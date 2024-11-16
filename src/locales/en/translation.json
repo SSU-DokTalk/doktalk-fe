@@ -1,0 +1,36 @@
+{
+  "component": {
+    "topnav": {
+      "community": "Community",
+      "debate": "Debate",
+      "summary": "Summary",
+      "search": {
+        "placeholder": "Find out your interests!"
+      },
+      "user": {
+        "postfix": ""
+      },
+      "dropdown": {
+        "mypage": "Mypage",
+        "my-activity": "My Activity",
+        "settings": "Settings",
+        "logout": "Logout"
+      },
+      "register": "Register",
+      "login": "Login"
+    }
+  },
+  "page": {
+    "login": {
+      "email": "email",
+      "password": "password",
+      "login": "Login",
+      "keep-login": "Keep Login",
+      "save-id": "Save ID",
+      "find-id": "Find ID",
+      "find-password": "Find Password",
+      "social-login-text": "Social Login",
+      "register": "Register"
+    }
+  }
+}

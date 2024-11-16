@@ -1,0 +1,151 @@
+@use "./variables";
+
+/* Login Page */
+#login {
+  width: 100%;
+  .container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 460px;
+
+    .logo-container {
+      margin-top: 50px;
+      height: 100%;
+      align-items: center;
+      display: flex;
+      text-decoration: none;
+      .logo {
+        font-size: 40px;
+        font-weight: 800;
+      }
+      .dok {
+        color: variables.$brand-color1;
+      }
+      .colon {
+        color: variables.$brand-color2;
+        margin-bottom: 10px;
+      }
+      .talk {
+        color: variables.$brand-color1;
+      }
+    }
+
+    .login-form {
+      margin-top: 64px;
+      width: 100%;
+      .login-box {
+        margin-bottom: 10px;
+        height: 64px;
+        border: 2px solid variables.$brand-color5;
+        border-radius: 10px;
+        padding: 0 25px;
+        .login-input {
+          height: 100%;
+          width: 100%;
+          border: none;
+          font-size: 20px;
+          font-weight: 400;
+          &::placeholder {
+            font-size: 20px;
+            font-weight: 400;
+            color: variables.$brand-color5;
+          }
+        }
+      }
+      .login-button {
+        height: 64px;
+        width: 100%;
+        border: none;
+        border-radius: 10px;
+        color: white;
+        background-color: variables.$brand-color1;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+    }
+
+    .additional-container {
+      display: flex;
+      width: 100%;
+      justify-content: space-between;
+      .checkbox-container {
+        display: flex;
+        align-items: center;
+        input {
+          width: 24px;
+          height: 24px;
+          border: 1px solid variables.$brand-color5;
+          border-radius: 3px;
+          cursor: pointer;
+        }
+        label {
+          margin-left: 5px;
+          margin-right: 15px;
+          font-size: 15px;
+          color: variables.$brand-color5;
+          cursor: pointer;
+        }
+      }
+      .find-myinfo {
+        display: flex;
+        .myinfo {
+          padding: 0 10px;
+        }
+        .divider {
+          color: variables.$brand-color5;
+        }
+      }
+    }
+  }
+
+  .social-login-box {
+    width: 100%;
+    margin-top: 64px;
+    .social-login-text-container {
+      display: flex;
+      width: 100%;
+      align-items: center;
+      hr {
+        flex: 1;
+        border: 1px solid variables.$brand-color5;
+      }
+      .social-login-text {
+        margin: 0 10px;
+        text-align: center;
+        color: variables.$brand-color5;
+      }
+    }
+    .social-login-container {
+      display: flex;
+      justify-content: center;
+      .social-login-button {
+        height: 50px;
+        width: 50px;
+        margin: 30px 10px 40px;
+        border-radius: 50%;
+        cursor: pointer;
+      }
+    }
+  }
+
+  .register-container {
+    width: 100%;
+    .register-button {
+      height: 64px;
+      width: 100%;
+      border: 2px solid variables.$brand-color1;
+      border-radius: 10px;
+      color: variables.$brand-color1;
+      background-color: white;
+      font-size: 20px;
+      font-weight: 600;
+      margin-bottom: 10px;
+    }
+  }
+}
+
+/* Register Page */
+#register {
+}

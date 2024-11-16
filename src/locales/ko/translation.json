@@ -1,0 +1,36 @@
+{
+  "component": {
+    "topnav": {
+      "community": "커뮤니티",
+      "debate": "독서 토론",
+      "summary": "도서 요약",
+      "search": {
+        "placeholder": "관심있는 도서를 검색하세요!"
+      },
+      "user": {
+        "postfix": "님"
+      },
+      "dropdown": {
+        "mypage": "마이페이지",
+        "my-activity": "내 활동",
+        "settings": "설정",
+        "logout": "로그아웃"
+      },
+      "register": "회원가입",
+      "login": "로그인"
+    }
+  },
+  "page": {
+    "login": {
+      "email": "이메일",
+      "password": "비밀번호",
+      "login": "로그인",
+      "keep-login": "로그인 유지",
+      "save-id": "아이디 저장",
+      "find-id": "아이디 찾기",
+      "find-password": "비밀번호 찾기",
+      "social-login-text": "소셜 계정으로 간편 로그인",
+      "register": "회원가입"
+    }
+  }
+}
