@@ -4,6 +4,8 @@ import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 
+const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
+
 function Auth() {
   const { provider } = useParams();
   const dispatch = useAppDispatch();
@@ -15,6 +17,7 @@ function Auth() {
       .get(`/api/oauth/${provider}`, {
         params: {
           code: code,
+          redirect_uri: REDIRECT_URI,
         },
       })
       .then(async (res) => {
