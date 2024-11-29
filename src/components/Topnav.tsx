@@ -97,7 +97,11 @@ function Topnav() {
                 <FontAwesomeIcon icon={faBell} className="user-notification" />
                 <Dropdown className="user-dropdown">
                   <Dropdown.Toggle className="user-dropdown-toggle">
-                    <img src={userIcon} alt="userIcon" className="user-icon" />
+                    <img
+                      src={user.profile ?? userIcon}
+                      alt="userIcon"
+                      className="user-icon"
+                    />
                     <div className="user-name-container">
                       <span className="user-name">{user.name ?? "닉네임"}</span>
                       {t("component.topnav.user.postfix")}

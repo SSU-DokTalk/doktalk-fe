@@ -21,7 +21,12 @@ function Auth() {
         },
       })
       .then(async (res) => {
-        let { id, name, role }: { id: number; name: string; role: string } =
+        let {
+          id,
+          name,
+          role,
+          profile,
+        }: { id: number; name: string; profile: string; role: string } =
           res.data;
         let token = res.headers.authorization;
 
@@ -30,6 +35,7 @@ function Auth() {
           setUser({
             id: id,
             name: name,
+            profile: profile,
             role: role,
           })
         );
