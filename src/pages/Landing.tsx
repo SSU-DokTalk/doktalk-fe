@@ -137,7 +137,7 @@ function Landing() {
         <BookList books={MOCK_BOOKS} />
       </div>
       <div style={{
-        width: "100%", display: "flex", gap: "30px", alignItems: "start", justifyContent: "center", padding: "20px",
+        width: "100%", display: "flex", gap: "40px", alignItems: "start", justifyContent: "center", padding: "20px",
       }}>
         <SideBar {...MOCK_SIDEBAR} />
         <div style={{ width: "40%", display: "flex", flexDirection: "column", gap: "30px", alignItems: "start", }}>

@@ -1,6 +1,8 @@
 import { ArticleType } from '@/types/components'
+import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-function HotArticle({ commentCount, content, createdAt, like, title, user, }: ArticleType) {
+function HotArticle({ commentCount, content, like, title, user, }: ArticleType) {
     return (
         <div
             style={{
@@ -19,24 +21,20 @@ function HotArticle({ commentCount, content, createdAt, like, title, user, }: Ar
                 gap: "10px",
             }}
         >
-            <div style={{ display: "flex", gap: "10px", alignItems: "center", fontSize: "20px", }}>
-                {user?.image ? <img src={user.image} alt={user.name} style={{ width: "32px", height: "32px", borderRadius: "50%" }} /> : <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "gray" }} />}
-                <span style={{ fontSize: "14px" }}>{user.name}</span>
-                <span style={{ fontSize: "14px", color: "#666565" }}>{new Date().getHours() - new Date(createdAt).getHours()} 시간 전</span>
-            </div>
             <div>
                 <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>{title}</h1>
                 <p style={{ fontSize: "15px" }}>{content}</p>
             </div>
-            <div style={{ display: "flex", gap: "12px", alignItems: "end", color: "#666565" }}>
-                <div style={{ fontSize: "16px", }}>
-                    <span>{like}</span>
+            <div style={{ display: "flex", gap: "12px", alignItems: "center", color: "#666565" }}>
+                <div style={{ display: "flex", gap: "10px", alignItems: "center", fontSize: "20px", }}>
+                    {user?.image ? <img src={user.image} alt={user.name} style={{ width: "32px", height: "32px", borderRadius: "50%" }} /> : <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "gray" }} />}
+                    <span style={{ fontSize: "14px" }}>{user.name}</span>
+                </div>
+                <div style={{ fontSize: "16px", marginLeft: "auto" }}>
+                    <FontAwesomeIcon icon={faHeart} style={{ marginRight: "4px" }} /><span>{like}</span>
                 </div>
                 <div style={{ fontSize: "16px", }}>
-                    <span>{commentCount}</span>
-                </div>
-                <div style={{ fontSize: "14px", cursor: "pointer", }}>
-                    댓글더보기
+                    <FontAwesomeIcon icon={faComment} style={{ marginRight: "4px" }} /><span>{commentCount}</span>
                 </div>
             </div>
         </div >
