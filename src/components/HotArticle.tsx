@@ -1,9 +1,6 @@
 import { ArticleType } from '@/types/components'
-import React from 'react'
 
-type Props = {}
-
-function HotArticle({ commentCount, content, createdAt, like, title, user, comment, image }: ArticleType) {
+function HotArticle({ commentCount, content, createdAt, like, title, user, }: ArticleType) {
     return (
         <div
             style={{

@@ -1,10 +1,9 @@
 import { ArticleType } from '@/types/components'
 import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-import React from 'react'
 
 
-function Article({ comment, commentCount, content, createdAt, like, title, user, image }: ArticleType) {
+function Article({ commentCount, content, createdAt, like, title, user, image }: ArticleType) {
     return (
         <div
             style={{

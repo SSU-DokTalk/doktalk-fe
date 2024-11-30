@@ -1,5 +1,4 @@
 import { BookType } from '@/types/components'
-import React from 'react'
 
 function Book({ author, imgSrc, title, href }: BookType) {
     return (
