@@ -21,9 +21,9 @@ function Auth() {
         },
       })
       .then(async (res) => {
-        let { id, name, role }: { id: number; name: string; role: string } =
+        const { id, name, role }: { id: number; name: string; role: string } =
           res.data;
-        let token = res.headers.authorization;
+        const token = res.headers.authorization;
 
         axios.defaults.headers.common["Authorization"] = token;
         await dispatch(

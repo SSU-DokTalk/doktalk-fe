@@ -63,7 +63,7 @@ function Topnav() {
   };
 
   return (
-    <div id="topnav">
+    <div id="topnav" style={{ zIndex: "10" }}>
       <div className="upper-container">
         <div className="left-container">
           <Link to={"/"} className="logo-container">
@@ -155,8 +155,8 @@ function Topnav() {
                 style={
                   tab.url != "/" + currentTab.pathname.split("/")[1]
                     ? {
-                        borderBottomColor: "rgba(0, 0, 0, 0)",
-                      }
+                      borderBottomColor: "rgba(0, 0, 0, 0)",
+                    }
                     : {}
                 }
                 key={"navtab" + idx}
@@ -167,8 +167,8 @@ function Topnav() {
                   style={
                     tab.url != "/" + currentTab.pathname.split("/")[1]
                       ? {
-                          color: "black",
-                        }
+                        color: "black",
+                      }
                       : {}
                   }
                 >
