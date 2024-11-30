@@ -4,6 +4,7 @@ import type { RootState } from "./store";
 interface UserState {
   id?: number;
   name?: string;
+  profile?: string;
   role?: string;
 }
 

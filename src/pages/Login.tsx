@@ -11,8 +11,10 @@ import facebookIcon from "@/assets/images/facebook.png";
 import { setUser } from "@/stores/user";
 import { useAppDispatch } from "@/stores/hooks";
 
+const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_CLIENT_ID;
 const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
 const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
+const FACEBOOK_CLIENT_ID = import.meta.env.VITE_FACEBOOK_CLIENT_ID;
 const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
 
 type UserInfoType = {
@@ -49,12 +51,24 @@ function Login() {
     navigate("/");
   };
 
+  const nonce = () => {
+    return Math.random().toString(36).substring(3, 14);
+  };
+
+  const doNaverLogin = () => {
+    window.location.href = `https://nid.naver.com/oauth2.0/authorize?client_id=${NAVER_CLIENT_ID}&redirect_uri=${REDIRECT_URI}/naver&response_type=code&state=${nonce()}`;
+  };
+
   const doKakaoLogin = () => {
     window.location.href = `https://kauth.kakao.com/oauth/authorize?client_id=${KAKAO_CLIENT_ID}&redirect_uri=${REDIRECT_URI}/kakao&response_type=code&scope=profile_nickname,profile_image,account_email`;
   };
 
   const doGoogleLogin = () => {
-    window.location.href = `https://accounts.google.com/o/oauth2/auth?response_type=code&client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI}/google&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email`;
+    window.location.href = `https://accounts.google.com/o/oauth2/auth?client_id=${GOOGLE_CLIENT_ID}&redirect_uri=${REDIRECT_URI}/google&response_type=code&scope=https://www.googleapis.com/auth/userinfo.profile https://www.googleapis.com/auth/userinfo.email`;
+  };
+
+  const doFacebookLogin = () => {
+    window.location.href = `https://www.facebook.com/v16.0/dialog/oauth?client_id=${FACEBOOK_CLIENT_ID}&redirect_uri=${REDIRECT_URI}/facebook&state=${nonce()}&scope=public_profile,email`;
   };
 
   return (
@@ -124,6 +138,7 @@ function Login() {
               src={naverIcon}
               alt="naver"
               className="social-login-button naver"
+              onClick={doNaverLogin}
             />
             <img
               src={kakaoIcon}
@@ -141,6 +156,7 @@ function Login() {
               src={facebookIcon}
               alt="facebook"
               className="social-login-button facebook"
+              onClick={doFacebookLogin}
             />
           </div>
         </div>
