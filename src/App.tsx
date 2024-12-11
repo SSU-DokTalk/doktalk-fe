@@ -9,7 +9,8 @@ import Landing from "@/pages/Landing";
 import Login from "@/pages/Login";
 import NotFound from "@/pages/NotFound";
 import Register from "@/pages/Register";
-import Auth from "./pages/Auth";
+import Auth from "@/pages/Auth";
+import MyPage from "@/pages/MyPage";
 
 function App() {
   return (
@@ -19,6 +20,7 @@ function App() {
         <Route path="/community" element={<Landing />}></Route>
         <Route path="/debate" element={<Landing />}></Route>
         <Route path="/summary" element={<Landing />}></Route>
+        <Route path="/mypage" element={<MyPage />}></Route>
       </Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>

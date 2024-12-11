@@ -193,3 +193,21 @@ h6 {
 #__next {
   isolation: isolate;
 }
+
+/*
+Draggable, Undraggable
+*/
+// Make All Component to undraggable
+body {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+// Make component to draggable
+.draggable {
+  -webkit-user-select: text;
+  -moz-user-select: text;
+  -ms-user-select: text;
+  user-select: text;
+}

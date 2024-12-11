@@ -1,18 +1,21 @@
+import axios from "axios";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
+import i18n from "@/locales/i18n";
+
+import { useAppDispatch, useAppSelector } from "@/stores/hooks";
+import { selectUser, unsetUser } from "@/stores/user";
+
+import { Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLanguage,
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
-import { Dropdown } from "react-bootstrap";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 import userIcon from "@/assets/images/profile.png";
+
 import { LinkItemType } from "@/types/components";
-import { Link, useLocation, useNavigate } from "react-router-dom";
-import i18n from "@/locales/i18n";
-import { useTranslation } from "react-i18next";
-import { useAppDispatch, useAppSelector } from "@/stores/hooks";
-import { selectUser, unsetUser } from "@/stores/user";
-import axios from "axios";
 
 const navTabs: LinkItemType[] = [
   {

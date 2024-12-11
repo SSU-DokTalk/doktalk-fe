@@ -73,7 +73,7 @@ function Login() {
 
   return (
     <div id="login">
-      <div className="container">
+      <div className="login-container">
         <Link to={"/"} className="logo-container">
           <div className="logo dok">讀</div>
           <div className="logo colon">:</div>

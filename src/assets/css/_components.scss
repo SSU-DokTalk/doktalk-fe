@@ -99,6 +99,8 @@
 
             .user-icon {
               height: 38px;
+              width: 38px;
+              object-fit: cover;
               margin-right: 10px;
               border-radius: 50%;
             }
@@ -158,6 +160,199 @@
           color: variables.$brand-color1;
           text-decoration: none;
         }
+      }
+    }
+  }
+}
+
+#friend-list-modal {
+  width: 471px;
+
+  .modal-content {
+    border-radius: 20px;
+
+    .modal-header {
+      margin-top: 20px;
+      border-bottom: none;
+      .modal-title {
+        flex: 1;
+        margin-left: 42px;
+        text-align: center;
+        color: black;
+        font-size: 25px;
+        font-weight: 400;
+        strong {
+          font-weight: 600;
+        }
+      }
+      .btn-close {
+        margin-right: 10px;
+      }
+    }
+    .modal-body {
+      .friend-info {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        color: black;
+
+        .info {
+          margin-bottom: 0;
+          font-weight: 600;
+          width: 80px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+        .current {
+          color: variables.$brand-color1;
+          border-bottom: 3px solid variables.$brand-color1;
+        }
+        .number {
+          font-size: 15px;
+        }
+        border-bottom: 1px solid variables.$brand-color4;
+      }
+      .friend-list {
+        justify-self: center;
+        margin-bottom: 25px;
+        .friend-container {
+          width: 234px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 30px;
+
+          .left-container {
+            display: flex;
+            align-items: center;
+
+            .friend-profile-icon {
+              width: 54px;
+              height: 54px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+            .friend-name {
+              margin-left: 12px;
+              font-size: 15px;
+              font-weight: 600;
+              color: black;
+            }
+          }
+          .right-container {
+            .delete-friend-button-container {
+              justify-self: flex-end;
+              .delete-friend-button {
+                width: 77px;
+                height: 30px;
+                background-color: white;
+                border: 1px solid variables.$brand-color4;
+                border-radius: 10px;
+                color: variables.$brand-color5;
+                font-size: 15px;
+                font-weight: 400;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+#profile {
+  display: flex;
+  border-bottom: 1px solid variables.$brand-color4;
+
+  .pre-offset {
+    flex: 1;
+  }
+  .post-offset {
+    flex: 1;
+  }
+  .profile-container {
+    flex: 4;
+    .upper-container {
+      margin-top: 35px;
+      .profile-image-container {
+        display: flex;
+        .profile-image {
+          width: 100px;
+          height: 100px;
+          border-radius: 50%;
+          object-fit: cover;
+        }
+        .button-container {
+          margin-left: 30px;
+          align-self: center;
+          button {
+            width: 96px;
+            height: 30px;
+            border-radius: 10px;
+            font-size: 15px;
+          }
+          .edit-profile {
+            border: 1px solid variables.$brand-color4;
+            background-color: white;
+            color: variables.$brand-color5;
+            font-weight: 400;
+          }
+          .be-friend {
+            border: none;
+            background-color: variables.$brand-color1;
+            color: white;
+            font-weight: 600;
+          }
+        }
+      }
+    }
+    .lower-container {
+      margin-top: 20px;
+      padding-left: 10px;
+      .name-container {
+        font-size: 30px;
+        font-weight: 600;
+        color: black;
+      }
+      .follow-container {
+        margin-top: 10px;
+        display: flex;
+        color: variables.$brand-color5;
+        font-size: 20px;
+        font-weight: 600;
+        .follower {
+          cursor: pointer;
+        }
+        .following {
+          cursor: pointer;
+          margin-left: 15px;
+        }
+      }
+      .introduction-container {
+        margin-top: 7px;
+        font-size: 15px;
+        font-weight: 400;
+        color: black;
+        .introduction {
+        }
+      }
+    }
+    .tabs {
+      margin-top: 40px;
+      display: flex;
+      justify-self: center;
+      color: variables.$brand-color5;
+      font-weight: 600;
+      font-size: 20px;
+      height: 36px;
+
+      .tab-item {
+        cursor: pointer;
+        margin: 0 24px;
+      }
+      .current-tab {
+        color: variables.$brand-color1;
+        border-bottom: 3px solid variables.$brand-color1;
       }
     }
   }
