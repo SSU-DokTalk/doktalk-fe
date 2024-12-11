@@ -2,7 +2,7 @@ import { ArticleType } from '@/types/components'
 import { faComment, faHeart } from '@fortawesome/free-regular-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 
-function HotArticle({ commentCount, content, like, title, user, }: ArticleType) {
+function HotArticle({ comments_num, content, likes_num, title, user }: ArticleType) {
     return (
         <div
             style={{
@@ -27,14 +27,14 @@ function HotArticle({ commentCount, content, like, title, user, }: ArticleType) 
             </div>
             <div style={{ display: "flex", gap: "12px", alignItems: "center", color: "#666565" }}>
                 <div style={{ display: "flex", gap: "10px", alignItems: "center", fontSize: "20px", }}>
-                    {user?.image ? <img src={user.image} alt={user.name} style={{ width: "32px", height: "32px", borderRadius: "50%" }} /> : <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "gray" }} />}
+                    {user?.profile ? <img src={user.profile} alt={user.name} style={{ width: "32px", height: "32px", borderRadius: "50%" }} /> : <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "gray" }} />}
                     <span style={{ fontSize: "14px" }}>{user.name}</span>
                 </div>
                 <div style={{ fontSize: "16px", marginLeft: "auto" }}>
-                    <FontAwesomeIcon icon={faHeart} style={{ marginRight: "4px" }} /><span>{like}</span>
+                    <FontAwesomeIcon icon={faHeart} style={{ marginRight: "4px" }} /><span>{likes_num}</span>
                 </div>
                 <div style={{ fontSize: "16px", }}>
-                    <FontAwesomeIcon icon={faComment} style={{ marginRight: "4px" }} /><span>{commentCount}</span>
+                    <FontAwesomeIcon icon={faComment} style={{ marginRight: "4px" }} /><span>{comments_num}</span>
                 </div>
             </div>
         </div >
