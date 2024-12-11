@@ -1,0 +1,27 @@
+@use "./variables";
+
+.logo-container {
+    margin-top: 50px;
+    height: 100%;
+    align-items: center;
+    display: flex;
+    text-decoration: none;
+
+    .logo {
+        font-size: 40px;
+        font-weight: 800;
+    }
+
+    .dok {
+        color: variables.$brand-color1;
+    }
+
+    .colon {
+        color: variables.$brand-color2;
+        margin-bottom: 10px;
+    }
+
+    .talk {
+        color: variables.$brand-color1;
+    }
+}
