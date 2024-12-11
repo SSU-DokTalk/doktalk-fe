@@ -1,0 +1,96 @@
+@use "../variables";
+
+#friend-list-modal {
+  width: 471px;
+
+  .modal-content {
+    border-radius: 20px;
+
+    .modal-header {
+      margin-top: 20px;
+      border-bottom: none;
+      .modal-title {
+        flex: 1;
+        margin-left: 42px;
+        text-align: center;
+        color: black;
+        font-size: 25px;
+        font-weight: 400;
+        strong {
+          font-weight: 600;
+        }
+      }
+      .btn-close {
+        margin-right: 10px;
+      }
+    }
+    .modal-body {
+      .friend-info {
+        display: flex;
+        justify-content: space-around;
+        text-align: center;
+        color: black;
+
+        .info {
+          margin-bottom: 0;
+          font-weight: 600;
+          width: 80px;
+          font-size: 20px;
+          cursor: pointer;
+        }
+        .current {
+          color: variables.$brand-color1;
+          border-bottom: 3px solid variables.$brand-color1;
+        }
+        .number {
+          font-size: 15px;
+        }
+        border-bottom: 1px solid variables.$brand-color4;
+      }
+      .friend-list {
+        justify-self: center;
+        margin-bottom: 25px;
+        .friend-container {
+          width: 234px;
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          margin-top: 30px;
+
+          .left-container {
+            display: flex;
+            align-items: center;
+
+            .friend-profile-icon {
+              width: 54px;
+              height: 54px;
+              border-radius: 50%;
+              object-fit: cover;
+            }
+            .friend-name {
+              margin-left: 12px;
+              font-size: 15px;
+              font-weight: 600;
+              color: black;
+            }
+          }
+          .right-container {
+            .delete-friend-button-container {
+              justify-self: flex-end;
+              .delete-friend-button {
+                width: 77px;
+                height: 30px;
+                background-color: white;
+                border: 1px solid variables.$brand-color4;
+                border-radius: 10px;
+                color: variables.$brand-color5;
+                font-size: 15px;
+                font-weight: 400;
+              }
+            }
+          }
+        }
+      }
+    }
+  }
+}
