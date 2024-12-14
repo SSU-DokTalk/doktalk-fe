@@ -1,19 +1,19 @@
 import { faPenToSquare } from '@fortawesome/free-solid-svg-icons'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
-// import axios from 'axios'
-// import { useEffect, useState } from 'react'
+import axios from 'axios'
+import { useEffect, useState } from 'react'
 
 function BoardWriteBar() {
 
-    // const [title, setTitle] = useState("")
-    // const [content, setContent] = useState("")
+    const [title, setTitle] = useState("")
+    const [content, setContent] = useState("")
     // const [image1, setImage1] = useState("")
     // const [image2, setImage2] = useState("")
 
-    // const [rows, setRows] = useState(1)
-    // const [writeMode, setWriteMode] = useState(false)
+    const [rows, setRows] = useState(1)
+    const [writeMode, setWriteMode] = useState(false)
 
-    // // 파일 선택 시 해당 파일을 담을 FormData (매번 필요 시 생성)
+    // 파일 선택 시 해당 파일을 담을 FormData (매번 필요 시 생성)
     // const [file1, setFile1] = useState<File | null>(null);
     // const [file2, setFile2] = useState<File | null>(null);
 
@@ -60,67 +60,67 @@ function BoardWriteBar() {
     // };
 
 
-    // const onTempSave = () => {
-    //     // Implement temporary save functionality here
-    // };
+    const onTempSave = () => {
+        // Implement temporary save functionality here
+    };
 
-    // const onSave = async () => {
-    //     if (!title || !content) {
-    //         alert("필수 항목을 입력해주세요");
-    //         return;
-    //     }
+    const onSave = async () => {
+        if (!title || !content) {
+            alert("필수 항목을 입력해주세요");
+            return;
+        }
 
-    //     if (!image1 || !image2) {
-    //         alert("이미지를 업로드해주세요");
-    //         return;
-    //     }
+        // if (!image1 || !image2) {
+        //     alert("이미지를 업로드해주세요");
+        //     return;
+        // }
 
-    //     try {
-    //         await axios.post("/api/post", {
-    //             title,
-    //             content,
-    //             image1,
-    //             image2,
-    //         });
-    //         setTitle("");
-    //         setContent("");
-    //         setImage1("");
-    //         setImage2("");
-    //         alert("게시글이 작성되었습니다");
-    //     } catch (error) {
-    //         console.error(error);
-    //     }
-    // };
+        try {
+            await axios.post("/api/post", {
+                title,
+                content,
+                image1: null,
+                image2: null,
+            });
+            setTitle("");
+            setContent("");
+            // setImage1("");
+            // setImage2("");
+            alert("게시글이 작성되었습니다");
+        } catch (error) {
+            console.error(error);
+        }
+    };
 
-    // const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
-    //     setTitle(e.target.value)
-    // }
+    const onChangeTitle = (e: React.ChangeEvent<HTMLInputElement>) => {
+        setTitle(e.target.value)
+    }
 
-    // const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
-    //     setContent(e.target.value)
-    // }
+    const onChangeContent = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
+        setContent(e.target.value)
+    }
 
 
-    // useEffect(() => {
-    //     document.addEventListener('click', handleClickOutside)
-    //     return () => {
-    //         document.removeEventListener('click', handleClickOutside)
-    //     }
-    // }, [writeMode])
+    useEffect(() => {
+        document.addEventListener('click', handleClickOutside)
+        return () => {
+            document.removeEventListener('click', handleClickOutside)
+        }
+    }, [writeMode])
 
-    // const handleClickOutside = (e: MouseEvent) => {
-    //     if (writeMode && !e.composedPath().some(path => Array.from(document.getElementsByClassName("write")).includes(path as Element))) {
-    //         setWriteMode(false)
-    //         setRows(1)
-    //     }
-    // }
+    const handleClickOutside = (e: MouseEvent) => {
+        if (writeMode && !e.composedPath().some(path => Array.from(document.getElementsByClassName("write")).includes(path as Element))) {
+            setWriteMode(false)
+            setRows(1)
+        }
+    }
 
-    // const onClickWrite = () => {
-    //     if (!writeMode) {
-    //         setWriteMode(true)
-    //         setRows(5)
-    //     }
-    // }
+    const onClickWrite = () => {
+        if (!writeMode) {
+            setWriteMode(true)
+            setRows(5)
+        }
+    }
 
 
     return (
@@ -147,7 +147,7 @@ function BoardWriteBar() {
                     gap: "10px",
                 }}
             >
-                {/* {writeMode ? (
+                {writeMode ? (
                     <>
                         <input
                             style={{
@@ -166,7 +166,7 @@ function BoardWriteBar() {
                             value={title}
                             onChange={onChangeTitle}
                         />
-                        <input
+                        {/* <input
                             type="file"
                             accept="image/*"
                             onChange={onAttach1}
@@ -175,8 +175,8 @@ function BoardWriteBar() {
                             type="file"
                             accept="image/*"
                             onChange={onAttach2}
-                        />
-                        <div
+                        /> */}
+                        {/* <div
                             style={{
                                 display: "flex",
                                 gap: "10px",
@@ -184,12 +184,12 @@ function BoardWriteBar() {
                         >
                             {image1 && <img src={image1} alt="image1" style={{ width: "100px", height: "100px" }} />}
                             {image2 && <img src={image2} alt="image2" style={{ width: "100px", height: "100px" }} />}
-                        </div>
+                        </div> */}
                     </>
                 ) : (
                     <>
                     </>
-                )} */}
+                )}
                 <div
                     style={{
                         display: "flex",
@@ -221,42 +221,43 @@ function BoardWriteBar() {
                             marginLeft: "auto",
                             width: "100%",
                             borderRadius: "30px",
-                            // height: `${rows * 50}px`,
+                            height: `${rows * 50}px`,
                             border: "none",
                             outline: "none",
                             paddingTop: "10px",
-                            // marginLeft: "10px",
                             animation: "grow 0.5s",
                             transition: "height 0.1s",
                             paddingLeft: "20px",
+                            paddingRight: "10%",
                             backgroundColor: "#F3F4F7",
                             resize: "none",
                         }}
                         placeholder="게시글을 작성해보세요!"
-                    // onClick={onClickWrite}
-                    // onChange={onChangeContent}
-                    // value={content}
+                        onClick={onClickWrite}
+                        onChange={onChangeContent}
+                        value={content}
                     />
                     <button
-                        // onClick={onSave}
+                        onClick={onSave}
                         style={{
                             // width: "100px",
                             padding: "0 10px",
                             height: "30px",
                             color: "white",
+                            backgroundColor: "#F3F4F7",
                             border: "none",
                             borderRadius: "10px",
                             cursor: "pointer",
                             position: "absolute",
                             right: "10px",
-                            top: "10px",
-                            // transform: "translateY(-50%)",
+                            top: "24px",
+                            transform: "translateY(-50%)",
                         }}
                     >
                         <FontAwesomeIcon style={{ color: "#666565" }} icon={faPenToSquare} />
                     </button>
                 </div>
-                {/* <div
+                <div
                     style={{
                         display: "flex",
                         gap: "10px",
@@ -292,7 +293,7 @@ function BoardWriteBar() {
                     >
                         작성 완료
                     </button>
-                </div> */}
+                </div>
             </div>
         </div>
     )
