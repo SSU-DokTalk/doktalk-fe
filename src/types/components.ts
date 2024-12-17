@@ -16,13 +16,21 @@ export type CommentType = {
   user: UserType;
 };
 
-export interface UserType {
+export type UserType = {
   id: number;
+  email: string;
   profile: string;
   name: string;
+  gender: boolean;
+  birthday: string;
+  introduction: string;
+  follower_num: number;
+  following_num: number;
   role: string; // 필요하다면 "USER" | "ADMIN" 등으로 세분화 가능
+  created_at: string;
+  updated_at: string;
   is_deleted: boolean;
-}
+};
 
 export interface ArticleType {
   id: number;
@@ -43,4 +51,19 @@ export type SidebarType = {
   books: BookType[];
   follwers: number;
   following: number;
+};
+
+export type RegisterType = {
+  email: string;
+  nickname: string;
+  password: string;
+  gender: string;
+  birthdate: string;
+  validation: boolean;
+  interest: string[];
+  agreement: {
+    agreement1: boolean;
+    agreement2: boolean;
+    agreement3: boolean;
+  };
 };

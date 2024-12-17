@@ -1,6 +1,6 @@
 import { BookType } from '@/types/components'
 
-function Book({ author, imgSrc, title, href }: BookType) {
+export function Book({ author, imgSrc, title, href }: BookType) {
     return (
         <div
             style={{
