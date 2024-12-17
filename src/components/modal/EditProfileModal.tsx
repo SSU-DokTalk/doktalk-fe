@@ -11,8 +11,8 @@ import { Modal } from "react-bootstrap";
 
 import userIcon from "@/assets/images/profile.svg";
 
-import { useAppDispatch } from "@/stores/hooks";
-import { setUser } from "@/stores/user";
+import { useAppDispatch, useAppSelector } from "@/stores/hooks";
+import { selectUser, setUser } from "@/stores/user";
 
 function EditProfileModal({
   showModal,
@@ -32,6 +32,7 @@ function EditProfileModal({
   });
   const imageRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
 
   useEffect(() => {
     axios.get(`/api/user/me`).then(
@@ -103,8 +104,9 @@ function EditProfileModal({
 
   const deleteImage = () => {
     axios.delete(`/api/user/profile`).then(
-      (res) => {
-        console.log(res);
+      async () => {
+        setUserInfo({ ...userInfo, profile: null });
+        await dispatch(setUser({ ...user, profile: undefined }));
       },
       (err) => {
         console.log(err);
