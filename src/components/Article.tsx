@@ -13,9 +13,6 @@ export function ArticleDetail({ user, article, onClose }: { user: UserType | nul
     const [text, setText] = useState("");
 
     useEffect(() => {
-
-        fetchComments();
-
         const handlePopState = () => {
             onClose();
         };
@@ -27,8 +24,12 @@ export function ArticleDetail({ user, article, onClose }: { user: UserType | nul
         };
     }, [])
 
+    useEffect(() => {
+        fetchComments();
+    }, [])
+
     const fetchComments = () => {
-        axios.get(`/api/post/${article.id}/comment`).then((response) => {
+        axios.get(`/api/post/${article.id}/comments`).then((response) => {
             setComments(response.data);
         }).catch((error) => {
             console.error(error);
@@ -36,7 +37,7 @@ export function ArticleDetail({ user, article, onClose }: { user: UserType | nul
     }
 
     const handleCommentSubmit = () => {
-        axios.post(`/api/post/${article.id}/comment`, { content: text }).then((response) => {
+        axios.post(`/api/post/${article.id}/comments`, { content: text }).then(() => {
             fetchComments();
         }).catch((error) => {
             console.error(error);
@@ -92,7 +93,7 @@ export function ArticleDetail({ user, article, onClose }: { user: UserType | nul
                     <input onChange={handleTextChange} type="text" style={{ width: "100%", padding: "8px", borderRadius: "16px", border: "2px solid #F3F4F7" }} />
                     <button onClick={handleCommentSubmit} style={{ fontSize: "16px", background: "none", border: "none" }}>등록</button>
                 </div>
-                <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+                <div style={{ display: "flex", flexDirection: "column", gap: "16px", }}>
                     {comments.map((comment, index) => (
                         <Comment key={`${comment.user.name}-${index}`} {...comment} />
                     ))}
@@ -144,11 +145,12 @@ function Article({ id, comments_num, content, created_at, image1, likes_num, tit
                     <FontAwesomeIcon icon={faHeart} style={{ marginRight: "4px" }} /><span>{likes_num}</span>
                 </button>
                 <button
+                    onClick={onClick}
                     style={{ fontSize: "16px", background: "none", border: "none" }}
                 >
                     <FontAwesomeIcon icon={faComment} style={{ marginRight: "4px" }} /><span>{comments_num}</span>
                 </button>
-                <button style={{ fontSize: "14px", cursor: "pointer", background: "none", border: "none" }}>
+                <button onClick={onClick} style={{ fontSize: "14px", cursor: "pointer", background: "none", border: "none" }}>
                     댓글더보기
                 </button>
             </div>

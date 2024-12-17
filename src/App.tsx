@@ -11,6 +11,7 @@ import NotFound from "@/pages/NotFound";
 import Register from "@/pages/Register";
 import Auth from "@/pages/Auth";
 import MyPage from "@/pages/MyPage";
+import Search from "./pages/Search";
 
 function App() {
   return (
@@ -18,7 +19,7 @@ function App() {
       <Route element={<BasicLayout />}>
         <Route path="/" element={<Landing />} />
         <Route path="/community" element={<Landing />}></Route>
-        <Route path="/debate" element={<Landing />}></Route>
+        <Route path="/debate" element={<Search />}></Route>
         <Route path="/summary" element={<Landing />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
       </Route>
