@@ -1,10 +1,13 @@
-import Profile from "@/components/Profile";
-import { useAppSelector } from "@/stores/hooks";
-import { selectUser } from "@/stores/user";
-import { InitialUser, User } from "@/types/data";
 import axios from "axios";
 import { useEffect, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+import Profile from "@/components/Profile";
+
+import { useAppSelector } from "@/stores/hooks";
+import { selectUser } from "@/stores/user";
+
+import { InitialUser, User } from "@/types/data";
 
 function UserProfile() {
   const { user_id } = useParams();

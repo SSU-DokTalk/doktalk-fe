@@ -1,5 +1,4 @@
-import { Modal } from "react-bootstrap";
-import userIcon from "@/assets/images/profile.svg";
+import axios from "axios";
 import React, {
   Dispatch,
   SetStateAction,
@@ -8,9 +7,12 @@ import React, {
   useRef,
   useState,
 } from "react";
+import { Modal } from "react-bootstrap";
+
+import userIcon from "@/assets/images/profile.svg";
+
 import { useAppDispatch } from "@/stores/hooks";
 import { setUser } from "@/stores/user";
-import axios from "axios";
 
 function EditProfileModal({
   showModal,

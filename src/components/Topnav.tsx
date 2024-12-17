@@ -1,11 +1,11 @@
 import axios from "axios";
+import { useEffect } from "react";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18n from "@/locales/i18n";
 
-import { useAppDispatch, useAppSelector } from "@/stores/hooks";
-import { selectUser, unsetUser } from "@/stores/user";
-
+import userIcon from "@/assets/images/profile.svg";
+import logo from "@/assets/images/logo.svg";
 import { Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -13,11 +13,11 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
-import userIcon from "@/assets/images/profile.svg";
-import logo from "@/assets/images/logo.svg";
+
+import { useAppDispatch, useAppSelector } from "@/stores/hooks";
+import { selectUser, unsetUser } from "@/stores/user";
 
 import { LinkItemType } from "@/types/components";
-import { useEffect } from "react";
 
 const navTabs: LinkItemType[] = [
   {

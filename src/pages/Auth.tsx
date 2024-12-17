@@ -1,8 +1,9 @@
-import { useAppDispatch } from "@/stores/hooks";
-import { setUser } from "@/stores/user";
 import axios from "axios";
 import { useEffect } from "react";
 import { useNavigate, useParams } from "react-router-dom";
+
+import { setUser } from "@/stores/user";
+import { useAppDispatch } from "@/stores/hooks";
 
 const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
 

@@ -3,7 +3,7 @@ import { Route, Routes } from "react-router-dom";
 import "@/assets/css/main.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
 
-import BasicLayout from "./layouts/BasicLayout";
+import BasicLayout from "@/layouts/BasicLayout";
 
 import Landing from "@/pages/Landing";
 import Login from "@/pages/Login";
@@ -11,8 +11,8 @@ import NotFound from "@/pages/NotFound";
 import Register from "@/pages/Register";
 import Auth from "@/pages/Auth";
 import MyPage from "@/pages/MyPage";
-import Search from "./pages/Search";
-import UserProfile from "./pages/UserProfile";
+import Search from "@/pages/Search";
+import UserProfile from "@/pages/UserProfile";
 
 function App() {
   return (

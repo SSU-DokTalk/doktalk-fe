@@ -2,8 +2,9 @@
 // src/pages/SignupPage.tsx
 import React from "react";
 import { useForm } from "react-hook-form";
-import { signup } from "../api/auth";
 import { useNavigate } from "react-router-dom";
+
+import { signup } from "@/api/auth";
 
 type FormData = {
   email: string;
@@ -91,7 +92,9 @@ const Register: React.FC = () => {
     }
   };
 
-  const handleAllAgreementsChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+  const handleAllAgreementsChange = (
+    e: React.ChangeEvent<HTMLInputElement>
+  ) => {
     const checked = e.target.checked;
     setValue("allAgreements", checked);
     setValue("agreement1", checked, { shouldValidate: true });
@@ -298,11 +301,14 @@ const Register: React.FC = () => {
             </button>
           </div>
 
-          <div style={{ display: "flex", flexDirection: "column", gap: "16px" }}>
+          <div
+            style={{ display: "flex", flexDirection: "column", gap: "16px" }}
+          >
             <div>
               <div style={{ fontWeight: "bold" }}>관심분야 선택</div>
               <div style={{ fontSize: "13px" }}>
-                선택한 관심분야는 개인 맞춤 도서 추천 / 토론방 매칭에 사용됩니다.
+                선택한 관심분야는 개인 맞춤 도서 추천 / 토론방 매칭에
+                사용됩니다.
               </div>
             </div>
             <div
@@ -360,7 +366,9 @@ const Register: React.FC = () => {
                   validate: (val) => val === true || "약관 1에 동의해주세요",
                 })}
               />
-              <label style={{ marginLeft: "8px" }}>{"(필수) 약관 1 동의"}</label>
+              <label style={{ marginLeft: "8px" }}>
+                {"(필수) 약관 1 동의"}
+              </label>
               <div style={{ marginLeft: "auto", marginRight: "16px" }}>
                 보기
               </div>
@@ -374,7 +382,9 @@ const Register: React.FC = () => {
                   validate: (val) => val === true || "약관 2에 동의해주세요",
                 })}
               />
-              <label style={{ marginLeft: "8px" }}>{"(필수) 약관 2 동의"}</label>
+              <label style={{ marginLeft: "8px" }}>
+                {"(필수) 약관 2 동의"}
+              </label>
               <div style={{ marginLeft: "auto", marginRight: "16px" }}>
                 보기
               </div>
@@ -382,11 +392,10 @@ const Register: React.FC = () => {
             {errors.agreement2 && <span>{errors.agreement2.message}</span>}
 
             <div style={{ display: "flex", alignItems: "center" }}>
-              <input
-                type="checkbox"
-                {...register("agreement3")}
-              />
-              <label style={{ marginLeft: "8px" }}>{"(선택) 약관 3 동의"} </label>
+              <input type="checkbox" {...register("agreement3")} />
+              <label style={{ marginLeft: "8px" }}>
+                {"(선택) 약관 3 동의"}{" "}
+              </label>
               <div style={{ marginLeft: "auto", marginRight: "16px" }}>
                 보기
               </div>

@@ -1,7 +1,7 @@
-import userIcon from "@/assets/images/sample200kb.png";
-
 import { Dispatch, SetStateAction, useState } from "react";
 import { Modal } from "react-bootstrap";
+
+import userIcon from "@/assets/images/profile.svg";
 
 const friends = [
   {

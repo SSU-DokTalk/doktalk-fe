@@ -1,8 +1,11 @@
-import userIcon from "@/assets/images/profile.svg";
 import { useEffect, useState } from "react";
-import FriendListModal from "./modal/FriendListModal";
+
+import userIcon from "@/assets/images/profile.svg";
+
+import FriendListModal from "@/components/modal/FriendListModal";
+import EditProfileModal from "@/components/modal/EditProfileModal";
+
 import { User } from "@/types/data";
-import EditProfileModal from "./modal/EditProfileModal";
 
 const MyTabs = [
   {
