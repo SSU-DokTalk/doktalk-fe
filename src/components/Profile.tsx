@@ -1,9 +1,10 @@
-// import userIcon from "@/assets/images/profile.png";
-import userIcon from "@/assets/images/sample200kb.png";
-import { useState } from "react";
+import userIcon from "@/assets/images/profile.png";
+import { useEffect, useState } from "react";
 import FriendListModal from "./modal/FriendListModal";
+import { User } from "@/types/data";
+import EditProfileModal from "./modal/EditProfileModal";
 
-const tabs = [
+const MyTabs = [
   {
     text: "게시글",
     url: "/post",
@@ -25,42 +26,73 @@ const tabs = [
     url: "/payment",
   },
 ];
-// const tabs = [
-//   {
-//     text: "게시글",
-//     url: "/post",
-//   },
-//   {
-//     text: "내 서재",
-//     url: "/library",
-//   },
-// ];
-function Profile() {
+const UserTabs = [
+  {
+    text: "게시글",
+    url: "/post",
+  },
+  {
+    text: "내 서재",
+    url: "/library",
+  },
+];
+function Profile({
+  userProfile,
+  is_me = false,
+}: {
+  userProfile: User;
+  is_me?: boolean;
+}) {
+  const [tabs, setTabs] = useState<{ text: string; url: string }[]>(UserTabs);
   const [currentTab, setCurrentTab] = useState("/post");
   const [showFriendsModal, setShowFriendsModal] = useState(false);
+  const [showEditProfileModal, setShowEditProfileModal] = useState(false);
 
-  let friend = 200;
-  let introduction =
-    "안녕하세요 👋 자기소개 문구입니다. \n자기소개 문구입니다. 자기소개 문구입니다.자기소개 문구입니다.자기소개 문구입니다.";
+  useEffect(() => {
+    if (is_me) {
+      setTabs(MyTabs);
+    } else {
+      setTabs(UserTabs);
+    }
+  }, [userProfile]);
+
   return (
     <div id="profile">
       <FriendListModal
-        showFriendsModal={showFriendsModal}
-        setShowFriendsModal={setShowFriendsModal}
-      ></FriendListModal>
+        showModal={showFriendsModal}
+        setShowModal={setShowFriendsModal}
+      />
+      <EditProfileModal
+        showModal={showEditProfileModal}
+        setShowModal={setShowEditProfileModal}
+      />
       <div className="pre-offset" />
       <div className="profile-container">
         <div className="upper-container">
           <div className="profile-image-container">
-            <img src={userIcon} alt="profile image" className="profile-image" />
+            <img
+              src={userProfile.profile ?? userIcon}
+              alt="profile image"
+              className="profile-image"
+            />
             <div className="button-container">
-              <button className="edit-profile">프로필 편집</button>
-              <button className="be-friend">친구 맺기</button>
+              {is_me ? (
+                <button
+                  className="edit-profile"
+                  onClick={() => {
+                    setShowEditProfileModal(true);
+                  }}
+                >
+                  프로필 편집
+                </button>
+              ) : (
+                <button className="be-friend">친구 맺기</button>
+              )}
             </div>
           </div>
         </div>
         <div className="lower-container">
-          <div className="name-container">닉네임</div>
+          <div className="name-container">{userProfile.name}</div>
           <div className="follow-container">
             <div
               className="follower"
@@ -68,7 +100,7 @@ function Profile() {
                 setShowFriendsModal(true);
               }}
             >
-              팔로워 {friend}명
+              팔로워 {userProfile.follower_num}명
             </div>
             <div
               className="following"
@@ -76,11 +108,13 @@ function Profile() {
                 setShowFriendsModal(true);
               }}
             >
-              팔로잉 {friend}명
+              팔로잉 {userProfile.following_num}명
             </div>
           </div>
           <div className="introduction-container">
-            <pre className="introduction">{introduction}</pre>
+            <pre className="introduction">
+              {userProfile.introduction ?? "자기소개가 없습니다."}
+            </pre>
           </div>
         </div>
         <div className="tabs">

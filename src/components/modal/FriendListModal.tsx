@@ -19,6 +19,16 @@ const friends = [
     name: "닉네임33",
     id: 3,
   },
+  {
+    profile: null,
+    name: "닉네임44",
+    id: 4,
+  },
+  {
+    profile: null,
+    name: "닉네임55",
+    id: 5,
+  },
 ];
 const tabs = [
   {
@@ -32,19 +42,19 @@ const tabs = [
 ];
 
 function FriendListModal({
-  showFriendsModal,
-  setShowFriendsModal,
+  showModal,
+  setShowModal,
 }: {
-  showFriendsModal: boolean;
-  setShowFriendsModal: Dispatch<SetStateAction<boolean>>;
+  showModal: boolean;
+  setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const [currentInfo, setCurrentInfo] = useState("follower");
   return (
     <Modal
       id="friend-list-modal"
-      show={showFriendsModal}
+      show={showModal}
       onHide={() => {
-        setShowFriendsModal(false);
+        setShowModal(false);
       }}
       centered
     >

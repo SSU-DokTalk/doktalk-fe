@@ -4,19 +4,17 @@ import { selectUser } from "@/stores/user";
 import { InitialUser, User } from "@/types/data";
 import axios from "axios";
 import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 
-function MyPage() {
-  const navigate = useNavigate();
+function UserProfile() {
+  const { user_id } = useParams();
   const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
   const [userProfile, setUserProfile] = useState<User>(InitialUser);
 
   useEffect(() => {
-    if (user.id == undefined) {
-      navigate("/login");
-    }
-
-    axios.get("/api/user/me").then(
+    if (user_id && parseInt(user_id ?? "0") == user.id) navigate("/mypage");
+    axios.get(`/api/user/${user_id}`).then(
       (res) => {
         setUserProfile(res.data);
       },
@@ -24,13 +22,13 @@ function MyPage() {
         console.log(err);
       }
     );
-  }, [user]);
+  });
 
   return (
     <>
-      <Profile userProfile={userProfile} is_me />
+      <Profile userProfile={userProfile} />
     </>
   );
 }
 
-export default MyPage;
+export default UserProfile;

@@ -12,6 +12,7 @@ import Register from "@/pages/Register";
 import Auth from "@/pages/Auth";
 import MyPage from "@/pages/MyPage";
 import Search from "./pages/Search";
+import UserProfile from "./pages/UserProfile";
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
         <Route path="/debate" element={<Search />}></Route>
         <Route path="/summary" element={<Landing />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
+        <Route path="/user/:user_id" element={<UserProfile />}></Route>
       </Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>

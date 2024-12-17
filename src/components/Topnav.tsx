@@ -16,6 +16,7 @@ import { faBell } from "@fortawesome/free-regular-svg-icons";
 import userIcon from "@/assets/images/profile.png";
 
 import { LinkItemType } from "@/types/components";
+import { useEffect } from "react";
 
 const navTabs: LinkItemType[] = [
   {
@@ -39,7 +40,7 @@ const dropdownItems: LinkItemType[] = [
   },
   {
     title: "component.topnav.dropdown.my-activity",
-    url: "/my-activity",
+    url: "/user/1",
   },
   {
     title: "component.topnav.dropdown.settings",
@@ -57,6 +58,8 @@ function Topnav() {
   const changeLanguage = () => {
     i18n.changeLanguage(i18n.language == "ko" ? "en" : "ko");
   };
+
+  useEffect(() => {}, [user]);
 
   const doLogout = () => {
     // 추후 실제 Logout 로직으로 변경
@@ -162,8 +165,8 @@ function Topnav() {
                 style={
                   tab.url != "/" + currentTab.pathname.split("/")[1]
                     ? {
-                      borderBottomColor: "rgba(0, 0, 0, 0)",
-                    }
+                        borderBottomColor: "rgba(0, 0, 0, 0)",
+                      }
                     : {}
                 }
                 key={"navtab" + idx}
@@ -174,8 +177,8 @@ function Topnav() {
                   style={
                     tab.url != "/" + currentTab.pathname.split("/")[1]
                       ? {
-                        color: "black",
-                      }
+                          color: "black",
+                        }
                       : {}
                   }
                 >
