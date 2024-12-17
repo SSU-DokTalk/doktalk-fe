@@ -98,7 +98,7 @@ function Landing() {
   const [user, setUser] = useState<UserType | null>(null);
   const [articles, setArticles] = useState<ArticleType[]>([]);
   // const [writeMode, setWriteMode] = useState(false);
-  const [books, setBooks] = useState<BookType[]>([]);
+  const [books,] = useState<BookType[]>([]);
   const [selectedArticle, setSelectedArticle] = useState<ArticleType | null>(null);
 
   const handleArticleClick = (article: ArticleType) => {
