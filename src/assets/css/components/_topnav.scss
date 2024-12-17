@@ -12,7 +12,7 @@
     display: flex;
     border-bottom: 1px solid variables.$brand-color4;
     .left-container {
-      margin-left: 150px;
+      margin-left: 180px;
       display: flex;
       flex: 8;
       .logo-container {
@@ -20,19 +20,11 @@
         align-items: center;
         display: flex;
         text-decoration: none;
+
         .logo {
-          font-size: 40px;
-          font-weight: 800;
-        }
-        .dok {
-          color: variables.$brand-color1;
-        }
-        .colon {
-          color: variables.$brand-color2;
-          margin-bottom: 10px;
-        }
-        .talk {
-          color: variables.$brand-color1;
+          margin-top: 20px;
+          height: 100px;
+          object-fit: contain;
         }
       }
       .searchbar-container {

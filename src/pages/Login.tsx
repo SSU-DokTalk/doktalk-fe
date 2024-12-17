@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
-import naverIcon from "@/assets/images/naver.png";
-import kakaoIcon from "@/assets/images/kakao.png";
-import googleIcon from "@/assets/images/google.png";
-import facebookIcon from "@/assets/images/facebook.png";
+import naverIcon from "@/assets/images/naver.svg";
+import kakaoIcon from "@/assets/images/kakao.svg";
+import googleIcon from "@/assets/images/google.svg";
+import facebookIcon from "@/assets/images/facebook.svg";
 import { setUser } from "@/stores/user";
 import { useAppDispatch } from "@/stores/hooks";
 
@@ -75,7 +75,7 @@ function Login() {
     <div id="login">
       <div className="login-container">
         <Link to={"/"} className="logo-container">
-          <div className="logo dok">讀</div>
+          <div className="logo dok">독</div>
           <div className="logo colon">:</div>
           <div className="logo talk">TALK</div>
         </Link>

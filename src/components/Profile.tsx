@@ -1,4 +1,4 @@
-import userIcon from "@/assets/images/profile.png";
+import userIcon from "@/assets/images/profile.svg";
 import { useEffect, useState } from "react";
 import FriendListModal from "./modal/FriendListModal";
 import { User } from "@/types/data";

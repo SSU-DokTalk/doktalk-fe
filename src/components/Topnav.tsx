@@ -13,7 +13,8 @@ import {
   faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
-import userIcon from "@/assets/images/profile.png";
+import userIcon from "@/assets/images/profile.svg";
+import logo from "@/assets/images/logo.svg";
 
 import { LinkItemType } from "@/types/components";
 import { useEffect } from "react";
@@ -73,9 +74,10 @@ function Topnav() {
       <div className="upper-container">
         <div className="left-container">
           <Link to={"/"} className="logo-container">
-            <div className="logo dok">讀</div>
+            {/* <div className="logo dok">讀</div>
             <div className="logo colon">:</div>
-            <div className="logo talk">TALK</div>
+            <div className="logo talk">TALK</div> */}
+            <img src={logo} alt="doktalk logo" className="logo" />
           </Link>
           <div className="searchbar-container">
             <div className="searchbar">

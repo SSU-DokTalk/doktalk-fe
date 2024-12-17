@@ -1,5 +1,5 @@
 import { Modal } from "react-bootstrap";
-import userIcon from "@/assets/images/profile.png";
+import userIcon from "@/assets/images/profile.svg";
 import React, {
   Dispatch,
   SetStateAction,
