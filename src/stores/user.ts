@@ -18,20 +18,24 @@ export interface UserState {
   introduction?: string;
   follower_num?: number;
   following_num?: number;
-  role?: "USER" | "ADMIN";
+  role: string;
   created_at?: Date;
   updated_at?: Date;
   is_deleted?: boolean;
 }
 
-const initialState: UserState = {};
+const initialState: UserState = {
+  role: "USER",
+};
 
 export const userSlice = createSlice({
   name: "user",
   initialState,
   reducers: {
     unsetUser: () => {
-      return {};
+      return {
+        role: "USER",
+      };
     },
     setUser: (state, action: PayloadAction<UserState>) => {
       return {

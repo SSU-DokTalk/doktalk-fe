@@ -13,8 +13,8 @@ function Comment({ content, createdAt, user }: CommentType) {
     >
       {user ? (
         <img
-          src={user.profile}
-          alt={user.name}
+          src={user.profile || ""}
+          alt={user.name || ""}
           style={{ width: "32px", height: "32px", borderRadius: "50%" }}
         />
       ) : (
