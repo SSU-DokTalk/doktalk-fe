@@ -1,15 +1,15 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 
-import { ArticleType } from "@/types/components";
+import { PostType } from "@/types/components";
 
-function HotArticle({
+function HotPost({
   comments_num,
   content,
   likes_num,
   title,
   user,
-}: ArticleType) {
+}: PostType) {
   return (
     <div
       style={{
@@ -51,7 +51,7 @@ function HotArticle({
           {user?.profile ? (
             <img
               src={user.profile}
-              alt={user.name}
+              alt={user.name || ""}
               style={{ width: "32px", height: "32px", borderRadius: "50%" }}
             />
           ) : (
@@ -79,7 +79,7 @@ function HotArticle({
   );
 }
 
-function HotArticleList({ articles }: { articles: ArticleType[] }) {
+function HotPostList({ posts: articles }: { posts: PostType[] }) {
   return (
     <div
       style={{
@@ -103,10 +103,10 @@ function HotArticleList({ articles }: { articles: ArticleType[] }) {
         인기 게시글
       </h1>
       {articles.map((article, index) => (
-        <HotArticle key={`${article.title}-${index}`} {...article} />
+        <HotPost key={`${article.title}-${index}`} {...article} />
       ))}
     </div>
   );
 }
 
-export default HotArticleList;
+export default HotPostList;

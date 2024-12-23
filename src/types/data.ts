@@ -65,10 +65,4 @@ export const MOCK_BOOKS: BookType[] = [
     author: "작가1",
     href: "https://www.naver.com",
   },
-  {
-    title: "책2",
-    imgSrc: mockBook2,
-    author: "작가2",
-    href: "https://www.naver.com",
-  },
 ];

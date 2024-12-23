@@ -6,10 +6,10 @@ function SideBar({
     follwers,
     following
 }: SidebarType) {
-    return (
+    return user && user.id ? (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", fontSize: "20px", width: "15%", borderRadius: "10px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center", fontSize: "20px", background: "#F3F4F7", width: "100%", padding: "16px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}>
-                {user?.profile ? <img src={user.profile} alt={user.name} style={{ width: "32px", height: "32px", borderRadius: "50%" }} /> : <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "gray" }} />}
+                {user?.profile ? <img src={user.profile} alt={user.name || "이미지 없음"} style={{ width: "32px", height: "32px", borderRadius: "50%" }} /> : <div style={{ width: "32px", height: "32px", borderRadius: "50%", backgroundColor: "gray" }} />}
                 <span style={{ fontSize: "14px" }}>{user.name}</span>
             </div>
             <div style={{ border: "2px solid #F3F4F7", width: "100%", display: "flex", flexDirection: "column", gap: "20px", alignItems: "start", flexWrap: "wrap", padding: "16px", borderBottomLeftRadius: "10px", borderBottomRightRadius: "10px" }}>
@@ -35,7 +35,7 @@ function SideBar({
                     내 서재
                 </div>
                 <div style={{ display: "flex", justifyContent: "space-between", gap: "2px", alignItems: "center", flexWrap: "wrap" }}>
-                    {books.map((book, index) => (
+                    {books?.map((book, index) => (
                         <div
                             key={`${book.title}-${index}`}
                             style={{
@@ -59,6 +59,42 @@ function SideBar({
                         </div>
                     ))}
                 </div>
+            </div>
+        </div>
+    ) : (
+        <div
+            style={{
+                display: "flex",
+                flexDirection: "column",
+                alignItems: "center",
+                fontSize: "20px",
+                width: "15%",
+                borderRadius: "10px",
+            }}
+        >
+            <div
+                style={{
+                    display: "flex",
+                    flexDirection: "column",
+                    gap: "10px",
+                    alignItems: "center",
+                    fontSize: "20px",
+                    background: "#F3F4F7",
+                    width: "100%",
+                    padding: "16px",
+                    borderTopRightRadius: "10px",
+                    borderTopLeftRadius: "10px",
+                }}
+            >
+                <div
+                    style={{
+                        width: "32px",
+                        height: "32px",
+                        borderRadius: "50%",
+                        backgroundColor: "gray",
+                    }}
+                />
+                <span style={{ fontSize: "14px" }}>로그인하세요</span>
             </div>
         </div>
     )

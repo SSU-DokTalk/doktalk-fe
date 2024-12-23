@@ -1,7 +1,7 @@
 import axios from "axios";
 
-export const heartUp = async (articleId: number) => {
-  axios.post(`/api/post/${articleId}/like`, {
+export const heartUp = async (postId: number) => {
+  axios.post(`/api/post/${postId}/like`, {
     headers: {
       "Content-Type": "application/json",
     },

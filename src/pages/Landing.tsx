@@ -1,57 +1,22 @@
-import axios from "axios";
-import { useEffect, useState } from "react";
-import ArticleList, { ArticleDetail } from "@/components/Article";
+import { useState } from "react";
+import PostList, { PostDetail } from "@/components/Post";
 import BoardWriteBar from "@/components/BoardWriteBar";
 import BookList from "@/components/Book";
-import HotArticleList from "@/components/HotArticle";
+import HotPostList from "@/components/HotPost";
 import SideBar from "@/components/SideBar";
 
-import { ArticleType, BookType, UserType } from "@/types/components";
+import { BookType } from "@/types/components";
 import { MOCK_BOOKS } from "@/types/data";
+import usePosts from "@/hooks/usePosts";
+import useUserRedux from "@/hooks/useUserRedux";
+import useSelectPost from "@/hooks/useSelectPost";
 
 function Landing() {
-  const [user, setUser] = useState<UserType | null>(null);
-  const [articles, setArticles] = useState<ArticleType[]>([]);
-  // const [writeMode, setWriteMode] = useState(false);
+
+  const { posts } = usePosts();
+  const user = useUserRedux();
   const [books] = useState<BookType[]>([]);
-  const [selectedArticle, setSelectedArticle] = useState<ArticleType | null>(
-    null
-  );
-
-  const handleArticleClick = (article: ArticleType) => {
-    setSelectedArticle(article);
-  };
-
-  const handleCloseDetail = () => {
-    setSelectedArticle(null);
-  };
-
-  useEffect(() => {
-    fetchUser();
-    fetchArticles();
-  }, []);
-
-  const fetchArticles = () => {
-    axios
-      .get("/api/post/recent")
-      .then((res) => {
-        setArticles(res.data.items);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
-
-  const fetchUser = () => {
-    axios
-      .get("/api/user/me")
-      .then((res) => {
-        setUser(res.data);
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  };
+  const { handleCloseDetail, handlePostClick, selectedPost } = useSelectPost();
 
   return (
     <div
@@ -83,7 +48,7 @@ function Landing() {
       // onClick={test}
       >
         <div style={{ textAlign: "left", fontSize: "24px", width: "50%" }}>
-          {user ? (
+          {user && user.id ? (
             <>
               <span style={{ fontWeight: "bold", color: "#000080" }}>
                 {user.name}
@@ -106,50 +71,12 @@ function Landing() {
           padding: "20px",
         }}
       >
-        {user ? (
-          <SideBar
-            books={MOCK_BOOKS}
-            following={user?.following_num}
-            follwers={user?.follower_num}
-            user={user}
-          />
-        ) : (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              fontSize: "20px",
-              width: "15%",
-              borderRadius: "10px",
-            }}
-          >
-            <div
-              style={{
-                display: "flex",
-                flexDirection: "column",
-                gap: "10px",
-                alignItems: "center",
-                fontSize: "20px",
-                background: "#F3F4F7",
-                width: "100%",
-                padding: "16px",
-                borderTopRightRadius: "10px",
-                borderTopLeftRadius: "10px",
-              }}
-            >
-              <div
-                style={{
-                  width: "32px",
-                  height: "32px",
-                  borderRadius: "50%",
-                  backgroundColor: "gray",
-                }}
-              />
-              <span style={{ fontSize: "14px" }}>로그인하세요</span>
-            </div>
-          </div>
-        )}
+        <SideBar
+          books={MOCK_BOOKS}
+          following={user?.following_num}
+          follwers={user?.follower_num}
+          user={user}
+        />
         <div
           style={{
             width: "40%",
@@ -168,23 +95,23 @@ function Landing() {
           >
             게시글
           </h1>
-          {selectedArticle ? (
-            <ArticleDetail
+          {selectedPost ? (
+            <PostDetail
               user={user}
-              article={selectedArticle}
+              post={selectedPost}
               onClose={handleCloseDetail}
             />
           ) : (
             <>
               <BoardWriteBar />
-              <ArticleList
-                articles={articles}
-                onArticleClick={handleArticleClick}
+              <PostList
+                posts={posts}
+                onPostClick={handlePostClick}
               />
             </>
           )}
         </div>
-        <HotArticleList articles={articles} />
+        <HotPostList posts={posts} />
       </div>
     </div>
   );

@@ -4,18 +4,18 @@ import { useEffect, useState } from "react";
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import { heartUp } from "@/api/article";
+import { heartUp } from "@/api/post";
 
-import { ArticleType, CommentType, UserType } from "@/types/components";
+import { PostType, CommentType, UserType } from "@/types/components";
 import Comment from "@/components/Comment";
 
-export function ArticleDetail({
+export function PostDetail({
   user,
-  article,
+  post,
   onClose,
 }: {
   user: UserType | null;
-  article: ArticleType;
+  post: PostType;
   onClose: () => void;
 }) {
   const [comments, setComments] = useState<CommentType[]>([]);
@@ -39,7 +39,7 @@ export function ArticleDetail({
 
   const fetchComments = () => {
     axios
-      .get(`/api/post/${article.id}/comments`)
+      .get(`/api/post/${post.id}/comments`)
       .then((response) => {
         setComments(response.data);
       })
@@ -50,7 +50,7 @@ export function ArticleDetail({
 
   const handleCommentSubmit = () => {
     axios
-      .post(`/api/post/${article.id}/comments`, { content: text })
+      .post(`/api/post/${post.id}/comments`, { content: text })
       .then(() => {
         fetchComments();
       })
@@ -83,10 +83,10 @@ export function ArticleDetail({
           width: "100%",
         }}
       >
-        {article.user ? (
+        {post.user ? (
           <img
-            src={article.user.profile}
-            alt={article.user.name}
+            src={post.user.profile || ""}
+            alt={post.user.name || ""}
             style={{ width: "32px", height: "32px", borderRadius: "50%" }}
           />
         ) : (
@@ -99,12 +99,12 @@ export function ArticleDetail({
             }}
           />
         )}
-        <span style={{ fontSize: "14px" }}>{article.user?.name}</span>
+        <span style={{ fontSize: "14px" }}>{post.user?.name}</span>
         <span style={{ fontSize: "14px", color: "#666565" }}>
-          {new Date().getHours() - new Date(article.created_at).getHours()} 시간
+          {new Date().getHours() - new Date(post.created_at).getHours()} 시간
           전
         </span>
-        {article.user.id == user?.id ? (
+        {post.user.id == user?.id ? (
           <div
             style={{
               display: "flex",
@@ -143,16 +143,16 @@ export function ArticleDetail({
       </div>
       <div
         style={{ cursor: "pointer" }}
-        // onClick={onClick}
+      // onClick={onClick}
       >
         <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>
-          {article.title}
+          {post.title}
         </h1>
-        <p style={{ fontSize: "15px" }}>{article.content}</p>
+        <p style={{ fontSize: "15px" }}>{post.content}</p>
       </div>
       <img
-        src={article.image1}
-        alt={article.title}
+        src={post.image1}
+        alt={post.title}
         style={{
           width: "auto",
           height: "500px",
@@ -161,11 +161,11 @@ export function ArticleDetail({
         }}
       />
       <button
-        onClick={() => heartUp(article.id)}
+        onClick={() => heartUp(post.id)}
         style={{ fontSize: "16px", background: "none", border: "none" }}
       >
         <FontAwesomeIcon icon={faHeart} style={{ marginRight: "4px" }} />
-        <span>{article.likes_num}</span>
+        <span>{post.likes_num}</span>
       </button>
 
       <div
@@ -180,12 +180,12 @@ export function ArticleDetail({
         }}
       >
         <h2 style={{ fontSize: "20px", fontWeight: "bold" }}>
-          댓글 {article.comments_num}
+          댓글 {post.comments_num}
         </h2>
         <div style={{ display: "flex", gap: "16px", alignItems: "center" }}>
           <img
-            src={user?.profile}
-            alt={user?.name}
+            src={user?.profile || ""}
+            alt={user?.name || ""}
             style={{ width: "32px", height: "32px", borderRadius: "50%" }}
           />
           <input
@@ -215,7 +215,7 @@ export function ArticleDetail({
   );
 }
 
-function Article({
+function Post({
   id,
   comments_num,
   content,
@@ -225,7 +225,7 @@ function Article({
   title,
   user,
   onClick,
-}: ArticleType & { onClick?: () => void }) {
+}: PostType & { onClick?: () => void }) {
   return (
     <div
       style={{
@@ -255,7 +255,7 @@ function Article({
         {user?.profile ? (
           <img
             src={user.profile}
-            alt={user.name}
+            alt={user.name || ""}
             style={{ width: "32px", height: "32px", borderRadius: "50%" }}
           />
         ) : (
@@ -325,12 +325,12 @@ function Article({
   );
 }
 
-function ArticleList({
-  articles,
-  onArticleClick,
+function PostList({
+  posts: posts,
+  onPostClick,
 }: {
-  articles: ArticleType[];
-  onArticleClick: (article: ArticleType) => void;
+  posts: PostType[];
+  onPostClick: (post: PostType) => void;
 }) {
   return (
     <div
@@ -343,15 +343,15 @@ function ArticleList({
         width: "100%",
       }}
     >
-      {articles.map((article, index) => (
-        <Article
-          key={`${article.title}-${index}`}
-          {...article}
-          onClick={() => onArticleClick(article)}
+      {posts.map((post, index) => (
+        <Post
+          key={`${post.title}-${index}`}
+          {...post}
+          onClick={() => onPostClick(post)}
         />
       ))}
     </div>
   );
 }
 
-export default ArticleList;
+export default PostList;

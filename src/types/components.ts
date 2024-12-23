@@ -17,22 +17,22 @@ export type CommentType = {
 };
 
 export type UserType = {
-  id: number;
-  email: string;
-  profile: string;
-  name: string;
-  gender: boolean;
-  birthday: string;
-  introduction: string;
-  follower_num: number;
-  following_num: number;
-  role: string; // 필요하다면 "USER" | "ADMIN" 등으로 세분화 가능
-  created_at: string;
-  updated_at: string;
-  is_deleted: boolean;
+  id?: number;
+  email?: string;
+  profile?: string | null;
+  name?: string | null;
+  gender?: boolean | null;
+  birthday?: Date | null;
+  introduction?: string | null;
+  follower_num?: number | null;
+  following_num: number | null;
+  role?: string | null; // 필요하다면 "USER" | "ADMIN" 등으로 세분화 가능
+  created_at?: Date | null;
+  updated_at?: Date | null;
+  is_deleted?: boolean | null;
 };
 
-export interface ArticleType {
+export interface PostType {
   id: number;
   user_id: number;
   title: string;
@@ -48,9 +48,9 @@ export interface ArticleType {
 
 export type SidebarType = {
   user: UserType;
-  books: BookType[];
-  follwers: number;
-  following: number;
+  books?: BookType[];
+  follwers?: number | null;
+  following?: number | null;
 };
 
 export type RegisterType = {

@@ -20,8 +20,9 @@ function App() {
     <Routes>
       <Route element={<BasicLayout />}>
         <Route path="/" element={<Landing />} />
+        <Route path="/search" element={<Search />}></Route>
         <Route path="/community" element={<Landing />}></Route>
-        <Route path="/debate" element={<Search />}></Route>
+        <Route path="/debate" element={<Landing />}></Route>
         <Route path="/summary" element={<Summary />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/user/:user_id" element={<UserProfile />}></Route>

@@ -60,7 +60,7 @@ function Topnav() {
     i18n.changeLanguage(i18n.language == "ko" ? "en" : "ko");
   };
 
-  useEffect(() => {}, [user]);
+  useEffect(() => { }, [user]);
 
   const doLogout = () => {
     // 추후 실제 Logout 로직으로 변경
@@ -84,6 +84,7 @@ function Topnav() {
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
                 className="searchbar-icon"
+                onClick={() => navigate("/search")}
               />
               <input
                 type="text"
@@ -167,8 +168,8 @@ function Topnav() {
                 style={
                   tab.url != "/" + currentTab.pathname.split("/")[1]
                     ? {
-                        borderBottomColor: "rgba(0, 0, 0, 0)",
-                      }
+                      borderBottomColor: "rgba(0, 0, 0, 0)",
+                    }
                     : {}
                 }
                 key={"navtab" + idx}
@@ -179,8 +180,8 @@ function Topnav() {
                   style={
                     tab.url != "/" + currentTab.pathname.split("/")[1]
                       ? {
-                          color: "black",
-                        }
+                        color: "black",
+                      }
                       : {}
                   }
                 >
