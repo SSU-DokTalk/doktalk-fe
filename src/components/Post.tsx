@@ -6,18 +6,18 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import { heartUp } from "@/api/post";
 
-import { PostType, CommentType, UserType } from "@/types/components";
+import { PostType, CommentType } from "@/types/components";
 import Comment from "@/components/Comment";
+import useUserRedux from "@/hooks/useUserRedux";
 
 export function PostDetail({
-  user,
   post,
   onClose,
 }: {
-  user: UserType | null;
   post: PostType;
   onClose: () => void;
 }) {
+  const user = useUserRedux();
   const [comments, setComments] = useState<CommentType[]>([]);
   const [text, setText] = useState("");
 

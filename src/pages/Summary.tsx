@@ -5,12 +5,10 @@ import SearchBar from "@/components/SearchBar";
 import SideBar from "@/components/SideBar";
 import usePosts from "@/hooks/usePosts";
 import useSelectPost from "@/hooks/useSelectPost";
-import useUserRedux from "@/hooks/useUserRedux";
 import { MOCK_BOOKS } from "@/types/data";
 
 function Summary() {
 
-    const user = useUserRedux();
     const { posts } = usePosts();
     const selection = useSelectPost();
 
@@ -38,9 +36,9 @@ function Summary() {
             >
                 <SideBar
                     books={MOCK_BOOKS}
-                    following={user?.following_num}
-                    follwers={user?.follower_num}
-                    user={user}
+                // following={user?.following_num}
+                // follwers={user?.follower_num}
+                // user={user}
                 />
                 <div
                     style={{

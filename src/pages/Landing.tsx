@@ -73,9 +73,6 @@ function Landing() {
       >
         <SideBar
           books={MOCK_BOOKS}
-          following={user?.following_num}
-          follwers={user?.follower_num}
-          user={user}
         />
         <div
           style={{
@@ -97,7 +94,6 @@ function Landing() {
           </h1>
           {selectedPost ? (
             <PostDetail
-              user={user}
               post={selectedPost}
               onClose={handleCloseDetail}
             />

@@ -1,11 +1,17 @@
+import useUserRedux from '@/hooks/useUserRedux'
 import { SidebarType } from '@/types/components'
 
 function SideBar({
-    user,
+    // user,
     books,
-    follwers,
-    following
+    // follwers,
+    // following
 }: SidebarType) {
+
+    const user = useUserRedux()
+    const follwers = user.follower_num
+    const following = user.following_num
+
     return user && user.id ? (
         <div style={{ display: "flex", flexDirection: "column", alignItems: "center", fontSize: "20px", width: "15%", borderRadius: "10px" }}>
             <div style={{ display: "flex", flexDirection: "column", gap: "10px", alignItems: "center", fontSize: "20px", background: "#F3F4F7", width: "100%", padding: "16px", borderTopRightRadius: "10px", borderTopLeftRadius: "10px" }}>

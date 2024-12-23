@@ -3,12 +3,9 @@ import BookList from "@/components/BookListSearch"
 import Header from "@/components/Header"
 import SearchBar from "@/components/SearchBar"
 import SideBar from "@/components/SideBar"
-import useUserRedux from "@/hooks/useUserRedux"
 import { MOCK_BOOKS } from "@/types/data"
 
 function Search() {
-
-    const user = useUserRedux()
 
     return (
         <div
@@ -33,9 +30,6 @@ function Search() {
             >
                 <SideBar
                     books={MOCK_BOOKS}
-                    following={user?.following_num}
-                    follwers={user?.follower_num}
-                    user={user}
                 />
                 <div
                     style={{

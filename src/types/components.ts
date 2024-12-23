@@ -47,7 +47,7 @@ export interface PostType {
 }
 
 export type SidebarType = {
-  user: UserType;
+  user?: UserType;
   books?: BookType[];
   follwers?: number | null;
   following?: number | null;
