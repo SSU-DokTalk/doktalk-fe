@@ -9,22 +9,37 @@ const useUserRedux = () => {
   const user = useSelector((state: RootState) => selectUser(state));
 
   useEffect(() => {
-    const fetchUser = () => {
-      axios
-        .get("/api/user/me")
-        .then((res) => {
-          dispatch(setUser(res.data));
-        })
-        .catch((err) => {
-          console.log(err);
-          dispatch(unsetUser());
-        });
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = token;
+    }
+
+    const fetchUser = async () => {
+      try {
+        const res = await axios.get("/api/user/me");
+        localStorage.setItem("user", JSON.stringify(res.data));
+        dispatch(setUser(res.data));
+      } catch (err) {
+        console.log(err);
+        localStorage.removeItem("user");
+        dispatch(unsetUser());
+      }
     };
 
-    fetchUser();
+    const savedUser = localStorage.getItem("user");
+    if (savedUser) {
+      dispatch(setUser(JSON.parse(savedUser)));
+    } else {
+      fetchUser();
+    }
   }, [dispatch]);
 
-  return user;
+  const logout = () => {
+    localStorage.removeItem("user");
+    dispatch(unsetUser());
+  };
+
+  return { user, logout };
 };
 
 export default useUserRedux;

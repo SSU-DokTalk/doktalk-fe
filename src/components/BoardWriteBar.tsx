@@ -3,6 +3,7 @@ import { useEffect, useState } from "react";
 
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import usePosts from "@/hooks/usePosts";
 
 function BoardWriteBar() {
   const [title, setTitle] = useState("");
@@ -12,6 +13,12 @@ function BoardWriteBar() {
 
   const [rows, setRows] = useState(1);
   const [writeMode, setWriteMode] = useState(false);
+
+  const { posts, loading, error, update } = usePosts();
+
+  useEffect(() => {
+    update();
+  }, [posts]);
 
   // 파일 선택 시 해당 파일을 담을 FormData (매번 필요 시 생성)
   // const [file1, setFile1] = useState<File | null>(null);
@@ -86,6 +93,7 @@ function BoardWriteBar() {
       // setImage1("");
       // setImage2("");
       alert("게시글이 작성되었습니다");
+      await update(); // 새로운 게시글을 가져오기 위해 update 함수 호출
     } catch (error) {
       console.error(error);
     }

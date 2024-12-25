@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Link } from "react-router-dom";
 import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
@@ -34,12 +34,21 @@ function Login() {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      axios.defaults.headers.common["Authorization"] = token;
+    }
+  }, []);
+
   const doLogin = async () => {
     await axios.post("/api/user/login", userInfo).then(async (res) => {
       const { id, name, role }: { id: number; name: string; role: string } =
         res.data;
       const token = res.headers.authorization;
       axios.defaults.headers.common["Authorization"] = token;
+      localStorage.setItem("token", token);
+      localStorage.setItem("user", JSON.stringify({ id, name, role }));
       await dispatch(
         setUser({
           id: id,

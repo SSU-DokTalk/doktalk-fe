@@ -1,5 +1,5 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { Suspense, useEffect, useState } from "react";
 
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -17,7 +17,7 @@ export function PostDetail({
   post: PostType;
   onClose: () => void;
 }) {
-  const user = useUserRedux();
+  const { user, } = useUserRedux();
   const [comments, setComments] = useState<CommentType[]>([]);
   const [text, setText] = useState("");
 
@@ -344,12 +344,139 @@ function PostList({
       }}
     >
       {posts.map((post, index) => (
-        <Post
+        <Suspense
           key={`${post.title}-${index}`}
-          {...post}
-          onClick={() => onPostClick(post)}
-        />
+          fallback={<PostSkeleton />}
+        >
+          <Post
+            {...post}
+            onClick={() => onPostClick(post)}
+          />
+        </Suspense>
       ))}
+    </div>
+  );
+}
+
+export function PostSkeleton() {
+  return (
+    <div
+      style={{
+        // height: "400px",
+        backgroundColor: "gray",
+        textAlign: "left",
+        fontSize: "20px",
+        alignContent: "start",
+        width: "100%",
+        borderRadius: "20px",
+        border: "2px solid #F3F4F7",
+        padding: "20px",
+        // margin: "20px",
+        display: "flex",
+        flexDirection: "column",
+        gap: "10px",
+      }}
+    >
+      <div
+        style={{
+          display: "flex",
+          gap: "10px",
+          alignItems: "center",
+          fontSize: "20px",
+        }}
+      >
+        <div
+          style={{
+            width: "32px",
+            height: "32px",
+            borderRadius: "50%",
+            backgroundColor: "gray",
+          }}
+        />
+        <div
+          style={{
+            width: "100px",
+            height: "16px",
+            borderRadius: "8px",
+            backgroundColor: "gray",
+          }}
+        />
+      </div>
+      <div>
+        <div
+          style={{
+            width: "100%",
+            height: "16px",
+            borderRadius: "8px",
+            backgroundColor: "gray",
+          }}
+        />
+        <div
+          style={{
+            width: "100%",
+            height: "16px",
+            borderRadius: "8px",
+            backgroundColor: "gray",
+          }}
+        />
+        <div
+          style={{
+            width: "100%",
+            height: "16px",
+            borderRadius: "8px",
+            backgroundColor: "gray",
+          }}
+        />
+        <div
+          style={{
+            width: "100%",
+            height: "16px",
+            borderRadius: "8px",
+            backgroundColor: "gray",
+          }}
+        />
+      </div>
+      <div
+        style={{
+          width: "100%",
+          height: "500px",
+          borderRadius: "20px",
+          backgroundColor: "gray",
+        }}
+      />
+      <div
+        style={{
+          display: "flex",
+          gap: "12px",
+          alignItems: "end",
+          color: "#666565",
+        }}
+      >
+        <div
+          style={{
+            width: "100px",
+            height: "16px",
+            borderRadius: "8px",
+            backgroundColor: "gray",
+          }}
+        />
+        <div
+          style={{
+            width: "100px",
+            height: "16px",
+            borderRadius: "8px",
+            backgroundColor: "gray",
+          }}
+        />
+        <div
+          style={{
+            width: "100px",
+            height: "16px",
+            borderRadius: "8px",
+            backgroundColor: "gray",
+          }}
+        />
+      </div>
     </div>
   );
 }

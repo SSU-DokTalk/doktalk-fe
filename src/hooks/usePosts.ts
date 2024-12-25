@@ -9,22 +9,22 @@ const usePosts = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
+  const update = async () => {
+    try {
+      const response = await axios.get("/api/post/recent");
+      setPosts(response.data.items);
+    } catch (err: any) {
+      setError(err);
+    } finally {
+      setLoading(false);
+    }
+  };
+
   useEffect(() => {
-    const fetchPosts = async () => {
-      try {
-        const response = await axios.get("/api/post/recent");
-        setPosts(response.data.items);
-      } catch (err: any) {
-        setError(err);
-      } finally {
-        setLoading(false);
-      }
-    };
+    update();
+  }, [posts]);
 
-    fetchPosts();
-  }, []);
-
-  return { posts, loading, error };
+  return { posts, loading, error, update };
 };
 
 export default usePosts;

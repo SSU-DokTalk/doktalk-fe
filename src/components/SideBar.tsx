@@ -8,7 +8,7 @@ function SideBar({
     // following
 }: SidebarType) {
 
-    const user = useUserRedux()
+    const {user, } = useUserRedux()
     const follwers = user.follower_num
     const following = user.following_num
 

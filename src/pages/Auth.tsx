@@ -32,6 +32,9 @@ function Auth() {
         const token = res.headers.authorization;
 
         axios.defaults.headers.common["Authorization"] = token;
+        localStorage.setItem("token", token);
+        localStorage.setItem("user", JSON.stringify({ id, name, profile, role }));
+
         await dispatch(
           setUser({
             id: id,
@@ -47,7 +50,7 @@ function Auth() {
       .finally(() => {
         navigate("/");
       });
-  }, []);
+  }, [provider, code, dispatch, navigate]);
 
   return <></>;
 }
