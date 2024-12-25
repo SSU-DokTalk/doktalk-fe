@@ -50,14 +50,17 @@ export function PostDetail({
 
   const handleCommentSubmit = () => {
     axios
-      .post(`/api/post/${post.id}/comments`, { content: text })
+      .post(`/api/post/${post.id}/comment`, { content: text })
       .then(() => {
         fetchComments();
+        setText("");
       })
       .catch((error) => {
         console.error(error);
       });
-  };
+
+      setText("");
+    };
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -190,6 +193,7 @@ export function PostDetail({
           />
           <input
             onChange={handleTextChange}
+            value={text}
             type="text"
             style={{
               width: "100%",
@@ -200,7 +204,7 @@ export function PostDetail({
           />
           <button
             onClick={handleCommentSubmit}
-            style={{ fontSize: "16px", background: "none", border: "none" }}
+            style={{ fontSize: "16px", background: "none", border: "none", width: "100px" }}
           >
             등록
           </button>

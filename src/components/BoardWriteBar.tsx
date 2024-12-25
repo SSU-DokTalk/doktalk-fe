@@ -8,43 +8,52 @@ import usePosts from "@/hooks/usePosts";
 function BoardWriteBar() {
   const [title, setTitle] = useState("");
   const [content, setContent] = useState("");
-  // const [image1, setImage1] = useState("")
-  // const [image2, setImage2] = useState("")
+  const [image, setImage] = useState("")
+  const [file, setFile] = useState<File | null>(null);
 
   const [rows, setRows] = useState(1);
   const [writeMode, setWriteMode] = useState(false);
 
-  const { posts, loading, error, update } = usePosts();
+  const { posts, update } = usePosts();
 
   useEffect(() => {
     update();
   }, [posts]);
 
+  const onAttachImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files?.[0] || null;
+    if (!file) return;
+
+    setImage(URL.createObjectURL(file));
+    setFile(file);
+  }
+
   // 파일 선택 시 해당 파일을 담을 FormData (매번 필요 시 생성)
   // const [file1, setFile1] = useState<File | null>(null);
   // const [file2, setFile2] = useState<File | null>(null);
 
-  // const uploadImage = async (
-  //     file: File | null,
-  //     setImage: React.Dispatch<React.SetStateAction<string>>
-  // ) => {
-  //     if (!file) return;
+  const uploadImage = async (
+      file: File | null,
+  ) => {
+      if (!file) return;
 
-  //     const formData = new FormData();
-  //     formData.append('file', file);
+      const formData = new FormData();
+      formData.append('file', file);
 
-  //     try {
-  //         const response = await axios.post<string>("/api/image?directory=post", formData, {
-  //             headers: {
-  //                 "Content-Type": "multipart/form-data",
-  //             },
-  //         });
-  //         console.log(response.data);
-  //         setImage(response.data);
-  //     } catch (error) {
-  //         console.error(error);
-  //     }
-  // };
+      try {
+          const response = await axios.post<string>("/api/image?directory=post", formData, {
+              headers: {
+                  "Content-Type": "multipart/form-data",
+              },
+          });
+          console.log(response.data);
+          return response.data;
+      } catch (error) {
+          console.error(error);
+      }
+
+      return "";
+  };
 
   // const onAttach1 = async (e: React.ChangeEvent<HTMLInputElement>) => {
   //     const file = e.target.files?.[0] || null;
@@ -76,17 +85,14 @@ function BoardWriteBar() {
       return;
     }
 
-    // if (!image1 || !image2) {
-    //     alert("이미지를 업로드해주세요");
-    //     return;
-    // }
-
+    const url = await uploadImage(file);
+    
     try {
       await axios.post("/api/post", {
         title,
         content,
-        image1: null,
-        image2: null,
+        image1: url,
+        image2: url,
       });
       setTitle("");
       setContent("");
@@ -153,7 +159,6 @@ function BoardWriteBar() {
           borderRadius: "20px",
           border: "2px solid #F3F4F7",
           padding: "20px",
-          // boxSizing: "border-box",
           display: "flex",
           flexDirection: "column",
           alignItems: "center",
@@ -161,48 +166,6 @@ function BoardWriteBar() {
           gap: "10px",
         }}
       >
-        {writeMode ? (
-          <>
-            <input
-              style={{
-                width: "100%",
-                border: "none",
-                outline: "none",
-                // backgroundColor: "#F3F4F7",
-                marginLeft: "84px",
-                marginBottom: "10px",
-                animation: "grow 0.5s",
-                transition: "height 0.1s",
-                resize: "none",
-                fontSize: "20px",
-              }}
-              placeholder="제목을 입력해주세요"
-              value={title}
-              onChange={onChangeTitle}
-            />
-            {/* <input
-                            type="file"
-                            accept="image/*"
-                            onChange={onAttach1}
-                        />
-                        <input
-                            type="file"
-                            accept="image/*"
-                            onChange={onAttach2}
-                        /> */}
-            {/* <div
-                            style={{
-                                display: "flex",
-                                gap: "10px",
-                            }}
-                        >
-                            {image1 && <img src={image1} alt="image1" style={{ width: "100px", height: "100px" }} />}
-                            {image2 && <img src={image2} alt="image2" style={{ width: "100px", height: "100px" }} />}
-                        </div> */}
-          </>
-        ) : (
-          <></>
-        )}
         <div
           style={{
             display: "flex",
@@ -230,49 +193,129 @@ function BoardWriteBar() {
               // boxSizing: "border-box",
             }}
           />
-          <textarea
+          <div
             style={{
-              marginLeft: "auto",
+              display: "flex",
+              flexDirection: "column",
+              gap: "5px",
               width: "100%",
-              borderRadius: "30px",
-              height: `${rows * 50}px`,
-              border: "none",
-              outline: "none",
-              paddingTop: "10px",
-              animation: "grow 0.5s",
-              transition: "height 0.1s",
-              paddingLeft: "20px",
-              paddingRight: "10%",
-              backgroundColor: "#F3F4F7",
-              resize: "none",
-            }}
-            placeholder="게시글을 작성해보세요!"
-            onClick={onClickWrite}
-            onChange={onChangeContent}
-            value={content}
-          />
-          <button
-            onClick={onSave}
-            style={{
-              // width: "100px",
-              padding: "0 10px",
-              height: "30px",
-              color: "white",
-              backgroundColor: "#F3F4F7",
-              border: "none",
-              borderRadius: "10px",
-              cursor: "pointer",
-              position: "absolute",
-              right: "10px",
-              top: "24px",
-              transform: "translateY(-50%)",
             }}
           >
-            <FontAwesomeIcon
-              style={{ color: "#666565" }}
-              icon={faPenToSquare}
+
+            {writeMode ? (
+              <>
+                <input
+                  style={{
+                    width: "100%",
+                    border: "none",
+                    outline: "none",
+                    // backgroundColor: "#F3F4F7",
+                    marginLeft: "16px",
+                    marginBottom: "10px",
+                    animation: "grow 0.5s",
+                    transition: "height 0.1s",
+                    resize: "none",
+                    fontSize: "20px",
+                  }}
+                  placeholder="제목을 입력해주세요"
+                  value={title}
+                  onChange={onChangeTitle}
+                />
+                <div
+                  style={{
+                    display: "flex",
+                    gap: "10px",
+                    marginBottom: "10px",
+                  }}
+                >
+                  <div
+                    style={{
+                      display: "flex",
+                      gap: "10px",
+                      marginBottom: "10px",
+                    }}
+                  >
+                    <label
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        backgroundColor: "gray",
+                        display: "flex",
+                        alignItems: "center",
+                        justifyContent: "center",
+                        cursor: "pointer",
+                        borderRadius: "10px",
+                      }}
+                    >
+                      <input
+                        type="file"
+                        style={{ display: "none" }}
+                        onChange={onAttachImage}
+                      />
+                      <span style={{ color: "white" }}>Upload</span>
+                    </label>
+                  </div>
+                  {image && (
+                    <img
+                      src={image}
+                      alt="Preview"
+                      style={{
+                        width: "100px",
+                        height: "100px",
+                        objectFit: "cover",
+                        borderRadius: "10px",
+                      }}
+                    />
+                  )}
+                </div>
+              </>
+            ) : (
+              <></>
+            )}
+            <textarea
+              style={{
+                marginLeft: "auto",
+                width: "100%",
+                borderRadius: "30px",
+                height: `${rows * 50}px`,
+                border: "none",
+                outline: "none",
+                paddingTop: "10px",
+                animation: "grow 0.5s",
+                transition: "height 0.1s",
+                paddingLeft: "20px",
+                paddingRight: "10%",
+                backgroundColor: "#F3F4F7",
+                resize: "none",
+              }}
+              placeholder="게시글을 작성해보세요!"
+              onClick={onClickWrite}
+              onChange={onChangeContent}
+              value={content}
             />
-          </button>
+            <button
+              onClick={onSave}
+              style={{
+                // width: "100px",
+                padding: "0 10px",
+                height: "30px",
+                color: "white",
+                backgroundColor: "#F3F4F7",
+                border: "none",
+                borderRadius: "10px",
+                cursor: "pointer",
+                position: "absolute",
+                right: "10px",
+                top: "24px",
+                transform: "translateY(-50%)",
+              }}
+            >
+              <FontAwesomeIcon
+                style={{ color: "#666565" }}
+                icon={faPenToSquare}
+              />
+            </button>
+          </div>
         </div>
         <div
           style={{

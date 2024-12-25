@@ -8,8 +8,9 @@ const usePosts = () => {
   const [posts, setPosts] = useState([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
+  const [updateFlag, setUpdateFlag] = useState(false);
 
-  const update = async () => {
+  const fetchUpdate = async () => {
     try {
       const response = await axios.get("/api/post/recent");
       setPosts(response.data.items);
@@ -20,9 +21,13 @@ const usePosts = () => {
     }
   };
 
+  const update = async () => {
+    setUpdateFlag((prev) => !prev);
+  }
+
   useEffect(() => {
-    update();
-  }, [posts]);
+    fetchUpdate();
+  }, [posts, updateFlag]);
 
   return { posts, loading, error, update };
 };
