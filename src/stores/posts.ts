@@ -1,5 +1,3 @@
-import userReducer from "@/stores/user";
-
 import { createSlice, configureStore } from '@reduxjs/toolkit';
 
 const postsSlice = createSlice({
@@ -14,14 +12,12 @@ const postsSlice = createSlice({
   },
 });
 
+export const { toggleUpdateFlag } = postsSlice.actions;
 
-export const store = configureStore({
+const store = configureStore({
   reducer: {
-    user: userReducer,
     posts: postsSlice.reducer,
   },
 });
 
-export const { toggleUpdateFlag } = postsSlice.actions;
-export type RootState = ReturnType<typeof store.getState>;
-export type AppDispatch = typeof store.dispatch;
+export default store;

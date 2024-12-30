@@ -1,6 +1,5 @@
 import { MOCK_BOOKS } from '@/types/data';
 
-
 function HotSummary() {
     return (
         <div
@@ -13,39 +12,17 @@ function HotSummary() {
                 paddingTop: "20px",
                 paddingBottom: "20px",
                 display: "flex",
-                flexDirection: "column",
+                // flexDirection: "column",
                 gap: "30px",
                 alignItems: "center",
-                flexWrap: "wrap",
-                overflowX: "scroll",
-                scrollbarColor: "transparent transparent",
+                overflowX: "auto",
+                // scrollbarColor: "transparent transparent",
             }}
-            onMouseDown={(e) => {
-                const container = e.currentTarget;
-                const startX = e.pageX - container.offsetLeft;
-                const scrollLeft = container.scrollLeft;
-
-                const onMouseMove = (e: MouseEvent) => {
-                    const x = e.pageX - container.offsetLeft;
-                    const walk = (x - startX) * 2; //scroll-fast
-                    container.scrollLeft = scrollLeft - walk;
-                };
-
-                const onMouseUp = () => {
-                    window.removeEventListener("mousemove", onMouseMove);
-                    window.removeEventListener("mouseup", onMouseUp);
-                };
-
-                window.addEventListener("mousemove", onMouseMove);
-                window.addEventListener("mouseup", onMouseUp);
-            }}
-        // onClick={test}
         >
             <div
                 style={{
                     display: "flex",
                     gap: "10px",
-                    alignItems: "center",
                 }}
             >
                 {MOCK_BOOKS.map((book, idx) => {
@@ -56,9 +33,10 @@ function HotSummary() {
                                 display: "flex",
                                 gap: "10px",
                                 alignItems: "center",
-                                width: "512px",
+                                width: "256px",
                                 border: "2px solid lightgray",
                                 borderRadius: "10px",
+                                flexShrink: 0,
                             }}
                         >
                             <img
@@ -96,4 +74,4 @@ function HotSummary() {
     )
 }
 
-export default HotSummary
+export default HotSummary;

@@ -14,10 +14,11 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 
-import { useAppDispatch, useAppSelector } from "@/stores/hooks";
-import { selectUser, unsetUser } from "@/stores/user";
+import { useAppSelector } from "@/stores/hooks";
+import { selectUser } from "@/stores/user";
 
 import { LinkItemType } from "@/types/components";
+import useLogout from "@/hooks/useLogout";
 
 const navTabs: LinkItemType[] = [
   {
@@ -53,7 +54,7 @@ function Topnav() {
   const currentTab = useLocation();
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
-  const dispatch = useAppDispatch();
+  const logout = useLogout();
 
   const { t } = useTranslation();
   const changeLanguage = () => {
@@ -64,7 +65,8 @@ function Topnav() {
 
   const doLogout = () => {
     // 추후 실제 Logout 로직으로 변경
-    dispatch(unsetUser());
+    logout();
+    // dispatch(unsetUser());
     axios.defaults.headers.common["Authorization"] = "";
     navigate("/");
   };

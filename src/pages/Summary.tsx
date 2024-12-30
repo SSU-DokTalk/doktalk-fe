@@ -1,16 +1,28 @@
+import { getSummary } from "@/api/summary";
 import Header from "@/components/Header";
 import HotSummary from "@/components/HotSummary";
-import PostList from "@/components/Post";
+import SummaryCreate from "@/components/SummaryCreate";
 import SearchBar from "@/components/SearchBar";
 import SideBar from "@/components/SideBar";
-import usePosts from "@/hooks/usePosts";
-import useSelectPost from "@/hooks/useSelectPost";
-import { MOCK_BOOKS } from "@/types/data";
+import { BasicSummaryRes, MOCK_BOOKS } from "@/types/data";
+import { faPen } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useLayoutEffect, useState } from "react";
+import SummaryList from "@/components/Summary";
 
 function Summary() {
 
-    const { posts } = usePosts();
-    const selection = useSelectPost();
+    const [summary, setSummary] = useState<BasicSummaryRes | null>(null);
+
+    const [writeMode, setWriteMode] = useState<boolean>(false);
+
+    const [detailed, setDetailed] = useState<boolean>(false);
+
+    useLayoutEffect(() => {
+        getSummary(1).then((res) => {
+            setSummary(res);
+        });
+    }, [])
 
     return (
         <div
@@ -49,18 +61,59 @@ function Summary() {
                         alignItems: "center",
                     }}
                 >
-                    <Header
-                        text="인기요약"
-                    />
-                    <HotSummary />
-                    <SearchBar
-                        placeholder="관심 도서의 요약을 검색해보세요!"
-                    />
-                    <PostList
-                        onPostClick={selection.handlePostClick}
-                        posts={posts}
-                    />
+                    {detailed ? (
+                        // <PaymentPage />
+                        <></>
+                    ) : (
+                        <>
+                            {writeMode ? (
+                                <>
+                                    <Header
+                                        text="인기요약"
+                                    />
+                                    <SummaryCreate />
+                                </>
+                            ) : (
+                                <>
+                                    <Header
+                                        text="게시글 작성하기"
+                                    />
+                                    <HotSummary />
+                                    <SearchBar
+                                        placeholder="관심 도서의 요약을 검색해보세요!"
+                                    />
+                                    {summary && (
+                                        <SummaryList
+                                            onSummaryClick={() => { setDetailed(true) }}
+                                            summaries={[summary]}
+                                        />
+                                    )}
+                                    <button
+                                        onClick={() => setWriteMode(true)}
+                                        style={{
+                                            backgroundColor: "#000080",
+                                            color: "#fff",
+                                            border: "none",
+                                            padding: "10px 20px",
+                                            borderRadius: "10px",
+                                            cursor: "pointer",
+                                            marginLeft: "auto",
+                                            display: "flex",
+                                            gap: "10px",
+                                            alignItems: "center",
+                                            justifyContent: "center",
+                                        }}
+                                    >
+                                        <div>작성하기</div>
+                                        <FontAwesomeIcon icon={faPen} />
+                                    </button>
+                                </>
+                            )}
+                        </>
+                    )}
+
                 </div>
+
             </div>
         </div>
     )

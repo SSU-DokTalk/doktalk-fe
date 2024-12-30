@@ -1,9 +1,11 @@
 import axios from "axios";
 import { useEffect, useState } from "react";
+import { useDispatch } from "react-redux";
+import { toggleUpdateFlag } from "@/stores/store";
 
 import { faPenToSquare } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import usePosts from "@/hooks/usePosts";
+import useUserRedux from "@/hooks/useUserRedux";
 
 function BoardWriteBar() {
   const [title, setTitle] = useState("");
@@ -14,11 +16,11 @@ function BoardWriteBar() {
   const [rows, setRows] = useState(1);
   const [writeMode, setWriteMode] = useState(false);
 
-  const { posts, update } = usePosts();
+  const { user } = useUserRedux();
 
-  useEffect(() => {
-    update();
-  }, [posts]);
+  // const [writeFlag, setWriteFlag] = useState(false);
+
+  const dispatch = useDispatch();
 
   const onAttachImage = async (e: React.ChangeEvent<HTMLInputElement>) => {
     const file = e.target.files?.[0] || null;
@@ -33,26 +35,26 @@ function BoardWriteBar() {
   // const [file2, setFile2] = useState<File | null>(null);
 
   const uploadImage = async (
-      file: File | null,
+    file: File | null,
   ) => {
-      if (!file) return;
+    if (!file) return;
 
-      const formData = new FormData();
-      formData.append('file', file);
+    const formData = new FormData();
+    formData.append('file', file);
 
-      try {
-          const response = await axios.post<string>("/api/image?directory=post", formData, {
-              headers: {
-                  "Content-Type": "multipart/form-data",
-              },
-          });
-          console.log(response.data);
-          return response.data;
-      } catch (error) {
-          console.error(error);
-      }
+    try {
+      const response = await axios.post<string>("/api/image?directory=post", formData, {
+        headers: {
+          "Content-Type": "multipart/form-data",
+        },
+      });
+      console.log(response.data);
+      return response.data;
+    } catch (error) {
+      console.error(error);
+    }
 
-      return "";
+    return "";
   };
 
   // const onAttach1 = async (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -86,7 +88,7 @@ function BoardWriteBar() {
     }
 
     const url = await uploadImage(file);
-    
+
     try {
       await axios.post("/api/post", {
         title,
@@ -96,10 +98,8 @@ function BoardWriteBar() {
       });
       setTitle("");
       setContent("");
-      // setImage1("");
-      // setImage2("");
       alert("게시글이 작성되었습니다");
-      await update(); // 새로운 게시글을 가져오기 위해 update 함수 호출
+      dispatch(toggleUpdateFlag()); // Redux 상태를 사용하여 update 함수 호출
     } catch (error) {
       console.error(error);
     }
@@ -179,20 +179,39 @@ function BoardWriteBar() {
             fontSize: "20px",
           }}
         >
-          <div
-            style={{
-              width: "32px",
-              height: "32px",
-              aspectRatio: "1 / 1",
-              // marginLeft: "10px",
-              marginTop: "8px",
-              marginRight: "10px",
-              marginBottom: "auto",
-              borderRadius: "50%",
-              backgroundColor: "gray",
-              // boxSizing: "border-box",
-            }}
-          />
+          {/* Profile Image */}
+          {user && user.id && user.profile ? (
+            <img
+              src={user.profile}
+              alt="profile image"
+              style={{
+                width: "32px",
+                height: "32px",
+                aspectRatio: "1 / 1",
+                borderRadius: "50%",
+                // marginLeft: "10px",
+                marginTop: "8px",
+                marginRight: "10px",
+                marginBottom: "auto",
+              }}
+            />
+          ) : (
+            <div
+              style={{
+                width: "32px",
+                height: "32px",
+                aspectRatio: "1 / 1",
+                // marginLeft: "10px",
+                marginTop: "8px",
+                marginRight: "10px",
+                marginBottom: "auto",
+                borderRadius: "50%",
+                backgroundColor: "gray",
+                // boxSizing: "border-box",
+              }}
+            />
+          )}
+
           <div
             style={{
               display: "flex",

@@ -1,4 +1,3 @@
-import BookCategory from "@/components/BookCategory"
 import BookList from "@/components/BookListSearch"
 import Header from "@/components/Header"
 import SearchBar from "@/components/SearchBar"
@@ -47,7 +46,7 @@ function Search() {
                     }}
                 >
                     <Header text="도서 검색" />
-                    <BookCategory />
+                    {/* <BookCategory /> */}
                     <SearchBar placeholder="관심 도서를 검색해보세요!" />
                     <BookList />
                 </div>

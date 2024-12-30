@@ -1,5 +1,5 @@
 import axios from "axios";
-import { Suspense, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 
 import { faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -59,8 +59,8 @@ export function PostDetail({
         console.error(error);
       });
 
-      setText("");
-    };
+    setText("");
+  };
 
   const handleTextChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     setText(event.target.value);
@@ -281,16 +281,18 @@ function Post({
         <h1 style={{ fontSize: "20px", fontWeight: "bold" }}>{title}</h1>
         <p style={{ fontSize: "15px" }}>{content}</p>
       </div>
-      <img
-        src={image1}
-        alt={title}
-        style={{
-          width: "auto",
-          height: "500px",
-          borderRadius: "20px",
-          objectFit: "cover",
-        }}
-      />
+      {image1 &&
+        <img
+          src={image1}
+          alt={title}
+          style={{
+            width: "auto",
+            height: "500px",
+            borderRadius: "20px",
+            objectFit: "cover",
+          }}
+        />
+      }
       <div
         style={{
           display: "flex",
@@ -348,15 +350,16 @@ function PostList({
       }}
     >
       {posts.map((post, index) => (
-        <Suspense
+        // <Suspense
+        //   key={`${post.title}-${index}`}
+        //   fallback={<PostSkeleton />}
+        // >
+        <Post
           key={`${post.title}-${index}`}
-          fallback={<PostSkeleton />}
-        >
-          <Post
-            {...post}
-            onClick={() => onPostClick(post)}
-          />
-        </Suspense>
+          {...post}
+          onClick={() => onPostClick(post)}
+        />
+        // </Suspense>
       ))}
     </div>
   );

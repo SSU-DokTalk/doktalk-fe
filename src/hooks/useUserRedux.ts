@@ -12,7 +12,7 @@ const useUserRedux = () => {
     const token = localStorage.getItem("token");
     if (token) {
       axios.defaults.headers.common["Authorization"] = token;
-    }
+    } 
 
     const fetchUser = async () => {
       try {
@@ -34,12 +34,7 @@ const useUserRedux = () => {
     }
   }, [dispatch]);
 
-  const logout = () => {
-    localStorage.removeItem("user");
-    dispatch(unsetUser());
-  };
-
-  return { user, logout };
+  return { user,  };
 };
 
 export default useUserRedux;

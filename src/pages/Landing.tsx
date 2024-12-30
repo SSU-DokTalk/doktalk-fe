@@ -1,5 +1,5 @@
-import { Suspense, useState } from "react";
-import PostList, { PostDetail, PostSkeleton } from "@/components/Post";
+import { useEffect, useState } from "react";
+import PostList, { PostDetail,  } from "@/components/Post";
 import BoardWriteBar from "@/components/BoardWriteBar";
 import BookList from "@/components/Book";
 import HotPostList from "@/components/HotPost";
@@ -12,11 +12,14 @@ import useUserRedux from "@/hooks/useUserRedux";
 import useSelectPost from "@/hooks/useSelectPost";
 
 function Landing() {
-
-  const { posts } = usePosts();
-  const { user, } = useUserRedux();
+  const { posts, update } = usePosts();
+  const { user } = useUserRedux();
   const [books] = useState<BookType[]>([]);
   const { handleCloseDetail, handlePostClick, selectedPost } = useSelectPost();
+
+  useEffect(() => {
+    update();
+  }, []);
 
   return (
     <div
@@ -100,14 +103,14 @@ function Landing() {
           ) : (
             <>
               <BoardWriteBar />
-              <Suspense
-                fallback={<PostSkeleton />}
-              >
-                <PostList
-                  posts={posts}
-                  onPostClick={handlePostClick}
-                />
-              </Suspense>
+              {/* <Suspense
+                  fallback={<PostSkeleton />}
+                > */}
+              <PostList
+                posts={posts}
+                onPostClick={handlePostClick}
+              />
+              {/* </Suspense> */}
             </>
           )}
         </div>
