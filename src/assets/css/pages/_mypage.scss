@@ -1,0 +1,15 @@
+#mypage {
+  .content-container {
+    display: flex;
+    .content-left-margin {
+      flex: 1;
+    }
+    .content {
+      flex: 2;
+      background-color: aqua;
+    }
+    .content-right-margin {
+      flex: 1;
+    }
+  }
+}

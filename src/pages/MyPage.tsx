@@ -8,6 +8,7 @@ import { selectUser } from "@/stores/user";
 import { useAppSelector } from "@/stores/hooks";
 
 import { InitialUser, User } from "@/types/data";
+import PostThumbnail from "@/components/PostThumbnail";
 
 function MyPage() {
   const navigate = useNavigate();
@@ -30,9 +31,16 @@ function MyPage() {
   }, [user]);
 
   return (
-    <>
+    <div id="mypage">
       <Profile userProfile={userProfile} is_me />
-    </>
+      <div className="content-container">
+        <div className="content-left-margin" />
+        <div className="content">
+          <PostThumbnail />
+        </div>
+        <div className="content-right-margin" />
+      </div>
+    </div>
   );
 }
 
