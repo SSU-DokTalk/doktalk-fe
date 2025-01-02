@@ -1,20 +1,18 @@
-import { useEffect, useState } from "react";
-import PostList, { PostDetail,  } from "@/components/Post";
+import { useEffect } from "react";
+import PostList, { PostDetail, } from "@/components/Post";
 import BoardWriteBar from "@/components/BoardWriteBar";
-import BookList from "@/components/Book";
 import HotPostList from "@/components/HotPost";
 import SideBar from "@/components/SideBar";
 
-import { BookType } from "@/types/components";
 import { MOCK_BOOKS } from "@/types/data";
 import usePosts from "@/hooks/usePosts";
 import useUserRedux from "@/hooks/useUserRedux";
 import useSelectPost from "@/hooks/useSelectPost";
+import HotDebates from "@/components/HotDebates";
 
 function Landing() {
   const { posts, update } = usePosts();
   const { user } = useUserRedux();
-  const [books] = useState<BookType[]>([]);
   const { handleCloseDetail, handlePostClick, selectedPost } = useSelectPost();
 
   useEffect(() => {
@@ -50,19 +48,23 @@ function Landing() {
         }}
       // onClick={test}
       >
-        <div style={{ textAlign: "left", fontSize: "24px", width: "50%" }}>
+        <div style={{ textAlign: "left", fontSize: "24px", width: "100%" }}>
           {user && user.id ? (
-            <>
-              <span style={{ fontWeight: "bold", color: "#000080" }}>
-                {user.name}
-              </span>
-              {" 님을 위한 추천도서"}
-            </>
+            <div style={{ width: "100%" }}>
+              <div style={{ width: "50%", margin: "auto" }}>
+                <span style={{ fontWeight: "bold", color: "#000080" }}>
+                  {user.name}
+                </span>
+                {" 님을 위한 추천 토론방"}
+              </div>
+              <HotDebates />
+            </div>
           ) : (
-            "로그인하여 추천도서를 확인하세요"
+            <div style={{ width: "50%", margin: "auto" }}>
+              {"로그인하여 추천 토론방을 확인하세요"}
+            </div>
           )}
         </div>
-        <BookList books={books} />
       </div>
       <div
         style={{

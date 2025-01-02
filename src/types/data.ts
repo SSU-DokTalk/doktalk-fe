@@ -67,11 +67,33 @@ export const MOCK_BOOKS: BookType[] = [
   },
 ];
 
+export const MOCK_DEBATES = [
+  {
+    title: "책1",
+    imgSrc: mockBook1,
+    content: "이 책은 정말 재밌어요",
+    author: "작가1",
+  },
+
+  {
+    title: "책1",
+    imgSrc: mockBook1,
+    content: "이 책은 정말 재밌어요",
+    author: "작가1",
+  },
+  {
+    title: "책1",
+    imgSrc: mockBook1,
+    content: "이 책은 정말 재밌어요",
+    author: "작가1",
+  },
+];
+
 interface SummaryUser {
   id: number;
-  profile: string;     // e.g. "https://example.com/profile-image.jpg"
+  profile: string; // e.g. "https://example.com/profile-image.jpg"
   name: string;
-  role: string;        // e.g. "USER" | "ADMIN"
+  role: string; // e.g. "USER" | "ADMIN"
   is_deleted: boolean;
 }
 
@@ -87,9 +109,9 @@ export interface BasicSummaryRes {
   image2: string;
   likes_num: number;
   comments_num: number;
-  created_at: string;   // or Date
-  updated_at: string;   // or Date
-  user: SummaryUser;    // Info about the user who created the summary
+  created_at: string; // or Date
+  updated_at: string; // or Date
+  user: SummaryUser; // Info about the user who created the summary
 }
 
 /**
