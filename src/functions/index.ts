@@ -1,17 +1,23 @@
-import dayjs, { Dayjs } from "dayjs";
+import dayjs from "dayjs";
 import duration, { Duration } from "dayjs/plugin/duration";
+import utc from "dayjs/plugin/utc";
+import timezone from "dayjs/plugin/timezone";
 dayjs.extend(duration);
+dayjs.extend(utc);
+dayjs.extend(timezone);
+dayjs.tz.setDefault("Etc/GMT");
 
-export function getTimeDiff(timeToCompare: Dayjs): string {
-  const timeDiffDuration: Duration = dayjs.duration(
-    dayjs().diff(timeToCompare)
+export function getTimeDiff(timeToCompare: Date): string {
+  let utcDateTime = dayjs.tz(timeToCompare);
+  let timeDiffDuration: Duration = dayjs.duration(
+    dayjs().diff(dayjs(utcDateTime))
   );
-  const yearDiff: number = parseInt(timeDiffDuration.format("Y"));
-  const monthDiff: number = parseInt(timeDiffDuration.format("M"));
-  const dateDiff: number = parseInt(timeDiffDuration.format("D"));
-  const hourDiff: number = parseInt(timeDiffDuration.format("H"));
-  const minuteDiff: number = parseInt(timeDiffDuration.format("m"));
-  const secondDiff: number = parseInt(timeDiffDuration.format("s"));
+  let yearDiff: number = parseInt(timeDiffDuration.format("Y"));
+  let monthDiff: number = parseInt(timeDiffDuration.format("M"));
+  let dateDiff: number = parseInt(timeDiffDuration.format("D"));
+  let hourDiff: number = parseInt(timeDiffDuration.format("H"));
+  let minuteDiff: number = parseInt(timeDiffDuration.format("m"));
+  let secondDiff: number = parseInt(timeDiffDuration.format("s"));
 
   if (yearDiff > 0) {
     return `${yearDiff}년 전`;
@@ -26,6 +32,23 @@ export function getTimeDiff(timeToCompare: Dayjs): string {
   } else if (secondDiff > 0) {
     return `${secondDiff}초 전`;
   } else {
-    return "";
+    return "방금 전";
   }
+}
+
+export function getDate(date: Date): string {
+  let offset = new Date().getTimezoneOffset();
+  return dayjs(date.getTime() - offset * 60 * 1000).format("YYYY.MM.DD");
+}
+
+export function getDateTime(date: Date): string {
+  let offset = new Date().getTimezoneOffset();
+  return dayjs(date.getTime() - offset * 60 * 1000).format(
+    "YYYY-MM-DD HH:mm:ss"
+  );
+}
+
+export function getFileTypeFromUrl(url: string): string {
+  let urlSplit = url.split(".");
+  return urlSplit.length == 1 ? "" : urlSplit[urlSplit.length - 1];
 }

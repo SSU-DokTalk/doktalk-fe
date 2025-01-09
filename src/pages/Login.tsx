@@ -11,6 +11,8 @@ import facebookIcon from "@/assets/images/facebook.svg";
 
 import { setUser } from "@/stores/user";
 import { useAppDispatch } from "@/stores/hooks";
+import { LoginUserInfoType } from "@/types";
+import { initialLoginUserInfo } from "@/types/initialValue";
 
 const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_CLIENT_ID;
 const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
@@ -18,17 +20,9 @@ const GOOGLE_CLIENT_ID = import.meta.env.VITE_GOOGLE_CLIENT_ID;
 const FACEBOOK_CLIENT_ID = import.meta.env.VITE_FACEBOOK_CLIENT_ID;
 const REDIRECT_URI = import.meta.env.VITE_REDIRECT_URI;
 
-type UserInfoType = {
-  email: string;
-  password: string;
-};
-const initialUserInfo: UserInfoType = {
-  email: "",
-  password: "",
-};
-
 function Login() {
-  const [userInfo, setUserInfo] = useState<UserInfoType>(initialUserInfo);
+  const [userInfo, setUserInfo] =
+    useState<LoginUserInfoType>(initialLoginUserInfo);
   const { t } = useTranslation();
 
   const dispatch = useAppDispatch();

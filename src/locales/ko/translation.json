@@ -1,7 +1,7 @@
 {
   "component": {
     "topnav": {
-      "community": "커뮤니티",
+      "main-page": "메인 페이지",
       "debate": "독서 토론",
       "summary": "도서 요약",
       "search": {

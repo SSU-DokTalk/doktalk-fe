@@ -6,7 +6,11 @@
     }
     .content {
       flex: 2;
-      background-color: aqua;
+      #write-post-card,
+      #write-summary-card,
+      #write-debate-card {
+        margin: 15px 0 10px;
+      }
     }
     .content-right-margin {
       flex: 1;

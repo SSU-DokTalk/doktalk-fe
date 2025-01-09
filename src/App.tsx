@@ -1,3 +1,4 @@
+import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 
 import "@/assets/css/main.scss";
@@ -13,18 +14,103 @@ import Auth from "@/pages/Auth";
 import MyPage from "@/pages/MyPage";
 import Search from "@/pages/Search";
 import UserProfile from "@/pages/UserProfile";
+import Summary from "@/pages/Summary";
+import { useEffect, useState } from "react";
+import { useAppDispatch, useAppSelector } from "./stores/hooks";
+import { selectUser, setUser } from "./stores/user";
+import cookie from "react-cookies";
+import ContentMainLayout from "./layouts/ContentMainLayout";
+import LandingUpper from "./components/section/LandingUpper";
 
 function App() {
+  const dispatch = useAppDispatch();
+  const user = useAppSelector(selectUser);
+  const [isAuthChecked, setIsAuthChecked] = useState(false);
+
+  useEffect(() => {
+    if (cookie.load("Authorization") != undefined) {
+      axios
+        .post(
+          `/api/user/access-token`,
+          {},
+          {
+            params: {
+              refresh_token: cookie.load("Authorization"),
+            },
+          }
+        )
+        .then(async (res) => {
+          // 새 토큰 저장
+          let token = res.headers.authorization;
+          axios.defaults.headers.common["Authorization"] = token;
+
+          // 유저 정보가 없는 경우 다시 요청
+          if (user == undefined || user.id == undefined || user.id == 0) {
+            axios
+              .get("/api/user/me")
+              .then(async (res) => {
+                let {
+                  id,
+                  name,
+                  role,
+                  profile,
+                }: {
+                  id: number;
+                  name: string;
+                  role: string;
+                  profile: string;
+                } = res.data;
+                if (id != 0) {
+                  await dispatch(
+                    setUser({
+                      id: id,
+                      name: name,
+                      profile: profile,
+                      role: role,
+                    })
+                  );
+                }
+              })
+              .catch((err) => {
+                console.log(err);
+              });
+          }
+        })
+        .finally(() => {
+          setIsAuthChecked(true);
+        });
+    } else {
+      setIsAuthChecked(true);
+    }
+  }, []);
+
+  if (!isAuthChecked) {
+    return <div>Loading...</div>;
+  }
+
   return (
     <Routes>
       <Route element={<BasicLayout />}>
-        <Route path="/" element={<Landing />} />
+        {/* <Route path="/" element={<Landing />} /> */}
+        <Route path="/search" element={<Search />}></Route>
         <Route path="/community" element={<Landing />}></Route>
-        <Route path="/debate" element={<Search />}></Route>
-        <Route path="/summary" element={<Landing />}></Route>
+        <Route path="/debate" element={<Landing />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/user/:user_id" element={<UserProfile />}></Route>
+        <Route
+          element={
+            <ContentMainLayout>
+              <LandingUpper />
+            </ContentMainLayout>
+          }
+        >
+          <Route path="/" element={<Landing />}></Route>
+        </Route>
+        <Route element={<ContentMainLayout />}>
+          <Route path="/summary" element={<Summary />}></Route>
+        </Route>
       </Route>
+      <Route element={<ContentMainLayout></ContentMainLayout>}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/auth/:provider" element={<Auth />}></Route>

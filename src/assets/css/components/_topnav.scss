@@ -11,52 +11,53 @@
     height: 122px;
     display: flex;
     border-bottom: 1px solid variables.$brand-color4;
+    .offset {
+      flex: 2;
+    }
     .left-container {
-      margin-left: 180px;
       display: flex;
-      flex: 8;
+      justify-content: start;
       .logo-container {
         height: 100%;
         align-items: center;
         display: flex;
         text-decoration: none;
-
         .logo {
           margin-top: 20px;
           height: 100px;
-          object-fit: contain;
+          object-fit: cover;
         }
       }
-      .searchbar-container {
-        margin-left: 100px;
-        flex: 1;
+    }
+    .searchbar-container {
+      flex: 7;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      .searchbar {
+        margin-left: 20px;
+        width: 70%;
+        height: 48px;
+        border: 2px solid variables.$brand-color1;
+        border-radius: 48px;
         display: flex;
         align-items: center;
-        .searchbar {
+        .searchbar-icon {
           margin-left: 20px;
-          width: 70%;
-          height: 48px;
-          border: 2px solid variables.$brand-color1;
-          border-radius: 48px;
-          display: flex;
-          align-items: center;
-          .searchbar-icon {
-            margin-left: 20px;
-            font-size: 20px;
-            stroke-width: 2px;
-            color: variables.$brand-color1;
-          }
-          .searchbar-input {
-            margin: 0 20px;
-            border: 0;
-            width: 100%;
-            font-size: 15px;
+          font-size: 20px;
+          stroke-width: 2px;
+          color: variables.$brand-color1;
+        }
+        .searchbar-input {
+          margin: 0 20px;
+          border: 0;
+          width: 100%;
+          font-size: 15px;
+          font-weight: 600;
+          &::placeholder {
+            color: variables.$brand-color5;
             font-weight: 600;
-            &::placeholder {
-              color: variables.$brand-color5;
-              font-weight: 600;
-              font-size: 15px;
-            }
+            font-size: 15px;
           }
         }
       }
@@ -90,12 +91,7 @@
             color: variables.$brand-color5;
 
             .user-icon {
-              height: 38px;
-              width: 38px;
-              object-fit: cover;
-              aspect-ratio: 1 / 1;
               margin-right: 10px;
-              border-radius: 50%;
             }
             .user-name-container {
               font-size: 15px;

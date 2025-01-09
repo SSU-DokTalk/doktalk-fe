@@ -1,0 +1,44 @@
+@use "../variables" as v;
+
+#landing-page {
+  display: flex;
+  padding-top: 50px;
+  .post-container {
+    flex: 3;
+    padding-right: 30px;
+    .post-title {
+      font-size: 25px;
+      font-weight: 700;
+      margin-left: 10px;
+      margin-bottom: 12px;
+      color: v.$brand-color1;
+    }
+    #write-post-card {
+      margin-bottom: 25px;
+      .summary-title {
+        font-size: 25px;
+        font-weight: 700;
+        margin-left: 10px;
+        margin-bottom: 12px;
+        color: v.$brand-color1;
+      }
+    }
+  }
+  .summary-container {
+    flex: 2;
+    width: 1%;
+    padding-left: 30px;
+    padding-right: 50px;
+    .summary-section-title {
+      width: 100%;
+      font-size: 25px;
+      font-weight: 700;
+      margin-left: 10px;
+      margin-bottom: 12px;
+      color: v.$brand-color1;
+    }
+    #popular-summary-card {
+      margin-bottom: 10px;
+    }
+  }
+}

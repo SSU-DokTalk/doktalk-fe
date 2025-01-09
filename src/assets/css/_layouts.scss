@@ -1,0 +1,17 @@
+@use "./variables" as v;
+
+#content-main-layout {
+  position: relative;
+
+  #floating-user-profile {
+    top: 30px;
+    left: 60px;
+  }
+  .upper-container {
+    background-color: v.$brand-color3;
+    padding-left: 280px;
+  }
+  .lower-container {
+    padding-left: 280px;
+  }
+}

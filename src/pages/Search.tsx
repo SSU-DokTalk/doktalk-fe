@@ -1,39 +1,55 @@
-import { Book } from "@/components/Book"
-
-const MOCK_BOOKS = [
-    {
-        title: "책 제목",
-        imgSrc: "https://via.placeholder.com/150",
-        author: "작가",
-        href: "https://www.google.com",
-    },
-    {
-        title: "책 제목",
-        imgSrc: "https://via.placeholder.com/150",
-        author: "작가",
-        href: "https://www.naver.com",
-    },
-]
+import BookList from "@/components/BookListSearch";
+import Header from "@/components/Header";
+import SearchBar from "@/components/SearchBar";
 
 function Search() {
-    return (
-        <div>
-            <h1>도서 검색</h1>
-            <div>
-                <div>
-
-                </div>
-                <div>
-                </div>
-            </div>
-            <input type="text" />
-            <div>
-                {MOCK_BOOKS.map((book) => (
-                    <Book key={book.title} {...book} />
-                ))}
-            </div>
+  return (
+    <div
+      style={{
+        display: "flex",
+        flexDirection: "column",
+        gap: "30px",
+        alignItems: "center",
+        flexWrap: "wrap",
+        width: "100%",
+      }}
+    >
+      <div
+        style={{
+          width: "100%",
+          display: "flex",
+          gap: "40px",
+          alignItems: "start",
+          justifyContent: "center",
+          padding: "20px",
+        }}
+      >
+        {/* <SideBar
+                    books={MOCK_BOOKS}
+                /> */}
+        <div
+          style={{
+            textAlign: "center",
+            fontSize: "20px",
+            alignContent: "center",
+            width: "60%",
+            paddingTop: "20px",
+            paddingBottom: "20px",
+            display: "flex",
+            flexDirection: "column",
+            gap: "30px",
+            alignItems: "center",
+            flexWrap: "wrap",
+          }}
+        >
+          <Header text="도서 검색" />
+          {/* <BookCategory /> */}
+          <SearchBar placeholder="관심 도서를 검색해보세요!" />
+          <BookList />
         </div>
-    )
+      </div>
+    </div>
+  );
 }
 
-export default Search
+export default Search;

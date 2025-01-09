@@ -7,11 +7,14 @@ import { store } from "@/stores/store.ts";
 import "@/locales/i18n.ts";
 
 import App from "@/App.tsx";
+import TokenRefresher from "@/TokenRefresher";
 
 createRoot(document.getElementById("root")!).render(
   <BrowserRouter>
     <Provider store={store}>
-      <App />
+      <TokenRefresher>
+        <App />
+      </TokenRefresher>
     </Provider>
   </BrowserRouter>
 );

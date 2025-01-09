@@ -217,3 +217,99 @@
     }
   }
 }
+
+#write-post-modal {
+  max-width: 700px;
+  .modal-content {
+    border-radius: 20px;
+
+    .modal-header {
+      margin-top: 20px;
+      border-bottom: none;
+      .modal-title {
+        flex: 1;
+        margin-left: 42px;
+        text-align: center;
+        color: black;
+        font-size: 25px;
+        font-weight: 400;
+        strong {
+          font-weight: 600;
+        }
+      }
+      .btn-close {
+        margin-right: 10px;
+      }
+    }
+    .modal-body {
+      display: flex;
+      justify-content: center;
+
+      .post-container {
+        width: 450px;
+
+        .post-title-container {
+          height: 54px;
+          border: 1px solid variables.$brand-color4;
+          border-radius: 10px;
+          display: flex;
+          align-items: center;
+          padding: 0 20px;
+          margin-bottom: 16px;
+          .post-title {
+            font-size: 20px;
+            font-weight: 400;
+            width: 100%;
+            border: none;
+          }
+        }
+        .post-files-container {
+          #upload-files {
+            .upload-button {
+              width: 140px;
+              height: 45px;
+              font-size: 15px;
+            }
+          }
+        }
+        .post-content-container {
+          margin-top: 10px;
+          height: 40vh;
+          .post-content {
+            width: 100%;
+            height: 100%;
+            border: 1px solid variables.$brand-color4;
+            border-radius: 10px;
+            padding: 20px 25px;
+            font-size: 15px;
+            font-weight: 400;
+            resize: none;
+          }
+        }
+        .button-container {
+          margin-top: 20px;
+          display: flex;
+          justify-content: end;
+          button {
+            width: 120px;
+            height: 45px;
+            border-radius: 10px;
+            font-size: 20px;
+            font-weight: 400;
+            margin-left: 15px;
+          }
+          .temporary-save-button {
+            color: variables.$brand-color1;
+            background-color: white;
+            border: 1px solid variables.$brand-color1;
+          }
+          .post-button {
+            color: white;
+            background-color: variables.$brand-color1;
+            border: none;
+          }
+        }
+      }
+    }
+  }
+}

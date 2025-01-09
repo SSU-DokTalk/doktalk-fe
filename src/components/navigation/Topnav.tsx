@@ -1,10 +1,10 @@
 import axios from "axios";
 import { useEffect } from "react";
+import cookie from "react-cookies";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18n from "@/locales/i18n";
 
-import userIcon from "@/assets/images/profile.svg";
 import logo from "@/assets/images/logo.svg";
 import { Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -18,11 +18,12 @@ import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { selectUser, unsetUser } from "@/stores/user";
 
 import { LinkItemType } from "@/types/components";
+import ProfileIcon from "../base/ProfileIcon";
 
 const navTabs: LinkItemType[] = [
   {
-    title: "component.topnav.community",
-    url: "/community",
+    title: "component.topnav.main-page",
+    url: "/",
   },
   {
     title: "component.topnav.debate",
@@ -41,7 +42,7 @@ const dropdownItems: LinkItemType[] = [
   },
   {
     title: "component.topnav.dropdown.my-activity",
-    url: "/user/1",
+    url: "/my-activity",
   },
   {
     title: "component.topnav.dropdown.settings",
@@ -63,34 +64,32 @@ function Topnav() {
   useEffect(() => {}, [user]);
 
   const doLogout = () => {
-    // 추후 실제 Logout 로직으로 변경
     dispatch(unsetUser());
     axios.defaults.headers.common["Authorization"] = "";
-    navigate("/");
+    cookie.remove("Authorization", { path: "/" });
+    navigate("/login");
   };
 
   return (
     <div id="topnav" style={{ zIndex: "10" }}>
       <div className="upper-container">
+        <div className="offset" />
         <div className="left-container">
           <Link to={"/"} className="logo-container">
-            {/* <div className="logo dok">讀</div>
-            <div className="logo colon">:</div>
-            <div className="logo talk">TALK</div> */}
             <img src={logo} alt="doktalk logo" className="logo" />
           </Link>
-          <div className="searchbar-container">
-            <div className="searchbar">
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className="searchbar-icon"
-              />
-              <input
-                type="text"
-                placeholder={t("component.topnav.search.placeholder")}
-                className="searchbar-input"
-              />
-            </div>
+        </div>
+        <div className="searchbar-container">
+          <div className="searchbar">
+            <FontAwesomeIcon
+              icon={faMagnifyingGlass}
+              className="searchbar-icon"
+            />
+            <input
+              type="text"
+              placeholder={t("component.topnav.search.placeholder")}
+              className="searchbar-input"
+            />
           </div>
         </div>
         <div className="right-container">
@@ -100,14 +99,14 @@ function Topnav() {
               className="user-language"
               onClick={changeLanguage}
             />
-            {user.id != undefined ? (
+            {user.id != 0 ? (
               <>
                 <FontAwesomeIcon icon={faBell} className="user-notification" />
                 <Dropdown className="user-dropdown">
                   <Dropdown.Toggle className="user-dropdown-toggle">
-                    <img
-                      src={user.profile ?? userIcon}
-                      alt="userIcon"
+                    <ProfileIcon
+                      profile={user.profile}
+                      size={38}
                       className="user-icon"
                     />
                     <div className="user-name-container">

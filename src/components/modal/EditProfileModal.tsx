@@ -30,37 +30,34 @@ function EditProfileModal({
     name: "",
     introduction: "",
   });
-  const imageRef = useRef<HTMLInputElement | null>(null);
+  const inputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
 
   useEffect(() => {
-    axios.get(`/api/user/me`).then(
-      (res) => {
-        let { profile, name, introduction } = res.data;
-        setUserInfo({ profile, name, introduction });
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
-  }, []);
+    if (user != undefined && user.id != 0 && showModal) {
+      axios.get(`/api/user/me`).then(
+        (res) => {
+          let { profile, name, introduction } = res.data;
+          setUserInfo({ profile, name, introduction });
+        },
+        (err) => {
+          console.log(err);
+        }
+      );
+    }
+  }, [showModal]);
 
   const updateUserInfo = () => {
-    axios.patch(`/api/user/me`, userInfo).then(
-      async (res) => {
-        let { id, name, profile, role } = res.data;
-        await dispatch(setUser({ id, name, profile, role }));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.patch(`/api/user/me`, userInfo).then(async (res) => {
+      let { id, name, profile, role } = res.data;
+      await dispatch(setUser({ id, name, profile, role }));
+    });
   };
 
   const clickUploadImageButton = () => {
-    if (!imageRef.current) return;
-    imageRef.current.click();
+    if (!inputRef.current) return;
+    inputRef.current.click();
   };
 
   const uploadImage = useCallback(
@@ -141,9 +138,9 @@ function EditProfileModal({
             <input
               className="profile-image-input"
               type="file"
-              accept="image/*"
+              accept=".jpg, .jpeg, .png, .gif"
               name="profile"
-              ref={imageRef}
+              ref={inputRef}
               onChange={uploadImage}
             />
             <button

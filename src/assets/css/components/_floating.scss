@@ -1,0 +1,105 @@
+@use "../variables" as v;
+
+#floating-user-profile {
+  position: absolute;
+  width: 180px;
+  box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25);
+  border: 1px solid v.$brand-color4;
+  border-radius: 10px;
+  background-color: white;
+
+  .profile-info-container {
+    margin: 7px 6px 0;
+    background-color: v.$brand-color3;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .profile-info {
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      height: 120px;
+      .user-name {
+        margin-top: 10px;
+        font-size: 15px;
+        font-weight: 700;
+      }
+    }
+  }
+  .follow-info {
+    color: v.$brand-color5;
+    font-size: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    margin: 10px 0;
+
+    .follow-container {
+      display: flex;
+      align-items: center;
+      .text {
+        font-weight: 400;
+      }
+      .count {
+        margin-left: 8px;
+        font-weight: 600;
+      }
+    }
+  }
+  .accordion {
+    .accordion-item {
+      border: none;
+      border-top: 1px solid v.$brand-color3;
+      border-radius: 0;
+      margin: 0 10px;
+      .accordion-header {
+        font-size: 15px;
+        font-weight: 600;
+        .accordion-button {
+          color: v.$brand-color1;
+          padding: 10px 10px;
+          &::after,
+          &::before {
+            display: none;
+          }
+          &:focus {
+            box-shadow: none;
+          }
+          &:not(.collapsed) {
+            background-color: inherit;
+            box-shadow: none;
+          }
+        }
+      }
+      .accordion-collapse {
+        .accordion-body {
+          padding: 0 10px 5px;
+        }
+        .my-activity {
+          a {
+            display: block;
+            color: v.$brand-color5;
+            font-size: 12px;
+            font-weight: 400;
+            text-decoration: none;
+            margin-bottom: 10px;
+          }
+        }
+        .my-library {
+          display: flex;
+          flex-wrap: wrap;
+          margin-bottom: 20px;
+          justify-content: center;
+          img {
+            margin: 3px;
+            box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25);
+          }
+        }
+      }
+    }
+  }
+}

@@ -8,7 +8,12 @@ export interface UserState {
   role?: string;
 }
 
-const initialState: UserState = {};
+const initialState: UserState = {
+  id: 0,
+  name: undefined,
+  profile: undefined,
+  role: "",
+};
 
 export const userSlice = createSlice({
   name: "user",

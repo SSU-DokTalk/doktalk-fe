@@ -1,59 +1,127 @@
-export interface User {
+export type BasicUserType = {
+  id: number;
+  name: string;
+  profile?: string;
+  is_deleted: boolean;
+  role: "USER" | "ADMIN";
+};
+
+export interface UserType {
   id: number;
   email: string;
-  profile: string | null;
-  name: string | null;
-  gender: boolean | null;
-  birthday: Date | null;
-  introduction: string | null;
+  profile?: string;
+  name?: string;
+  gender?: boolean;
+  birthday?: Date;
+  introduction?: string;
   follower_num: number;
   following_num: number;
   role: "USER" | "ADMIN";
-  created_at: Date;
-  updated_at: Date;
+  created: Date;
+  updated: Date;
   is_deleted: boolean;
+  deleted_at?: Date;
 }
 
-export const InitialUser: User = {
-  id: 0,
-  email: "",
-  profile: null,
-  name: null,
-  gender: null,
-  birthday: null,
-  introduction: null,
-  follower_num: 0,
-  following_num: 0,
-  role: "USER",
-  created_at: new Date(),
-  updated_at: new Date(),
-  is_deleted: true,
-};
+export interface BookAPIType {
+  title: string;
+  link?: string;
+  image?: string;
+  author: string;
+  discount: number;
+  publisher: string;
+  pubdate: Date;
+  isbn: number;
+  description: string;
+}
 
-export interface Post {
+export interface BookType {
+  isbn: number;
+  title: string;
+  image?: string;
+  author: string;
+  publisher: string;
+  pubdate: Date;
+  description: string;
+}
+
+export interface PostType {
   id: number;
   user_id: number;
-  user: User;
+  user: BasicUserType;
   title: string;
   content: string;
-  image1: string | null;
-  image2: string | null;
+  files?: string[];
   likes_num: number;
   comments_num: number;
-  created_at: Date;
-  updated_at: Date;
+  created: Date;
+  updated: Date;
 }
 
-export const InitialPost: Post = {
-  id: 0,
-  user_id: 0,
-  user: InitialUser,
-  title: "",
-  content: "",
-  image1: null,
-  image2: null,
-  likes_num: 0,
-  comments_num: 0,
-  created_at: new Date(),
-  updated_at: new Date(),
+export interface SummaryType {
+  id: number;
+  user_id: number;
+  user: BasicUserType;
+  isbn: number;
+  book: BookType;
+  title: string;
+  free_content: string;
+  charged_content: string;
+  price: number;
+  files?: string[];
+  likes_num: number;
+  comments_num: number;
+  created: Date;
+  updated: Date;
+}
+
+export interface DebateType {
+  id: number;
+  user_id: number;
+  user: BasicUserType;
+  isbn: number;
+  book: BookType;
+  location?: string;
+  link?: string;
+  held_at: Date;
+  title: string;
+  content: string;
+  likes_num: number;
+  comments_num: number;
+  created: Date;
+  updated: Date;
+  files?: string[];
+}
+
+export interface MyBookType {
+  id: number;
+  user_id: number;
+  user: BasicUserType;
+  isbn: number;
+  book: BookType;
+  created: Date;
+  updated: Date;
+}
+
+export type FollowType = {
+  created: Date;
+  follower?: BasicUserType;
+  following?: BasicUserType;
+  follower_id: number;
+  following_id: number;
 };
+
+export interface PaymentType {
+  id: number;
+  user_id: number;
+  user: BasicUserType;
+  product_type: "D" | "S";
+  product_id: number;
+  content?: string;
+  price: number;
+  quantity: number;
+  created: Date;
+  updated: Date;
+  is_deleted: boolean;
+  deleted_at?: Date;
+}
