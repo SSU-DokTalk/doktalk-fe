@@ -12,7 +12,6 @@ import NotFound from "@/pages/NotFound";
 import Register from "@/pages/Register";
 import Auth from "@/pages/Auth";
 import MyPage from "@/pages/MyPage";
-import Search from "@/pages/Search";
 import UserProfile from "@/pages/UserProfile";
 import Summary from "@/pages/Summary";
 import { useEffect, useState } from "react";
@@ -91,12 +90,6 @@ function App() {
   return (
     <Routes>
       <Route element={<BasicLayout />}>
-        {/* <Route path="/" element={<Landing />} /> */}
-        <Route path="/search" element={<Search />}></Route>
-        <Route path="/community" element={<Landing />}></Route>
-        <Route path="/debate" element={<Landing />}></Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
-        <Route path="/user/:user_id" element={<UserProfile />}></Route>
         <Route
           element={
             <ContentMainLayout>
@@ -109,6 +102,11 @@ function App() {
         <Route element={<ContentMainLayout />}>
           <Route path="/summary" element={<Summary />}></Route>
         </Route>
+        <Route path="/community" element={<Landing />}></Route>
+        <Route path="/debate" element={<Landing />}></Route>
+        <Route path="/mypage" element={<MyPage />}></Route>
+        {/* <Route path="/search" element={<Search />}></Route> */}
+        <Route path="/user/:user_id" element={<UserProfile />}></Route>
       </Route>
       <Route element={<ContentMainLayout></ContentMainLayout>}></Route>
       <Route path="/login" element={<Login />}></Route>

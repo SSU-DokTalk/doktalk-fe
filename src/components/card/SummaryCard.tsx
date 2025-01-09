@@ -72,7 +72,10 @@ function SummaryCard({
         />
       </div>
       <div className="summary-container">
-        <div className="summary-content-container">
+        <div
+          className="summary-content-container"
+          onClick={() => navigate(`/summary/${summary.id}`)}
+        >
           <div className="title">{summary.title}</div>
           <pre className="content">{summary.free_content}</pre>
         </div>

@@ -4,7 +4,7 @@ import React from "react";
 import { useForm } from "react-hook-form";
 import { useNavigate } from "react-router-dom";
 
-import { signup } from "@/api/auth";
+import axios from "axios";
 
 type FormData = {
   email: string;
@@ -85,7 +85,11 @@ const Register: React.FC = () => {
     }
 
     try {
-      await signup(data);
+      axios.post("/api/user/register", data, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
       navigate("/login");
     } catch (error: any) {
       alert(error?.message || "회원가입 중 오류가 발생했습니다.");

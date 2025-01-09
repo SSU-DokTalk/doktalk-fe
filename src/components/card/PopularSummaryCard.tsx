@@ -61,8 +61,18 @@ function PopularSummaryCard({
 
   return (
     <div id="popular-summary-card">
-      <div className="summary-title">{summary.title}</div>
-      <div className="summary-content">{summary.free_content}</div>
+      <div
+        className="summary-title"
+        onClick={() => navigate(`/summary/${summary.id}`)}
+      >
+        {summary.title}
+      </div>
+      <div
+        className="summary-content"
+        onClick={() => navigate(`/summary/${summary.id}`)}
+      >
+        {summary.free_content}
+      </div>
       <div className="info-container">
         <div className="user-info">
           <ProfileIcon size={15} />

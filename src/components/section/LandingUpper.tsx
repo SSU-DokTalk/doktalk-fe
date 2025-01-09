@@ -1,14 +1,27 @@
 import { DUMMY_DEBATES } from "@/common/dummy_data";
 import { DebateType } from "@/types/data";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import RecommendDebateCard from "../card/RecommendDebateCard";
 import Carousel from "@/components/carousel/Carousel";
 import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
+import axios from "axios";
 
 function LandingUpper() {
   const user = useAppSelector(selectUser);
   const [debates, setDebates] = useState<DebateType[]>(DUMMY_DEBATES);
+
+  useEffect(() => {
+    axios.get(`/api/debate/recommend`).then(
+      (res) => {
+        let { items } = res.data;
+        setDebates(items);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  }, []);
 
   return (
     <div id="landing-page-upper-container">

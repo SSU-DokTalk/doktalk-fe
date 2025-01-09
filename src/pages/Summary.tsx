@@ -6,7 +6,6 @@ import SummaryCard from "@/components/card/SummaryCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
-import DebateCard from "@/components/card/DebateCard";
 import axios from "axios";
 import { DUMMY_DEBATES, DUMMY_SUMMARIES } from "@/common/dummy_data";
 import CarouselSummaryCard from "@/components/card/CarouselSummaryCard";
@@ -63,6 +62,7 @@ function Summary() {
       let { items }: { items: SummaryType[] } = res.data;
       if (!items || items.length === 0) return;
       setSummaries(items);
+      setPopularSummaries(items);
     });
   }, []);
 

@@ -67,7 +67,7 @@ function EditProfileModal({
       formData.append("file", e.target.files[0]);
 
       axios
-        .post(`/api/image`, formData, {
+        .post(`/api/file`, formData, {
           headers: {
             "Content-Type": "multipart/form-data",
           },
