@@ -23,6 +23,8 @@ import LandingUpper from "./components/section/LandingUpper";
 import Debate from "./pages/Debate";
 import Search from "./pages/Search";
 import { Spinner } from "react-bootstrap";
+import CreateDebate from "./pages/CreateDebate";
+import CreateSummary from "./pages/CreateSummary";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -121,6 +123,10 @@ function App() {
           <Route path="/search" element={<Search />}></Route>
           <Route path="/summary" element={<Summary />}></Route>
         </Route>
+        <Route path="/summary/create" element={<CreateSummary />}></Route>
+        <Route path="/debate/create" element={<CreateDebate />}></Route>
+        <Route path="/community" element={<Landing />}></Route>
+        <Route path="/debate" element={<Landing />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/user/:user_id" element={<UserProfile />}></Route>
       </Route>

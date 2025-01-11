@@ -11,6 +11,7 @@ import WriteIcon from "@/assets/images/WriteIcon";
 import DebateCard from "@/components/card/DebateCard";
 import InfiniteScroll from "@/components/base/InfiniteScroll";
 import PopularSummaryCard from "@/components/card/PopularSummaryCard";
+import { useNavigate } from "react-router-dom";
 
 const searchBys: {
   name: string;
@@ -63,6 +64,8 @@ function Debate() {
   const [search, setSearch] = useState<string>("");
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (popularDebates.length === 0) {
@@ -130,7 +133,7 @@ function Debate() {
                 );
               })}
             </div>
-            <button>
+            <button onClick={() => navigate("/debate/create")}>
               <span>토론방 생성</span>
               <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
             </button>

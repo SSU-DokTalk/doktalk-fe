@@ -1,0 +1,180 @@
+@use '../variables' as v;
+
+#create-debate-card {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: start;
+  width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 50px;
+  margin-bottom: 50px;
+
+  .create-debate-title {
+    font-size: 25px;
+    font-weight: 600;
+    color: v.$brand-color1;
+    margin-bottom: 20px;
+  }
+
+  .create-debate-content {
+    display: flex;
+    gap: 4px;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    font-weight: 400;
+
+    .title-input {
+      width: 100%;
+      border: 2px solid v.$brand-color4;
+      border-radius: 10px;
+      padding: 10px 10px 10px 20px;
+    }
+
+    .row {
+      display: flex;
+      align-items: center;
+      position: relative;
+      width: 100%;
+      gap: 4px;
+
+      .left {
+        flex: calc(1/4);
+        text-align: center;
+        color: v.$brand-color1;
+        border-radius: 10px;
+        padding: 10px;
+      }
+
+      .icon {
+        position: absolute;
+        border: none;
+        background: transparent;
+        color: v.$brand-color5;
+        width: 50px;
+        border-radius: 10px;
+        padding: 10px;
+        right: 0;
+      }
+
+      .search {
+        flex: 1;
+        border: 2px solid v.$brand-color4;
+        border-radius: 10px;
+        padding: 10px 10px 10px 20px;
+      }
+    }
+
+    .file {
+      display: flex;
+      justify-content: start;
+      position: relative;
+      align-items: center;
+      align-self: flex-start;
+      width: 28%;
+      height: 54px;
+      border: 2px solid v.$brand-color4;
+      border-radius: 10px;
+      padding: 10px 10px 10px 20px;
+
+      .left {
+        width: fit-content;
+        position: absolute;
+        left: 2;
+        text-align: center;
+        color: black;
+      }
+
+      input[type="file"] {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        opacity: 0;
+        cursor: pointer;
+      }
+
+      .icon {
+        margin-left: auto;
+        margin-right: 16px;
+      }
+    }
+
+    .file-list {
+      margin-top: 8px;
+      margin-right: auto;
+    }
+
+    .content-input {
+      width: 100%;
+      height: 300px;
+      border: 2px solid v.$brand-color4;
+      border-radius: 10px;
+      resize: none;
+      padding: 20px
+    }
+
+    .row-price {
+      display: flex;
+      gap: 4px;
+      justify-content: left;
+      align-items: center;
+      width: 100%;
+
+      .icon {
+        border: none;
+        background: transparent;
+        color: v.$brand-color5;
+        border-radius: 10px;
+        display: flex;
+        svg {
+          width: 24px;
+          height: 24px;
+        }
+      }
+
+      .price {
+        flex: calc(1/4);
+        border: 2px solid v.$brand-color4;
+        border-radius: 10px;
+        padding: 10px 10px 10px 20px;
+      }
+
+      .left {
+        border: 2px solid v.$brand-color4;
+        color: v.$brand-color1;
+        border-radius: 10px;
+        padding: 10px;
+      }
+    }
+  }
+
+  .button-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    margin-top: 20px;
+    margin-left: auto;
+    
+    .temp {
+      padding: 10px 20px;
+      background-color: white;
+      border: 2px solid v.$brand-color1;
+      color: v.$brand-color1;
+      border-radius: 10px;
+    }
+
+    .complete {
+      padding: 10px 20px;
+      background-color: v.$brand-color1;
+      color: white;
+      border: none;
+      border-radius: 10px;
+    }
+  }
+}

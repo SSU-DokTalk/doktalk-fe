@@ -11,6 +11,7 @@ import { DUMMY_DEBATES, DUMMY_SUMMARIES } from "@/common/dummy_data";
 import CarouselSummaryCard from "@/components/card/CarouselSummaryCard";
 import PopularDebateCard from "@/components/card/PopularDebateCard";
 import WriteIcon from "@/assets/images/WriteIcon";
+import { useNavigate } from "react-router-dom";
 
 const searchBys: {
   name: string;
@@ -57,6 +58,8 @@ function Summary() {
   const [search, setSearch] = useState<string>("");
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`summary`).then(async (res) => {
@@ -129,7 +132,7 @@ function Summary() {
                 );
               })}
             </div>
-            <button>
+            <button onClick={() => navigate("/summary/create")} >
               <span>요약 작성</span>
               <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
             </button>
