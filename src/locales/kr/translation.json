@@ -1,0 +1,212 @@
+{
+  "function": {
+    "time": {
+      "ago": " 전",
+      "now": "방금 전",
+      "second": "초",
+      "minute": "분",
+      "hour": "시간",
+      "day": "일",
+      "week": "주",
+      "month": "개월",
+      "year": "년"
+    }
+  },
+  "component": {
+    "floating": {
+      "text": {
+        "login": "로그인",
+        "follower": "팔로워",
+        "following": "팔로잉",
+        "my-activity": "내 활동",
+        "likes": "좋아요",
+        "post": "내 게시글",
+        "summary": "내 요약",
+        "shopping-cart": "찜 내역",
+        "debate": "참여중인 토론방",
+        "library": "내 서재"
+      }
+    },
+    "topnav": {
+      "main-page": "메인 페이지",
+      "debate": "독서 토론",
+      "summary": "도서 요약",
+      "search": "도서 검색",
+      "search-bar": {
+        "placeholder": "관심있는 도서를 검색하세요!"
+      },
+      "user": {
+        "postfix": "님"
+      },
+      "dropdown": {
+        "mypage": "마이페이지",
+        "my-activity": "내 활동",
+        "settings": "설정",
+        "logout": "로그아웃"
+      },
+      "register": "회원가입",
+      "login": "로그인"
+    },
+    "card": {
+      "write-post": {
+        "placeholder": "게시글을 작성해보세요!"
+      },
+      "book": {
+        "button": {
+          "add-to-library": "내 서재에 담기",
+          "look-summary": "요약 보기"
+        }
+      }
+    },
+    "section": {
+      "profile": {
+        "button": {
+          "edit-profile": "프로필 편집",
+          "follow": "팔로우",
+          "unfollow": "팔로우 취소"
+        },
+        "text": {
+          "follower-prefix": "팔로워 ",
+          "follower-postfix": "명",
+          "following-prefix": "팔로잉 ",
+          "following-postfix": "명",
+          "no-introduction": "자기소개가 없습니다."
+        },
+        "tab": {
+          "my-tab": {
+            "post": "게시글",
+            "summary": "내 요약",
+            "library": "내 서재",
+            "debate": "토론방",
+            "payment": "결제 내역"
+          },
+          "user-tab": {
+            "post": "게시글",
+            "library": "서재"
+          }
+        }
+      },
+      "profile-tab-details": {
+        "item": {
+          "no-post-item": "작성된 게시글이 없습니다",
+          "no-summary-item": "요약이 존재하지 않습니다",
+          "no-library-item": "서재에 담긴 도서가 없습니다",
+          "no-debate-item": "참여중인 토론방이 없습니다",
+          "no-payment-item": "결제 내역이 없습니다",
+          "no-book-item": "읽고 있는 책이 없습니다",
+          "currently-reading-book-prefix": "내가 읽고 있는 책",
+          "currently-reading-book-postfix": "개",
+          "currently-reading-summary-prefix": "내가 읽고 있는 요약",
+          "currently-reading-summary-postfix": "개",
+          "show-more": "더보기",
+          "currency": "₩"
+        },
+        "go-to": {
+          "search": "내 서재에 담을 도서 검색하러 가기",
+          "summary": "읽을 요약 보러 가기"
+        },
+        "time": {
+          "year": "년",
+          "month": {
+            "1": "1월",
+            "2": "2월",
+            "3": "3월",
+            "4": "4월",
+            "5": "5월",
+            "6": "6월",
+            "7": "7월",
+            "8": "8월",
+            "9": "9월",
+            "10": "10월",
+            "11": "11월",
+            "12": "12월"
+          }
+        }
+      }
+    }
+  },
+  "page": {
+    "landing": {
+      "title": {
+        "post": "게시글",
+        "popular-summary": "인기 요약",
+        "recommend-prefix": "",
+        "recommend-postfix": "추천 토론방",
+        "for-you-prefix": "",
+        "for-you-postfix": "님을 위한 "
+      },
+      "item": {
+        "no-post-item": "아직 작성된 게시글이 없습니다",
+        "no-summary-item": "아직 작성된 요약이 없습니다"
+      }
+    },
+    "login": {
+      "email": "이메일",
+      "password": "비밀번호",
+      "login": "로그인",
+      "keep-login": "로그인 유지",
+      "save-id": "아이디 저장",
+      "find-id": "아이디 찾기",
+      "find-password": "비밀번호 찾기",
+      "social-login-text": "소셜 계정으로 간편 로그인",
+      "register": "회원가입"
+    },
+    "debate": {
+      "title": {
+        "recommend": "추천 토론방",
+        "popular": "인기 요약"
+      },
+      "search": {
+        "book-title": "도서 제목",
+        "item-title": "토론방 제목",
+        "placeholder": "토론방을 검색해보세요!"
+      },
+      "sort": {
+        "latest": "최신순",
+        "popular": "인기순",
+        "from": "날짜순"
+      },
+      "button": {
+        "create": "토론방 생성"
+      },
+      "item": {
+        "no-debate-item": "아직 작성된 요약이 없습니다",
+        "no-summary-item": "아직 토론방이 없습니다"
+      }
+    },
+    "summary": {
+      "title": {
+        "recommend": "추천 요약",
+        "popular": "인기 토론방"
+      },
+      "search": {
+        "book-title": "도서 제목",
+        "item-title": "요약 제목",
+        "placeholder": "관심 도서의 요약을 검색해보세요!"
+      },
+      "sort": {
+        "latest": "최신순",
+        "popular": "인기순"
+      },
+      "button": {
+        "write": "요약 작성"
+      },
+      "item": {
+        "no-summary-item": "아직 작성된 요약이 없습니다",
+        "no-debate-item": "아직 토론방이 없습니다"
+      }
+    },
+    "search": {
+      "title": {
+        "page": "도서 검색"
+      },
+      "sort": {
+        "latest": "최신순",
+        "popular": "인기순"
+      },
+      "search": {
+        "placeholder": "관심 도서를 검색해보세요!"
+      }
+    }
+  }
+}

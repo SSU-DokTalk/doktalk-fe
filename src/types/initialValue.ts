@@ -47,23 +47,23 @@ export const MyTabs: {
   url: MyTabsCandidate;
 }[] = [
   {
-    text: "게시글",
+    text: "component.section.profile.tab.my-tab.post",
     url: "/post",
   },
   {
-    text: "내 요약",
+    text: "component.section.profile.tab.my-tab.summary",
     url: "/summary",
   },
   {
-    text: "내 서재",
+    text: "component.section.profile.tab.my-tab.library",
     url: "/library",
   },
   {
-    text: "토론방",
+    text: "component.section.profile.tab.my-tab.debate",
     url: "/debate",
   },
   {
-    text: "결제내역",
+    text: "component.section.profile.tab.my-tab.payment",
     url: "/payment",
   },
 ];
@@ -72,11 +72,11 @@ export const UserTabs: {
   url: UserTabsCandidate;
 }[] = [
   {
-    text: "게시글",
+    text: "component.section.profile.tab.user-tab.post",
     url: "/post",
   },
   {
-    text: "서재",
+    text: "component.section.profile.tab.user-tab.library",
     url: "/library",
   },
 ];

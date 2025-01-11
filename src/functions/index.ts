@@ -2,6 +2,7 @@ import dayjs from "dayjs";
 import duration, { Duration } from "dayjs/plugin/duration";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
+import { useTranslation } from "react-i18next";
 dayjs.extend(duration);
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -19,20 +20,22 @@ export function getTimeDiff(timeToCompare: Date): string {
   let minuteDiff: number = parseInt(timeDiffDuration.format("m"));
   let secondDiff: number = parseInt(timeDiffDuration.format("s"));
 
+  const { t } = useTranslation();
+
   if (yearDiff > 0) {
-    return `${yearDiff}년 전`;
+    return `${yearDiff}${t("function.time.year")}${t("function.time.ago")}`;
   } else if (monthDiff > 0) {
-    return `${monthDiff}달 전`;
+    return `${monthDiff}${t("function.time.month")}${t("function.time.ago")}`;
   } else if (dateDiff > 0) {
-    return `${dateDiff}일 전`;
+    return `${dateDiff}${t("function.time.day")}${t("function.time.ago")}`;
   } else if (hourDiff > 0) {
-    return `${hourDiff}시간 전`;
+    return `${hourDiff}${t("function.time.hour")}${t("function.time.ago")}`;
   } else if (minuteDiff > 0) {
-    return `${minuteDiff}분 전`;
+    return `${minuteDiff}${t("function.time.minute")}${t("function.time.ago")}`;
   } else if (secondDiff > 0) {
-    return `${secondDiff}초 전`;
+    return `${secondDiff}${t("function.time.second")}${t("function.time.ago")}`;
   } else {
-    return "방금 전";
+    return `${t("function.time.now")}`;
   }
 }
 

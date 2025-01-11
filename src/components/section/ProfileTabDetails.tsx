@@ -30,6 +30,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { getDateTime } from "@/functions";
 import { DUMMY_PAYMENTS } from "@/common/dummy_data";
+import { useTranslation } from "react-i18next";
 
 function ProfileTabDetails({
   userProfile = undefined,
@@ -77,6 +78,7 @@ function ProfileTabDetails({
     useState<boolean>(false);
 
   const user = useAppSelector(selectUser);
+  const { t } = useTranslation();
 
   useEffect(() => {
     console.log("isPaymentCurTimeChanged", isPaymentCurTimeChanged);
@@ -134,7 +136,9 @@ function ProfileTabDetails({
               likes={postLikes}
               setLikes={setPostLikes}
               hasNoItem={posts.length === 0}
-              hasNoItemMessage="아직 작성한 게시글이 없습니다"
+              hasNoItemMessage={t(
+                "component.section.profile-tab-details.item.no-post-item"
+              )}
               condition={userProfile && userProfile.id != 0}
               refreshCondition={didPost}
               dependency={[didPost]}
@@ -174,7 +178,9 @@ function ProfileTabDetails({
               likes={summaryLikes}
               setLikes={setSummaryLikes}
               hasNoItem={summaries.length === 0}
-              hasNoItemMessage="아직 작성한 요약이 없습니다"
+              hasNoItemMessage={t(
+                "component.section.profile-tab-details.item.no-summary-item"
+              )}
               condition={userProfile && userProfile.id != 0}
             >
               {summaries.map((summary, index) => (
@@ -193,10 +199,20 @@ function ProfileTabDetails({
             <div className="currently-reading-books-container">
               <div className="currently-reading-header">
                 <div className="currently-reading-title">
-                  내가 읽고 있는 책{" "}
-                  <span className="item-count">{totalMyBooks}개</span>
+                  {t(
+                    "component.section.profile-tab-details.item.currently-reading-book-prefix"
+                  ) + " "}
+                  <span className="item-count">
+                    {totalMyBooks}
+                    {t(
+                      "component.section.profile-tab-details.item.currently-reading-book-postfix"
+                    )}
+                  </span>
                 </div>
-                <div className="show-more">{"더보기 >"}</div>
+                <div className="show-more">
+                  {t("component.section.profile-tab-details.item.show-more") +
+                    " >"}
+                </div>
               </div>
               {!hasLoadedMyBook ? (
                 <Spinner animation="border" className="loading-spinner">
@@ -205,9 +221,14 @@ function ProfileTabDetails({
               ) : myBooks.length === 0 ? (
                 <div className="no-item">
                   <img src={noImage} alt="no image" width="122px" />
-                  <p className="no-item-message">읽고 있는 책이 없습니다</p>
+                  <p className="no-item-message">
+                    {t(
+                      "component.section.profile-tab-details.item.no-book-item"
+                    )}
+                  </p>
                   <Link to="/search" className="go-to">
-                    {"내 서재에 담을 도서 검색하러 가기 >"}
+                    {t("component.section.profile-tab-details.go-to.search") +
+                      " >"}
                   </Link>
                 </div>
               ) : (
@@ -221,12 +242,20 @@ function ProfileTabDetails({
             <div className="currently-reading-summaries-container">
               <div className="currently-reading-header">
                 <div className="currently-reading-title">
-                  내가 읽고 있는 요약{" "}
+                  {t(
+                    "component.section.profile-tab-details.item.currently-reading-summary-prefix"
+                  ) + " "}
                   <span className="item-count">
-                    {totalPurchasedSummaries}개
+                    {totalPurchasedSummaries}
+                    {t(
+                      "component.section.profile-tab-details.item.currently-reading-summary-postfix"
+                    )}
                   </span>
                 </div>
-                <div className="show-more">{"더보기 >"}</div>
+                <div className="show-more">
+                  {t("component.section.profile-tab-details.item.show-more") +
+                    " >"}
+                </div>
               </div>
               {!hasLoadedPurchaseSummary ? (
                 <Spinner animation="border" className="loading-spinner">
@@ -235,9 +264,14 @@ function ProfileTabDetails({
               ) : purchasedSummaries.length === 0 ? (
                 <div className="no-item">
                   <img src={noImage} alt="no image" width="122px" />
-                  <p className="no-item-message">읽고 있는 요약이 없습니다</p>
+                  <p className="no-item-message">
+                    {t(
+                      "component.section.profile-tab-details.item.no-summary-item"
+                    )}
+                  </p>
                   <Link to="/summary" className="go-to">
-                    {"읽을 요약 보러 가기 >"}
+                    {t("component.section.profile-tab-details.go-to.summary") +
+                      " >"}
                   </Link>
                 </div>
               ) : (
@@ -275,7 +309,9 @@ function ProfileTabDetails({
               likes={debateLikes}
               setLikes={setDebateLikes}
               hasNoItem={debates.length === 0}
-              hasNoItemMessage="아직 참여중인 토론방이 없습니다"
+              hasNoItemMessage={t(
+                "component.section.profile-tab-details.item.no-debate-item"
+              )}
               condition={userProfile && userProfile.id != 0}
             >
               {debates.map((debate, index) => (
@@ -322,10 +358,16 @@ function ProfileTabDetails({
                   <FontAwesomeIcon icon={faChevronRight} />
                 </div>
                 <div className="cur-month">
-                  {paymentCurTime.getFullYear()}년{" "}
-                  {paymentCurTime.getMonth() + 1}월
+                  {paymentCurTime.getFullYear()}
+                  {t("component.section.profile-tab-details.time.year")}{" "}
+                  {t(
+                    `component.section.profile-tab-details.time.month.${(
+                      paymentCurTime.getMonth() + 1
+                    ).toString()}`
+                  )}
                 </div>
                 <div className="total-payment">
+                  {t("component.section.profile-tab-details.item.currency")}
                   {payments
                     .filter((payment) => {
                       let time = new Date(getDateTime(payment.created));
@@ -338,7 +380,6 @@ function ProfileTabDetails({
                       (acc, payment) => acc + payment.price * payment.quantity,
                       0
                     )}
-                  원
                 </div>
               </div>
             </div>

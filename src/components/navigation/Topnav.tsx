@@ -1,17 +1,14 @@
 import axios from "axios";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import cookie from "react-cookies";
 import { Link, useLocation, useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 import i18n from "@/locales/i18n";
 
 import logo from "@/assets/images/logo.svg";
-import { Dropdown } from "react-bootstrap";
+import { ButtonProps, Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faLanguage,
-  faMagnifyingGlass,
-} from "@fortawesome/free-solid-svg-icons";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 
 import { useAppDispatch, useAppSelector } from "@/stores/hooks";
@@ -19,6 +16,8 @@ import { selectUser, unsetUser } from "@/stores/user";
 
 import { LinkItemType } from "@/types/components";
 import ProfileIcon from "../base/ProfileIcon";
+import kr from "@/assets/images/flags/kr.svg";
+import us from "@/assets/images/flags/us.svg";
 
 const navTabs: LinkItemType[] = [
   {
@@ -54,6 +53,23 @@ const dropdownItems: LinkItemType[] = [
   },
 ];
 
+const languageDropdownItems: {
+  name: string;
+  value: string;
+  icon: string;
+}[] = [
+  {
+    name: "한국어",
+    value: "kr",
+    icon: kr,
+  },
+  {
+    name: "English",
+    value: "us",
+    icon: us,
+  },
+];
+
 function Topnav() {
   const currentTab = useLocation();
   const navigate = useNavigate();
@@ -61,8 +77,9 @@ function Topnav() {
   const dispatch = useAppDispatch();
 
   const { t } = useTranslation();
-  const changeLanguage = () => {
-    i18n.changeLanguage(i18n.language == "ko" ? "en" : "ko");
+  const changeLanguage = (item: { name: string; value: string }) => {
+    localStorage.setItem("lang", item.value);
+    i18n.changeLanguage(item.value);
   };
 
   useEffect(() => {}, [user]);
@@ -98,11 +115,50 @@ function Topnav() {
         </div>
         <div className="right-container">
           <div className="user-container">
-            <FontAwesomeIcon
-              icon={faLanguage}
-              className="user-language"
-              onClick={changeLanguage}
-            />
+            <Dropdown className="language-dropdown">
+              <Dropdown.Toggle
+                as={React.forwardRef<HTMLButtonElement, ButtonProps>(
+                  ({ onClick }, ref) => (
+                    <button
+                      className="language-icon"
+                      style={{
+                        backgroundImage: `url(${
+                          (
+                            languageDropdownItems.find(
+                              (item) =>
+                                item.value == localStorage.getItem("lang")
+                            ) ?? languageDropdownItems[0]
+                          ).icon
+                        })`,
+                      }}
+                      ref={ref}
+                      onClick={(e) => {
+                        e.preventDefault();
+                        onClick?.(e);
+                      }}
+                    />
+                  )
+                )}
+              />
+              <Dropdown.Menu>
+                {languageDropdownItems.map((item, idx) => {
+                  return (
+                    <Dropdown.Item
+                      onClick={() => changeLanguage(item)}
+                      key={"lang" + idx}
+                    >
+                      <button
+                        className="lang-menu-icon"
+                        style={{
+                          backgroundImage: `url(${item.icon})`,
+                        }}
+                      />
+                      <div className="lang-menu-text">{item.name}</div>
+                    </Dropdown.Item>
+                  );
+                })}
+              </Dropdown.Menu>
+            </Dropdown>
             {user.id != 0 ? (
               <>
                 <FontAwesomeIcon icon={faBell} className="user-notification" />

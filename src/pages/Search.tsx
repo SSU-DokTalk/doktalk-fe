@@ -4,17 +4,18 @@ import { BookType } from "@/types/data";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 
 const sortBys: {
   name: string;
   value: string;
 }[] = [
   {
-    name: "최신순",
+    name: "page.search.sort.latest",
     value: "latest",
   },
   {
-    name: "인기순",
+    name: "page.search.sort.popular",
     value: "popular",
   },
 ];
@@ -22,6 +23,8 @@ const sortBys: {
 function Search() {
   const [books, setBooks] = useState<BookType[]>(DUMMY_BOOKS);
   const [search, setSearch] = useState<string>("");
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (books.length == 0) {
@@ -32,13 +35,13 @@ function Search() {
   return (
     <div id="search-page">
       <div className="page-container">
-        <div className="page-title">도서 검색</div>
+        <div className="page-title">{t("page.search.title.page")}</div>
         <div className="search-bar">
           <FontAwesomeIcon icon={faSearch} className="search-icon" />
           <input
             className="search-input"
             type="text"
-            placeholder="관심 도서를 검색해보세요!"
+            placeholder={t("page.search.search.placeholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
@@ -47,7 +50,7 @@ function Search() {
           <div className="sort-by-container">
             {sortBys.map((sortBy, index) => (
               <div key={"sortBy" + index} className="sort-by-item">
-                {sortBy.name}
+                {t(sortBy.name)}
               </div>
             ))}
           </div>

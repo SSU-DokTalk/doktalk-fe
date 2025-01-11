@@ -7,6 +7,7 @@ import Image from "../base/Image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
 import { BookType, UserType } from "@/types/data";
+import { useTranslation } from "react-i18next";
 
 function FloatingUserProfile({
   isUserUpdated,
@@ -21,6 +22,7 @@ function FloatingUserProfile({
 }) {
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const [userInfo, setUserInfo] = useState<{
     follower_num: number;
@@ -78,32 +80,42 @@ function FloatingUserProfile({
       >
         <div className="profile-info">
           <ProfileIcon profile={user.profile} size={50} />
-          <div className="user-name">{user.name ?? "로그인"}</div>
+          <div className="user-name">
+            {user.name ?? t("component.floating.text.login")}
+          </div>
         </div>
       </div>
       <div className="follow-info">
         <div className="follow-container">
-          <div className="text">팔로워</div>
+          <div className="text">{t("component.floating.text.follower")}</div>
           <div className="count">{userInfo.follower_num}</div>
         </div>
         <div className="follow-container">
-          <div className="text">팔로잉</div>
+          <div className="text">{t("component.floating.text.following")}</div>
           <div className="count">{userInfo.following_num}</div>
         </div>
       </div>
       <Accordion alwaysOpen>
         <Accordion.Item eventKey="0" className="accordion-item">
-          <Accordion.Header>내 활동</Accordion.Header>
+          <Accordion.Header>
+            {t("component.floating.text.my-activity")}
+          </Accordion.Header>
           <Accordion.Body className="my-activity">
-            <Link to={""}>좋아요</Link>
-            <Link to={"/mypage/post"}>내 게시글</Link>
-            <Link to={"/mypage/summary"}>내 요약</Link>
-            <Link to={""}>찜 내역</Link>
-            <Link to={"/mypage/debate"}>참여중인 토론방</Link>
+            <Link to={""}>{t("component.floating.text.likes")}</Link>
+            <Link to={"/mypage/post"}>{t("component.floating.text.post")}</Link>
+            <Link to={"/mypage/summary"}>
+              {t("component.floating.text.summary")}
+            </Link>
+            <Link to={""}>{t("component.floating.text.shopping-cart")}</Link>
+            <Link to={"/mypage/debate"}>
+              {t("component.floating.text.debate")}
+            </Link>
           </Accordion.Body>
         </Accordion.Item>
         <Accordion.Item eventKey="1">
-          <Accordion.Header>내 서재</Accordion.Header>
+          <Accordion.Header>
+            {t("component.floating.text.library")}
+          </Accordion.Header>
           <Accordion.Body className="my-library">
             {books.slice(0, 6).map((book, idx) => {
               return (

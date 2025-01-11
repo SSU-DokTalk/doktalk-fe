@@ -15,6 +15,7 @@ import {
   UserTabs,
   UserTabsCandidate,
 } from "@/types/initialValue";
+import { useTranslation } from "react-i18next";
 
 function Profile({
   userProfile,
@@ -39,6 +40,7 @@ function Profile({
   const [didEdit, setDidEdit] = useState(false);
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (userProfile.id != 0) {
@@ -120,7 +122,7 @@ function Profile({
                     setShowEditProfileModal(true);
                   }}
                 >
-                  프로필 편집
+                  {t("component.section.profile.button.edit-profile")}
                 </button>
               ) : (
                 <button
@@ -133,7 +135,9 @@ function Profile({
                     }
                   }}
                 >
-                  {isFollowing ? "팔로우 취소" : "팔로우"}
+                  {isFollowing
+                    ? t("component.section.profile.button.unfollow")
+                    : t("component.section.profile.button.follow")}
                 </button>
               )}
             </div>
@@ -148,7 +152,9 @@ function Profile({
                 setShowFriendsModal(true);
               }}
             >
-              팔로워 {userProfile.follower_num}명
+              {t("component.section.profile.text.follower-prefix")}
+              {userProfile.follower_num}
+              {t("component.section.profile.text.follower-postfix")}
             </div>
             <div
               className="following"
@@ -156,12 +162,15 @@ function Profile({
                 setShowFriendsModal(true);
               }}
             >
-              팔로잉 {userProfile.following_num}명
+              {t("component.section.profile.text.following-prefix")}
+              {userProfile.following_num}
+              {t("component.section.profile.text.following-postfix")}
             </div>
           </div>
           <div className="introduction-container">
             <pre className="introduction">
-              {userProfile.introduction ?? "자기소개가 없습니다."}
+              {userProfile.introduction ??
+                t("component.section.profile.text.no-introduction")}
             </pre>
           </div>
         </div>
@@ -186,7 +195,7 @@ function Profile({
                   console.log(e.currentTarget.dataset.value);
                 }}
               >
-                {tab.text}
+                {t(tab.text)}
               </div>
             );
           })}

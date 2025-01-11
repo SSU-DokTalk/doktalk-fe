@@ -6,10 +6,13 @@ import Carousel from "@/components/carousel/Carousel";
 import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 function LandingUpper() {
   const user = useAppSelector(selectUser);
   const [debates, setDebates] = useState<DebateType[]>(DUMMY_DEBATES);
+
+  const { t } = useTranslation();
 
   useEffect(() => {
     axios.get(`/api/debate/recommend`).then(
@@ -26,12 +29,15 @@ function LandingUpper() {
   return (
     <div id="landing-page-upper-container">
       <div className="container-title">
+        {t("page.landing.title.recommend-prefix")}
         {user.id == 0 ? null : (
           <span>
-            <span className="user-name">{user.name}</span>님을 위한{" "}
+            {t("page.landing.title.for-you-prefix")}
+            <span className="user-name">{user.name}</span>
+            {t("page.landing.title.for-you-postfix")}
           </span>
         )}
-        추천 토론방
+        {t("page.landing.title.recommend-postfix")}
       </div>
       <div className="container-contents">
         <Carousel

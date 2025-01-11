@@ -5,6 +5,7 @@ import ProfileIcon from "@/components/base/ProfileIcon";
 import { Dispatch, SetStateAction, useState } from "react";
 import WritePostModal from "../modal/WritePostModal";
 import WriteIcon from "@/assets/images/WriteIcon";
+import { useTranslation } from "react-i18next";
 
 function WritePostCard({
   setDidPost = undefined,
@@ -13,6 +14,8 @@ function WritePostCard({
 }) {
   const user = useAppSelector(selectUser);
   const [showModal, setShowModal] = useState<boolean>(false);
+
+  const { t } = useTranslation();
 
   return (
     <div id="write-post-card">
@@ -28,7 +31,9 @@ function WritePostCard({
           setShowModal(true);
         }}
       >
-        <div className="write-input">게시글을 작성해보세요!</div>
+        <div className="write-input">
+          {t("component.card.write-post.placeholder")}
+        </div>
         <WriteIcon className="write-icon" width={20} fill={"#666565"} />
       </div>
     </div>

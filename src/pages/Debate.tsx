@@ -11,17 +11,18 @@ import WriteIcon from "@/assets/images/WriteIcon";
 import DebateCard from "@/components/card/DebateCard";
 import InfiniteScroll from "@/components/base/InfiniteScroll";
 import PopularSummaryCard from "@/components/card/PopularSummaryCard";
+import { useTranslation } from "react-i18next";
 
 const searchBys: {
   name: string;
   value: "bkt" | "dbt";
 }[] = [
   {
-    name: "도서 제목",
+    name: "page.debate.search.book-title",
     value: "bkt",
   },
   {
-    name: "토론방 제목",
+    name: "page.debate.search.item-title",
     value: "dbt",
   },
 ];
@@ -32,22 +33,22 @@ const sortBys: {
   element?: JSX.Element;
 }[] = [
   {
-    name: "최신순",
+    name: "page.debate.sort.latest",
     value: "latest",
   },
   {
-    name: "인기순",
+    name: "page.debate.sort.popular",
     value: "popular",
   },
   {
-    name: "날짜순",
+    name: "page.debate.sort.from",
     value: "from",
     element: <IonIcon name="calendar-outline" className="sort-by-icon" />,
   },
 ];
 
 function Debate() {
-  const [popularDebates, setPopularDebates] =
+  const [recommendDebates, setRecommendDebates] =
     useState<DebateType[]>(DUMMY_DEBATES);
 
   const [debates, setDebates] = useState<DebateType[]>(DUMMY_DEBATES);
@@ -64,19 +65,30 @@ function Debate() {
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
-    if (popularDebates.length === 0) {
-      setPopularDebates(DUMMY_DEBATES);
+    if (recommendDebates.length === 0) {
+      setRecommendDebates(DUMMY_DEBATES);
     }
   });
 
   return (
     <div id="debate-page">
-      <div className="popular-content-container">
-        <div className="popular-content-title">추천 토론</div>
-        <Carousel items={popularDebates} size={3} className="popular-content">
-          {popularDebates.map((debate, idx) => (
-            <CarouselDebateCard key={"popular-debate" + idx} debate={debate} />
+      <div className="recommend-content-container">
+        <div className="recommend-content-title">
+          {t("page.debate.title.recommend")}
+        </div>
+        <Carousel
+          items={recommendDebates}
+          size={3}
+          className="recommend-content"
+        >
+          {recommendDebates.map((debate, idx) => (
+            <CarouselDebateCard
+              key={"recommend-debate" + idx}
+              debate={debate}
+            />
           ))}
         </Carousel>
       </div>
@@ -88,21 +100,23 @@ function Debate() {
               className="searchbox-icon"
             />
             <Dropdown>
-              <Dropdown.Toggle>{searchBys[searchByIdx].name}</Dropdown.Toggle>
+              <Dropdown.Toggle>
+                {t(searchBys[searchByIdx].name)}
+              </Dropdown.Toggle>
               <Dropdown.Menu>
                 {searchBys.map((searchBy, index) => (
                   <Dropdown.Item
                     key={"search-by" + index}
                     onClick={() => setSearchByIdx(index)}
                   >
-                    {searchBy.name}
+                    {t(searchBy.name)}
                   </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
             </Dropdown>
             <input
               type="text"
-              placeholder="토론방을 검색해보세요!"
+              placeholder={t("page.debate.search.placeholder")}
               className="searchbox"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -124,14 +138,14 @@ function Debate() {
                     }
                     onClick={() => setSortByIdx(index)}
                   >
-                    {sortBy.name}
+                    {t(sortBy.name)}
                     {sortBy.element ?? null}
                   </div>
                 );
               })}
             </div>
             <button>
-              <span>토론방 생성</span>
+              <span>{t("page.debate.button.create")}</span>
               <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
             </button>
           </div>
@@ -147,7 +161,7 @@ function Debate() {
               likes={debateLikes}
               setLikes={setDebateLikes}
               hasNoItem={summaries.length === 0}
-              hasNoItemMessage="아직 작성된 요약이 없습니다"
+              hasNoItemMessage={t("page.debate.item.no-debate-item")}
             >
               {debates.map((debate, index) => (
                 <DebateCard
@@ -162,7 +176,9 @@ function Debate() {
           </div>
         </div>
         <div className="right-container">
-          <div className="right-container-title">인기 요약</div>
+          <div className="right-container-title">
+            {t("page.debate.title.popular")}
+          </div>
           <div className="right-container-content">
             <InfiniteScroll
               api={`summary/popular`}
@@ -175,7 +191,7 @@ function Debate() {
               likes={summaryLikes}
               setLikes={setSummaryLikes}
               hasNoItem={summaries.length === 0}
-              hasNoItemMessage="아직 토론방이 없습니다"
+              hasNoItemMessage={t("page.debate.item.no-summary-item")}
             >
               {summaries.map((summary, index) => (
                 <PopularSummaryCard

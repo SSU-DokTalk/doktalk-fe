@@ -23,6 +23,7 @@ import LandingUpper from "./components/section/LandingUpper";
 import Debate from "./pages/Debate";
 import Search from "./pages/Search";
 import { Spinner } from "react-bootstrap";
+import i18n from "./locales/i18n";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -30,6 +31,11 @@ function App() {
   const [isAuthChecked, setIsAuthChecked] = useState(false);
 
   useEffect(() => {
+    if (localStorage.getItem("lang") == null) {
+      localStorage.setItem("lang", "kr");
+    }
+    i18n.changeLanguage(localStorage.getItem("lang") as string);
+
     if (cookie.load("Authorization") != undefined) {
       axios
         .post(

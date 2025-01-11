@@ -1,7 +1,10 @@
 import { BookType } from "@/types/data";
 import Image from "@/components/base/Image";
+import { useTranslation } from "react-i18next";
 
 function BookCard({ book }: { book: BookType }) {
+  const { t } = useTranslation();
+
   return (
     <div id="book-card">
       <div className="image-container">
@@ -16,8 +19,12 @@ function BookCard({ book }: { book: BookType }) {
         <div className="description">{book.description.replace("\n", " ")}</div>
       </div>
       <div className="button-container">
-        <button className="to-my-book">내 서재에 담기</button>
-        <button className="look-summary">요약 보기</button>
+        <button className="to-my-book">
+          {t("component.card.book.button.add-to-library")}
+        </button>
+        <button className="look-summary">
+          {t("component.card.book.button.look-summary")}
+        </button>
       </div>
     </div>
   );

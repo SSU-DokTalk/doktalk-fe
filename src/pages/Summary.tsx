@@ -11,17 +11,18 @@ import { DUMMY_DEBATES, DUMMY_SUMMARIES } from "@/common/dummy_data";
 import CarouselSummaryCard from "@/components/card/CarouselSummaryCard";
 import PopularDebateCard from "@/components/card/PopularDebateCard";
 import WriteIcon from "@/assets/images/WriteIcon";
+import { useTranslation } from "react-i18next";
 
 const searchBys: {
   name: string;
   value: "bkt" | "smt";
 }[] = [
   {
-    name: "도서 제목",
+    name: "page.summary.search.book-title",
     value: "bkt",
   },
   {
-    name: "요약 제목",
+    name: "page.summary.search.item-title",
     value: "smt",
   },
 ];
@@ -31,11 +32,11 @@ const sortBys: {
   value: "latest" | "popular";
 }[] = [
   {
-    name: "최신순",
+    name: "page.summary.sort.latest",
     value: "latest",
   },
   {
-    name: "인기순",
+    name: "page.summary.sort.popular",
     value: "popular",
   },
 ];
@@ -58,6 +59,8 @@ function Summary() {
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
 
+  const { t } = useTranslation();
+
   useEffect(() => {
     axios.get(`summary`).then(async (res) => {
       let { items }: { items: SummaryType[] } = res.data;
@@ -70,7 +73,9 @@ function Summary() {
   return (
     <div id="summary-page">
       <div className="popular-content-container">
-        <div className="popular-content-title">추천 요약</div>
+        <div className="popular-content-title">
+          {t("page.summary.title.recommend")}
+        </div>
         <Carousel items={popularSummaries} size={3} className="popular-content">
           {popularSummaries.map((summary, index) => (
             <CarouselSummaryCard
@@ -88,21 +93,23 @@ function Summary() {
               className="searchbox-icon"
             />
             <Dropdown>
-              <Dropdown.Toggle>{searchBys[searchByIdx].name}</Dropdown.Toggle>
+              <Dropdown.Toggle>
+                {t(searchBys[searchByIdx].name)}
+              </Dropdown.Toggle>
               <Dropdown.Menu>
                 {searchBys.map((searchBy, index) => (
                   <Dropdown.Item
                     key={"search-by" + index}
                     onClick={() => setSearchByIdx(index)}
                   >
-                    {searchBy.name}
+                    {t(searchBy.name)}
                   </Dropdown.Item>
                 ))}
               </Dropdown.Menu>
             </Dropdown>
             <input
               type="text"
-              placeholder="관심 도서의 요약을 검색해보세요!"
+              placeholder={t("page.summary.search.placeholder")}
               className="searchbox"
               value={search}
               onChange={(e) => setSearch(e.target.value)}
@@ -124,13 +131,13 @@ function Summary() {
                     }
                     onClick={() => setSortByIdx(index)}
                   >
-                    {sortBy.name}
+                    {t(sortBy.name)}
                   </div>
                 );
               })}
             </div>
             <button>
-              <span>요약 작성</span>
+              <span>{t("page.summary.button.write")}</span>
               <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
             </button>
           </div>
@@ -146,7 +153,7 @@ function Summary() {
               likes={summaryLikes}
               setLikes={setSummaryLikes}
               hasNoItem={summaries.length === 0}
-              hasNoItemMessage="아직 작성된 요약이 없습니다"
+              hasNoItemMessage={t("page.summary.item.no-summary-item")}
             >
               {summaries.map((summary, index) => (
                 <SummaryCard
@@ -161,7 +168,9 @@ function Summary() {
           </div>
         </div>
         <div className="right-container">
-          <div className="right-container-title">인기 토론방</div>
+          <div className="right-container-title">
+            {t("page.summary.title.popular")}
+          </div>
           <div className="right-container-content">
             <InfiniteScroll
               api={`debate/popular`}
@@ -174,7 +183,7 @@ function Summary() {
               likes={debateLikes}
               setLikes={setDebateLikes}
               hasNoItem={debates.length === 0}
-              hasNoItemMessage="아직 토론방이 없습니다"
+              hasNoItemMessage={t("page.summary.item.no-debate-item")}
             >
               {debates.map((debate, index) => (
                 <PopularDebateCard key={"debate" + index} debate={debate} />

@@ -7,6 +7,7 @@ import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 import WritePostCard from "@/components/card/WritePostCard";
 import PopularSummaryCard from "../components/card/PopularSummaryCard";
+import { useTranslation } from "react-i18next";
 
 function Landing() {
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -21,11 +22,12 @@ function Landing() {
   const [summaryLikes, setSummaryLikes] = useState<boolean[]>([]);
 
   const user = useAppSelector(selectUser);
+  const { t } = useTranslation();
 
   return (
     <div id="landing-page">
       <div className="post-container">
-        <div className="post-title">게시글</div>
+        <div className="post-title">{t("page.landing.title.post")}</div>
         {user.id != 0 ? <WritePostCard setDidPost={setDidPost} /> : null}
         <InfiniteScroll
           api={`post/recent`}
@@ -38,7 +40,7 @@ function Landing() {
           likes={postLikes}
           setLikes={setPostLikes}
           hasNoItem={posts.length === 0}
-          hasNoItemMessage="아직 작성한 게시글이 없습니다"
+          hasNoItemMessage={t("page.landing.item.no-post-item")}
           refreshCondition={didPost}
           dependency={[didPost]}
           afterFetchSuccess={async () => {
@@ -60,7 +62,9 @@ function Landing() {
         </InfiniteScroll>
       </div>
       <div className="summary-container">
-        <div className="summary-section-title">인기 요약</div>
+        <div className="summary-section-title">
+          {t("page.landing.title.popular-summary")}
+        </div>
         <InfiniteScroll
           api={`summary/recent`}
           likes_api={`summarys/like`}
@@ -72,7 +76,7 @@ function Landing() {
           likes={summaryLikes}
           setLikes={setSummaryLikes}
           hasNoItem={summaries.length === 0}
-          hasNoItemMessage="아직 작성한 요약이 없습니다"
+          hasNoItemMessage={t("page.landing.item.no-summary-item")}
         >
           {summaries.map((summary, index) => (
             <PopularSummaryCard
