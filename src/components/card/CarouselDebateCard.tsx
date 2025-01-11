@@ -2,17 +2,19 @@ import { DebateType } from "@/types/data";
 import Image from "@/components/base/Image";
 import ProfileIcon from "@/components/base/ProfileIcon";
 
-function RecommendDebateCard({
+function CarouselDebateCard({
   debate,
   ...props
 }: { debate: DebateType } & React.HTMLProps<HTMLDivElement>) {
   return (
-    <div id="recommend-debate-card" {...props}>
+    <div id="carousel-debate-card" {...props}>
       <Image
         src={debate.book.image}
         alt={"debate book image"}
-        width={86}
-        height={124}
+        width={65}
+        height={100}
+        noImageFontSize={40}
+        noImageTextFontSize={10}
       />
       <div className="debate-info">
         <div className="debate">
@@ -32,4 +34,4 @@ function RecommendDebateCard({
   );
 }
 
-export default RecommendDebateCard;
+export default CarouselDebateCard;

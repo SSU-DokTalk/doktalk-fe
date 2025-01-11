@@ -33,6 +33,10 @@ const navTabs: LinkItemType[] = [
     title: "component.topnav.summary",
     url: "/summary",
   },
+  {
+    title: "component.topnav.search",
+    url: "/search",
+  },
 ];
 
 const dropdownItems: LinkItemType[] = [
@@ -87,7 +91,7 @@ function Topnav() {
             />
             <input
               type="text"
-              placeholder={t("component.topnav.search.placeholder")}
+              placeholder={t("component.topnav.search-bar.placeholder")}
               className="searchbar-input"
             />
           </div>

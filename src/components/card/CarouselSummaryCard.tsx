@@ -10,6 +10,8 @@ function CarouselSummaryCard({ summary }: { summary: SummaryType }) {
         alt="book cover"
         width={65}
         height={100}
+        noImageFontSize={40}
+        noImageTextFontSize={10}
       />
       <div className="summary-info">
         <div className="summary-content-container">

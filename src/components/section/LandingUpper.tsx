@@ -1,7 +1,7 @@
 import { DUMMY_DEBATES } from "@/common/dummy_data";
 import { DebateType } from "@/types/data";
 import { useEffect, useState } from "react";
-import RecommendDebateCard from "../card/RecommendDebateCard";
+import CarouselDebateCard from "../card/CarouselDebateCard";
 import Carousel from "@/components/carousel/Carousel";
 import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
@@ -26,7 +26,12 @@ function LandingUpper() {
   return (
     <div id="landing-page-upper-container">
       <div className="container-title">
-        <span className="user-name">{user.name}</span>님을 위한 추천 토론방
+        {user.id == 0 ? null : (
+          <span>
+            <span className="user-name">{user.name}</span>님을 위한{" "}
+          </span>
+        )}
+        추천 토론방
       </div>
       <div className="container-contents">
         <Carousel
@@ -35,7 +40,7 @@ function LandingUpper() {
           className="container-contents-carousel"
         >
           {debates.map((debate, idx) => (
-            <RecommendDebateCard
+            <CarouselDebateCard
               key={"recommend-debate" + idx}
               debate={debate}
             />

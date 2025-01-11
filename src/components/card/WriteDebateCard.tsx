@@ -2,7 +2,7 @@ import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "@/components/base/ProfileIcon";
-import write from "@/assets/images/write.svg";
+import WriteIcon from "@/assets/images/WriteIcon";
 
 function WriteDebateCard() {
   const user = useAppSelector(selectUser);
@@ -16,7 +16,7 @@ function WriteDebateCard() {
         onClick={() => navigate("/debate/write")}
       >
         <div className="write-input">새로운 토론방을 생성해보세요!</div>
-        <img src={write} alt="" className="write-icon" width={20} />
+        <WriteIcon className="write-icon" width={20} fill={"#666565"} />
       </div>
     </div>
   );

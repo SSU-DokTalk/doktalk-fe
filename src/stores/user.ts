@@ -5,14 +5,14 @@ export interface UserState {
   id?: number;
   name?: string;
   profile?: string;
-  role?: string;
+  role?: "USER" | "ADMIN";
 }
 
 const initialState: UserState = {
   id: 0,
   name: undefined,
   profile: undefined,
-  role: "",
+  role: "USER",
 };
 
 export const userSlice = createSlice({
@@ -20,7 +20,7 @@ export const userSlice = createSlice({
   initialState,
   reducers: {
     unsetUser: () => {
-      return {};
+      return initialState;
     },
     setUser: (state, action: PayloadAction<UserState>) => {
       return {

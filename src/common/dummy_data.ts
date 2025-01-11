@@ -27,7 +27,7 @@ export const DUMMY_SUMMARIES: SummaryType[] = [
     id: 6,
     user_id: 5,
     isbn: 9788936473235,
-    title: "string",
+    title: "stringstringstringstringstringstringstringstringstringstring",
     free_content: "string",
     charged_content: "string",
     price: 0,

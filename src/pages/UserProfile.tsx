@@ -23,7 +23,7 @@ function UserProfile() {
   const [currentTab, setCurrentTab] = useState<UserTabsCandidate>("/post");
 
   useEffect(() => {
-    if (user_id && user.id != 0 && parseInt(user_id ?? "0") == user.id)
+    if (user.id != 0 && parseInt(user_id ?? "0") == user.id)
       navigate("/mypage");
     axios.get(`/api/user/${user_id}`).then(
       (res) => {

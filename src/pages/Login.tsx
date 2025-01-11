@@ -30,8 +30,11 @@ function Login() {
 
   const doLogin = async () => {
     await axios.post("/api/user/login", userInfo).then(async (res) => {
-      const { id, name, role }: { id: number; name: string; role: string } =
-        res.data;
+      const {
+        id,
+        name,
+        role,
+      }: { id: number; name: string; role: "USER" | "ADMIN" } = res.data;
       const token = res.headers.authorization;
       axios.defaults.headers.common["Authorization"] = token;
       await dispatch(

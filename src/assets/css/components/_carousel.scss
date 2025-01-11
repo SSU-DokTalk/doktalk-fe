@@ -3,6 +3,8 @@
 #carousel {
   position: relative;
   display: flex;
+  justify-content: space-between;
+
   .carousel-button {
     position: absolute;
     top: 50%;
@@ -27,6 +29,8 @@
     margin-right: -22.5px;
   }
   .carousel-items {
+    width: 30%;
     margin: 0 5px;
+    flex: 1;
   }
 }

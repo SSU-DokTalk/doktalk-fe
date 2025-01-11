@@ -1,10 +1,11 @@
 {
   "component": {
     "topnav": {
-      "community": "Community",
+      "main-page": "Community",
       "debate": "Debate",
       "summary": "Summary",
-      "search": {
+      "search": "Explore",
+      "search-bar": {
         "placeholder": "Find out your interests!"
       },
       "user": {

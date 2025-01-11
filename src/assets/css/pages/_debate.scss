@@ -1,6 +1,6 @@
 @use "../variables" as v;
 
-#summary-page {
+#debate-page {
   .popular-content-container {
     height: 240px;
     .popular-content-title {
@@ -12,7 +12,6 @@
     .popular-content {
       height: 145px;
       width: 70%;
-      display: flex;
     }
   }
 
@@ -68,11 +67,19 @@
             font-weight: 600;
             color: v.$brand-color5;
             margin-right: 25px;
+            display: flex;
+            align-items: center;
             cursor: pointer;
+
+            .sort-by-icon {
+              display: flex;
+              align-items: center;
+              margin-left: 5px;
+            }
           }
         }
         button {
-          width: 105px;
+          width: 120px;
           height: 38px;
           background-color: v.$brand-color1;
           color: white;
@@ -102,7 +109,7 @@
       }
       .right-container-content {
         margin-top: 20px;
-        #popular-debate-card {
+        #popular-summary-card {
           width: 70%;
           margin-bottom: 10px;
         }

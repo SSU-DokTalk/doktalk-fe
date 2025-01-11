@@ -17,9 +17,11 @@ import { selectUser, setUser } from "@/stores/user";
 function EditProfileModal({
   showModal,
   setShowModal,
+  setDidEdit,
 }: {
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
+  setDidEdit: Dispatch<SetStateAction<boolean>>;
 }) {
   const [userInfo, setUserInfo] = useState<{
     profile: string | null;
@@ -35,7 +37,7 @@ function EditProfileModal({
   const user = useAppSelector(selectUser);
 
   useEffect(() => {
-    if (user != undefined && user.id != 0 && showModal) {
+    if (user.id != 0 && showModal) {
       axios.get(`/api/user/me`).then(
         (res) => {
           let { profile, name, introduction } = res.data;
@@ -52,6 +54,7 @@ function EditProfileModal({
     axios.patch(`/api/user/me`, userInfo).then(async (res) => {
       let { id, name, profile, role } = res.data;
       await dispatch(setUser({ id, name, profile, role }));
+      setDidEdit(true);
     });
   };
 

@@ -1,9 +1,9 @@
 import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 
-import write from "@/assets/images/write.svg";
 import ProfileIcon from "@/components/base/ProfileIcon";
 import { useNavigate } from "react-router-dom";
+import WriteIcon from "@/assets/images/WriteIcon";
 
 function WriteSummaryCard() {
   const user = useAppSelector(selectUser);
@@ -17,7 +17,7 @@ function WriteSummaryCard() {
         onClick={() => navigate("/summary/write")}
       >
         <div className="write-input">요약을 작성해보세요!</div>
-        <img src={write} alt="" className="write-icon" width={20} />
+        <WriteIcon className="write-icon" width={20} fill={"#666565"} />
       </div>
     </div>
   );

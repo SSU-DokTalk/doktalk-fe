@@ -20,6 +20,9 @@ import { selectUser, setUser } from "./stores/user";
 import cookie from "react-cookies";
 import ContentMainLayout from "./layouts/ContentMainLayout";
 import LandingUpper from "./components/section/LandingUpper";
+import Debate from "./pages/Debate";
+import Search from "./pages/Search";
+import { Spinner } from "react-bootstrap";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -44,7 +47,7 @@ function App() {
           axios.defaults.headers.common["Authorization"] = token;
 
           // 유저 정보가 없는 경우 다시 요청
-          if (user == undefined || user.id == undefined || user.id == 0) {
+          if (user.id == 0) {
             axios
               .get("/api/user/me")
               .then(async (res) => {
@@ -56,7 +59,7 @@ function App() {
                 }: {
                   id: number;
                   name: string;
-                  role: string;
+                  role: "USER" | "ADMIN";
                   profile: string;
                 } = res.data;
                 if (id != 0) {
@@ -84,7 +87,21 @@ function App() {
   }, []);
 
   if (!isAuthChecked) {
-    return <div>Loading...</div>;
+    return (
+      <div
+        style={{
+          width: "100vw",
+          height: "100vh",
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
+        }}
+      >
+        <Spinner animation="border" className="loading-spinner">
+          <span className="visually-hidden">Loading...</span>
+        </Spinner>
+      </div>
+    );
   }
 
   return (
@@ -100,12 +117,11 @@ function App() {
           <Route path="/" element={<Landing />}></Route>
         </Route>
         <Route element={<ContentMainLayout />}>
+          <Route path="/debate" element={<Debate />}></Route>
+          <Route path="/search" element={<Search />}></Route>
           <Route path="/summary" element={<Summary />}></Route>
         </Route>
-        <Route path="/community" element={<Landing />}></Route>
-        <Route path="/debate" element={<Landing />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
-        {/* <Route path="/search" element={<Search />}></Route> */}
         <Route path="/user/:user_id" element={<UserProfile />}></Route>
       </Route>
       <Route element={<ContentMainLayout></ContentMainLayout>}></Route>

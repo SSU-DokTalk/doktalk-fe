@@ -18,10 +18,12 @@ import {
 
 function Profile({
   userProfile,
+  setUserProfile = undefined,
   currentTab = undefined,
   setCurrentTab = undefined,
 }: {
   userProfile: UserType;
+  setUserProfile?: Dispatch<SetStateAction<UserType>>;
   currentTab?: MyTabsCandidate | UserTabsCandidate;
   setCurrentTab?: Dispatch<SetStateAction<MyTabsCandidate | UserTabsCandidate>>;
 }) {
@@ -34,6 +36,7 @@ function Profile({
   const [showFriendsModal, setShowFriendsModal] = useState(false);
   const [showEditProfileModal, setShowEditProfileModal] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
+  const [didEdit, setDidEdit] = useState(false);
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
 
@@ -54,7 +57,19 @@ function Profile({
     } else {
       setTabs(UserTabs);
     }
-  }, [user.id, userProfile.id]);
+    if (didEdit && user.id != 0 && userProfile.id == user.id) {
+      axios.get(`/api/user/me`).then(
+        (res) => {
+          let { data } = res;
+          setDidEdit(false);
+          setUserProfile?.(data);
+        },
+        () => {
+          setDidEdit(false);
+        }
+      );
+    }
+  }, [user.id, userProfile.id, didEdit]);
 
   const follow = () => {
     axios.post(`/api/user/follow/${userProfile.id}`).then(
@@ -90,6 +105,7 @@ function Profile({
       <EditProfileModal
         showModal={showEditProfileModal}
         setShowModal={setShowEditProfileModal}
+        setDidEdit={setDidEdit}
       />
       <div className="pre-offset" />
       <div className="profile-container">

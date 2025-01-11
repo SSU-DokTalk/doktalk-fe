@@ -10,6 +10,12 @@ function BasicLayout() {
     >
       <Topnav />
       <Outlet />
+      <div
+        className="footer"
+        style={{
+          height: "70px",
+        }}
+      />
     </div>
   );
 }

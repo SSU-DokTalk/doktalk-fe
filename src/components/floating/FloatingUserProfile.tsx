@@ -2,7 +2,7 @@ import Accordion from "react-bootstrap/Accordion";
 import ProfileIcon from "@/components/base/ProfileIcon";
 import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import Image from "../base/Image";
 import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import axios from "axios";
@@ -20,6 +20,7 @@ function FloatingUserProfile({
   setIsLibraryUpdated: Dispatch<SetStateAction<boolean>>;
 }) {
   const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
 
   const [userInfo, setUserInfo] = useState<{
     follower_num: number;
@@ -31,9 +32,7 @@ function FloatingUserProfile({
   const [books, setBooks] = useState<BookType[]>([]);
 
   useEffect(() => {
-    console.log("hi");
-    if (isUserUpdated && user && user.id != 0) {
-      console.log("hi2");
+    if (isUserUpdated && user.id != 0) {
       axios.get("/api/user/me").then(
         async (res) => {
           let { data }: { data: UserType } = res;
@@ -50,8 +49,7 @@ function FloatingUserProfile({
         }
       );
     }
-    if (isLibraryUpdated && user && user.id != 0) {
-      console.log("hi3");
+    if (isLibraryUpdated && user.id != 0) {
       axios
         .get(`/api/user/${user.id}/mybooks`, {
           params: {
@@ -74,10 +72,13 @@ function FloatingUserProfile({
 
   return (
     <div id="floating-user-profile">
-      <div className="profile-info-container">
+      <div
+        className="profile-info-container"
+        onClick={() => navigate(user.id == 0 ? "/login" : "/mypage")}
+      >
         <div className="profile-info">
-          <ProfileIcon src={user.profile} size={50} />
-          <div className="user-name">{user.name}</div>
+          <ProfileIcon profile={user.profile} size={50} />
+          <div className="user-name">{user.name ?? "로그인"}</div>
         </div>
       </div>
       <div className="follow-info">

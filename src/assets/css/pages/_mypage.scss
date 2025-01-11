@@ -2,18 +2,18 @@
   .content-container {
     display: flex;
     .content-left-margin {
-      flex: 1;
+      width: 25%;
     }
     .content {
-      flex: 2;
+      width: 50%;
       #write-post-card,
       #write-summary-card,
       #write-debate-card {
-        margin: 15px 0 10px;
+        margin-bottom: 10px;
       }
     }
     .content-right-margin {
-      flex: 1;
+      width: 25%;
     }
   }
 }

@@ -63,7 +63,7 @@ function SummaryCard({
 
   return (
     <div id="summary-card">
-      <div className="summary-image-container">
+      <div className="image-container">
         <Image
           src={summary.book.image}
           alt="summary image"
@@ -71,13 +71,13 @@ function SummaryCard({
           height="142px"
         />
       </div>
-      <div className="summary-container">
+      <div className="item-container">
         <div
-          className="summary-content-container"
+          className="item-content-container"
           onClick={() => navigate(`/summary/${summary.id}`)}
         >
           <div className="title">{summary.title}</div>
-          <pre className="content">{summary.free_content}</pre>
+          <div className="content">{summary.free_content}</div>
         </div>
         <div className="info-container">
           <div className="user-info">

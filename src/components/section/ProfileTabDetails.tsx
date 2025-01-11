@@ -118,7 +118,7 @@ function ProfileTabDetails({
       {userProfile && userProfile?.id != 0 ? (
         currentTab === "/post" ? (
           <div className="post-tab">
-            {user && user.id != 0 ? (
+            {user.id != 0 ? (
               userProfile.id == user.id ? (
                 <WritePostCard setDidPost={setDidPost} />
               ) : null
@@ -158,7 +158,7 @@ function ProfileTabDetails({
           </div>
         ) : userProfile && currentTab === "/summary" ? (
           <div className="summary-tab">
-            {user && user.id != 0 ? (
+            {user.id != 0 ? (
               userProfile.id == user.id ? (
                 <WriteSummaryCard />
               ) : null
@@ -259,7 +259,7 @@ function ProfileTabDetails({
           </div>
         ) : userProfile && currentTab === "/debate" ? (
           <div className="debate-tab">
-            {user && user.id != 0 ? (
+            {user.id != 0 ? (
               userProfile.id == user.id ? (
                 <WriteDebateCard />
               ) : null

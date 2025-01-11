@@ -6,7 +6,7 @@ export type BasicUserType = {
   role: "USER" | "ADMIN";
 };
 
-export interface UserType {
+export type UserType = {
   id: number;
   email: string;
   profile?: string;
@@ -21,9 +21,9 @@ export interface UserType {
   updated: Date;
   is_deleted: boolean;
   deleted_at?: Date;
-}
+};
 
-export interface BookAPIType {
+export type BookAPIType = {
   title: string;
   link?: string;
   image?: string;
@@ -33,9 +33,9 @@ export interface BookAPIType {
   pubdate: Date;
   isbn: number;
   description: string;
-}
+};
 
-export interface BookType {
+export type BookType = {
   isbn: number;
   title: string;
   image?: string;
@@ -43,9 +43,9 @@ export interface BookType {
   publisher: string;
   pubdate: Date;
   description: string;
-}
+};
 
-export interface PostType {
+export type PostType = {
   id: number;
   user_id: number;
   user: BasicUserType;
@@ -56,9 +56,9 @@ export interface PostType {
   comments_num: number;
   created: Date;
   updated: Date;
-}
+};
 
-export interface SummaryType {
+export type SummaryType = {
   id: number;
   user_id: number;
   user: BasicUserType;
@@ -73,9 +73,9 @@ export interface SummaryType {
   comments_num: number;
   created: Date;
   updated: Date;
-}
+};
 
-export interface DebateType {
+export type DebateType = {
   id: number;
   user_id: number;
   user: BasicUserType;
@@ -91,9 +91,9 @@ export interface DebateType {
   created: Date;
   updated: Date;
   files?: string[];
-}
+};
 
-export interface MyBookType {
+export type MyBookType = {
   id: number;
   user_id: number;
   user: BasicUserType;
@@ -101,7 +101,7 @@ export interface MyBookType {
   book: BookType;
   created: Date;
   updated: Date;
-}
+};
 
 export type FollowType = {
   created: Date;
@@ -111,7 +111,7 @@ export type FollowType = {
   following_id: number;
 };
 
-export interface PaymentType {
+export type PaymentType = {
   id: number;
   user_id: number;
   user: BasicUserType;
@@ -124,4 +124,4 @@ export interface PaymentType {
   updated: Date;
   is_deleted: boolean;
   deleted_at?: Date;
-}
+};

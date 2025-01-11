@@ -1,5 +1,3 @@
-import { UserType } from "./data";
-
 export type LinkItemType = {
   title: string;
   url: string;
@@ -8,26 +6,6 @@ export type LinkItemType = {
 export type PreviewType = {
   url: string;
   filename: string;
-};
-
-export type BookType = {
-  title: string;
-  imgSrc: string;
-  author: string;
-  href: string;
-};
-
-export type CommentType = {
-  content: string;
-  createdAt: string;
-  user: UserType;
-};
-
-export type SidebarType = {
-  user?: UserType;
-  books?: BookType[];
-  follwers?: number | null;
-  following?: number | null;
 };
 
 export type RegisterType = {

@@ -26,13 +26,9 @@ function Landing() {
     <div id="landing-page">
       <div className="post-container">
         <div className="post-title">게시글</div>
-        {user && user.id != 0 ? (
-          user.id == user.id ? (
-            <WritePostCard setDidPost={setDidPost} />
-          ) : null
-        ) : null}
+        {user.id != 0 ? <WritePostCard setDidPost={setDidPost} /> : null}
         <InfiniteScroll
-          api={`user/${user.id}/posts`}
+          api={`post/recent`}
           likes_api={`posts/like`}
           setItems={setPosts}
           page={postPage}
@@ -43,7 +39,6 @@ function Landing() {
           setLikes={setPostLikes}
           hasNoItem={posts.length === 0}
           hasNoItemMessage="아직 작성한 게시글이 없습니다"
-          condition={user && user.id != 0}
           refreshCondition={didPost}
           dependency={[didPost]}
           afterFetchSuccess={async () => {
@@ -67,7 +62,7 @@ function Landing() {
       <div className="summary-container">
         <div className="summary-section-title">인기 요약</div>
         <InfiniteScroll
-          api={`user/${user.id}/summaries`}
+          api={`summary/recent`}
           likes_api={`summarys/like`}
           setItems={setSummaries}
           page={summaryPage}
@@ -78,7 +73,6 @@ function Landing() {
           setLikes={setSummaryLikes}
           hasNoItem={summaries.length === 0}
           hasNoItemMessage="아직 작성한 요약이 없습니다"
-          condition={user && user.id != 0}
         >
           {summaries.map((summary, index) => (
             <PopularSummaryCard

@@ -1,10 +1,10 @@
 import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 
-import write from "@/assets/images/write.svg";
 import ProfileIcon from "@/components/base/ProfileIcon";
 import { Dispatch, SetStateAction, useState } from "react";
 import WritePostModal from "../modal/WritePostModal";
+import WriteIcon from "@/assets/images/WriteIcon";
 
 function WritePostCard({
   setDidPost = undefined,
@@ -29,7 +29,7 @@ function WritePostCard({
         }}
       >
         <div className="write-input">게시글을 작성해보세요!</div>
-        <img src={write} alt="" className="write-icon" width={20} />
+        <WriteIcon className="write-icon" width={20} fill={"#666565"} />
       </div>
     </div>
   );

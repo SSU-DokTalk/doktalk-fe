@@ -15,7 +15,7 @@ function MyPage() {
   const [currentTab, setCurrentTab] = useState<MyTabsCandidate>("/post");
 
   useEffect(() => {
-    if (user && user.id != undefined && user.id != 0) {
+    if (user.id != 0) {
       axios
         .get("/api/user/me")
         .then((res) => {
@@ -31,6 +31,7 @@ function MyPage() {
     <div id="mypage">
       <Profile
         userProfile={userProfile}
+        setUserProfile={setUserProfile}
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
       />

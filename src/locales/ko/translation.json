@@ -4,7 +4,8 @@
       "main-page": "메인 페이지",
       "debate": "독서 토론",
       "summary": "도서 요약",
-      "search": {
+      "search": "도서 검색",
+      "search-bar": {
         "placeholder": "관심있는 도서를 검색하세요!"
       },
       "user": {

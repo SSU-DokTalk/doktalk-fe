@@ -2,6 +2,8 @@ import axios from "axios";
 import Spinner from "react-bootstrap/Spinner";
 import { useEffect, useRef, useState } from "react";
 import NoItem from "@/assets/images/no-item.svg";
+import { selectUser } from "@/stores/user";
+import { useAppSelector } from "@/stores/hooks";
 
 /**
  * 무한 스크롤
@@ -78,6 +80,7 @@ function InfiniteScroll({
   const [inherentPage, setInherentPage] = useState<number>(1);
 
   const elementRef = useRef<HTMLDivElement>(null);
+  const user = useAppSelector(selectUser);
 
   const fetchMoreItems = async () => {
     if (beforeFetch) await beforeFetch();
@@ -103,7 +106,7 @@ function InfiniteScroll({
             } else {
               await (setHasMore ?? setInherentHasMore)(false);
             }
-            if (likes_api && likes && setLikes) {
+            if (likes_api && likes && setLikes && user.id != 0) {
               await axios
                 .get(
                   `/api/${likes_api}?${items
@@ -121,6 +124,11 @@ function InfiniteScroll({
                     ]);
                   }
                 );
+            } else {
+              setLikes?.((prvLikes) => [
+                ...prvLikes,
+                ...new Array(items.length).fill(false),
+              ]);
             }
             if (afterFetchSuccess) await afterFetchSuccess();
           },
@@ -162,13 +170,22 @@ function InfiniteScroll({
     <>
       {children}
       {(hasMore ?? inherentHasMore) && (
-        <Spinner
-          ref={elementRef}
-          animation="border"
-          className="loading-spinner"
+        <div
+          style={{
+            display: "flex",
+            justifyContent: "center",
+            marginTop: "20px",
+            marginBottom: "20px",
+          }}
         >
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+          <Spinner
+            ref={elementRef}
+            animation="border"
+            className="loading-spinner"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </Spinner>
+        </div>
       )}
       {!(hasMore ?? inherentHasMore) &&
         hasNoItem &&

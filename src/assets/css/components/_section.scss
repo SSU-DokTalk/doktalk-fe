@@ -5,13 +5,13 @@
   border-bottom: 1px solid v.$brand-color4;
 
   .pre-offset {
-    flex: 1;
+    width: 20%;
   }
   .post-offset {
-    flex: 1;
+    width: 20%;
   }
   .profile-container {
-    flex: 4;
+    width: 60%;
     .upper-container {
       margin-top: 35px;
       .profile-image-container {
@@ -108,8 +108,10 @@
     text-align: center;
   }
   .post-tab {
+    margin-top: 20px;
   }
   .summary-tab {
+    margin-top: 20px;
   }
   .library-tab {
     .currently-reading-header {
@@ -163,6 +165,7 @@
     }
   }
   .debate-tab {
+    margin-top: 20px;
   }
   .payment-tab {
     .select-month-container {
@@ -191,7 +194,6 @@
           justify-content: center;
           align-items: center;
           background-color: white;
-          // z-index: 1;
         }
         .left {
           left: 0;
@@ -231,9 +233,8 @@
 }
 
 #landing-page-upper-container {
-  height: 380px;
+  height: 330px;
   background-color: v.$brand-color3;
-  // padding-left: 280px;
   padding-top: 30px;
 
   .container-title {
@@ -248,10 +249,6 @@
     }
   }
   .container-contents {
-    display: flex;
-    width: 950px;
-    #recommend-debate-card {
-      margin-right: 25px;
-    }
+    width: 70%;
   }
 }

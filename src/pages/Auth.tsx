@@ -27,8 +27,12 @@ function Auth() {
           name,
           role,
           profile,
-        }: { id: number; name: string; profile: string; role: string } =
-          res.data;
+        }: {
+          id: number;
+          name: string;
+          profile: string;
+          role: "USER" | "ADMIN";
+        } = res.data;
         const token = res.headers.authorization;
 
         axios.defaults.headers.common["Authorization"] = token;
