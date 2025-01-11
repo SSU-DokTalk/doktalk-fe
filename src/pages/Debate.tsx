@@ -4,7 +4,7 @@ import Carousel from "@/components/carousel/Carousel";
 import { DebateType, SummaryType } from "@/types/data";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import IonIcon from "@reacticons/ionicons";
 import WriteIcon from "@/assets/images/WriteIcon";
@@ -63,6 +63,12 @@ function Debate() {
   const [search, setSearch] = useState<string>("");
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
+
+  useEffect(() => {
+    if (popularDebates.length === 0) {
+      setPopularDebates(DUMMY_DEBATES);
+    }
+  });
 
   return (
     <div id="debate-page">

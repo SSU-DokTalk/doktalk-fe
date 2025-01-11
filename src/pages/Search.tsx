@@ -3,7 +3,7 @@ import BookCard from "@/components/card/BookCard";
 import { BookType } from "@/types/data";
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 const sortBys: {
   name: string;
@@ -22,6 +22,12 @@ const sortBys: {
 function Search() {
   const [books, setBooks] = useState<BookType[]>(DUMMY_BOOKS);
   const [search, setSearch] = useState<string>("");
+
+  useEffect(() => {
+    if (books.length == 0) {
+      setBooks(DUMMY_BOOKS);
+    }
+  });
 
   return (
     <div id="search-page">

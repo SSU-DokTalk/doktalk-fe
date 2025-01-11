@@ -279,7 +279,13 @@ function ProfileTabDetails({
               condition={userProfile && userProfile.id != 0}
             >
               {debates.map((debate, index) => (
-                <DebateCard key={"debate" + index} debate={debate} />
+                <DebateCard
+                  key={"debate" + index}
+                  idx={index}
+                  hasLiked={debateLikes[index]}
+                  setHasLiked={setDebateLikes}
+                  debate={debate}
+                />
               ))}
             </InfiniteScroll>
           </div>
