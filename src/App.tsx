@@ -24,6 +24,8 @@ import Debate from "./pages/Debate";
 import Search from "./pages/Search";
 import { Spinner } from "react-bootstrap";
 import i18n from "./locales/i18n";
+import CreateDebate from "./pages/CreateDebate";
+import CreateSummary from "./pages/CreateSummary";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -127,10 +129,11 @@ function App() {
           <Route path="/search" element={<Search />}></Route>
           <Route path="/summary" element={<Summary />}></Route>
         </Route>
+        <Route path="/summary/create" element={<CreateSummary />}></Route>
+        <Route path="/debate/create" element={<CreateDebate />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/user/:user_id" element={<UserProfile />}></Route>
       </Route>
-      <Route element={<ContentMainLayout></ContentMainLayout>}></Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>
       <Route path="/auth/:provider" element={<Auth />}></Route>

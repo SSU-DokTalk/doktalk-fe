@@ -12,6 +12,7 @@ import CarouselSummaryCard from "@/components/card/CarouselSummaryCard";
 import PopularDebateCard from "@/components/card/PopularDebateCard";
 import WriteIcon from "@/assets/images/WriteIcon";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const searchBys: {
   name: string;
@@ -60,6 +61,7 @@ function Summary() {
   const [sortByIdx, setSortByIdx] = useState<number>(0);
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`summary`).then(async (res) => {
@@ -136,7 +138,7 @@ function Summary() {
                 );
               })}
             </div>
-            <button>
+            <button onClick={() => navigate("/summary/create")}>
               <span>{t("page.summary.button.write")}</span>
               <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
             </button>

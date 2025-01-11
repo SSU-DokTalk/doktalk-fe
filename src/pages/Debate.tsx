@@ -12,6 +12,7 @@ import DebateCard from "@/components/card/DebateCard";
 import InfiniteScroll from "@/components/base/InfiniteScroll";
 import PopularSummaryCard from "@/components/card/PopularSummaryCard";
 import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const searchBys: {
   name: string;
@@ -66,6 +67,7 @@ function Debate() {
   const [sortByIdx, setSortByIdx] = useState<number>(0);
 
   const { t } = useTranslation();
+  const navigate = useNavigate();
 
   useEffect(() => {
     if (recommendDebates.length === 0) {
@@ -144,7 +146,7 @@ function Debate() {
                 );
               })}
             </div>
-            <button>
+            <button onClick={() => navigate("/debate/create")}>
               <span>{t("page.debate.button.create")}</span>
               <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
             </button>
