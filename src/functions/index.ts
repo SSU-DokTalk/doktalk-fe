@@ -55,3 +55,7 @@ export function getFileTypeFromUrl(url: string): string {
   let urlSplit = url.split(".");
   return urlSplit.length == 1 ? "" : urlSplit[urlSplit.length - 1];
 }
+
+export function range(size: number, start = 0, step = 1): number[] {
+  return [...Array(size).keys()].map((key) => key * step + start);
+}

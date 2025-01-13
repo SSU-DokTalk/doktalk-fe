@@ -70,15 +70,25 @@
             display: flex;
             align-items: center;
             cursor: pointer;
-
-            .sort-by-icon {
+            .react-datepicker-wrapper {
               display: flex;
               align-items: center;
-              margin-left: 5px;
+              .custom-input {
+                display: flex;
+                align-items: center;
+
+                .sort-by-icon {
+                  display: flex;
+                  align-items: center;
+                  margin: 0 5px;
+                }
+                .date-text {
+                }
+              }
             }
           }
         }
-        button {
+        .create-debate-button {
           height: 38px;
           background-color: v.$brand-color1;
           color: white;

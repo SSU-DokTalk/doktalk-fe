@@ -4,7 +4,7 @@ import Carousel from "@/components/carousel/Carousel";
 import { DebateType, SummaryType } from "@/types/data";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
+import { forwardRef, useEffect, useRef, useState } from "react";
 import { Dropdown } from "react-bootstrap";
 import IonIcon from "@reacticons/ionicons";
 import WriteIcon from "@/assets/images/WriteIcon";
@@ -17,7 +17,10 @@ import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 import axios from "axios";
 import useDebounce from "@/hooks/useDebounce";
-import { getDate } from "@/functions";
+import { getDate, range } from "@/functions";
+import DatePicker from "react-datepicker";
+import "react-datepicker/dist/react-datepicker.css";
+import { getMonth, getYear } from "date-fns";
 
 const searchBys: {
   name: string;
@@ -36,7 +39,6 @@ const searchBys: {
 const sortBys: {
   name: string;
   value: "latest" | "popular" | "from";
-  element?: JSX.Element;
 }[] = [
   {
     name: "page.debate.sort.latest",
@@ -49,8 +51,23 @@ const sortBys: {
   {
     name: "page.debate.sort.from",
     value: "from",
-    element: <IonIcon name="calendar-outline" className="sort-by-icon" />,
   },
+];
+
+const years = range(10 + getYear(new Date()) - 2025, 2025, 1);
+const months = [
+  "function.time.months.1",
+  "function.time.months.2",
+  "function.time.months.3",
+  "function.time.months.4",
+  "function.time.months.5",
+  "function.time.months.6",
+  "function.time.months.7",
+  "function.time.months.8",
+  "function.time.months.9",
+  "function.time.months.10",
+  "function.time.months.11",
+  "function.time.months.12",
 ];
 
 function Debate() {
@@ -69,27 +86,38 @@ function Debate() {
   const [search, setSearch] = useState<string>("");
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
-  const [from, ...__] = useState<Date>(new Date());
+  const [from, setFrom] = useState<Date>(new Date());
   const debouncedSearch = useDebounce(search, 500);
   const prevValueRef = useRef<{
     debouncedSearch: string;
     searchByIdx: number;
     sortByIdx: number;
-  }>({ debouncedSearch: "", searchByIdx: 0, sortByIdx: 0 });
+    from: Date;
+  }>({ debouncedSearch: "", searchByIdx: 0, sortByIdx: 0, from: new Date() });
 
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const CustomDatePicker = forwardRef<any, any>(
+    ({ value, onClick, className }, ref) => (
+      <div className={className} onClick={onClick} ref={ref}>
+        <IonIcon name="calendar-outline" className="sort-by-icon" />
+        <span className="date-text">{value}</span>
+      </div>
+    )
+  );
+
   useEffect(() => {
     if (
       prevValueRef.current.debouncedSearch === debouncedSearch &&
       prevValueRef.current.searchByIdx === searchByIdx &&
-      prevValueRef.current.sortByIdx === sortByIdx
+      prevValueRef.current.sortByIdx === sortByIdx &&
+      prevValueRef.current.from === from
     )
       return;
-    prevValueRef.current = { debouncedSearch, searchByIdx, sortByIdx };
-  }, [debouncedSearch, searchByIdx, sortByIdx]);
+    prevValueRef.current = { debouncedSearch, searchByIdx, sortByIdx, from };
+  }, [debouncedSearch, searchByIdx, sortByIdx, from]);
 
   useEffect(() => {
     if (popularSummaries.length === 0 && !isPopularSummaryLoaded) {
@@ -189,12 +217,83 @@ function Debate() {
                     onClick={() => setSortByIdx(index)}
                   >
                     {t(sortBy.name)}
-                    {sortBy.element ?? null}
+                    {sortBy.value == "from" ? (
+                      <DatePicker
+                        selected={from}
+                        onChange={(date) => setFrom(date ?? new Date())}
+                        dateFormat="yyyy/MM/dd"
+                        minDate={new Date("2025-01-01")}
+                        maxDate={new Date(`${getYear(new Date()) + 10}-12-31`)}
+                        customInput={
+                          <CustomDatePicker className="custom-input" />
+                        }
+                        showDisabledMonthNavigation
+                        renderCustomHeader={({
+                          date,
+                          changeYear,
+                          changeMonth,
+                          decreaseMonth,
+                          increaseMonth,
+                          prevMonthButtonDisabled,
+                          nextMonthButtonDisabled,
+                        }) => (
+                          <div
+                            style={{
+                              margin: 10,
+                              display: "flex",
+                              justifyContent: "center",
+                            }}
+                          >
+                            <button
+                              onClick={decreaseMonth}
+                              disabled={prevMonthButtonDisabled}
+                            >
+                              {"<"}
+                            </button>
+                            <select
+                              value={getYear(date)}
+                              onChange={({ target: { value } }) =>
+                                changeYear(parseInt(value))
+                              }
+                            >
+                              {years.map((option) => (
+                                <option key={option} value={option}>
+                                  {option}
+                                </option>
+                              ))}
+                            </select>
+
+                            <select
+                              value={months[getMonth(date)]}
+                              onChange={({ target: { value } }) =>
+                                changeMonth(months.indexOf(value))
+                              }
+                            >
+                              {months.map((option) => (
+                                <option key={option} value={option}>
+                                  {t(option)}
+                                </option>
+                              ))}
+                            </select>
+
+                            <button
+                              onClick={increaseMonth}
+                              disabled={nextMonthButtonDisabled}
+                            >
+                              {">"}
+                            </button>
+                          </div>
+                        )}
+                      />
+                    ) : null}
                   </div>
                 );
               })}
             </div>
-            <button onClick={() => navigate("/debate/create")}>
+            <button
+              className="create-debate-button"
+              onClick={() => navigate("/debate/create")}
+            >
               <span>{t("page.debate.button.create")}</span>
               <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
             </button>
@@ -219,7 +318,8 @@ function Debate() {
               refreshCondition={
                 debouncedSearch !== prevValueRef.current.debouncedSearch ||
                 searchByIdx !== prevValueRef.current.searchByIdx ||
-                sortByIdx !== prevValueRef.current.sortByIdx
+                sortByIdx !== prevValueRef.current.sortByIdx ||
+                from !== prevValueRef.current.from
               }
               dependency={[prevValueRef]}
             >
