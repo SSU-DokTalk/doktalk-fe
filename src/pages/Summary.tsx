@@ -1,30 +1,33 @@
 import Carousel from "@/components/carousel/Carousel";
 import InfiniteScroll from "@/components/base/InfiniteScroll";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { DebateType, SummaryType } from "@/types/data";
 import SummaryCard from "@/components/card/SummaryCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
-import { DUMMY_DEBATES, DUMMY_SUMMARIES } from "@/common/dummy_data";
+import { DUMMY_SUMMARIES } from "@/common/dummy_data";
 import CarouselSummaryCard from "@/components/card/CarouselSummaryCard";
 import PopularDebateCard from "@/components/card/PopularDebateCard";
 import WriteIcon from "@/assets/images/WriteIcon";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "@/stores/hooks";
+import { selectUser } from "@/stores/user";
+import useDebounce from "@/hooks/useDebounce";
 
 const searchBys: {
   name: string;
-  value: "bkt" | "smt";
+  value: "bt" | "it";
 }[] = [
   {
     name: "page.summary.search.book-title",
-    value: "bkt",
+    value: "bt",
   },
   {
     name: "page.summary.search.item-title",
-    value: "smt",
+    value: "it",
   },
 ];
 
@@ -43,7 +46,7 @@ const sortBys: {
 ];
 
 function Summary() {
-  const [popularSummaries, setPopularSummaries] =
+  const [recommendSummaries, setRecommendSummaries] =
     useState<SummaryType[]>(DUMMY_SUMMARIES);
 
   const [summaries, setSummaries] = useState<SummaryType[]>([]);
@@ -51,26 +54,66 @@ function Summary() {
   const [summaryHasMore, setSummaryHasMore] = useState<boolean>(true);
   const [summaryLikes, setSummaryLikes] = useState<boolean[]>([]);
 
-  const [debates, setDebates] = useState<DebateType[]>(DUMMY_DEBATES);
-  const [debatePage, setDebatePage] = useState<number>(1);
-  const [debateHasMore, setDebateHasMore] = useState<boolean>(true);
-  const [debateLikes, setDebateLikes] = useState<boolean[]>([]);
+  const [popularDebates, setPopularDebates] = useState<DebateType[]>([]);
+  const [popularDebateLikes, setPopularDebateLikes] = useState<boolean[]>([]);
+  const [isPopularDebateLoaded, setIsPopularDebateLoaded] =
+    useState<boolean>(false);
 
   const [search, setSearch] = useState<string>("");
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
+  const debouncedSearch = useDebounce(search, 500);
+  const prevValueRef = useRef<{
+    debouncedSearch: string;
+    searchByIdx: number;
+    sortByIdx: number;
+  }>({ debouncedSearch: "", searchByIdx: 0, sortByIdx: 0 });
 
+  const user = useAppSelector(selectUser);
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   useEffect(() => {
-    axios.get(`summary`).then(async (res) => {
-      let { items }: { items: SummaryType[] } = res.data;
-      if (!items || items.length === 0) return;
-      setSummaries(items);
-      setPopularSummaries(items);
-    });
-  }, []);
+    if (
+      prevValueRef.current.debouncedSearch === debouncedSearch &&
+      prevValueRef.current.searchByIdx === searchByIdx &&
+      prevValueRef.current.sortByIdx === sortByIdx
+    )
+      return;
+    prevValueRef.current = { debouncedSearch, searchByIdx, sortByIdx };
+  }, [debouncedSearch, searchByIdx, sortByIdx]);
+
+  useEffect(() => {
+    if (popularDebates.length === 0 && !isPopularDebateLoaded) {
+      axios
+        .get(`/api/debate/popular`)
+        .then(async (res) => {
+          let { data: items }: { data: DebateType[] } = res;
+          setPopularDebates(items);
+
+          if (user.id == 0 || !items || items.length === 0) return;
+
+          await axios
+            .get(
+              `/api/debates/like?${items
+                .map((item) => "ids=" + item.id)
+                .join("&")}`
+            )
+            .then(
+              (res) => {
+                let { data: itemLikes }: { data: boolean[] } = res;
+                setPopularDebateLikes((prev) => [...prev, ...itemLikes]);
+              },
+              () => {
+                setPopularDebateLikes(new Array(items.length).fill(false));
+              }
+            );
+        })
+        .finally(() => {
+          setIsPopularDebateLoaded(true);
+        });
+    }
+  });
 
   return (
     <div id="summary-page">
@@ -78,8 +121,12 @@ function Summary() {
         <div className="popular-content-title">
           {t("page.summary.title.recommend")}
         </div>
-        <Carousel items={popularSummaries} size={3} className="popular-content">
-          {popularSummaries.map((summary, index) => (
+        <Carousel
+          items={recommendSummaries}
+          size={3}
+          className="popular-content"
+        >
+          {recommendSummaries.map((summary, index) => (
             <CarouselSummaryCard
               key={"popular-summary" + index}
               summary={summary}
@@ -145,7 +192,7 @@ function Summary() {
           </div>
           <div className="content-container">
             <InfiniteScroll
-              api={`summary?search=${search}&searchby=${searchBys[searchByIdx].value}&sort=${sortBys[sortByIdx].value}`}
+              api={`summary?search=${debouncedSearch}&searchby=${searchBys[searchByIdx].value}&sortby=${sortBys[sortByIdx].value}`}
               likes_api={`summarys/like`}
               setItems={setSummaries}
               page={summaryPage}
@@ -156,6 +203,12 @@ function Summary() {
               setLikes={setSummaryLikes}
               hasNoItem={summaries.length === 0}
               hasNoItemMessage={t("page.summary.item.no-summary-item")}
+              refreshCondition={
+                debouncedSearch !== prevValueRef.current.debouncedSearch ||
+                searchByIdx !== prevValueRef.current.searchByIdx ||
+                sortByIdx !== prevValueRef.current.sortByIdx
+              }
+              dependency={[prevValueRef]}
             >
               {summaries.map((summary, index) => (
                 <SummaryCard
@@ -174,23 +227,15 @@ function Summary() {
             {t("page.summary.title.popular")}
           </div>
           <div className="right-container-content">
-            <InfiniteScroll
-              api={`debate/popular`}
-              likes_api={`debates/like`}
-              setItems={setDebates}
-              page={debatePage}
-              setPage={setDebatePage}
-              hasMore={debateHasMore}
-              setHasMore={setDebateHasMore}
-              likes={debateLikes}
-              setLikes={setDebateLikes}
-              hasNoItem={debates.length === 0}
-              hasNoItemMessage={t("page.summary.item.no-debate-item")}
-            >
-              {debates.map((debate, index) => (
-                <PopularDebateCard key={"debate" + index} debate={debate} />
-              ))}
-            </InfiniteScroll>
+            {popularDebates.map((debate, index) => (
+              <PopularDebateCard
+                key={"debate" + index}
+                idx={index}
+                debate={debate}
+                hasLiked={popularDebateLikes[index]}
+                setHasLiked={setPopularDebateLikes}
+              />
+            ))}
           </div>
         </div>
       </div>

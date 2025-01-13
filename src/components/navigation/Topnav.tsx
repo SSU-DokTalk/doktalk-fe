@@ -6,7 +6,7 @@ import { useTranslation } from "react-i18next";
 import i18n from "@/locales/i18n";
 
 import logo from "@/assets/images/logo.svg";
-import { ButtonProps, Dropdown } from "react-bootstrap";
+import { Dropdown } from "react-bootstrap";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { faBell } from "@fortawesome/free-regular-svg-icons";
@@ -16,8 +16,8 @@ import { selectUser, unsetUser } from "@/stores/user";
 
 import { LinkItemType } from "@/types/components";
 import ProfileIcon from "../base/ProfileIcon";
-import kr from "@/assets/images/flags/kr.svg";
-import us from "@/assets/images/flags/us.svg";
+import KR from "@/assets/images/flags/kr.svg?react";
+import US from "@/assets/images/flags/us.svg?react";
 
 const navTabs: LinkItemType[] = [
   {
@@ -56,17 +56,17 @@ const dropdownItems: LinkItemType[] = [
 const languageDropdownItems: {
   name: string;
   value: string;
-  icon: string;
+  icon: any;
 }[] = [
   {
     name: "한국어",
     value: "kr",
-    icon: kr,
+    icon: <KR className="lang-menu-icon" />,
   },
   {
     name: "English",
     value: "us",
-    icon: us,
+    icon: <US className="lang-menu-icon" />,
   },
 ];
 
@@ -117,26 +117,24 @@ function Topnav() {
           <div className="user-container">
             <Dropdown className="language-dropdown">
               <Dropdown.Toggle
-                as={React.forwardRef<HTMLButtonElement, ButtonProps>(
+                as={React.forwardRef<HTMLDivElement, any>(
                   ({ onClick }, ref) => (
-                    <button
+                    <div
                       className="language-icon"
-                      style={{
-                        backgroundImage: `url(${
-                          (
-                            languageDropdownItems.find(
-                              (item) =>
-                                item.value == localStorage.getItem("lang")
-                            ) ?? languageDropdownItems[0]
-                          ).icon
-                        })`,
-                      }}
                       ref={ref}
                       onClick={(e) => {
                         e.preventDefault();
                         onClick?.(e);
                       }}
-                    />
+                    >
+                      {
+                        (
+                          languageDropdownItems.find(
+                            (item) => item.value == localStorage.getItem("lang")
+                          ) ?? languageDropdownItems[0]
+                        ).icon
+                      }
+                    </div>
                   )
                 )}
               />
@@ -147,12 +145,7 @@ function Topnav() {
                       onClick={() => changeLanguage(item)}
                       key={"lang" + idx}
                     >
-                      <button
-                        className="lang-menu-icon"
-                        style={{
-                          backgroundImage: `url(${item.icon})`,
-                        }}
-                      />
+                      {item.icon}
                       <div className="lang-menu-text">{item.name}</div>
                     </Dropdown.Item>
                   );

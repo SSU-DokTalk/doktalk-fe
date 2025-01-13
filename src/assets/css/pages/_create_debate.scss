@@ -1,37 +1,35 @@
-@use '../variables' as v;
+@use "../variables" as v;
 
-#create-summary-card {
+#create-debate-page {
   display: flex;
   flex-direction: column;
-  justify-content: center;
-  align-items: start;
-  width: 600px;
-  margin-left: auto;
-  margin-right: auto;
+  margin-left: 10%;
+  width: 60%;
   margin-top: 50px;
   margin-bottom: 50px;
 
-  .create-summary-title {
+  .create-debate-title {
     font-size: 25px;
     font-weight: 600;
     color: v.$brand-color1;
     margin-bottom: 20px;
   }
 
-  .create-summary-content {
+  .create-debate-content {
     display: flex;
     gap: 4px;
     flex-direction: column;
     justify-content: center;
     align-items: center;
     width: 100%;
+    font-size: 20px;
     font-weight: 400;
 
     .title-input {
       width: 100%;
-      border: 2px solid v.$brand-color4;
+      border: 1px solid v.$brand-color4;
       border-radius: 10px;
-      padding: 10px 10px 10px 20px;
+      padding: 8px 15px;
     }
 
     .row {
@@ -42,12 +40,12 @@
       gap: 4px;
 
       .left {
-        flex: calc(1/4);
+        flex: calc(1 / 4);
         text-align: center;
-        border: 2px solid v.$brand-color4;
         color: v.$brand-color1;
         border-radius: 10px;
         padding: 10px;
+        font-weight: 600;
       }
 
       .icon {
@@ -63,45 +61,9 @@
 
       .search {
         flex: 1;
-        border: 2px solid v.$brand-color4;
+        border: 1px solid v.$brand-color4;
         border-radius: 10px;
-        padding: 10px 10px 10px 20px;
-      }
-    }
-
-    .file {
-      display: flex;
-      justify-content: start;
-      position: relative;
-      align-items: center;
-      align-self: flex-start;
-      width: 28%;
-      height: 54px;
-      border: 2px solid v.$brand-color4;
-      border-radius: 10px;
-      padding: 10px 10px 10px 20px;
-
-      .left {
-        width: fit-content;
-        position: absolute;
-        left: 2;
-        text-align: center;
-        color: black;
-      }
-
-      input[type="file"] {
-        position: absolute;
-        width: 100%;
-        height: 100%;
-        top: 0;
-        left: 0;
-        opacity: 0;
-        cursor: pointer;
-      }
-
-      .icon {
-        margin-left: auto;
-        margin-right: 16px;
+        padding: 8px 15px;
       }
     }
 
@@ -113,10 +75,10 @@
     .content-input {
       width: 100%;
       height: 300px;
-      border: 2px solid v.$brand-color4;
+      border: 1px solid v.$brand-color4;
       border-radius: 10px;
       resize: none;
-      padding: 20px
+      padding: 20px;
     }
 
     .row-price {
@@ -139,17 +101,18 @@
       }
 
       .price {
-        flex: calc(1/4);
-        border: 2px solid v.$brand-color4;
+        flex: calc(1 / 4);
+        border: 1px solid v.$brand-color4;
         border-radius: 10px;
-        padding: 10px 10px 10px 20px;
+        padding: 8px 15px;
       }
 
       .left {
-        border: 2px solid v.$brand-color4;
+        border: 1px solid v.$brand-color4;
         color: v.$brand-color1;
         border-radius: 10px;
         padding: 10px;
+        font-weight: 600;
       }
     }
   }
@@ -161,17 +124,17 @@
     gap: 10px;
     margin-top: 20px;
     margin-left: auto;
-    
+
     .temp {
-      padding: 10px 20px;
+      padding: 8px 15px;
       background-color: white;
-      border: 2px solid v.$brand-color1;
+      border: 1px solid v.$brand-color1;
       color: v.$brand-color1;
       border-radius: 10px;
     }
 
     .complete {
-      padding: 10px 20px;
+      padding: 8px 15px;
       background-color: v.$brand-color1;
       color: white;
       border: none;

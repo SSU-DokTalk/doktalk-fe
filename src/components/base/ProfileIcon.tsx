@@ -14,6 +14,7 @@ function ProfileIcon({
       style={{
         width: `${size}px`,
         height: `${size}px`,
+        flexShrink: 0,
         borderRadius: "50%",
       }}
     >
@@ -21,6 +22,8 @@ function ProfileIcon({
         src={profile ?? userIcon}
         alt="Profile Icon"
         style={{
+          width: "100%",
+          height: "100%",
           borderRadius: "50%",
           objectFit: "cover",
           aspectRatio: 1,

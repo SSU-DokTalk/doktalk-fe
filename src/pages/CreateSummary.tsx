@@ -1,21 +1,20 @@
 import { useState } from "react";
-import "@/assets/css/components/_summary.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import UploadFiles from "@/components/base/UploadFiles";
+import IonIcon from "@reacticons/ionicons";
 
 function CreateSummary() {
   const [title, setTitle] = useState("");
   const [book, setBook] = useState("");
   const [category, setCategory] = useState("");
-  const [, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [content, setContent] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(5000);
 
   return (
-    <div id="create-summary-card">
-      <div className="create-summary-title">게시글 작성하기</div>
+    <div id="create-summary-page">
+      <div className="create-summary-title">요약 작성하기</div>
       <div className="create-summary-content">
         <input
           type="text"
@@ -61,15 +60,22 @@ function CreateSummary() {
           onChange={(e) => setContent(e.target.value)}
         ></textarea>
         <div className="row-price">
-          <button className="icon">
-            <FontAwesomeIcon icon={faInfoCircle} />
-          </button>
+          <IonIcon
+            name="information-circle-outline"
+            className="icon"
+            style={{
+              height: "30px",
+              width: "30px",
+            }}
+          />
           <div className="left">가격</div>
           <input
             type="number"
             placeholder="가격을 입력해주세요."
             className="price"
             value={price}
+            pattern="([0-9]+.{0,1}[0-9]*,{0,1})*[0-9]"
+            required
             onChange={(e) => setPrice(parseInt(e.target.value))}
           />
         </div>

@@ -94,6 +94,7 @@ function InfiniteScroll({
         })
         .then(
           async (res) => {
+            if (afterFetchSuccess) await afterFetchSuccess();
             let {
               items,
               page: pg,
@@ -106,31 +107,31 @@ function InfiniteScroll({
             } else {
               await (setHasMore ?? setInherentHasMore)(false);
             }
-            if (likes_api && likes && setLikes && user.id != 0) {
-              await axios
-                .get(
-                  `/api/${likes_api}?${items
-                    .map((item) => "ids=" + item.id)
-                    .join("&")}`
-                )
-                .then(
-                  (newLikes) => {
-                    setLikes((prvLikes) => [...prvLikes, ...newLikes.data]);
-                  },
-                  () => {
-                    setLikes((prvLikes) => [
-                      ...prvLikes,
-                      ...new Array(items.length).fill(false),
-                    ]);
-                  }
-                );
-            } else {
+            if (!items || items.length === 0) return;
+            if (!likes_api || user.id == 0 || !likes || !setLikes) {
               setLikes?.((prvLikes) => [
                 ...prvLikes,
                 ...new Array(items.length).fill(false),
               ]);
+              return;
             }
-            if (afterFetchSuccess) await afterFetchSuccess();
+            await axios
+              .get(
+                `/api/${likes_api}?${items
+                  .map((item) => "ids=" + item.id)
+                  .join("&")}`
+              )
+              .then(
+                (newLikes) => {
+                  setLikes((prvLikes) => [...prvLikes, ...newLikes.data]);
+                },
+                () => {
+                  setLikes((prvLikes) => [
+                    ...prvLikes,
+                    ...new Array(items.length).fill(false),
+                  ]);
+                }
+              );
           },
           async () => {
             await (setHasMore ?? setInherentHasMore)(false);
@@ -159,6 +160,7 @@ function InfiniteScroll({
     if (elementRef.current) {
       observer.observe(elementRef.current);
     }
+    console.log(JSON.stringify(dependency));
     return () => {
       if (elementRef.current) {
         observer.unobserve(elementRef.current);

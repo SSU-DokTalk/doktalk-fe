@@ -77,11 +77,16 @@
           .language-icon {
             width: 36px;
             height: 36px;
-            border: 1px solid variables.$brand-color3;
-            border-radius: 50%;
-            background-size: contain;
-            background-position: 50%;
-            background-repeat: no-repeat;
+            cursor: pointer;
+            .lang-menu-icon {
+              width: 36px;
+              height: 36px;
+              border: 1px solid variables.$brand-color3;
+              border-radius: 50%;
+              background-size: contain;
+              background-position: 50%;
+              background-repeat: no-repeat;
+            }
           }
           .dropdown-menu {
             .dropdown-item {

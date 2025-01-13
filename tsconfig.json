@@ -1,4 +1,8 @@
 {
+  "compilerOptions": {
+    "types": ["vite-plugin-svgr/client"]
+  },
+  "include": ["images.d.ts"],
   "files": [],
   "references": [
     { "path": "./tsconfig.app.json" },

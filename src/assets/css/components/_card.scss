@@ -294,7 +294,7 @@
     display: flex;
     margin-left: 25px;
     padding: 0 30px;
-    width: 100%;
+    width: calc(100% - 70px);
     height: 45px;
     background-color: #f3f4f7;
     border-radius: 25px;
@@ -393,6 +393,8 @@
       .like-container {
         display: flex;
         align-items: center;
+        margin-right: 50%;
+
         .like-icon {
           cursor: pointer;
         }
@@ -404,7 +406,6 @@
           font-weight: 400;
           font-size: 15px;
         }
-        margin-right: 50%;
       }
       .comment-container {
         display: flex;
@@ -483,7 +484,13 @@
         align-items: center;
         margin-right: 50%;
 
-        .like-count {
+        .like-icon {
+          cursor: pointer;
+        }
+        .liked {
+          color: #e03131;
+        }
+        .like-text {
           margin-left: 5px;
           font-weight: 400;
           font-size: 15px;
@@ -494,7 +501,7 @@
         display: flex;
         align-items: center;
 
-        .comment-count {
+        .comment-text {
           margin-left: 5px;
           font-weight: 400;
           font-size: 15px;

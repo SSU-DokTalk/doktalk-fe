@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 
 import PostCard from "@/components/card/PostCard";
 import InfiniteScroll from "@/components/base/InfiniteScroll";
@@ -8,6 +8,7 @@ import { selectUser } from "@/stores/user";
 import WritePostCard from "@/components/card/WritePostCard";
 import PopularSummaryCard from "../components/card/PopularSummaryCard";
 import { useTranslation } from "react-i18next";
+import axios from "axios";
 
 function Landing() {
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -16,13 +17,45 @@ function Landing() {
   const [didPost, setDidPost] = useState<boolean>(false);
   const [postLikes, setPostLikes] = useState<boolean[]>([]);
 
-  const [summaries, setSummaries] = useState<SummaryType[]>([]);
-  const [summaryPage, setSummaryPage] = useState<number>(1);
-  const [summaryHasMore, setSummaryHasMore] = useState<boolean>(true);
-  const [summaryLikes, setSummaryLikes] = useState<boolean[]>([]);
+  const [popularSummaries, setPopularSummaries] = useState<SummaryType[]>([]);
+  const [popularSummaryLikes, setPopularSummaryLikes] = useState<boolean[]>([]);
+  const [isPopularSummaryLoaded, setIsPopularSummaryLoaded] =
+    useState<boolean>(false);
 
-  const user = useAppSelector(selectUser);
   const { t } = useTranslation();
+  const user = useAppSelector(selectUser);
+
+  useEffect(() => {
+    if (popularSummaries.length === 0 && !isPopularSummaryLoaded) {
+      axios
+        .get(`/api/summary/popular`)
+        .then(async (res) => {
+          let { data: items }: { data: SummaryType[] } = res;
+          setPopularSummaries(items);
+
+          if (user.id == 0) return;
+
+          await axios
+            .get(
+              `/api/summarys/like?${items
+                .map((item) => "ids=" + item.id)
+                .join("&")}`
+            )
+            .then(
+              (res) => {
+                let { data: itemLikes }: { data: boolean[] } = res;
+                setPopularSummaryLikes((prev) => [...prev, ...itemLikes]);
+              },
+              () => {
+                setPopularSummaryLikes(new Array(items.length).fill(false));
+              }
+            );
+        })
+        .finally(() => {
+          setIsPopularSummaryLoaded(true);
+        });
+    }
+  });
 
   return (
     <div id="landing-page">
@@ -65,29 +98,15 @@ function Landing() {
         <div className="summary-section-title">
           {t("page.landing.title.popular-summary")}
         </div>
-        <InfiniteScroll
-          api={`summary/recent`}
-          likes_api={`summarys/like`}
-          setItems={setSummaries}
-          page={summaryPage}
-          setPage={setSummaryPage}
-          hasMore={summaryHasMore}
-          setHasMore={setSummaryHasMore}
-          likes={summaryLikes}
-          setLikes={setSummaryLikes}
-          hasNoItem={summaries.length === 0}
-          hasNoItemMessage={t("page.landing.item.no-summary-item")}
-        >
-          {summaries.map((summary, index) => (
-            <PopularSummaryCard
-              key={"popular-summary" + index}
-              idx={index}
-              summary={summary}
-              hasLiked={summaryLikes[index]}
-              setHasLiked={setSummaryLikes}
-            />
-          ))}
-        </InfiniteScroll>
+        {popularSummaries.map((summary, index) => (
+          <PopularSummaryCard
+            key={"popular-summary" + index}
+            idx={index}
+            summary={summary}
+            hasLiked={popularSummaryLikes[index]}
+            setHasLiked={setPopularSummaryLikes}
+          />
+        ))}
       </div>
     </div>
   );

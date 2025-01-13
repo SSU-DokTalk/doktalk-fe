@@ -51,6 +51,9 @@ function FloatingUserProfile({
         }
       );
     }
+  }, [user, isUserUpdated]);
+
+  useEffect(() => {
     if (isLibraryUpdated && user.id != 0) {
       axios
         .get(`/api/user/${user.id}/mybooks`, {
@@ -70,7 +73,7 @@ function FloatingUserProfile({
           }
         );
     }
-  }, [user, isUserUpdated, isLibraryUpdated]);
+  }, [user, isLibraryUpdated]);
 
   return (
     <div id="floating-user-profile">

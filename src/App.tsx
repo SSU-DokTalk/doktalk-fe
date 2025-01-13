@@ -128,9 +128,9 @@ function App() {
           <Route path="/debate" element={<Debate />}></Route>
           <Route path="/search" element={<Search />}></Route>
           <Route path="/summary" element={<Summary />}></Route>
+          <Route path="/summary/create" element={<CreateSummary />}></Route>
+          <Route path="/debate/create" element={<CreateDebate />}></Route>
         </Route>
-        <Route path="/summary/create" element={<CreateSummary />}></Route>
-        <Route path="/debate/create" element={<CreateDebate />}></Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/user/:user_id" element={<UserProfile />}></Route>
       </Route>

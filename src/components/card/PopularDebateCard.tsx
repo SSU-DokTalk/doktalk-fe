@@ -6,14 +6,59 @@ import {
   faComment,
   faHeart as faHeartRegular,
 } from "@fortawesome/free-regular-svg-icons";
+import { Dispatch, SetStateAction } from "react";
+import { useNavigate } from "react-router-dom";
+import axios from "axios";
 
 function PopularDebateCard({
+  idx,
   debate,
-  has_liked = false,
+  hasLiked = false,
+  setHasLiked,
 }: {
+  idx: number;
   debate: DebateType;
-  has_liked?: boolean;
+  hasLiked?: boolean;
+  setHasLiked: Dispatch<SetStateAction<boolean[]>>;
 }) {
+  const navigate = useNavigate();
+
+  const doLike = () => {
+    // Like API 호출
+    axios
+      .post(`/api/debate/${debate.id}/like`)
+      .then(() => {
+        // 좋아요 성공
+        setHasLiked((prv) =>
+          prv
+            .slice(0, idx)
+            .concat(true)
+            .concat(prv.slice(idx + 1))
+        );
+        debate.likes_num++;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
+  const doUnlike = () => {
+    axios
+      .delete(`/api/debate/${debate.id}/like`)
+      .then(() => {
+        setHasLiked((prv) =>
+          prv
+            .slice(0, idx)
+            .concat(false)
+            .concat(prv.slice(idx + 1))
+        );
+        debate.likes_num--;
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  };
+
   return (
     <div id="popular-debate-card">
       <div className="title">{debate.title}</div>
@@ -25,16 +70,24 @@ function PopularDebateCard({
         </div>
         <div className="additional-info">
           <div className="like-container">
-            {has_liked ? (
-              <FontAwesomeIcon icon={faHeartSolid} />
+            {hasLiked ? (
+              <FontAwesomeIcon
+                icon={faHeartSolid}
+                onClick={doUnlike}
+                className="like-icon liked"
+              />
             ) : (
-              <FontAwesomeIcon icon={faHeartRegular} />
+              <FontAwesomeIcon
+                icon={faHeartRegular}
+                onClick={doLike}
+                className="like-icon"
+              />
             )}
-            <div className="like-count">{debate.likes_num}</div>
+            <div className="like-text">{debate.likes_num}</div>
           </div>
           <div className="comment-container">
             <FontAwesomeIcon icon={faComment} />
-            <div className="comment-count">{debate.comments_num}</div>
+            <div className="comment-text">{debate.comments_num}</div>
           </div>
         </div>
       </div>

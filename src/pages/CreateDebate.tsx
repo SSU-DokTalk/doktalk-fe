@@ -1,7 +1,5 @@
 import { useState } from "react";
-import "@/assets/css/components/_debate.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faInfoCircle } from "@fortawesome/free-solid-svg-icons";
 import {
   faCalendar,
   faImage,
@@ -9,6 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import UploadFiles from "@/components/base/UploadFiles";
 import { ACCEPTABLE_IMAGE } from "@/common/variables";
+import IonIcon from "@reacticons/ionicons";
 
 function CreateDebate() {
   const [title, setTitle] = useState("");
@@ -17,13 +16,13 @@ function CreateDebate() {
   const [link, setLink] = useState("");
   const [time, setTime] = useState("");
   const [category, setCategory] = useState("");
-  const [, setFiles] = useState<File[]>([]);
+  const [files, setFiles] = useState<File[]>([]);
   const [content, setContent] = useState("");
-  const [price, setPrice] = useState(0);
+  const [price, setPrice] = useState(5000);
 
   return (
-    <div id="create-debate-card">
-      <div className="create-debate-title">게시글 작성하기</div>
+    <div id="create-debate-page">
+      <div className="create-debate-title">토론방 생성하기</div>
       <div className="create-debate-content">
         <input
           type="text"
@@ -107,9 +106,14 @@ function CreateDebate() {
           onChange={(e) => setContent(e.target.value)}
         ></textarea>
         <div className="row-price">
-          <button className="icon">
-            <FontAwesomeIcon icon={faInfoCircle} />
-          </button>
+          <IonIcon
+            name="information-circle-outline"
+            className="icon"
+            style={{
+              height: "30px",
+              width: "30px",
+            }}
+          />
           <div className="left">가격</div>
           <input
             type="number"
