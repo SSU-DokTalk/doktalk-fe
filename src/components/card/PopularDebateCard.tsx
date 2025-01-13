@@ -61,10 +61,17 @@ function PopularDebateCard({
 
   return (
     <div id="popular-debate-card">
-      <div className="title">{debate.title}</div>
-      <div className="content">{debate.content}</div>
+      <div className="title" onClick={() => navigate(`/debate/${debate.id}`)}>
+        {debate.title}
+      </div>
+      <div className="content" onClick={() => navigate(`/debate/${debate.id}`)}>
+        {debate.content}
+      </div>
       <div className="content-info">
-        <div className="user-info">
+        <div
+          className="user-info"
+          onClick={() => navigate(`/user/${debate.user.id}`)}
+        >
           <ProfileIcon profile={debate.user.profile} size={15} />
           <div className="user-name">{debate.user.name}</div>
         </div>
@@ -85,7 +92,10 @@ function PopularDebateCard({
             )}
             <div className="like-text">{debate.likes_num}</div>
           </div>
-          <div className="comment-container">
+          <div
+            className="comment-container"
+            onClick={() => navigate(`/debate/${debate.id}`)}
+          >
             <FontAwesomeIcon icon={faComment} />
             <div className="comment-text">{debate.comments_num}</div>
           </div>

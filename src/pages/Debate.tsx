@@ -54,8 +54,7 @@ const sortBys: {
 ];
 
 function Debate() {
-  const [recommendDebates, setRecommendDebates] =
-    useState<DebateType[]>(DUMMY_DEBATES);
+  const [recommendDebates, ..._] = useState<DebateType[]>(DUMMY_DEBATES);
 
   const [debates, setDebates] = useState<DebateType[]>([]);
   const [debatePage, setDebatePage] = useState<number>(1);
@@ -70,7 +69,7 @@ function Debate() {
   const [search, setSearch] = useState<string>("");
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
-  const [from, setFrom] = useState<Date>(new Date());
+  const [from, ...__] = useState<Date>(new Date());
   const debouncedSearch = useDebounce(search, 500);
   const prevValueRef = useRef<{
     debouncedSearch: string;

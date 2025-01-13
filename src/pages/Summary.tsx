@@ -46,8 +46,7 @@ const sortBys: {
 ];
 
 function Summary() {
-  const [recommendSummaries, setRecommendSummaries] =
-    useState<SummaryType[]>(DUMMY_SUMMARIES);
+  const [recommendSummaries, ..._] = useState<SummaryType[]>(DUMMY_SUMMARIES);
 
   const [summaries, setSummaries] = useState<SummaryType[]>([]);
   const [summaryPage, setSummaryPage] = useState<number>(1);

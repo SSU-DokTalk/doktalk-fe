@@ -8,7 +8,7 @@ function CreateSummary() {
   const [title, setTitle] = useState("");
   const [book, setBook] = useState("");
   const [category, setCategory] = useState("");
-  const [files, setFiles] = useState<File[]>([]);
+  const [_, setFiles] = useState<File[]>([]);
   const [content, setContent] = useState("");
   const [price, setPrice] = useState(5000);
 
