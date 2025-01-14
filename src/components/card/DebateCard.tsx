@@ -74,7 +74,7 @@ function DebateCard({
       <div className="item-container">
         <div
           className="item-content-container"
-          onClick={() => navigate(`/summary/${debate.id}`)}
+          onClick={() => navigate(`/debate/${debate.id}`)}
         >
           <div className="title">{debate.title}</div>
           <div className="content">{debate.content}</div>
