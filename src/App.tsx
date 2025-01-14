@@ -27,6 +27,8 @@ import i18n from "./locales/i18n";
 import CreateDebate from "./pages/CreateDebate";
 import CreateSummary from "./pages/CreateSummary";
 import Settings from "./pages/Settings";
+import DebateDetail from "./pages/DebateDetail";
+import SummaryDetail from "./pages/SummaryDetail";
 
 function App() {
   const dispatch = useAppDispatch();
@@ -129,6 +131,8 @@ function App() {
           <Route path="/debate" element={<Debate />}></Route>
           <Route path="/search" element={<Search />}></Route>
           <Route path="/summary" element={<Summary />}></Route>
+          <Route path="/debate/:debate_id" element={<DebateDetail />}></Route>
+          <Route path="/summary/:summary_id" element={<SummaryDetail />}></Route>
           <Route path="/summary/create" element={<CreateSummary />}></Route>
           <Route path="/debate/create" element={<CreateDebate />}></Route>
         </Route>
