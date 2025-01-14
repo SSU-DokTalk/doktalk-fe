@@ -74,13 +74,16 @@ function DebateCard({
       <div className="item-container">
         <div
           className="item-content-container"
-          onClick={() => navigate(`/summary/${debate.id}`)}
+          onClick={() => navigate(`/debate/${debate.id}`)}
         >
           <div className="title">{debate.title}</div>
           <div className="content">{debate.content}</div>
         </div>
         <div className="info-container">
-          <div className="user-info">
+          <div
+            className="user-info"
+            onClick={() => navigate(`/user/${debate.user.id}`)}
+          >
             <ProfileIcon
               profile={debate.user.profile}
               size={28}
@@ -106,7 +109,10 @@ function DebateCard({
               )}
               <div className="like-text">{debate.likes_num}</div>
             </div>
-            <div className="comment-container">
+            <div
+              className="comment-container"
+              onClick={() => navigate(`/debate/${debate.id}`)}
+            >
               <FontAwesomeIcon icon={faComment} />
               <div className="comment-text">{debate.comments_num}</div>
             </div>

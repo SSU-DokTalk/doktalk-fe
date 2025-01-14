@@ -88,6 +88,7 @@ function EditProfileModal({
               async (res) => {
                 let { id, name, profile, role } = res.data;
                 await dispatch(setUser({ id, name, profile, role }));
+                setDidEdit(true);
               },
               (err) => {
                 console.log(err);
@@ -107,6 +108,7 @@ function EditProfileModal({
       async () => {
         setUserInfo({ ...userInfo, profile: null });
         await dispatch(setUser({ ...user, profile: undefined }));
+        setDidEdit(true);
       },
       (err) => {
         console.log(err);

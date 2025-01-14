@@ -38,6 +38,9 @@
       .publisher {
         margin-left: 15px;
       }
+      .pubdate {
+        margin-left: 15px;
+      }
     }
     .description {
       margin-top: 8px;
@@ -47,7 +50,6 @@
 
       overflow: hidden;
       text-overflow: ellipsis;
-      white-space: pre-wrap;
       word-wrap: break-word;
       display: -webkit-box;
       line-clamp: 4;
@@ -64,7 +66,7 @@
     button {
       border-radius: 10px;
       width: 120px;
-      height: 30px;
+      padding: 3px 6px;
       font-size: 15px;
       font-weight: 600;
     }

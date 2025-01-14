@@ -68,7 +68,8 @@
       "book": {
         "button": {
           "add-to-library": "Add to Library",
-          "look-summary": "Summary"
+          "remove-from-library": "Remove from Library",
+          "in-library-num": "In Library"
         }
       }
     },

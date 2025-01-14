@@ -28,11 +28,11 @@ export type BookAPIType = {
   link?: string;
   image?: string;
   author: string;
-  discount: number;
+  discount?: number;
   publisher: string;
-  pubdate: Date;
+  pubdate: string;
   isbn: number;
-  description: string;
+  description?: string;
 };
 
 export type BookType = {
@@ -41,8 +41,9 @@ export type BookType = {
   image?: string;
   author: string;
   publisher: string;
-  pubdate: Date;
-  description: string;
+  pubdate: string;
+  description?: string;
+  in_library_num: number;
 };
 
 export type PostType = {

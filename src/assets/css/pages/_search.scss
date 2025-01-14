@@ -48,10 +48,12 @@
           font-weight: 600;
           color: v.$brand-color5;
           margin-left: 10px;
+          cursor: pointer;
         }
       }
       .result-content-container {
         margin-top: 40px;
+        padding-bottom: 70px;
         #book-card {
           margin-bottom: 30px;
         }

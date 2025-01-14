@@ -37,6 +37,7 @@ function InfiniteScroll({
   children,
   api,
   likes_api = undefined,
+  itemId = "id",
   setItems,
   page = undefined,
   setPage = undefined,
@@ -58,6 +59,7 @@ function InfiniteScroll({
   children: React.ReactNode;
   api: string;
   likes_api?: string;
+  itemId?: string;
   setItems: React.Dispatch<React.SetStateAction<any[]>>;
   page?: number | undefined;
   setPage?: React.Dispatch<React.SetStateAction<number>> | undefined;
@@ -99,8 +101,15 @@ function InfiniteScroll({
               items,
               page: pg,
               pages,
-            }: { items: any[]; page: number; pages: number } = res.data;
+              total,
+            }: {
+              items: any[];
+              page: number;
+              pages: number;
+              total: number;
+            } = res.data;
             if (pg <= pages) {
+              console.log(items, page, pages, total);
               setItems?.((prevItems) => [...prevItems, ...items]);
               await (setHasMore ?? setInherentHasMore)(pg != pages);
               await (setPage ?? setInherentPage)(pg + 1);
@@ -118,7 +127,7 @@ function InfiniteScroll({
             await axios
               .get(
                 `/api/${likes_api}?${items
-                  .map((item) => "ids=" + item.id)
+                  .map((item) => "ids=" + item[itemId])
                   .join("&")}`
               )
               .then(
@@ -160,7 +169,6 @@ function InfiniteScroll({
     if (elementRef.current) {
       observer.observe(elementRef.current);
     }
-    console.log(JSON.stringify(dependency));
     return () => {
       if (elementRef.current) {
         observer.unobserve(elementRef.current);

@@ -91,12 +91,19 @@
         }
         .my-library {
           display: flex;
-          flex-wrap: wrap;
-          margin-bottom: 20px;
           justify-content: center;
-          img {
-            margin: 3px;
-            box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25);
+          align-items: center;
+          margin-bottom: 20px;
+          .books-container {
+            display: flex;
+            flex-wrap: wrap;
+            width: 100%;
+            justify-content: stretch;
+
+            img {
+              margin: 3px;
+              box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25);
+            }
           }
         }
       }

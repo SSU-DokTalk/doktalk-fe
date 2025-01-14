@@ -68,7 +68,8 @@
       "book": {
         "button": {
           "add-to-library": "내 서재에 담기",
-          "look-summary": "요약 보기"
+          "remove-from-library": "서재에서 삭제",
+          "in-library-num": "담은 수"
         }
       }
     },
@@ -211,6 +212,9 @@
       }
     },
     "search": {
+      "item": {
+        "no-book-item": "검색 결과가 없습니다"
+      },
       "title": {
         "page": "도서 검색"
       },

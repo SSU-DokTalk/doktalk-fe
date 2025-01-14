@@ -1,26 +1,19 @@
 import Accordion from "react-bootstrap/Accordion";
 import ProfileIcon from "@/components/base/ProfileIcon";
-import { useAppSelector } from "@/stores/hooks";
+import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 import { Link, useNavigate } from "react-router-dom";
 import Image from "../base/Image";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import axios from "axios";
-import { BookType, UserType } from "@/types/data";
+import { MyBookType, UserType } from "@/types/data";
 import { useTranslation } from "react-i18next";
+import { selectGlobalState, updateGlobalState } from "@/stores/globalStates";
 
-function FloatingUserProfile({
-  isUserUpdated,
-  setIsUserUpdated,
-  isLibraryUpdated,
-  setIsLibraryUpdated,
-}: {
-  isUserUpdated: boolean;
-  isLibraryUpdated: boolean;
-  setIsUserUpdated: Dispatch<SetStateAction<boolean>>;
-  setIsLibraryUpdated: Dispatch<SetStateAction<boolean>>;
-}) {
+function FloatingUserProfile() {
   const user = useAppSelector(selectUser);
+  const globalState = useAppSelector(selectGlobalState);
+  const dispatch = useAppDispatch();
   const navigate = useNavigate();
   const { t } = useTranslation();
 
@@ -31,30 +24,26 @@ function FloatingUserProfile({
     follower_num: 0,
     following_num: 0,
   });
-  const [books, setBooks] = useState<BookType[]>([]);
+  const [books, setBooks] = useState<MyBookType[]>([]);
 
   useEffect(() => {
-    if (isUserUpdated && user.id != 0) {
-      axios.get("/api/user/me").then(
-        async (res) => {
-          let { data }: { data: UserType } = res;
-          if (data.id != 0) {
-            await setUserInfo({
-              follower_num: data.follower_num,
-              following_num: data.following_num,
-            });
-            await setIsUserUpdated(false);
-          }
-        },
-        async () => {
-          await setIsUserUpdated(false);
+    if (globalState.isFollowerUpdated && user.id != 0) {
+      axios.get("/api/user/me").then(async (res) => {
+        let { data }: { data: UserType } = res;
+        if (data.id != 0) {
+          await setUserInfo({
+            follower_num: data.follower_num,
+            following_num: data.following_num,
+          });
         }
-      );
+      });
+      dispatch(updateGlobalState({ isFollowerUpdated: false }));
     }
-  }, [user, isUserUpdated]);
+  }, [user, globalState.isFollowerUpdated]);
 
   useEffect(() => {
-    if (isLibraryUpdated && user.id != 0) {
+    console.log(globalState);
+    if (globalState.isLibraryUpdated && user.id != 0) {
       axios
         .get(`/api/user/${user.id}/mybooks`, {
           params: {
@@ -62,18 +51,13 @@ function FloatingUserProfile({
             size: 6,
           },
         })
-        .then(
-          async (res) => {
-            let { items }: { items: BookType[] } = res.data;
-            await setBooks(items);
-            await setIsLibraryUpdated(false);
-          },
-          async () => {
-            await setIsLibraryUpdated(false);
-          }
-        );
+        .then(async (res) => {
+          let { items }: { items: MyBookType[] } = res.data;
+          await setBooks(items);
+        });
+      dispatch(updateGlobalState({ isLibraryUpdated: false }));
     }
-  }, [user, isLibraryUpdated]);
+  }, [user, globalState.isLibraryUpdated]);
 
   return (
     <div id="floating-user-profile">
@@ -120,18 +104,20 @@ function FloatingUserProfile({
             {t("component.floating.text.library")}
           </Accordion.Header>
           <Accordion.Body className="my-library">
-            {books.slice(0, 6).map((book, idx) => {
-              return (
-                <Image
-                  key={"my-library-book" + idx}
-                  src={book.image}
-                  width="40px"
-                  height="55px"
-                  noImageFontSize={16}
-                  noImageTextFontSize={6}
-                />
-              );
-            })}
+            <div className="books-container">
+              {books.slice(0, 6).map((mybook, idx) => {
+                return (
+                  <Image
+                    key={"my-library-book" + idx}
+                    src={mybook.book.image}
+                    width="40px"
+                    height="55px"
+                    noImageFontSize={16}
+                    noImageTextFontSize={6}
+                  />
+                );
+              })}
+            </div>
           </Accordion.Body>
         </Accordion.Item>
       </Accordion>
