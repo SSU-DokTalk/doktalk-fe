@@ -75,7 +75,7 @@ function PopularSummaryCard({
       </div>
       <div className="info-container">
         <div className="user-info">
-          <ProfileIcon size={15} />
+          <ProfileIcon profile={summary.user.profile} size={15} />
           <div className="user-name">{summary.user.name}</div>
         </div>
         <div className="additional-info">
