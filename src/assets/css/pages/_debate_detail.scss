@@ -1,180 +1,163 @@
 @use "../variables" as v;
 
 #debate-detail {
-    max-width: 600px;
-    margin-right: auto;
-    margin-left: 100px;
-    margin-top: 48px;
-    backdrop-filter: blur(10px);
+  max-width: 600px;
+  margin-right: auto;
+  margin-left: 100px;
+  margin-top: 48px;
+  backdrop-filter: blur(10px);
 
-    .discussion-info {
-        margin-top: 16px;
+  .discussion-info {
+    margin-top: 16px;
 
-        &__title {
-            font-size: 1.5rem;
-            font-weight: bold;
-            margin-bottom: 16px;
-        }
-
-        &__grid {
-            display: grid;
-            gap: 8px;
-        }
-
-        &__item {
-            display: flex;
-            align-items: center;
-            grid-template-columns: 1fr 1fr;
-
-            strong {
-                padding: 4px;
-                border-radius: 5px;
-                text-align: center;
-                width: 100px;
-                font-weight: 500;
-                background: v.$brand-color3;
-                color: v.$brand-color1;
-            }
-
-            span {
-                margin-left: 8px;
-            }
-        }
-
-        .book {
-            strong {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                height: 100%;
-            }
-        }
-
-        &__cover {
-            width: 100px;
-            height: 140px;
-            background-color: #ddd;
-            margin-left: 8px;
-        }
-
-        &__book-cover {
-            width: 60px;
-            height: 80px;
-            background-color: #ddd;
-            margin-left: 16px;
-        }
-
-        &__description {
-            margin-top: 16px;
-            line-height: 1.4;
-        }
-
-        &__likes {
-            margin-top: 8px;
-            color: #555;
-        }
+    &__title {
+      font-size: 1.5rem;
+      font-weight: bold;
+      margin-bottom: 16px;
     }
 
+    &__grid {
+      display: grid;
+      gap: 8px;
+    }
 
-    .user-header {
+    &__item {
+      display: flex;
+      align-items: center;
+      grid-template-columns: 1fr 1fr;
+
+      strong {
+        padding: 4px;
+        border-radius: 5px;
+        text-align: center;
+        width: 100px;
+        font-weight: 500;
+        background: v.$brand-color3;
+        color: v.$brand-color1;
+      }
+
+      span {
+        margin-left: 8px;
+      }
+    }
+
+    .book {
+      strong {
         display: flex;
         align-items: center;
-        justify-content: space-between;
-
-        &__info {
-            display: flex;
-            align-items: center;
-        }
-
-        &__avatar {
-            width: 40px;
-            height: 40px;
-            background-color: #ddd;
-            border-radius: 50%;
-            margin-right: 12px;
-        }
-
-        &__text {
-            display: flex;
-            flex-direction: column;
-        }
-
-        &__nickname {
-            font-weight: 600;
-            font-size: 1rem;
-        }
-
-        &__time {
-            font-size: 0.875rem;
-            color: #888;
-        }
-
-        &__actions {
-            display: flex;
-            align-items: center;
-
-            button {
-                padding: 4px 16px;
-            }
-
-            .delete {
-                border-color: #f00;
-                color: #f00;
-            }
-        }
+        justify-content: center;
+        height: 100%;
+      }
     }
 
-    .payment-box {
-        margin-top: 32px;
-        padding: 24px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-
-        &__title {
-            font-size: 1rem;
-            font-weight: 500;
-            margin-bottom: 16px;
-        }
-
-        &__info {
-            display: flex;
-            align-items: center;
-
-            .payment-box__currency {
-                margin-right: 16px;
-                font-weight: bold;
-                font-size: 1rem;
-                color: v.$brand-color1;
-                cursor: pointer;
-                background: v.$brand-color3;
-                border: none
-            }
-
-            .payment-box__amount {
-                font-size: 1rem;
-                margin-right: 16px;
-            }
-        }
-
-        &__button {
-            color: v.$brand-color1;
-            border: none;
-            padding: 10px 16px;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: underline v.$brand-color1;
-        }
+    &__cover {
+      margin-left: 8px;
     }
 
+    &__description {
+      margin-top: 16px;
+      line-height: 1.4;
+    }
 
-    button {
-        border: 1px solid #ccc;
-        background-color: #fff;
-        color: #000;
-        padding: 6px 12px;
-        border-radius: 4px;
+    &__likes {
+      margin-top: 8px;
+      color: #555;
+    }
+  }
+
+  .user-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    &__info {
+      display: flex;
+      align-items: center;
+    }
+
+    &__avatar {
+      margin-right: 12px;
+    }
+
+    &__text {
+      display: flex;
+      flex-direction: column;
+    }
+
+    &__nickname {
+      font-weight: 600;
+      font-size: 1rem;
+    }
+
+    &__time {
+      font-size: 0.875rem;
+      color: #888;
+    }
+
+    &__actions {
+      display: flex;
+      align-items: center;
+
+      button {
+        padding: 4px 16px;
+      }
+
+      .delete {
+        border-color: #f00;
+        color: #f00;
+      }
+    }
+  }
+
+  .payment-box {
+    margin-top: 32px;
+    padding: 24px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+
+    &__title {
+      font-size: 1rem;
+      font-weight: 500;
+      margin-bottom: 16px;
+    }
+
+    &__info {
+      display: flex;
+      align-items: center;
+
+      .payment-box__currency {
+        margin-right: 16px;
+        font-weight: bold;
+        font-size: 1rem;
+        color: v.$brand-color1;
         cursor: pointer;
-        margin-left: 8px;
+        background: v.$brand-color3;
+        border: none;
+      }
 
+      .payment-box__amount {
+        font-size: 1rem;
+        margin-right: 16px;
+      }
     }
+
+    &__button {
+      color: v.$brand-color1;
+      border: none;
+      padding: 10px 16px;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: underline v.$brand-color1;
+    }
+  }
+
+  button {
+    border: 1px solid #ccc;
+    background-color: #fff;
+    color: #000;
+    padding: 6px 12px;
+    border-radius: 4px;
+    cursor: pointer;
+    margin-left: 8px;
+  }
 }

@@ -1,21 +1,41 @@
 import { useParams } from "react-router-dom";
-import "@/assets/css/pages/_debate_detail.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons/faCartPlus";
 import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
+import ProfileIcon from "@/components/base/ProfileIcon";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import { DebateType } from "@/types/data";
+import { InitialDebate } from "@/types/initialValue";
+import { getDateTime, getTimeDiff } from "@/functions";
+import Image from "@/components/base/Image";
 
 function DebateDetail() {
   const { debate_id } = useParams();
+  const [debate, setDebate] = useState<DebateType>(InitialDebate);
+
+  useEffect(() => {
+    axios.get(`/api/debate/${debate_id}`).then((res) => {
+      let { data }: { data: DebateType } = res;
+      setDebate(data);
+    });
+  }, [debate_id]);
 
   return (
     <div id="debate-detail">
       <div className="user-header">
         <div className="user-header__info">
-          <div className="user-header__avatar" />
+          <ProfileIcon
+            profile={debate.user.profile}
+            size={40}
+            className="user-header__avatar"
+          />
           <div className="user-header__text">
-            <span className="user-header__nickname">닉네임</span>
-            <span className="user-header__time">3시간 전</span>
+            <span className="user-header__nickname">{debate.user.name}</span>
+            <span className="user-header__time">
+              {getTimeDiff(debate.created)}
+            </span>
           </div>
         </div>
 
@@ -25,20 +45,20 @@ function DebateDetail() {
         </div>
       </div>
       <div className="discussion-info">
-        <h2 className="discussion-info__title">토론방 제목</h2>
+        <h2 className="discussion-info__title">{debate.title}</h2>
 
         <div className="discussion-info__grid">
           <div className="discussion-info__item">
             <strong>모임 장소</strong>
-            <span>송실대 입구역</span>
+            <span>{debate.location}</span>
           </div>
           <div className="discussion-info__item">
             <strong>온라인 링크</strong>
-            <span>링크첨부</span>
+            <span>{debate.link}</span>
           </div>
           <div className="discussion-info__item">
             <strong>시간</strong>
-            <span>2024년 11월 23일 15:00</span>
+            <span>{getDateTime(new Date(debate.held_at))}</span>
           </div>
           <div className="discussion-info__item">
             <strong>카테고리</strong>
@@ -47,16 +67,18 @@ function DebateDetail() {
           <div className="discussion-info__item book">
             <strong>지정 도서</strong>
             <div>
-              <span>지정도서 제목</span>
-              <div className="discussion-info__cover" />
+              <span>{debate.book.title}</span>
+              <Image
+                src={debate.book.image}
+                width="100px"
+                height="140px"
+                className="discussion-info__cover"
+              />
             </div>
           </div>
         </div>
 
-        <p className="discussion-info__description">
-          모모모에 대해 토론하실 분 모집합니다~ <br />
-          주제는 ㅇㅇㅇㅇㅇ 입니다.
-        </p>
+        <pre className="discussion-info__description">{debate.content}</pre>
 
         <div className="discussion-info__likes">
           <FontAwesomeIcon icon={faHeart} className="like-icon" />

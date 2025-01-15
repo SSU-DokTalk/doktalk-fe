@@ -46,6 +46,8 @@ export function getDate(date: Date): string {
 
 export function getDateTime(date: Date): string {
   let offset = new Date().getTimezoneOffset();
+  console.log(date);
+  console.log(date.getTime());
   return dayjs(date.getTime() - offset * 60 * 1000).format(
     "YYYY-MM-DD HH:mm:ss"
   );
