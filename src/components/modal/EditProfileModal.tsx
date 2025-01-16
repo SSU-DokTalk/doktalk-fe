@@ -9,10 +9,9 @@ import React, {
 } from "react";
 import { Modal } from "react-bootstrap";
 
-import userIcon from "@/assets/images/profile.svg";
-
 import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { selectUser, setUser } from "@/stores/user";
+import ProfileIcon from "@/components/base/ProfileIcon";
 
 function EditProfileModal({
   showModal,
@@ -24,11 +23,11 @@ function EditProfileModal({
   setDidEdit: Dispatch<SetStateAction<boolean>>;
 }) {
   const [userInfo, setUserInfo] = useState<{
-    profile: string | null;
+    profile: string | undefined;
     name: string;
     introduction: string;
   }>({
-    profile: null,
+    profile: undefined,
     name: "",
     introduction: "",
   });
@@ -106,7 +105,7 @@ function EditProfileModal({
   const deleteImage = () => {
     axios.delete(`/api/user/profile`).then(
       async () => {
-        setUserInfo({ ...userInfo, profile: null });
+        setUserInfo({ ...userInfo, profile: undefined });
         await dispatch(setUser({ ...user, profile: undefined }));
         setDidEdit(true);
       },
@@ -134,10 +133,11 @@ function EditProfileModal({
       </Modal.Header>
       <Modal.Body>
         <div className="profile-image-container">
-          <img
-            src={userInfo.profile ?? userIcon}
-            alt="user icon"
+          <ProfileIcon
+            profile={userInfo.profile}
+            alt={"user icon"}
             className="profile-image"
+            size={176}
           />
           <div className="profile-image-button-container">
             <input

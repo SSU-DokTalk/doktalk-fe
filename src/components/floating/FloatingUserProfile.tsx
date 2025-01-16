@@ -42,7 +42,6 @@ function FloatingUserProfile() {
   }, [user, globalState.isFollowerUpdated]);
 
   useEffect(() => {
-    console.log(globalState);
     if (globalState.isLibraryUpdated && user.id != 0) {
       axios
         .get(`/api/user/${user.id}/mybooks`, {

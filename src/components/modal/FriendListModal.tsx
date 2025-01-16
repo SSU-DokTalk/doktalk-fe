@@ -1,9 +1,11 @@
-import { Dispatch, SetStateAction, useState, useEffect, useRef } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 import { Modal } from "react-bootstrap";
 import { FollowType, UserType } from "@/types/data";
 
 import userIcon from "@/assets/images/profile.svg";
 import InfiniteScroll from "../base/InfiniteScroll";
+import { useAppDispatch, useAppSelector } from "@/stores/hooks";
+import { selectGlobalState, updateGlobalState } from "@/stores/globalStates";
 
 const tabs = [
   {
@@ -34,27 +36,9 @@ function FriendListModal({
   const [currentInfo, setCurrentInfo] = useState<"follower" | "following">(
     "follower"
   );
-  const prevValueRef = useRef<{
-    follower_num: number;
-    following_num: number;
-  }>({ follower_num: 0, following_num: 0 });
 
-  useEffect(() => {
-    if (
-      currentInfo == "follower" &&
-      prevValueRef.current.follower_num === userProfile.follower_num
-    )
-      return;
-    if (
-      currentInfo == "following" &&
-      prevValueRef.current.following_num === userProfile.following_num
-    )
-      return;
-    prevValueRef.current = {
-      follower_num: userProfile.follower_num,
-      following_num: userProfile.following_num,
-    };
-  }, [userProfile.follower_num, userProfile.following_num, currentInfo]);
+  const globalState = useAppSelector(selectGlobalState);
+  const dispatch = useAppDispatch();
 
   return (
     <Modal
@@ -115,14 +99,15 @@ function FriendListModal({
                 : setHasMoreFollowing
             }
             condition={userProfile && userProfile.id != 0 && showModal}
-            refreshCondition={
-              currentInfo == "follower"
-                ? prevValueRef.current.follower_num !== userProfile.follower_num
-                : prevValueRef.current.following_num !==
-                  userProfile.following_num
-            }
+            refreshCondition={globalState.isFollowerUpdated}
+            afterFetchSuccess={async () => {
+              dispatch(updateGlobalState({ isFollowerUpdated: false }));
+            }}
+            afterFetchFail={() => {
+              dispatch(updateGlobalState({ isFollowerUpdated: false }));
+            }}
             size={50}
-            dependency={[userProfile.follower_num, userProfile.following_num]}
+            dependency={[globalState.isFollowerUpdated]}
           >
             {(currentInfo == "follower" ? followers : followings).map(
               (friend, idx) => {

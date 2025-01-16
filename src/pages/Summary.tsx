@@ -16,6 +16,7 @@ import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 import useDebounce from "@/hooks/useDebounce";
+import CategoryCard from "@/components/card/CategoryCard";
 
 const searchBys: {
   name: string;
@@ -58,15 +59,17 @@ function Summary() {
   const [isPopularDebateLoaded, setIsPopularDebateLoaded] =
     useState<boolean>(false);
 
+  const [categories, setCategories] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
   const debouncedSearch = useDebounce(search, 500);
   const prevValueRef = useRef<{
+    categories: number;
     debouncedSearch: string;
     searchByIdx: number;
     sortByIdx: number;
-  }>({ debouncedSearch: "", searchByIdx: 0, sortByIdx: 0 });
+  }>({ categories: 0, debouncedSearch: "", searchByIdx: 0, sortByIdx: 0 });
 
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
@@ -74,13 +77,19 @@ function Summary() {
 
   useEffect(() => {
     if (
+      prevValueRef.current.categories === categories &&
       prevValueRef.current.debouncedSearch === debouncedSearch &&
       prevValueRef.current.searchByIdx === searchByIdx &&
       prevValueRef.current.sortByIdx === sortByIdx
     )
       return;
-    prevValueRef.current = { debouncedSearch, searchByIdx, sortByIdx };
-  }, [debouncedSearch, searchByIdx, sortByIdx]);
+    prevValueRef.current = {
+      categories,
+      debouncedSearch,
+      searchByIdx,
+      sortByIdx,
+    };
+  }, [categories, debouncedSearch, searchByIdx, sortByIdx]);
 
   useEffect(() => {
     if (popularDebates.length === 0 && !isPopularDebateLoaded) {
@@ -133,108 +142,119 @@ function Summary() {
           ))}
         </Carousel>
       </div>
-      <div className="lower-content-container">
-        <div className="left-container">
-          <div className="searchbox-container">
-            <FontAwesomeIcon
-              icon={faMagnifyingGlass}
-              className="searchbox-icon"
-            />
-            <Dropdown>
-              <Dropdown.Toggle>
-                {t(searchBys[searchByIdx].name)}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {searchBys.map((searchBy, index) => (
-                  <Dropdown.Item
-                    key={"search-by" + index}
-                    onClick={() => setSearchByIdx(index)}
-                  >
-                    {t(searchBy.name)}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-            <input
-              type="text"
-              placeholder={t("page.summary.search.placeholder")}
-              className="searchbox"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className="content-header">
-            <div className="sort-by">
-              {sortBys.map((sortBy, index) => {
-                return (
-                  <div
-                    key={"sort-by" + index}
-                    className="sort-by-text"
-                    style={
-                      sortByIdx === index
-                        ? {
-                            color: "#000080",
-                          }
-                        : {}
-                    }
-                    onClick={() => setSortByIdx(index)}
-                  >
-                    {t(sortBy.name)}
-                  </div>
-                );
-              })}
+      <div className="content-container">
+        <div className="lower-content-container">
+          <CategoryCard
+            categories={categories}
+            setCategories={setCategories}
+            className="left-container"
+          />
+          <div className="right-container"></div>
+        </div>
+        <div className="lower-content-container">
+          <div className="left-container">
+            <div className="searchbox-container">
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="searchbox-icon"
+              />
+              <Dropdown>
+                <Dropdown.Toggle>
+                  {t(searchBys[searchByIdx].name)}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {searchBys.map((searchBy, index) => (
+                    <Dropdown.Item
+                      key={"search-by" + index}
+                      onClick={() => setSearchByIdx(index)}
+                    >
+                      {t(searchBy.name)}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              <input
+                type="text"
+                placeholder={t("page.summary.search.placeholder")}
+                className="searchbox"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
-            <button onClick={() => navigate("/summary/create")}>
-              <span>{t("page.summary.button.write")}</span>
-              <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
-            </button>
+            <div className="content-header">
+              <div className="sort-by">
+                {sortBys.map((sortBy, index) => {
+                  return (
+                    <div
+                      key={"sort-by" + index}
+                      className="sort-by-text"
+                      style={
+                        sortByIdx === index
+                          ? {
+                              color: "#000080",
+                            }
+                          : {}
+                      }
+                      onClick={() => setSortByIdx(index)}
+                    >
+                      {t(sortBy.name)}
+                    </div>
+                  );
+                })}
+              </div>
+              <button onClick={() => navigate("/summary/create")}>
+                <span>{t("page.summary.button.write")}</span>
+                <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
+              </button>
+            </div>
+            <div className="content-container">
+              <InfiniteScroll
+                api={`summary?category=${categories}&search=${debouncedSearch}&searchby=${searchBys[searchByIdx].value}&sortby=${sortBys[sortByIdx].value}`}
+                likes_api={`summarys/like`}
+                setItems={setSummaries}
+                page={summaryPage}
+                setPage={setSummaryPage}
+                hasMore={summaryHasMore}
+                setHasMore={setSummaryHasMore}
+                likes={summaryLikes}
+                setLikes={setSummaryLikes}
+                hasNoItem={summaries.length === 0}
+                hasNoItemMessage={t("page.summary.item.no-summary-item")}
+                refreshCondition={
+                  categories !== prevValueRef.current.categories ||
+                  debouncedSearch !== prevValueRef.current.debouncedSearch ||
+                  searchByIdx !== prevValueRef.current.searchByIdx ||
+                  sortByIdx !== prevValueRef.current.sortByIdx
+                }
+                dependency={[prevValueRef]}
+              >
+                {summaries.map((summary, index) => (
+                  <SummaryCard
+                    key={"summary" + index}
+                    idx={index}
+                    summary={summary}
+                    hasLiked={summaryLikes[index]}
+                    setHasLiked={setSummaryLikes}
+                  />
+                ))}
+              </InfiniteScroll>
+            </div>
           </div>
-          <div className="content-container">
-            <InfiniteScroll
-              api={`summary?search=${debouncedSearch}&searchby=${searchBys[searchByIdx].value}&sortby=${sortBys[sortByIdx].value}`}
-              likes_api={`summarys/like`}
-              setItems={setSummaries}
-              page={summaryPage}
-              setPage={setSummaryPage}
-              hasMore={summaryHasMore}
-              setHasMore={setSummaryHasMore}
-              likes={summaryLikes}
-              setLikes={setSummaryLikes}
-              hasNoItem={summaries.length === 0}
-              hasNoItemMessage={t("page.summary.item.no-summary-item")}
-              refreshCondition={
-                debouncedSearch !== prevValueRef.current.debouncedSearch ||
-                searchByIdx !== prevValueRef.current.searchByIdx ||
-                sortByIdx !== prevValueRef.current.sortByIdx
-              }
-              dependency={[prevValueRef]}
-            >
-              {summaries.map((summary, index) => (
-                <SummaryCard
-                  key={"summary" + index}
+          <div className="right-container">
+            <div className="right-container-title">
+              {t("page.summary.title.popular")}
+            </div>
+            <div className="right-container-content">
+              {popularDebates.map((debate, index) => (
+                <PopularDebateCard
+                  key={"debate" + index}
                   idx={index}
-                  summary={summary}
-                  hasLiked={summaryLikes[index]}
-                  setHasLiked={setSummaryLikes}
+                  debate={debate}
+                  hasLiked={popularDebateLikes[index]}
+                  setHasLiked={setPopularDebateLikes}
                 />
               ))}
-            </InfiniteScroll>
-          </div>
-        </div>
-        <div className="right-container">
-          <div className="right-container-title">
-            {t("page.summary.title.popular")}
-          </div>
-          <div className="right-container-content">
-            {popularDebates.map((debate, index) => (
-              <PopularDebateCard
-                key={"debate" + index}
-                idx={index}
-                debate={debate}
-                hasLiked={popularDebateLikes[index]}
-                setHasLiked={setPopularDebateLikes}
-              />
-            ))}
+            </div>
           </div>
         </div>
       </div>

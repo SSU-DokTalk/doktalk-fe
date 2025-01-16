@@ -1,4 +1,16 @@
 {
+  "var": {
+    "category": {
+      "POLITICS": "Politics/Society",
+      "HUMANITIES": "Humanities",
+      "ECONOMY": "Economy/Management",
+      "HISTORY": "History/Culture",
+      "SCIENCE": "Science(IT/Technology)",
+      "ESSAY": "Essay",
+      "TEENAGER": "Teenager",
+      "CHILD": "Child"
+    }
+  },
   "function": {
     "time": {
       "ago": " ago",

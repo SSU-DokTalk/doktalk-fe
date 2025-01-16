@@ -3,6 +3,7 @@ import duration, { Duration } from "dayjs/plugin/duration";
 import utc from "dayjs/plugin/utc";
 import timezone from "dayjs/plugin/timezone";
 import { useTranslation } from "react-i18next";
+import { CATEGORY } from "@/common/variables";
 dayjs.extend(duration);
 dayjs.extend(utc);
 dayjs.extend(timezone);
@@ -46,8 +47,6 @@ export function getDate(date: Date): string {
 
 export function getDateTime(date: Date): string {
   let offset = new Date().getTimezoneOffset();
-  console.log(date);
-  console.log(date.getTime());
   return dayjs(date.getTime() - offset * 60 * 1000).format(
     "YYYY-MM-DD HH:mm:ss"
   );
@@ -60,4 +59,19 @@ export function getFileTypeFromUrl(url: string): string {
 
 export function range(size: number, start = 0, step = 1): number[] {
   return [...Array(size).keys()].map((key) => key * step + start);
+}
+
+export function getCategoryFromNumber(
+  category: number
+): (typeof CATEGORY)[string][] {
+  let categories: (typeof CATEGORY)[string][] = [];
+  if (category & (1 << 0)) categories.push(CATEGORY.POLITICS);
+  if (category & (1 << 1)) categories.push(CATEGORY.HUMANITIES);
+  if (category & (1 << 2)) categories.push(CATEGORY.ECONOMY);
+  if (category & (1 << 3)) categories.push(CATEGORY.HISTORY);
+  if (category & (1 << 4)) categories.push(CATEGORY.SCIENCE);
+  if (category & (1 << 5)) categories.push(CATEGORY.ESSAY);
+  if (category & (1 << 6)) categories.push(CATEGORY.TEENAGER);
+  if (category & (1 << 7)) categories.push(CATEGORY.CHILD);
+  return categories;
 }

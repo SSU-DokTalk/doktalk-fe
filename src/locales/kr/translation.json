@@ -1,4 +1,16 @@
 {
+  "var": {
+    "category": {
+      "POLITICS": "정치/사회",
+      "HUMANITIES": "인문",
+      "ECONOMY": "경제/경영",
+      "HISTORY": "역사/문화",
+      "SCIENCE": "과학(IT/기술)",
+      "ESSAY": "논술",
+      "TEENAGER": "청소년",
+      "CHILD": "어린이"
+    }
+  },
   "function": {
     "time": {
       "ago": " 전",

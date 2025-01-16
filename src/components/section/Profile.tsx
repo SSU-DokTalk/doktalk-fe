@@ -5,7 +5,7 @@ import FriendListModal from "@/components/modal/FriendListModal";
 import EditProfileModal from "@/components/modal/EditProfileModal";
 
 import { UserType } from "@/types/data";
-import { useAppSelector } from "@/stores/hooks";
+import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 import { useNavigate } from "react-router-dom";
 import ProfileIcon from "@/components/base/ProfileIcon";
@@ -16,6 +16,7 @@ import {
   UserTabsCandidate,
 } from "@/types/initialValue";
 import { useTranslation } from "react-i18next";
+import { updateGlobalState } from "@/stores/globalStates";
 
 function Profile({
   userProfile,
@@ -40,6 +41,7 @@ function Profile({
   const [didEdit, setDidEdit] = useState(false);
   const navigate = useNavigate();
   const user = useAppSelector(selectUser);
+  const dispatch = useAppDispatch();
   const { t } = useTranslation();
 
   useEffect(() => {
@@ -78,6 +80,7 @@ function Profile({
       () => {
         setIsFollowing(true);
         userProfile.follower_num++;
+        dispatch(updateGlobalState({ isFollowerUpdated: true }));
       },
       (err) => {
         console.log(err);
@@ -90,6 +93,7 @@ function Profile({
       () => {
         setIsFollowing(false);
         userProfile.follower_num--;
+        dispatch(updateGlobalState({ isFollowerUpdated: true }));
       },
       (err) => {
         console.log(err);
@@ -192,7 +196,6 @@ function Profile({
                       | MyTabsCandidate
                       | UserTabsCandidate
                   );
-                  console.log(e.currentTarget.dataset.value);
                 }}
               >
                 {t(tab.text)}

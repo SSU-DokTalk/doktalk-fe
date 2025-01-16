@@ -81,7 +81,6 @@ function ProfileTabDetails({
   const { t } = useTranslation();
 
   useEffect(() => {
-    console.log("isPaymentCurTimeChanged", isPaymentCurTimeChanged);
     if (currentTab === "/library" && userProfile && userProfile.id != 0) {
       if (!hasLoadedMyBook) {
         axios
@@ -94,23 +93,19 @@ function ProfileTabDetails({
           .then((res) => {
             let { items, total }: { items: MyBookType[]; total: number } =
               res.data;
-            console.log(items, total);
             setMyBooks(items);
             setTotalMyBooks(total);
             setHasLoadedMyBook(true);
           });
       }
       if (!hasLoadedPurchaseSummary) {
-        axios
-          // .get(`/api/user/${userProfile.id}/purchased-summaries`)
-          .get(`/api/user/${userProfile.id}/summaries`)
-          .then((res) => {
-            let { items, total }: { items: SummaryType[]; total: number } =
-              res.data;
-            setPurchasedSummaries(items);
-            setTotalPurchasedSummaries(total);
-            setHasLoadedPurchaseSummary(true);
-          });
+        axios.get(`/api/user/${userProfile.id}/summaries`).then((res) => {
+          let { items, total }: { items: SummaryType[]; total: number } =
+            res.data;
+          setPurchasedSummaries(items);
+          setTotalPurchasedSummaries(total);
+          setHasLoadedPurchaseSummary(true);
+        });
       }
     }
   }, [currentTab, userProfile, isPaymentCurTimeChanged]);
@@ -338,7 +333,6 @@ function ProfileTabDetails({
                         paymentCurTime.setMonth(paymentCurTime.getMonth() - 1)
                       )
                     );
-                    console.log("left", isPaymentCurTimeChanged);
                   }}
                 >
                   <FontAwesomeIcon icon={faChevronLeft} />
@@ -352,7 +346,6 @@ function ProfileTabDetails({
                         paymentCurTime.setMonth(paymentCurTime.getMonth() + 1)
                       )
                     );
-                    console.log("right", isPaymentCurTimeChanged);
                   }}
                 >
                   <FontAwesomeIcon icon={faChevronRight} />
@@ -401,11 +394,9 @@ function ProfileTabDetails({
               }
               condition={userProfile && userProfile.id != 0}
               afterFetchSuccess={async () => {
-                console.log("success");
                 await setIsPaymentCurTimeChanged(false);
               }}
               afterFetchFail={async () => {
-                console.log("fail");
                 await setIsPaymentCurTimeChanged(false);
               }}
               dependency={[isPaymentCurTimeChanged]}

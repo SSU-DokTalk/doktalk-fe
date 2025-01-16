@@ -109,7 +109,6 @@ function InfiniteScroll({
               total: number;
             } = res.data;
             if (pg <= pages) {
-              console.log(items, page, pages, total);
               setItems?.((prevItems) => [...prevItems, ...items]);
               await (setHasMore ?? setInherentHasMore)(pg != pages);
               await (setPage ?? setInherentPage)(pg + 1);
@@ -160,7 +159,9 @@ function InfiniteScroll({
   const observer = new IntersectionObserver(onIntersection);
 
   useEffect(() => {
+    console.log("InfiniteScroll useEffect");
     if (refreshCondition) {
+      console.log("InfiniteScroll useEffect refreshCondition");
       (setPage ?? setInherentPage)(1);
       (setHasMore ?? setInherentHasMore)(true);
       setLikes?.([]);

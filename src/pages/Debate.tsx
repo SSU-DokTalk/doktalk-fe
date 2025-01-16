@@ -21,6 +21,7 @@ import { getDate, range } from "@/functions";
 import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
+import CategoryCard from "@/components/card/CategoryCard";
 
 const searchBys: {
   name: string;
@@ -83,17 +84,25 @@ function Debate() {
   const [isPopularSummaryLoaded, setIsPopularSummaryLoaded] =
     useState<boolean>(false);
 
+  const [categories, setCategories] = useState<number>(0);
   const [search, setSearch] = useState<string>("");
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
   const [from, setFrom] = useState<Date>(new Date());
   const debouncedSearch = useDebounce(search, 500);
   const prevValueRef = useRef<{
+    categories: number;
     debouncedSearch: string;
     searchByIdx: number;
     sortByIdx: number;
     from: Date;
-  }>({ debouncedSearch: "", searchByIdx: 0, sortByIdx: 0, from: new Date() });
+  }>({
+    categories: 0,
+    debouncedSearch: "",
+    searchByIdx: 0,
+    sortByIdx: 0,
+    from: new Date(),
+  });
 
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
@@ -110,14 +119,21 @@ function Debate() {
 
   useEffect(() => {
     if (
+      prevValueRef.current.categories === categories &&
       prevValueRef.current.debouncedSearch === debouncedSearch &&
       prevValueRef.current.searchByIdx === searchByIdx &&
       prevValueRef.current.sortByIdx === sortByIdx &&
       prevValueRef.current.from === from
     )
       return;
-    prevValueRef.current = { debouncedSearch, searchByIdx, sortByIdx, from };
-  }, [debouncedSearch, searchByIdx, sortByIdx, from]);
+    prevValueRef.current = {
+      categories,
+      debouncedSearch,
+      searchByIdx,
+      sortByIdx,
+      from,
+    };
+  }, [categories, debouncedSearch, searchByIdx, sortByIdx, from]);
 
   useEffect(() => {
     if (popularSummaries.length === 0 && !isPopularSummaryLoaded) {
@@ -170,185 +186,198 @@ function Debate() {
           ))}
         </Carousel>
       </div>
-      <div className="lower-content-container">
-        <div className="left-container">
-          <div className="searchbox-container">
-            <FontAwesomeIcon
-              icon={faMagnifyingGlass}
-              className="searchbox-icon"
-            />
-            <Dropdown>
-              <Dropdown.Toggle>
-                {t(searchBys[searchByIdx].name)}
-              </Dropdown.Toggle>
-              <Dropdown.Menu>
-                {searchBys.map((searchBy, index) => (
-                  <Dropdown.Item
-                    key={"search-by" + index}
-                    onClick={() => setSearchByIdx(index)}
-                  >
-                    {t(searchBy.name)}
-                  </Dropdown.Item>
-                ))}
-              </Dropdown.Menu>
-            </Dropdown>
-            <input
-              type="text"
-              placeholder={t("page.debate.search.placeholder")}
-              className="searchbox"
-              value={search}
-              onChange={(e) => setSearch(e.target.value)}
-            />
-          </div>
-          <div className="content-header">
-            <div className="sort-by">
-              {sortBys.map((sortBy, index) => {
-                return (
-                  <div
-                    key={"sort-by" + index}
-                    className="sort-by-text"
-                    style={
-                      sortByIdx === index
-                        ? {
-                            color: "#000080",
-                          }
-                        : {}
-                    }
-                    onClick={() => setSortByIdx(index)}
-                  >
-                    {t(sortBy.name)}
-                    {sortBy.value == "from" ? (
-                      <DatePicker
-                        selected={from}
-                        onChange={(date) => setFrom(date ?? new Date())}
-                        dateFormat="yyyy/MM/dd"
-                        minDate={new Date("2025-01-01")}
-                        maxDate={new Date(`${getYear(new Date()) + 10}-12-31`)}
-                        customInput={
-                          <CustomDatePicker className="custom-input" />
-                        }
-                        showDisabledMonthNavigation
-                        renderCustomHeader={({
-                          date,
-                          changeYear,
-                          changeMonth,
-                          decreaseMonth,
-                          increaseMonth,
-                          prevMonthButtonDisabled,
-                          nextMonthButtonDisabled,
-                        }) => (
-                          <div
-                            style={{
-                              margin: 10,
-                              display: "flex",
-                              justifyContent: "center",
-                            }}
-                          >
-                            <button
-                              onClick={decreaseMonth}
-                              disabled={prevMonthButtonDisabled}
-                            >
-                              {"<"}
-                            </button>
-                            <select
-                              value={getYear(date)}
-                              onChange={({ target: { value } }) =>
-                                changeYear(parseInt(value))
-                              }
-                            >
-                              {years.map((option) => (
-                                <option key={option} value={option}>
-                                  {option}
-                                </option>
-                              ))}
-                            </select>
-
-                            <select
-                              value={months[getMonth(date)]}
-                              onChange={({ target: { value } }) =>
-                                changeMonth(months.indexOf(value))
-                              }
-                            >
-                              {months.map((option) => (
-                                <option key={option} value={option}>
-                                  {t(option)}
-                                </option>
-                              ))}
-                            </select>
-
-                            <button
-                              onClick={increaseMonth}
-                              disabled={nextMonthButtonDisabled}
-                            >
-                              {">"}
-                            </button>
-                          </div>
-                        )}
-                      />
-                    ) : null}
-                  </div>
-                );
-              })}
+      <div className="content-container">
+        <div className="lower-content-container">
+          <CategoryCard
+            categories={categories}
+            setCategories={setCategories}
+            className="left-container"
+          />
+          <div className="right-container"></div>
+        </div>
+        <div className="lower-content-container">
+          <div className="left-container">
+            <div className="searchbox-container">
+              <FontAwesomeIcon
+                icon={faMagnifyingGlass}
+                className="searchbox-icon"
+              />
+              <Dropdown>
+                <Dropdown.Toggle>
+                  {t(searchBys[searchByIdx].name)}
+                </Dropdown.Toggle>
+                <Dropdown.Menu>
+                  {searchBys.map((searchBy, index) => (
+                    <Dropdown.Item
+                      key={"search-by" + index}
+                      onClick={() => setSearchByIdx(index)}
+                    >
+                      {t(searchBy.name)}
+                    </Dropdown.Item>
+                  ))}
+                </Dropdown.Menu>
+              </Dropdown>
+              <input
+                type="text"
+                placeholder={t("page.debate.search.placeholder")}
+                className="searchbox"
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+              />
             </div>
-            <button
-              className="create-debate-button"
-              onClick={() => navigate("/debate/create")}
-            >
-              <span>{t("page.debate.button.create")}</span>
-              <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
-            </button>
+            <div className="content-header">
+              <div className="sort-by">
+                {sortBys.map((sortBy, index) => {
+                  return (
+                    <div
+                      key={"sort-by" + index}
+                      className="sort-by-text"
+                      style={
+                        sortByIdx === index
+                          ? {
+                              color: "#000080",
+                            }
+                          : {}
+                      }
+                      onClick={() => setSortByIdx(index)}
+                    >
+                      {t(sortBy.name)}
+                      {sortBy.value == "from" ? (
+                        <DatePicker
+                          selected={from}
+                          onChange={(date) => setFrom(date ?? new Date())}
+                          dateFormat="yyyy/MM/dd"
+                          minDate={new Date("2025-01-01")}
+                          maxDate={
+                            new Date(`${getYear(new Date()) + 10}-12-31`)
+                          }
+                          customInput={
+                            <CustomDatePicker className="custom-input" />
+                          }
+                          showDisabledMonthNavigation
+                          renderCustomHeader={({
+                            date,
+                            changeYear,
+                            changeMonth,
+                            decreaseMonth,
+                            increaseMonth,
+                            prevMonthButtonDisabled,
+                            nextMonthButtonDisabled,
+                          }) => (
+                            <div
+                              style={{
+                                margin: 10,
+                                display: "flex",
+                                justifyContent: "center",
+                              }}
+                            >
+                              <button
+                                onClick={decreaseMonth}
+                                disabled={prevMonthButtonDisabled}
+                              >
+                                {"<"}
+                              </button>
+                              <select
+                                value={getYear(date)}
+                                onChange={({ target: { value } }) =>
+                                  changeYear(parseInt(value))
+                                }
+                              >
+                                {years.map((option) => (
+                                  <option key={option} value={option}>
+                                    {option}
+                                  </option>
+                                ))}
+                              </select>
+
+                              <select
+                                value={months[getMonth(date)]}
+                                onChange={({ target: { value } }) =>
+                                  changeMonth(months.indexOf(value))
+                                }
+                              >
+                                {months.map((option) => (
+                                  <option key={option} value={option}>
+                                    {t(option)}
+                                  </option>
+                                ))}
+                              </select>
+
+                              <button
+                                onClick={increaseMonth}
+                                disabled={nextMonthButtonDisabled}
+                              >
+                                {">"}
+                              </button>
+                            </div>
+                          )}
+                        />
+                      ) : null}
+                    </div>
+                  );
+                })}
+              </div>
+              <button
+                className="create-debate-button"
+                onClick={() => navigate("/debate/create")}
+              >
+                <span>{t("page.debate.button.create")}</span>
+                <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
+              </button>
+            </div>
+            <div className="content-container">
+              <InfiniteScroll
+                api={`debate?category=${categories}&search=${debouncedSearch}&searchby=${
+                  searchBys[searchByIdx].value
+                }&sortby=${sortBys[sortByIdx].value}${
+                  sortByIdx == 2 ? "&from_=" + getDate(from) : ""
+                }`}
+                likes_api={`debates/like`}
+                setItems={setDebates}
+                page={debatePage}
+                setPage={setDebatePage}
+                hasMore={debateHasMore}
+                setHasMore={setDebateHasMore}
+                likes={debateLikes}
+                setLikes={setDebateLikes}
+                hasNoItem={debates.length === 0}
+                hasNoItemMessage={t("page.debate.item.no-debate-item")}
+                refreshCondition={
+                  categories !== prevValueRef.current.categories ||
+                  debouncedSearch !== prevValueRef.current.debouncedSearch ||
+                  searchByIdx !== prevValueRef.current.searchByIdx ||
+                  sortByIdx !== prevValueRef.current.sortByIdx ||
+                  from !== prevValueRef.current.from
+                }
+                dependency={[prevValueRef]}
+              >
+                {debates.map((debate, index) => (
+                  <DebateCard
+                    key={"debate" + index}
+                    idx={index}
+                    debate={debate}
+                    hasLiked={debateLikes[index]}
+                    setHasLiked={setDebateLikes}
+                  />
+                ))}
+              </InfiniteScroll>
+            </div>
           </div>
-          <div className="content-container">
-            <InfiniteScroll
-              api={`debate?search=${debouncedSearch}&searchby=${
-                searchBys[searchByIdx].value
-              }&sortby=${sortBys[sortByIdx].value}${
-                sortByIdx == 2 ? "&from_=" + getDate(from) : ""
-              }`}
-              likes_api={`debates/like`}
-              setItems={setDebates}
-              page={debatePage}
-              setPage={setDebatePage}
-              hasMore={debateHasMore}
-              setHasMore={setDebateHasMore}
-              likes={debateLikes}
-              setLikes={setDebateLikes}
-              hasNoItem={debates.length === 0}
-              hasNoItemMessage={t("page.debate.item.no-debate-item")}
-              refreshCondition={
-                debouncedSearch !== prevValueRef.current.debouncedSearch ||
-                searchByIdx !== prevValueRef.current.searchByIdx ||
-                sortByIdx !== prevValueRef.current.sortByIdx ||
-                from !== prevValueRef.current.from
-              }
-              dependency={[prevValueRef]}
-            >
-              {debates.map((debate, index) => (
-                <DebateCard
-                  key={"debate" + index}
+          <div className="right-container">
+            <div className="right-container-title">
+              {t("page.debate.title.popular")}
+            </div>
+            <div className="right-container-content">
+              {popularSummaries.map((summary, index) => (
+                <PopularSummaryCard
+                  key={"summary" + index}
                   idx={index}
-                  debate={debate}
-                  hasLiked={debateLikes[index]}
-                  setHasLiked={setDebateLikes}
+                  summary={summary}
+                  hasLiked={popularSummaryLikes[index]}
+                  setHasLiked={setPopularSummaryLikes}
                 />
               ))}
-            </InfiniteScroll>
-          </div>
-        </div>
-        <div className="right-container">
-          <div className="right-container-title">
-            {t("page.debate.title.popular")}
-          </div>
-          <div className="right-container-content">
-            {popularSummaries.map((summary, index) => (
-              <PopularSummaryCard
-                key={"summary" + index}
-                idx={index}
-                summary={summary}
-                hasLiked={popularSummaryLikes[index]}
-                setHasLiked={setPopularSummaryLikes}
-              />
-            ))}
+            </div>
           </div>
         </div>
       </div>
