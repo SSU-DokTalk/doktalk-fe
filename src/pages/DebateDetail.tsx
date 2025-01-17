@@ -6,7 +6,7 @@ import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import ProfileIcon from "@/components/base/ProfileIcon";
 import { useEffect, useState } from "react";
 import axios from "axios";
-import { DebateType } from "@/types/data";
+import { DebateType, PaymentType } from "@/types/data";
 import { InitialDebate } from "@/types/initialValue";
 import { getDateTime, getTimeDiff } from "@/functions";
 import Image from "@/components/base/Image";
@@ -15,12 +15,59 @@ function DebateDetail() {
   const { debate_id } = useParams();
   const [debate, setDebate] = useState<DebateType>(InitialDebate);
 
+  const [purchaseId, setPurchaseId] = useState<number>(0);
+
   useEffect(() => {
     axios.get(`/api/debate/${debate_id}`).then((res) => {
       let { data }: { data: DebateType } = res;
       setDebate(data);
     });
   }, [debate_id]);
+
+  const doPurchase = () => {
+    // 추후 PG사 연동하여 API 작성
+    // 현재는 결제 API가 없으므로 무조건 성공으로 가정
+    console.log({
+      product_type: "D",
+      product_id: debate.id,
+      price: debate.price,
+      quantity: 1,
+    });
+    axios
+      .post(`/api/purchase`, {
+        product_type: "D",
+        product_id: debate.id,
+        price: debate.price,
+        quantity: 1,
+      })
+      .then((res) => {
+        console.log(res);
+      });
+  };
+
+  const cancelPurchase = () => {
+    axios.delete(`/api/purchase/${purchaseId}`).then(
+      (res) => {
+        console.log(res.data);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
+
+  const getPurchase = () => {
+    axios.get(`/api/purchase/D/${debate.id}`).then(
+      (res) => {
+        let { data }: { data: PaymentType } = res;
+        setPurchaseId(data.id);
+        console.log(data);
+      },
+      (err) => {
+        console.log(err);
+      }
+    );
+  };
 
   return (
     <div id="debate-detail">
@@ -82,6 +129,9 @@ function DebateDetail() {
 
         <div className="discussion-info__likes">
           <FontAwesomeIcon icon={faHeart} className="like-icon" />
+          <span className="discussion-info__likes__text">
+            {debate.likes_num}
+          </span>
         </div>
       </div>
       <div className="payment-box">
@@ -90,12 +140,20 @@ function DebateDetail() {
         </p>
 
         <div className="payment-box__info">
-          <button className="payment-box__currency">
+          <button
+            className="payment-box__currency"
+            onClick={() => cancelPurchase()} // 결제 테스트용
+          >
             <FontAwesomeIcon icon={faCartPlus} />
             {""} 찜
           </button>
-          <span className="payment-box__amount">1,000 원</span>
-          <button className="payment-box__button">
+          <span
+            className="payment-box__amount"
+            onClick={getPurchase} // 결제 테스트용
+          >
+            1,000 원
+          </span>
+          <button className="payment-box__button" onClick={doPurchase}>
             결제하기{" "}
             <FontAwesomeIcon
               icon={faChevronRight}

@@ -87,6 +87,7 @@ export type DebateType = {
   held_at: Date;
   title: string;
   content: string;
+  price: number;
   likes_num: number;
   comments_num: number;
   created: Date;

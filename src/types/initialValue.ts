@@ -5,6 +5,7 @@ import {
   BasicUserType,
   DebateType,
   BookType,
+  PaymentType,
 } from "@/types/data";
 
 export const initialLoginUserInfo: LoginUserInfoType = {
@@ -61,6 +62,7 @@ export const InitialDebate: DebateType = {
   location: undefined,
   link: undefined,
   held_at: new Date(),
+  price: 0,
   title: "",
   content: "",
   likes_num: 0,
@@ -68,6 +70,21 @@ export const InitialDebate: DebateType = {
   created: new Date(),
   updated: new Date(),
   files: undefined,
+};
+
+export const InitialPayment: PaymentType = {
+  id: 0,
+  user_id: 0,
+  user: InitialUser as BasicUserType,
+  product_type: "D",
+  product_id: 0,
+  content: undefined,
+  price: 0,
+  quantity: 0,
+  created: new Date(),
+  updated: new Date(),
+  is_deleted: false,
+  deleted_at: undefined,
 };
 
 export type UserTabsCandidate = "/post" | "/library";

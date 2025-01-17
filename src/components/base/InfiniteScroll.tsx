@@ -41,6 +41,7 @@ function InfiniteScroll({
   setItems,
   page = undefined,
   setPage = undefined,
+  setTotal = undefined,
   hasMore = undefined,
   setHasMore = undefined,
   likes = undefined,
@@ -63,6 +64,7 @@ function InfiniteScroll({
   setItems: React.Dispatch<React.SetStateAction<any[]>>;
   page?: number | undefined;
   setPage?: React.Dispatch<React.SetStateAction<number>> | undefined;
+  setTotal?: React.Dispatch<React.SetStateAction<number>>;
   hasMore?: boolean | undefined;
   setHasMore?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
   likes?: boolean[];
@@ -109,7 +111,8 @@ function InfiniteScroll({
               total: number;
             } = res.data;
             if (pg <= pages) {
-              setItems?.((prevItems) => [...prevItems, ...items]);
+              setItems((prevItems) => [...prevItems, ...items]);
+              setTotal?.(total);
               await (setHasMore ?? setInherentHasMore)(pg != pages);
               await (setPage ?? setInherentPage)(pg + 1);
             } else {
@@ -166,6 +169,7 @@ function InfiniteScroll({
       (setHasMore ?? setInherentHasMore)(true);
       setLikes?.([]);
       setItems([]);
+      setTotal?.(0);
     }
     if (elementRef.current) {
       observer.observe(elementRef.current);
