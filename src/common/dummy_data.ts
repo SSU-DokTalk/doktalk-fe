@@ -241,6 +241,7 @@ export const DUMMY_DEBATES: DebateType[] = [
     held_at: new Date("2025-01-08T15:35:29.002Z"),
     title:
       "1토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 ",
+    price: 0,
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
@@ -274,6 +275,7 @@ export const DUMMY_DEBATES: DebateType[] = [
     held_at: new Date("2025-01-08T15:35:29.002Z"),
     title:
       "2토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 ",
+    price: 0,
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
@@ -307,6 +309,7 @@ export const DUMMY_DEBATES: DebateType[] = [
     held_at: new Date("2025-01-08T15:35:29.002Z"),
     title:
       "3토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 ",
+    price: 0,
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
@@ -340,6 +343,7 @@ export const DUMMY_DEBATES: DebateType[] = [
     held_at: new Date("2025-01-08T15:35:29.002Z"),
     title:
       "4토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 ",
+    price: 0,
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
@@ -373,6 +377,7 @@ export const DUMMY_DEBATES: DebateType[] = [
     held_at: new Date("2025-01-08T15:35:29.002Z"),
     title:
       "5토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 토론방 제목 ",
+    price: 0,
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
