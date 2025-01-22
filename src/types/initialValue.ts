@@ -6,6 +6,7 @@ import {
   DebateType,
   BookType,
   PaymentType,
+  SummaryType,
 } from "@/types/data";
 
 export const initialLoginUserInfo: LoginUserInfoType = {
@@ -65,6 +66,23 @@ export const InitialDebate: DebateType = {
   price: 0,
   title: "",
   content: "",
+  likes_num: 0,
+  comments_num: 0,
+  created: new Date(),
+  updated: new Date(),
+  files: undefined,
+};
+
+export const InitialSummary: SummaryType = {
+  id: 0,
+  user_id: 0,
+  user: InitialUser as BasicUserType,
+  isbn: 0,
+  book: InitialBook,
+  title: "",
+  free_content: "",
+  charged_content: "",
+  price: 0,
   likes_num: 0,
   comments_num: 0,
   created: new Date(),
