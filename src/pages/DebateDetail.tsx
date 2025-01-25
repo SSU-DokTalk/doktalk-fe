@@ -10,12 +10,16 @@ import { DebateType, PaymentType } from "@/types/data";
 import { InitialDebate } from "@/types/initialValue";
 import { getDateTime, getTimeDiff } from "@/functions";
 import Image from "@/components/base/Image";
+import { selectUser } from "@/stores/user";
+import { useAppSelector } from "@/stores/hooks";
 
 function DebateDetail() {
   const { debate_id } = useParams();
   const [debate, setDebate] = useState<DebateType>(InitialDebate);
 
   const [purchaseId, setPurchaseId] = useState<number>(0);
+
+  const user = useAppSelector(selectUser);
 
   useEffect(() => {
     axios.get(`/api/debate/${debate_id}`).then((res) => {
@@ -87,8 +91,12 @@ function DebateDetail() {
         </div>
 
         <div className="user-header__actions">
-          <button>수정</button>
-          <button className="delete">삭제</button>
+          {user.id === debate.user.id && (
+            <>
+              <button>수정</button>
+              <button className="delete">삭제</button>
+            </>
+          )}
         </div>
       </div>
       <div className="discussion-info">
