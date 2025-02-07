@@ -71,5 +71,6 @@ export function getCategoryFromNumber(
   if (category & (1 << 5)) categories.push(CATEGORY.ESSAY);
   if (category & (1 << 6)) categories.push(CATEGORY.TEENAGER);
   if (category & (1 << 7)) categories.push(CATEGORY.CHILD);
+  if (category & (1 << 8)) categories.push(CATEGORY.WEBTOON);
   return categories;
 }

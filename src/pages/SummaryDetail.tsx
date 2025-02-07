@@ -12,7 +12,6 @@ import Image from "@/components/base/Image";
 import { selectUser } from "@/stores/user";
 import { useAppSelector } from "@/stores/hooks";
 import { InitialSummary } from "@/types/initialValue";
-import "@/assets/css/pages/_summary_detail.scss";
 
 function SummaryDetail() {
   const { summary_id } = useParams();

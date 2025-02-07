@@ -252,3 +252,49 @@
     width: 70%;
   }
 }
+
+#comment-section {
+  background-color: v.$brand-color3;
+  border-radius: 30px;
+  padding: 20px 30px;
+
+  .title {
+    font-size: 20px;
+    font-weight: 600;
+    margin-bottom: 15px;
+  }
+  .comment-box {
+    border: 1px solid v.$brand-color4;
+    border-radius: 10px;
+    background-color: white;
+    padding: 20px 20px;
+
+    &__upper {
+      display: flex;
+      justify-content: space-between;
+    }
+    &__input {
+      border: 1px solid v.$brand-color4;
+      border-radius: 10px;
+      padding: 10px 15px;
+      width: calc(100% - (34px + 25px));
+      resize: none;
+    }
+    &__lower {
+      display: flex;
+      justify-content: flex-end;
+      margin-top: 10px;
+      button {
+        width: 100px;
+        height: 40px;
+        border: none;
+        border-radius: 10px;
+        background-color: v.$brand-color1;
+        color: white;
+        padding: 5px 10px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+    }
+  }
+}

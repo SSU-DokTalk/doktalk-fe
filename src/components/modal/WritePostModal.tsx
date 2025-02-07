@@ -1,17 +1,22 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from "react";
 import { Modal } from "react-bootstrap";
 import UploadFiles from "@/components/base/UploadFiles";
-import { ACCEPTABLE_IMAGE } from "@/common/variables";
+import { ACCEPTABLE } from "@/common/variables";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
+import { PostType } from "@/types/data";
 
 function WritePostModal({
+  post,
   showModal,
   setShowModal,
+  isEdit = false,
   setDidPost = undefined,
 }: {
+  post?: PostType;
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
+  isEdit?: boolean;
   setDidPost?: Dispatch<SetStateAction<boolean>>;
 }) {
   const [postData, setPostData] = useState<{
@@ -23,8 +28,17 @@ function WritePostModal({
   });
   const [files, setFiles] = useState<File[]>([]);
 
+  useEffect(() => {
+    if (isEdit && post) {
+      setPostData({
+        title: post.title,
+        content: post.content,
+      });
+    }
+  }, [isEdit, post]);
+
   const doPost = async () => {
-    const imageUrls = await Promise.all(
+    const filesRes = await Promise.all(
       files.map(
         async (file) => {
           const formData = new FormData();
@@ -46,10 +60,11 @@ function WritePostModal({
         () => null
       )
     );
+    console.log(filesRes);
     await axios
       .post("/api/post", {
         ...postData,
-        files: imageUrls,
+        files: filesRes,
       })
       .then(
         () => {
@@ -97,7 +112,7 @@ function WritePostModal({
           <div className="post-files-container">
             <UploadFiles
               setFiles={setFiles}
-              accept={ACCEPTABLE_IMAGE.join()}
+              accept={ACCEPTABLE.join()}
               buttonText="사진 추가"
               buttonIcon={faImage}
               previewSize={102}

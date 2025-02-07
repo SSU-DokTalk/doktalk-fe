@@ -89,16 +89,14 @@ function PostCard({
         onClick={() => navigate(`/post/${post.id}`)}
       >
         {post.files
-          ?.filter(
-            (file) =>
-              !file.startsWith(import.meta.env.VITE_IMG_SRC) ||
-              ACCEPTABLE_IMAGE.includes(`.${getFileTypeFromUrl(file)}`)
+          ?.filter((file) =>
+            ACCEPTABLE_IMAGE.includes(`.${getFileTypeFromUrl(file.url)}`)
           )
           .slice(0, 2)
           .map((file, index) => {
             return (
               <Image
-                src={file}
+                src={file.url}
                 alt={`image${index}`}
                 width={"49%"}
                 key={index}

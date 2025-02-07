@@ -9,5 +9,6 @@
 @use "./pages/summary";
 @use "./pages/create_summary";
 @use "./pages/create_debate";
-@use "./pages/debate_detail";
-@use "./pages/summary_detail";
+@use "./pages/detail/post_detail";
+@use "./pages/detail/debate_detail";
+@use "./pages/detail/summary_detail";

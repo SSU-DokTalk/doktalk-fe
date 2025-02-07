@@ -13,5 +13,6 @@ export const CATEGORY: {
   ESSAY: { name: "var.category.ESSAY", value: 1 << 5 },
   TEENAGER: { name: "var.category.TEENAGER", value: 1 << 6 },
   CHILD: { name: "var.category.CHILD", value: 1 << 7 },
+  WEBTOON: { name: "var.category.WEBTOON", value: 1 << 8 },
 } as const;
 export type CATEGORY_KEY = keyof typeof CATEGORY;

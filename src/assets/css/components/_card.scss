@@ -722,3 +722,83 @@
     }
   }
 }
+
+#comment-card {
+  display: flex;
+  justify-content: space-between;
+  padding: 20px 20px;
+  border: 1px solid v.$brand-color4;
+  border-radius: 10px;
+  background-color: white;
+  .comment-card {
+    &__container {
+      width: calc(100% - 34px - 15px);
+    }
+    &__nickname {
+      font-size: 15px;
+      font-weight: 600;
+      color: black;
+    }
+    &__time {
+      font-size: 12px;
+      font-weight: 400;
+      color: v.$brand-color5;
+    }
+    &__content {
+      font-size: 15px;
+      font-weight: 400;
+      line-break: normal;
+      word-break: break-all;
+    }
+    &__additional {
+      display: flex;
+      justify-content: flex-start;
+      gap: 10px;
+    }
+    &__reply {
+      font-size: 12px;
+      font-weight: 400;
+      color: v.$brand-color5;
+    }
+    &__like {
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      font-size: 12px;
+      font-weight: 400;
+      color: v.$brand-color5;
+    }
+  }
+}
+
+#file-card {
+  width: 245px;
+  height: 55px;
+  display: flex;
+  border: 1px solid v.$brand-color4;
+  border-radius: 10px;
+  padding: 0 20px;
+  justify-content: center;
+  align-items: center;
+
+  .download-file {
+    display: inline-flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+    text-decoration: none;
+    color: black;
+    cursor: pointer;
+
+    .filename {
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: calc(100% - 36px - 20px);
+    }
+    .file-ext {
+    }
+  }
+}

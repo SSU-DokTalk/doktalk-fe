@@ -52,7 +52,7 @@ export type PostType = {
   user: BasicUserType;
   title: string;
   content: string;
-  files?: string[];
+  files?: { name: string; url: string }[];
   likes_num: number;
   comments_num: number;
   created: Date;
@@ -126,4 +126,17 @@ export type PaymentType = {
   updated: Date;
   is_deleted: boolean;
   deleted_at?: Date;
+};
+
+export type CommentType = {
+  id: number;
+  user_id: number;
+  user: BasicUserType;
+  post_id: number;
+  upper_comment_id: number;
+  content: string;
+  comments_num: number;
+  likes_num: number;
+  created: Date;
+  updated: Date;
 };
