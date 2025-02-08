@@ -245,6 +245,8 @@ export const DUMMY_DEBATES: DebateType[] = [
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
+    category: 0,
+    limit: 2,
     likes_num: 0,
     comments_num: 0,
     created: new Date("2025-01-08T15:35:29.002Z"),
@@ -279,6 +281,8 @@ export const DUMMY_DEBATES: DebateType[] = [
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
+    category: 0,
+    limit: 2,
     likes_num: 0,
     comments_num: 0,
     created: new Date("2025-01-08T15:35:29.002Z"),
@@ -313,6 +317,8 @@ export const DUMMY_DEBATES: DebateType[] = [
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
+    category: 0,
+    limit: 2,
     likes_num: 0,
     comments_num: 0,
     created: new Date("2025-01-08T15:35:29.002Z"),
@@ -347,6 +353,8 @@ export const DUMMY_DEBATES: DebateType[] = [
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
+    category: 0,
+    limit: 2,
     likes_num: 0,
     comments_num: 0,
     created: new Date("2025-01-08T15:35:29.002Z"),
@@ -381,6 +389,8 @@ export const DUMMY_DEBATES: DebateType[] = [
     content:
       "내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 내용 미리보기 ",
     files: ["https://example.com/"],
+    category: 0,
+    limit: 2,
     likes_num: 0,
     comments_num: 0,
     created: new Date("2025-01-08T15:35:29.002Z"),

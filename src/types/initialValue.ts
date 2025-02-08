@@ -66,6 +66,8 @@ export const InitialDebate: DebateType = {
   price: 0,
   title: "",
   content: "",
+  category: 0,
+  limit: 2,
   likes_num: 0,
   comments_num: 0,
   created: new Date(),
