@@ -64,9 +64,13 @@
       .dropdown {
         align-self: flex-end;
         .dropdown-menu {
-          min-width: 50vh;
+          min-width: 40vw;
+          height: 40vh;
           width: fit-content;
+          overflow: scroll;
         }
+      }
+      .book-thumbnail {
       }
       .input-box {
         width: 80%;
@@ -87,6 +91,15 @@
             color: v.$brand-color5;
           }
         }
+        .react-datepicker-wrapper {
+          width: 100%;
+        }
+        .custom-input {
+          width: 100%;
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
       }
       .input-box-short {
         width: 90px;
@@ -106,6 +119,13 @@
           ::placeholder {
             color: v.$brand-color5;
           }
+        }
+      }
+      .category-input {
+        justify-content: space-between;
+        .category-container {
+          display: flex;
+          flex-wrap: wrap;
         }
       }
       span {

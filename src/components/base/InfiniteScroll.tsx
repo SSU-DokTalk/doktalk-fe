@@ -89,6 +89,7 @@ function InfiniteScroll({
   const fetchMoreItems = async () => {
     if (beforeFetch) await beforeFetch();
     if (condition && (hasMore ?? inherentHasMore)) {
+      console.log(api);
       await axios
         .get(`/api/${api}`, {
           params: {

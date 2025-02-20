@@ -1,3 +1,8 @@
+export type FileType = {
+  name: string;
+  url: string;
+};
+
 export type BasicUserType = {
   id: number;
   name: string;
@@ -52,7 +57,7 @@ export type PostType = {
   user: BasicUserType;
   title: string;
   content: string;
-  files?: { name: string; url: string }[];
+  files?: FileType[];
   likes_num: number;
   comments_num: number;
   created: Date;
@@ -68,8 +73,9 @@ export type SummaryType = {
   title: string;
   free_content: string;
   charged_content: string;
+  category: number;
   price: number;
-  files?: string[];
+  files?: FileType[];
   likes_num: number;
   comments_num: number;
   created: Date;
@@ -94,7 +100,7 @@ export type DebateType = {
   comments_num: number;
   created: Date;
   updated: Date;
-  files?: string[];
+  files?: FileType[];
 };
 
 export type MyBookType = {

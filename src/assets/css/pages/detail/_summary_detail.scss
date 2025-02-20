@@ -1,256 +1,194 @@
 @use "../../variables" as v;
 
 #summary-detail {
-  max-width: 600px;
-  margin-right: auto;
-  margin-left: 100px;
-  margin-top: 48px;
-
-  .discussion-info {
-    margin-top: 16px;
-
-    &__title {
-      font-size: 1.5rem;
-      font-weight: bold;
-      margin-bottom: 16px;
-    }
-
-    &__grid {
-      display: grid;
-      gap: 8px;
-    }
-
-    &__item {
+  display: flex;
+  margin-top: 40px;
+  .container {
+    width: 70%;
+    .header {
       display: flex;
-      align-items: center;
-      grid-template-columns: 1fr 1fr;
+      justify-content: space-between;
+      &__container {
+        width: calc(100% - 50px - 20px);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
 
-      strong {
-        padding: 4px;
-        border-radius: 5px;
-        text-align: center;
-        width: 100px;
-        font-weight: 500;
-        background: v.$brand-color3;
-        color: v.$brand-color1;
+        .user-info {
+          .nickname {
+            font-size: 20px;
+            font-weight: 600;
+          }
+          .time {
+            font-size: 15px;
+            font-weight: 400;
+            color: v.$brand-color5;
+          }
+        }
+        .actions {
+          display: flex;
+          gap: 5px;
+          button {
+            border-radius: 5px;
+            background-color: white;
+            font-size: 15px;
+            font-weight: 400;
+            padding: 2px 15px;
+          }
+          .edit {
+            border: 1px solid v.$brand-color4;
+            color: v.$brand-color5;
+          }
+          .delete {
+            border: 1px solid v.$red;
+            color: v.$red;
+          }
+        }
       }
+    }
+    .content {
+      .title {
+        font-size: 25px;
+        font-weight: 600;
+      }
+      &__text {
+        font-size: 15px;
+        font-weight: 400;
+        text-wrap: wrap;
+      }
+      &__image-container {
+      }
+      &__image {
+      }
+      &__file-container {
+        margin-top: 10px;
+      }
+      &__like-container {
+        margin-top: 20px;
+        display: flex;
+        font-size: 17px;
+        font-weight: 400;
+        align-items: center;
+        color: v.$brand-color5;
+      }
+      &__like {
+        margin-left: 5px;
+      }
+      .liked {
+        color: #e03131;
+      }
+      .like-icon {
+        cursor: pointer;
+      }
+    }
+  }
 
-      span {
-        margin-left: 8px;
+  .additional-info {
+    margin-top: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+
+    .item {
+      display: flex;
+      gap: 10px;
+
+      .label {
+        width: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgba(243, 244, 247, 1);
+        border: none;
+        border-radius: 5px;
+        color: v.$brand-color1;
+        font-size: 15px;
+        font-weight: 400;
+      }
+      .content {
+        width: 90%;
+      }
+    }
+  }
+  .payment {
+    &__container {
+      position: relative;
+      width: 100%;
+      height: 11rem;
+
+      .charged-content {
+        overflow: hidden;
+        text-wrap: wrap;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 8;
+        -webkit-box-orient: vertical;
       }
     }
 
-    .book {
-      strong {
+    &__box {
+      position: absolute;
+      top: 0;
+      width: 100%;
+      height: 11rem;
+      display: flex;
+      backdrop-filter: blur(8px);
+      flex-direction: column;
+      justify-content: center;
+      padding: 0 56px;
+
+      &__title {
+        color: v.$brand-color1;
+        font-size: 20px;
+        font-weight: 600;
+        margin-bottom: 16px;
+      }
+
+      &__info {
         display: flex;
         align-items: center;
-        justify-content: center;
-        height: 100%;
-      }
-    }
-
-    &__cover {
-      margin-left: 8px;
-    }
-
-    &__description {
-      margin-top: 16px;
-      line-height: 1.4;
-    }
-
-    &__likes {
-      margin-top: 8px;
-      color: #555;
-
-      &__text {
-        margin-left: 8px;
-      }
-    }
-  }
-
-  .user-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-
-    &__info {
-      display: flex;
-      align-items: center;
-    }
-
-    &__avatar {
-      margin-right: 12px;
-    }
-
-    &__text {
-      display: flex;
-      flex-direction: column;
-    }
-
-    &__nickname {
-      font-weight: 600;
-      font-size: 1rem;
-    }
-
-    &__time {
-      font-size: 0.875rem;
-      color: #888;
-    }
-
-    &__actions {
-      display: flex;
-      align-items: center;
-
-      button {
-        padding: 4px 16px;
-      }
-
-      .delete {
-        border-color: #f00;
-        color: #f00;
-      }
-    }
-  }
-
-  .payment-box {
-    margin-top: 32px;
-    padding: 24px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    backdrop-filter: blur(10px);
-
-    &__title {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 16px;
-    }
-
-    &__info {
-      display: flex;
-      align-items: center;
-
-      .payment-box__currency {
-        margin-right: 16px;
-        font-weight: bold;
-        font-size: 1rem;
-        color: v.$brand-color1;
-        cursor: pointer;
-        background: v.$brand-color3;
-        border: none;
-      }
-
-      .payment-box__amount {
-        font-size: 1rem;
-        margin-right: 16px;
-      }
-    }
-
-    &__button {
-      color: v.$brand-color1;
-      border: none;
-      padding: 10px 16px;
-      border-radius: 4px;
-      cursor: pointer;
-      text-decoration: underline v.$brand-color1;
-    }
-  }
-
-  .comment-box {
-    margin-top: 32px;
-    padding: 24px;
-    border: 1px solid #ddd;
-    border-radius: 8px;
-    background-color: v.$brand-color3;
-    backdrop-filter: blur(10px);
-
-    &__title {
-      font-size: 1rem;
-      font-weight: 500;
-      margin-bottom: 16px;
-    }
-
-    .comment {
-      display: flex;
-      align-items: center;
-      margin-top: 16px;
-    }
-
-    textarea {
-      width: 90%;
-      margin-left: auto;
-      padding: 8px;
-      border: 1px solid #ccc;
-      border-radius: 4px;
-      margin-top: 16px;
-      resize: none;
-    }
-
-    &__content {
-      margin-top: 16px;
-      line-height: 1.4;
-    }
-
-    &__input {
-      width: 100%;
-      display: flex;
-      justify-content: end;
-
-      button {
-        margin-top: 16px;
-        border: 1px solid #ccc;
-        background-color: v.$brand-color1;
-        color: white;
-        padding: 6px 24px;
-        border-radius: 10px;
-        cursor: pointer;
-        margin-left: auto;
-      }
-    }
-
-    &__comments {
-      display: flex;
-      flex-direction: column;
-      width: 100%;
-
-      .comment {
-        margin-top: 16px;
-        padding: 16px;
-        border: 1px solid #ddd;
-        border-radius: 8px;
-        background-color: #fff;
-        backdrop-filter: blur(10px);
-        display: flex;
-        align-items: start;
-
-        &__text {
+        gap: 16px;
+        .box {
+          border: none;
+          border-radius: 10px;
           display: flex;
-          flex-direction: column;
-          margin-left: 16px;
-          line-height: 1.4;
-        }
-
-        &__info {
-          display: flex;
+          height: 40px;
           align-items: center;
+          justify-content: center;
+          font-size: 15px;
+          font-weight: 600;
+        }
+        .into-cart {
+          background: rgba(243, 244, 247, 1);
+          color: v.$brand-color1;
+          width: 80px;
+          gap: 8px;
+        }
+        .purchase {
+          background: white;
+          color: v.$brand-color1;
+          gap: 38px;
+          padding: 0 20px;
+          border: 1px solid v.$brand-color3;
 
-          &__text {
-            &__nickname {
-            }
-
-            &__content {
-            }
+          .price {
+            color: black;
+          }
+          .do-purchase {
+            text-decoration: underline;
           }
         }
       }
     }
   }
 
-  button {
-    border: 1px solid #ccc;
-    color: #000;
-    padding: 6px 12px;
-    border-radius: 4px;
-    cursor: pointer;
-    margin-left: 8px;
+  .offset {
+    width: 30%;
+  }
+  #comment-section {
+    margin-top: 28px;
+    #comment-card {
+      margin-top: 14px;
+    }
   }
 }

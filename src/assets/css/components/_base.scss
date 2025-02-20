@@ -115,3 +115,22 @@
     }
   }
 }
+
+#book-search-result {
+  display: flex;
+  padding: 20px 30px;
+  .book-info {
+    margin-left: 10px;
+    width: calc(100% - 70px - 10px);
+    .title {
+      font-size: 15px;
+      font-weight: 600;
+      color: black;
+    }
+    .info {
+      font-size: 12px;
+      font-weight: 600;
+      color: v.$brand-color5;
+    }
+  }
+}

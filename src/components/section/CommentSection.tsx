@@ -8,7 +8,6 @@ import { selectUser } from "@/stores/user";
 import InfiniteScroll from "@/components/base/InfiniteScroll";
 
 function CommentSection({
-  isItemExist,
   itemType,
   itemId,
   total,
@@ -17,7 +16,6 @@ function CommentSection({
   commentsApi,
   commentLikesApi,
 }: {
-  isItemExist: boolean;
   itemType: "post" | "summary" | "debate";
   itemId: number;
   total: number;
@@ -60,7 +58,10 @@ function CommentSection({
       });
   };
 
-  useEffect(() => {}, [itemId, total]);
+  useEffect(() => {
+    console.log("CommentSection");
+    console.log(commentsApi);
+  }, [itemId, total]);
 
   return (
     <div id="comment-section">
@@ -90,7 +91,7 @@ function CommentSection({
         likes={commentLikes}
         setLikes={setCommentLikes}
         hasNoItem={comments.length === 0}
-        condition={isItemExist}
+        condition={itemId != 0}
         refreshCondition={didComment}
         dependency={[itemId, didComment]}
         afterFetchSuccess={async () => {

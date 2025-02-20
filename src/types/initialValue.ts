@@ -85,6 +85,7 @@ export const InitialSummary: SummaryType = {
   free_content: "",
   charged_content: "",
   price: 0,
+  category: 0,
   likes_num: 0,
   comments_num: 0,
   created: new Date(),

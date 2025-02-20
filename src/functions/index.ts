@@ -74,3 +74,11 @@ export function getCategoryFromNumber(
   if (category & (1 << 8)) categories.push(CATEGORY.WEBTOON);
   return categories;
 }
+
+export function addCategory(category: number, value: number): number {
+  return category | value;
+}
+
+export function removeCategory(category: number, value: number): number {
+  return category & ~value;
+}

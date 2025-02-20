@@ -1,214 +1,249 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
+
+import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons/faCartPlus";
-import { faChevronRight } from "@fortawesome/free-solid-svg-icons";
 import ProfileIcon from "@/components/base/ProfileIcon";
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { PaymentType, SummaryType } from "@/types/data";
-import { getTimeDiff } from "@/functions";
+import {
+  getCategoryFromNumber,
+  getFileTypeFromUrl,
+  getTimeDiff,
+} from "@/functions";
 import Image from "@/components/base/Image";
 import { selectUser } from "@/stores/user";
 import { useAppSelector } from "@/stores/hooks";
 import { InitialSummary } from "@/types/initialValue";
+import CommentSection from "../components/section/CommentSection";
+import { useTranslation } from "react-i18next";
+import { ACCEPTABLE_FILE, ACCEPTABLE_IMAGE } from "@/common/variables";
+import FileCard from "@/components/card/FileCard";
 
 function SummaryDetail() {
   const { summary_id } = useParams();
   const [summary, setSummary] = useState<SummaryType>(InitialSummary);
-  const [comments, setComments] = useState<any[]>([]);
-
   const [purchaseId, setPurchaseId] = useState<number>(0);
+  const [hasLiked, setHasLiked] = useState<boolean>(false);
 
   const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const getPurchase = (summary_id: number) => {
+    axios.get(`/api/purchase/S/${summary_id}`).then((res) => {
+      let { data }: { data: PaymentType } = res;
+      setPurchaseId(data.id);
+      axios.get(`/api/summary/${summary_id}/charged_content`).then((res) => {
+        setSummary({ ...summary, charged_content: res.data });
+      });
+    });
+  };
 
   useEffect(() => {
+    if (parseInt(summary_id ?? "0") == 0) return;
     axios.get(`/api/summary/${summary_id}`).then((res) => {
       let { data }: { data: SummaryType } = res;
       setSummary(data);
     });
 
-    axios.get(`/api/summary/${summary_id}/comments`).then((res) => {
-      let { data }: { data: any[] } = res;
-      setComments(data);
-    });
-  }, [summary_id]);
+    axios
+      .get(`/api/summarys/like`, {
+        params: {
+          ids: summary_id,
+        },
+      })
+      .then((res) => {
+        let { data }: { data: boolean[] } = res;
+        setHasLiked(data[0]);
+      });
+
+    getPurchase(parseInt(summary_id ?? "0"));
+  }, [summary_id, purchaseId]);
 
   const doPurchase = () => {
     // 추후 PG사 연동하여 API 작성
     // 현재는 결제 API가 없으므로 무조건 성공으로 가정
-    console.log({
-      product_type: "D",
-      product_id: summary.id,
-      price: summary.price,
-      quantity: 1,
-    });
     axios
       .post(`/api/purchase`, {
-        product_type: "D",
+        product_type: "S",
         product_id: summary.id,
+        content: "요약 구매",
         price: summary.price,
         quantity: 1,
       })
-      .then((res) => {
-        console.log(res);
+      .then(() => {
+        getPurchase(parseInt(summary_id ?? "0"));
       });
   };
 
   const cancelPurchase = () => {
-    axios.delete(`/api/purchase/${purchaseId}`).then(
-      (res) => {
-        console.log(res.data);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.delete(`/api/purchase/${purchaseId}`);
   };
 
-  const getPurchase = () => {
-    axios.get(`/api/purchase/D/${summary.id}`).then(
-      (res) => {
-        let { data }: { data: PaymentType } = res;
-        setPurchaseId(data.id);
-        console.log(data);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+  const doLike = () => {
+    // Like API 호출
+    axios.post(`/api/summary/${summary.id}/like`).then(() => {
+      // 좋아요 성공
+      setHasLiked(true);
+      summary.likes_num++;
+    });
   };
 
-  const postComment = async () => {
-    await axios.post(`/api/summary/${summary.id}/comment`, {
-      upper_comment_id: 0,
-      content: "string",
+  const doUnlike = () => {
+    axios.delete(`/api/summary/${summary.id}/like`).then(() => {
+      setHasLiked(false);
+      summary.likes_num--;
+    });
+  };
+
+  const doDelete = () => {
+    axios.delete(`/api/summary/${summary.id}`).then(() => {
+      navigate("/summary");
     });
   };
 
   return (
     <div id="summary-detail">
-      <div className="user-header">
-        <div className="user-header__info">
-          <ProfileIcon
-            profile={summary.user.profile}
-            size={40}
-            className="user-header__avatar"
-          />
-          <div className="user-header__text">
-            <span className="user-header__nickname">{summary.user.name}</span>
-            <span className="user-header__time">
-              {getTimeDiff(summary.created)}
-            </span>
+      <div className="container">
+        <div className="header">
+          <ProfileIcon profile={summary.user.profile} size={50} />
+          <div className="header__container">
+            <div className="user-info">
+              <div className="nickname">{summary.user.name}</div>
+              <div className="time">{getTimeDiff(summary.created)}</div>
+            </div>
+            {summary.user.id == user.id && (
+              <div className="actions">
+                <button className="edit">수정</button>
+                <button className="delete" onClick={doDelete}>
+                  삭제
+                </button>
+              </div>
+            )}
           </div>
         </div>
+        <div className="content">
+          <h2 className="title">{summary.title}</h2>
+          <div className="additional-info">
+            <div className="item">
+              <div className="label">카테고리</div>
+              <div className="content">
+                {getCategoryFromNumber(summary.category)
+                  .map((category) => t(category.name))
+                  .join(", ")}
+              </div>
+            </div>
+            <div className="item">
+              <div className="label">지정 도서</div>
+              <div className="content">
+                <span>{summary.book.title}</span>
+                <Image src={summary.book.image} width="100px" height="140px" />
+              </div>
+            </div>
+          </div>
 
-        <div className="user-header__actions">
-          {user.id === summary.user.id && (
-            <>
-              <button>수정</button>
-              <button className="delete">삭제</button>
-            </>
+          <pre className="content__text free-content">
+            {summary.free_content}
+          </pre>
+
+          {purchaseId == 0 ? (
+            <div className="payment__container">
+              <pre className="content__text charged-content">
+                {summary.charged_content}
+              </pre>
+              <div className="payment__box ">
+                <p className="payment__box__title">
+                  이어서 읽으시려면 결제가 필요합니다.
+                </p>
+
+                <div className="payment__box__info">
+                  <button
+                    className="box into-cart"
+                    onClick={() => cancelPurchase()} // 결제 테스트용
+                  >
+                    <FontAwesomeIcon icon={faCartPlus} />
+                    {""} 찜
+                  </button>
+                  <button
+                    className="box purchase"
+                    onClick={doPurchase} // 결제 테스트용
+                  >
+                    <span className="price">{summary.price} 원</span>
+                    <span className="do-purchase">결제하기 →</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          ) : (
+            <pre className="content__text">{summary.charged_content}</pre>
           )}
-        </div>
-      </div>
-      <div className="discussion-info">
-        <h2 className="discussion-info__title">{summary.title}</h2>
 
-        <div className="discussion-info__grid">
-          <div className="discussion-info__item">
-            <strong>카테고리</strong>
-            <span>인문</span>
+          <div className="content__image-container">
+            {summary.files
+              ?.filter((file) =>
+                ACCEPTABLE_IMAGE.includes(`.${getFileTypeFromUrl(file.url)}`)
+              )
+              .map((file, idx) => {
+                return (
+                  <img
+                    key={"img" + idx}
+                    className="content__image"
+                    src={file.url}
+                    alt="content"
+                  />
+                );
+              })}
           </div>
-          <div className="discussion-info__item book">
-            <strong>지정 도서</strong>
-            <div>
-              <span>{summary.book.title}</span>
-              <Image
-                src={summary.book.image}
-                width="100px"
-                height="140px"
-                className="discussion-info__cover"
+          <div className="content__file-container">
+            {summary.files
+              ?.filter((file) =>
+                ACCEPTABLE_FILE.includes(`.${getFileTypeFromUrl(file.url)}`)
+              )
+              .map((file, idx) => {
+                return (
+                  <FileCard
+                    key={"file" + idx}
+                    file={file}
+                    className="content__file"
+                  />
+                );
+              })}
+          </div>
+
+          <div className="content__like-container">
+            {hasLiked ? (
+              <FontAwesomeIcon
+                icon={faHeartSolid}
+                fontSize={20}
+                className="like-icon liked"
+                onClick={doUnlike}
               />
-            </div>
+            ) : (
+              <FontAwesomeIcon
+                icon={faHeartRegular}
+                fontSize={20}
+                className="like-icon"
+                onClick={doLike}
+              />
+            )}
+            <span className="content__like">{summary.likes_num}</span>
           </div>
         </div>
 
-        <pre className="discussion-info__description">
-          {summary.free_content}
-        </pre>
-
-        <div className="discussion-info__likes">
-          <FontAwesomeIcon icon={faHeart} className="like-icon" />
-          <span className="discussion-info__likes__text">
-            {summary.likes_num}
-          </span>
-        </div>
+        <CommentSection
+          itemType="summary"
+          itemId={summary.id}
+          total={summary.comments_num}
+          setItem={setSummary}
+          api={`summary/${summary.id}/comment`}
+          commentsApi={`summary/${summary.id}/comments`}
+          commentLikesApi={`summary/comments/like`}
+        />
       </div>
-      <div className="payment-box">
-        <p className="payment-box__title">
-          이어서 읽으시려면 결제가 필요합니다.
-        </p>
-
-        <div className="payment-box__info">
-          <button
-            className="payment-box__currency"
-            onClick={() => cancelPurchase()} // 결제 테스트용
-          >
-            <FontAwesomeIcon icon={faCartPlus} />
-            {""} 찜
-          </button>
-          <span
-            className="payment-box__amount"
-            onClick={getPurchase} // 결제 테스트용
-          >
-            {summary.price} 원
-          </span>
-          <button className="payment-box__button" onClick={doPurchase}>
-            결제하기{" "}
-            <FontAwesomeIcon
-              icon={faChevronRight}
-              className="payment-box__button-icon"
-            />
-          </button>
-        </div>
-      </div>
-      <div className="comment-box">
-        <div className="comment-box__title">댓글</div>
-        <div className="comment">
-          <div className="comment__info">
-            <ProfileIcon
-              profile={user.profile}
-              size={30}
-              className="comment__avatar"
-            />
-          </div>
-          <textarea placeholder="댓글을 입력해주세요." />
-        </div>
-        <div className="comment-box__input">
-          <button onClick={postComment}>등록</button>
-        </div>
-        <div className="comment-box__comments">
-          {comments.map((comment) => (
-            <div className="comment" key={comment.id}>
-              <div className="comment__info">
-                <ProfileIcon
-                  profile={comment.user.profile}
-                  size={30}
-                  className="comment__avatar"
-                />
-              </div>
-              <div className="comment__text">
-                <span className="comment__nickname">{comment.user.name}</span>
-                <span className="comment__time">
-                  {/* {getTimeDiff(comment.created)} */}
-                </span>
-                <span className="comment__content">{comment.content}</span>
-              </div>
-            </div>
-          ))}
-        </div>
-      </div>
+      <div className="offset"></div>
     </div>
   );
 }

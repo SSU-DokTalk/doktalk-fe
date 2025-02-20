@@ -19,7 +19,6 @@ function PostDetail() {
   const { post_id } = useParams();
   const [post, setPost] = useState<PostType>(InitialPost);
   const [hasLiked, setHasLiked] = useState<boolean>(false);
-  const [isItemExist, setIsItemExist] = useState<boolean>(false);
   const [showModal, setShowModal] = useState<boolean>(false);
   const [didPost, setDidPost] = useState<boolean>(false);
 
@@ -30,7 +29,6 @@ function PostDetail() {
     axios.get(`/api/post/${post_id}`).then((res) => {
       let { data }: { data: PostType } = res;
       setPost(data);
-      console.log(data);
     });
     axios
       .get(`/api/posts/like`, {
@@ -41,34 +39,23 @@ function PostDetail() {
       .then((res) => {
         let { data }: { data: boolean[] } = res;
         setHasLiked(data[0]);
-        setIsItemExist(true);
       });
   }, [post_id, didPost]);
 
   const doLike = () => {
     // Like API 호출
-    axios
-      .post(`/api/post/${post.id}/like`)
-      .then(() => {
-        // 좋아요 성공
-        setHasLiked(true);
-        post.likes_num++;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.post(`/api/post/${post.id}/like`).then(() => {
+      // 좋아요 성공
+      setHasLiked(true);
+      post.likes_num++;
+    });
   };
 
   const doUnlike = () => {
-    axios
-      .delete(`/api/post/${post.id}/like`)
-      .then(() => {
-        setHasLiked(false);
-        post.likes_num--;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.delete(`/api/post/${post.id}/like`).then(() => {
+      setHasLiked(false);
+      post.likes_num--;
+    });
   };
 
   const doDelete = () => {
@@ -160,7 +147,6 @@ function PostDetail() {
           </div>
         </div>
         <CommentSection
-          isItemExist={isItemExist}
           itemType="post"
           itemId={post.id}
           total={post.comments_num}
