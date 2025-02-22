@@ -7,7 +7,15 @@ import React, {
   useRef,
   useState,
 } from "react";
-import { Modal } from "react-bootstrap";
+
+import {
+  Dialog,
+  DialogTitle,
+  DialogContent,
+  Button,
+  IconButton,
+} from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
 
 import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { selectUser, setUser } from "@/stores/user";
@@ -116,70 +124,70 @@ function EditProfileModal({
   };
 
   return (
-    <Modal
-      id="edit-profile-modal"
-      show={showModal}
-      backdrop="static"
-      keyboard={false}
-      onHide={() => {
-        setShowModal(false);
-      }}
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>
-          <b>프로필 편집</b>
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="profile-image-container">
+    <Dialog
+      id='edit-profile-modal'
+      open={showModal}
+      onClose={() => setShowModal(false)}
+      maxWidth='sm'
+      fullWidth
+      scroll='body'>
+      <DialogTitle>프로필 편집</DialogTitle>
+      <IconButton
+        className='btn-close'
+        aria-label='close'
+        onClick={() => setShowModal(false)}
+        sx={{ position: "absolute", right: 8, top: 8 }}>
+        <CloseIcon />
+      </IconButton>
+
+      <DialogContent dividers>
+        <div className='profile-image-container'>
           <ProfileIcon
             profile={userInfo.profile}
-            alt={"user icon"}
-            className="profile-image"
+            alt='user icon'
+            className='profile-image'
             size={176}
           />
-          <div className="profile-image-button-container">
+          <div className='profile-image-button-container'>
             <input
-              className="profile-image-input"
-              type="file"
-              accept=".jpg, .jpeg, .png, .gif"
-              name="profile"
+              className='profile-image-input'
+              type='file'
+              accept='.jpg, .jpeg, .png, .gif'
+              name='profile'
               ref={inputRef}
               onChange={uploadImage}
             />
-            <button
-              className="profile-image-button image-upload"
-              onClick={clickUploadImageButton}
-            >
+            <Button
+              className='profile-image-button image-upload'
+              onClick={clickUploadImageButton}>
               이미지 업로드
-            </button>
-            <button
-              className="profile-image-button image-delete"
-              onClick={deleteImage}
-            >
+            </Button>
+            <Button
+              className='profile-image-button image-delete'
+              onClick={deleteImage}>
               이미지 제거
-            </button>
+            </Button>
           </div>
         </div>
-        <div className="user-info-container">
-          <div className="attribute-container">
-            <div className="attribute">닉네임</div>
+        <div className='user-info-container'>
+          <div className='attribute-container'>
+            <div className='attribute'>닉네임</div>
             <input
-              className="nickname"
-              type="text"
-              placeholder="(필수) 닉네임을 입력해주세요."
+              className='nickname'
+              type='text'
+              placeholder='(필수) 닉네임을 입력해주세요.'
               value={userInfo.name!}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, name: e.target.value })
               }
             />
           </div>
-          <div className="attribute-container">
-            <div className="attribute">자기소개</div>
+
+          <div className='attribute-container'>
+            <div className='attribute'>자기소개</div>
             <textarea
-              className="introduction"
-              placeholder="회원님에 대해 소개해주세요."
+              className='introduction'
+              placeholder='회원님에 대해 소개해주세요.'
               value={userInfo.introduction!}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, introduction: e.target.value })
@@ -187,14 +195,14 @@ function EditProfileModal({
             />
           </div>
         </div>
-        <div className="submit-button-container">
-          <div className="submit-button-offset" />
-          <button className="submit-user-info" onClick={updateUserInfo}>
+        <div className='submit-button-container'>
+          <div className='submit-button-offset' />
+          <button className='submit-user-info' onClick={updateUserInfo}>
             편집 완료
           </button>
         </div>
-      </Modal.Body>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 }
 

@@ -1,30 +1,27 @@
 @use "../variables";
 
 #friend-list-modal {
-  width: 471px;
-
-  .modal-content {
+  .MuiDialog-paper {
+    width: 471px;
     border-radius: 20px;
 
-    .modal-header {
-      margin-top: 20px;
-      border-bottom: none;
-      .modal-title {
-        flex: 1;
-        margin-left: 42px;
-        text-align: center;
-        color: black;
-        font-size: 25px;
-        font-weight: 400;
-        strong {
-          font-weight: 600;
-        }
-      }
-      .btn-close {
-        margin-right: 10px;
+    .MuiDialogTitle-root {
+      flex: 1;
+      margin-left: 42px;
+      text-align: center;
+      color: black;
+      font-size: 25px;
+      font-weight: 400;
+      strong {
+        font-weight: 600;
       }
     }
-    .modal-body {
+    .btn-close {
+      margin-top: 5px;
+      margin-right: 10px;
+    }
+
+    .MuiDialogContent-root {
       .friend-info {
         display: flex;
         justify-content: space-around;
@@ -102,25 +99,21 @@
 }
 
 #edit-profile-modal {
-  width: 471px;
-  .modal-content {
+  .MuiDialog-paper {
+    width: 471px;
     border-radius: 20px;
-    .modal-header {
-      margin-top: 20px;
-      border-bottom: none;
-      .modal-title {
-        flex: 1;
-        margin-left: 42px;
-        text-align: center;
-        color: black;
-        font-size: 25px;
-        font-weight: 600;
-      }
-      .btn-close {
-        margin-right: 10px;
-      }
+    .MuiDialogTitle-root {
+      flex: 1;
+      text-align: center;
+      color: black;
+      font-size: 25px;
+      font-weight: 600;
     }
-    .modal-body {
+    .btn-close {
+      margin-top: 5px;
+      margin-right: 10px;
+    }
+    .MuiDialogContent-root {
       .profile-image-container {
         display: flex;
         flex-direction: column;
@@ -219,29 +212,27 @@
 }
 
 #write-post-modal {
-  max-width: 700px;
-  .modal-content {
+  .MuiDialog-paper {
+    max-width: 700px;
     border-radius: 20px;
 
-    .modal-header {
-      margin-top: 20px;
-      border-bottom: none;
-      .modal-title {
-        flex: 1;
-        margin-left: 42px;
-        text-align: center;
-        color: black;
-        font-size: 25px;
-        font-weight: 400;
-        strong {
-          font-weight: 600;
-        }
-      }
-      .btn-close {
-        margin-right: 10px;
+    .MuiDialogTitle-root {
+      flex: 1;
+      margin-left: 42px;
+      text-align: center;
+      color: black;
+      font-size: 25px;
+      font-weight: 400;
+      strong {
+        font-weight: 600;
       }
     }
-    .modal-body {
+    .btn-close {
+      margin-top: 5px;
+      margin-right: 10px;
+    }
+
+    .MuiDialogContent-root {
       display: flex;
       justify-content: center;
 
