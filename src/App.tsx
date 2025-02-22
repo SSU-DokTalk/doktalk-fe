@@ -22,7 +22,7 @@ import ContentMainLayout from "./layouts/ContentMainLayout";
 import LandingUpper from "./components/section/LandingUpper";
 import Debate from "./pages/Debate";
 import Search from "./pages/Search";
-import { Spinner } from "react-bootstrap";
+import CircularProgress from "@mui/material/CircularProgress";
 import i18n from "./locales/i18n";
 import CreateDebate from "./pages/CreateDebate";
 import CreateSummary from "./pages/CreateSummary";
@@ -107,11 +107,8 @@ function App() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-        }}
-      >
-        <Spinner animation="border" className="loading-spinner">
-          <span className="visually-hidden">Loading...</span>
-        </Spinner>
+        }}>
+        <CircularProgress className='loading-spinner' />
       </div>
     );
   }
@@ -124,28 +121,29 @@ function App() {
             <ContentMainLayout>
               <LandingUpper />
             </ContentMainLayout>
-          }
-        >
-          <Route path="/" element={<Landing />}></Route>
+          }>
+          <Route path='/' element={<Landing />}></Route>
         </Route>
         <Route element={<ContentMainLayout />}>
-          <Route path="/debate" element={<Debate />}></Route>
-          <Route path="/search" element={<Search />}></Route>
-          <Route path="/summary" element={<Summary />}></Route>
-          <Route path="/debate/:debate_id" element={<DebateDetail />}></Route>
-          <Route path="/summary/:summary_id" element={<SummaryDetail />}></Route>
-          <Route path="/post/:post_id" element={<PostDetail />}></Route>
-          <Route path="/summary/create" element={<CreateSummary />}></Route>
-          <Route path="/debate/create" element={<CreateDebate />}></Route>
+          <Route path='/debate' element={<Debate />}></Route>
+          <Route path='/search' element={<Search />}></Route>
+          <Route path='/summary' element={<Summary />}></Route>
+          <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>
+          <Route
+            path='/summary/:summary_id'
+            element={<SummaryDetail />}></Route>
+          <Route path='/post/:post_id' element={<PostDetail />}></Route>
+          <Route path='/summary/create' element={<CreateSummary />}></Route>
+          <Route path='/debate/create' element={<CreateDebate />}></Route>
         </Route>
-        <Route path="/mypage" element={<MyPage />}></Route>
-        <Route path="/user/:user_id" element={<UserProfile />}></Route>
-        <Route path="settings" element={<Settings/>}></Route>
+        <Route path='/mypage' element={<MyPage />}></Route>
+        <Route path='/user/:user_id' element={<UserProfile />}></Route>
+        <Route path='settings' element={<Settings />}></Route>
       </Route>
-      <Route path="/login" element={<Login />}></Route>
-      <Route path="/register" element={<Register />}></Route>
-      <Route path="/auth/:provider" element={<Auth />}></Route>
-      <Route path="*" element={<NotFound />}></Route>
+      <Route path='/login' element={<Login />}></Route>
+      <Route path='/register' element={<Register />}></Route>
+      <Route path='/auth/:provider' element={<Auth />}></Route>
+      <Route path='*' element={<NotFound />}></Route>
     </Routes>
   );
 }
