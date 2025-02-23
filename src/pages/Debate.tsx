@@ -1,3 +1,6 @@
+import { ArrowDropDown } from "@mui/icons-material";
+import { Menu, MenuItem, ButtonBase } from "@mui/material";
+
 import { DUMMY_DEBATES } from "@/common/dummy_data";
 import CarouselDebateCard from "@/components/card/CarouselDebateCard";
 import Carousel from "@/components/carousel/Carousel";
@@ -5,7 +8,6 @@ import { DebateType, SummaryType } from "@/types/data";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { forwardRef, useEffect, useRef, useState } from "react";
-import { Dropdown } from "react-bootstrap";
 import IonIcon from "@reacticons/ionicons";
 import WriteIcon from "@/assets/images/WriteIcon";
 import DebateCard from "@/components/card/DebateCard";
@@ -108,11 +110,14 @@ function Debate() {
   const { t } = useTranslation();
   const navigate = useNavigate();
 
+  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
+  const open = Boolean(anchorEl);
+
   const CustomDatePicker = forwardRef<any, any>(
     ({ value, onClick, className }, ref) => (
       <div className={className} onClick={onClick} ref={ref}>
-        <IonIcon name="calendar-outline" className="sort-by-icon" />
-        <span className="date-text">{value}</span>
+        <IonIcon name='calendar-outline' className='sort-by-icon' />
+        <span className='date-text'>{value}</span>
       </div>
     )
   );
@@ -168,16 +173,15 @@ function Debate() {
   });
 
   return (
-    <div id="debate-page">
-      <div className="recommend-content-container">
-        <div className="recommend-content-title">
+    <div id='debate-page'>
+      <div className='recommend-content-container'>
+        <div className='recommend-content-title'>
           {t("page.debate.title.recommend")}
         </div>
         <Carousel
           items={recommendDebates}
           size={3}
-          className="recommend-content"
-        >
+          className='recommend-content'>
           {recommendDebates.map((debate, idx) => (
             <CarouselDebateCard
               key={"recommend-debate" + idx}
@@ -186,52 +190,57 @@ function Debate() {
           ))}
         </Carousel>
       </div>
-      <div className="content-container">
-        <div className="lower-content-container">
+      <div className='content-container'>
+        <div className='lower-content-container'>
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
-            className="left-container"
+            className='left-container'
           />
-          <div className="right-container"></div>
+          <div className='right-container'></div>
         </div>
-        <div className="lower-content-container">
-          <div className="left-container">
-            <div className="searchbox-container">
+        <div className='lower-content-container'>
+          <div className='left-container'>
+            <div className='searchbox-container'>
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
-                className="searchbox-icon"
+                className='searchbox-icon'
               />
-              <Dropdown>
-                <Dropdown.Toggle>
-                  {t(searchBys[searchByIdx].name)}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
+              <div className='search-by-dropdown'>
+                <ButtonBase
+                  onClick={(event) => {
+                    setAnchorEl(event.currentTarget);
+                  }}>
+                  {t(searchBys[searchByIdx].name)} <ArrowDropDown />
+                </ButtonBase>
+                <Menu
+                  open={open}
+                  anchorEl={anchorEl}
+                  onClose={() => setAnchorEl(null)}>
                   {searchBys.map((searchBy, index) => (
-                    <Dropdown.Item
+                    <MenuItem
                       key={"search-by" + index}
-                      onClick={() => setSearchByIdx(index)}
-                    >
+                      onClick={() => setSearchByIdx(index)}>
                       {t(searchBy.name)}
-                    </Dropdown.Item>
+                    </MenuItem>
                   ))}
-                </Dropdown.Menu>
-              </Dropdown>
+                </Menu>
+              </div>
               <input
-                type="text"
+                type='text'
                 placeholder={t("page.debate.search.placeholder")}
-                className="searchbox"
+                className='searchbox'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <div className="content-header">
-              <div className="sort-by">
+            <div className='content-header'>
+              <div className='sort-by'>
                 {sortBys.map((sortBy, index) => {
                   return (
                     <div
                       key={"sort-by" + index}
-                      className="sort-by-text"
+                      className='sort-by-text'
                       style={
                         sortByIdx === index
                           ? {
@@ -239,20 +248,19 @@ function Debate() {
                             }
                           : {}
                       }
-                      onClick={() => setSortByIdx(index)}
-                    >
+                      onClick={() => setSortByIdx(index)}>
                       {t(sortBy.name)}
                       {sortBy.value == "from" ? (
                         <DatePicker
                           selected={from}
                           onChange={(date) => setFrom(date ?? new Date())}
-                          dateFormat="yyyy/MM/dd"
+                          dateFormat='yyyy/MM/dd'
                           minDate={new Date("2025-01-01")}
                           maxDate={
                             new Date(`${getYear(new Date()) + 10}-12-31`)
                           }
                           customInput={
-                            <CustomDatePicker className="custom-input" />
+                            <CustomDatePicker className='custom-input' />
                           }
                           showDisabledMonthNavigation
                           renderCustomHeader={({
@@ -269,20 +277,17 @@ function Debate() {
                                 margin: 10,
                                 display: "flex",
                                 justifyContent: "center",
-                              }}
-                            >
+                              }}>
                               <button
                                 onClick={decreaseMonth}
-                                disabled={prevMonthButtonDisabled}
-                              >
+                                disabled={prevMonthButtonDisabled}>
                                 {"<"}
                               </button>
                               <select
                                 value={getYear(date)}
                                 onChange={({ target: { value } }) =>
                                   changeYear(parseInt(value))
-                                }
-                              >
+                                }>
                                 {years.map((option) => (
                                   <option key={option} value={option}>
                                     {option}
@@ -294,8 +299,7 @@ function Debate() {
                                 value={months[getMonth(date)]}
                                 onChange={({ target: { value } }) =>
                                   changeMonth(months.indexOf(value))
-                                }
-                              >
+                                }>
                                 {months.map((option) => (
                                   <option key={option} value={option}>
                                     {t(option)}
@@ -305,8 +309,7 @@ function Debate() {
 
                               <button
                                 onClick={increaseMonth}
-                                disabled={nextMonthButtonDisabled}
-                              >
+                                disabled={nextMonthButtonDisabled}>
                                 {">"}
                               </button>
                             </div>
@@ -318,14 +321,13 @@ function Debate() {
                 })}
               </div>
               <button
-                className="create-debate-button"
-                onClick={() => navigate("/debate/create")}
-              >
+                className='create-debate-button'
+                onClick={() => navigate("/debate/create")}>
                 <span>{t("page.debate.button.create")}</span>
-                <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
+                <WriteIcon className='write-icon' width={17} fill={"#ffffff"} />
               </button>
             </div>
-            <div className="content-container">
+            <div className='content-container'>
               <InfiniteScroll
                 api={`debate?category=${categories}&search=${debouncedSearch}&searchby=${
                   searchBys[searchByIdx].value
@@ -349,8 +351,7 @@ function Debate() {
                   sortByIdx !== prevValueRef.current.sortByIdx ||
                   from !== prevValueRef.current.from
                 }
-                dependency={[prevValueRef]}
-              >
+                dependency={[prevValueRef]}>
                 {debates.map((debate, index) => (
                   <DebateCard
                     key={"debate" + index}
@@ -363,11 +364,11 @@ function Debate() {
               </InfiniteScroll>
             </div>
           </div>
-          <div className="right-container">
-            <div className="right-container-title">
+          <div className='right-container'>
+            <div className='right-container-title'>
               {t("page.debate.title.popular")}
             </div>
-            <div className="right-container-content">
+            <div className='right-container-content'>
               {popularSummaries.map((summary, index) => (
                 <PopularSummaryCard
                   key={"summary" + index}
@@ -381,7 +382,7 @@ function Debate() {
           </div>
         </div>
       </div>
-      <div className="footer" />
+      <div className='footer' />
     </div>
   );
 }
