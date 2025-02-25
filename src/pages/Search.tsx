@@ -47,21 +47,21 @@ function Search() {
   }, [debouncedSearch, sortByIdx]);
 
   return (
-    <div id="search-page">
-      <div className="page-container">
-        <div className="page-title">{t("page.search.title.page")}</div>
-        <div className="search-bar">
-          <FontAwesomeIcon icon={faSearch} className="search-icon" />
+    <div id='search-page' className='px-4! md:px-0! md:w-4/5'>
+      <div className='page-container'>
+        <div className='page-title'>{t("page.search.title.page")}</div>
+        <div className='search-bar'>
+          <FontAwesomeIcon icon={faSearch} className='search-icon' />
           <input
-            className="search-input"
-            type="text"
+            className='search-input'
+            type='text'
             placeholder={t("page.search.search.placeholder")}
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
-        <div className="result-container">
-          <div className="sort-by-container">
+        <div className='result-container'>
+          <div className='sort-by-container'>
             {sortBys.map((sortBy, index) => (
               <div
                 key={"sortBy" + index}
@@ -73,17 +73,16 @@ function Search() {
                         color: "#000080",
                       }
                     : {}
-                }
-              >
+                }>
                 {t(sortBy.name)}
               </div>
             ))}
           </div>
-          <div className="result-content-container">
+          <div className='result-content-container'>
             <InfiniteScroll
               api={`books?search=${debouncedSearch}&sortby=${sortBys[sortByIdx].value}`}
               likes_api={"librarys/is_in_library"}
-              itemId="isbn"
+              itemId='isbn'
               setItems={setBooks}
               page={bookPage}
               setPage={setBookPage}
@@ -97,8 +96,7 @@ function Search() {
                 debouncedSearch !== prevValueRef.current.debouncedSearch ||
                 sortByIdx !== prevValueRef.current.sortByIdx
               }
-              dependency={[prevValueRef]}
-            >
+              dependency={[prevValueRef]}>
               {books.map((book, index) => (
                 <BookCard
                   key={"book" + index}
