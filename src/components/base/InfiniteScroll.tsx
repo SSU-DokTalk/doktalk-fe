@@ -1,5 +1,5 @@
 import axios from "axios";
-import Spinner from "react-bootstrap/Spinner";
+import { CircularProgress } from "@mui/material";
 import { useEffect, useRef, useState } from "react";
 import NoItem from "@/assets/images/no-item.svg";
 import { selectUser } from "@/stores/user";
@@ -192,15 +192,9 @@ function InfiniteScroll({
             justifyContent: "center",
             marginTop: "20px",
             marginBottom: "20px",
-          }}
-        >
-          <Spinner
-            ref={elementRef}
-            animation="border"
-            className="loading-spinner"
-          >
-            <span className="visually-hidden">Loading...</span>
-          </Spinner>
+          }}>
+          <CircularProgress ref={elementRef} className='loading-spinner' />
+          <span className='visually-hidden'>Loading...</span>
         </div>
       )}
       {!(hasMore ?? inherentHasMore) &&
@@ -216,9 +210,8 @@ function InfiniteScroll({
               color: "#666565",
               fontSize: "20px",
               fontWeight: "400",
-            }}
-          >
-            <img src={NoItem} alt="no item" />
+            }}>
+            <img src={NoItem} alt='no item' />
             <span>{hasNoItemMessage}</span>
           </div>
         ))}

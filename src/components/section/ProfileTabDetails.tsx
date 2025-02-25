@@ -19,7 +19,7 @@ import Book from "@/components/base/Book";
 import axios from "axios";
 import noImage from "@/assets/images/no-item.svg";
 import { Link } from "react-router-dom";
-import Spinner from "react-bootstrap/Spinner";
+import { CircularProgress } from "@mui/material";
 import WriteDebateCard from "@/components/card/WriteDebateCard";
 import DebateCard from "@/components/card/DebateCard";
 import PaymentCard from "@/components/card/PaymentCard";
@@ -111,10 +111,10 @@ function ProfileTabDetails({
   }, [currentTab, userProfile, isPaymentCurTimeChanged]);
 
   return (
-    <div id="profile-tab-details">
+    <div id='profile-tab-details'>
       {userProfile && userProfile?.id != 0 ? (
         currentTab === "/post" ? (
-          <div className="post-tab">
+          <div className='post-tab'>
             {user.id != 0 ? (
               userProfile.id == user.id ? (
                 <WritePostCard setDidPost={setDidPost} />
@@ -142,8 +142,7 @@ function ProfileTabDetails({
               }}
               afterFetchFail={async () => {
                 await setDidPost(false);
-              }}
-            >
+              }}>
               {posts.map((post, idx) => (
                 <PostCard
                   idx={idx}
@@ -156,7 +155,7 @@ function ProfileTabDetails({
             </InfiniteScroll>
           </div>
         ) : userProfile && currentTab === "/summary" ? (
-          <div className="summary-tab">
+          <div className='summary-tab'>
             {user.id != 0 ? (
               userProfile.id == user.id ? (
                 <WriteSummaryCard />
@@ -176,8 +175,7 @@ function ProfileTabDetails({
               hasNoItemMessage={t(
                 "component.section.profile-tab-details.item.no-summary-item"
               )}
-              condition={userProfile && userProfile.id != 0}
-            >
+              condition={userProfile && userProfile.id != 0}>
               {summaries.map((summary, index) => (
                 <SummaryCard
                   key={"summary" + index}
@@ -190,87 +188,89 @@ function ProfileTabDetails({
             </InfiniteScroll>
           </div>
         ) : userProfile && currentTab === "/library" ? (
-          <div className="library-tab">
-            <div className="currently-reading-books-container">
-              <div className="currently-reading-header">
-                <div className="currently-reading-title">
+          <div className='library-tab'>
+            <div className='currently-reading-books-container'>
+              <div className='currently-reading-header'>
+                <div className='currently-reading-title'>
                   {t(
                     "component.section.profile-tab-details.item.currently-reading-book-prefix"
                   ) + " "}
-                  <span className="item-count">
+                  <span className='item-count'>
                     {totalMyBooks}
                     {t(
                       "component.section.profile-tab-details.item.currently-reading-book-postfix"
                     )}
                   </span>
                 </div>
-                <div className="show-more">
+                <div className='show-more'>
                   {t("component.section.profile-tab-details.item.show-more") +
                     " >"}
                 </div>
               </div>
               {!hasLoadedMyBook ? (
-                <Spinner animation="border" className="loading-spinner">
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
+                <div>
+                  <CircularProgress className='loading-spinner' />
+                  <span className='visually-hidden'>Loading...</span>
+                </div>
               ) : myBooks.length === 0 ? (
-                <div className="no-item">
-                  <img src={noImage} alt="no image" width="122px" />
-                  <p className="no-item-message">
+                <div className='no-item'>
+                  <img src={noImage} alt='no image' width='122px' />
+                  <p className='no-item-message'>
                     {t(
                       "component.section.profile-tab-details.item.no-book-item"
                     )}
                   </p>
-                  <Link to="/search" className="go-to">
+                  <Link to='/search' className='go-to'>
                     {t("component.section.profile-tab-details.go-to.search") +
                       " >"}
                   </Link>
                 </div>
               ) : (
-                <div className="currently-reading-books">
+                <div className='currently-reading-books'>
                   {myBooks.slice(0, 4).map((mybook, index) => {
                     return <Book key={"book" + index} book={mybook.book} />;
                   })}
                 </div>
               )}
             </div>
-            <div className="currently-reading-summaries-container">
-              <div className="currently-reading-header">
-                <div className="currently-reading-title">
+            <div className='currently-reading-summaries-container'>
+              <div className='currently-reading-header'>
+                <div className='currently-reading-title'>
                   {t(
                     "component.section.profile-tab-details.item.currently-reading-summary-prefix"
                   ) + " "}
-                  <span className="item-count">
+                  <span className='item-count'>
                     {totalPurchasedSummaries}
                     {t(
                       "component.section.profile-tab-details.item.currently-reading-summary-postfix"
                     )}
                   </span>
                 </div>
-                <div className="show-more">
+                <div className='show-more'>
                   {t("component.section.profile-tab-details.item.show-more") +
                     " >"}
                 </div>
               </div>
               {!hasLoadedPurchaseSummary ? (
-                <Spinner animation="border" className="loading-spinner">
-                  <span className="visually-hidden">Loading...</span>
-                </Spinner>
+                <div>
+                  <CircularProgress className='loading-spinner' />
+                  <span className='visually-hidden'>Loading...</span>
+                </div>
               ) : purchasedSummaries.length === 0 ? (
-                <div className="no-item">
-                  <img src={noImage} alt="no image" width="122px" />
-                  <p className="no-item-message">
+                <div className='no-item'>
+                  <img src={noImage} alt='no image' width='122px' />
+                  <p className='no-item-message'>
                     {t(
                       "component.section.profile-tab-details.item.no-summary-item"
                     )}
                   </p>
-                  <Link to="/summary" className="go-to">
+                  <Link to='/summary' className='go-to'>
                     {t("component.section.profile-tab-details.go-to.summary") +
                       " >"}
                   </Link>
                 </div>
               ) : (
-                <div className="currently-reading-summaries">
+                <div className='currently-reading-summaries'>
                   {purchasedSummaries.slice(0, 4).map((summary, index) => {
                     return (
                       <SummaryCard
@@ -287,7 +287,7 @@ function ProfileTabDetails({
             </div>
           </div>
         ) : userProfile && currentTab === "/debate" ? (
-          <div className="debate-tab">
+          <div className='debate-tab'>
             {user.id != 0 ? (
               userProfile.id == user.id ? (
                 <WriteDebateCard />
@@ -307,8 +307,7 @@ function ProfileTabDetails({
               hasNoItemMessage={t(
                 "component.section.profile-tab-details.item.no-debate-item"
               )}
-              condition={userProfile && userProfile.id != 0}
-            >
+              condition={userProfile && userProfile.id != 0}>
               {debates.map((debate, index) => (
                 <DebateCard
                   key={"debate" + index}
@@ -321,11 +320,11 @@ function ProfileTabDetails({
             </InfiniteScroll>
           </div>
         ) : userProfile && currentTab === "/payment" ? (
-          <div className="payment-tab">
-            <div className="select-month-container">
-              <div className="month-box">
+          <div className='payment-tab'>
+            <div className='select-month-container'>
+              <div className='month-box'>
                 <div
-                  className="month-button left"
+                  className='month-button left'
                   onClick={async () => {
                     await setIsPaymentCurTimeChanged(true);
                     await setPaymentCurTime(
@@ -333,12 +332,11 @@ function ProfileTabDetails({
                         paymentCurTime.setMonth(paymentCurTime.getMonth() - 1)
                       )
                     );
-                  }}
-                >
+                  }}>
                   <FontAwesomeIcon icon={faChevronLeft} />
                 </div>
                 <div
-                  className="month-button right"
+                  className='month-button right'
                   onClick={async () => {
                     await setIsPaymentCurTimeChanged(true);
                     await setPaymentCurTime(
@@ -346,11 +344,10 @@ function ProfileTabDetails({
                         paymentCurTime.setMonth(paymentCurTime.getMonth() + 1)
                       )
                     );
-                  }}
-                >
+                  }}>
                   <FontAwesomeIcon icon={faChevronRight} />
                 </div>
-                <div className="cur-month">
+                <div className='cur-month'>
                   {paymentCurTime.getFullYear()}
                   {t("component.section.profile-tab-details.time.year")}{" "}
                   {t(
@@ -359,7 +356,7 @@ function ProfileTabDetails({
                     ).toString()}`
                   )}
                 </div>
-                <div className="total-payment">
+                <div className='total-payment'>
                   {t("component.section.profile-tab-details.item.currency")}
                   {payments
                     .filter((payment) => {
@@ -386,8 +383,8 @@ function ProfileTabDetails({
               hasNoItem={payments.length === 0}
               refreshCondition={isPaymentCurTimeChanged}
               hasNoItemComponent={
-                <div className="no-item">
-                  <p className="no-item-message">
+                <div className='no-item'>
+                  <p className='no-item-message'>
                     해당 날짜의 결제 내역이 없습니다
                   </p>
                 </div>
@@ -399,8 +396,7 @@ function ProfileTabDetails({
               afterFetchFail={async () => {
                 await setIsPaymentCurTimeChanged(false);
               }}
-              dependency={[isPaymentCurTimeChanged]}
-            >
+              dependency={[isPaymentCurTimeChanged]}>
               {payments.map((payment, index) => (
                 <PaymentCard key={"payment" + index} payment={payment} />
               ))}
