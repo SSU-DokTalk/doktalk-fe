@@ -70,18 +70,18 @@ function Login() {
   };
 
   return (
-    <div id="login">
-      <div className="login-container">
-        <Link to={"/"} className="logo-container">
-          <div className="logo dok">독</div>
-          <div className="logo colon">:</div>
-          <div className="logo talk">TALK</div>
+    <div id='login'>
+      <div className='login-container'>
+        <Link to={"/"} className='logo-container'>
+          <div className='logo dok'>독</div>
+          <div className='logo colon'>:</div>
+          <div className='logo talk'>TALK</div>
         </Link>
-        <div className="login-form">
-          <div className="login-box">
+        <div className='login-form'>
+          <div className='login-box'>
             <input
-              type="email"
-              className="login-input"
+              type='email'
+              className='login-input'
               placeholder={t("page.login.email")}
               value={userInfo.email}
               onChange={(e) =>
@@ -92,10 +92,10 @@ function Login() {
               }
             />
           </div>
-          <div className="login-box">
+          <div className='login-box'>
             <input
-              type="password"
-              className="login-input"
+              type='password'
+              className='login-input'
               placeholder={t("page.login.password")}
               value={userInfo.password}
               onChange={(e) =>
@@ -106,60 +106,62 @@ function Login() {
               }
             />
           </div>
-          <button className="login-button" onClick={doLogin}>
+          <button className='login-button' onClick={doLogin}>
             {t("page.login.login")}
           </button>
         </div>
-        <div className="additional-container">
-          <div className="checkbox-container">
-            <input type="checkbox" name="" id="keep-login" />
-            <label htmlFor="keep-login">{t("page.login.keep-login")}</label>
-            <input type="checkbox" name="" id="save-id" />
-            <label htmlFor="save-id">{t("page.login.save-id")}</label>
+        <div className='additional-container'>
+          <div className='checkbox-container'>
+            <input type='checkbox' name='' id='keep-login' />
+            <label htmlFor='keep-login'>{t("page.login.keep-login")}</label>
+            <input type='checkbox' name='' id='save-id' />
+            <label htmlFor='save-id'>{t("page.login.save-id")}</label>
           </div>
-          <div className="find-myinfo">
-            <div className="myinfo">{t("page.login.find-id")}</div>
-            <div className="divider">|</div>
-            <div className="myinfo">{t("page.login.find-password")}</div>
+          <div className='find-myinfo'>
+            <div className='myinfo'>{t("page.login.find-id")}</div>
+            <div className='divider'>|</div>
+            <div className='myinfo'>{t("page.login.find-password")}</div>
           </div>
         </div>
-        <div className="social-login-box">
-          <div className="social-login-text-container">
+        <div className='social-login-box'>
+          <div className='social-login-text-container'>
             <hr />
-            <div className="social-login-text">
+            <div className='social-login-text'>
               {t("page.login.social-login-text")}
             </div>
             <hr />
           </div>
-          <div className="social-login-container">
+          <div className='social-login-container'>
             <img
               src={naverIcon}
-              alt="naver"
-              className="social-login-button naver"
+              alt='naver'
+              className='social-login-button naver'
               onClick={doNaverLogin}
             />
             <img
               src={kakaoIcon}
-              alt="kakao"
-              className="social-login-button kakao"
+              alt='kakao'
+              className='social-login-button kakao'
               onClick={doKakaoLogin}
             />
             <img
               src={googleIcon}
-              alt="google"
-              className="social-login-button google"
+              alt='google'
+              className='social-login-button google'
               onClick={doGoogleLogin}
             />
             <img
               src={facebookIcon}
-              alt="facebook"
-              className="social-login-button facebook"
+              alt='facebook'
+              className='social-login-button facebook'
               onClick={doFacebookLogin}
             />
           </div>
         </div>
-        <div className="register-container">
-          <button className="register-button">
+        <div className='register-container'>
+          <button
+            className='register-button'
+            onClick={() => navigate("/register")}>
             {t("page.login.register")}
           </button>
         </div>
