@@ -14,10 +14,13 @@ function ContentMainLayout({ children }: { children?: React.ReactNode }) {
   });
 
   return (
-    <div id="content-main-layout">
-      <FloatingUserProfile />
-      <div className="upper-container">{children}</div>
-      <div className="lower-container">
+    <div id='content-main-layout'>
+      <div className='hidden md:block'>
+        <FloatingUserProfile />
+      </div>
+
+      <div className='upper-container md:pl-72!'>{children}</div>
+      <div className='lower-container md:pl-72!'>
         <Outlet />
       </div>
     </div>

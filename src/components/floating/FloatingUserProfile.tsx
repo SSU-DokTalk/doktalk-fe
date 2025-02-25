@@ -59,34 +59,33 @@ function FloatingUserProfile() {
   }, [user, globalState.isLibraryUpdated]);
 
   return (
-    <div id="floating-user-profile">
+    <div id='floating-user-profile'>
       <div
-        className="profile-info-container"
-        onClick={() => navigate(user.id == 0 ? "/login" : "/mypage")}
-      >
-        <div className="profile-info">
+        className='profile-info-container'
+        onClick={() => navigate(user.id == 0 ? "/login" : "/mypage")}>
+        <div className='profile-info'>
           <ProfileIcon profile={user.profile} size={50} />
-          <div className="user-name">
+          <div className='user-name'>
             {user.name ?? t("component.floating.text.login")}
           </div>
         </div>
       </div>
-      <div className="follow-info">
-        <div className="follow-container">
-          <div className="text">{t("component.floating.text.follower")}</div>
-          <div className="count">{userInfo.follower_num}</div>
+      <div className='follow-info'>
+        <div className='follow-container'>
+          <div className='text'>{t("component.floating.text.follower")}</div>
+          <div className='count'>{userInfo.follower_num}</div>
         </div>
-        <div className="follow-container">
-          <div className="text">{t("component.floating.text.following")}</div>
-          <div className="count">{userInfo.following_num}</div>
+        <div className='follow-container'>
+          <div className='text'>{t("component.floating.text.following")}</div>
+          <div className='count'>{userInfo.following_num}</div>
         </div>
       </div>
       <Accordion alwaysOpen>
-        <Accordion.Item eventKey="0" className="accordion-item">
+        <Accordion.Item eventKey='0' className='accordion-item'>
           <Accordion.Header>
             {t("component.floating.text.my-activity")}
           </Accordion.Header>
-          <Accordion.Body className="my-activity">
+          <Accordion.Body className='my-activity'>
             <Link to={""}>{t("component.floating.text.likes")}</Link>
             <Link to={"/mypage/post"}>{t("component.floating.text.post")}</Link>
             <Link to={"/mypage/summary"}>
@@ -98,19 +97,19 @@ function FloatingUserProfile() {
             </Link>
           </Accordion.Body>
         </Accordion.Item>
-        <Accordion.Item eventKey="1">
+        <Accordion.Item eventKey='1'>
           <Accordion.Header>
             {t("component.floating.text.library")}
           </Accordion.Header>
-          <Accordion.Body className="my-library">
-            <div className="books-container">
+          <Accordion.Body className='my-library'>
+            <div className='books-container'>
               {books.slice(0, 6).map((mybook, idx) => {
                 return (
                   <Image
                     key={"my-library-book" + idx}
                     src={mybook.book.image}
-                    width="40px"
-                    height="55px"
+                    width='40px'
+                    height='55px'
                     noImageFontSize={16}
                     noImageTextFontSize={6}
                   />
