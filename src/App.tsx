@@ -2,6 +2,7 @@ import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 
 import "@/assets/css/main.scss";
+import "@/assets/css/tailwind.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 
 import BasicLayout from "@/layouts/BasicLayout";
