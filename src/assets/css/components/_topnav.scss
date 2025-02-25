@@ -8,15 +8,10 @@
   background-color: white;
 
   .upper-container {
-    height: 122px;
-    display: flex;
     border-bottom: 1px solid variables.$brand-color4;
-    .offset {
-      flex: 2;
-    }
     .left-container {
       display: flex;
-      justify-content: start;
+      justify-content: center;
       .logo-container {
         height: 100%;
         align-items: center;

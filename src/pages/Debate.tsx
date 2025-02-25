@@ -21,7 +21,6 @@ import axios from "axios";
 import useDebounce from "@/hooks/useDebounce";
 import { getDate, range } from "@/functions";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import CategoryCard from "@/components/card/CategoryCard";
 import SearchDropdown from "@/components/dropdown/SearchByDropdown";
