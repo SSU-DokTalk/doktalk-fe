@@ -1,30 +1,20 @@
 import { forwardRef, useEffect, useRef, useState } from "react";
 
-import { Dropdown } from "react-bootstrap";
-
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faImage,
-  faMagnifyingGlass,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
+import { faImage } from "@fortawesome/free-solid-svg-icons";
 import UploadFiles from "@/components/base/UploadFiles";
 import { ACCEPTABLE, CATEGORY } from "@/common/variables";
 import { BookType, DebateType } from "@/types/data";
 import { InitialDebate } from "@/types/initialValue";
-import {
-  addCategory,
-  getCategoryFromNumber,
-  range,
-  removeCategory,
-} from "@/functions";
+import { range } from "@/functions";
 import { useTranslation } from "react-i18next";
 import IonIcon from "@reacticons/ionicons";
 import axios from "axios";
 import { getMonth, getYear } from "date-fns";
 import DatePicker from "react-datepicker";
 import { useNavigate } from "react-router-dom";
+
 import BookSearchDropdown from "@/components/dropdown/BookSearchDropdown";
+import CategoryDropdown from "@/components/dropdown/CategoryChipDropdown";
 
 const years = range(10 + getYear(new Date()) - 2025, 2025, 1);
 const months = [
@@ -50,10 +40,6 @@ function CreateDebate() {
   });
 
   const [files, setFiles] = useState<File[]>([]);
-  const [show, setShow] = useState<{ book: boolean; category: boolean }>({
-    book: false,
-    category: false,
-  });
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -223,69 +209,8 @@ function CreateDebate() {
         </div>
         <BookSearchDropdown setBookIsbnData={setDebateData} />
 
-        <div className='input-container'>
-          <label htmlFor='category'>카테고리</label>
-          <Dropdown
-            show={show.category}
-            onSelect={(e) => {
-              setDebateData((prev) => {
-                return {
-                  ...prev,
-                  category: addCategory(prev.category, parseInt(e ?? "0")),
-                };
-              });
-              setShow((prev) => ({ ...prev, category: false }));
-            }}
-            onToggle={(e) => {
-              setShow((prev) => ({ ...prev, category: e }));
-            }}>
-            <Dropdown.Menu>
-              {Object.keys(CATEGORY).map((category) => {
-                return (
-                  <Dropdown.Item
-                    key={"category" + CATEGORY[category].value}
-                    eventKey={CATEGORY[category].value}>
-                    {t(CATEGORY[category].name)}
-                  </Dropdown.Item>
-                );
-              })}
-            </Dropdown.Menu>
-          </Dropdown>
-          <div
-            className='input-box category-input'
-            onClick={() => setShow((prev) => ({ ...prev, category: true }))}>
-            <div className='category-container'>
-              {debateData.category == 0
-                ? "토론 주제의 카테고리를 선택해주세요"
-                : getCategoryFromNumber(debateData.category).map(
-                    (category, index) => {
-                      return (
-                        <div
-                          className='selected-category'
-                          key={"selected-category" + index}>
-                          <span>{t(category.name)}</span>
-                          <FontAwesomeIcon
-                            icon={faXmark}
-                            onClick={() =>
-                              setDebateData((prev) => {
-                                return {
-                                  ...prev,
-                                  category: removeCategory(
-                                    prev.category,
-                                    category.value
-                                  ),
-                                };
-                              })
-                            }
-                          />
-                        </div>
-                      );
-                    }
-                  )}
-            </div>
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </div>
-        </div>
+        <CategoryDropdown data={debateData} setData={setDebateData} />
+
         <div className='input-container'>
           <label htmlFor='limit'>인원 제한</label>
           <div className='input-box-short'>
