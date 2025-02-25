@@ -24,6 +24,7 @@ import DatePicker from "react-datepicker";
 import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import CategoryCard from "@/components/card/CategoryCard";
+import SearchDropdown from "@/components/dropdown/SearchByDropdown";
 
 const searchBys: {
   name: string;
@@ -109,9 +110,6 @@ function Debate() {
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
   const navigate = useNavigate();
-
-  const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
-  const open = Boolean(anchorEl);
 
   const CustomDatePicker = forwardRef<any, any>(
     ({ value, onClick, className }, ref) => (
@@ -206,26 +204,11 @@ function Debate() {
                 icon={faMagnifyingGlass}
                 className='searchbox-icon'
               />
-              <div className='search-by-dropdown'>
-                <ButtonBase
-                  onClick={(event) => {
-                    setAnchorEl(event.currentTarget);
-                  }}>
-                  {t(searchBys[searchByIdx].name)} <ArrowDropDown />
-                </ButtonBase>
-                <Menu
-                  open={open}
-                  anchorEl={anchorEl}
-                  onClose={() => setAnchorEl(null)}>
-                  {searchBys.map((searchBy, index) => (
-                    <MenuItem
-                      key={"search-by" + index}
-                      onClick={() => setSearchByIdx(index)}>
-                      {t(searchBy.name)}
-                    </MenuItem>
-                  ))}
-                </Menu>
-              </div>
+              <SearchDropdown
+                searchBys={searchBys}
+                searchByIdx={searchByIdx}
+                setSearchByIdx={setSearchByIdx}
+              />
               <input
                 type='text'
                 placeholder={t("page.debate.search.placeholder")}
