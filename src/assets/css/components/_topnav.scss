@@ -18,8 +18,8 @@
         display: flex;
         text-decoration: none;
         .logo {
-          margin-top: 20px;
-          height: 100px;
+          // margin-top: 20px;
+          // height: 100px;
           object-fit: cover;
         }
       }
@@ -58,7 +58,7 @@
       }
     }
     .right-container {
-      margin-right: 150px;
+      // margin-right: 150px;
       flex: 3;
       display: flex;
       align-items: center;
@@ -68,7 +68,7 @@
         height: 48px;
         align-items: center;
         .language-dropdown {
-          margin-right: 20px;
+          // margin-right: 20px;
           .language-icon {
             width: 36px;
             height: 36px;

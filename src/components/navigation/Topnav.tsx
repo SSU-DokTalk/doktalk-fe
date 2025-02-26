@@ -125,14 +125,14 @@ function Topnav() {
   return (
     <>
       <div id='topnav' style={{ zIndex: "10" }}>
-        <div className='upper-container grid grid-cols-2 gap-4 md:grid-cols-5'>
-          <div className='left-container'>
+        <div className='upper-container grid grid-cols-3 md:grid-cols-5'>
+          <div className='left-container ml-4! my-2! md:mt-5!'>
             <Link to={"/"} className='logo-container'>
               <img src={logo} alt='doktalk logo' className='logo' />
             </Link>
           </div>
 
-          <div className='right-container md:col-span-2 md:order-3'>
+          <div className='right-container col-span-2 md:col-span-1 md:order-3 '>
             <div className='user-container'>
               {user.id != 0 ? (
                 <LoginedInfo doLogout={doLogout} />
@@ -140,7 +140,7 @@ function Topnav() {
                 <GuestInfo />
               )}
 
-              <div className='language-dropdown'>
+              <div className='language-dropdown md:mr-5!'>
                 <IconButton
                   className='language-icon'
                   onClick={(event) => {
@@ -177,14 +177,14 @@ function Topnav() {
               </div>
 
               <IconButton
-                className='drawer-button md:hidden!'
+                className='drawer-button md:hidden! mr-4!'
                 onClick={() => setDrawerOpen(true)}>
                 <FontAwesomeIcon icon={faBars} />
               </IconButton>
             </div>
           </div>
 
-          <div className='searchbar-container pb-8! col-span-2 md:pb-0! md:order-2'>
+          <div className='searchbar-container pb-4! col-span-3 md:pb-0! md:order-2'>
             <div className='searchbar'>
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
