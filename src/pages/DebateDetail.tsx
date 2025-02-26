@@ -94,7 +94,7 @@ function DebateDetail() {
   }
 
   return (
-    <div id='debate-detail'>
+    <div id='debate-detail' className='m-4! md:ml-24! md:mt-12!'>
       <div className='user-header'>
         <div className='user-header__info'>
           <ProfileIcon
