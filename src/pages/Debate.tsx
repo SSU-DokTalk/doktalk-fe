@@ -169,7 +169,7 @@ function Debate() {
 
   return (
     <div id='debate-page'>
-      <div className='recommend-content-container'>
+      {/* <div className='recommend-content-container'>
         <div className='recommend-content-title'>
           {t("page.debate.title.recommend")}
         </div>
@@ -184,18 +184,18 @@ function Debate() {
             />
           ))}
         </Carousel>
-      </div>
+      </div> */}
       <div className='content-container'>
         <div className='lower-content-container'>
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
-            className='left-container'
+            className='left-container mx-4! w-screen md:w-3/5'
           />
-          <div className='right-container'></div>
+          {/* <div className='right-container'></div> */}
         </div>
         <div className='lower-content-container'>
-          <div className='left-container'>
+          <div className='left-container mx-4! md:w-3/5!'>
             <div className='searchbox-container'>
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
