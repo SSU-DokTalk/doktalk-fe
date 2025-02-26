@@ -134,7 +134,7 @@ function Summary() {
         <Carousel
           items={recommendSummaries}
           size={isMd() ? 3 : 1}
-          className='popular-content'>
+          className='popular-content mx-auto md:mx-0!'>
           {recommendSummaries.map((summary, index) => (
             <CarouselSummaryCard
               key={"popular-summary" + index}
@@ -143,17 +143,18 @@ function Summary() {
           ))}
         </Carousel>
       </div>
-      <div className='content-container'>
-        <div className='lower-content-container'>
+
+      <div className='content-container mx-4!'>
+        <div className='lower-content-container md:w-3/5!'>
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
             className='left-container'
           />
-          <div className='right-container'></div>
+          {/* <div className='right-container'></div> */}
         </div>
-        <div className='lower-content-container'>
-          <div className='left-container'>
+        <div className='lower-content-container md:flex'>
+          <div className='left-container md:w-3/5!'>
             <div className='searchbox-container'>
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
