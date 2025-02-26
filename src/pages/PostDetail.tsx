@@ -83,7 +83,7 @@ function PostDetail() {
 
   return (
     <div id='post-detail'>
-      <div className='container'>
+      <div className='container md:w-7/10!'>
         <div className='header'>
           <ProfileIcon profile={post.user.profile} size={50} />
           <div className='header__container'>
@@ -216,7 +216,7 @@ function PostDetail() {
           commentLikesApi={`post/comments/like`}
         />
       </div>
-      <div className='offset'></div>
+      <div className='offset hidden md:block'></div>
     </div>
   );
 }
