@@ -59,7 +59,7 @@ function Landing() {
 
   return (
     <div id='landing-page'>
-      <div className='post-container'>
+      <div className='post-container px-4! md:px-0! md:w-3/5'>
         <div className='post-title hidden md:block'>
           {t("page.landing.title.post")}
         </div>
