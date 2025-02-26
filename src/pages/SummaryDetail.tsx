@@ -123,7 +123,7 @@ function SummaryDetail() {
 
   return (
     <div id='summary-detail'>
-      <div className='container'>
+      <div className='container md:w-7/10!'>
         <div className='header'>
           <ProfileIcon profile={summary.user.profile} size={50} />
           <div className='header__container'>
@@ -303,7 +303,7 @@ function SummaryDetail() {
           commentLikesApi={`summary/comments/like`}
         />
       </div>
-      <div className='offset'></div>
+      <div className='offset hidden md:block'></div>
     </div>
   );
 }
