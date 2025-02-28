@@ -36,6 +36,7 @@ import { useAppSelector } from "@/stores/hooks";
 function InfiniteScroll({
   children,
   api,
+  api_params = {},
   likes_api = undefined,
   itemId = "id",
   setItems,
@@ -59,6 +60,7 @@ function InfiniteScroll({
 }: {
   children: React.ReactNode;
   api: string;
+  api_params?: any;
   likes_api?: string;
   itemId?: string;
   setItems: React.Dispatch<React.SetStateAction<any[]>>;
@@ -67,8 +69,8 @@ function InfiniteScroll({
   setTotal?: React.Dispatch<React.SetStateAction<number>>;
   hasMore?: boolean | undefined;
   setHasMore?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
-  likes?: boolean[];
-  setLikes?: React.Dispatch<React.SetStateAction<boolean[]>>;
+  likes?: number[];
+  setLikes?: React.Dispatch<React.SetStateAction<number[]>>;
   beforeFetch?: () => void;
   afterFetchSuccess?: () => void;
   afterFetchFail?: () => void;
@@ -89,16 +91,17 @@ function InfiniteScroll({
   const fetchMoreItems = async () => {
     if (beforeFetch) await beforeFetch();
     if (condition && (hasMore ?? inherentHasMore)) {
-      console.log(api);
       await axios
         .get(`/api/${api}`, {
           params: {
             page: page ?? inherentPage,
             size: size,
+            ...api_params,
           },
         })
         .then(
           async (res) => {
+            console.log(res);
             if (afterFetchSuccess) await afterFetchSuccess();
             let {
               items,
@@ -111,7 +114,8 @@ function InfiniteScroll({
               pages: number;
               total: number;
             } = res.data;
-            if (pg <= pages) {
+            console.log(items);
+            if (pg <= pages && pages > 0) {
               setItems((prevItems) => [...prevItems, ...items]);
               setTotal?.(total);
               await (setHasMore ?? setInherentHasMore)(pg != pages);
@@ -120,30 +124,16 @@ function InfiniteScroll({
               await (setHasMore ?? setInherentHasMore)(false);
             }
             if (!items || items.length === 0) return;
-            if (!likes_api || user.id == 0 || !likes || !setLikes) {
-              setLikes?.((prvLikes) => [
-                ...prvLikes,
-                ...new Array(items.length).fill(false),
-              ]);
-              return;
-            }
+            if (!likes_api || user.id == 0 || !likes || !setLikes) return;
             await axios
               .get(
                 `/api/${likes_api}?${items
                   .map((item) => "ids=" + item[itemId])
                   .join("&")}`
               )
-              .then(
-                (newLikes) => {
-                  setLikes((prvLikes) => [...prvLikes, ...newLikes.data]);
-                },
-                () => {
-                  setLikes((prvLikes) => [
-                    ...prvLikes,
-                    ...new Array(items.length).fill(false),
-                  ]);
-                }
-              );
+              .then((newLikes) => {
+                setLikes((prvLikes) => prvLikes.concat(newLikes.data));
+              });
           },
           async () => {
             await (setHasMore ?? setInherentHasMore)(false);
@@ -180,7 +170,14 @@ function InfiniteScroll({
         observer.unobserve(elementRef.current);
       }
     };
-  }, [inherentPage, page, condition, api, JSON.stringify(dependency)]);
+  }, [
+    inherentPage,
+    page,
+    condition,
+    api,
+    JSON.stringify(dependency),
+    JSON.stringify(api_params),
+  ]);
 
   return (
     <>

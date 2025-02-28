@@ -14,51 +14,29 @@ import { useNavigate } from "react-router-dom";
 
 function DebateCard({
   debate,
-  idx,
   hasLiked,
   setHasLiked,
 }: {
   debate: DebateType;
-  idx: number;
   hasLiked: boolean;
-  setHasLiked: Dispatch<SetStateAction<boolean[]>>;
+  setHasLiked: Dispatch<SetStateAction<number[]>>;
 }) {
   const navigate = useNavigate();
 
   const doLike = () => {
     // Like API 호출
-    axios
-      .post(`/api/debate/${debate.id}/like`)
-      .then(() => {
-        // 좋아요 성공
-        setHasLiked((prv) =>
-          prv
-            .slice(0, idx)
-            .concat(true)
-            .concat(prv.slice(idx + 1))
-        );
-        debate.likes_num++;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.post(`/api/debate/${debate.id}/like`).then(() => {
+      // 좋아요 성공
+      setHasLiked((prv) => prv.concat([debate.id]));
+      debate.likes_num++;
+    });
   };
 
   const doUnlike = () => {
-    axios
-      .delete(`/api/debate/${debate.id}/like`)
-      .then(() => {
-        setHasLiked((prv) =>
-          prv
-            .slice(0, idx)
-            .concat(false)
-            .concat(prv.slice(idx + 1))
-        );
-        debate.likes_num--;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.delete(`/api/debate/${debate.id}/like`).then(() => {
+      setHasLiked((prv) => prv.filter((val) => val !== debate.id));
+      debate.likes_num--;
+    });
   };
 
   return (

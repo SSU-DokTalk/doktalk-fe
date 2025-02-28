@@ -3,7 +3,7 @@ import WritePostCard from "@/components/card/WritePostCard";
 import PostCard from "@/components/card/PostCard";
 import WriteSummaryCard from "@/components/card/WriteSummaryCard";
 import InfiniteScroll from "@/components/base/InfiniteScroll";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import {
   DebateType,
   MyBookType,
@@ -29,7 +29,6 @@ import {
   faChevronRight,
 } from "@fortawesome/free-solid-svg-icons";
 import { getDateTime } from "@/functions";
-import { DUMMY_PAYMENTS } from "@/common/dummy_data";
 import { useTranslation } from "react-i18next";
 
 function ProfileTabDetails({
@@ -43,12 +42,12 @@ function ProfileTabDetails({
   const [postPage, setPostPage] = useState<number>(1);
   const [postHasMore, setPostHasMore] = useState<boolean>(true);
   const [didPost, setDidPost] = useState<boolean>(false);
-  const [postLikes, setPostLikes] = useState<boolean[]>([]);
+  const [postLikes, setPostLikes] = useState<number[]>([]);
 
   const [summaries, setSummaries] = useState<SummaryType[]>([]);
   const [summaryPage, setSummaryPage] = useState<number>(1);
   const [summaryHasMore, setSummaryHasMore] = useState<boolean>(true);
-  const [summaryLikes, setSummaryLikes] = useState<boolean[]>([]);
+  const [summaryLikes, setSummaryLikes] = useState<number[]>([]);
 
   const [myBooks, setMyBooks] = useState<MyBookType[]>([]);
   const [totalMyBooks, setTotalMyBooks] = useState<number>(0);
@@ -61,21 +60,23 @@ function ProfileTabDetails({
     useState<number>(0);
   const [hasLoadedPurchaseSummary, setHasLoadedPurchaseSummary] =
     useState<boolean>(false);
-  const [purchasedSummaryLikes, setPurchasedSummaryLikes] = useState<boolean[]>(
+  const [purchasedSummaryLikes, setPurchasedSummaryLikes] = useState<number[]>(
     []
   );
 
   const [debates, setDebates] = useState<DebateType[]>([]);
   const [debatePage, setDebatePage] = useState<number>(1);
   const [debateHasMore, setDebateHasMore] = useState<boolean>(true);
-  const [debateLikes, setDebateLikes] = useState<boolean[]>([]);
+  const [debateLikes, setDebateLikes] = useState<number[]>([]);
 
-  const [payments, setPayments] = useState<PaymentType[]>(DUMMY_PAYMENTS);
+  const offset = new Date().getTimezoneOffset();
+  let now = new Date();
+  var thisMonth = new Date(now.getFullYear(), now.getMonth(), 1);
+  const [payments, setPayments] = useState<PaymentType[]>([]);
   const [paymentPage, setPaymentPage] = useState<number>(1);
   const [paymentHasMore, setPaymentHasMore] = useState<boolean>(true);
-  const [paymentCurTime, setPaymentCurTime] = useState<Date>(new Date());
-  const [isPaymentCurTimeChanged, setIsPaymentCurTimeChanged] =
-    useState<boolean>(false);
+  const [paymentCurTime, setPaymentCurTime] = useState<Date>(thisMonth);
+  const isCurTimeChanged = useRef<boolean>(false);
 
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
@@ -108,7 +109,11 @@ function ProfileTabDetails({
         });
       }
     }
-  }, [currentTab, userProfile, isPaymentCurTimeChanged]);
+  }, [currentTab, userProfile, isCurTimeChanged.current]);
+
+  const afterFetch = () => {
+    isCurTimeChanged.current = false;
+  };
 
   return (
     <div id="profile-tab-details">
@@ -144,12 +149,11 @@ function ProfileTabDetails({
                 await setDidPost(false);
               }}
             >
-              {posts.map((post, idx) => (
+              {posts.map((post) => (
                 <PostCard
-                  idx={idx}
                   key={"post" + post.id}
                   post={post}
-                  hasLiked={postLikes[idx]}
+                  hasLiked={postLikes.includes(post.id)}
                   setHasLiked={setPostLikes}
                 />
               ))}
@@ -181,9 +185,8 @@ function ProfileTabDetails({
               {summaries.map((summary, index) => (
                 <SummaryCard
                   key={"summary" + index}
-                  idx={index}
                   summary={summary}
-                  hasLiked={summaryLikes[index]}
+                  hasLiked={summaryLikes.includes(summary.id)}
                   setHasLiked={setSummaryLikes}
                 />
               ))}
@@ -274,10 +277,9 @@ function ProfileTabDetails({
                   {purchasedSummaries.slice(0, 4).map((summary, index) => {
                     return (
                       <SummaryCard
-                        idx={index}
                         key={"purchased_summary" + index}
                         summary={summary}
-                        hasLiked={purchasedSummaryLikes[index]}
+                        hasLiked={purchasedSummaryLikes.includes(summary.id)}
                         setHasLiked={setPurchasedSummaryLikes}
                       />
                     );
@@ -312,8 +314,7 @@ function ProfileTabDetails({
               {debates.map((debate, index) => (
                 <DebateCard
                   key={"debate" + index}
-                  idx={index}
-                  hasLiked={debateLikes[index]}
+                  hasLiked={debateLikes.includes(debate.id)}
                   setHasLiked={setDebateLikes}
                   debate={debate}
                 />
@@ -327,7 +328,7 @@ function ProfileTabDetails({
                 <div
                   className="month-button left"
                   onClick={async () => {
-                    await setIsPaymentCurTimeChanged(true);
+                    isCurTimeChanged.current = true;
                     await setPaymentCurTime(
                       new Date(
                         paymentCurTime.setMonth(paymentCurTime.getMonth() - 1)
@@ -340,7 +341,7 @@ function ProfileTabDetails({
                 <div
                   className="month-button right"
                   onClick={async () => {
-                    await setIsPaymentCurTimeChanged(true);
+                    isCurTimeChanged.current = true;
                     await setPaymentCurTime(
                       new Date(
                         paymentCurTime.setMonth(paymentCurTime.getMonth() + 1)
@@ -363,7 +364,9 @@ function ProfileTabDetails({
                   {t("component.section.profile-tab-details.item.currency")}
                   {payments
                     .filter((payment) => {
-                      let time = new Date(getDateTime(payment.created));
+                      let time = new Date(
+                        getDateTime(new Date(payment.created))
+                      );
                       return (
                         time.getFullYear() === paymentCurTime.getFullYear() &&
                         time.getMonth() === paymentCurTime.getMonth()
@@ -377,14 +380,29 @@ function ProfileTabDetails({
               </div>
             </div>
             <InfiniteScroll
-              api={`user/${userProfile.id}/payments`}
+              api={`user/purchase`}
+              api_params={{
+                _from: new Date(
+                  paymentCurTime.getTime() - offset * 60 * 1000
+                ).getTime(),
+                _to: new Date(
+                  new Date(
+                    paymentCurTime.getFullYear(),
+                    paymentCurTime.getMonth() + 1,
+                    1
+                  ).getTime() -
+                    offset * 60 * 1000
+                ).getTime(),
+              }}
               setItems={setPayments}
               page={paymentPage}
               setPage={setPaymentPage}
               hasMore={paymentHasMore}
               setHasMore={setPaymentHasMore}
+              afterFetchFail={afterFetch}
+              afterFetchSuccess={afterFetch}
               hasNoItem={payments.length === 0}
-              refreshCondition={isPaymentCurTimeChanged}
+              refreshCondition={isCurTimeChanged.current}
               hasNoItemComponent={
                 <div className="no-item">
                   <p className="no-item-message">
@@ -393,13 +411,7 @@ function ProfileTabDetails({
                 </div>
               }
               condition={userProfile && userProfile.id != 0}
-              afterFetchSuccess={async () => {
-                await setIsPaymentCurTimeChanged(false);
-              }}
-              afterFetchFail={async () => {
-                await setIsPaymentCurTimeChanged(false);
-              }}
-              dependency={[isPaymentCurTimeChanged]}
+              dependency={[isCurTimeChanged.current]}
             >
               {payments.map((payment, index) => (
                 <PaymentCard key={"payment" + index} payment={payment} />

@@ -4,7 +4,7 @@ import { selectUser } from "@/stores/user";
 import ProfileIcon from "@/components/base/ProfileIcon";
 import { Dispatch, SetStateAction, useState } from "react";
 import WritePostModal from "../modal/WritePostModal";
-import WriteIcon from "@/assets/images/WriteIcon";
+import WriteIcon from "@/assets/images/write.svg?react";
 import { useTranslation } from "react-i18next";
 
 function WritePostCard({

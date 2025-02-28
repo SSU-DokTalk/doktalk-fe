@@ -15,10 +15,10 @@ function Landing() {
   const [postPage, setPostPage] = useState<number>(1);
   const [postHasMore, setPostHasMore] = useState<boolean>(true);
   const [didPost, setDidPost] = useState<boolean>(false);
-  const [postLikes, setPostLikes] = useState<boolean[]>([]);
+  const [postLikes, setPostLikes] = useState<number[]>([]);
 
   const [popularSummaries, setPopularSummaries] = useState<SummaryType[]>([]);
-  const [popularSummaryLikes, setPopularSummaryLikes] = useState<boolean[]>([]);
+  const [popularSummaryLikes, setPopularSummaryLikes] = useState<number[]>([]);
   const [isPopularSummaryLoaded, setIsPopularSummaryLoaded] =
     useState<boolean>(false);
 
@@ -43,7 +43,7 @@ function Landing() {
             )
             .then(
               (res) => {
-                let { data: itemLikes }: { data: boolean[] } = res;
+                let { data: itemLikes }: { data: number[] } = res;
                 setPopularSummaryLikes((prev) => [...prev, ...itemLikes]);
               },
               () => {
@@ -83,12 +83,11 @@ function Landing() {
             await setDidPost(false);
           }}
         >
-          {posts.map((post, idx) => (
+          {posts.map((post) => (
             <PostCard
-              idx={idx}
               key={"post" + post.id}
               post={post}
-              hasLiked={postLikes[idx]}
+              hasLiked={postLikes.includes(post.id)}
               setHasLiked={setPostLikes}
             />
           ))}
@@ -101,9 +100,8 @@ function Landing() {
         {popularSummaries.map((summary, index) => (
           <PopularSummaryCard
             key={"popular-summary" + index}
-            idx={index}
             summary={summary}
-            hasLiked={popularSummaryLikes[index]}
+            hasLiked={popularSummaryLikes.includes(summary.id)}
             setHasLiked={setPopularSummaryLikes}
           />
         ))}

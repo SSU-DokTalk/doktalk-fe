@@ -13,52 +13,30 @@ import {
 import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
 
 function SummaryCard({
-  idx,
   summary,
   hasLiked = false,
   setHasLiked,
 }: {
-  idx: number;
   summary: SummaryType;
   hasLiked?: boolean;
-  setHasLiked: Dispatch<SetStateAction<boolean[]>>;
+  setHasLiked: Dispatch<SetStateAction<number[]>>;
 }) {
   const navigate = useNavigate();
 
   const doLike = () => {
     // Like API 호출
-    axios
-      .post(`/api/summary/${summary.id}/like`)
-      .then(() => {
-        // 좋아요 성공
-        setHasLiked((prv) =>
-          prv
-            .slice(0, idx)
-            .concat(true)
-            .concat(prv.slice(idx + 1))
-        );
-        summary.likes_num++;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.post(`/api/summary/${summary.id}/like`).then(() => {
+      // 좋아요 성공
+      setHasLiked((prv) => prv.concat([summary.id]));
+      summary.likes_num++;
+    });
   };
 
   const doUnlike = () => {
-    axios
-      .delete(`/api/summary/${summary.id}/like`)
-      .then(() => {
-        setHasLiked((prv) =>
-          prv
-            .slice(0, idx)
-            .concat(false)
-            .concat(prv.slice(idx + 1))
-        );
-        summary.likes_num--;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.delete(`/api/summary/${summary.id}/like`).then(() => {
+      setHasLiked((prv) => prv.filter((val) => val !== summary.id));
+      summary.likes_num--;
+    });
   };
 
   return (

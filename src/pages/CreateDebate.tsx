@@ -58,7 +58,7 @@ function CreateDebate() {
   const [books, setBooks] = useState<BookType[]>([]);
   const [bookPage, setBookPage] = useState<number>(1);
   const [bookHasMore, setBookHasMore] = useState<boolean>(true);
-  const [isInLibrary, setIsInLibrary] = useState<boolean[]>([]);
+  const [isInLibrary, setIsInLibrary] = useState<number[]>([]);
 
   const [files, setFiles] = useState<File[]>([]);
   const [show, setShow] = useState<{ book: boolean; category: boolean }>({

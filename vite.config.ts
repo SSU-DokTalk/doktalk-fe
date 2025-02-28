@@ -6,7 +6,7 @@ import svgr from "vite-plugin-svgr";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const config: UserConfig = {
-    plugins: [react(), svgr({ include: "**/*.svg?react" })],
+    plugins: [react(), svgr()],
     resolve: {
       alias: [{ find: "@", replacement: "/src" }],
     },

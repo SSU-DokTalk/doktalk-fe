@@ -60,34 +60,29 @@ function App() {
 
           // 유저 정보가 없는 경우 다시 요청
           if (user.id == 0) {
-            axios
-              .get("/api/user/me")
-              .then(async (res) => {
-                let {
-                  id,
-                  name,
-                  role,
-                  profile,
-                }: {
-                  id: number;
-                  name: string;
-                  role: "USER" | "ADMIN";
-                  profile: string;
-                } = res.data;
-                if (id != 0) {
-                  await dispatch(
-                    setUser({
-                      id: id,
-                      name: name,
-                      profile: profile,
-                      role: role,
-                    })
-                  );
-                }
-              })
-              .catch((err) => {
-                console.log(err);
-              });
+            axios.get("/api/user/me").then(async (res) => {
+              let {
+                id,
+                name,
+                role,
+                profile,
+              }: {
+                id: number;
+                name: string;
+                role: "USER" | "ADMIN";
+                profile: string;
+              } = res.data;
+              if (id != 0) {
+                await dispatch(
+                  setUser({
+                    id: id,
+                    name: name,
+                    profile: profile,
+                    role: role,
+                  })
+                );
+              }
+            });
           }
         })
         .finally(() => {
@@ -133,14 +128,17 @@ function App() {
           <Route path="/search" element={<Search />}></Route>
           <Route path="/summary" element={<Summary />}></Route>
           <Route path="/debate/:debate_id" element={<DebateDetail />}></Route>
-          <Route path="/summary/:summary_id" element={<SummaryDetail />}></Route>
+          <Route
+            path="/summary/:summary_id"
+            element={<SummaryDetail />}
+          ></Route>
           <Route path="/post/:post_id" element={<PostDetail />}></Route>
           <Route path="/summary/create" element={<CreateSummary />}></Route>
           <Route path="/debate/create" element={<CreateDebate />}></Route>
         </Route>
         <Route path="/mypage" element={<MyPage />}></Route>
         <Route path="/user/:user_id" element={<UserProfile />}></Route>
-        <Route path="settings" element={<Settings/>}></Route>
+        <Route path="settings" element={<Settings />}></Route>
       </Route>
       <Route path="/login" element={<Login />}></Route>
       <Route path="/register" element={<Register />}></Route>

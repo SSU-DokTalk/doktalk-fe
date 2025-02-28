@@ -52,32 +52,25 @@ function WritePostModal({
                 directory: "post",
               },
             })
-            .then(
-              (res) => res.data,
-              (err) => console.log(err)
-            );
+            .then((res) => res.data);
         },
         () => null
       )
     );
-    console.log(filesRes);
     await axios
       .post("/api/post", {
         ...postData,
         files: filesRes,
       })
-      .then(
-        () => {
-          setShowModal(false);
-          setPostData({
-            title: "",
-            content: "",
-          });
-          setFiles([]);
-          setDidPost?.(true);
-        },
-        (err) => console.log(err)
-      );
+      .then(() => {
+        setShowModal(false);
+        setPostData({
+          title: "",
+          content: "",
+        });
+        setFiles([]);
+        setDidPost?.(true);
+      });
   };
 
   return (

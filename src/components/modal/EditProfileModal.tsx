@@ -37,15 +37,10 @@ function EditProfileModal({
 
   useEffect(() => {
     if (user.id != 0 && showModal) {
-      axios.get(`/api/user/me`).then(
-        (res) => {
-          let { profile, name, introduction } = res.data;
-          setUserInfo({ profile, name, introduction });
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      axios.get(`/api/user/me`).then((res) => {
+        let { profile, name, introduction } = res.data;
+        setUserInfo({ profile, name, introduction });
+      });
     }
   }, [showModal]);
 
@@ -77,42 +72,27 @@ function EditProfileModal({
             directory: "profile",
           },
         })
-        .then(
-          async (res) => {
-            let { data } = res;
-            let updatedUserInfo = { ...userInfo, profile: data };
-            await setUserInfo(updatedUserInfo);
+        .then(async (res) => {
+          let { data } = res;
+          let updatedUserInfo = { ...userInfo, profile: data };
+          await setUserInfo(updatedUserInfo);
 
-            axios.patch(`/api/user/me`, updatedUserInfo).then(
-              async (res) => {
-                let { id, name, profile, role } = res.data;
-                await dispatch(setUser({ id, name, profile, role }));
-                setDidEdit(true);
-              },
-              (err) => {
-                console.log(err);
-              }
-            );
-          },
-          (err) => {
-            console.log(err);
-          }
-        );
+          axios.patch(`/api/user/me`, updatedUserInfo).then(async (res) => {
+            let { id, name, profile, role } = res.data;
+            await dispatch(setUser({ id, name, profile, role }));
+            setDidEdit(true);
+          });
+        });
     },
     [userInfo]
   );
 
   const deleteImage = () => {
-    axios.delete(`/api/user/profile`).then(
-      async () => {
-        setUserInfo({ ...userInfo, profile: undefined });
-        await dispatch(setUser({ ...user, profile: undefined }));
-        setDidEdit(true);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.delete(`/api/user/profile`).then(async () => {
+      setUserInfo({ ...userInfo, profile: undefined });
+      await dispatch(setUser({ ...user, profile: undefined }));
+      setDidEdit(true);
+    });
   };
 
   return (

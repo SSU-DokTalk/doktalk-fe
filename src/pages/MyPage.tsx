@@ -16,14 +16,9 @@ function MyPage() {
 
   useEffect(() => {
     if (user.id != 0) {
-      axios
-        .get("/api/user/me")
-        .then((res) => {
-          setUserProfile(res.data);
-        })
-        .catch((err) => {
-          console.log(err);
-        });
+      axios.get("/api/user/me").then((res) => {
+        setUserProfile(res.data);
+      });
     }
   }, [user.id]);
 

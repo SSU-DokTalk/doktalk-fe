@@ -46,14 +46,9 @@ function Profile({
 
   useEffect(() => {
     if (userProfile.id != 0) {
-      axios.get(`/api/user/is-following/${userProfile.id}`).then(
-        (res) => {
-          setIsFollowing(res.data);
-        },
-        (err) => {
-          console.log(err);
-        }
-      );
+      axios.get(`/api/user/is-following/${userProfile.id}`).then((res) => {
+        setIsFollowing(res.data);
+      });
     }
     if (user.id != 0 && userProfile.id == user.id) {
       setTabs(MyTabs);
@@ -76,29 +71,19 @@ function Profile({
   }, [user.id, userProfile.id, didEdit]);
 
   const follow = () => {
-    axios.post(`/api/user/follow/${userProfile.id}`).then(
-      () => {
-        setIsFollowing(true);
-        userProfile.follower_num++;
-        dispatch(updateGlobalState({ isFollowerUpdated: true }));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.post(`/api/user/follow/${userProfile.id}`).then(() => {
+      setIsFollowing(true);
+      userProfile.follower_num++;
+      dispatch(updateGlobalState({ isFollowerUpdated: true }));
+    });
   };
 
   const unfollow = () => {
-    axios.delete(`/api/user/follow/${userProfile.id}`).then(
-      () => {
-        setIsFollowing(false);
-        userProfile.follower_num--;
-        dispatch(updateGlobalState({ isFollowerUpdated: true }));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.delete(`/api/user/follow/${userProfile.id}`).then(() => {
+      setIsFollowing(false);
+      userProfile.follower_num--;
+      dispatch(updateGlobalState({ isFollowerUpdated: true }));
+    });
   };
 
   return (

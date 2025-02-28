@@ -7,38 +7,26 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
 import { Dispatch, SetStateAction } from "react";
 function CommentCard({
-  idx,
   comment,
   itemType,
   hasLiked,
   setHasLiked,
 }: {
-  idx: number;
   comment: CommentType;
   itemType: "post" | "summary" | "debate";
   hasLiked: boolean;
-  setHasLiked: Dispatch<SetStateAction<boolean[]>>;
+  setHasLiked: Dispatch<SetStateAction<number[]>>;
 }) {
   const doLike = () => {
     axios.post(`/api/${itemType}/comment/${comment.id}/like`).then(() => {
-      setHasLiked((prv) =>
-        prv
-          .slice(0, idx)
-          .concat(true)
-          .concat(prv.slice(idx + 1))
-      );
+      setHasLiked((prv) => prv.concat([comment.id]));
       comment.likes_num++;
     });
   };
 
   const doUnlike = () => {
     axios.delete(`/api/${itemType}/comment/${comment.id}/like`).then(() => {
-      setHasLiked((prv) =>
-        prv
-          .slice(0, idx)
-          .concat(false)
-          .concat(prv.slice(idx + 1))
-      );
+      setHasLiked((prv) => prv.filter((val) => val !== comment.id));
       comment.likes_num--;
     });
   };

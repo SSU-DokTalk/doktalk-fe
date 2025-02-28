@@ -15,15 +15,10 @@ function LandingUpper() {
   const { t } = useTranslation();
 
   useEffect(() => {
-    axios.get(`/api/debate/recommend`).then(
-      (res) => {
-        let { items } = res.data;
-        setDebates(items);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.get(`/api/debate/recommend`).then((res) => {
+      let { items } = res.data;
+      setDebates(items);
+    });
   }, []);
 
   return (

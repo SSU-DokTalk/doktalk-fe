@@ -25,14 +25,9 @@ function UserProfile() {
   useEffect(() => {
     if (user.id != 0 && parseInt(user_id ?? "0") == user.id)
       navigate("/mypage");
-    axios.get(`/api/user/${user_id}`).then(
-      (res) => {
-        setUserProfile(res.data);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.get(`/api/user/${user_id}`).then((res) => {
+      setUserProfile(res.data);
+    });
   }, [user_id]);
 
   return (

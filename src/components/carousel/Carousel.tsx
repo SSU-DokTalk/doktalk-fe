@@ -16,7 +16,6 @@ function Carousel({
   size: number;
 } & HTMLAttributes<HTMLDivElement>) {
   const [currentIdx, setCurrentIdx] = useState<number>(0);
-  // console.log(children);
   return (
     <div id="carousel" {...props}>
       {items.length < size ? null : (
