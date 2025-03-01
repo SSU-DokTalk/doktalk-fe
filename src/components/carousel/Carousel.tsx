@@ -18,26 +18,24 @@ function Carousel({
   const [currentIdx, setCurrentIdx] = useState<number>(0);
   // console.log(children);
   return (
-    <div id="carousel" {...props}>
+    <div id='carousel' {...props}>
       {items.length < size ? null : (
         <div
-          className="carousel-button left"
+          className='carousel-button left'
           onClick={() =>
             setCurrentIdx((prev) => (prev + items.length - 1) % items.length)
-          }
-        >
+          }>
           <FontAwesomeIcon icon={faChevronLeft} />
         </div>
       )}
       {items.length < size ? null : (
         <div
-          className="carousel-button right"
-          onClick={() => setCurrentIdx((prev) => (prev + 1) % items.length)}
-        >
+          className='carousel-button right'
+          onClick={() => setCurrentIdx((prev) => (prev + 1) % items.length)}>
           <FontAwesomeIcon icon={faChevronRight} />
         </div>
       )}
-      {currentIdx + 3 < items.length
+      {currentIdx + size < items.length
         ? children.slice(currentIdx, currentIdx + size).map((child, idx) => {
             return (
               <div key={"carousel-item" + idx} className={`carousel-items`}>
