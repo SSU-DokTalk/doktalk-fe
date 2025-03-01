@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faHeart } from "@fortawesome/free-regular-svg-icons";
 import { faCartPlus } from "@fortawesome/free-solid-svg-icons/faCartPlus";
@@ -35,6 +35,7 @@ function DebateDetail() {
   const [drawerOpen, setDrawerOpen] = useState(false);
 
   const user = useAppSelector(selectUser);
+  const navigate = useNavigate();
 
   useEffect(() => {
     axios.get(`/api/debate/${debate_id}`).then((res) => {
@@ -52,46 +53,33 @@ function DebateDetail() {
       price: debate.price,
       quantity: 1,
     });
-    axios
-      .post(`/api/purchase`, {
-        product_type: "D",
-        product_id: debate.id,
-        price: debate.price,
-        quantity: 1,
-      })
-      .then((res) => {
-        console.log(res);
-      });
+    axios.post(`/api/purchase`, {
+      product_type: "D",
+      product_id: debate.id,
+      price: debate.price,
+      quantity: 1,
+    });
   };
 
   const cancelPurchase = () => {
-    axios.delete(`/api/purchase/${purchaseId}`).then(
-      (res) => {
-        console.log(res.data);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.delete(`/api/purchase/${purchaseId}`).then((res) => {
+      console.log("Cancelled", res.data);
+    });
   };
 
   const getPurchase = () => {
-    axios.get(`/api/purchase/D/${debate.id}`).then(
-      (res) => {
-        let { data }: { data: PaymentType } = res;
-        setPurchaseId(data.id);
-        console.log(data);
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.get(`/api/purchase/D/${debate.id}`).then((res) => {
+      let { data }: { data: PaymentType } = res;
+      setPurchaseId(data.id);
+      console.log(data);
+    });
   };
 
-  function doDelete(event: MouseEvent<HTMLDivElement, MouseEvent>): void {
-    alert("미구현입니당");
-    // throw new Error("Function not implemented.");
-  }
+  const doDelete = () => {
+    axios.delete(`/api/debate/${debate.id}`).then(() => {
+      navigate("/debate");
+    });
+  };
 
   return (
     <div id='debate-detail' className='m-4! md:ml-24! md:mt-12!'>

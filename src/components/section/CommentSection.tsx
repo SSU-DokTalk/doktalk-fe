@@ -32,7 +32,7 @@ function CommentSection({
   const [comments, setComments] = useState<CommentType[]>([]);
   const [commentPage, setCommentPage] = useState<number>(1);
   const [commentHasMore, setCommentHasMore] = useState<boolean>(true);
-  const [commentLikes, setCommentLikes] = useState<boolean[]>([]);
+  const [commentLikes, setCommentLikes] = useState<number[]>([]);
 
   const [didComment, setDidComment] = useState<boolean>(false);
 
@@ -44,7 +44,7 @@ function CommentSection({
         upper_comment_id: upperComment,
         content: commentData,
       })
-      .then((res) => {
+      .then(() => {
         setItem((prev: any) => {
           return {
             ...prev,
@@ -54,14 +54,10 @@ function CommentSection({
         setDidComment(true);
         setCommentData("");
         setUpperComment(undefined);
-        console.log(res);
       });
   };
 
-  useEffect(() => {
-    console.log("CommentSection");
-    console.log(commentsApi);
-  }, [itemId, total]);
+  useEffect(() => {}, [itemId, total]);
 
   return (
     <div id="comment-section">
@@ -105,10 +101,9 @@ function CommentSection({
         {comments.map((comment, idx) => (
           <CommentCard
             key={"comment" + idx}
-            idx={idx}
             itemType={itemType}
             comment={comment}
-            hasLiked={commentLikes[idx]}
+            hasLiked={commentLikes.includes(comment.id)}
             setHasLiked={setCommentLikes}
           />
         ))}

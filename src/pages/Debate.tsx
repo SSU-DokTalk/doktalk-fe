@@ -6,7 +6,7 @@ import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { forwardRef, useEffect, useRef, useState } from "react";
 import IonIcon from "@reacticons/ionicons";
-import WriteIcon from "@/assets/images/WriteIcon";
+import WriteIcon from "@/assets/images/write.svg?react";
 import DebateCard from "@/components/card/DebateCard";
 import InfiniteScroll from "@/components/base/InfiniteScroll";
 import PopularSummaryCard from "@/components/card/PopularSummaryCard";
@@ -77,10 +77,10 @@ function Debate() {
   const [debates, setDebates] = useState<DebateType[]>([]);
   const [debatePage, setDebatePage] = useState<number>(1);
   const [debateHasMore, setDebateHasMore] = useState<boolean>(true);
-  const [debateLikes, setDebateLikes] = useState<boolean[]>([]);
+  const [debateLikes, setDebateLikes] = useState<number[]>([]);
 
   const [popularSummaries, setPopularSummaries] = useState<SummaryType[]>([]);
-  const [popularSummaryLikes, setPopularSummaryLikes] = useState<boolean[]>([]);
+  const [popularSummaryLikes, setPopularSummaryLikes] = useState<number[]>([]);
   const [isPopularSummaryLoaded, setIsPopularSummaryLoaded] =
     useState<boolean>(false);
 
@@ -151,15 +151,10 @@ function Debate() {
                 .map((item) => "ids=" + item.id)
                 .join("&")}`
             )
-            .then(
-              (res) => {
-                let { data: itemLikes }: { data: boolean[] } = res;
-                setPopularSummaryLikes((prev) => [...prev, ...itemLikes]);
-              },
-              () => {
-                setPopularSummaryLikes(new Array(items.length).fill(false));
-              }
-            );
+            .then((res) => {
+              let { data: itemLikes }: { data: number[] } = res;
+              setPopularSummaryLikes((prev) => prev.concat(itemLikes));
+            });
         })
         .finally(() => {
           setIsPopularSummaryLoaded(true);
@@ -335,9 +330,8 @@ function Debate() {
                 {debates.map((debate, index) => (
                   <DebateCard
                     key={"debate" + index}
-                    idx={index}
                     debate={debate}
-                    hasLiked={debateLikes[index]}
+                    hasLiked={debateLikes.includes(debate.id)}
                     setHasLiked={setDebateLikes}
                   />
                 ))}
@@ -352,9 +346,8 @@ function Debate() {
               {popularSummaries.map((summary, index) => (
                 <PopularSummaryCard
                   key={"summary" + index}
-                  idx={index}
                   summary={summary}
-                  hasLiked={popularSummaryLikes[index]}
+                  hasLiked={popularSummaryLikes.includes(summary.id)}
                   setHasLiked={setPopularSummaryLikes}
                 />
               ))}

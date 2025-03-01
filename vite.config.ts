@@ -8,7 +8,7 @@ import tailwindcss from "@tailwindcss/vite";
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const config: UserConfig = {
-    plugins: [tailwindcss(), react(), svgr({ include: "**/*.svg?react" })],
+    plugins: [tailwindcss(), react(), svgr()],
     resolve: {
       alias: [{ find: "@", replacement: "/src" }],
     },

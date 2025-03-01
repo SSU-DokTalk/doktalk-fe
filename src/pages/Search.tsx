@@ -25,7 +25,7 @@ function Search() {
   const [books, setBooks] = useState<BookType[]>([]);
   const [bookPage, setBookPage] = useState<number>(1);
   const [bookHasMore, setBookHasMore] = useState<boolean>(true);
-  const [isInLibrary, setIsInLibrary] = useState<boolean[]>([]);
+  const [isInLibrary, setIsInLibrary] = useState<number[]>([]);
 
   const [search, setSearch] = useState<string>("");
   const [sortByIdx, setSortByIdx] = useState<number>(0);
@@ -97,15 +97,16 @@ function Search() {
                 sortByIdx !== prevValueRef.current.sortByIdx
               }
               dependency={[prevValueRef]}>
-              {books.map((book, index) => (
-                <BookCard
-                  key={"book" + index}
-                  idx={index}
-                  book={book}
-                  isInLibrary={isInLibrary[index]}
-                  setIsInLibrary={setIsInLibrary}
-                />
-              ))}
+              {books.map((book, index) => {
+                return (
+                  <BookCard
+                    key={"book" + index}
+                    book={book}
+                    isInLibrary={isInLibrary.includes(book.isbn)}
+                    setIsInLibrary={setIsInLibrary}
+                  />
+                );
+              })}
             </InfiniteScroll>
           </div>
         </div>

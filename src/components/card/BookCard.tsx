@@ -6,53 +6,31 @@ import { updateGlobalState } from "@/stores/globalStates";
 import { useAppDispatch } from "@/stores/hooks";
 
 function BookCard({
-  idx,
   book,
   isInLibrary,
   setIsInLibrary,
 }: {
-  idx: number;
   book: BookType;
   isInLibrary: boolean;
-  setIsInLibrary: React.Dispatch<React.SetStateAction<boolean[]>>;
+  setIsInLibrary: React.Dispatch<React.SetStateAction<number[]>>;
 }) {
   const { t } = useTranslation();
   const dispatch = useAppDispatch();
 
   const addToLibrary = () => {
-    axios.post(`/api/library/${book.isbn}`).then(
-      () => {
-        setIsInLibrary((prv) =>
-          prv
-            .slice(0, idx)
-            .concat(true)
-            .concat(prv.slice(idx + 1))
-        );
-        book.in_library_num++;
-        dispatch(updateGlobalState({ isLibraryUpdated: true }));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.post(`/api/library/${book.isbn}`).then(() => {
+      setIsInLibrary((prv) => prv.concat([book.isbn]));
+      book.in_library_num++;
+      dispatch(updateGlobalState({ isLibraryUpdated: true }));
+    });
   };
 
   const removeFromLibrary = () => {
-    axios.delete(`/api/library/${book.isbn}`).then(
-      () => {
-        setIsInLibrary((prv) =>
-          prv
-            .slice(0, idx)
-            .concat(false)
-            .concat(prv.slice(idx + 1))
-        );
-        book.in_library_num--;
-        dispatch(updateGlobalState({ isLibraryUpdated: true }));
-      },
-      (err) => {
-        console.log(err);
-      }
-    );
+    axios.delete(`/api/library/${book.isbn}`).then(() => {
+      setIsInLibrary((prv) => prv.filter((isbn) => isbn !== book.isbn));
+      book.in_library_num--;
+      dispatch(updateGlobalState({ isLibraryUpdated: true }));
+    });
   };
 
   return (

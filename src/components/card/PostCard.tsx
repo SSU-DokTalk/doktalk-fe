@@ -14,52 +14,30 @@ import { Dispatch, SetStateAction } from "react";
 import { useNavigate } from "react-router-dom";
 
 function PostCard({
-  idx,
   post,
   hasLiked = false,
   setHasLiked,
 }: {
-  idx: number;
   post: PostType;
   hasLiked?: boolean;
-  setHasLiked: Dispatch<SetStateAction<boolean[]>>;
+  setHasLiked: Dispatch<SetStateAction<number[]>>;
 }) {
   const navigate = useNavigate();
 
   const doLike = () => {
     // Like API 호출
-    axios
-      .post(`/api/post/${post.id}/like`)
-      .then(() => {
-        // 좋아요 성공
-        setHasLiked((prv) =>
-          prv
-            .slice(0, idx)
-            .concat(true)
-            .concat(prv.slice(idx + 1))
-        );
-        post.likes_num++;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.post(`/api/post/${post.id}/like`).then(() => {
+      // 좋아요 성공
+      setHasLiked((prv) => prv.concat([post.id]));
+      post.likes_num++;
+    });
   };
 
   const doUnlike = () => {
-    axios
-      .delete(`/api/post/${post.id}/like`)
-      .then(() => {
-        setHasLiked((prv) =>
-          prv
-            .slice(0, idx)
-            .concat(false)
-            .concat(prv.slice(idx + 1))
-        );
-        post.likes_num--;
-      })
-      .catch((err) => {
-        console.log(err);
-      });
+    axios.delete(`/api/post/${post.id}/like`).then(() => {
+      setHasLiked((prv) => prv.filter((val) => val !== post.id));
+      post.likes_num--;
+    });
   };
 
   return (

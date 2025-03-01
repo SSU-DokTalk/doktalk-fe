@@ -25,7 +25,6 @@ function BookSearchDropdown({
   const [books, setBooks] = useState<BookType[]>([]);
   const [bookPage, setBookPage] = useState<number>(1);
   const [bookHasMore, setBookHasMore] = useState<boolean>(true);
-  const [isInLibrary, setIsInLibrary] = useState<boolean[]>([]);
 
   const { t } = useTranslation();
 
@@ -86,8 +85,6 @@ function BookSearchDropdown({
                   setPage={setBookPage}
                   hasMore={bookHasMore}
                   setHasMore={setBookHasMore}
-                  likes={isInLibrary}
-                  setLikes={setIsInLibrary}
                   hasNoItem={books.length === 0}
                   hasNoItemMessage={t("page.search.item.no-book-item")}
                   refreshCondition={

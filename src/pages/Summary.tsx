@@ -9,7 +9,7 @@ import axios from "axios";
 import { DUMMY_SUMMARIES } from "@/common/dummy_data";
 import CarouselSummaryCard from "@/components/card/CarouselSummaryCard";
 import PopularDebateCard from "@/components/card/PopularDebateCard";
-import WriteIcon from "@/assets/images/WriteIcon";
+import WriteIcon from "@/assets/images/write.svg?react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 import { useAppSelector } from "@/stores/hooks";
@@ -54,10 +54,10 @@ function Summary() {
   const [summaries, setSummaries] = useState<SummaryType[]>([]);
   const [summaryPage, setSummaryPage] = useState<number>(1);
   const [summaryHasMore, setSummaryHasMore] = useState<boolean>(true);
-  const [summaryLikes, setSummaryLikes] = useState<boolean[]>([]);
+  const [summaryLikes, setSummaryLikes] = useState<number[]>([]);
 
   const [popularDebates, setPopularDebates] = useState<DebateType[]>([]);
-  const [popularDebateLikes, setPopularDebateLikes] = useState<boolean[]>([]);
+  const [popularDebateLikes, setPopularDebateLikes] = useState<number[]>([]);
   const [isPopularDebateLoaded, setIsPopularDebateLoaded] =
     useState<boolean>(false);
 
@@ -111,7 +111,7 @@ function Summary() {
             )
             .then(
               (res) => {
-                let { data: itemLikes }: { data: boolean[] } = res;
+                let { data: itemLikes }: { data: number[] } = res;
                 setPopularDebateLikes((prev) => [...prev, ...itemLikes]);
               },
               () => {
@@ -221,9 +221,8 @@ function Summary() {
                 {summaries.map((summary, index) => (
                   <SummaryCard
                     key={"summary" + index}
-                    idx={index}
                     summary={summary}
-                    hasLiked={summaryLikes[index]}
+                    hasLiked={summaryLikes.includes(summary.id)}
                     setHasLiked={setSummaryLikes}
                   />
                 ))}
@@ -238,9 +237,8 @@ function Summary() {
               {popularDebates.map((debate, index) => (
                 <PopularDebateCard
                   key={"debate" + index}
-                  idx={index}
                   debate={debate}
-                  hasLiked={popularDebateLikes[index]}
+                  hasLiked={popularDebateLikes.includes(debate.id)}
                   setHasLiked={setPopularDebateLikes}
                 />
               ))}
