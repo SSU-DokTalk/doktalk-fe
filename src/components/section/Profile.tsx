@@ -102,7 +102,7 @@ function Profile({
   };
 
   return (
-    <div id="profile">
+    <div id='profile'>
       <FriendListModal
         showModal={showFriendsModal}
         setShowModal={setShowFriendsModal}
@@ -113,32 +113,29 @@ function Profile({
         setShowModal={setShowEditProfileModal}
         setDidEdit={setDidEdit}
       />
-      <div className="pre-offset" />
-      <div className="profile-container">
-        <div className="upper-container">
-          <div className="profile-image-container">
+      <div className='profile-container mx-8! md:w-3/5! md:mx-auto!'>
+        <div className='upper-container'>
+          <div className='profile-image-container'>
             <ProfileIcon profile={userProfile.profile} size={100} />
-            <div className="button-container">
+            <div className='button-container'>
               {user.id != 0 && userProfile.id == user.id ? (
                 <button
-                  className="edit-profile"
+                  className='edit-profile'
                   onClick={() => {
                     setShowEditProfileModal(true);
-                  }}
-                >
+                  }}>
                   {t("component.section.profile.button.edit-profile")}
                 </button>
               ) : (
                 <button
-                  className="be-friend"
+                  className='be-friend'
                   onClick={() => {
                     if (isFollowing) {
                       unfollow();
                     } else {
                       follow();
                     }
-                  }}
-                >
+                  }}>
                   {isFollowing
                     ? t("component.section.profile.button.unfollow")
                     : t("component.section.profile.button.follow")}
@@ -147,38 +144,36 @@ function Profile({
             </div>
           </div>
         </div>
-        <div className="lower-container">
-          <div className="name-container">{userProfile.name}</div>
-          <div className="follow-container">
+        <div className='lower-container'>
+          <div className='name-container'>{userProfile.name}</div>
+          <div className='follow-container'>
             <div
-              className="follower"
+              className='follower'
               onClick={() => {
                 setShowFriendsModal(true);
-              }}
-            >
+              }}>
               {t("component.section.profile.text.follower-prefix")}
               {userProfile.follower_num}
               {t("component.section.profile.text.follower-postfix")}
             </div>
             <div
-              className="following"
+              className='following'
               onClick={() => {
                 setShowFriendsModal(true);
-              }}
-            >
+              }}>
               {t("component.section.profile.text.following-prefix")}
               {userProfile.following_num}
               {t("component.section.profile.text.following-postfix")}
             </div>
           </div>
-          <div className="introduction-container">
-            <pre className="introduction">
+          <div className='introduction-container'>
+            <pre className='introduction'>
               {userProfile.introduction ??
                 t("component.section.profile.text.no-introduction")}
             </pre>
           </div>
         </div>
-        <div className="tabs">
+        <div className='tabs'>
           {tabs.map((tab, idx) => {
             return (
               <div
@@ -196,15 +191,13 @@ function Profile({
                       | MyTabsCandidate
                       | UserTabsCandidate
                   );
-                }}
-              >
+                }}>
                 {t(tab.text)}
               </div>
             );
           })}
         </div>
       </div>
-      <div className="post-offset" />
     </div>
   );
 }

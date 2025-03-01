@@ -18,6 +18,8 @@ import useDebounce from "@/hooks/useDebounce";
 import CategoryCard from "@/components/card/CategoryCard";
 import SearchDropdown from "@/components/dropdown/SearchByDropdown";
 
+import { isMd } from "@/functions/breakpoint";
+
 const searchBys: {
   name: string;
   value: "bt" | "it";
@@ -131,8 +133,8 @@ function Summary() {
         </div>
         <Carousel
           items={recommendSummaries}
-          size={3}
-          className='popular-content'>
+          size={isMd() ? 3 : 1}
+          className='popular-content mx-auto md:mx-0!'>
           {recommendSummaries.map((summary, index) => (
             <CarouselSummaryCard
               key={"popular-summary" + index}
@@ -141,17 +143,18 @@ function Summary() {
           ))}
         </Carousel>
       </div>
-      <div className='content-container'>
-        <div className='lower-content-container'>
+
+      <div className='content-container mx-4!'>
+        <div className='lower-content-container md:w-3/5!'>
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
             className='left-container'
           />
-          <div className='right-container'></div>
+          {/* <div className='right-container'></div> */}
         </div>
-        <div className='lower-content-container'>
-          <div className='left-container'>
+        <div className='lower-content-container md:flex'>
+          <div className='left-container md:w-3/5!'>
             <div className='searchbox-container'>
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
@@ -227,7 +230,7 @@ function Summary() {
               </InfiniteScroll>
             </div>
           </div>
-          <div className='right-container'>
+          <div className='right-container hidden md:block'>
             <div className='right-container-title'>
               {t("page.summary.title.popular")}
             </div>

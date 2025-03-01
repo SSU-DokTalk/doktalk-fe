@@ -2,7 +2,11 @@ import axios from "axios";
 import { Route, Routes } from "react-router-dom";
 
 import "@/assets/css/main.scss";
+import "@/assets/css/pages/_settings.scss";
+import "@/assets/css/components/_sidebar.scss";
 import "bootstrap/dist/css/bootstrap.min.css";
+import "react-datepicker/dist/react-datepicker.css";
+import "@/assets/css/tailwind.css";
 
 import BasicLayout from "@/layouts/BasicLayout";
 
@@ -123,9 +127,9 @@ function App() {
             </ContentMainLayout>
           }>
           <Route path='/' element={<Landing />}></Route>
+          <Route path='/debate' element={<Debate />}></Route>
         </Route>
         <Route element={<ContentMainLayout />}>
-          <Route path='/debate' element={<Debate />}></Route>
           <Route path='/search' element={<Search />}></Route>
           <Route path='/summary' element={<Summary />}></Route>
           <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>

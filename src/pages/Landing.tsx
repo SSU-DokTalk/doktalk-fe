@@ -58,9 +58,11 @@ function Landing() {
   });
 
   return (
-    <div id="landing-page">
-      <div className="post-container">
-        <div className="post-title">{t("page.landing.title.post")}</div>
+    <div id='landing-page'>
+      <div className='post-container px-4! md:px-0! md:w-3/5'>
+        <div className='post-title hidden md:block'>
+          {t("page.landing.title.post")}
+        </div>
         {user.id != 0 ? <WritePostCard setDidPost={setDidPost} /> : null}
         <InfiniteScroll
           api={`post/recent`}
@@ -81,8 +83,7 @@ function Landing() {
           }}
           afterFetchFail={async () => {
             await setDidPost(false);
-          }}
-        >
+          }}>
           {posts.map((post, idx) => (
             <PostCard
               idx={idx}
@@ -94,8 +95,8 @@ function Landing() {
           ))}
         </InfiniteScroll>
       </div>
-      <div className="summary-container">
-        <div className="summary-section-title">
+      <div className='summary-container hidden md:block'>
+        <div className='summary-section-title'>
           {t("page.landing.title.popular-summary")}
         </div>
         {popularSummaries.map((summary, index) => (

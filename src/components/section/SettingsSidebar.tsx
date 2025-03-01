@@ -1,7 +1,10 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import "@/assets/css/components/_sidebar.scss";
-import { faBell, faComment, faHeart } from "@fortawesome/free-regular-svg-icons";
+import {
+  faBell,
+  faComment,
+  faHeart,
+} from "@fortawesome/free-regular-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
 
 interface MenuItem {
@@ -25,28 +28,26 @@ function SettingsSidebar({ tabIndex, setTabIndex }: SettingsSidebarProps) {
     `tab-button${isActive ? " activated" : ""}`;
 
   return (
-    <div id="settings-sidebar">
+    <div id='settings-sidebar'>
       <h1>설정</h1>
 
-      <h4 className="subtitle">공개 범위</h4>
+      <h4 className='subtitle'>공개 범위</h4>
       <button
         className={getButtonClassName(tabIndex === 0)}
-        onClick={() => setTabIndex(0)}
-      >
-        <FontAwesomeIcon className="icon" icon={faLock} fill="white" />
+        onClick={() => setTabIndex(0)}>
+        <FontAwesomeIcon className='icon' icon={faLock} fill='white' />
         공개 범위 수정
       </button>
 
-      <h4 className="subtitle">내 활동</h4>
+      <h4 className='subtitle'>내 활동</h4>
       {menuItems.map((item, index) => {
         const isActive = tabIndex === index + 1;
         return (
           <button
-            key={item.name} 
+            key={item.name}
             className={getButtonClassName(isActive)}
-            onClick={() => setTabIndex(index + 1)}
-          >
-            <FontAwesomeIcon className="icon" icon={item.icon} />
+            onClick={() => setTabIndex(index + 1)}>
+            <FontAwesomeIcon className='icon' icon={item.icon} />
             {item.name}
           </button>
         );

@@ -8,6 +8,8 @@ import { selectUser } from "@/stores/user";
 import axios from "axios";
 import { useTranslation } from "react-i18next";
 
+import { isMd } from "@/functions/breakpoint";
+
 function LandingUpper() {
   const user = useAppSelector(selectUser);
   const [debates, setDebates] = useState<DebateType[]>(DUMMY_DEBATES);
@@ -27,24 +29,23 @@ function LandingUpper() {
   }, []);
 
   return (
-    <div id="landing-page-upper-container">
-      <div className="container-title">
+    <div id='landing-page-upper-container'>
+      <div className='container-title'>
         {t("page.landing.title.recommend-prefix")}
         {user.id == 0 ? null : (
           <span>
             {t("page.landing.title.for-you-prefix")}
-            <span className="user-name">{user.name}</span>
+            <span className='user-name'>{user.name}</span>
             {t("page.landing.title.for-you-postfix")}
           </span>
         )}
         {t("page.landing.title.recommend-postfix")}
       </div>
-      <div className="container-contents">
+      <div className='container-contents mx-auto md:m-0!'>
         <Carousel
           items={debates}
-          size={3}
-          className="container-contents-carousel"
-        >
+          size={isMd() ? 3 : 1}
+          className='container-contents-carousel'>
           {debates.map((debate, idx) => (
             <CarouselDebateCard
               key={"recommend-debate" + idx}

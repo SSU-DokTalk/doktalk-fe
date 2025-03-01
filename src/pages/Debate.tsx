@@ -1,6 +1,3 @@
-import { ArrowDropDown } from "@mui/icons-material";
-import { Menu, MenuItem, ButtonBase } from "@mui/material";
-
 import { DUMMY_DEBATES } from "@/common/dummy_data";
 import CarouselDebateCard from "@/components/card/CarouselDebateCard";
 import Carousel from "@/components/carousel/Carousel";
@@ -21,10 +18,10 @@ import axios from "axios";
 import useDebounce from "@/hooks/useDebounce";
 import { getDate, range } from "@/functions";
 import DatePicker from "react-datepicker";
-import "react-datepicker/dist/react-datepicker.css";
 import { getMonth, getYear } from "date-fns";
 import CategoryCard from "@/components/card/CategoryCard";
 import SearchDropdown from "@/components/dropdown/SearchByDropdown";
+import { isMd } from "@/functions/breakpoint";
 
 const searchBys: {
   name: string;
@@ -172,13 +169,13 @@ function Debate() {
 
   return (
     <div id='debate-page'>
-      <div className='recommend-content-container'>
+      {/* <div className='recommend-content-container'>
         <div className='recommend-content-title'>
           {t("page.debate.title.recommend")}
         </div>
         <Carousel
           items={recommendDebates}
-          size={3}
+          size={isMd() ? 3 : 1}
           className='recommend-content'>
           {recommendDebates.map((debate, idx) => (
             <CarouselDebateCard
@@ -187,18 +184,18 @@ function Debate() {
             />
           ))}
         </Carousel>
-      </div>
+      </div> */}
       <div className='content-container'>
         <div className='lower-content-container'>
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
-            className='left-container'
+            className='left-container mx-4! w-screen md:w-3/5'
           />
-          <div className='right-container'></div>
+          {/* <div className='right-container'></div> */}
         </div>
         <div className='lower-content-container'>
-          <div className='left-container'>
+          <div className='left-container mx-4! md:w-3/5!'>
             <div className='searchbox-container'>
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
@@ -347,7 +344,7 @@ function Debate() {
               </InfiniteScroll>
             </div>
           </div>
-          <div className='right-container'>
+          <div className='right-container hidden md:block'>
             <div className='right-container-title'>
               {t("page.debate.title.popular")}
             </div>

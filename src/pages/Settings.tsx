@@ -6,7 +6,6 @@ import {
   faHeart,
 } from "@fortawesome/free-regular-svg-icons";
 import { faLock } from "@fortawesome/free-solid-svg-icons";
-import "@/assets/css/pages/_settings.scss";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const items = [
@@ -19,13 +18,13 @@ function Settings() {
   const [tabIndex, setTabIndex] = useState(0);
 
   return (
-    <div id="settings">
+    <div id='settings'>
       <SettingsSidebar tabIndex={tabIndex} setTabIndex={setTabIndex} />
-      <div className="settings-content">
+      <div className='settings-content'>
         {tabIndex === 0 ? (
           <div>
-            <div className="settings-content-header">
-              <FontAwesomeIcon className="icon" icon={faLock} />
+            <div className='settings-content-header'>
+              <FontAwesomeIcon className='icon' icon={faLock} />
               <h2>공개 범위 수정</h2>
             </div>
           </div>
