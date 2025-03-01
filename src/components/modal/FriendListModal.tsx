@@ -1,5 +1,8 @@
 import { Dispatch, SetStateAction, useState } from "react";
-import { Modal } from "react-bootstrap";
+
+import { Dialog, DialogTitle, DialogContent, IconButton } from "@mui/material";
+import CloseIcon from "@mui/icons-material/Close";
+
 import { FollowType, UserType } from "@/types/data";
 
 import userIcon from "@/assets/images/profile.svg";
@@ -41,22 +44,28 @@ function FriendListModal({
   const dispatch = useAppDispatch();
 
   return (
-    <Modal
-      id="friend-list-modal"
-      show={showModal}
-      onHide={() => {
+    <Dialog
+      id='friend-list-modal'
+      open={showModal}
+      onClose={() => {
         setShowModal(false);
         setCurrentInfo("follower");
       }}
-      centered
-    >
-      <Modal.Header closeButton>
-        <Modal.Title>
-          <strong>{userProfile.name}</strong>님의 친구
-        </Modal.Title>
-      </Modal.Header>
-      <Modal.Body>
-        <div className="friend-info">
+      maxWidth='sm'
+      fullWidth
+      scroll='body'>
+      <DialogTitle>
+        <strong>{userProfile.name}</strong>님의 친구
+      </DialogTitle>
+      <IconButton
+        className='btn-close'
+        aria-label='close'
+        onClick={() => setShowModal(false)}
+        sx={{ position: "absolute", right: 8, top: 8 }}>
+        <CloseIcon />
+      </IconButton>
+      <DialogContent>
+        <div className='friend-info'>
           {tabs.map((tab, idx) => {
             return (
               <pre
@@ -70,10 +79,9 @@ function FriendListModal({
                   setCurrentInfo(
                     e.currentTarget.dataset.value as "follower" | "following"
                   );
-                }}
-              >
+                }}>
                 {tab.name + "\n"}
-                <span className="number">
+                <span className='number'>
                   {tab.key == "follower"
                     ? userProfile.follower_num
                     : userProfile.following_num}
@@ -82,7 +90,7 @@ function FriendListModal({
             );
           })}
         </div>
-        <div className="friend-list">
+        <div className='friend-list'>
           <InfiniteScroll
             api={`user/${userProfile.id}/${currentInfo}s`}
             setItems={currentInfo == "follower" ? setFollowers : setFollowings}
@@ -107,25 +115,24 @@ function FriendListModal({
               dispatch(updateGlobalState({ isFollowerUpdated: false }));
             }}
             size={50}
-            dependency={[globalState.isFollowerUpdated]}
-          >
+            dependency={[globalState.isFollowerUpdated]}>
             {(currentInfo == "follower" ? followers : followings).map(
               (friend, idx) => {
                 return (
-                  <div key={"friend" + idx} className="friend-container">
-                    <div className="left-container">
+                  <div key={"friend" + idx} className='friend-container'>
+                    <div className='left-container'>
                       <img
                         src={friend[currentInfo]?.profile ?? userIcon}
-                        alt="user icon"
-                        className="friend-profile-icon"
+                        alt='user icon'
+                        className='friend-profile-icon'
                       />
-                      <div className="friend-name">
+                      <div className='friend-name'>
                         {friend[currentInfo]?.name}
                       </div>
                     </div>
-                    <div className="right-container">
-                      <div className="delete-friend-button-container">
-                        <button className="delete-friend-button">삭제</button>
+                    <div className='right-container'>
+                      <div className='delete-friend-button-container'>
+                        <button className='delete-friend-button'>삭제</button>
                       </div>
                     </div>
                   </div>
@@ -134,8 +141,8 @@ function FriendListModal({
             )}
           </InfiniteScroll>
         </div>
-      </Modal.Body>
-    </Modal>
+      </DialogContent>
+    </Dialog>
   );
 }
 

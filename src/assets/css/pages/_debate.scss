@@ -31,13 +31,15 @@
         .searchbox-icon {
           font-size: 20px;
         }
-        .dropdown {
-          .dropdown-toggle {
+        .search-by-dropdown {
+          .MuiButtonBase-root {
             background-color: inherit;
             border: none;
             color: v.$brand-color1;
             font-size: 15px;
             font-weight: 400;
+            width: max-content;
+            padding: 0.5rem;
           }
         }
         input {

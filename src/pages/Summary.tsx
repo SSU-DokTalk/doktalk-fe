@@ -5,7 +5,6 @@ import { DebateType, SummaryType } from "@/types/data";
 import SummaryCard from "@/components/card/SummaryCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Dropdown from "react-bootstrap/Dropdown";
 import axios from "axios";
 import { DUMMY_SUMMARIES } from "@/common/dummy_data";
 import CarouselSummaryCard from "@/components/card/CarouselSummaryCard";
@@ -17,6 +16,7 @@ import { useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
 import useDebounce from "@/hooks/useDebounce";
 import CategoryCard from "@/components/card/CategoryCard";
+import SearchDropdown from "@/components/dropdown/SearchByDropdown";
 
 const searchBys: {
   name: string;
@@ -124,16 +124,15 @@ function Summary() {
   });
 
   return (
-    <div id="summary-page">
-      <div className="popular-content-container">
-        <div className="popular-content-title">
+    <div id='summary-page'>
+      <div className='popular-content-container'>
+        <div className='popular-content-title'>
           {t("page.summary.title.recommend")}
         </div>
         <Carousel
           items={recommendSummaries}
           size={3}
-          className="popular-content"
-        >
+          className='popular-content'>
           {recommendSummaries.map((summary, index) => (
             <CarouselSummaryCard
               key={"popular-summary" + index}
@@ -142,52 +141,42 @@ function Summary() {
           ))}
         </Carousel>
       </div>
-      <div className="content-container">
-        <div className="lower-content-container">
+      <div className='content-container'>
+        <div className='lower-content-container'>
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
-            className="left-container"
+            className='left-container'
           />
-          <div className="right-container"></div>
+          <div className='right-container'></div>
         </div>
-        <div className="lower-content-container">
-          <div className="left-container">
-            <div className="searchbox-container">
+        <div className='lower-content-container'>
+          <div className='left-container'>
+            <div className='searchbox-container'>
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
-                className="searchbox-icon"
+                className='searchbox-icon'
               />
-              <Dropdown>
-                <Dropdown.Toggle>
-                  {t(searchBys[searchByIdx].name)}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {searchBys.map((searchBy, index) => (
-                    <Dropdown.Item
-                      key={"search-by" + index}
-                      onClick={() => setSearchByIdx(index)}
-                    >
-                      {t(searchBy.name)}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
+              <SearchDropdown
+                searchBys={searchBys}
+                searchByIdx={searchByIdx}
+                setSearchByIdx={setSearchByIdx}
+              />
               <input
-                type="text"
+                type='text'
                 placeholder={t("page.summary.search.placeholder")}
-                className="searchbox"
+                className='searchbox'
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <div className="content-header">
-              <div className="sort-by">
+            <div className='content-header'>
+              <div className='sort-by'>
                 {sortBys.map((sortBy, index) => {
                   return (
                     <div
                       key={"sort-by" + index}
-                      className="sort-by-text"
+                      className='sort-by-text'
                       style={
                         sortByIdx === index
                           ? {
@@ -195,8 +184,7 @@ function Summary() {
                             }
                           : {}
                       }
-                      onClick={() => setSortByIdx(index)}
-                    >
+                      onClick={() => setSortByIdx(index)}>
                       {t(sortBy.name)}
                     </div>
                   );
@@ -204,10 +192,10 @@ function Summary() {
               </div>
               <button onClick={() => navigate("/summary/create")}>
                 <span>{t("page.summary.button.write")}</span>
-                <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
+                <WriteIcon className='write-icon' width={17} fill={"#ffffff"} />
               </button>
             </div>
-            <div className="content-container">
+            <div className='content-container'>
               <InfiniteScroll
                 api={`summary?category=${categories}&search=${debouncedSearch}&searchby=${searchBys[searchByIdx].value}&sortby=${sortBys[sortByIdx].value}`}
                 likes_api={`summarys/like`}
@@ -226,8 +214,7 @@ function Summary() {
                   searchByIdx !== prevValueRef.current.searchByIdx ||
                   sortByIdx !== prevValueRef.current.sortByIdx
                 }
-                dependency={[prevValueRef]}
-              >
+                dependency={[prevValueRef]}>
                 {summaries.map((summary, index) => (
                   <SummaryCard
                     key={"summary" + index}
@@ -240,11 +227,11 @@ function Summary() {
               </InfiniteScroll>
             </div>
           </div>
-          <div className="right-container">
-            <div className="right-container-title">
+          <div className='right-container'>
+            <div className='right-container-title'>
               {t("page.summary.title.popular")}
             </div>
-            <div className="right-container-content">
+            <div className='right-container-content'>
               {popularDebates.map((debate, index) => (
                 <PopularDebateCard
                   key={"debate" + index}
@@ -258,7 +245,7 @@ function Summary() {
           </div>
         </div>
       </div>
-      <div className="footer" />
+      <div className='footer' />
     </div>
   );
 }

@@ -78,34 +78,13 @@
             width: 36px;
             height: 36px;
             cursor: pointer;
-            .lang-menu-icon {
-              width: 36px;
-              height: 36px;
-              border: 1px solid variables.$brand-color3;
-              border-radius: 50%;
-              background-size: contain;
-              background-position: 50%;
-              background-repeat: no-repeat;
-            }
-          }
-          .dropdown-menu {
-            .dropdown-item {
-              display: flex;
-              align-items: center;
-              padding: 4px 20px;
-              .lang-menu-icon {
-                width: 24px;
-                height: 24px;
-                border: 1px solid variables.$brand-color3;
-                border-radius: 50%;
-                background-size: contain;
-                background-position: 50%;
-                background-repeat: no-repeat;
-              }
-              .lang-menu-text {
-                margin-left: 10px;
-              }
-            }
+            width: 36px;
+            height: 36px;
+            border: 1px solid variables.$brand-color3;
+            border-radius: 50%;
+            background-size: contain;
+            background-position: 50%;
+            background-repeat: no-repeat;
           }
         }
         .user-notification {
@@ -130,16 +109,6 @@
               .user-name {
                 font-weight: 600;
               }
-            }
-          }
-        }
-        .user-dropdown-menu {
-          .user-dropdown-menu-item {
-            text-align: center;
-            .user-dropdown-menu-item-title {
-              font-size: 15px;
-              color: black;
-              text-decoration: none;
             }
           }
         }
@@ -181,6 +150,37 @@
           text-decoration: none;
         }
       }
+    }
+  }
+}
+
+.language-dropdown-menu {
+  .MuiMenuItem-root {
+    display: flex;
+    align-items: center;
+    padding: 4px 20px;
+    .lang-menu-icon {
+      width: 24px;
+      height: 24px;
+      border: 1px solid variables.$brand-color3;
+      border-radius: 50%;
+      background-size: contain;
+      background-position: 50%;
+      background-repeat: no-repeat;
+    }
+    .lang-menu-text {
+      margin-left: 10px;
+    }
+  }
+}
+
+.user-dropdown-menu {
+  .user-dropdown-menu-item {
+    text-align: center;
+    .user-dropdown-menu-item-title {
+      font-size: 15px;
+      color: black;
+      text-decoration: none;
     }
   }
 }
