@@ -28,22 +28,20 @@ function MyPage() {
   }, [user.id]);
 
   return (
-    <div id="mypage">
+    <div id='mypage'>
       <Profile
         userProfile={userProfile}
         setUserProfile={setUserProfile}
         currentTab={currentTab}
         setCurrentTab={setCurrentTab}
       />
-      <div className="content-container">
-        <div className="content-left-margin" />
-        <div className="content">
+      <div className='content-container'>
+        <div className='content md:w-1/2 md:mx-auto!'>
           <ProfileTabDetails
             currentTab={currentTab}
             userProfile={userProfile}
           />
         </div>
-        <div className="content-right-margin" />
       </div>
     </div>
   );
