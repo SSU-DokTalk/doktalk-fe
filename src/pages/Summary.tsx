@@ -133,7 +133,6 @@ function Summary() {
           {t("page.summary.title.recommend")}
         </div>
         <Carousel
-          items={recommendSummaries}
           size={isMd() ? 3 : 1}
           className='popular-content mx-auto md:mx-0!'>
           {recommendSummaries.map((summary, index) => (

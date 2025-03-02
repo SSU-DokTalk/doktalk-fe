@@ -7,34 +7,34 @@ import { HTMLAttributes, ReactNode, useState } from "react";
 
 function Carousel({
   children,
-  items,
   size = 3,
   ...props
 }: {
   children: ReactNode[];
-  items: any[];
   size: number;
 } & HTMLAttributes<HTMLDivElement>) {
   const [currentIdx, setCurrentIdx] = useState<number>(0);
   return (
     <div id='carousel' {...props}>
-      {items.length < size ? null : (
+      {children.length < size ? null : (
         <div
           className='carousel-button left'
           onClick={() =>
-            setCurrentIdx((prev) => (prev + items.length - 1) % items.length)
+            setCurrentIdx(
+              (prev) => (prev + children.length - 1) % children.length
+            )
           }>
           <FontAwesomeIcon icon={faChevronLeft} />
         </div>
       )}
-      {items.length < size ? null : (
+      {children.length < size ? null : (
         <div
           className='carousel-button right'
-          onClick={() => setCurrentIdx((prev) => (prev + 1) % items.length)}>
+          onClick={() => setCurrentIdx((prev) => (prev + 1) % children.length)}>
           <FontAwesomeIcon icon={faChevronRight} />
         </div>
       )}
-      {currentIdx + size < items.length
+      {currentIdx + size < children.length
         ? children.slice(currentIdx, currentIdx + size).map((child, idx) => {
             return (
               <div key={"carousel-item" + idx} className={`carousel-items`}>
@@ -44,7 +44,7 @@ function Carousel({
           })
         : children
             .slice(currentIdx, currentIdx + size)
-            .concat(children.slice(0, size - (items.length - currentIdx)))
+            .concat(children.slice(0, size - (children.length - currentIdx)))
             .map((child, idx) => {
               return (
                 <div key={"carousel-item" + idx} className={`carousel-items`}>
