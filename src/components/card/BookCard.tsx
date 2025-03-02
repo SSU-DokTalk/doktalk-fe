@@ -61,8 +61,7 @@ function BookCard({
         </div>
       </div>
 
-      {/* TODO: 현재 bootstrap을 완전히 제거하지 않아 bootstrap.css의 flex-row가 적용되면 정상동작하지 않아 ! 필요 (.flex-row {flex-direction: row !important;})) */}
-      <div className='button-container flex flex-row! md:flex-col!'>
+      <div className='button-container flex flex-row md:flex-col'>
         <button
           className='to-my-book my-1 mr-1 md:ml-1!'
           onClick={isInLibrary ? removeFromLibrary : addToLibrary}>

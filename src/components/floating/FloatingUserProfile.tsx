@@ -1,4 +1,5 @@
-import Accordion from "react-bootstrap/Accordion";
+import { Accordion, AccordionDetails, AccordionSummary } from "@mui/material";
+
 import ProfileIcon from "@/components/base/ProfileIcon";
 import { useAppDispatch, useAppSelector } from "@/stores/hooks";
 import { selectUser } from "@/stores/user";
@@ -80,12 +81,12 @@ function FloatingUserProfile() {
           <div className='count'>{userInfo.following_num}</div>
         </div>
       </div>
-      <Accordion alwaysOpen>
-        <Accordion.Item eventKey='0' className='accordion-item'>
-          <Accordion.Header>
+      <div className='accordion'>
+        <Accordion className='accordion-item'>
+          <AccordionSummary>
             {t("component.floating.text.my-activity")}
-          </Accordion.Header>
-          <Accordion.Body className='my-activity'>
+          </AccordionSummary>
+          <AccordionDetails className='my-activity'>
             <Link to={""}>{t("component.floating.text.likes")}</Link>
             <Link to={"/mypage/post"}>{t("component.floating.text.post")}</Link>
             <Link to={"/mypage/summary"}>
@@ -95,13 +96,14 @@ function FloatingUserProfile() {
             <Link to={"/mypage/debate"}>
               {t("component.floating.text.debate")}
             </Link>
-          </Accordion.Body>
-        </Accordion.Item>
-        <Accordion.Item eventKey='1'>
-          <Accordion.Header>
+          </AccordionDetails>
+        </Accordion>
+
+        <Accordion className='accordion-item'>
+          <AccordionSummary>
             {t("component.floating.text.library")}
-          </Accordion.Header>
-          <Accordion.Body className='my-library'>
+          </AccordionSummary>
+          <AccordionDetails className='my-library'>
             <div className='books-container'>
               {books.slice(0, 6).map((mybook, idx) => {
                 return (
@@ -116,9 +118,9 @@ function FloatingUserProfile() {
                 );
               })}
             </div>
-          </Accordion.Body>
-        </Accordion.Item>
-      </Accordion>
+          </AccordionDetails>
+        </Accordion>
+      </div>
     </div>
   );
 }

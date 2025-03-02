@@ -4,7 +4,6 @@ import { Route, Routes } from "react-router-dom";
 import "@/assets/css/main.scss";
 import "@/assets/css/pages/_settings.scss";
 import "@/assets/css/components/_sidebar.scss";
-import "bootstrap/dist/css/bootstrap.min.css";
 import "react-datepicker/dist/react-datepicker.css";
 import "@/assets/css/tailwind.css";
 
