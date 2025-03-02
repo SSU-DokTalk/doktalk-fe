@@ -19,6 +19,7 @@ import CategoryCard from "@/components/card/CategoryCard";
 import SearchDropdown from "@/components/dropdown/SearchByDropdown";
 
 import { isMd } from "@/functions/breakpoint";
+import { SearchBar } from "@/components/input/searchbar";
 
 const searchBys: {
   name: string;
@@ -155,24 +156,17 @@ function Summary() {
         </div>
         <div className='lower-content-container md:flex'>
           <div className='left-container md:w-3/5!'>
-            <div className='searchbox-container'>
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className='searchbox-icon'
-              />
+            <SearchBar
+              placeholder={t("page.summary.search.placeholder")}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}>
               <SearchDropdown
                 searchBys={searchBys}
                 searchByIdx={searchByIdx}
                 setSearchByIdx={setSearchByIdx}
               />
-              <input
-                type='text'
-                placeholder={t("page.summary.search.placeholder")}
-                className='searchbox'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
+            </SearchBar>
+
             <div className='content-header'>
               <div className='sort-by'>
                 {sortBys.map((sortBy, index) => {

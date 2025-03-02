@@ -42,6 +42,8 @@ import ProfileIcon from "../base/ProfileIcon";
 import KR from "@/assets/images/flags/kr.svg?react";
 import US from "@/assets/images/flags/us.svg?react";
 
+import { TopNavSearchBar } from "@/components/input/searchbar";
+
 const navTabs: LinkItemType[] = [
   {
     title: "component.topnav.main-page",
@@ -184,19 +186,7 @@ function Topnav() {
             </div>
           </div>
 
-          <div className='searchbar-container pb-4! col-span-3 md:pb-0! md:order-2'>
-            <div className='searchbar'>
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className='searchbar-icon'
-              />
-              <input
-                type='text'
-                placeholder={t("component.topnav.search-bar.placeholder")}
-                className='searchbar-input'
-              />
-            </div>
-          </div>
+          <TopNavSearchBar />
         </div>
 
         <div className='lower-container hidden md:block'>
