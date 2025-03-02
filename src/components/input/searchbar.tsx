@@ -13,7 +13,7 @@ export function SearchBar({
   value: string;
   onChange: ChangeEventHandler<HTMLInputElement> | undefined;
   placeholder: string;
-  children: ReactNode | ReactNode[] | undefined;
+  children?: ReactNode | ReactNode[] | undefined;
 }) {
   return (
     <>
