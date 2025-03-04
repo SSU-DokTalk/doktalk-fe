@@ -67,7 +67,6 @@ jobs:
             ${{ secrets.PATH_TO_DOCKER }} stop ${{ secrets.DOCKER_CONTAINER_NAME }}
             ${{ secrets.PATH_TO_DOCKER }} rm ${{ secrets.DOCKER_CONTAINER_NAME }}
             ${{ secrets.PATH_TO_DOCKER }} run \
-            -p ${{ secrets.DOCKER_HTTP_PORT }}:80 \
             -p ${{ secrets.DOCKER_HTTPS_PORT }}:80 \
             \
             --name ${{ secrets.DOCKER_CONTAINER_NAME }} \
