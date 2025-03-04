@@ -105,8 +105,9 @@ function App() {
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
-        }}>
-        <CircularProgress className='loading-spinner' />
+        }}
+      >
+        <CircularProgress className="loading-spinner" />
       </div>
     );
   }
@@ -119,29 +120,31 @@ function App() {
             <ContentMainLayout>
               <LandingUpper />
             </ContentMainLayout>
-          }>
-          <Route path='/' element={<Landing />}></Route>
-          <Route path='/debate' element={<Debate />}></Route>
+          }
+        >
+          <Route path="/" element={<Landing />}></Route>
+          <Route path="/debate" element={<Debate />}></Route>
         </Route>
         <Route element={<ContentMainLayout />}>
-          <Route path='/search' element={<Search />}></Route>
-          <Route path='/summary' element={<Summary />}></Route>
-          <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>
+          <Route path="/search" element={<Search />}></Route>
+          <Route path="/summary" element={<Summary />}></Route>
+          <Route path="/debate/:debate_id" element={<DebateDetail />}></Route>
           <Route
-            path='/summary/:summary_id'
-            element={<SummaryDetail />}></Route>
-          <Route path='/post/:post_id' element={<PostDetail />}></Route>
-          <Route path='/summary/create' element={<CreateSummary />}></Route>
-          <Route path='/debate/create' element={<CreateDebate />}></Route>
+            path="/summary/:summary_id"
+            element={<SummaryDetail />}
+          ></Route>
+          <Route path="/post/:post_id" element={<PostDetail />}></Route>
+          <Route path="/summary/create" element={<CreateSummary />}></Route>
+          <Route path="/debate/create" element={<CreateDebate />}></Route>
         </Route>
-        <Route path='/mypage' element={<MyPage />}></Route>
-        <Route path='/user/:user_id' element={<UserProfile />}></Route>
-        <Route path='settings' element={<Settings />}></Route>
+        <Route path="/mypage" element={<MyPage />}></Route>
+        <Route path="/user/:user_id" element={<UserProfile />}></Route>
+        <Route path="settings" element={<Settings />}></Route>
       </Route>
-      <Route path='/login' element={<Login />}></Route>
-      <Route path='/register' element={<Register />}></Route>
-      <Route path='/auth/:provider' element={<Auth />}></Route>
-      <Route path='*' element={<NotFound />}></Route>
+      <Route path="/login" element={<Login />}></Route>
+      <Route path="/register" element={<Register />}></Route>
+      <Route path="/auth/:provider" element={<Auth />}></Route>
+      <Route path="*" element={<NotFound />}></Route>
     </Routes>
   );
 }
