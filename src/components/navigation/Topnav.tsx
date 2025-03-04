@@ -35,7 +35,7 @@ import {
 import { faBell } from "@fortawesome/free-regular-svg-icons";
 
 import { useAppDispatch, useAppSelector } from "@/stores/hooks";
-import { selectUser, unsetUser, UserState } from "@/stores/user";
+import { selectUser, unsetUser } from "@/stores/user";
 
 import { LinkItemType } from "@/types/components";
 import ProfileIcon from "../base/ProfileIcon";
@@ -88,12 +88,12 @@ const languageDropdownItems: {
   {
     name: "한국어",
     value: "kr",
-    icon: <KR className='lang-menu-icon' />,
+    icon: <KR className="lang-menu-icon" />,
   },
   {
     name: "English",
     value: "us",
-    icon: <US className='lang-menu-icon' />,
+    icon: <US className="lang-menu-icon" />,
   },
 ];
 
@@ -124,28 +124,29 @@ function Topnav() {
 
   return (
     <>
-      <div id='topnav' style={{ zIndex: "10" }}>
-        <div className='upper-container grid grid-cols-3 md:grid-cols-5'>
-          <div className='left-container ml-4! my-2! md:mt-5!'>
-            <Link to={"/"} className='logo-container'>
-              <img src={logo} alt='doktalk logo' className='logo' />
+      <div id="topnav" style={{ zIndex: "10" }}>
+        <div className="upper-container grid grid-cols-3 md:grid-cols-5">
+          <div className="left-container ml-4! my-2! md:mt-5!">
+            <Link to={"/"} className="logo-container">
+              <img src={logo} alt="doktalk logo" className="logo" />
             </Link>
           </div>
 
-          <div className='right-container col-span-2 md:col-span-1 md:order-3 '>
-            <div className='user-container'>
+          <div className="right-container col-span-2 md:col-span-1 md:order-3 ">
+            <div className="user-container">
               {user.id != 0 ? (
                 <LoginedInfo doLogout={doLogout} />
               ) : (
                 <GuestInfo />
               )}
 
-              <div className='language-dropdown md:mr-5!'>
+              <div className="language-dropdown md:mr-5!">
                 <IconButton
-                  className='language-icon'
+                  className="language-icon"
                   onClick={(event) => {
                     setAnchorEl(event.currentTarget);
-                  }}>
+                  }}
+                >
                   {
                     (
                       languageDropdownItems.find(
@@ -159,7 +160,8 @@ function Topnav() {
                   open={open}
                   anchorEl={anchorEl}
                   onClose={() => setAnchorEl(null)}
-                  className='language-dropdown-menu'>
+                  className="language-dropdown-menu"
+                >
                   {languageDropdownItems.map((item, idx) => {
                     return (
                       <MenuItem
@@ -167,9 +169,10 @@ function Topnav() {
                           changeLanguage(item);
                           setAnchorEl(null);
                         }}
-                        key={"lang" + idx}>
+                        key={"lang" + idx}
+                      >
                         {item.icon}
-                        <div className='lang-menu-text'>{item.name}</div>
+                        <div className="lang-menu-text">{item.name}</div>
                       </MenuItem>
                     );
                   })}
@@ -177,34 +180,35 @@ function Topnav() {
               </div>
 
               <IconButton
-                className='drawer-button md:hidden! mr-4!'
-                onClick={() => setDrawerOpen(true)}>
+                className="drawer-button md:hidden! mr-4!"
+                onClick={() => setDrawerOpen(true)}
+              >
                 <FontAwesomeIcon icon={faBars} />
               </IconButton>
             </div>
           </div>
 
-          <div className='searchbar-container pb-4! col-span-3 md:pb-0! md:order-2'>
-            <div className='searchbar'>
+          <div className="searchbar-container pb-4! col-span-3 md:pb-0! md:order-2">
+            <div className="searchbar">
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
-                className='searchbar-icon'
+                className="searchbar-icon"
               />
               <input
-                type='text'
+                type="text"
                 placeholder={t("component.topnav.search-bar.placeholder")}
-                className='searchbar-input'
+                className="searchbar-input"
               />
             </div>
           </div>
         </div>
 
-        <div className='lower-container hidden md:block'>
-          <div className='tab-container'>
+        <div className="lower-container hidden md:block">
+          <div className="tab-container">
             {navTabs.map((tab, idx) => {
               return (
                 <div
-                  className='tab'
+                  className="tab"
                   style={
                     tab.url != "/" + currentTab.pathname.split("/")[1]
                       ? {
@@ -212,17 +216,19 @@ function Topnav() {
                         }
                       : {}
                   }
-                  key={"navtab" + idx}>
+                  key={"navtab" + idx}
+                >
                   <Link
                     to={tab.url}
-                    className='tab-title'
+                    className="tab-title"
                     style={
                       tab.url != "/" + currentTab.pathname.split("/")[1]
                         ? {
                             color: "black",
                           }
                         : {}
-                    }>
+                    }
+                  >
                     {t(tab.title)}
                   </Link>
                 </div>
@@ -239,9 +245,10 @@ function Topnav() {
               top: "33%",
               height: "66%", // 전체 높이의 2/3만큼만 차지
             },
-          }}>
-          <Box className='w-screen! h-1/2!'>
-            <div className='flex justify-between px-10!'>
+          }}
+        >
+          <Box className="w-screen! h-1/2!">
+            <div className="flex justify-between px-10!">
               <span>탐색</span>
               <IconButton onClick={() => setDrawerOpen(false)}>
                 <FontAwesomeIcon icon={faXmark} />
@@ -254,14 +261,15 @@ function Topnav() {
                     <Link
                       to={tab.url}
                       onClick={() => setDrawerOpen(false)}
-                      className='tab-title'
+                      className="tab-title"
                       style={
                         tab.url != "/" + currentTab.pathname.split("/")[1]
                           ? {
                               color: "black",
                             }
                           : {}
-                      }>
+                      }
+                    >
                       {t(tab.title)}
                     </Link>
                   </ListItem>
@@ -277,8 +285,9 @@ function Topnav() {
                       navigate(item.url);
                       setDrawerOpen(false);
                     }}
-                    className='user-dropdown-menu-item'
-                    key={"dropdown" + idx}>
+                    className="user-dropdown-menu-item"
+                    key={"dropdown" + idx}
+                  >
                     {t(item.title)}
                   </ListItem>
                 );
@@ -286,7 +295,7 @@ function Topnav() {
             </List>
             <Divider />
 
-            <ListItem onClick={doLogout} className='user-dropdown-menu-item'>
+            <ListItem onClick={doLogout} className="user-dropdown-menu-item">
               {t("component.topnav.dropdown.logout")}
             </ListItem>
           </Box>
@@ -305,18 +314,20 @@ function BottomNav() {
 
   return (
     <>
-      <div className='bottom-nav md:hidden'>
+      <div className="bottom-nav md:hidden">
         <Paper
           sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
-          elevation={3}>
+          elevation={3}
+        >
           <BottomNavigation
             showLabels
             value={pageIdx}
-            onChange={(event, newPageIdx) => {
+            onChange={(_, newPageIdx) => {
               setPageIdx(newPageIdx);
               navigate(navTabs[newPageIdx].url);
-            }}>
-            {navTabs.map((item, idx) => (
+            }}
+          >
+            {navTabs.map((item) => (
               <BottomNavigationAction label={t(item.title)} icon={item.icon} />
             ))}
           </BottomNavigation>
@@ -340,26 +351,28 @@ function LoginedInfo({
 
   return (
     <>
-      <FontAwesomeIcon icon={faBell} className='user-notification' />
-      <div className='user-dropdown hidden md:block'>
+      <FontAwesomeIcon icon={faBell} className="user-notification" />
+      <div className="user-dropdown hidden md:block">
         <Button
-          className='user-dropdown-toggle'
+          className="user-dropdown-toggle"
           onClick={(event) => {
             setAnchorEl(event.currentTarget);
-          }}>
-          <ProfileIcon profile={user.profile} size={38} className='user-icon' />
-          <div className='user-name-container'>
-            <span className='user-name'>{user.name ?? "닉네임"}</span>
+          }}
+        >
+          <ProfileIcon profile={user.profile} size={38} className="user-icon" />
+          <div className="user-name-container">
+            <span className="user-name">{user.name ?? "닉네임"}</span>
             {t("component.topnav.user.postfix")}
             <ArrowDropDown />
           </div>
         </Button>
 
         <Menu
-          className='user-dropdown-menu'
+          className="user-dropdown-menu"
           open={open}
           anchorEl={anchorEl}
-          onClose={() => setAnchorEl(null)}>
+          onClose={() => setAnchorEl(null)}
+        >
           {dropdownItems.map((item, idx) => {
             return (
               <MenuItem
@@ -367,14 +380,18 @@ function LoginedInfo({
                   navigate(item.url);
                   setAnchorEl(null);
                 }}
-                className='user-dropdown-menu-item'
-                key={"dropdown" + idx}>
+                className="user-dropdown-menu-item"
+                key={"dropdown" + idx}
+              >
                 {t(item.title)}
               </MenuItem>
             );
           })}
-          <Divider component='li' />
-          <MenuItem onClick={doLogout} className='user-dropdown-menu-item'>
+          <Divider component="li" />
+          <MenuItem
+            onClick={() => doLogout()}
+            className="user-dropdown-menu-item"
+          >
             {t("component.topnav.dropdown.logout")}
           </MenuItem>
         </Menu>
@@ -389,11 +406,11 @@ function GuestInfo(): React.ReactNode | Iterable<React.ReactNode> {
 
   return (
     <>
-      <div className='user-login-container'>
-        <button className='user-register' onClick={() => navigate("/register")}>
+      <div className="user-login-container">
+        <button className="user-register" onClick={() => navigate("/register")}>
           {t("component.topnav.register")}
         </button>
-        <button className='user-login' onClick={() => navigate("/login")}>
+        <button className="user-login" onClick={() => navigate("/login")}>
           {t("component.topnav.login")}
         </button>
       </div>

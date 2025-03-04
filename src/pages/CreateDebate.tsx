@@ -1,9 +1,9 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useState } from "react";
 
 import { faImage } from "@fortawesome/free-solid-svg-icons";
 import UploadFiles from "@/components/base/UploadFiles";
-import { ACCEPTABLE, CATEGORY } from "@/common/variables";
-import { BookType, DebateType } from "@/types/data";
+import { ACCEPTABLE } from "@/common/variables";
+import { DebateType } from "@/types/data";
 import { InitialDebate } from "@/types/initialValue";
 import { range } from "@/functions";
 import { useTranslation } from "react-i18next";
@@ -47,8 +47,8 @@ function CreateDebate() {
   const CustomDatePicker = forwardRef<any, any>(
     ({ value, onClick, className }, ref) => (
       <div className={className} onClick={onClick} ref={ref}>
-        <span className='date-text'>{value}</span>
-        <IonIcon name='calendar-outline' className='sort-by-icon' />
+        <span className="date-text">{value}</span>
+        <IonIcon name="calendar-outline" className="sort-by-icon" />
       </div>
     )
   );
@@ -90,13 +90,13 @@ function CreateDebate() {
   };
 
   return (
-    <div id='create-debate-page'>
-      <div className='container'>
+    <div id="create-debate-page">
+      <div className="container">
         <h1>토론방 생성하기</h1>
-        <div className='input-container__title'>
+        <div className="input-container__title">
           <input
-            type='text'
-            placeholder='제목을 입력해주세요'
+            type="text"
+            placeholder="제목을 입력해주세요"
             value={debateData.title}
             onChange={(e) => {
               setDebateData((prev) => {
@@ -105,13 +105,13 @@ function CreateDebate() {
             }}
           />
         </div>
-        <div className='input-container'>
-          <label htmlFor='location'>모임 장소</label>
-          <div className='input-box'>
+        <div className="input-container">
+          <label htmlFor="location">모임 장소</label>
+          <div className="input-box">
             <input
-              id='location'
-              type='text'
-              placeholder='모일 장소를 입력해주세요'
+              id="location"
+              type="text"
+              placeholder="모일 장소를 입력해주세요"
               value={debateData.location}
               onChange={(e) => {
                 setDebateData((prev) => {
@@ -121,13 +121,13 @@ function CreateDebate() {
             />
           </div>
         </div>
-        <div className='input-container'>
-          <label htmlFor='link'>온라인 링크</label>
-          <div className='input-box'>
+        <div className="input-container">
+          <label htmlFor="link">온라인 링크</label>
+          <div className="input-box">
             <input
-              id='link'
-              type='text'
-              placeholder='온라인 모임일 경우 참여 링크를 입력해주세요'
+              id="link"
+              type="text"
+              placeholder="온라인 모임일 경우 참여 링크를 입력해주세요"
               value={debateData.link}
               onChange={(e) => {
                 setDebateData((prev) => {
@@ -137,9 +137,9 @@ function CreateDebate() {
             />
           </div>
         </div>
-        <div className='input-container'>
-          <label htmlFor='held_at'>모임 시간</label>
-          <div className='input-box'>
+        <div className="input-container">
+          <label htmlFor="held_at">모임 시간</label>
+          <div className="input-box">
             <DatePicker
               selected={debateData.held_at}
               onChange={(date) =>
@@ -147,10 +147,10 @@ function CreateDebate() {
                   return { ...prev, held_at: date ?? new Date() };
                 })
               }
-              dateFormat='yyyy/MM/dd hh:mm aa'
+              dateFormat="yyyy/MM/dd hh:mm aa"
               minDate={new Date()}
               maxDate={new Date(`${getYear(new Date()) + 10}-12-31`)}
-              customInput={<CustomDatePicker className='custom-input' />}
+              customInput={<CustomDatePicker className="custom-input" />}
               showDisabledMonthNavigation
               showTimeSelect
               renderCustomHeader={({
@@ -167,17 +167,20 @@ function CreateDebate() {
                     margin: 10,
                     display: "flex",
                     justifyContent: "center",
-                  }}>
+                  }}
+                >
                   <button
                     onClick={decreaseMonth}
-                    disabled={prevMonthButtonDisabled}>
+                    disabled={prevMonthButtonDisabled}
+                  >
                     {"<"}
                   </button>
                   <select
                     value={getYear(date)}
                     onChange={({ target: { value } }) =>
                       changeYear(parseInt(value))
-                    }>
+                    }
+                  >
                     {years.map((option) => (
                       <option key={option} value={option}>
                         {option}
@@ -189,7 +192,8 @@ function CreateDebate() {
                     value={months[getMonth(date)]}
                     onChange={({ target: { value } }) =>
                       changeMonth(months.indexOf(value))
-                    }>
+                    }
+                  >
                     {months.map((option) => (
                       <option key={option} value={option}>
                         {t(option)}
@@ -199,7 +203,8 @@ function CreateDebate() {
 
                   <button
                     onClick={increaseMonth}
-                    disabled={nextMonthButtonDisabled}>
+                    disabled={nextMonthButtonDisabled}
+                  >
                     {">"}
                   </button>
                 </div>
@@ -211,13 +216,13 @@ function CreateDebate() {
 
         <CategoryDropdown data={debateData} setData={setDebateData} />
 
-        <div className='input-container'>
-          <label htmlFor='limit'>인원 제한</label>
-          <div className='input-box-short'>
+        <div className="input-container">
+          <label htmlFor="limit">인원 제한</label>
+          <div className="input-box-short">
             <input
-              id='limit'
-              type='number'
-              placeholder='0'
+              id="limit"
+              type="number"
+              placeholder="0"
               value={debateData.limit}
               min={0}
               onChange={(e) => {
@@ -232,35 +237,35 @@ function CreateDebate() {
         <UploadFiles
           setFiles={setFiles}
           accept={ACCEPTABLE.join()}
-          buttonText='파일 추가'
+          buttonText="파일 추가"
           buttonIcon={faImage}
         />
         <textarea
           value={debateData.content}
-          placeholder='나누고 싶은 이야기를 적어주세요'
+          placeholder="나누고 싶은 이야기를 적어주세요"
           onChange={(e) =>
             setDebateData((prev) => ({ ...prev, content: e.target.value }))
           }
         />
-        <div className='input-container'>
+        <div className="input-container">
           <IonIcon
-            name='information-circle-outline'
-            className='icon'
+            name="information-circle-outline"
+            className="icon"
             style={{
               height: "30px",
               width: "30px",
             }}
           />
-          <label htmlFor='price' className='price-label'>
+          <label htmlFor="price" className="price-label">
             가격
           </label>
           <input
-            id='price'
-            type='number'
-            className='price-input'
+            id="price"
+            type="number"
+            className="price-input"
             step={1000}
             min={0}
-            placeholder='가격을 입력해주세요'
+            placeholder="가격을 입력해주세요"
             value={debateData.price}
             onChange={(e) => {
               setDebateData((prev) => {
@@ -269,14 +274,14 @@ function CreateDebate() {
             }}
           />
         </div>
-        <div className='button-container'>
-          <button className='temp'>임시 저장</button>
-          <button className='submit' onClick={doSubmit}>
+        <div className="button-container">
+          <button className="temp">임시 저장</button>
+          <button className="submit" onClick={doSubmit}>
             작성 완료
           </button>
         </div>
       </div>
-      <div className='offset'></div>
+      <div className="offset"></div>
     </div>
   );
 }

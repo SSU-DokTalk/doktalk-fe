@@ -1,9 +1,9 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import UploadFiles from "@/components/base/UploadFiles";
 import IonIcon from "@reacticons/ionicons";
 import { InitialSummary } from "@/types/initialValue";
-import { BookType, SummaryType } from "@/types/data";
-import { ACCEPTABLE, CATEGORY } from "@/common/variables";
+import { SummaryType } from "@/types/data";
+import { ACCEPTABLE } from "@/common/variables";
 import { faImage } from "@fortawesome/free-regular-svg-icons";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
@@ -52,14 +52,14 @@ function CreateSummary() {
   };
 
   return (
-    <div id='create-summary-page'>
-      <div className='container'>
+    <div id="create-summary-page">
+      <div className="container">
         <h1>요약 작성하기</h1>
-        <div className='input-container__title'>
+        <div className="input-container__title">
           <input
-            type='text'
-            className='title-input'
-            placeholder='제목을 입력해주세요.'
+            type="text"
+            className="title-input"
+            placeholder="제목을 입력해주세요."
             value={summaryData.title}
             onChange={(e) =>
               setSummaryData((prev) => ({ ...prev, title: e.target.value }))
@@ -73,12 +73,12 @@ function CreateSummary() {
         <UploadFiles
           setFiles={setFiles}
           accept={ACCEPTABLE.join()}
-          buttonText='파일 추가'
+          buttonText="파일 추가"
           buttonIcon={faImage}
         />
         <textarea
           value={summaryData.free_content}
-          placeholder='미리보기로 공유하고 싶은 내용을 작성해주세요.'
+          placeholder="미리보기로 공유하고 싶은 내용을 작성해주세요."
           onChange={(e) =>
             setSummaryData((prev) => ({
               ...prev,
@@ -88,7 +88,7 @@ function CreateSummary() {
         />
         <textarea
           value={summaryData.charged_content}
-          placeholder='유료로 공유하고 싶은 내용을 작성해주세요.'
+          placeholder="유료로 공유하고 싶은 내용을 작성해주세요."
           onChange={(e) =>
             setSummaryData((prev) => ({
               ...prev,
@@ -96,25 +96,25 @@ function CreateSummary() {
             }))
           }
         />
-        <div className='input-container'>
+        <div className="input-container">
           <IonIcon
-            name='information-circle-outline'
-            className='icon'
+            name="information-circle-outline"
+            className="icon"
             style={{
               height: "30px",
               width: "30px",
             }}
           />
-          <label htmlFor='price' className='price-label'>
+          <label htmlFor="price" className="price-label">
             가격
           </label>
           <input
-            id='price'
-            type='number'
-            className='price-input'
+            id="price"
+            type="number"
+            className="price-input"
             step={1000}
             min={0}
-            placeholder='가격을 입력해주세요'
+            placeholder="가격을 입력해주세요"
             value={summaryData.price}
             onChange={(e) => {
               setSummaryData((prev) => {
@@ -123,14 +123,14 @@ function CreateSummary() {
             }}
           />
         </div>
-        <div className='button-container'>
-          <button className='temp'>임시 저장</button>
-          <button className='submit' onClick={doSubmit}>
+        <div className="button-container">
+          <button className="temp">임시 저장</button>
+          <button className="submit" onClick={doSubmit}>
             작성 완료
           </button>
         </div>
       </div>
-      <div className='offset'></div>
+      <div className="offset"></div>
     </div>
   );
 }

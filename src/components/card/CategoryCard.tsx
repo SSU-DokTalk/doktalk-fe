@@ -6,7 +6,7 @@ import {
 } from "@mui/material";
 
 import { CATEGORY } from "@/common/variables";
-import { Dispatch, SetStateAction, useState } from "react";
+import { ComponentProps, Dispatch, SetStateAction, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
@@ -22,7 +22,7 @@ function CategoryCard({
 }: {
   categories: number;
   setCategories: Dispatch<SetStateAction<number>>;
-} & React.HTMLProps<HTMLDivElement>) {
+} & ComponentProps<typeof Paper>) {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const { t } = useTranslation();
 
@@ -35,8 +35,8 @@ function CategoryCard({
   };
 
   return (
-    <Paper id='category-card' className='accordion' {...props}>
-      <Accordion className='accordion-item'>
+    <Paper id="category-card" className="accordion" {...props}>
+      <Accordion className="accordion-item">
         <AccordionSummary onClick={() => setIsCollapsed((prev) => !prev)}>
           <span>카테고리 선택</span>
           {isCollapsed ? (
@@ -46,7 +46,7 @@ function CategoryCard({
           )}
         </AccordionSummary>
         <AccordionDetails>
-          <ul className='category-list'>
+          <ul className="category-list">
             {Object.entries(CATEGORY).map(([_, category], index) => {
               return (
                 <li
@@ -59,7 +59,8 @@ function CategoryCard({
                     categories & category.value
                       ? () => removeCategory(category.value)
                       : () => addCategory(category.value)
-                  }>
+                  }
+                >
                   {t(category.name)}
                 </li>
               );
@@ -68,15 +69,16 @@ function CategoryCard({
         </AccordionDetails>
       </Accordion>
 
-      <div className='selected-category-container'>
+      <div className="selected-category-container">
         {categories == 0 ? (
-          <div className='no-category'>선택한 카테고리가 없습니다.</div>
+          <div className="no-category">선택한 카테고리가 없습니다.</div>
         ) : (
           getCategoryFromNumber(categories).map((category, index) => {
             return (
               <div
-                className='selected-category'
-                key={"selected-category" + index}>
+                className="selected-category"
+                key={"selected-category" + index}
+              >
                 <span>{t(category.name)}</span>
                 <FontAwesomeIcon
                   icon={faXmark}

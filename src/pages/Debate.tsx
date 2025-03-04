@@ -1,6 +1,6 @@
-import { DUMMY_DEBATES } from "@/common/dummy_data";
-import CarouselDebateCard from "@/components/card/CarouselDebateCard";
-import Carousel from "@/components/carousel/Carousel";
+// import { DUMMY_DEBATES } from "@/common/dummy_data";
+// import CarouselDebateCard from "@/components/card/CarouselDebateCard";
+// import Carousel from "@/components/carousel/Carousel";
 import { DebateType, SummaryType } from "@/types/data";
 import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -21,7 +21,7 @@ import DatePicker from "react-datepicker";
 import { getMonth, getYear } from "date-fns";
 import CategoryCard from "@/components/card/CategoryCard";
 import SearchDropdown from "@/components/dropdown/SearchByDropdown";
-import { isMd } from "@/functions/breakpoint";
+// import { isMd } from "@/functions/breakpoint";
 
 const searchBys: {
   name: string;
@@ -72,7 +72,7 @@ const months = [
 ];
 
 function Debate() {
-  const [recommendDebates, ..._] = useState<DebateType[]>(DUMMY_DEBATES);
+  // const [recommendDebates, ..._] = useState<DebateType[]>(DUMMY_DEBATES);
 
   const [debates, setDebates] = useState<DebateType[]>([]);
   const [debatePage, setDebatePage] = useState<number>(1);
@@ -111,8 +111,8 @@ function Debate() {
   const CustomDatePicker = forwardRef<any, any>(
     ({ value, onClick, className }, ref) => (
       <div className={className} onClick={onClick} ref={ref}>
-        <IonIcon name='calendar-outline' className='sort-by-icon' />
-        <span className='date-text'>{value}</span>
+        <IonIcon name="calendar-outline" className="sort-by-icon" />
+        <span className="date-text">{value}</span>
       </div>
     )
   );
@@ -163,7 +163,7 @@ function Debate() {
   });
 
   return (
-    <div id='debate-page'>
+    <div id="debate-page">
       {/* <div className='recommend-content-container'>
         <div className='recommend-content-title'>
           {t("page.debate.title.recommend")}
@@ -180,21 +180,21 @@ function Debate() {
           ))}
         </Carousel>
       </div> */}
-      <div className='content-container'>
-        <div className='lower-content-container'>
+      <div className="content-container">
+        <div className="lower-content-container">
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
-            className='left-container mx-4! w-screen md:w-3/5'
+            className="left-container mx-4! w-screen md:w-3/5"
           />
           {/* <div className='right-container'></div> */}
         </div>
-        <div className='lower-content-container'>
-          <div className='left-container mx-4! md:w-3/5!'>
-            <div className='searchbox-container'>
+        <div className="lower-content-container">
+          <div className="left-container mx-4! md:w-3/5!">
+            <div className="searchbox-container">
               <FontAwesomeIcon
                 icon={faMagnifyingGlass}
-                className='searchbox-icon'
+                className="searchbox-icon"
               />
               <SearchDropdown
                 searchBys={searchBys}
@@ -202,20 +202,20 @@ function Debate() {
                 setSearchByIdx={setSearchByIdx}
               />
               <input
-                type='text'
+                type="text"
                 placeholder={t("page.debate.search.placeholder")}
-                className='searchbox'
+                className="searchbox"
                 value={search}
                 onChange={(e) => setSearch(e.target.value)}
               />
             </div>
-            <div className='content-header'>
-              <div className='sort-by'>
+            <div className="content-header">
+              <div className="sort-by">
                 {sortBys.map((sortBy, index) => {
                   return (
                     <div
                       key={"sort-by" + index}
-                      className='sort-by-text'
+                      className="sort-by-text"
                       style={
                         sortByIdx === index
                           ? {
@@ -223,19 +223,20 @@ function Debate() {
                             }
                           : {}
                       }
-                      onClick={() => setSortByIdx(index)}>
+                      onClick={() => setSortByIdx(index)}
+                    >
                       {t(sortBy.name)}
                       {sortBy.value == "from" ? (
                         <DatePicker
                           selected={from}
                           onChange={(date) => setFrom(date ?? new Date())}
-                          dateFormat='yyyy/MM/dd'
+                          dateFormat="yyyy/MM/dd"
                           minDate={new Date("2025-01-01")}
                           maxDate={
                             new Date(`${getYear(new Date()) + 10}-12-31`)
                           }
                           customInput={
-                            <CustomDatePicker className='custom-input' />
+                            <CustomDatePicker className="custom-input" />
                           }
                           showDisabledMonthNavigation
                           renderCustomHeader={({
@@ -252,17 +253,20 @@ function Debate() {
                                 margin: 10,
                                 display: "flex",
                                 justifyContent: "center",
-                              }}>
+                              }}
+                            >
                               <button
                                 onClick={decreaseMonth}
-                                disabled={prevMonthButtonDisabled}>
+                                disabled={prevMonthButtonDisabled}
+                              >
                                 {"<"}
                               </button>
                               <select
                                 value={getYear(date)}
                                 onChange={({ target: { value } }) =>
                                   changeYear(parseInt(value))
-                                }>
+                                }
+                              >
                                 {years.map((option) => (
                                   <option key={option} value={option}>
                                     {option}
@@ -274,7 +278,8 @@ function Debate() {
                                 value={months[getMonth(date)]}
                                 onChange={({ target: { value } }) =>
                                   changeMonth(months.indexOf(value))
-                                }>
+                                }
+                              >
                                 {months.map((option) => (
                                   <option key={option} value={option}>
                                     {t(option)}
@@ -284,7 +289,8 @@ function Debate() {
 
                               <button
                                 onClick={increaseMonth}
-                                disabled={nextMonthButtonDisabled}>
+                                disabled={nextMonthButtonDisabled}
+                              >
                                 {">"}
                               </button>
                             </div>
@@ -296,13 +302,14 @@ function Debate() {
                 })}
               </div>
               <button
-                className='create-debate-button'
-                onClick={() => navigate("/debate/create")}>
+                className="create-debate-button"
+                onClick={() => navigate("/debate/create")}
+              >
                 <span>{t("page.debate.button.create")}</span>
-                <WriteIcon className='write-icon' width={17} fill={"#ffffff"} />
+                <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
               </button>
             </div>
-            <div className='content-container'>
+            <div className="content-container">
               <InfiniteScroll
                 api={`debate?category=${categories}&search=${debouncedSearch}&searchby=${
                   searchBys[searchByIdx].value
@@ -326,7 +333,8 @@ function Debate() {
                   sortByIdx !== prevValueRef.current.sortByIdx ||
                   from !== prevValueRef.current.from
                 }
-                dependency={[prevValueRef]}>
+                dependency={[prevValueRef]}
+              >
                 {debates.map((debate, index) => (
                   <DebateCard
                     key={"debate" + index}
@@ -338,11 +346,11 @@ function Debate() {
               </InfiniteScroll>
             </div>
           </div>
-          <div className='right-container hidden md:block'>
-            <div className='right-container-title'>
+          <div className="right-container hidden md:block">
+            <div className="right-container-title">
               {t("page.debate.title.popular")}
             </div>
-            <div className='right-container-content'>
+            <div className="right-container-content">
               {popularSummaries.map((summary, index) => (
                 <PopularSummaryCard
                   key={"summary" + index}
@@ -355,7 +363,7 @@ function Debate() {
           </div>
         </div>
       </div>
-      <div className='footer' />
+      <div className="footer" />
     </div>
   );
 }

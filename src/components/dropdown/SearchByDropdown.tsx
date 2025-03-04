@@ -1,4 +1,4 @@
-import { Dispatch, SetStateAction, useEffect, useRef, useState } from "react";
+import { Dispatch, SetStateAction, useState } from "react";
 
 import { ArrowDropDown } from "@mui/icons-material";
 import { ButtonBase, Menu, MenuItem } from "@mui/material";
@@ -23,11 +23,12 @@ function SearchDropdown({
 
   return (
     <>
-      <div className='search-by-dropdown'>
+      <div className="search-by-dropdown">
         <ButtonBase
           onClick={(event) => {
             setAnchorEl(event.currentTarget);
-          }}>
+          }}
+        >
           {t(searchBys[searchByIdx].name)} <ArrowDropDown />
         </ButtonBase>
         <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
@@ -37,7 +38,8 @@ function SearchDropdown({
               onClick={() => {
                 setSearchByIdx(index);
                 setAnchorEl(null);
-              }}>
+              }}
+            >
               {t(searchBy.name)}
             </MenuItem>
           ))}

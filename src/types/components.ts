@@ -1,6 +1,7 @@
 export type LinkItemType = {
   title: string;
   url: string;
+  icon?: any;
 };
 
 export type PreviewType = {
