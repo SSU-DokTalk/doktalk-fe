@@ -3,6 +3,7 @@ import FloatingUserProfile from "../components/floating/FloatingUserProfile";
 import { useEffect } from "react";
 import { updateGlobalState } from "@/stores/globalStates";
 import { useAppDispatch } from "@/stores/hooks";
+import { LeftPanel, MiddlePanel } from "@/components/panel/sidePanel";
 
 function ContentMainLayout({ children }: { children?: React.ReactNode }) {
   const dispatch = useAppDispatch();
@@ -20,8 +21,11 @@ function ContentMainLayout({ children }: { children?: React.ReactNode }) {
       </div>
 
       <div className='upper-container md:pl-72!'>{children}</div>
-      <div className='lower-container md:pl-72!'>
-        <Outlet />
+      <div className='lower-container flex'>
+        <LeftPanel />
+        <MiddlePanel>
+          <Outlet />
+        </MiddlePanel>
       </div>
     </div>
   );

@@ -186,12 +186,12 @@ function Debate() {
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
-            className='left-container mx-4! w-screen md:w-3/5'
+            className='left-container mx-4! w-screen'
           />
           {/* <div className='right-container'></div> */}
         </div>
         <div className='lower-content-container'>
-          <div className='left-container mx-4! md:w-3/5!'>
+          <div className='left-container mx-4! w-full'>
             <SearchBar
               placeholder={t("page.debate.search.placeholder")}
               value={search}

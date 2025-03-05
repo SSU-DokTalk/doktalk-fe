@@ -20,6 +20,7 @@ import SearchDropdown from "@/components/dropdown/SearchByDropdown";
 
 import { isMd } from "@/functions/breakpoint";
 import { SearchBar } from "@/components/input/searchbar";
+import { MiddlePanel, RightPanel } from "@/components/panel/sidePanel";
 
 const searchBys: {
   name: string;
@@ -145,16 +146,18 @@ function Summary() {
       </div>
 
       <div className='content-container mx-4!'>
-        <div className='lower-content-container md:w-3/5!'>
-          <CategoryCard
-            categories={categories}
-            setCategories={setCategories}
-            className='left-container'
-          />
-          {/* <div className='right-container'></div> */}
+        <div className='lower-content-container md:flex'>
+          <MiddlePanel>
+            <CategoryCard
+              categories={categories}
+              setCategories={setCategories}
+              className='left-container'
+            />
+          </MiddlePanel>
+          <RightPanel />
         </div>
         <div className='lower-content-container md:flex'>
-          <div className='left-container md:w-3/5!'>
+          <MiddlePanel className='left-container'>
             <SearchBar
               placeholder={t("page.summary.search.placeholder")}
               value={search}
@@ -221,8 +224,9 @@ function Summary() {
                 ))}
               </InfiniteScroll>
             </div>
-          </div>
-          <div className='right-container hidden md:block'>
+          </MiddlePanel>
+
+          <RightPanel className='right-container hidden lg:block'>
             <div className='right-container-title'>
               {t("page.summary.title.popular")}
             </div>
@@ -236,7 +240,7 @@ function Summary() {
                 />
               ))}
             </div>
-          </div>
+          </RightPanel>
         </div>
       </div>
       <div className='footer' />
