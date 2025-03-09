@@ -1,9 +1,9 @@
-import { BookType } from "@/types/data";
-import Image from "@/components/base/Image";
-import { useTranslation } from "react-i18next";
-import axios from "axios";
-import { updateGlobalState } from "@/stores/globalStates";
-import { useAppDispatch } from "@/stores/hooks";
+import { BookType } from '@/types/data';
+import Image from '@/components/base/Image';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
+import { updateGlobalState } from '@/stores/globalStates';
+import { useAppDispatch } from '@/stores/hooks';
 
 function BookCard({
   book,
@@ -43,11 +43,12 @@ function BookCard({
           <div className='title'>{book.title}</div>
           <div className='info-container'>
             <div className='author'>
-              {book.author.split("^").length > 2
-                ? `${book.author.split("^").slice(0, 2).join(", ")} 외 ${
-                    book.author.split("^").slice(2).length
-                  }명`
-                : `${book.author.split("^").slice(0, 2)}`}
+              {book.author &&
+                (book.author.split('^').length > 2
+                  ? `${book.author.split('^').slice(0, 2).join(', ')} 외 ${
+                      book.author.split('^').slice(2).length
+                    }명`
+                  : `${book.author.split('^').slice(0, 2)}`)}
             </div>
             <div className='publisher'>{book.publisher}</div>
             <div className='pubdate'>{`${book.pubdate.slice(
@@ -56,7 +57,7 @@ function BookCard({
             )}/${book.pubdate.slice(4, 6)}/${book.pubdate.slice(6, 8)}`}</div>
           </div>
           <div className='description'>
-            {book.description?.replace("\n", " ")}
+            {book.description?.replace('\n', ' ')}
           </div>
         </div>
       </div>
@@ -64,13 +65,14 @@ function BookCard({
       <div className='button-container flex flex-row md:flex-col'>
         <button
           className='to-my-book my-1 mr-1 md:ml-1!'
-          onClick={isInLibrary ? removeFromLibrary : addToLibrary}>
+          onClick={isInLibrary ? removeFromLibrary : addToLibrary}
+        >
           {isInLibrary
-            ? t("component.card.book.button.remove-from-library")
-            : t("component.card.book.button.add-to-library")}
+            ? t('component.card.book.button.remove-from-library')
+            : t('component.card.book.button.add-to-library')}
         </button>
         <button className='look-summary m-1!'>
-          {`${t("component.card.book.button.in-library-num")} ${
+          {`${t('component.card.book.button.in-library-num')} ${
             book.in_library_num
           }`}
           {}

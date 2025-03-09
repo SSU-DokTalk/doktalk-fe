@@ -1,4 +1,4 @@
-import axios from "axios";
+import axios from 'axios';
 import React, {
   Dispatch,
   SetStateAction,
@@ -6,7 +6,7 @@ import React, {
   useEffect,
   useRef,
   useState,
-} from "react";
+} from 'react';
 
 import {
   Dialog,
@@ -14,12 +14,12 @@ import {
   DialogContent,
   Button,
   IconButton,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+} from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-import { useAppDispatch, useAppSelector } from "@/stores/hooks";
-import { selectUser, setUser } from "@/stores/user";
-import ProfileIcon from "@/components/base/ProfileIcon";
+import { useAppDispatch, useAppSelector } from '@/stores/hooks';
+import { selectUser, setUser } from '@/stores/user';
+import ProfileIcon from '@/components/base/ProfileIcon';
 
 function EditProfileModal({
   showModal,
@@ -36,8 +36,8 @@ function EditProfileModal({
     introduction: string;
   }>({
     profile: undefined,
-    name: "",
-    introduction: "",
+    name: '',
+    introduction: '',
   });
   const inputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
@@ -69,15 +69,15 @@ function EditProfileModal({
     (e: React.ChangeEvent<HTMLInputElement>) => {
       if (!e.target.files) return;
       const formData = new FormData();
-      formData.append("file", e.target.files[0]);
+      formData.append('file', e.target.files[0]);
 
       axios
         .post(`/api/file`, formData, {
           headers: {
-            "Content-Type": "multipart/form-data",
+            'Content-Type': 'multipart/form-data',
           },
           params: {
-            directory: "profile",
+            directory: 'profile',
           },
         })
         .then(async (res) => {
@@ -110,13 +110,15 @@ function EditProfileModal({
       onClose={() => setShowModal(false)}
       maxWidth='sm'
       fullWidth
-      scroll='body'>
+      scroll='body'
+    >
       <DialogTitle>프로필 편집</DialogTitle>
       <IconButton
         className='btn-close'
         aria-label='close'
         onClick={() => setShowModal(false)}
-        sx={{ position: "absolute", right: 8, top: 8 }}>
+        sx={{ position: 'absolute', right: 8, top: 8 }}
+      >
         <CloseIcon />
       </IconButton>
 
@@ -139,12 +141,14 @@ function EditProfileModal({
             />
             <Button
               className='profile-image-button image-upload'
-              onClick={clickUploadImageButton}>
+              onClick={clickUploadImageButton}
+            >
               이미지 업로드
             </Button>
             <Button
               className='profile-image-button image-delete'
-              onClick={deleteImage}>
+              onClick={deleteImage}
+            >
               이미지 제거
             </Button>
           </div>

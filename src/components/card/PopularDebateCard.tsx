@@ -1,14 +1,14 @@
-import { DebateType } from "@/types/data";
-import ProfileIcon from "@/components/base/ProfileIcon";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
+import { DebateType } from '@/types/data';
+import ProfileIcon from '@/components/base/ProfileIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
 import {
   faComment,
   faHeart as faHeartRegular,
-} from "@fortawesome/free-regular-svg-icons";
-import { Dispatch, SetStateAction } from "react";
-import { useNavigate } from "react-router-dom";
-import axios from "axios";
+} from '@fortawesome/free-regular-svg-icons';
+import { Dispatch, SetStateAction } from 'react';
+import { useNavigate } from 'react-router-dom';
+import axios from 'axios';
 
 function PopularDebateCard({
   debate,
@@ -38,44 +38,44 @@ function PopularDebateCard({
   };
 
   return (
-    <div id="popular-debate-card">
-      <div className="title" onClick={() => navigate(`/debate/${debate.id}`)}>
+    <div id='popular-debate-card'>
+      <div className='title' onClick={() => navigate(`/debate/${debate.id}`)}>
         {debate.title}
       </div>
-      <div className="content" onClick={() => navigate(`/debate/${debate.id}`)}>
+      <div className='content' onClick={() => navigate(`/debate/${debate.id}`)}>
         {debate.content}
       </div>
-      <div className="content-info">
+      <div className='content-info'>
         <div
-          className="user-info"
+          className='user-info'
           onClick={() => navigate(`/user/${debate.user.id}`)}
         >
           <ProfileIcon profile={debate.user.profile} size={15} />
-          <div className="user-name">{debate.user.name}</div>
+          <div className='user-name'>{debate.user.name}</div>
         </div>
-        <div className="additional-info">
-          <div className="like-container">
+        <div className='additional-info'>
+          <div className='like-container'>
             {hasLiked ? (
               <FontAwesomeIcon
                 icon={faHeartSolid}
                 onClick={doUnlike}
-                className="like-icon liked"
+                className='like-icon liked'
               />
             ) : (
               <FontAwesomeIcon
                 icon={faHeartRegular}
                 onClick={doLike}
-                className="like-icon"
+                className='like-icon'
               />
             )}
-            <div className="like-text">{debate.likes_num}</div>
+            <div className='like-text'>{debate.likes_num}</div>
           </div>
           <div
-            className="comment-container"
+            className='comment-container'
             onClick={() => navigate(`/debate/${debate.id}`)}
           >
             <FontAwesomeIcon icon={faComment} />
-            <div className="comment-text">{debate.comments_num}</div>
+            <div className='comment-text'>{debate.comments_num}</div>
           </div>
         </div>
       </div>

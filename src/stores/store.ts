@@ -1,7 +1,7 @@
-import userReducer from "@/stores/user";
-import globalStateReducer from "@/stores/globalStates";
+import userReducer from '@/stores/user';
+import globalStateReducer from '@/stores/globalStates';
 
-import { configureStore } from "@reduxjs/toolkit";
+import { configureStore } from '@reduxjs/toolkit';
 
 export const store = configureStore({
   reducer: {

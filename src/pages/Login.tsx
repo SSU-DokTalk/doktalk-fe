@@ -1,18 +1,18 @@
-import axios from "axios";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import axios from 'axios';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import naverIcon from "@/assets/images/naver.svg";
-import kakaoIcon from "@/assets/images/kakao.svg";
-import googleIcon from "@/assets/images/google.svg";
-import facebookIcon from "@/assets/images/facebook.svg";
+import naverIcon from '@/assets/images/naver.svg';
+import kakaoIcon from '@/assets/images/kakao.svg';
+import googleIcon from '@/assets/images/google.svg';
+import facebookIcon from '@/assets/images/facebook.svg';
 
-import { setUser } from "@/stores/user";
-import { useAppDispatch } from "@/stores/hooks";
-import { LoginUserInfoType } from "@/types";
-import { initialLoginUserInfo } from "@/types/initialValue";
+import { setUser } from '@/stores/user';
+import { useAppDispatch } from '@/stores/hooks';
+import { LoginUserInfoType } from '@/types';
+import { initialLoginUserInfo } from '@/types/initialValue';
 
 const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_CLIENT_ID;
 const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
@@ -29,14 +29,14 @@ function Login() {
   const navigate = useNavigate();
 
   const doLogin = async () => {
-    await axios.post("/api/user/login", userInfo).then(async (res) => {
+    await axios.post('/api/user/login', userInfo).then(async (res) => {
       const {
         id,
         name,
         role,
-      }: { id: number; name: string; role: "USER" | "ADMIN" } = res.data;
+      }: { id: number; name: string; role: 'USER' | 'ADMIN' } = res.data;
       const token = res.headers.authorization;
-      axios.defaults.headers.common["Authorization"] = token;
+      axios.defaults.headers.common['Authorization'] = token;
       await dispatch(
         setUser({
           id: id,
@@ -46,7 +46,7 @@ function Login() {
       );
     });
 
-    navigate("/");
+    navigate('/');
   };
 
   const nonce = () => {
@@ -72,7 +72,7 @@ function Login() {
   return (
     <div id='login'>
       <div className='login-container'>
-        <Link to={"/"} className='logo-container'>
+        <Link to={'/'} className='logo-container'>
           <div className='logo dok'>독</div>
           <div className='logo colon'>:</div>
           <div className='logo talk'>TALK</div>
@@ -82,7 +82,7 @@ function Login() {
             <input
               type='email'
               className='login-input'
-              placeholder={t("page.login.email")}
+              placeholder={t('page.login.email')}
               value={userInfo.email}
               onChange={(e) =>
                 setUserInfo({
@@ -96,7 +96,7 @@ function Login() {
             <input
               type='password'
               className='login-input'
-              placeholder={t("page.login.password")}
+              placeholder={t('page.login.password')}
               value={userInfo.password}
               onChange={(e) =>
                 setUserInfo({
@@ -107,27 +107,27 @@ function Login() {
             />
           </div>
           <button className='login-button' onClick={doLogin}>
-            {t("page.login.login")}
+            {t('page.login.login')}
           </button>
         </div>
         <div className='additional-container'>
           <div className='checkbox-container'>
             <input type='checkbox' name='' id='keep-login' />
-            <label htmlFor='keep-login'>{t("page.login.keep-login")}</label>
+            <label htmlFor='keep-login'>{t('page.login.keep-login')}</label>
             <input type='checkbox' name='' id='save-id' />
-            <label htmlFor='save-id'>{t("page.login.save-id")}</label>
+            <label htmlFor='save-id'>{t('page.login.save-id')}</label>
           </div>
           <div className='find-myinfo'>
-            <div className='myinfo'>{t("page.login.find-id")}</div>
+            <div className='myinfo'>{t('page.login.find-id')}</div>
             <div className='divider'>|</div>
-            <div className='myinfo'>{t("page.login.find-password")}</div>
+            <div className='myinfo'>{t('page.login.find-password')}</div>
           </div>
         </div>
         <div className='social-login-box'>
           <div className='social-login-text-container'>
             <hr />
             <div className='social-login-text'>
-              {t("page.login.social-login-text")}
+              {t('page.login.social-login-text')}
             </div>
             <hr />
           </div>
@@ -161,8 +161,9 @@ function Login() {
         <div className='register-container'>
           <button
             className='register-button'
-            onClick={() => navigate("/register")}>
-            {t("page.login.register")}
+            onClick={() => navigate('/register')}
+          >
+            {t('page.login.register')}
           </button>
         </div>
       </div>

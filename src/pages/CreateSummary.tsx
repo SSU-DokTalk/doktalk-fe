@@ -1,14 +1,14 @@
-import { useEffect, useRef, useState } from "react";
-import UploadFiles from "@/components/base/UploadFiles";
-import IonIcon from "@reacticons/ionicons";
-import { InitialSummary } from "@/types/initialValue";
-import { BookType, SummaryType } from "@/types/data";
-import { ACCEPTABLE, CATEGORY } from "@/common/variables";
-import { faImage } from "@fortawesome/free-regular-svg-icons";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
-import BookSearchDropdown from "@/components/dropdown/BookSearchDropdown";
-import CategoryDropdown from "@/components/dropdown/CategoryChipDropdown";
+import { useState } from 'react';
+import UploadFiles from '@/components/base/UploadFiles';
+import IonIcon from '@reacticons/ionicons';
+import { InitialSummary } from '@/types/initialValue';
+import { SummaryType } from '@/types/data';
+import { ACCEPTABLE } from '@/common/variables';
+import { faImage } from '@fortawesome/free-regular-svg-icons';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
+import BookSearchDropdown from '@/components/dropdown/BookSearchDropdown';
+import CategoryDropdown from '@/components/dropdown/CategoryChipDropdown';
 
 function CreateSummary() {
   const [summaryData, setSummaryData] = useState<SummaryType>({
@@ -22,14 +22,14 @@ function CreateSummary() {
     const fileRes = await Promise.all(
       files.map(async (file) => {
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append('file', file);
         return await axios
-          .post("/api/file", formData, {
+          .post('/api/file', formData, {
             headers: {
-              "Content-Type": "multipart/form-data",
+              'Content-Type': 'multipart/form-data',
             },
             params: {
-              directory: "summary",
+              directory: 'summary',
             },
           })
           .then((res) => res.data);
@@ -37,7 +37,7 @@ function CreateSummary() {
     );
 
     await axios
-      .post("/api/summary", {
+      .post('/api/summary', {
         isbn: summaryData.isbn,
         title: summaryData.title,
         free_content: summaryData.free_content,
@@ -47,7 +47,7 @@ function CreateSummary() {
         category: summaryData.category,
       })
       .then(() => {
-        navigate("/summary");
+        navigate('/summary');
       });
   };
 
@@ -101,8 +101,8 @@ function CreateSummary() {
             name='information-circle-outline'
             className='icon'
             style={{
-              height: "30px",
-              width: "30px",
+              height: '30px',
+              width: '30px',
             }}
           />
           <label htmlFor='price' className='price-label'>

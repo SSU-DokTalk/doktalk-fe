@@ -1,35 +1,35 @@
-import { forwardRef, useEffect, useRef, useState } from "react";
+import { forwardRef, useState } from 'react';
 
-import { faImage } from "@fortawesome/free-solid-svg-icons";
-import UploadFiles from "@/components/base/UploadFiles";
-import { ACCEPTABLE, CATEGORY } from "@/common/variables";
-import { BookType, DebateType } from "@/types/data";
-import { InitialDebate } from "@/types/initialValue";
-import { range } from "@/functions";
-import { useTranslation } from "react-i18next";
-import IonIcon from "@reacticons/ionicons";
-import axios from "axios";
-import { getMonth, getYear } from "date-fns";
-import DatePicker from "react-datepicker";
-import { useNavigate } from "react-router-dom";
+import { faImage } from '@fortawesome/free-solid-svg-icons';
+import UploadFiles from '@/components/base/UploadFiles';
+import { ACCEPTABLE } from '@/common/variables';
+import { DebateType } from '@/types/data';
+import { InitialDebate } from '@/types/initialValue';
+import { range } from '@/functions';
+import { useTranslation } from 'react-i18next';
+import IonIcon from '@reacticons/ionicons';
+import axios from 'axios';
+import { getMonth, getYear } from 'date-fns';
+import DatePicker from 'react-datepicker';
+import { useNavigate } from 'react-router-dom';
 
-import BookSearchDropdown from "@/components/dropdown/BookSearchDropdown";
-import CategoryDropdown from "@/components/dropdown/CategoryChipDropdown";
+import BookSearchDropdown from '@/components/dropdown/BookSearchDropdown';
+import CategoryDropdown from '@/components/dropdown/CategoryChipDropdown';
 
 const years = range(10 + getYear(new Date()) - 2025, 2025, 1);
 const months = [
-  "function.time.months.1",
-  "function.time.months.2",
-  "function.time.months.3",
-  "function.time.months.4",
-  "function.time.months.5",
-  "function.time.months.6",
-  "function.time.months.7",
-  "function.time.months.8",
-  "function.time.months.9",
-  "function.time.months.10",
-  "function.time.months.11",
-  "function.time.months.12",
+  'function.time.months.1',
+  'function.time.months.2',
+  'function.time.months.3',
+  'function.time.months.4',
+  'function.time.months.5',
+  'function.time.months.6',
+  'function.time.months.7',
+  'function.time.months.8',
+  'function.time.months.9',
+  'function.time.months.10',
+  'function.time.months.11',
+  'function.time.months.12',
 ];
 
 function CreateDebate() {
@@ -57,14 +57,14 @@ function CreateDebate() {
     const fileRes = await Promise.all(
       files.map(async (file) => {
         const formData = new FormData();
-        formData.append("file", file);
+        formData.append('file', file);
         return await axios
-          .post("/api/file", formData, {
+          .post('/api/file', formData, {
             headers: {
-              "Content-Type": "multipart/form-data",
+              'Content-Type': 'multipart/form-data',
             },
             params: {
-              directory: "debate",
+              directory: 'debate',
             },
           })
           .then((res) => res.data);
@@ -72,7 +72,7 @@ function CreateDebate() {
     );
 
     await axios
-      .post("/api/debate", {
+      .post('/api/debate', {
         title: debateData.title,
         location: debateData.location,
         link: debateData.link,
@@ -85,7 +85,7 @@ function CreateDebate() {
         price: debateData.price,
       })
       .then(() => {
-        navigate("/debate");
+        navigate('/debate');
       });
   };
 
@@ -165,19 +165,22 @@ function CreateDebate() {
                 <div
                   style={{
                     margin: 10,
-                    display: "flex",
-                    justifyContent: "center",
-                  }}>
+                    display: 'flex',
+                    justifyContent: 'center',
+                  }}
+                >
                   <button
                     onClick={decreaseMonth}
-                    disabled={prevMonthButtonDisabled}>
-                    {"<"}
+                    disabled={prevMonthButtonDisabled}
+                  >
+                    {'<'}
                   </button>
                   <select
                     value={getYear(date)}
                     onChange={({ target: { value } }) =>
                       changeYear(parseInt(value))
-                    }>
+                    }
+                  >
                     {years.map((option) => (
                       <option key={option} value={option}>
                         {option}
@@ -189,7 +192,8 @@ function CreateDebate() {
                     value={months[getMonth(date)]}
                     onChange={({ target: { value } }) =>
                       changeMonth(months.indexOf(value))
-                    }>
+                    }
+                  >
                     {months.map((option) => (
                       <option key={option} value={option}>
                         {t(option)}
@@ -199,8 +203,9 @@ function CreateDebate() {
 
                   <button
                     onClick={increaseMonth}
-                    disabled={nextMonthButtonDisabled}>
-                    {">"}
+                    disabled={nextMonthButtonDisabled}
+                  >
+                    {'>'}
                   </button>
                 </div>
               )}
@@ -247,8 +252,8 @@ function CreateDebate() {
             name='information-circle-outline'
             className='icon'
             style={{
-              height: "30px",
-              width: "30px",
+              height: '30px',
+              width: '30px',
             }}
           />
           <label htmlFor='price' className='price-label'>

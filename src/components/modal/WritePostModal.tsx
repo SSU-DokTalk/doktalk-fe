@@ -1,19 +1,13 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  Button,
-  IconButton,
-} from "@mui/material";
-import CloseIcon from "@mui/icons-material/Close";
+import { Dialog, DialogTitle, DialogContent, IconButton } from '@mui/material';
+import CloseIcon from '@mui/icons-material/Close';
 
-import UploadFiles from "@/components/base/UploadFiles";
-import { ACCEPTABLE } from "@/common/variables";
-import { faImage } from "@fortawesome/free-regular-svg-icons";
-import axios from "axios";
-import { PostType } from "@/types/data";
+import UploadFiles from '@/components/base/UploadFiles';
+import { ACCEPTABLE } from '@/common/variables';
+import { faImage } from '@fortawesome/free-regular-svg-icons';
+import axios from 'axios';
+import { PostType } from '@/types/data';
 
 function WritePostModal({
   post,
@@ -32,8 +26,8 @@ function WritePostModal({
     title: string;
     content: string;
   }>({
-    title: "",
-    content: "",
+    title: '',
+    content: '',
   });
   const [files, setFiles] = useState<File[]>([]);
 
@@ -51,14 +45,14 @@ function WritePostModal({
       files.map(
         async (file) => {
           const formData = new FormData();
-          formData.append("file", file);
+          formData.append('file', file);
           return await axios
-            .post("/api/file", formData, {
+            .post('/api/file', formData, {
               headers: {
-                "Content-Type": "multipart/form-data",
+                'Content-Type': 'multipart/form-data',
               },
               params: {
-                directory: "post",
+                directory: 'post',
               },
             })
             .then((res) => res.data);
@@ -67,15 +61,15 @@ function WritePostModal({
       )
     );
     await axios
-      .post("/api/post", {
+      .post('/api/post', {
         ...postData,
         files: filesRes,
       })
       .then(() => {
         setShowModal(false);
         setPostData({
-          title: "",
-          content: "",
+          title: '',
+          content: '',
         });
         setFiles([]);
         setDidPost?.(true);
@@ -91,7 +85,8 @@ function WritePostModal({
       }}
       maxWidth='sm'
       fullWidth
-      scroll='body'>
+      scroll='body'
+    >
       <DialogTitle>
         <b>게시글 작성</b>
       </DialogTitle>
@@ -99,7 +94,8 @@ function WritePostModal({
         className='btn-close'
         aria-label='close'
         onClick={() => setShowModal(false)}
-        sx={{ position: "absolute", right: 8, top: 8 }}>
+        sx={{ position: 'absolute', right: 8, top: 8 }}
+      >
         <CloseIcon />
       </IconButton>
 

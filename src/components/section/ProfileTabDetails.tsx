@@ -1,9 +1,9 @@
-import { MyTabsCandidate } from "@/types/initialValue";
-import WritePostCard from "@/components/card/WritePostCard";
-import PostCard from "@/components/card/PostCard";
-import WriteSummaryCard from "@/components/card/WriteSummaryCard";
-import InfiniteScroll from "@/components/base/InfiniteScroll";
-import { useEffect, useRef, useState } from "react";
+import { MyTabsCandidate } from '@/types/initialValue';
+import WritePostCard from '@/components/card/WritePostCard';
+import PostCard from '@/components/card/PostCard';
+import WriteSummaryCard from '@/components/card/WriteSummaryCard';
+import InfiniteScroll from '@/components/base/InfiniteScroll';
+import { useEffect, useRef, useState } from 'react';
 import {
   DebateType,
   MyBookType,
@@ -11,25 +11,25 @@ import {
   PaymentType,
   SummaryType,
   UserType,
-} from "@/types/data";
-import { selectUser } from "@/stores/user";
-import { useAppSelector } from "@/stores/hooks";
-import SummaryCard from "@/components/card/SummaryCard";
-import Book from "@/components/base/Book";
-import axios from "axios";
-import noImage from "@/assets/images/no-item.svg";
-import { Link } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
-import WriteDebateCard from "@/components/card/WriteDebateCard";
-import DebateCard from "@/components/card/DebateCard";
-import PaymentCard from "@/components/card/PaymentCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from '@/types/data';
+import { selectUser } from '@/stores/user';
+import { useAppSelector } from '@/stores/hooks';
+import SummaryCard from '@/components/card/SummaryCard';
+import Book from '@/components/base/Book';
+import axios from 'axios';
+import noImage from '@/assets/images/no-item.svg';
+import { Link } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
+import WriteDebateCard from '@/components/card/WriteDebateCard';
+import DebateCard from '@/components/card/DebateCard';
+import PaymentCard from '@/components/card/PaymentCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronLeft,
   faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { getDateTime } from "@/functions";
-import { useTranslation } from "react-i18next";
+} from '@fortawesome/free-solid-svg-icons';
+import { getDateTime } from '@/functions';
+import { useTranslation } from 'react-i18next';
 
 function ProfileTabDetails({
   userProfile = undefined,
@@ -243,6 +243,7 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
 
   useEffect(() => {
     if (userProfile.id != 0) {
+
       if (!hasLoadedMyBook) {
         axios
           .get(`/api/user/${userProfile.id}/mybooks`, {

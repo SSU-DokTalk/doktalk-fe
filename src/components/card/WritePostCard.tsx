@@ -1,11 +1,11 @@
-import { useAppSelector } from "@/stores/hooks";
-import { selectUser } from "@/stores/user";
+import { useAppSelector } from '@/stores/hooks';
+import { selectUser } from '@/stores/user';
 
-import ProfileIcon from "@/components/base/ProfileIcon";
-import { Dispatch, SetStateAction, useState } from "react";
-import WritePostModal from "../modal/WritePostModal";
-import WriteIcon from "@/assets/images/write.svg?react";
-import { useTranslation } from "react-i18next";
+import ProfileIcon from '@/components/base/ProfileIcon';
+import { Dispatch, SetStateAction, useState } from 'react';
+import WritePostModal from '../modal/WritePostModal';
+import WriteIcon from '@/assets/images/write.svg?react';
+import { useTranslation } from 'react-i18next';
 
 function WritePostCard({
   setDidPost = undefined,
@@ -18,7 +18,7 @@ function WritePostCard({
   const { t } = useTranslation();
 
   return (
-    <div id="write-post-card">
+    <div id='write-post-card'>
       <WritePostModal
         showModal={showModal}
         setShowModal={setShowModal}
@@ -26,15 +26,15 @@ function WritePostCard({
       />
       <ProfileIcon profile={user.profile} size={45} />
       <div
-        className="input-container"
+        className='input-container'
         onClick={() => {
           setShowModal(true);
         }}
       >
-        <div className="write-input">
-          {t("component.card.write-post.placeholder")}
+        <div className='write-input'>
+          {t('component.card.write-post.placeholder')}
         </div>
-        <WriteIcon className="write-icon" width={20} fill={"#666565"} />
+        <WriteIcon className='write-icon' width={20} fill={'#666565'} />
       </div>
     </div>
   );

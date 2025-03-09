@@ -3,18 +3,18 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-} from "@mui/material";
+} from '@mui/material';
 
-import { CATEGORY } from "@/common/variables";
-import { Dispatch, SetStateAction, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CATEGORY } from '@/common/variables';
+import { ComponentProps, Dispatch, SetStateAction, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronDown,
   faChevronUp,
   faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import { getCategoryFromNumber } from "@/functions";
+} from '@fortawesome/free-solid-svg-icons';
+import { getCategoryFromNumber } from '@/functions';
 function CategoryCard({
   categories,
   setCategories,
@@ -22,7 +22,7 @@ function CategoryCard({
 }: {
   categories: number;
   setCategories: Dispatch<SetStateAction<number>>;
-} & React.HTMLProps<HTMLDivElement>) {
+} & ComponentProps<typeof Paper>) {
   const [isCollapsed, setIsCollapsed] = useState(true);
   const { t } = useTranslation();
 
@@ -51,15 +51,16 @@ function CategoryCard({
               return (
                 <li
                   className={
-                    "category-item " +
-                    (category.value & categories ? "selected" : "")
+                    'category-item ' +
+                    (category.value & categories ? 'selected' : '')
                   }
-                  key={"category" + index}
+                  key={'category' + index}
                   onClick={
                     categories & category.value
                       ? () => removeCategory(category.value)
                       : () => addCategory(category.value)
-                  }>
+                  }
+                >
                   {t(category.name)}
                 </li>
               );
@@ -76,7 +77,8 @@ function CategoryCard({
             return (
               <div
                 className='selected-category'
-                key={"selected-category" + index}>
+                key={'selected-category' + index}
+              >
                 <span>{t(category.name)}</span>
                 <FontAwesomeIcon
                   icon={faXmark}

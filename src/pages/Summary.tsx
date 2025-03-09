@@ -1,52 +1,53 @@
-import Carousel from "@/components/carousel/Carousel";
-import InfiniteScroll from "@/components/base/InfiniteScroll";
-import { useEffect, useRef, useState } from "react";
-import { DebateType, SummaryType } from "@/types/data";
-import SummaryCard from "@/components/card/SummaryCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import axios from "axios";
-import { DUMMY_SUMMARIES } from "@/common/dummy_data";
-import CarouselSummaryCard from "@/components/card/CarouselSummaryCard";
-import PopularDebateCard from "@/components/card/PopularDebateCard";
-import WriteIcon from "@/assets/images/write.svg?react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "@/stores/hooks";
-import { selectUser } from "@/stores/user";
-import useDebounce from "@/hooks/useDebounce";
-import CategoryCard from "@/components/card/CategoryCard";
-import SearchDropdown from "@/components/dropdown/SearchByDropdown";
+import Carousel from '@/components/carousel/Carousel';
+import InfiniteScroll from '@/components/base/InfiniteScroll';
+import { useEffect, useRef, useState } from 'react';
+import { DebateType, SummaryType } from '@/types/data';
+import SummaryCard from '@/components/card/SummaryCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { DUMMY_SUMMARIES } from '@/common/dummy_data';
+import CarouselSummaryCard from '@/components/card/CarouselSummaryCard';
+import PopularDebateCard from '@/components/card/PopularDebateCard';
+import WriteIcon from '@/assets/images/write.svg?react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '@/stores/hooks';
+import { selectUser } from '@/stores/user';
+import useDebounce from '@/hooks/useDebounce';
+import CategoryCard from '@/components/card/CategoryCard';
+import SearchDropdown from '@/components/dropdown/SearchByDropdown';
 
 import { isMd } from "@/functions/breakpoint";
 import { SearchBar } from "@/components/input/searchbar";
 import { MiddlePanel, RightPanel } from "@/components/panel/sidePanel";
 
+
 const searchBys: {
   name: string;
-  value: "bt" | "it";
+  value: 'bt' | 'it';
 }[] = [
   {
-    name: "page.summary.search.book-title",
-    value: "bt",
+    name: 'page.summary.search.book-title',
+    value: 'bt',
   },
   {
-    name: "page.summary.search.item-title",
-    value: "it",
+    name: 'page.summary.search.item-title',
+    value: 'it',
   },
 ];
 
 const sortBys: {
   name: string;
-  value: "latest" | "popular";
+  value: 'latest' | 'popular';
 }[] = [
   {
-    name: "page.summary.sort.latest",
-    value: "latest",
+    name: 'page.summary.sort.latest',
+    value: 'latest',
   },
   {
-    name: "page.summary.sort.popular",
-    value: "popular",
+    name: 'page.summary.sort.popular',
+    value: 'popular',
   },
 ];
 
@@ -64,7 +65,7 @@ function Summary() {
     useState<boolean>(false);
 
   const [categories, setCategories] = useState<number>(0);
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
   const debouncedSearch = useDebounce(search, 500);
@@ -73,7 +74,7 @@ function Summary() {
     debouncedSearch: string;
     searchByIdx: number;
     sortByIdx: number;
-  }>({ categories: 0, debouncedSearch: "", searchByIdx: 0, sortByIdx: 0 });
+  }>({ categories: 0, debouncedSearch: '', searchByIdx: 0, sortByIdx: 0 });
 
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
@@ -108,8 +109,8 @@ function Summary() {
           await axios
             .get(
               `/api/debates/like?${items
-                .map((item) => "ids=" + item.id)
-                .join("&")}`
+                .map((item) => 'ids=' + item.id)
+                .join('&')}`
             )
             .then(
               (res) => {
@@ -131,14 +132,15 @@ function Summary() {
     <div id='summary-page'>
       <div className='popular-content-container'>
         <div className='popular-content-title'>
-          {t("page.summary.title.recommend")}
+          {t('page.summary.title.recommend')}
         </div>
         <Carousel
           size={isMd() ? 3 : 1}
-          className='popular-content mx-auto md:mx-0!'>
+          className='popular-content mx-auto md:mx-0!'
+        >
           {recommendSummaries.map((summary, index) => (
             <CarouselSummaryCard
-              key={"popular-summary" + index}
+              key={'popular-summary' + index}
               summary={summary}
             />
           ))}
@@ -174,24 +176,25 @@ function Summary() {
                 {sortBys.map((sortBy, index) => {
                   return (
                     <div
-                      key={"sort-by" + index}
+                      key={'sort-by' + index}
                       className='sort-by-text'
                       style={
                         sortByIdx === index
                           ? {
-                              color: "#000080",
+                              color: '#000080',
                             }
                           : {}
                       }
-                      onClick={() => setSortByIdx(index)}>
+                      onClick={() => setSortByIdx(index)}
+                    >
                       {t(sortBy.name)}
                     </div>
                   );
                 })}
               </div>
-              <button onClick={() => navigate("/summary/create")}>
-                <span>{t("page.summary.button.write")}</span>
-                <WriteIcon className='write-icon' width={17} fill={"#ffffff"} />
+              <button onClick={() => navigate('/summary/create')}>
+                <span>{t('page.summary.button.write')}</span>
+                <WriteIcon className='write-icon' width={17} fill={'#ffffff'} />
               </button>
             </div>
             <div className='content-container'>
@@ -206,17 +209,18 @@ function Summary() {
                 likes={summaryLikes}
                 setLikes={setSummaryLikes}
                 hasNoItem={summaries.length === 0}
-                hasNoItemMessage={t("page.summary.item.no-summary-item")}
+                hasNoItemMessage={t('page.summary.item.no-summary-item')}
                 refreshCondition={
                   categories !== prevValueRef.current.categories ||
                   debouncedSearch !== prevValueRef.current.debouncedSearch ||
                   searchByIdx !== prevValueRef.current.searchByIdx ||
                   sortByIdx !== prevValueRef.current.sortByIdx
                 }
-                dependency={[prevValueRef]}>
+                dependency={[prevValueRef]}
+              >
                 {summaries.map((summary, index) => (
                   <SummaryCard
-                    key={"summary" + index}
+                    key={'summary' + index}
                     summary={summary}
                     hasLiked={summaryLikes.includes(summary.id)}
                     setHasLiked={setSummaryLikes}
@@ -228,12 +232,12 @@ function Summary() {
 
           <RightPanel className='right-container hidden lg:block'>
             <div className='right-container-title'>
-              {t("page.summary.title.popular")}
+              {t('page.summary.title.popular')}
             </div>
             <div className='right-container-content'>
               {popularDebates.map((debate, index) => (
                 <PopularDebateCard
-                  key={"debate" + index}
+                  key={'debate' + index}
                   debate={debate}
                   hasLiked={popularDebateLikes.includes(debate.id)}
                   setHasLiked={setPopularDebateLikes}

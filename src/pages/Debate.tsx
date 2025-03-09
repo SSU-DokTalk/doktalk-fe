@@ -26,54 +26,54 @@ import { SearchBar } from "@/components/input/searchbar";
 
 const searchBys: {
   name: string;
-  value: "bt" | "it";
+  value: 'bt' | 'it';
 }[] = [
   {
-    name: "page.debate.search.book-title",
-    value: "bt",
+    name: 'page.debate.search.book-title',
+    value: 'bt',
   },
   {
-    name: "page.debate.search.item-title",
-    value: "it",
+    name: 'page.debate.search.item-title',
+    value: 'it',
   },
 ];
 
 const sortBys: {
   name: string;
-  value: "latest" | "popular" | "from";
+  value: 'latest' | 'popular' | 'from';
 }[] = [
   {
-    name: "page.debate.sort.latest",
-    value: "latest",
+    name: 'page.debate.sort.latest',
+    value: 'latest',
   },
   {
-    name: "page.debate.sort.popular",
-    value: "popular",
+    name: 'page.debate.sort.popular',
+    value: 'popular',
   },
   {
-    name: "page.debate.sort.from",
-    value: "from",
+    name: 'page.debate.sort.from',
+    value: 'from',
   },
 ];
 
 const years = range(10 + getYear(new Date()) - 2025, 2025, 1);
 const months = [
-  "function.time.months.1",
-  "function.time.months.2",
-  "function.time.months.3",
-  "function.time.months.4",
-  "function.time.months.5",
-  "function.time.months.6",
-  "function.time.months.7",
-  "function.time.months.8",
-  "function.time.months.9",
-  "function.time.months.10",
-  "function.time.months.11",
-  "function.time.months.12",
+  'function.time.months.1',
+  'function.time.months.2',
+  'function.time.months.3',
+  'function.time.months.4',
+  'function.time.months.5',
+  'function.time.months.6',
+  'function.time.months.7',
+  'function.time.months.8',
+  'function.time.months.9',
+  'function.time.months.10',
+  'function.time.months.11',
+  'function.time.months.12',
 ];
 
 function Debate() {
-  const [recommendDebates, ..._] = useState<DebateType[]>(DUMMY_DEBATES);
+  // const [recommendDebates, ..._] = useState<DebateType[]>(DUMMY_DEBATES);
 
   const [debates, setDebates] = useState<DebateType[]>([]);
   const [debatePage, setDebatePage] = useState<number>(1);
@@ -86,7 +86,7 @@ function Debate() {
     useState<boolean>(false);
 
   const [categories, setCategories] = useState<number>(0);
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
   const [from, setFrom] = useState<Date>(new Date());
@@ -99,7 +99,7 @@ function Debate() {
     from: Date;
   }>({
     categories: 0,
-    debouncedSearch: "",
+    debouncedSearch: '',
     searchByIdx: 0,
     sortByIdx: 0,
     from: new Date(),
@@ -149,8 +149,8 @@ function Debate() {
           await axios
             .get(
               `/api/summarys/like?${items
-                .map((item) => "ids=" + item.id)
-                .join("&")}`
+                .map((item) => 'ids=' + item.id)
+                .join('&')}`
             )
             .then((res) => {
               let { data: itemLikes }: { data: number[] } = res;
@@ -202,29 +202,30 @@ function Debate() {
                 setSearchByIdx={setSearchByIdx}
               />
             </SearchBar>
-
+        
             <div className='content-header'>
               <div className='sort-by'>
                 {sortBys.map((sortBy, index) => {
                   return (
                     <div
-                      key={"sort-by" + index}
+                      key={'sort-by' + index}
                       className='sort-by-text'
                       style={
                         sortByIdx === index
                           ? {
-                              color: "#000080",
+                              color: '#000080',
                             }
                           : {}
                       }
-                      onClick={() => setSortByIdx(index)}>
+                      onClick={() => setSortByIdx(index)}
+                    >
                       {t(sortBy.name)}
-                      {sortBy.value == "from" ? (
+                      {sortBy.value == 'from' ? (
                         <DatePicker
                           selected={from}
                           onChange={(date) => setFrom(date ?? new Date())}
                           dateFormat='yyyy/MM/dd'
-                          minDate={new Date("2025-01-01")}
+                          minDate={new Date('2025-01-01')}
                           maxDate={
                             new Date(`${getYear(new Date()) + 10}-12-31`)
                           }
@@ -244,19 +245,22 @@ function Debate() {
                             <div
                               style={{
                                 margin: 10,
-                                display: "flex",
-                                justifyContent: "center",
-                              }}>
+                                display: 'flex',
+                                justifyContent: 'center',
+                              }}
+                            >
                               <button
                                 onClick={decreaseMonth}
-                                disabled={prevMonthButtonDisabled}>
-                                {"<"}
+                                disabled={prevMonthButtonDisabled}
+                              >
+                                {'<'}
                               </button>
                               <select
                                 value={getYear(date)}
                                 onChange={({ target: { value } }) =>
                                   changeYear(parseInt(value))
-                                }>
+                                }
+                              >
                                 {years.map((option) => (
                                   <option key={option} value={option}>
                                     {option}
@@ -268,7 +272,8 @@ function Debate() {
                                 value={months[getMonth(date)]}
                                 onChange={({ target: { value } }) =>
                                   changeMonth(months.indexOf(value))
-                                }>
+                                }
+                              >
                                 {months.map((option) => (
                                   <option key={option} value={option}>
                                     {t(option)}
@@ -278,8 +283,9 @@ function Debate() {
 
                               <button
                                 onClick={increaseMonth}
-                                disabled={nextMonthButtonDisabled}>
-                                {">"}
+                                disabled={nextMonthButtonDisabled}
+                              >
+                                {'>'}
                               </button>
                             </div>
                           )}
@@ -291,9 +297,10 @@ function Debate() {
               </div>
               <button
                 className='create-debate-button'
-                onClick={() => navigate("/debate/create")}>
-                <span>{t("page.debate.button.create")}</span>
-                <WriteIcon className='write-icon' width={17} fill={"#ffffff"} />
+                onClick={() => navigate('/debate/create')}
+              >
+                <span>{t('page.debate.button.create')}</span>
+                <WriteIcon className='write-icon' width={17} fill={'#ffffff'} />
               </button>
             </div>
             <div className='content-container'>
@@ -301,7 +308,7 @@ function Debate() {
                 api={`debate?category=${categories}&search=${debouncedSearch}&searchby=${
                   searchBys[searchByIdx].value
                 }&sortby=${sortBys[sortByIdx].value}${
-                  sortByIdx == 2 ? "&from_=" + getDate(from) : ""
+                  sortByIdx == 2 ? '&from_=' + getDate(from) : ''
                 }`}
                 likes_api={`debates/like`}
                 setItems={setDebates}
@@ -312,7 +319,7 @@ function Debate() {
                 likes={debateLikes}
                 setLikes={setDebateLikes}
                 hasNoItem={debates.length === 0}
-                hasNoItemMessage={t("page.debate.item.no-debate-item")}
+                hasNoItemMessage={t('page.debate.item.no-debate-item')}
                 refreshCondition={
                   categories !== prevValueRef.current.categories ||
                   debouncedSearch !== prevValueRef.current.debouncedSearch ||
@@ -320,10 +327,11 @@ function Debate() {
                   sortByIdx !== prevValueRef.current.sortByIdx ||
                   from !== prevValueRef.current.from
                 }
-                dependency={[prevValueRef]}>
+                dependency={[prevValueRef]}
+              >
                 {debates.map((debate, index) => (
                   <DebateCard
-                    key={"debate" + index}
+                    key={'debate' + index}
                     debate={debate}
                     hasLiked={debateLikes.includes(debate.id)}
                     setHasLiked={setDebateLikes}
@@ -334,12 +342,12 @@ function Debate() {
           </div>
           <div className='right-container hidden md:block'>
             <div className='right-container-title'>
-              {t("page.debate.title.popular")}
+              {t('page.debate.title.popular')}
             </div>
             <div className='right-container-content'>
               {popularSummaries.map((summary, index) => (
                 <PopularSummaryCard
-                  key={"summary" + index}
+                  key={'summary' + index}
                   summary={summary}
                   hasLiked={popularSummaryLikes.includes(summary.id)}
                   setHasLiked={setPopularSummaryLikes}

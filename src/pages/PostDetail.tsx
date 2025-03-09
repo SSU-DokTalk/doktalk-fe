@@ -1,26 +1,25 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { useNavigate, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import {
   faBars,
   faHeart as faHeartSolid,
   faPen,
   faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-import ProfileIcon from "@/components/base/ProfileIcon";
-import { useEffect, useState } from "react";
-import { PostType } from "@/types/data";
-import { getFileTypeFromUrl, getTimeDiff } from "@/functions";
-import { selectUser } from "@/stores/user";
-import { useAppSelector } from "@/stores/hooks";
-import { InitialPost } from "@/types/initialValue";
-import axios from "axios";
-import CommentSection from "../components/section/CommentSection";
-import { ACCEPTABLE_FILE, ACCEPTABLE_IMAGE } from "@/common/variables";
-import FileCard from "@/components/card/FileCard";
-import WritePostModal from "@/components/modal/WritePostModal";
+} from '@fortawesome/free-solid-svg-icons';
+import ProfileIcon from '@/components/base/ProfileIcon';
+import { useEffect, useState } from 'react';
+import { PostType } from '@/types/data';
+import { getFileTypeFromUrl, getTimeDiff } from '@/functions';
+import { selectUser } from '@/stores/user';
+import { useAppSelector } from '@/stores/hooks';
+import { InitialPost } from '@/types/initialValue';
+import axios from 'axios';
+import CommentSection from '../components/section/CommentSection';
+import { ACCEPTABLE_FILE, ACCEPTABLE_IMAGE } from '@/common/variables';
+import FileCard from '@/components/card/FileCard';
+import WritePostModal from '@/components/modal/WritePostModal';
 import {
-  Box,
   Drawer,
   IconButton,
   List,
@@ -28,7 +27,7 @@ import {
   ListItemButton,
   ListItemIcon,
   Paper,
-} from "@mui/material";
+} from '@mui/material';
 
 function PostDetail() {
   const { post_id } = useParams();
@@ -77,7 +76,7 @@ function PostDetail() {
 
   const doDelete = () => {
     axios.delete(`/api/post/${post.id}`).then(() => {
-      navigate("/");
+      navigate('/');
     });
   };
 
@@ -111,7 +110,8 @@ function PostDetail() {
                 <div className='for-mobile md:hidden'>
                   <IconButton
                     className='drawer-button md:hidden!'
-                    onClick={() => setDrawerOpen(true)}>
+                    onClick={() => setDrawerOpen(true)}
+                  >
                     <FontAwesomeIcon icon={faBars} />
                   </IconButton>
                   <Drawer
@@ -120,9 +120,10 @@ function PostDetail() {
                     onClose={() => setDrawerOpen(false)}
                     PaperProps={{
                       sx: {
-                        bgcolor: "transparent",
+                        bgcolor: 'transparent',
                       },
-                    }}>
+                    }}
+                  >
                     <Paper className='rounded-t-2xl!'>
                       <hr className='w-15 h-1 mx-auto my-4 bg-gray-100 border-0 rounded-sm dark:bg-gray-700' />
                       <p className='text-center'>게시글 옵션</p>
@@ -130,7 +131,8 @@ function PostDetail() {
                         <ListItem>
                           <ListItemButton
                             className='edit'
-                            onClick={() => setShowModal(true)}>
+                            onClick={() => setShowModal(true)}
+                          >
                             <ListItemIcon>
                               <FontAwesomeIcon icon={faPen} />
                             </ListItemIcon>
@@ -164,7 +166,7 @@ function PostDetail() {
               .map((file, idx) => {
                 return (
                   <img
-                    key={"img" + idx}
+                    key={'img' + idx}
                     className='content__image'
                     src={file.url}
                     alt='content'
@@ -180,7 +182,7 @@ function PostDetail() {
               .map((file, idx) => {
                 return (
                   <FileCard
-                    key={"file" + idx}
+                    key={'file' + idx}
                     file={file}
                     className='content__file'
                   />
