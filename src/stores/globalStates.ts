@@ -1,5 +1,5 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "@/stores/store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '@/stores/store';
 
 export interface GlobalStateType {
   isFollowerUpdated?: boolean;
@@ -12,7 +12,7 @@ const initialState: GlobalStateType = {
 };
 
 export const globalStateSlice = createSlice({
-  name: "globalState",
+  name: 'globalState',
   initialState,
   reducers: {
     updateGlobalState: (state, action: PayloadAction<GlobalStateType>) => {

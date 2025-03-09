@@ -3,18 +3,18 @@ import {
   Accordion,
   AccordionDetails,
   AccordionSummary,
-} from "@mui/material";
+} from '@mui/material';
 
-import { CATEGORY } from "@/common/variables";
-import { ComponentProps, Dispatch, SetStateAction, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CATEGORY } from '@/common/variables';
+import { ComponentProps, Dispatch, SetStateAction, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronDown,
   faChevronUp,
   faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import { getCategoryFromNumber } from "@/functions";
+} from '@fortawesome/free-solid-svg-icons';
+import { getCategoryFromNumber } from '@/functions';
 function CategoryCard({
   categories,
   setCategories,
@@ -35,8 +35,8 @@ function CategoryCard({
   };
 
   return (
-    <Paper id="category-card" className="accordion" {...props}>
-      <Accordion className="accordion-item">
+    <Paper id='category-card' className='accordion' {...props}>
+      <Accordion className='accordion-item'>
         <AccordionSummary onClick={() => setIsCollapsed((prev) => !prev)}>
           <span>카테고리 선택</span>
           {isCollapsed ? (
@@ -46,15 +46,15 @@ function CategoryCard({
           )}
         </AccordionSummary>
         <AccordionDetails>
-          <ul className="category-list">
+          <ul className='category-list'>
             {Object.entries(CATEGORY).map(([_, category], index) => {
               return (
                 <li
                   className={
-                    "category-item " +
-                    (category.value & categories ? "selected" : "")
+                    'category-item ' +
+                    (category.value & categories ? 'selected' : '')
                   }
-                  key={"category" + index}
+                  key={'category' + index}
                   onClick={
                     categories & category.value
                       ? () => removeCategory(category.value)
@@ -69,15 +69,15 @@ function CategoryCard({
         </AccordionDetails>
       </Accordion>
 
-      <div className="selected-category-container">
+      <div className='selected-category-container'>
         {categories == 0 ? (
-          <div className="no-category">선택한 카테고리가 없습니다.</div>
+          <div className='no-category'>선택한 카테고리가 없습니다.</div>
         ) : (
           getCategoryFromNumber(categories).map((category, index) => {
             return (
               <div
-                className="selected-category"
-                key={"selected-category" + index}
+                className='selected-category'
+                key={'selected-category' + index}
               >
                 <span>{t(category.name)}</span>
                 <FontAwesomeIcon

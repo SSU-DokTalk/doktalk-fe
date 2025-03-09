@@ -1,19 +1,19 @@
-import { Outlet } from "react-router-dom";
-import Topnav from "@/components/navigation/Topnav";
+import { Outlet } from 'react-router-dom';
+import Topnav from '@/components/navigation/Topnav';
 
 function BasicLayout() {
   return (
     <div
       style={{
-        width: "100%",
+        width: '100%',
       }}
     >
       <Topnav />
       <Outlet />
       <div
-        className="footer"
+        className='footer'
         style={{
-          height: "70px",
+          height: '70px',
         }}
       />
     </div>

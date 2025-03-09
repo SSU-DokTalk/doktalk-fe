@@ -1,8 +1,8 @@
-import { Outlet } from "react-router-dom";
-import FloatingUserProfile from "../components/floating/FloatingUserProfile";
-import { useEffect } from "react";
-import { updateGlobalState } from "@/stores/globalStates";
-import { useAppDispatch } from "@/stores/hooks";
+import { Outlet } from 'react-router-dom';
+import FloatingUserProfile from '../components/floating/FloatingUserProfile';
+import { useEffect } from 'react';
+import { updateGlobalState } from '@/stores/globalStates';
+import { useAppDispatch } from '@/stores/hooks';
 
 function ContentMainLayout({ children }: { children?: React.ReactNode }) {
   const dispatch = useAppDispatch();

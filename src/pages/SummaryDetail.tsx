@@ -1,31 +1,31 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useNavigate, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
-import { faHeart as faHeartRegular } from "@fortawesome/free-regular-svg-icons";
+import { faHeart as faHeartRegular } from '@fortawesome/free-regular-svg-icons';
 import {
   faBars,
   faHeart as faHeartSolid,
   faPen,
   faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons/faCartPlus";
-import ProfileIcon from "@/components/base/ProfileIcon";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { PaymentType, SummaryType } from "@/types/data";
+} from '@fortawesome/free-solid-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
+import ProfileIcon from '@/components/base/ProfileIcon';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { PaymentType, SummaryType } from '@/types/data';
 import {
   getCategoryFromNumber,
   getFileTypeFromUrl,
   getTimeDiff,
-} from "@/functions";
-import Image from "@/components/base/Image";
-import { selectUser } from "@/stores/user";
-import { useAppSelector } from "@/stores/hooks";
-import { InitialSummary } from "@/types/initialValue";
-import CommentSection from "../components/section/CommentSection";
-import { useTranslation } from "react-i18next";
-import { ACCEPTABLE_FILE, ACCEPTABLE_IMAGE } from "@/common/variables";
-import FileCard from "@/components/card/FileCard";
+} from '@/functions';
+import Image from '@/components/base/Image';
+import { selectUser } from '@/stores/user';
+import { useAppSelector } from '@/stores/hooks';
+import { InitialSummary } from '@/types/initialValue';
+import CommentSection from '../components/section/CommentSection';
+import { useTranslation } from 'react-i18next';
+import { ACCEPTABLE_FILE, ACCEPTABLE_IMAGE } from '@/common/variables';
+import FileCard from '@/components/card/FileCard';
 import {
   Drawer,
   IconButton,
@@ -34,7 +34,7 @@ import {
   ListItemButton,
   ListItemIcon,
   Paper,
-} from "@mui/material";
+} from '@mui/material';
 
 function SummaryDetail() {
   const { summary_id } = useParams();
@@ -59,7 +59,7 @@ function SummaryDetail() {
   };
 
   useEffect(() => {
-    if (parseInt(summary_id ?? "0") == 0) return;
+    if (parseInt(summary_id ?? '0') == 0) return;
     axios.get(`/api/summary/${summary_id}`).then((res) => {
       let { data }: { data: SummaryType } = res;
       setSummary(data);
@@ -76,7 +76,7 @@ function SummaryDetail() {
         setHasLiked(data[0]);
       });
 
-    getPurchase(parseInt(summary_id ?? "0"));
+    getPurchase(parseInt(summary_id ?? '0'));
   }, [summary_id, purchaseId]);
 
   const doPurchase = () => {
@@ -84,14 +84,14 @@ function SummaryDetail() {
     // 현재는 결제 API가 없으므로 무조건 성공으로 가정
     axios
       .post(`/api/purchase`, {
-        product_type: "S",
+        product_type: 'S',
         product_id: summary.id,
-        content: "요약 구매",
+        content: '요약 구매',
         price: summary.price,
         quantity: 1,
       })
       .then(() => {
-        getPurchase(parseInt(summary_id ?? "0"));
+        getPurchase(parseInt(summary_id ?? '0'));
       });
   };
 
@@ -117,7 +117,7 @@ function SummaryDetail() {
 
   const doDelete = () => {
     axios.delete(`/api/summary/${summary.id}`).then(() => {
-      navigate("/summary");
+      navigate('/summary');
     });
   };
 
@@ -143,7 +143,8 @@ function SummaryDetail() {
                 <div className='for-mobile md:hidden'>
                   <IconButton
                     className='drawer-button md:hidden!'
-                    onClick={() => setDrawerOpen(true)}>
+                    onClick={() => setDrawerOpen(true)}
+                  >
                     <FontAwesomeIcon icon={faBars} />
                   </IconButton>
                   <Drawer
@@ -152,9 +153,10 @@ function SummaryDetail() {
                     onClose={() => setDrawerOpen(false)}
                     PaperProps={{
                       sx: {
-                        bgcolor: "transparent",
+                        bgcolor: 'transparent',
                       },
-                    }}>
+                    }}
+                  >
                     <Paper className='rounded-t-2xl!'>
                       <hr className='w-15 h-1 mx-auto my-4 bg-gray-100 border-0 rounded-sm dark:bg-gray-700' />
                       <p className='text-center'>게시글 옵션</p>
@@ -162,7 +164,8 @@ function SummaryDetail() {
                         <ListItem>
                           <ListItemButton
                             className='edit'
-                            onClick={() => alert("미구현입니당")}>
+                            onClick={() => alert('미구현입니당')}
+                          >
                             <ListItemIcon>
                               <FontAwesomeIcon icon={faPen} />
                             </ListItemIcon>
@@ -193,7 +196,7 @@ function SummaryDetail() {
               <div className='content'>
                 {getCategoryFromNumber(summary.category)
                   .map((category) => t(category.name))
-                  .join(", ")}
+                  .join(', ')}
               </div>
             </div>
             <div className='item'>
@@ -225,7 +228,7 @@ function SummaryDetail() {
                     onClick={() => cancelPurchase()} // 결제 테스트용
                   >
                     <FontAwesomeIcon icon={faCartPlus} />
-                    {""} 찜
+                    {''} 찜
                   </button>
                   <button
                     className='box purchase'
@@ -249,7 +252,7 @@ function SummaryDetail() {
               .map((file, idx) => {
                 return (
                   <img
-                    key={"img" + idx}
+                    key={'img' + idx}
                     className='content__image'
                     src={file.url}
                     alt='content'
@@ -265,7 +268,7 @@ function SummaryDetail() {
               .map((file, idx) => {
                 return (
                   <FileCard
-                    key={"file" + idx}
+                    key={'file' + idx}
                     file={file}
                     className='content__file'
                   />

@@ -1,5 +1,5 @@
-import UserIcon from "@/assets/images/profile.svg?react";
-import { useState } from "react";
+import UserIcon from '@/assets/images/profile.svg?react';
+import { useState } from 'react';
 
 function ProfileIcon({
   profile = undefined,
@@ -18,28 +18,28 @@ function ProfileIcon({
         width: `${size}px`,
         height: `${size}px`,
         flexShrink: 0,
-        borderRadius: "50%",
+        borderRadius: '50%',
       }}
     >
-      {profile == undefined || profile == "" || error ? (
+      {profile == undefined || profile == '' || error ? (
         <UserIcon
           style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "50%",
-            objectFit: "cover",
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            objectFit: 'cover',
             aspectRatio: 1,
           }}
         />
       ) : (
         <img
           src={profile}
-          alt="Profile Icon"
+          alt='Profile Icon'
           style={{
-            width: "100%",
-            height: "100%",
-            borderRadius: "50%",
-            objectFit: "cover",
+            width: '100%',
+            height: '100%',
+            borderRadius: '50%',
+            objectFit: 'cover',
             aspectRatio: 1,
           }}
           onError={() => setError(true)}
