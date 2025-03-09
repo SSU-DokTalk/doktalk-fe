@@ -1,306 +1,306 @@
-@use "../variables";
+@use '../variables';
 
 #friend-list-modal {
-  .MuiDialog-paper {
-    width: 471px;
-    border-radius: 20px;
+    .MuiDialog-paper {
+        width: 471px;
+        border-radius: 20px;
 
-    .MuiDialogTitle-root {
-      flex: 1;
-      margin-left: 42px;
-      text-align: center;
-      color: black;
-      font-size: 25px;
-      font-weight: 400;
-      strong {
-        font-weight: 600;
-      }
-    }
-    .btn-close {
-      margin-top: 5px;
-      margin-right: 10px;
-    }
-
-    .MuiDialogContent-root {
-      .friend-info {
-        display: flex;
-        justify-content: space-around;
-        text-align: center;
-        color: black;
-
-        .info {
-          margin-bottom: 0;
-          font-weight: 600;
-          width: 80px;
-          font-size: 20px;
-          cursor: pointer;
-        }
-        .current {
-          color: variables.$brand-color1;
-          border-bottom: 3px solid variables.$brand-color1;
-        }
-        .number {
-          font-size: 15px;
-        }
-        border-bottom: 1px solid variables.$brand-color4;
-      }
-      .friend-list {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
-        margin-bottom: 25px;
-        max-height: 300px;
-        overflow: scroll;
-
-        .friend-container {
-          width: 234px;
-          display: flex;
-          align-items: center;
-          justify-content: space-between;
-          margin-top: 30px;
-
-          .left-container {
-            display: flex;
-            align-items: center;
-
-            .friend-profile-icon {
-              width: 54px;
-              height: 54px;
-              border-radius: 50%;
-              object-fit: cover;
+        .MuiDialogTitle-root {
+            flex: 1;
+            margin-left: 42px;
+            text-align: center;
+            color: black;
+            font-size: 25px;
+            font-weight: 400;
+            strong {
+                font-weight: 600;
             }
-            .friend-name {
-              margin-left: 12px;
-              font-size: 15px;
-              font-weight: 600;
-              color: black;
-            }
-          }
-          .right-container {
-            .delete-friend-button-container {
-              justify-self: flex-end;
-              .delete-friend-button {
-                width: 77px;
-                height: 30px;
-                background-color: white;
-                border: 1px solid variables.$brand-color4;
-                border-radius: 10px;
-                color: variables.$brand-color5;
-                font-size: 15px;
-                font-weight: 400;
-              }
-            }
-          }
         }
-      }
+        .btn-close {
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+
+        .MuiDialogContent-root {
+            .friend-info {
+                display: flex;
+                justify-content: space-around;
+                text-align: center;
+                color: black;
+
+                .info {
+                    margin-bottom: 0;
+                    font-weight: 600;
+                    width: 80px;
+                    font-size: 20px;
+                    cursor: pointer;
+                }
+                .current {
+                    color: variables.$brand-color1;
+                    border-bottom: 3px solid variables.$brand-color1;
+                }
+                .number {
+                    font-size: 15px;
+                }
+                border-bottom: 1px solid variables.$brand-color4;
+            }
+            .friend-list {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                width: 100%;
+                margin-bottom: 25px;
+                max-height: 300px;
+                overflow: scroll;
+
+                .friend-container {
+                    width: 234px;
+                    display: flex;
+                    align-items: center;
+                    justify-content: space-between;
+                    margin-top: 30px;
+
+                    .left-container {
+                        display: flex;
+                        align-items: center;
+
+                        .friend-profile-icon {
+                            width: 54px;
+                            height: 54px;
+                            border-radius: 50%;
+                            object-fit: cover;
+                        }
+                        .friend-name {
+                            margin-left: 12px;
+                            font-size: 15px;
+                            font-weight: 600;
+                            color: black;
+                        }
+                    }
+                    .right-container {
+                        .delete-friend-button-container {
+                            justify-self: flex-end;
+                            .delete-friend-button {
+                                width: 77px;
+                                height: 30px;
+                                background-color: white;
+                                border: 1px solid variables.$brand-color4;
+                                border-radius: 10px;
+                                color: variables.$brand-color5;
+                                font-size: 15px;
+                                font-weight: 400;
+                            }
+                        }
+                    }
+                }
+            }
+        }
     }
-  }
 }
 
 #edit-profile-modal {
-  .MuiDialog-paper {
-    width: 471px;
-    border-radius: 20px;
-    .MuiDialogTitle-root {
-      flex: 1;
-      text-align: center;
-      color: black;
-      font-size: 25px;
-      font-weight: 600;
-    }
-    .btn-close {
-      margin-top: 5px;
-      margin-right: 10px;
-    }
-    .MuiDialogContent-root {
-      .profile-image-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        .profile-image {
-          width: 176px;
-          height: 176px;
-          border-radius: 50%;
-          object-fit: cover;
-        }
-        .profile-image-button-container {
-          margin-top: 20px;
-          display: flex;
-          flex-direction: column;
-          .profile-image-input {
-            display: none;
-          }
-          .profile-image-button {
-            width: 205px;
-            height: 36px;
-            border-radius: 10px;
-            font-size: 20px;
-            font-weight: 600;
-            margin-bottom: 5px;
-            border: none;
-            background-color: white;
-          }
-          .image-upload {
-            background-color: variables.$brand-color1;
-            color: white;
-          }
-          .image-delete {
-            border: 1px solid variables.$brand-color1;
-          }
-        }
-      }
-      .user-info-container {
-        margin-top: 30px;
-        .attribute-container {
-          display: flex;
-          margin: 5px 0 10px;
-
-          .attribute {
-            flex: 2;
-            margin-top: 14px;
-            margin-right: 17px;
-            text-align: end;
-            font-size: 20px;
-            font-weight: 600;
+    .MuiDialog-paper {
+        width: 471px;
+        border-radius: 20px;
+        .MuiDialogTitle-root {
+            flex: 1;
+            text-align: center;
             color: black;
-          }
-          input,
-          textarea {
-            flex: 7;
-            border: 1px solid variables.$brand-color4;
-            border-radius: 10px;
-            padding-left: 15px;
-            font-size: 20px;
-            font-weight: 400;
-
-            &::placeholder {
-              color: variables.$brand-color5;
+            font-size: 25px;
+            font-weight: 600;
+        }
+        .btn-close {
+            margin-top: 5px;
+            margin-right: 10px;
+        }
+        .MuiDialogContent-root {
+            .profile-image-container {
+                display: flex;
+                flex-direction: column;
+                align-items: center;
+                .profile-image {
+                    width: 176px;
+                    height: 176px;
+                    border-radius: 50%;
+                    object-fit: cover;
+                }
+                .profile-image-button-container {
+                    margin-top: 20px;
+                    display: flex;
+                    flex-direction: column;
+                    .profile-image-input {
+                        display: none;
+                    }
+                    .profile-image-button {
+                        width: 205px;
+                        height: 36px;
+                        border-radius: 10px;
+                        font-size: 20px;
+                        font-weight: 600;
+                        margin-bottom: 5px;
+                        border: none;
+                        background-color: white;
+                    }
+                    .image-upload {
+                        background-color: variables.$brand-color1;
+                        color: white;
+                    }
+                    .image-delete {
+                        border: 1px solid variables.$brand-color1;
+                    }
+                }
             }
-          }
-          textarea {
-            padding-top: 10px;
-          }
-          .nickname {
-            height: 54px;
-          }
-          .introduction {
-            height: 174px;
-            resize: none;
-          }
+            .user-info-container {
+                margin-top: 30px;
+                .attribute-container {
+                    display: flex;
+                    margin: 5px 0 10px;
+
+                    .attribute {
+                        flex: 2;
+                        margin-top: 14px;
+                        margin-right: 17px;
+                        text-align: end;
+                        font-size: 20px;
+                        font-weight: 600;
+                        color: black;
+                    }
+                    input,
+                    textarea {
+                        flex: 7;
+                        border: 1px solid variables.$brand-color4;
+                        border-radius: 10px;
+                        padding-left: 15px;
+                        font-size: 20px;
+                        font-weight: 400;
+
+                        &::placeholder {
+                            color: variables.$brand-color5;
+                        }
+                    }
+                    textarea {
+                        padding-top: 10px;
+                    }
+                    .nickname {
+                        height: 54px;
+                    }
+                    .introduction {
+                        height: 174px;
+                        resize: none;
+                    }
+                }
+            }
+            .submit-button-container {
+                display: flex;
+                .submit-button-offset {
+                    flex: 2;
+                    margin-right: 17px;
+                }
+                .submit-user-info {
+                    flex: 7;
+                    margin-top: 30px;
+                    height: 54px;
+                    background-color: variables.$brand-color1;
+                    border-radius: 10px;
+                    color: white;
+                    font-size: 20px;
+                    font-weight: 600;
+                }
+            }
         }
-      }
-      .submit-button-container {
-        display: flex;
-        .submit-button-offset {
-          flex: 2;
-          margin-right: 17px;
-        }
-        .submit-user-info {
-          flex: 7;
-          margin-top: 30px;
-          height: 54px;
-          background-color: variables.$brand-color1;
-          border-radius: 10px;
-          color: white;
-          font-size: 20px;
-          font-weight: 600;
-        }
-      }
     }
-  }
 }
 
 #write-post-modal {
-  .MuiDialog-paper {
-    max-width: 700px;
-    border-radius: 20px;
+    .MuiDialog-paper {
+        max-width: 700px;
+        border-radius: 20px;
 
-    .MuiDialogTitle-root {
-      flex: 1;
-      margin-left: 42px;
-      text-align: center;
-      color: black;
-      font-size: 25px;
-      font-weight: 400;
-      strong {
-        font-weight: 600;
-      }
-    }
-    .btn-close {
-      margin-top: 5px;
-      margin-right: 10px;
-    }
-
-    .MuiDialogContent-root {
-      display: flex;
-      justify-content: center;
-
-      .post-container {
-        width: 450px;
-
-        .post-title-container {
-          height: 54px;
-          border: 1px solid variables.$brand-color4;
-          border-radius: 10px;
-          display: flex;
-          align-items: center;
-          padding: 0 20px;
-          margin-bottom: 16px;
-          .post-title {
-            font-size: 20px;
+        .MuiDialogTitle-root {
+            flex: 1;
+            margin-left: 42px;
+            text-align: center;
+            color: black;
+            font-size: 25px;
             font-weight: 400;
-            width: 100%;
-            border: none;
-          }
-        }
-        .post-files-container {
-          #upload-files {
-            .upload-button {
-              width: 140px;
-              height: 45px;
-              font-size: 15px;
+            strong {
+                font-weight: 600;
             }
-          }
         }
-        .post-content-container {
-          margin-top: 10px;
-          height: 40vh;
-          .post-content {
-            width: 100%;
-            height: 100%;
-            border: 1px solid variables.$brand-color4;
-            border-radius: 10px;
-            padding: 20px 25px;
-            font-size: 15px;
-            font-weight: 400;
-            resize: none;
-          }
+        .btn-close {
+            margin-top: 5px;
+            margin-right: 10px;
         }
-        .button-container {
-          margin-top: 20px;
-          display: flex;
-          justify-content: end;
-          button {
-            width: 120px;
-            height: 45px;
-            border-radius: 10px;
-            font-size: 20px;
-            font-weight: 400;
-            margin-left: 15px;
-          }
-          .temporary-save-button {
-            color: variables.$brand-color1;
-            background-color: white;
-            border: 1px solid variables.$brand-color1;
-          }
-          .post-button {
-            color: white;
-            background-color: variables.$brand-color1;
-            border: none;
-          }
+
+        .MuiDialogContent-root {
+            display: flex;
+            justify-content: center;
+
+            .post-container {
+                width: 450px;
+
+                .post-title-container {
+                    height: 54px;
+                    border: 1px solid variables.$brand-color4;
+                    border-radius: 10px;
+                    display: flex;
+                    align-items: center;
+                    padding: 0 20px;
+                    margin-bottom: 16px;
+                    .post-title {
+                        font-size: 20px;
+                        font-weight: 400;
+                        width: 100%;
+                        border: none;
+                    }
+                }
+                .post-files-container {
+                    #upload-files {
+                        .upload-button {
+                            width: 140px;
+                            height: 45px;
+                            font-size: 15px;
+                        }
+                    }
+                }
+                .post-content-container {
+                    margin-top: 10px;
+                    height: 40vh;
+                    .post-content {
+                        width: 100%;
+                        height: 100%;
+                        border: 1px solid variables.$brand-color4;
+                        border-radius: 10px;
+                        padding: 20px 25px;
+                        font-size: 15px;
+                        font-weight: 400;
+                        resize: none;
+                    }
+                }
+                .button-container {
+                    margin-top: 20px;
+                    display: flex;
+                    justify-content: end;
+                    button {
+                        width: 120px;
+                        height: 45px;
+                        border-radius: 10px;
+                        font-size: 20px;
+                        font-weight: 400;
+                        margin-left: 15px;
+                    }
+                    .temporary-save-button {
+                        color: variables.$brand-color1;
+                        background-color: white;
+                        border: 1px solid variables.$brand-color1;
+                    }
+                    .post-button {
+                        color: white;
+                        background-color: variables.$brand-color1;
+                        border: none;
+                    }
+                }
+            }
         }
-      }
     }
-  }
 }

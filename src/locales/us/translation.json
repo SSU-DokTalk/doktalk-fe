@@ -1,240 +1,240 @@
 {
-  "var": {
-    "category": {
-      "POLITICS": "Politics/Society",
-      "HUMANITIES": "Humanities",
-      "ECONOMY": "Economy/Management",
-      "HISTORY": "History/Culture",
-      "SCIENCE": "Science(IT/Technology)",
-      "ESSAY": "Essay",
-      "TEENAGER": "Teenager",
-      "CHILD": "Child",
-      "WEBTOON": "Webtoon"
-    }
-  },
-  "function": {
-    "time": {
-      "ago": " ago",
-      "now": "now",
-      "second": "s",
-      "minute": "m",
-      "hour": "h",
-      "day": "d",
-      "week": "w",
-      "month": "m",
-      "year": "y",
-      "months": {
-        "1": "Jan",
-        "2": "Feb",
-        "3": "Mar",
-        "4": "Apr",
-        "5": "May",
-        "6": "Jun",
-        "7": "Jul",
-        "8": "Aug",
-        "9": "Sep",
-        "10": "Oct",
-        "11": "Nov",
-        "12": "Dec"
-      }
-    }
-  },
-  "component": {
-    "floating": {
-      "text": {
-        "login": "Login",
-        "follower": "Follower",
-        "following": "Following",
-        "my-activity": "My Activity",
-        "likes": "Likes",
-        "post": "My Post",
-        "summary": "My Summary",
-        "shopping-cart": "Shopping Cart",
-        "debate": "Participating Debate",
-        "library": "Library"
-      }
-    },
-    "topnav": {
-      "main-page": "Community",
-      "debate": "Debate",
-      "summary": "Summary",
-      "search": "Explore",
-      "search-bar": {
-        "placeholder": "Find out your interests!"
-      },
-      "user": {
-        "postfix": ""
-      },
-      "dropdown": {
-        "mypage": "Mypage",
-        "my-activity": "My Activity",
-        "settings": "Settings",
-        "logout": "Logout"
-      },
-      "register": "Register",
-      "login": "Login"
-    },
-    "card": {
-      "write-post": {
-        "placeholder": "Write your post!"
-      },
-      "book": {
-        "button": {
-          "add-to-library": "Add to Library",
-          "remove-from-library": "Remove from Library",
-          "in-library-num": "In Library"
+    "var": {
+        "category": {
+            "POLITICS": "Politics/Society",
+            "HUMANITIES": "Humanities",
+            "ECONOMY": "Economy/Management",
+            "HISTORY": "History/Culture",
+            "SCIENCE": "Science(IT/Technology)",
+            "ESSAY": "Essay",
+            "TEENAGER": "Teenager",
+            "CHILD": "Child",
+            "WEBTOON": "Webtoon"
         }
-      }
     },
-    "section": {
-      "profile": {
-        "button": {
-          "edit-profile": "Edit Profile",
-          "follow": "Follow",
-          "unfollow": "Unfollow"
-        },
-        "text": {
-          "follower-prefix": "",
-          "follower-postfix": " follower",
-          "following-prefix": "",
-          "following-postfix": " following",
-          "no-introduction": "No introduction."
-        },
-        "tab": {
-          "my-tab": {
-            "post": "Post",
-            "summary": "My Summary",
-            "library": "My Library",
-            "debate": "Debate",
-            "payment": "Payment"
-          },
-          "user-tab": {
-            "post": "Post",
-            "library": "Library"
-          }
-        }
-      },
-      "profile-tab-details": {
-        "item": {
-          "no-post-item": "There is no post item",
-          "no-summary-item": "There is no summary item",
-          "no-library-item": "There is no book in the library",
-          "no-debate-item": "There is no participating debate room",
-          "no-payment-item": "There is no payment item",
-          "no-book-item": "There is no book",
-          "currently-reading-book-prefix": "Currently reading",
-          "currently-reading-book-postfix": " books",
-          "currently-reading-summary-prefix": "Currently reading",
-          "currently-reading-summary-postfix": " summaries",
-          "show-more": "Show more",
-          "currency": "$"
-        },
-        "go-to": {
-          "search": "Go to search books to add to your library",
-          "summary": "Go to explore summary"
-        },
+    "function": {
         "time": {
-          "year": "",
-          "month": {
-            "1": "Jan",
-            "2": "Feb",
-            "3": "Mar",
-            "4": "Apr",
-            "5": "May",
-            "6": "Jun",
-            "7": "Jul",
-            "8": "Aug",
-            "9": "Sep",
-            "10": "Oct",
-            "11": "Nov",
-            "12": "Dec"
-          }
+            "ago": " ago",
+            "now": "now",
+            "second": "s",
+            "minute": "m",
+            "hour": "h",
+            "day": "d",
+            "week": "w",
+            "month": "m",
+            "year": "y",
+            "months": {
+                "1": "Jan",
+                "2": "Feb",
+                "3": "Mar",
+                "4": "Apr",
+                "5": "May",
+                "6": "Jun",
+                "7": "Jul",
+                "8": "Aug",
+                "9": "Sep",
+                "10": "Oct",
+                "11": "Nov",
+                "12": "Dec"
+            }
         }
-      }
+    },
+    "component": {
+        "floating": {
+            "text": {
+                "login": "Login",
+                "follower": "Follower",
+                "following": "Following",
+                "my-activity": "My Activity",
+                "likes": "Likes",
+                "post": "My Post",
+                "summary": "My Summary",
+                "shopping-cart": "Shopping Cart",
+                "debate": "Participating Debate",
+                "library": "Library"
+            }
+        },
+        "topnav": {
+            "main-page": "Community",
+            "debate": "Debate",
+            "summary": "Summary",
+            "search": "Explore",
+            "search-bar": {
+                "placeholder": "Find out your interests!"
+            },
+            "user": {
+                "postfix": ""
+            },
+            "dropdown": {
+                "mypage": "Mypage",
+                "my-activity": "My Activity",
+                "settings": "Settings",
+                "logout": "Logout"
+            },
+            "register": "Register",
+            "login": "Login"
+        },
+        "card": {
+            "write-post": {
+                "placeholder": "Write your post!"
+            },
+            "book": {
+                "button": {
+                    "add-to-library": "Add to Library",
+                    "remove-from-library": "Remove from Library",
+                    "in-library-num": "In Library"
+                }
+            }
+        },
+        "section": {
+            "profile": {
+                "button": {
+                    "edit-profile": "Edit Profile",
+                    "follow": "Follow",
+                    "unfollow": "Unfollow"
+                },
+                "text": {
+                    "follower-prefix": "",
+                    "follower-postfix": " follower",
+                    "following-prefix": "",
+                    "following-postfix": " following",
+                    "no-introduction": "No introduction."
+                },
+                "tab": {
+                    "my-tab": {
+                        "post": "Post",
+                        "summary": "My Summary",
+                        "library": "My Library",
+                        "debate": "Debate",
+                        "payment": "Payment"
+                    },
+                    "user-tab": {
+                        "post": "Post",
+                        "library": "Library"
+                    }
+                }
+            },
+            "profile-tab-details": {
+                "item": {
+                    "no-post-item": "There is no post item",
+                    "no-summary-item": "There is no summary item",
+                    "no-library-item": "There is no book in the library",
+                    "no-debate-item": "There is no participating debate room",
+                    "no-payment-item": "There is no payment item",
+                    "no-book-item": "There is no book",
+                    "currently-reading-book-prefix": "Currently reading",
+                    "currently-reading-book-postfix": " books",
+                    "currently-reading-summary-prefix": "Currently reading",
+                    "currently-reading-summary-postfix": " summaries",
+                    "show-more": "Show more",
+                    "currency": "$"
+                },
+                "go-to": {
+                    "search": "Go to search books to add to your library",
+                    "summary": "Go to explore summary"
+                },
+                "time": {
+                    "year": "",
+                    "month": {
+                        "1": "Jan",
+                        "2": "Feb",
+                        "3": "Mar",
+                        "4": "Apr",
+                        "5": "May",
+                        "6": "Jun",
+                        "7": "Jul",
+                        "8": "Aug",
+                        "9": "Sep",
+                        "10": "Oct",
+                        "11": "Nov",
+                        "12": "Dec"
+                    }
+                }
+            }
+        }
+    },
+    "page": {
+        "landing": {
+            "title": {
+                "post": "Post",
+                "popular-summary": "Popular Summaries",
+                "recommend-prefix": "Recommended Debate Rooms ",
+                "recommend-postfix": "",
+                "for-you-prefix": "For ",
+                "for-you-postfix": ""
+            },
+            "item": {
+                "no-post-item": "There is no post item",
+                "no-summary-item": "There is no summary item"
+            }
+        },
+        "login": {
+            "email": "email",
+            "password": "password",
+            "login": "Login",
+            "keep-login": "Keep Login",
+            "save-id": "Save ID",
+            "find-id": "Find ID",
+            "find-password": "Find Password",
+            "social-login-text": "Social Login",
+            "register": "Register"
+        },
+        "debate": {
+            "title": {
+                "recommend": "Recommended Debate Rooms",
+                "popular": "Popular Summaries"
+            },
+            "search": {
+                "book-title": "Book Title",
+                "item-title": "Room Title",
+                "placeholder": "Search for debate rooms!"
+            },
+            "sort": {
+                "latest": "Latest",
+                "popular": "Popular",
+                "from": "From"
+            },
+            "button": {
+                "create": "Create"
+            },
+            "item": {
+                "no-debate-item": "There is no debate item",
+                "no-summary-item": "There is no summary item"
+            }
+        },
+        "summary": {
+            "title": {
+                "recommend": "Recommended Summaries",
+                "popular": "Popular Debate Rooms"
+            },
+            "search": {
+                "book-title": "Book Title",
+                "item-title": "Summary Title",
+                "placeholder": "Search for summaries!"
+            },
+            "sort": {
+                "latest": "Latest",
+                "popular": "Popular"
+            },
+            "button": {
+                "write": "Write"
+            },
+            "item": {
+                "no-summary-item": "There is no summary item",
+                "no-debate-item": "There is no debate item"
+            }
+        },
+        "search": {
+            "title": {
+                "page": "Search Books"
+            },
+            "sort": {
+                "latest": "Latest",
+                "popular": "Popular"
+            },
+            "search": {
+                "placeholder": "Search for books!"
+            }
+        }
     }
-  },
-  "page": {
-    "landing": {
-      "title": {
-        "post": "Post",
-        "popular-summary": "Popular Summaries",
-        "recommend-prefix": "Recommended Debate Rooms ",
-        "recommend-postfix": "",
-        "for-you-prefix": "For ",
-        "for-you-postfix": ""
-      },
-      "item": {
-        "no-post-item": "There is no post item",
-        "no-summary-item": "There is no summary item"
-      }
-    },
-    "login": {
-      "email": "email",
-      "password": "password",
-      "login": "Login",
-      "keep-login": "Keep Login",
-      "save-id": "Save ID",
-      "find-id": "Find ID",
-      "find-password": "Find Password",
-      "social-login-text": "Social Login",
-      "register": "Register"
-    },
-    "debate": {
-      "title": {
-        "recommend": "Recommended Debate Rooms",
-        "popular": "Popular Summaries"
-      },
-      "search": {
-        "book-title": "Book Title",
-        "item-title": "Room Title",
-        "placeholder": "Search for debate rooms!"
-      },
-      "sort": {
-        "latest": "Latest",
-        "popular": "Popular",
-        "from": "From"
-      },
-      "button": {
-        "create": "Create"
-      },
-      "item": {
-        "no-debate-item": "There is no debate item",
-        "no-summary-item": "There is no summary item"
-      }
-    },
-    "summary": {
-      "title": {
-        "recommend": "Recommended Summaries",
-        "popular": "Popular Debate Rooms"
-      },
-      "search": {
-        "book-title": "Book Title",
-        "item-title": "Summary Title",
-        "placeholder": "Search for summaries!"
-      },
-      "sort": {
-        "latest": "Latest",
-        "popular": "Popular"
-      },
-      "button": {
-        "write": "Write"
-      },
-      "item": {
-        "no-summary-item": "There is no summary item",
-        "no-debate-item": "There is no debate item"
-      }
-    },
-    "search": {
-      "title": {
-        "page": "Search Books"
-      },
-      "sort": {
-        "latest": "Latest",
-        "popular": "Popular"
-      },
-      "search": {
-        "placeholder": "Search for books!"
-      }
-    }
-  }
 }

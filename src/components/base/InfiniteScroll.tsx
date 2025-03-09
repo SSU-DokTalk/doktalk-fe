@@ -1,9 +1,9 @@
-import axios from "axios";
-import { CircularProgress } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-import NoItem from "@/assets/images/no-item.svg";
-import { selectUser } from "@/stores/user";
-import { useAppSelector } from "@/stores/hooks";
+import axios from 'axios'
+import { CircularProgress } from '@mui/material'
+import { useEffect, useRef, useState } from 'react'
+import NoItem from '@/assets/images/no-item.svg'
+import { selectUser } from '@/stores/user'
+import { useAppSelector } from '@/stores/hooks'
 
 /**
  * 무한 스크롤
@@ -34,186 +34,196 @@ import { useAppSelector } from "@/stores/hooks";
  */
 
 function InfiniteScroll({
-  children,
-  api,
-  api_params = {},
-  likes_api = undefined,
-  itemId = "id",
-  setItems,
-  page = undefined,
-  setPage = undefined,
-  setTotal = undefined,
-  hasMore = undefined,
-  setHasMore = undefined,
-  likes = undefined,
-  setLikes = undefined,
-  beforeFetch = undefined,
-  afterFetchSuccess = undefined,
-  afterFetchFail = undefined,
-  hasNoItem = false,
-  hasNoItemMessage = "아직 항목이 없습니다",
-  hasNoItemComponent = undefined,
-  condition = true,
-  refreshCondition = false,
-  dependency = [],
-  size = 10,
-}: {
-  children: React.ReactNode;
-  api: string;
-  api_params?: any;
-  likes_api?: string;
-  itemId?: string;
-  setItems: React.Dispatch<React.SetStateAction<any[]>>;
-  page?: number | undefined;
-  setPage?: React.Dispatch<React.SetStateAction<number>> | undefined;
-  setTotal?: React.Dispatch<React.SetStateAction<number>>;
-  hasMore?: boolean | undefined;
-  setHasMore?: React.Dispatch<React.SetStateAction<boolean>> | undefined;
-  likes?: number[];
-  setLikes?: React.Dispatch<React.SetStateAction<number[]>>;
-  beforeFetch?: () => void;
-  afterFetchSuccess?: () => void;
-  afterFetchFail?: () => void;
-  hasNoItem?: boolean;
-  hasNoItemMessage?: string;
-  hasNoItemComponent?: React.ReactNode;
-  condition?: boolean;
-  refreshCondition?: boolean;
-  dependency?: any[];
-  size?: number;
-}) {
-  const [inherentHasMore, setInherentHasMore] = useState<boolean>(true);
-  const [inherentPage, setInherentPage] = useState<number>(1);
-
-  const elementRef = useRef<HTMLDivElement>(null);
-  const user = useAppSelector(selectUser);
-
-  const fetchMoreItems = async () => {
-    if (beforeFetch) await beforeFetch();
-    if (condition && (hasMore ?? inherentHasMore)) {
-      await axios
-        .get(`/api/${api}`, {
-          params: {
-            page: page ?? inherentPage,
-            size: size,
-            ...api_params,
-          },
-        })
-        .then(
-          async (res) => {
-            console.log(res);
-            if (afterFetchSuccess) await afterFetchSuccess();
-            let {
-              items,
-              page: pg,
-              pages,
-              total,
-            }: {
-              items: any[];
-              page: number;
-              pages: number;
-              total: number;
-            } = res.data;
-            console.log(items);
-            if (pg <= pages && pages > 0) {
-              setItems((prevItems) => [...prevItems, ...items]);
-              setTotal?.(total);
-              await (setHasMore ?? setInherentHasMore)(pg != pages);
-              await (setPage ?? setInherentPage)(pg + 1);
-            } else {
-              await (setHasMore ?? setInherentHasMore)(false);
-            }
-            if (!items || items.length === 0) return;
-            if (!likes_api || user.id == 0 || !likes || !setLikes) return;
-            await axios
-              .get(
-                `/api/${likes_api}?${items
-                  .map((item) => "ids=" + item[itemId])
-                  .join("&")}`
-              )
-              .then((newLikes) => {
-                setLikes((prvLikes) => prvLikes.concat(newLikes.data));
-              });
-          },
-          async () => {
-            await (setHasMore ?? setInherentHasMore)(false);
-            if (afterFetchFail) afterFetchFail();
-          }
-        );
-    }
-  };
-
-  const onIntersection = async (entities: IntersectionObserverEntry[]) => {
-    const target = entities[0];
-    if (target.isIntersecting && (hasMore ?? inherentHasMore)) {
-      await fetchMoreItems();
-    }
-  };
-
-  const observer = new IntersectionObserver(onIntersection);
-
-  useEffect(() => {
-    console.log("InfiniteScroll useEffect");
-    if (refreshCondition) {
-      console.log("InfiniteScroll useEffect refreshCondition");
-      (setPage ?? setInherentPage)(1);
-      (setHasMore ?? setInherentHasMore)(true);
-      setLikes?.([]);
-      setItems([]);
-      setTotal?.(0);
-    }
-    if (elementRef.current) {
-      observer.observe(elementRef.current);
-    }
-    return () => {
-      if (elementRef.current) {
-        observer.unobserve(elementRef.current);
-      }
-    };
-  }, [
-    inherentPage,
-    page,
-    condition,
+    children,
     api,
-    JSON.stringify(dependency),
-    JSON.stringify(api_params),
-  ]);
+    api_params = {},
+    likes_api = undefined,
+    itemId = 'id',
+    setItems,
+    page = undefined,
+    setPage = undefined,
+    setTotal = undefined,
+    hasMore = undefined,
+    setHasMore = undefined,
+    likes = undefined,
+    setLikes = undefined,
+    beforeFetch = undefined,
+    afterFetchSuccess = undefined,
+    afterFetchFail = undefined,
+    hasNoItem = false,
+    hasNoItemMessage = '아직 항목이 없습니다',
+    hasNoItemComponent = undefined,
+    condition = true,
+    refreshCondition = false,
+    dependency = [],
+    size = 10,
+}: {
+    children: React.ReactNode
+    api: string
+    api_params?: any
+    likes_api?: string
+    itemId?: string
+    setItems: React.Dispatch<React.SetStateAction<any[]>>
+    page?: number | undefined
+    setPage?: React.Dispatch<React.SetStateAction<number>> | undefined
+    setTotal?: React.Dispatch<React.SetStateAction<number>>
+    hasMore?: boolean | undefined
+    setHasMore?: React.Dispatch<React.SetStateAction<boolean>> | undefined
+    likes?: number[]
+    setLikes?: React.Dispatch<React.SetStateAction<number[]>>
+    beforeFetch?: () => void
+    afterFetchSuccess?: () => void
+    afterFetchFail?: () => void
+    hasNoItem?: boolean
+    hasNoItemMessage?: string
+    hasNoItemComponent?: React.ReactNode
+    condition?: boolean
+    refreshCondition?: boolean
+    dependency?: any[]
+    size?: number
+}) {
+    const [inherentHasMore, setInherentHasMore] = useState<boolean>(true)
+    const [inherentPage, setInherentPage] = useState<number>(1)
 
-  return (
-    <>
-      {children}
-      {(hasMore ?? inherentHasMore) && (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "20px",
-            marginBottom: "20px",
-          }}>
-          <CircularProgress ref={elementRef} className='loading-spinner' />
-          <span className='visually-hidden'>Loading...</span>
-        </div>
-      )}
-      {!(hasMore ?? inherentHasMore) &&
-        hasNoItem &&
-        (hasNoItemComponent ?? (
-          <div
-            style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "50px",
-              color: "#666565",
-              fontSize: "20px",
-              fontWeight: "400",
-            }}>
-            <img src={NoItem} alt='no item' />
-            <span>{hasNoItemMessage}</span>
-          </div>
-        ))}
-    </>
-  );
+    const elementRef = useRef<HTMLDivElement>(null)
+    const user = useAppSelector(selectUser)
+
+    const fetchMoreItems = async () => {
+        if (beforeFetch) await beforeFetch()
+        if (condition && (hasMore ?? inherentHasMore)) {
+            await axios
+                .get(`/api/${api}`, {
+                    params: {
+                        page: page ?? inherentPage,
+                        size: size,
+                        ...api_params,
+                    },
+                })
+                .then(
+                    async (res) => {
+                        console.log(res)
+                        if (afterFetchSuccess) await afterFetchSuccess()
+                        let {
+                            items,
+                            page: pg,
+                            pages,
+                            total,
+                        }: {
+                            items: any[]
+                            page: number
+                            pages: number
+                            total: number
+                        } = res.data
+                        console.log(items)
+                        if (pg <= pages && pages > 0) {
+                            setItems((prevItems) => [...prevItems, ...items])
+                            setTotal?.(total)
+                            await (setHasMore ?? setInherentHasMore)(
+                                pg != pages
+                            )
+                            await (setPage ?? setInherentPage)(pg + 1)
+                        } else {
+                            await (setHasMore ?? setInherentHasMore)(false)
+                        }
+                        if (!items || items.length === 0) return
+                        if (!likes_api || user.id == 0 || !likes || !setLikes)
+                            return
+                        await axios
+                            .get(
+                                `/api/${likes_api}?${items
+                                    .map((item) => 'ids=' + item[itemId])
+                                    .join('&')}`
+                            )
+                            .then((newLikes) => {
+                                setLikes((prvLikes) =>
+                                    prvLikes.concat(newLikes.data)
+                                )
+                            })
+                    },
+                    async () => {
+                        await (setHasMore ?? setInherentHasMore)(false)
+                        if (afterFetchFail) afterFetchFail()
+                    }
+                )
+        }
+    }
+
+    const onIntersection = async (entities: IntersectionObserverEntry[]) => {
+        const target = entities[0]
+        if (target.isIntersecting && (hasMore ?? inherentHasMore)) {
+            await fetchMoreItems()
+        }
+    }
+
+    const observer = new IntersectionObserver(onIntersection)
+
+    useEffect(() => {
+        console.log('InfiniteScroll useEffect')
+        if (refreshCondition) {
+            console.log('InfiniteScroll useEffect refreshCondition')
+            ;(setPage ?? setInherentPage)(1)
+            ;(setHasMore ?? setInherentHasMore)(true)
+            setLikes?.([])
+            setItems([])
+            setTotal?.(0)
+        }
+        if (elementRef.current) {
+            observer.observe(elementRef.current)
+        }
+        return () => {
+            if (elementRef.current) {
+                observer.unobserve(elementRef.current)
+            }
+        }
+    }, [
+        inherentPage,
+        page,
+        condition,
+        api,
+        JSON.stringify(dependency),
+        JSON.stringify(api_params),
+    ])
+
+    return (
+        <>
+            {children}
+            {(hasMore ?? inherentHasMore) && (
+                <div
+                    style={{
+                        display: 'flex',
+                        justifyContent: 'center',
+                        marginTop: '20px',
+                        marginBottom: '20px',
+                    }}
+                >
+                    <CircularProgress
+                        ref={elementRef}
+                        className='loading-spinner'
+                    />
+                    <span className='visually-hidden'>Loading...</span>
+                </div>
+            )}
+            {!(hasMore ?? inherentHasMore) &&
+                hasNoItem &&
+                (hasNoItemComponent ?? (
+                    <div
+                        style={{
+                            display: 'flex',
+                            flexDirection: 'column',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginTop: '50px',
+                            color: '#666565',
+                            fontSize: '20px',
+                            fontWeight: '400',
+                        }}
+                    >
+                        <img src={NoItem} alt='no item' />
+                        <span>{hasNoItemMessage}</span>
+                    </div>
+                ))}
+        </>
+    )
 }
 
-export default InfiniteScroll;
+export default InfiniteScroll

@@ -1,93 +1,93 @@
-@use "../../variables" as v;
+@use '../../variables' as v;
 
 #post-detail {
-  display: flex;
-  margin-top: 40px;
-  .container {
-    // width: 70%;
-    .header {
-      display: flex;
-      justify-content: space-between;
-      &__container {
-        width: calc(100% - 50px - 20px);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+    display: flex;
+    margin-top: 40px;
+    .container {
+        // width: 70%;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            &__container {
+                width: calc(100% - 50px - 20px);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
 
-        .user-info {
-          .nickname {
-            font-size: 20px;
-            font-weight: 600;
-          }
-          .time {
-            font-size: 15px;
-            font-weight: 400;
-            color: v.$brand-color5;
-          }
+                .user-info {
+                    .nickname {
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                    .time {
+                        font-size: 15px;
+                        font-weight: 400;
+                        color: v.$brand-color5;
+                    }
+                }
+                .actions {
+                    display: flex;
+                    gap: 5px;
+                    button {
+                        border-radius: 5px;
+                        background-color: white;
+                        font-size: 15px;
+                        font-weight: 400;
+                        padding: 2px 15px;
+                    }
+                    .edit {
+                        border: 1px solid v.$brand-color4;
+                        color: v.$brand-color5;
+                    }
+                    .delete {
+                        border: 1px solid v.$red;
+                        color: v.$red;
+                    }
+                }
+            }
         }
-        .actions {
-          display: flex;
-          gap: 5px;
-          button {
-            border-radius: 5px;
-            background-color: white;
-            font-size: 15px;
-            font-weight: 400;
-            padding: 2px 15px;
-          }
-          .edit {
-            border: 1px solid v.$brand-color4;
-            color: v.$brand-color5;
-          }
-          .delete {
-            border: 1px solid v.$red;
-            color: v.$red;
-          }
+        .content {
+            .title {
+                font-size: 25px;
+                font-weight: 600;
+            }
+            &__text {
+                font-size: 15px;
+                font-weight: 400;
+            }
+            &__image-container {
+            }
+            &__image {
+            }
+            &__file-container {
+                margin-top: 10px;
+            }
+            &__like-container {
+                margin-top: 20px;
+                display: flex;
+                font-size: 17px;
+                font-weight: 400;
+                align-items: center;
+                color: v.$brand-color5;
+            }
+            &__like {
+                margin-left: 5px;
+            }
+            .liked {
+                color: #e03131;
+            }
+            .like-icon {
+                cursor: pointer;
+            }
         }
-      }
     }
-    .content {
-      .title {
-        font-size: 25px;
-        font-weight: 600;
-      }
-      &__text {
-        font-size: 15px;
-        font-weight: 400;
-      }
-      &__image-container {
-      }
-      &__image {
-      }
-      &__file-container {
-        margin-top: 10px;
-      }
-      &__like-container {
-        margin-top: 20px;
-        display: flex;
-        font-size: 17px;
-        font-weight: 400;
-        align-items: center;
-        color: v.$brand-color5;
-      }
-      &__like {
-        margin-left: 5px;
-      }
-      .liked {
-        color: #e03131;
-      }
-      .like-icon {
-        cursor: pointer;
-      }
+    .offset {
+        width: 30%;
     }
-  }
-  .offset {
-    width: 30%;
-  }
-  #comment-section {
-    margin-top: 28px;
-    #comment-card {
-      margin-top: 14px;
+    #comment-section {
+        margin-top: 28px;
+        #comment-card {
+            margin-top: 14px;
+        }
     }
-  }
 }

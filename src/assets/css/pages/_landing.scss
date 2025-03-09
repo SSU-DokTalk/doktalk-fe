@@ -1,43 +1,43 @@
-@use "../variables" as v;
+@use '../variables' as v;
 
 #landing-page {
-  display: flex;
-  padding-top: 30px;
-  .post-container {
-    // width: 60%;
-    // padding-right: 30px;
-    .post-title {
-      font-size: 25px;
-      font-weight: 700;
-      margin-left: 10px;
-      margin-bottom: 12px;
-      color: v.$brand-color1;
+    display: flex;
+    padding-top: 30px;
+    .post-container {
+        // width: 60%;
+        // padding-right: 30px;
+        .post-title {
+            font-size: 25px;
+            font-weight: 700;
+            margin-left: 10px;
+            margin-bottom: 12px;
+            color: v.$brand-color1;
+        }
+        #write-post-card {
+            margin-bottom: 25px;
+            .summary-title {
+                font-size: 25px;
+                font-weight: 700;
+                margin-left: 10px;
+                margin-bottom: 12px;
+                color: v.$brand-color1;
+            }
+        }
     }
-    #write-post-card {
-      margin-bottom: 25px;
-      .summary-title {
-        font-size: 25px;
-        font-weight: 700;
-        margin-left: 10px;
-        margin-bottom: 12px;
-        color: v.$brand-color1;
-      }
+    .summary-container {
+        width: 40%;
+        padding-left: 30px;
+        .summary-section-title {
+            width: 100%;
+            font-size: 25px;
+            font-weight: 700;
+            margin-left: 10px;
+            margin-bottom: 12px;
+            color: v.$brand-color1;
+        }
+        #popular-summary-card {
+            margin-bottom: 10px;
+            width: 70%;
+        }
     }
-  }
-  .summary-container {
-    width: 40%;
-    padding-left: 30px;
-    .summary-section-title {
-      width: 100%;
-      font-size: 25px;
-      font-weight: 700;
-      margin-left: 10px;
-      margin-bottom: 12px;
-      color: v.$brand-color1;
-    }
-    #popular-summary-card {
-      margin-bottom: 10px;
-      width: 70%;
-    }
-  }
 }

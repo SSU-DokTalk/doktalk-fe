@@ -1,19 +1,19 @@
 #mypage {
-  .content-container {
-    display: flex;
-    // .content-left-margin {
-    //   width: 25%;
-    // }
-    .content {
-      // width: 50%;
-      #write-post-card,
-      #write-summary-card,
-      #write-debate-card {
-        margin-bottom: 10px;
-      }
+    .content-container {
+        display: flex;
+        // .content-left-margin {
+        //   width: 25%;
+        // }
+        .content {
+            // width: 50%;
+            #write-post-card,
+            #write-summary-card,
+            #write-debate-card {
+                margin-bottom: 10px;
+            }
+        }
+        // .content-right-margin {
+        //   width: 25%;
+        // }
     }
-    // .content-right-margin {
-    //   width: 25%;
-    // }
-  }
 }

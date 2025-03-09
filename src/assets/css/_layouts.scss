@@ -1,14 +1,14 @@
-@use "./variables" as v;
+@use './variables' as v;
 
 #content-main-layout {
-  #floating-user-profile {
-    position: fixed;
-    top: 200px;
-    left: 60px;
-  }
-  .upper-container {
-    background-color: v.$brand-color3;
-  }
-  .lower-container {
-  }
+    #floating-user-profile {
+        position: fixed;
+        top: 200px;
+        left: 60px;
+    }
+    .upper-container {
+        background-color: v.$brand-color3;
+    }
+    .lower-container {
+    }
 }

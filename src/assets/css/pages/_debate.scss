@@ -1,133 +1,133 @@
-@use "../variables" as v;
+@use '../variables' as v;
 
 #debate-page {
-  .recommend-content-container {
-    height: 240px;
-    .recommend-content-title {
-      color: v.$brand-color1;
-      font-size: 20px;
-      font-weight: 600;
-      margin: 20px 0 15px;
-    }
-    .recommend-content {
-      height: 145px;
-      width: 70%;
-    }
-  }
-
-  .lower-content-container {
-    display: flex;
-    .left-container {
-      // width: 60%;
-      // padding-right: 20px;
-      .searchbox-container {
-        width: 100%;
-        display: flex;
-        border: 1px solid v.$brand-color1;
-        border-radius: 10px;
-        align-items: center;
-        padding: 0px 12px;
-        color: v.$brand-color1;
-        .searchbox-icon {
-          font-size: 20px;
-        }
-        .search-by-dropdown {
-          .MuiButtonBase-root {
-            background-color: inherit;
-            border: none;
+    .recommend-content-container {
+        height: 240px;
+        .recommend-content-title {
             color: v.$brand-color1;
-            font-size: 15px;
-            font-weight: 400;
-            width: max-content;
-            padding: 0.5rem;
-          }
-        }
-        input {
-          border: none;
-          background-color: inherit;
-          color: black;
-          font-size: 15px;
-          font-weight: 400;
-          width: 100%;
-          &:focus {
-            outline: none;
-          }
-          &::placeholder {
-            color: v.$brand-color5;
-          }
-        }
-      }
-      .content-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-        margin-top: 10px;
-        .sort-by {
-          display: flex;
-          .sort-by-text {
-            font-size: 15px;
+            font-size: 20px;
             font-weight: 600;
-            color: v.$brand-color5;
-            margin-right: 25px;
-            display: flex;
-            align-items: center;
-            cursor: pointer;
-            .react-datepicker-wrapper {
-              display: flex;
-              align-items: center;
-              .custom-input {
+            margin: 20px 0 15px;
+        }
+        .recommend-content {
+            height: 145px;
+            width: 70%;
+        }
+    }
+
+    .lower-content-container {
+        display: flex;
+        .left-container {
+            // width: 60%;
+            // padding-right: 20px;
+            .searchbox-container {
+                width: 100%;
                 display: flex;
+                border: 1px solid v.$brand-color1;
+                border-radius: 10px;
                 align-items: center;
-
-                .sort-by-icon {
-                  display: flex;
-                  align-items: center;
-                  margin: 0 5px;
+                padding: 0px 12px;
+                color: v.$brand-color1;
+                .searchbox-icon {
+                    font-size: 20px;
                 }
-                .date-text {
+                .search-by-dropdown {
+                    .MuiButtonBase-root {
+                        background-color: inherit;
+                        border: none;
+                        color: v.$brand-color1;
+                        font-size: 15px;
+                        font-weight: 400;
+                        width: max-content;
+                        padding: 0.5rem;
+                    }
                 }
-              }
+                input {
+                    border: none;
+                    background-color: inherit;
+                    color: black;
+                    font-size: 15px;
+                    font-weight: 400;
+                    width: 100%;
+                    &:focus {
+                        outline: none;
+                    }
+                    &::placeholder {
+                        color: v.$brand-color5;
+                    }
+                }
             }
-          }
-        }
-        .create-debate-button {
-          height: 38px;
-          background-color: v.$brand-color1;
-          color: white;
-          font-size: 15px;
-          font-weight: 600;
-          border: none;
-          border-radius: 10px;
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          padding-left: 15px;
-          padding-right: 10px;
-          .write-icon {
-            margin-left: 10px;
-          }
-        }
-      }
-      .content-container {
-        margin-top: 10px;
-      }
-    }
+            .content-header {
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
+                margin-top: 10px;
+                .sort-by {
+                    display: flex;
+                    .sort-by-text {
+                        font-size: 15px;
+                        font-weight: 600;
+                        color: v.$brand-color5;
+                        margin-right: 25px;
+                        display: flex;
+                        align-items: center;
+                        cursor: pointer;
+                        .react-datepicker-wrapper {
+                            display: flex;
+                            align-items: center;
+                            .custom-input {
+                                display: flex;
+                                align-items: center;
 
-    .right-container {
-      width: 40%;
-      padding-left: 20px;
-      .right-container-title {
-        font-size: 25px;
-        font-weight: 700;
-        color: v.$brand-color1;
-      }
-      .right-container-content {
-        margin-top: 20px;
-        #popular-summary-card {
-          width: 70%;
-          margin-bottom: 10px;
+                                .sort-by-icon {
+                                    display: flex;
+                                    align-items: center;
+                                    margin: 0 5px;
+                                }
+                                .date-text {
+                                }
+                            }
+                        }
+                    }
+                }
+                .create-debate-button {
+                    height: 38px;
+                    background-color: v.$brand-color1;
+                    color: white;
+                    font-size: 15px;
+                    font-weight: 600;
+                    border: none;
+                    border-radius: 10px;
+                    display: flex;
+                    justify-content: space-between;
+                    align-items: center;
+                    padding-left: 15px;
+                    padding-right: 10px;
+                    .write-icon {
+                        margin-left: 10px;
+                    }
+                }
+            }
+            .content-container {
+                margin-top: 10px;
+            }
         }
-      }
+
+        .right-container {
+            width: 40%;
+            padding-left: 20px;
+            .right-container-title {
+                font-size: 25px;
+                font-weight: 700;
+                color: v.$brand-color1;
+            }
+            .right-container-content {
+                margin-top: 20px;
+                #popular-summary-card {
+                    width: 70%;
+                    margin-bottom: 10px;
+                }
+            }
+        }
     }
-  }
 }

@@ -84,12 +84,12 @@ time,
 mark,
 audio,
 video {
-  margin: 0;
-  padding: 0;
-  border: 0;
-  font-size: 100%;
-  font: inherit;
-  vertical-align: baseline;
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
 }
 /* HTML5 display-role reset for older browsers */
 article,
@@ -103,29 +103,29 @@ hgroup,
 menu,
 nav,
 section {
-  display: block;
+    display: block;
 }
 body {
-  line-height: 1;
+    line-height: 1;
 }
 ol,
 ul {
-  list-style: none;
+    list-style: none;
 }
 blockquote,
 q {
-  quotes: none;
+    quotes: none;
 }
 blockquote:before,
 blockquote:after,
 q:before,
 q:after {
-  content: "";
-  content: none;
+    content: '';
+    content: none;
 }
 table {
-  border-collapse: collapse;
-  border-spacing: 0;
+    border-collapse: collapse;
+    border-spacing: 0;
 }
 
 // https://www.joshwcomeau.com/css/custom-css-reset/
@@ -133,17 +133,17 @@ table {
 *,
 *::before,
 *::after {
-  box-sizing: border-box;
+    box-sizing: border-box;
 }
 /* 2. Remove default margin */
 * {
-  margin: 0;
+    margin: 0;
 }
 body {
-  /* 3. Add accessible line-height */
-  line-height: 1.5;
-  /* 4. Improve text rendering */
-  -webkit-font-smoothing: antialiased;
+    /* 3. Add accessible line-height */
+    line-height: 1.5;
+    /* 4. Improve text rendering */
+    -webkit-font-smoothing: antialiased;
 }
 /* 5. Improve media defaults */
 img,
@@ -151,18 +151,18 @@ picture,
 video,
 canvas,
 svg {
-  display: block;
-  max-width: 100%;
+    display: block;
+    max-width: 100%;
 }
 /* 6. Inherit fonts for form controls */
 input,
 button,
 textarea,
 select {
-  font: inherit;
-  &:focus {
-    outline: none;
-  }
+    font: inherit;
+    &:focus {
+        outline: none;
+    }
 }
 /* 7. Avoid text overflows */
 p,
@@ -172,11 +172,11 @@ h3,
 h4,
 h5,
 h6 {
-  overflow-wrap: break-word;
+    overflow-wrap: break-word;
 }
 /* 8. Improve line wrapping */
 p {
-  text-wrap: pretty;
+    text-wrap: pretty;
 }
 h1,
 h2,
@@ -184,14 +184,14 @@ h3,
 h4,
 h5,
 h6 {
-  text-wrap: balance;
+    text-wrap: balance;
 }
 /*
   9. Create a root stacking context
 */
 #root,
 #__next {
-  isolation: isolate;
+    isolation: isolate;
 }
 
 /*
@@ -199,15 +199,15 @@ Draggable, Undraggable
 */
 // Make All Component to undraggable
 body {
-  -webkit-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
 }
 // Make component to draggable
 .draggable {
-  -webkit-user-select: text;
-  -moz-user-select: text;
-  -ms-user-select: text;
-  user-select: text;
+    -webkit-user-select: text;
+    -moz-user-select: text;
+    -ms-user-select: text;
+    user-select: text;
 }

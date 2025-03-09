@@ -1,112 +1,112 @@
-@use "../variables" as v;
+@use '../variables' as v;
 
 #floating-user-profile {
-  width: 180px;
-  box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25);
-  border: 1px solid v.$brand-color4;
-  border-radius: 10px;
-  background-color: white;
-
-  .profile-info-container {
-    margin: 7px 6px 0;
-    background-color: v.$brand-color3;
+    width: 180px;
+    box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25);
+    border: 1px solid v.$brand-color4;
     border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
+    background-color: white;
 
-    .profile-info {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      height: 120px;
-      .user-name {
-        margin-top: 10px;
-        font-size: 15px;
-        font-weight: 700;
-      }
-    }
-  }
-  .follow-info {
-    color: v.$brand-color5;
-    font-size: 12px;
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    margin: 10px 0;
+    .profile-info-container {
+        margin: 7px 6px 0;
+        background-color: v.$brand-color3;
+        border-radius: 10px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        cursor: pointer;
 
-    .follow-container {
-      display: flex;
-      align-items: center;
-      .text {
-        font-weight: 400;
-      }
-      .count {
-        margin-left: 8px;
-        font-weight: 600;
-      }
-    }
-  }
-  .accordion {
-    .accordion-item {
-      border: none !important;
-      border-top: 1px solid v.$brand-color3;
-      border-radius: 0;
-      margin: 0 10px;
-      .MuiAccordion-heading {
-        font-size: 15px;
-        font-weight: 600;
-        .MuiButtonBase-root {
-          color: v.$brand-color1;
-          // padding: 10px 10px;
-          &::after,
-          &::before {
-            display: none;
-          }
-          &:focus {
-            box-shadow: none;
-          }
-          &:not(.collapsed) {
-            background-color: inherit;
-            box-shadow: none;
-          }
-        }
-      }
-      .MuiCollapse-root {
-        .accordion-body {
-          padding: 0 10px 5px;
-        }
-        .my-activity {
-          a {
-            display: block;
-            color: v.$brand-color5;
-            font-size: 12px;
-            font-weight: 400;
-            text-decoration: none;
-            margin-bottom: 10px;
-          }
-        }
-        .my-library {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          margin-bottom: 20px;
-          .books-container {
+        .profile-info {
             display: flex;
-            flex-wrap: wrap;
-            width: 100%;
-            justify-content: stretch;
-
-            img {
-              margin: 3px;
-              box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25);
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 120px;
+            .user-name {
+                margin-top: 10px;
+                font-size: 15px;
+                font-weight: 700;
             }
-          }
         }
-      }
     }
-  }
+    .follow-info {
+        color: v.$brand-color5;
+        font-size: 12px;
+        display: flex;
+        align-items: center;
+        justify-content: space-evenly;
+        margin: 10px 0;
+
+        .follow-container {
+            display: flex;
+            align-items: center;
+            .text {
+                font-weight: 400;
+            }
+            .count {
+                margin-left: 8px;
+                font-weight: 600;
+            }
+        }
+    }
+    .accordion {
+        .accordion-item {
+            border: none !important;
+            border-top: 1px solid v.$brand-color3;
+            border-radius: 0;
+            margin: 0 10px;
+            .MuiAccordion-heading {
+                font-size: 15px;
+                font-weight: 600;
+                .MuiButtonBase-root {
+                    color: v.$brand-color1;
+                    // padding: 10px 10px;
+                    &::after,
+                    &::before {
+                        display: none;
+                    }
+                    &:focus {
+                        box-shadow: none;
+                    }
+                    &:not(.collapsed) {
+                        background-color: inherit;
+                        box-shadow: none;
+                    }
+                }
+            }
+            .MuiCollapse-root {
+                .accordion-body {
+                    padding: 0 10px 5px;
+                }
+                .my-activity {
+                    a {
+                        display: block;
+                        color: v.$brand-color5;
+                        font-size: 12px;
+                        font-weight: 400;
+                        text-decoration: none;
+                        margin-bottom: 10px;
+                    }
+                }
+                .my-library {
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    margin-bottom: 20px;
+                    .books-container {
+                        display: flex;
+                        flex-wrap: wrap;
+                        width: 100%;
+                        justify-content: stretch;
+
+                        img {
+                            margin: 3px;
+                            box-shadow: 0px 6px 6px 0px rgba(0, 0, 0, 0.25);
+                        }
+                    }
+                }
+            }
+        }
+    }
 }

@@ -1,194 +1,194 @@
-@use "../../variables" as v;
+@use '../../variables' as v;
 
 #summary-detail {
-  display: flex;
-  margin-top: 40px;
-  .container {
-    // width: 70%;
-    .header {
-      display: flex;
-      justify-content: space-between;
-      &__container {
-        width: calc(100% - 50px - 20px);
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        .user-info {
-          .nickname {
-            font-size: 20px;
-            font-weight: 600;
-          }
-          .time {
-            font-size: 15px;
-            font-weight: 400;
-            color: v.$brand-color5;
-          }
-        }
-        .actions {
-          display: flex;
-          gap: 5px;
-          button {
-            border-radius: 5px;
-            background-color: white;
-            font-size: 15px;
-            font-weight: 400;
-            padding: 2px 15px;
-          }
-          .edit {
-            border: 1px solid v.$brand-color4;
-            color: v.$brand-color5;
-          }
-          .delete {
-            border: 1px solid v.$red;
-            color: v.$red;
-          }
-        }
-      }
-    }
-    .content {
-      .title {
-        font-size: 25px;
-        font-weight: 600;
-      }
-      &__text {
-        font-size: 15px;
-        font-weight: 400;
-        text-wrap: wrap;
-      }
-      &__image-container {
-      }
-      &__image {
-      }
-      &__file-container {
-        margin-top: 10px;
-      }
-      &__like-container {
-        margin-top: 20px;
-        display: flex;
-        font-size: 17px;
-        font-weight: 400;
-        align-items: center;
-        color: v.$brand-color5;
-      }
-      &__like {
-        margin-left: 5px;
-      }
-      .liked {
-        color: #e03131;
-      }
-      .like-icon {
-        cursor: pointer;
-      }
-    }
-  }
-
-  .additional-info {
-    margin-top: 16px;
     display: flex;
-    flex-direction: column;
-    gap: 8px;
+    margin-top: 40px;
+    .container {
+        // width: 70%;
+        .header {
+            display: flex;
+            justify-content: space-between;
+            &__container {
+                width: calc(100% - 50px - 20px);
+                display: flex;
+                justify-content: space-between;
+                align-items: center;
 
-    .item {
-      display: flex;
-      gap: 10px;
+                .user-info {
+                    .nickname {
+                        font-size: 20px;
+                        font-weight: 600;
+                    }
+                    .time {
+                        font-size: 15px;
+                        font-weight: 400;
+                        color: v.$brand-color5;
+                    }
+                }
+                .actions {
+                    display: flex;
+                    gap: 5px;
+                    button {
+                        border-radius: 5px;
+                        background-color: white;
+                        font-size: 15px;
+                        font-weight: 400;
+                        padding: 2px 15px;
+                    }
+                    .edit {
+                        border: 1px solid v.$brand-color4;
+                        color: v.$brand-color5;
+                    }
+                    .delete {
+                        border: 1px solid v.$red;
+                        color: v.$red;
+                    }
+                }
+            }
+        }
+        .content {
+            .title {
+                font-size: 25px;
+                font-weight: 600;
+            }
+            &__text {
+                font-size: 15px;
+                font-weight: 400;
+                text-wrap: wrap;
+            }
+            &__image-container {
+            }
+            &__image {
+            }
+            &__file-container {
+                margin-top: 10px;
+            }
+            &__like-container {
+                margin-top: 20px;
+                display: flex;
+                font-size: 17px;
+                font-weight: 400;
+                align-items: center;
+                color: v.$brand-color5;
+            }
+            &__like {
+                margin-left: 5px;
+            }
+            .liked {
+                color: #e03131;
+            }
+            .like-icon {
+                cursor: pointer;
+            }
+        }
+    }
 
-      .label {
-        width: 10%;
+    .additional-info {
+        margin-top: 16px;
         display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: rgba(243, 244, 247, 1);
-        border: none;
-        border-radius: 5px;
-        color: v.$brand-color1;
-        font-size: 15px;
-        font-weight: 400;
-      }
-      .content {
-        width: 90%;
-      }
-    }
-  }
-  .payment {
-    &__container {
-      position: relative;
-      width: 100%;
-      height: 11rem;
+        flex-direction: column;
+        gap: 8px;
 
-      .charged-content {
-        overflow: hidden;
-        text-wrap: wrap;
-        text-overflow: ellipsis;
-        display: -webkit-box;
-        -webkit-line-clamp: 8;
-        -webkit-box-orient: vertical;
-      }
-    }
+        .item {
+            display: flex;
+            gap: 10px;
 
-    &__box {
-      position: absolute;
-      top: 0;
-      width: 100%;
-      height: 11rem;
-      display: flex;
-      backdrop-filter: blur(8px);
-      flex-direction: column;
-      justify-content: center;
-      padding: 0 56px;
-
-      &__title {
-        color: v.$brand-color1;
-        font-size: 20px;
-        font-weight: 600;
-        margin-bottom: 16px;
-      }
-
-      &__info {
-        display: flex;
-        align-items: center;
-        gap: 16px;
-        .box {
-          border: none;
-          border-radius: 10px;
-          display: flex;
-          height: 40px;
-          align-items: center;
-          justify-content: center;
-          font-size: 15px;
-          font-weight: 600;
+            .label {
+                width: 10%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                background-color: rgba(243, 244, 247, 1);
+                border: none;
+                border-radius: 5px;
+                color: v.$brand-color1;
+                font-size: 15px;
+                font-weight: 400;
+            }
+            .content {
+                width: 90%;
+            }
         }
-        .into-cart {
-          background: rgba(243, 244, 247, 1);
-          color: v.$brand-color1;
-          width: 80px;
-          gap: 8px;
-        }
-        .purchase {
-          background: white;
-          color: v.$brand-color1;
-          gap: 38px;
-          padding: 0 20px;
-          border: 1px solid v.$brand-color3;
-
-          .price {
-            color: black;
-          }
-          .do-purchase {
-            text-decoration: underline;
-          }
-        }
-      }
     }
-  }
+    .payment {
+        &__container {
+            position: relative;
+            width: 100%;
+            height: 11rem;
 
-  .offset {
-    width: 30%;
-  }
-  #comment-section {
-    margin-top: 28px;
-    #comment-card {
-      margin-top: 14px;
+            .charged-content {
+                overflow: hidden;
+                text-wrap: wrap;
+                text-overflow: ellipsis;
+                display: -webkit-box;
+                -webkit-line-clamp: 8;
+                -webkit-box-orient: vertical;
+            }
+        }
+
+        &__box {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            height: 11rem;
+            display: flex;
+            backdrop-filter: blur(8px);
+            flex-direction: column;
+            justify-content: center;
+            padding: 0 56px;
+
+            &__title {
+                color: v.$brand-color1;
+                font-size: 20px;
+                font-weight: 600;
+                margin-bottom: 16px;
+            }
+
+            &__info {
+                display: flex;
+                align-items: center;
+                gap: 16px;
+                .box {
+                    border: none;
+                    border-radius: 10px;
+                    display: flex;
+                    height: 40px;
+                    align-items: center;
+                    justify-content: center;
+                    font-size: 15px;
+                    font-weight: 600;
+                }
+                .into-cart {
+                    background: rgba(243, 244, 247, 1);
+                    color: v.$brand-color1;
+                    width: 80px;
+                    gap: 8px;
+                }
+                .purchase {
+                    background: white;
+                    color: v.$brand-color1;
+                    gap: 38px;
+                    padding: 0 20px;
+                    border: 1px solid v.$brand-color3;
+
+                    .price {
+                        color: black;
+                    }
+                    .do-purchase {
+                        text-decoration: underline;
+                    }
+                }
+            }
+        }
     }
-  }
+
+    .offset {
+        width: 30%;
+    }
+    #comment-section {
+        margin-top: 28px;
+        #comment-card {
+            margin-top: 14px;
+        }
+    }
 }

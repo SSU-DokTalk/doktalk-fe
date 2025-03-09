@@ -1,96 +1,112 @@
 import {
-  Paper,
-  Accordion,
-  AccordionDetails,
-  AccordionSummary,
-} from "@mui/material";
+    Paper,
+    Accordion,
+    AccordionDetails,
+    AccordionSummary,
+} from '@mui/material'
 
-import { CATEGORY } from "@/common/variables";
-import { ComponentProps, Dispatch, SetStateAction, useState } from "react";
-import { useTranslation } from "react-i18next";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { CATEGORY } from '@/common/variables'
+import { ComponentProps, Dispatch, SetStateAction, useState } from 'react'
+import { useTranslation } from 'react-i18next'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import {
-  faChevronDown,
-  faChevronUp,
-  faXmark,
-} from "@fortawesome/free-solid-svg-icons";
-import { getCategoryFromNumber } from "@/functions";
+    faChevronDown,
+    faChevronUp,
+    faXmark,
+} from '@fortawesome/free-solid-svg-icons'
+import { getCategoryFromNumber } from '@/functions'
 function CategoryCard({
-  categories,
-  setCategories,
-  ...props
+    categories,
+    setCategories,
+    ...props
 }: {
-  categories: number;
-  setCategories: Dispatch<SetStateAction<number>>;
+    categories: number
+    setCategories: Dispatch<SetStateAction<number>>
 } & ComponentProps<typeof Paper>) {
-  const [isCollapsed, setIsCollapsed] = useState(true);
-  const { t } = useTranslation();
+    const [isCollapsed, setIsCollapsed] = useState(true)
+    const { t } = useTranslation()
 
-  const removeCategory = (value: number) => {
-    setCategories((prev) => prev & ~value);
-  };
+    const removeCategory = (value: number) => {
+        setCategories((prev) => prev & ~value)
+    }
 
-  const addCategory = (value: number) => {
-    setCategories((prev) => prev | value);
-  };
+    const addCategory = (value: number) => {
+        setCategories((prev) => prev | value)
+    }
 
-  return (
-    <Paper id="category-card" className="accordion" {...props}>
-      <Accordion className="accordion-item">
-        <AccordionSummary onClick={() => setIsCollapsed((prev) => !prev)}>
-          <span>카테고리 선택</span>
-          {isCollapsed ? (
-            <FontAwesomeIcon icon={faChevronDown} />
-          ) : (
-            <FontAwesomeIcon icon={faChevronUp} />
-          )}
-        </AccordionSummary>
-        <AccordionDetails>
-          <ul className="category-list">
-            {Object.entries(CATEGORY).map(([_, category], index) => {
-              return (
-                <li
-                  className={
-                    "category-item " +
-                    (category.value & categories ? "selected" : "")
-                  }
-                  key={"category" + index}
-                  onClick={
-                    categories & category.value
-                      ? () => removeCategory(category.value)
-                      : () => addCategory(category.value)
-                  }
+    return (
+        <Paper id='category-card' className='accordion' {...props}>
+            <Accordion className='accordion-item'>
+                <AccordionSummary
+                    onClick={() => setIsCollapsed((prev) => !prev)}
                 >
-                  {t(category.name)}
-                </li>
-              );
-            })}
-          </ul>
-        </AccordionDetails>
-      </Accordion>
+                    <span>카테고리 선택</span>
+                    {isCollapsed ? (
+                        <FontAwesomeIcon icon={faChevronDown} />
+                    ) : (
+                        <FontAwesomeIcon icon={faChevronUp} />
+                    )}
+                </AccordionSummary>
+                <AccordionDetails>
+                    <ul className='category-list'>
+                        {Object.entries(CATEGORY).map(
+                            ([_, category], index) => {
+                                return (
+                                    <li
+                                        className={
+                                            'category-item ' +
+                                            (category.value & categories
+                                                ? 'selected'
+                                                : '')
+                                        }
+                                        key={'category' + index}
+                                        onClick={
+                                            categories & category.value
+                                                ? () =>
+                                                      removeCategory(
+                                                          category.value
+                                                      )
+                                                : () =>
+                                                      addCategory(
+                                                          category.value
+                                                      )
+                                        }
+                                    >
+                                        {t(category.name)}
+                                    </li>
+                                )
+                            }
+                        )}
+                    </ul>
+                </AccordionDetails>
+            </Accordion>
 
-      <div className="selected-category-container">
-        {categories == 0 ? (
-          <div className="no-category">선택한 카테고리가 없습니다.</div>
-        ) : (
-          getCategoryFromNumber(categories).map((category, index) => {
-            return (
-              <div
-                className="selected-category"
-                key={"selected-category" + index}
-              >
-                <span>{t(category.name)}</span>
-                <FontAwesomeIcon
-                  icon={faXmark}
-                  onClick={() => removeCategory(category.value)}
-                />
-              </div>
-            );
-          })
-        )}
-      </div>
-    </Paper>
-  );
+            <div className='selected-category-container'>
+                {categories == 0 ? (
+                    <div className='no-category'>
+                        선택한 카테고리가 없습니다.
+                    </div>
+                ) : (
+                    getCategoryFromNumber(categories).map((category, index) => {
+                        return (
+                            <div
+                                className='selected-category'
+                                key={'selected-category' + index}
+                            >
+                                <span>{t(category.name)}</span>
+                                <FontAwesomeIcon
+                                    icon={faXmark}
+                                    onClick={() =>
+                                        removeCategory(category.value)
+                                    }
+                                />
+                            </div>
+                        )
+                    })
+                )}
+            </div>
+        </Paper>
+    )
 }
 
-export default CategoryCard;
+export default CategoryCard
