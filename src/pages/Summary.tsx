@@ -18,10 +18,9 @@ import useDebounce from '@/hooks/useDebounce';
 import CategoryCard from '@/components/card/CategoryCard';
 import SearchDropdown from '@/components/dropdown/SearchByDropdown';
 
-import { isMd } from "@/functions/breakpoint";
-import { SearchBar } from "@/components/input/searchbar";
-import { MiddlePanel, RightPanel } from "@/components/panel/sidePanel";
-
+import { isMd } from '@/functions/breakpoint';
+import { SearchBar } from '@/components/input/searchbar';
+import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
 
 const searchBys: {
   name: string;
@@ -131,12 +130,12 @@ function Summary() {
   return (
     <div id='summary-page'>
       <div className='popular-content-container'>
-        <div className='popular-content-title'>
+        <div className='popular-content-title  ml-6!'>
           {t('page.summary.title.recommend')}
         </div>
         <Carousel
           size={isMd() ? 3 : 1}
-          className='popular-content mx-auto md:mx-0!'
+          className='popular-content mx-auto! md:mx-0!'
         >
           {recommendSummaries.map((summary, index) => (
             <CarouselSummaryCard
@@ -161,9 +160,10 @@ function Summary() {
         <div className='lower-content-container md:flex'>
           <MiddlePanel className='left-container'>
             <SearchBar
-              placeholder={t("page.summary.search.placeholder")}
+              placeholder={t('page.summary.search.placeholder')}
               value={search}
-              onChange={(e) => setSearch(e.target.value)}>
+              onChange={(e) => setSearch(e.target.value)}
+            >
               <SearchDropdown
                 searchBys={searchBys}
                 searchByIdx={searchByIdx}
