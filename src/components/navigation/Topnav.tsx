@@ -42,7 +42,7 @@ import ProfileIcon from '../base/ProfileIcon';
 import KR from '@/assets/images/flags/kr.svg?react';
 import US from '@/assets/images/flags/us.svg?react';
 
-import { TopNavSearchBar } from "@/components/input/searchbar";
+import { TopNavSearchBar } from '@/components/input/searchbar';
 
 const navTabs: LinkItemType[] = [
   {
@@ -191,7 +191,6 @@ function Topnav() {
           </div>
 
           <TopNavSearchBar />
-
         </div>
 
         <div className='lower-container hidden md:block'>
@@ -228,19 +227,10 @@ function Topnav() {
           </div>
         </div>
 
-        <Drawer
-          open={drawerOpen}
-          onClose={() => setDrawerOpen(false)}
-          PaperProps={{
-            sx: {
-              top: '33%',
-              height: '66%', // 전체 높이의 2/3만큼만 차지
-            },
-          }}
-        >
-          <Box className='w-screen! h-1/2!'>
-            <div className='flex justify-between px-10!'>
-              <span>탐색</span>
+        <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
+          <Box className='w-[60vw]'>
+            <div className='flex justify-between px-5!'>
+              <span className='text-2xl! py-6!'>탐색</span>
               <IconButton onClick={() => setDrawerOpen(false)}>
                 <FontAwesomeIcon icon={faXmark} />
               </IconButton>
