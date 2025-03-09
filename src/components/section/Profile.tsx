@@ -1,22 +1,22 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import axios from "axios";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import axios from 'axios';
 
-import FriendListModal from "@/components/modal/FriendListModal";
-import EditProfileModal from "@/components/modal/EditProfileModal";
+import FriendListModal from '@/components/modal/FriendListModal';
+import EditProfileModal from '@/components/modal/EditProfileModal';
 
-import { UserType } from "@/types/data";
-import { useAppDispatch, useAppSelector } from "@/stores/hooks";
-import { selectUser } from "@/stores/user";
-import { useNavigate } from "react-router-dom";
-import ProfileIcon from "@/components/base/ProfileIcon";
+import { UserType } from '@/types/data';
+import { useAppDispatch, useAppSelector } from '@/stores/hooks';
+import { selectUser } from '@/stores/user';
+import { useNavigate } from 'react-router-dom';
+import ProfileIcon from '@/components/base/ProfileIcon';
 import {
   MyTabs,
   MyTabsCandidate,
   UserTabs,
   UserTabsCandidate,
-} from "@/types/initialValue";
-import { useTranslation } from "react-i18next";
-import { updateGlobalState } from "@/stores/globalStates";
+} from '@/types/initialValue';
+import { useTranslation } from 'react-i18next';
+import { updateGlobalState } from '@/stores/globalStates';
 
 function Profile({
   userProfile,
@@ -34,7 +34,7 @@ function Profile({
       UserTabs
     );
   const [inherentCurrentTab, setInherentCurrentTab] =
-    useState<MyTabsCandidate>("/post");
+    useState<MyTabsCandidate>('/post');
   const [showFriendsModal, setShowFriendsModal] = useState(false);
   const [showEditProfileModal, setShowEditProfileModal] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -52,7 +52,7 @@ function Profile({
     }
     if (user.id != 0 && userProfile.id == user.id) {
       setTabs(MyTabs);
-      navigate("/mypage");
+      navigate('/mypage');
     } else {
       setTabs(UserTabs);
     }
@@ -108,8 +108,9 @@ function Profile({
                   className='edit-profile'
                   onClick={() => {
                     setShowEditProfileModal(true);
-                  }}>
-                  {t("component.section.profile.button.edit-profile")}
+                  }}
+                >
+                  {t('component.section.profile.button.edit-profile')}
                 </button>
               ) : (
                 <button
@@ -120,10 +121,11 @@ function Profile({
                     } else {
                       follow();
                     }
-                  }}>
+                  }}
+                >
                   {isFollowing
-                    ? t("component.section.profile.button.unfollow")
-                    : t("component.section.profile.button.follow")}
+                    ? t('component.section.profile.button.unfollow')
+                    : t('component.section.profile.button.follow')}
                 </button>
               )}
             </div>
@@ -136,25 +138,27 @@ function Profile({
               className='follower'
               onClick={() => {
                 setShowFriendsModal(true);
-              }}>
-              {t("component.section.profile.text.follower-prefix")}
+              }}
+            >
+              {t('component.section.profile.text.follower-prefix')}
               {userProfile.follower_num}
-              {t("component.section.profile.text.follower-postfix")}
+              {t('component.section.profile.text.follower-postfix')}
             </div>
             <div
               className='following'
               onClick={() => {
                 setShowFriendsModal(true);
-              }}>
-              {t("component.section.profile.text.following-prefix")}
+              }}
+            >
+              {t('component.section.profile.text.following-prefix')}
               {userProfile.following_num}
-              {t("component.section.profile.text.following-postfix")}
+              {t('component.section.profile.text.following-postfix')}
             </div>
           </div>
           <div className='introduction-container'>
             <pre className='introduction'>
               {userProfile.introduction ??
-                t("component.section.profile.text.no-introduction")}
+                t('component.section.profile.text.no-introduction')}
             </pre>
           </div>
         </div>
@@ -162,13 +166,13 @@ function Profile({
           {tabs.map((tab, idx) => {
             return (
               <div
-                key={"tab" + idx}
+                key={'tab' + idx}
                 className={[
-                  "tab-item",
+                  'tab-item',
                   (currentTab ?? inherentCurrentTab) == tab.url
-                    ? "current-tab"
-                    : "",
-                ].join(" ")}
+                    ? 'current-tab'
+                    : '',
+                ].join(' ')}
                 data-value={tab.url}
                 onClick={(e) => {
                   (setCurrentTab ?? setInherentCurrentTab)(
@@ -176,7 +180,8 @@ function Profile({
                       | MyTabsCandidate
                       | UserTabsCandidate
                   );
-                }}>
+                }}
+              >
                 {t(tab.text)}
               </div>
             );

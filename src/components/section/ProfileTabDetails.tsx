@@ -1,9 +1,9 @@
-import { MyTabsCandidate } from "@/types/initialValue";
-import WritePostCard from "@/components/card/WritePostCard";
-import PostCard from "@/components/card/PostCard";
-import WriteSummaryCard from "@/components/card/WriteSummaryCard";
-import InfiniteScroll from "@/components/base/InfiniteScroll";
-import { useEffect, useRef, useState } from "react";
+import { MyTabsCandidate } from '@/types/initialValue';
+import WritePostCard from '@/components/card/WritePostCard';
+import PostCard from '@/components/card/PostCard';
+import WriteSummaryCard from '@/components/card/WriteSummaryCard';
+import InfiniteScroll from '@/components/base/InfiniteScroll';
+import { useEffect, useRef, useState } from 'react';
 import {
   DebateType,
   MyBookType,
@@ -11,25 +11,25 @@ import {
   PaymentType,
   SummaryType,
   UserType,
-} from "@/types/data";
-import { selectUser } from "@/stores/user";
-import { useAppSelector } from "@/stores/hooks";
-import SummaryCard from "@/components/card/SummaryCard";
-import Book from "@/components/base/Book";
-import axios from "axios";
-import noImage from "@/assets/images/no-item.svg";
-import { Link } from "react-router-dom";
-import { CircularProgress } from "@mui/material";
-import WriteDebateCard from "@/components/card/WriteDebateCard";
-import DebateCard from "@/components/card/DebateCard";
-import PaymentCard from "@/components/card/PaymentCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+} from '@/types/data';
+import { selectUser } from '@/stores/user';
+import { useAppSelector } from '@/stores/hooks';
+import SummaryCard from '@/components/card/SummaryCard';
+import Book from '@/components/base/Book';
+import axios from 'axios';
+import noImage from '@/assets/images/no-item.svg';
+import { Link } from 'react-router-dom';
+import { CircularProgress } from '@mui/material';
+import WriteDebateCard from '@/components/card/WriteDebateCard';
+import DebateCard from '@/components/card/DebateCard';
+import PaymentCard from '@/components/card/PaymentCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faChevronLeft,
   faChevronRight,
-} from "@fortawesome/free-solid-svg-icons";
-import { getDateTime } from "@/functions";
-import { useTranslation } from "react-i18next";
+} from '@fortawesome/free-solid-svg-icons';
+import { getDateTime } from '@/functions';
+import { useTranslation } from 'react-i18next';
 
 function ProfileTabDetails({
   userProfile = undefined,
@@ -82,7 +82,7 @@ function ProfileTabDetails({
   const { t } = useTranslation();
 
   useEffect(() => {
-    if (currentTab === "/library" && userProfile && userProfile.id != 0) {
+    if (currentTab === '/library' && userProfile && userProfile.id != 0) {
       if (!hasLoadedMyBook) {
         axios
           .get(`/api/user/${userProfile.id}/mybooks`, {
@@ -118,7 +118,7 @@ function ProfileTabDetails({
   return (
     <div id='profile-tab-details'>
       {userProfile && userProfile?.id != 0 ? (
-        currentTab === "/post" ? (
+        currentTab === '/post' ? (
           <div className='post-tab'>
             {user.id != 0 ? (
               userProfile.id == user.id ? (
@@ -137,7 +137,7 @@ function ProfileTabDetails({
               setLikes={setPostLikes}
               hasNoItem={posts.length === 0}
               hasNoItemMessage={t(
-                "component.section.profile-tab-details.item.no-post-item"
+                'component.section.profile-tab-details.item.no-post-item'
               )}
               condition={userProfile && userProfile.id != 0}
               refreshCondition={didPost}
@@ -147,10 +147,11 @@ function ProfileTabDetails({
               }}
               afterFetchFail={async () => {
                 await setDidPost(false);
-              }}>
+              }}
+            >
               {posts.map((post) => (
                 <PostCard
-                  key={"post" + post.id}
+                  key={'post' + post.id}
                   post={post}
                   hasLiked={postLikes.includes(post.id)}
                   setHasLiked={setPostLikes}
@@ -158,7 +159,7 @@ function ProfileTabDetails({
               ))}
             </InfiniteScroll>
           </div>
-        ) : userProfile && currentTab === "/summary" ? (
+        ) : userProfile && currentTab === '/summary' ? (
           <div className='summary-tab'>
             {user.id != 0 ? (
               userProfile.id == user.id ? (
@@ -177,12 +178,13 @@ function ProfileTabDetails({
               setLikes={setSummaryLikes}
               hasNoItem={summaries.length === 0}
               hasNoItemMessage={t(
-                "component.section.profile-tab-details.item.no-summary-item"
+                'component.section.profile-tab-details.item.no-summary-item'
               )}
-              condition={userProfile && userProfile.id != 0}>
+              condition={userProfile && userProfile.id != 0}
+            >
               {summaries.map((summary, index) => (
                 <SummaryCard
-                  key={"summary" + index}
+                  key={'summary' + index}
                   summary={summary}
                   hasLiked={summaryLikes.includes(summary.id)}
                   setHasLiked={setSummaryLikes}
@@ -190,24 +192,24 @@ function ProfileTabDetails({
               ))}
             </InfiniteScroll>
           </div>
-        ) : userProfile && currentTab === "/library" ? (
+        ) : userProfile && currentTab === '/library' ? (
           <div className='library-tab'>
             <div className='currently-reading-books-container'>
               <div className='currently-reading-header'>
                 <div className='currently-reading-title'>
                   {t(
-                    "component.section.profile-tab-details.item.currently-reading-book-prefix"
-                  ) + " "}
+                    'component.section.profile-tab-details.item.currently-reading-book-prefix'
+                  ) + ' '}
                   <span className='item-count'>
                     {totalMyBooks}
                     {t(
-                      "component.section.profile-tab-details.item.currently-reading-book-postfix"
+                      'component.section.profile-tab-details.item.currently-reading-book-postfix'
                     )}
                   </span>
                 </div>
                 <div className='show-more'>
-                  {t("component.section.profile-tab-details.item.show-more") +
-                    " >"}
+                  {t('component.section.profile-tab-details.item.show-more') +
+                    ' >'}
                 </div>
               </div>
               {!hasLoadedMyBook ? (
@@ -220,18 +222,18 @@ function ProfileTabDetails({
                   <img src={noImage} alt='no image' width='122px' />
                   <p className='no-item-message'>
                     {t(
-                      "component.section.profile-tab-details.item.no-book-item"
+                      'component.section.profile-tab-details.item.no-book-item'
                     )}
                   </p>
                   <Link to='/search' className='go-to'>
-                    {t("component.section.profile-tab-details.go-to.search") +
-                      " >"}
+                    {t('component.section.profile-tab-details.go-to.search') +
+                      ' >'}
                   </Link>
                 </div>
               ) : (
                 <div className='currently-reading-books'>
                   {myBooks.slice(0, 4).map((mybook, index) => {
-                    return <Book key={"book" + index} book={mybook.book} />;
+                    return <Book key={'book' + index} book={mybook.book} />;
                   })}
                 </div>
               )}
@@ -240,18 +242,18 @@ function ProfileTabDetails({
               <div className='currently-reading-header'>
                 <div className='currently-reading-title'>
                   {t(
-                    "component.section.profile-tab-details.item.currently-reading-summary-prefix"
-                  ) + " "}
+                    'component.section.profile-tab-details.item.currently-reading-summary-prefix'
+                  ) + ' '}
                   <span className='item-count'>
                     {totalPurchasedSummaries}
                     {t(
-                      "component.section.profile-tab-details.item.currently-reading-summary-postfix"
+                      'component.section.profile-tab-details.item.currently-reading-summary-postfix'
                     )}
                   </span>
                 </div>
                 <div className='show-more'>
-                  {t("component.section.profile-tab-details.item.show-more") +
-                    " >"}
+                  {t('component.section.profile-tab-details.item.show-more') +
+                    ' >'}
                 </div>
               </div>
               {!hasLoadedPurchaseSummary ? (
@@ -264,12 +266,12 @@ function ProfileTabDetails({
                   <img src={noImage} alt='no image' width='122px' />
                   <p className='no-item-message'>
                     {t(
-                      "component.section.profile-tab-details.item.no-summary-item"
+                      'component.section.profile-tab-details.item.no-summary-item'
                     )}
                   </p>
                   <Link to='/summary' className='go-to'>
-                    {t("component.section.profile-tab-details.go-to.summary") +
-                      " >"}
+                    {t('component.section.profile-tab-details.go-to.summary') +
+                      ' >'}
                   </Link>
                 </div>
               ) : (
@@ -277,7 +279,7 @@ function ProfileTabDetails({
                   {purchasedSummaries.slice(0, 4).map((summary, index) => {
                     return (
                       <SummaryCard
-                        key={"purchased_summary" + index}
+                        key={'purchased_summary' + index}
                         summary={summary}
                         hasLiked={purchasedSummaryLikes.includes(summary.id)}
                         setHasLiked={setPurchasedSummaryLikes}
@@ -288,7 +290,7 @@ function ProfileTabDetails({
               )}
             </div>
           </div>
-        ) : userProfile && currentTab === "/debate" ? (
+        ) : userProfile && currentTab === '/debate' ? (
           <div className='debate-tab'>
             {user.id != 0 ? (
               userProfile.id == user.id ? (
@@ -307,12 +309,13 @@ function ProfileTabDetails({
               setLikes={setDebateLikes}
               hasNoItem={debates.length === 0}
               hasNoItemMessage={t(
-                "component.section.profile-tab-details.item.no-debate-item"
+                'component.section.profile-tab-details.item.no-debate-item'
               )}
-              condition={userProfile && userProfile.id != 0}>
+              condition={userProfile && userProfile.id != 0}
+            >
               {debates.map((debate, index) => (
                 <DebateCard
-                  key={"debate" + index}
+                  key={'debate' + index}
                   hasLiked={debateLikes.includes(debate.id)}
                   setHasLiked={setDebateLikes}
                   debate={debate}
@@ -320,7 +323,7 @@ function ProfileTabDetails({
               ))}
             </InfiniteScroll>
           </div>
-        ) : userProfile && currentTab === "/payment" ? (
+        ) : userProfile && currentTab === '/payment' ? (
           <div className='payment-tab'>
             <div className='select-month-container'>
               <div className='month-box'>
@@ -333,7 +336,8 @@ function ProfileTabDetails({
                         paymentCurTime.setMonth(paymentCurTime.getMonth() - 1)
                       )
                     );
-                  }}>
+                  }}
+                >
                   <FontAwesomeIcon icon={faChevronLeft} />
                 </div>
                 <div
@@ -345,12 +349,13 @@ function ProfileTabDetails({
                         paymentCurTime.setMonth(paymentCurTime.getMonth() + 1)
                       )
                     );
-                  }}>
+                  }}
+                >
                   <FontAwesomeIcon icon={faChevronRight} />
                 </div>
                 <div className='cur-month'>
                   {paymentCurTime.getFullYear()}
-                  {t("component.section.profile-tab-details.time.year")}{" "}
+                  {t('component.section.profile-tab-details.time.year')}{' '}
                   {t(
                     `component.section.profile-tab-details.time.month.${(
                       paymentCurTime.getMonth() + 1
@@ -358,7 +363,7 @@ function ProfileTabDetails({
                   )}
                 </div>
                 <div className='total-payment'>
-                  {t("component.section.profile-tab-details.item.currency")}
+                  {t('component.section.profile-tab-details.item.currency')}
                   {payments
                     .filter((payment) => {
                       let time = new Date(
@@ -408,9 +413,10 @@ function ProfileTabDetails({
                 </div>
               }
               condition={userProfile && userProfile.id != 0}
-              dependency={[isCurTimeChanged.current]}>
+              dependency={[isCurTimeChanged.current]}
+            >
               {payments.map((payment, index) => (
-                <PaymentCard key={"payment" + index} payment={payment} />
+                <PaymentCard key={'payment' + index} payment={payment} />
               ))}
             </InfiniteScroll>
           </div>
@@ -418,7 +424,7 @@ function ProfileTabDetails({
       ) : null}
       <div
         style={{
-          height: "100px",
+          height: '100px',
         }}
       />
     </div>

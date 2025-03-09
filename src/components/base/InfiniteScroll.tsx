@@ -1,9 +1,9 @@
-import axios from "axios";
-import { CircularProgress } from "@mui/material";
-import { useEffect, useRef, useState } from "react";
-import NoItem from "@/assets/images/no-item.svg";
-import { selectUser } from "@/stores/user";
-import { useAppSelector } from "@/stores/hooks";
+import axios from 'axios';
+import { CircularProgress } from '@mui/material';
+import { useEffect, useRef, useState } from 'react';
+import NoItem from '@/assets/images/no-item.svg';
+import { selectUser } from '@/stores/user';
+import { useAppSelector } from '@/stores/hooks';
 
 /**
  * 무한 스크롤
@@ -38,7 +38,7 @@ function InfiniteScroll({
   api,
   api_params = {},
   likes_api = undefined,
-  itemId = "id",
+  itemId = 'id',
   setItems,
   page = undefined,
   setPage = undefined,
@@ -51,7 +51,7 @@ function InfiniteScroll({
   afterFetchSuccess = undefined,
   afterFetchFail = undefined,
   hasNoItem = false,
-  hasNoItemMessage = "아직 항목이 없습니다",
+  hasNoItemMessage = '아직 항목이 없습니다',
   hasNoItemComponent = undefined,
   condition = true,
   refreshCondition = false,
@@ -128,8 +128,8 @@ function InfiniteScroll({
             await axios
               .get(
                 `/api/${likes_api}?${items
-                  .map((item) => "ids=" + item[itemId])
-                  .join("&")}`
+                  .map((item) => 'ids=' + item[itemId])
+                  .join('&')}`
               )
               .then((newLikes) => {
                 setLikes((prvLikes) => prvLikes.concat(newLikes.data));
@@ -153,9 +153,9 @@ function InfiniteScroll({
   const observer = new IntersectionObserver(onIntersection);
 
   useEffect(() => {
-    console.log("InfiniteScroll useEffect");
+    console.log('InfiniteScroll useEffect');
     if (refreshCondition) {
-      console.log("InfiniteScroll useEffect refreshCondition");
+      console.log('InfiniteScroll useEffect refreshCondition');
       (setPage ?? setInherentPage)(1);
       (setHasMore ?? setInherentHasMore)(true);
       setLikes?.([]);
@@ -185,11 +185,12 @@ function InfiniteScroll({
       {(hasMore ?? inherentHasMore) && (
         <div
           style={{
-            display: "flex",
-            justifyContent: "center",
-            marginTop: "20px",
-            marginBottom: "20px",
-          }}>
+            display: 'flex',
+            justifyContent: 'center',
+            marginTop: '20px',
+            marginBottom: '20px',
+          }}
+        >
           <CircularProgress ref={elementRef} className='loading-spinner' />
           <span className='visually-hidden'>Loading...</span>
         </div>
@@ -199,15 +200,16 @@ function InfiniteScroll({
         (hasNoItemComponent ?? (
           <div
             style={{
-              display: "flex",
-              flexDirection: "column",
-              alignItems: "center",
-              justifyContent: "center",
-              marginTop: "50px",
-              color: "#666565",
-              fontSize: "20px",
-              fontWeight: "400",
-            }}>
+              display: 'flex',
+              flexDirection: 'column',
+              alignItems: 'center',
+              justifyContent: 'center',
+              marginTop: '50px',
+              color: '#666565',
+              fontSize: '20px',
+              fontWeight: '400',
+            }}
+          >
             <img src={NoItem} alt='no item' />
             <span>{hasNoItemMessage}</span>
           </div>

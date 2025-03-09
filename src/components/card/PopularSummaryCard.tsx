@@ -1,14 +1,14 @@
-import { SummaryType } from "@/types/data";
-import ProfileIcon from "@/components/base/ProfileIcon";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { SummaryType } from '@/types/data';
+import ProfileIcon from '@/components/base/ProfileIcon';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faComment,
   faHeart as faHeartRegular,
-} from "@fortawesome/free-regular-svg-icons";
-import { faHeart as faHeartSolid } from "@fortawesome/free-solid-svg-icons";
-import { Dispatch, SetStateAction } from "react";
-import axios from "axios";
-import { useNavigate } from "react-router-dom";
+} from '@fortawesome/free-regular-svg-icons';
+import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
+import { Dispatch, SetStateAction } from 'react';
+import axios from 'axios';
+import { useNavigate } from 'react-router-dom';
 
 function PopularSummaryCard({
   summary,
@@ -38,44 +38,44 @@ function PopularSummaryCard({
   };
 
   return (
-    <div id="popular-summary-card">
+    <div id='popular-summary-card'>
       <div
-        className="summary-title"
+        className='summary-title'
         onClick={() => navigate(`/summary/${summary.id}`)}
       >
         {summary.title}
       </div>
       <div
-        className="summary-content"
+        className='summary-content'
         onClick={() => navigate(`/summary/${summary.id}`)}
       >
         {summary.free_content}
       </div>
-      <div className="info-container">
-        <div className="user-info">
+      <div className='info-container'>
+        <div className='user-info'>
           <ProfileIcon profile={summary.user.profile} size={15} />
-          <div className="user-name">{summary.user.name}</div>
+          <div className='user-name'>{summary.user.name}</div>
         </div>
-        <div className="additional-info">
-          <div className="like-container">
+        <div className='additional-info'>
+          <div className='like-container'>
             {hasLiked ? (
               <FontAwesomeIcon
                 icon={faHeartSolid}
                 onClick={doUnlike}
-                className="like-icon liked"
+                className='like-icon liked'
               />
             ) : (
               <FontAwesomeIcon
                 icon={faHeartRegular}
                 onClick={doLike}
-                className="like-icon"
+                className='like-icon'
               />
             )}
-            <div className="like-text">{summary.likes_num}</div>
+            <div className='like-text'>{summary.likes_num}</div>
           </div>
-          <div className="comment-container">
+          <div className='comment-container'>
             <FontAwesomeIcon icon={faComment} />
-            <div className="comment-text">{summary.comments_num}</div>
+            <div className='comment-text'>{summary.comments_num}</div>
           </div>
         </div>
       </div>

@@ -1,9 +1,9 @@
-import { Dispatch, SetStateAction, useState } from "react";
+import { Dispatch, SetStateAction, useState } from 'react';
 
-import { ArrowDropDown } from "@mui/icons-material";
-import { ButtonBase, Menu, MenuItem } from "@mui/material";
+import { ArrowDropDown } from '@mui/icons-material';
+import { ButtonBase, Menu, MenuItem } from '@mui/material';
 
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
 function SearchDropdown({
   searchBys,
@@ -23,7 +23,7 @@ function SearchDropdown({
 
   return (
     <>
-      <div className="search-by-dropdown">
+      <div className='search-by-dropdown'>
         <ButtonBase
           onClick={(event) => {
             setAnchorEl(event.currentTarget);
@@ -34,7 +34,7 @@ function SearchDropdown({
         <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>
           {searchBys.map((searchBy, index) => (
             <MenuItem
-              key={"search-by" + index}
+              key={'search-by' + index}
               onClick={() => {
                 setSearchByIdx(index);
                 setAnchorEl(null);

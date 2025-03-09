@@ -1,22 +1,22 @@
-import { useNavigate, useParams } from "react-router-dom";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faHeart } from "@fortawesome/free-regular-svg-icons";
-import { faCartPlus } from "@fortawesome/free-solid-svg-icons/faCartPlus";
+import { useNavigate, useParams } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faHeart } from '@fortawesome/free-regular-svg-icons';
+import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
 import {
   faBars,
   faChevronRight,
   faPen,
   faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-import ProfileIcon from "@/components/base/ProfileIcon";
-import { useEffect, useState } from "react";
-import axios from "axios";
-import { DebateType, PaymentType } from "@/types/data";
-import { InitialDebate } from "@/types/initialValue";
-import { getDateTime, getTimeDiff } from "@/functions";
-import Image from "@/components/base/Image";
-import { selectUser } from "@/stores/user";
-import { useAppSelector } from "@/stores/hooks";
+} from '@fortawesome/free-solid-svg-icons';
+import ProfileIcon from '@/components/base/ProfileIcon';
+import { useEffect, useState } from 'react';
+import axios from 'axios';
+import { DebateType, PaymentType } from '@/types/data';
+import { InitialDebate } from '@/types/initialValue';
+import { getDateTime, getTimeDiff } from '@/functions';
+import Image from '@/components/base/Image';
+import { selectUser } from '@/stores/user';
+import { useAppSelector } from '@/stores/hooks';
 import {
   Drawer,
   IconButton,
@@ -25,7 +25,7 @@ import {
   ListItemButton,
   ListItemIcon,
   Paper,
-} from "@mui/material";
+} from '@mui/material';
 
 function DebateDetail() {
   const { debate_id } = useParams();
@@ -48,13 +48,13 @@ function DebateDetail() {
     // 추후 PG사 연동하여 API 작성
     // 현재는 결제 API가 없으므로 무조건 성공으로 가정
     console.log({
-      product_type: "D",
+      product_type: 'D',
       product_id: debate.id,
       price: debate.price,
       quantity: 1,
     });
     axios.post(`/api/purchase`, {
-      product_type: "D",
+      product_type: 'D',
       product_id: debate.id,
       price: debate.price,
       quantity: 1,
@@ -63,7 +63,7 @@ function DebateDetail() {
 
   const cancelPurchase = () => {
     axios.delete(`/api/purchase/${purchaseId}`).then((res) => {
-      console.log("Cancelled", res.data);
+      console.log('Cancelled', res.data);
     });
   };
 
@@ -77,7 +77,7 @@ function DebateDetail() {
 
   const doDelete = () => {
     axios.delete(`/api/debate/${debate.id}`).then(() => {
-      navigate("/debate");
+      navigate('/debate');
     });
   };
 
@@ -111,7 +111,8 @@ function DebateDetail() {
           <div className='for-mobile md:hidden'>
             <IconButton
               className='drawer-button md:hidden!'
-              onClick={() => setDrawerOpen(true)}>
+              onClick={() => setDrawerOpen(true)}
+            >
               <FontAwesomeIcon icon={faBars} />
             </IconButton>
             <Drawer
@@ -120,9 +121,10 @@ function DebateDetail() {
               onClose={() => setDrawerOpen(false)}
               PaperProps={{
                 sx: {
-                  bgcolor: "transparent",
+                  bgcolor: 'transparent',
                 },
-              }}>
+              }}
+            >
               <Paper className='rounded-t-2xl!'>
                 <hr className='w-15 h-1 mx-auto my-4 bg-gray-100 border-0 rounded-sm dark:bg-gray-700' />
                 <p className='text-center'>게시글 옵션</p>
@@ -130,7 +132,8 @@ function DebateDetail() {
                   <ListItem>
                     <ListItemButton
                       className='edit'
-                      onClick={() => alert("미구현입니당")}>
+                      onClick={() => alert('미구현입니당')}
+                    >
                       <ListItemIcon>
                         <FontAwesomeIcon icon={faPen} />
                       </ListItemIcon>
@@ -206,7 +209,7 @@ function DebateDetail() {
             onClick={() => cancelPurchase()} // 결제 테스트용
           >
             <FontAwesomeIcon icon={faCartPlus} />
-            {""} 찜
+            {''} 찜
           </button>
           <span
             className='payment-box__amount'
@@ -215,7 +218,7 @@ function DebateDetail() {
             1,000 원
           </span>
           <button className='payment-box__button' onClick={doPurchase}>
-            결제하기{" "}
+            결제하기{' '}
             <FontAwesomeIcon
               icon={faChevronRight}
               className='payment-box__button-icon'

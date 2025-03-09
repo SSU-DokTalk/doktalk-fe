@@ -1,4 +1,4 @@
-import { LoginUserInfoType } from "@/types";
+import { LoginUserInfoType } from '@/types';
 import {
   UserType,
   PostType,
@@ -7,16 +7,16 @@ import {
   BookType,
   PaymentType,
   SummaryType,
-} from "@/types/data";
+} from '@/types/data';
 
 export const initialLoginUserInfo: LoginUserInfoType = {
-  email: "",
-  password: "",
+  email: '',
+  password: '',
 };
 
 export const InitialUser: UserType = {
   id: 0,
-  email: "",
+  email: '',
   profile: undefined,
   name: undefined,
   gender: undefined,
@@ -24,7 +24,7 @@ export const InitialUser: UserType = {
   introduction: undefined,
   follower_num: 0,
   following_num: 0,
-  role: "USER",
+  role: 'USER',
   created: new Date(),
   updated: new Date(),
   is_deleted: true,
@@ -34,8 +34,8 @@ export const InitialPost: PostType = {
   id: 0,
   user_id: 0,
   user: InitialUser as BasicUserType,
-  title: "",
-  content: "",
+  title: '',
+  content: '',
   files: undefined,
   likes_num: 0,
   comments_num: 0,
@@ -45,12 +45,12 @@ export const InitialPost: PostType = {
 
 export const InitialBook: BookType = {
   isbn: 0,
-  title: "",
-  image: "",
-  author: "",
-  publisher: "",
-  pubdate: "",
-  description: "",
+  title: '',
+  image: '',
+  author: '',
+  publisher: '',
+  pubdate: '',
+  description: '',
   in_library_num: 0,
 };
 
@@ -64,8 +64,8 @@ export const InitialDebate: DebateType = {
   link: undefined,
   held_at: new Date(),
   price: 0,
-  title: "",
-  content: "",
+  title: '',
+  content: '',
   category: 0,
   limit: 2,
   likes_num: 0,
@@ -81,9 +81,9 @@ export const InitialSummary: SummaryType = {
   user: InitialUser as BasicUserType,
   isbn: 0,
   book: InitialBook,
-  title: "",
-  free_content: "",
-  charged_content: "",
+  title: '',
+  free_content: '',
+  charged_content: '',
   price: 0,
   category: 0,
   likes_num: 0,
@@ -97,7 +97,7 @@ export const InitialPayment: PaymentType = {
   id: 0,
   user_id: 0,
   user: InitialUser as BasicUserType,
-  product_type: "D",
+  product_type: 'D',
   product_id: 0,
   content: undefined,
   price: 0,
@@ -108,36 +108,36 @@ export const InitialPayment: PaymentType = {
   deleted_at: undefined,
 };
 
-export type UserTabsCandidate = "/post" | "/library";
+export type UserTabsCandidate = '/post' | '/library';
 export type MyTabsCandidate =
   | UserTabsCandidate
-  | "/summary"
-  | "/debate"
-  | "/payment";
+  | '/summary'
+  | '/debate'
+  | '/payment';
 
 export const MyTabs: {
   text: string;
   url: MyTabsCandidate;
 }[] = [
   {
-    text: "component.section.profile.tab.my-tab.post",
-    url: "/post",
+    text: 'component.section.profile.tab.my-tab.post',
+    url: '/post',
   },
   {
-    text: "component.section.profile.tab.my-tab.summary",
-    url: "/summary",
+    text: 'component.section.profile.tab.my-tab.summary',
+    url: '/summary',
   },
   {
-    text: "component.section.profile.tab.my-tab.library",
-    url: "/library",
+    text: 'component.section.profile.tab.my-tab.library',
+    url: '/library',
   },
   {
-    text: "component.section.profile.tab.my-tab.debate",
-    url: "/debate",
+    text: 'component.section.profile.tab.my-tab.debate',
+    url: '/debate',
   },
   {
-    text: "component.section.profile.tab.my-tab.payment",
-    url: "/payment",
+    text: 'component.section.profile.tab.my-tab.payment',
+    url: '/payment',
   },
 ];
 export const UserTabs: {
@@ -145,11 +145,11 @@ export const UserTabs: {
   url: UserTabsCandidate;
 }[] = [
   {
-    text: "component.section.profile.tab.user-tab.post",
-    url: "/post",
+    text: 'component.section.profile.tab.user-tab.post',
+    url: '/post',
   },
   {
-    text: "component.section.profile.tab.user-tab.library",
-    url: "/library",
+    text: 'component.section.profile.tab.user-tab.library',
+    url: '/library',
   },
 ];

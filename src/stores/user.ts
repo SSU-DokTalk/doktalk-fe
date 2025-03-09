@@ -1,22 +1,22 @@
-import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import type { RootState } from "@/stores/store";
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import type { RootState } from '@/stores/store';
 
 export interface UserState {
   id?: number;
   name?: string;
   profile?: string;
-  role?: "USER" | "ADMIN";
+  role?: 'USER' | 'ADMIN';
 }
 
 const initialState: UserState = {
   id: 0,
   name: undefined,
   profile: undefined,
-  role: "USER",
+  role: 'USER',
 };
 
 export const userSlice = createSlice({
-  name: "user",
+  name: 'user',
   initialState,
   reducers: {
     unsetUser: () => {
