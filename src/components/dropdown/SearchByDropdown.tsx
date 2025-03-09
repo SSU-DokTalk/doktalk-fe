@@ -28,7 +28,8 @@ function SearchDropdown({
           onClick={(event) => {
             setAnchorEl(event.currentTarget);
           }}
-        >
+          className='text-brand1! text-[15px] font-normal w-max p-2! pl-3!'>
+
           {t(searchBys[searchByIdx].name)} <ArrowDropDown />
         </ButtonBase>
         <Menu open={open} anchorEl={anchorEl} onClose={() => setAnchorEl(null)}>

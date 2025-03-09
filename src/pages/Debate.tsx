@@ -1,27 +1,28 @@
-// import { DUMMY_DEBATES } from "@/common/dummy_data";
-// import CarouselDebateCard from "@/components/card/CarouselDebateCard";
-// import Carousel from "@/components/carousel/Carousel";
-import { DebateType, SummaryType } from '@/types/data';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { forwardRef, useEffect, useRef, useState } from 'react';
-import IonIcon from '@reacticons/ionicons';
-import WriteIcon from '@/assets/images/write.svg?react';
-import DebateCard from '@/components/card/DebateCard';
-import InfiniteScroll from '@/components/base/InfiniteScroll';
-import PopularSummaryCard from '@/components/card/PopularSummaryCard';
-import { useTranslation } from 'react-i18next';
-import { useNavigate } from 'react-router-dom';
-import { useAppSelector } from '@/stores/hooks';
-import { selectUser } from '@/stores/user';
-import axios from 'axios';
-import useDebounce from '@/hooks/useDebounce';
-import { getDate, range } from '@/functions';
-import DatePicker from 'react-datepicker';
-import { getMonth, getYear } from 'date-fns';
-import CategoryCard from '@/components/card/CategoryCard';
-import SearchDropdown from '@/components/dropdown/SearchByDropdown';
-// import { isMd } from "@/functions/breakpoint";
+import { DUMMY_DEBATES } from "@/common/dummy_data";
+import CarouselDebateCard from "@/components/card/CarouselDebateCard";
+import Carousel from "@/components/carousel/Carousel";
+import { DebateType, SummaryType } from "@/types/data";
+import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { forwardRef, useEffect, useRef, useState } from "react";
+import IonIcon from "@reacticons/ionicons";
+import WriteIcon from "@/assets/images/write.svg?react";
+import DebateCard from "@/components/card/DebateCard";
+import InfiniteScroll from "@/components/base/InfiniteScroll";
+import PopularSummaryCard from "@/components/card/PopularSummaryCard";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
+import { useAppSelector } from "@/stores/hooks";
+import { selectUser } from "@/stores/user";
+import axios from "axios";
+import useDebounce from "@/hooks/useDebounce";
+import { getDate, range } from "@/functions";
+import DatePicker from "react-datepicker";
+import { getMonth, getYear } from "date-fns";
+import CategoryCard from "@/components/card/CategoryCard";
+import SearchDropdown from "@/components/dropdown/SearchByDropdown";
+import { isMd } from "@/functions/breakpoint";
+import { SearchBar } from "@/components/input/searchbar";
 
 const searchBys: {
   name: string;
@@ -185,30 +186,23 @@ function Debate() {
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
-            className='left-container mx-4! w-screen md:w-3/5'
+            className='left-container mx-4! w-screen'
           />
           {/* <div className='right-container'></div> */}
         </div>
         <div className='lower-content-container'>
-          <div className='left-container mx-4! md:w-3/5!'>
-            <div className='searchbox-container'>
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className='searchbox-icon'
-              />
+          <div className='left-container mx-4! w-full'>
+            <SearchBar
+              placeholder={t("page.debate.search.placeholder")}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}>
               <SearchDropdown
                 searchBys={searchBys}
                 searchByIdx={searchByIdx}
                 setSearchByIdx={setSearchByIdx}
               />
-              <input
-                type='text'
-                placeholder={t('page.debate.search.placeholder')}
-                className='searchbox'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
+            </SearchBar>
+        
             <div className='content-header'>
               <div className='sort-by'>
                 {sortBys.map((sortBy, index) => {

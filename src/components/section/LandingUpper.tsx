@@ -37,11 +37,8 @@ function LandingUpper() {
         {t('page.landing.title.recommend-postfix')}
       </div>
       <div className='container-contents mx-auto md:m-0!'>
-        <Carousel
-          items={debates}
-          size={isMd() ? 3 : 1}
-          className='container-contents-carousel'
-        >
+        <Carousel size={isMd() ? 3 : 1} className='container-contents-carousel'>
+
           {debates.map((debate, idx) => (
             <CarouselDebateCard
               key={'recommend-debate' + idx}

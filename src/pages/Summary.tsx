@@ -18,7 +18,10 @@ import useDebounce from '@/hooks/useDebounce';
 import CategoryCard from '@/components/card/CategoryCard';
 import SearchDropdown from '@/components/dropdown/SearchByDropdown';
 
-import { isMd } from '@/functions/breakpoint';
+import { isMd } from "@/functions/breakpoint";
+import { SearchBar } from "@/components/input/searchbar";
+import { MiddlePanel, RightPanel } from "@/components/panel/sidePanel";
+
 
 const searchBys: {
   name: string;
@@ -132,7 +135,6 @@ function Summary() {
           {t('page.summary.title.recommend')}
         </div>
         <Carousel
-          items={recommendSummaries}
           size={isMd() ? 3 : 1}
           className='popular-content mx-auto md:mx-0!'
         >
@@ -146,34 +148,29 @@ function Summary() {
       </div>
 
       <div className='content-container mx-4!'>
-        <div className='lower-content-container md:w-3/5!'>
-          <CategoryCard
-            categories={categories}
-            setCategories={setCategories}
-            className='left-container'
-          />
-          {/* <div className='right-container'></div> */}
+        <div className='lower-content-container md:flex'>
+          <MiddlePanel>
+            <CategoryCard
+              categories={categories}
+              setCategories={setCategories}
+              className='left-container'
+            />
+          </MiddlePanel>
+          <RightPanel />
         </div>
         <div className='lower-content-container md:flex'>
-          <div className='left-container md:w-3/5!'>
-            <div className='searchbox-container'>
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className='searchbox-icon'
-              />
+          <MiddlePanel className='left-container'>
+            <SearchBar
+              placeholder={t("page.summary.search.placeholder")}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}>
               <SearchDropdown
                 searchBys={searchBys}
                 searchByIdx={searchByIdx}
                 setSearchByIdx={setSearchByIdx}
               />
-              <input
-                type='text'
-                placeholder={t('page.summary.search.placeholder')}
-                className='searchbox'
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
+            </SearchBar>
+
             <div className='content-header'>
               <div className='sort-by'>
                 {sortBys.map((sortBy, index) => {
@@ -231,8 +228,9 @@ function Summary() {
                 ))}
               </InfiniteScroll>
             </div>
-          </div>
-          <div className='right-container hidden md:block'>
+          </MiddlePanel>
+
+          <RightPanel className='right-container hidden lg:block'>
             <div className='right-container-title'>
               {t('page.summary.title.popular')}
             </div>
@@ -246,7 +244,7 @@ function Summary() {
                 />
               ))}
             </div>
-          </div>
+          </RightPanel>
         </div>
       </div>
       <div className='footer' />

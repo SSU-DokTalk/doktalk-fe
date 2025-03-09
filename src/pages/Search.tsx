@@ -1,11 +1,10 @@
-import BookCard from '@/components/card/BookCard';
-import useDebounce from '@/hooks/useDebounce';
-import { BookType } from '@/types/data';
-import { faSearch } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { useEffect, useRef, useState } from 'react';
-import { useTranslation } from 'react-i18next';
-import InfiniteScroll from '@/components/base/InfiniteScroll';
+import BookCard from "@/components/card/BookCard";
+import useDebounce from "@/hooks/useDebounce";
+import { BookType } from "@/types/data";
+import { useEffect, useRef, useState } from "react";
+import { useTranslation } from "react-i18next";
+import InfiniteScroll from "@/components/base/InfiniteScroll";
+import { SearchBar } from "@/components/input/searchbar";
 
 const sortBys: {
   name: string;
@@ -49,17 +48,12 @@ function Search() {
   return (
     <div id='search-page' className='px-4! md:px-0! md:w-4/5'>
       <div className='page-container'>
-        <div className='page-title'>{t('page.search.title.page')}</div>
-        <div className='search-bar'>
-          <FontAwesomeIcon icon={faSearch} className='search-icon' />
-          <input
-            className='search-input'
-            type='text'
-            placeholder={t('page.search.search.placeholder')}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
+        <div className='page-title'>{t("page.search.title.page")}</div>
+        <SearchBar
+          placeholder={t("page.search.search.placeholder")}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
         <div className='result-container'>
           <div className='sort-by-container'>
             {sortBys.map((sortBy, index) => (
