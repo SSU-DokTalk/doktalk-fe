@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { DebateType, SummaryType } from '@/types/data';
 import SummaryCard from '@/components/card/SummaryCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faPen } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { DUMMY_SUMMARIES } from '@/common/dummy_data';
 import CarouselSummaryCard from '@/components/card/CarouselSummaryCard';
@@ -21,6 +21,7 @@ import SearchDropdown from '@/components/dropdown/SearchByDropdown';
 import { isMd } from '@/functions/breakpoint';
 import { SearchBar } from '@/components/input/searchbar';
 import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
+import { Fab, IconButton } from '@mui/material';
 
 const searchBys: {
   name: string;
@@ -192,10 +193,28 @@ function Summary() {
                   );
                 })}
               </div>
-              <button onClick={() => navigate('/summary/create')}>
-                <span>{t('page.summary.button.write')}</span>
-                <WriteIcon className='write-icon' width={17} fill={'#ffffff'} />
-              </button>
+              <div className='create-summary'>
+                <div className='for-pc hidden md:block'>
+                  <button
+                    className='create-summary-button'
+                    onClick={() => navigate('/summary/create')}
+                  >
+                    <span>{t('page.summary.button.write')}</span>
+                    <WriteIcon
+                      className='write-icon'
+                      width={17}
+                      fill={'#ffffff'}
+                    />
+                  </button>
+                </div>
+                <div className='for-mobile md:hidden'>
+                  <Fab className='create-summary-floating-button fixed! bottom-20 right-4 bg-brand1!'>
+                    <IconButton onClick={() => navigate('/summary/create')}>
+                      <FontAwesomeIcon icon={faPen} color='white' />
+                    </IconButton>
+                  </Fab>
+                </div>
+              </div>
             </div>
             <div className='content-container'>
               <InfiniteScroll

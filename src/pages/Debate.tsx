@@ -2,7 +2,7 @@ import { DUMMY_DEBATES } from '@/common/dummy_data';
 import CarouselDebateCard from '@/components/card/CarouselDebateCard';
 import Carousel from '@/components/carousel/Carousel';
 import { DebateType, SummaryType } from '@/types/data';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import IonIcon from '@reacticons/ionicons';
@@ -23,6 +23,7 @@ import CategoryCard from '@/components/card/CategoryCard';
 import SearchDropdown from '@/components/dropdown/SearchByDropdown';
 import { isMd } from '@/functions/breakpoint';
 import { SearchBar } from '@/components/input/searchbar';
+import { Fab, IconButton } from '@mui/material';
 
 const searchBys: {
   name: string;
@@ -296,13 +297,29 @@ function Debate() {
                   );
                 })}
               </div>
-              <button
-                className='create-debate-button'
-                onClick={() => navigate('/debate/create')}
-              >
-                <span>{t('page.debate.button.create')}</span>
-                <WriteIcon className='write-icon' width={17} fill={'#ffffff'} />
-              </button>
+
+              <div className='create-debate'>
+                <div className='for-pc hidden md:block'>
+                  <button
+                    className='create-debate-button'
+                    onClick={() => navigate('/debate/create')}
+                  >
+                    <span>{t('page.debate.button.create')}</span>
+                    <WriteIcon
+                      className='write-icon'
+                      width={17}
+                      fill={'#ffffff'}
+                    />
+                  </button>
+                </div>
+                <div className='for-mobile md:hidden'>
+                  <Fab className='create-debate-floating-button fixed! bottom-20 right-4 bg-brand1!'>
+                    <IconButton onClick={() => navigate('/debate/create')}>
+                      <FontAwesomeIcon icon={faPen} color='white' />
+                    </IconButton>
+                  </Fab>
+                </div>
+              </div>
             </div>
             <div className='content-container'>
               <InfiniteScroll
