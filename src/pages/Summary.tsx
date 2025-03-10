@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { DebateType, SummaryType } from '@/types/data';
 import SummaryCard from '@/components/card/SummaryCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { DUMMY_SUMMARIES } from '@/common/dummy_data';
 import CarouselSummaryCard from '@/components/card/CarouselSummaryCard';

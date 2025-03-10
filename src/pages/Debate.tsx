@@ -2,7 +2,7 @@ import { DUMMY_DEBATES } from '@/common/dummy_data';
 import CarouselDebateCard from '@/components/card/CarouselDebateCard';
 import Carousel from '@/components/carousel/Carousel';
 import { DebateType, SummaryType } from '@/types/data';
-import { faMagnifyingGlass, faPen } from '@fortawesome/free-solid-svg-icons';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { forwardRef, useEffect, useRef, useState } from 'react';
 import IonIcon from '@reacticons/ionicons';

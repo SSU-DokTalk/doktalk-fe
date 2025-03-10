@@ -1,8 +1,8 @@
-import { useTranslation } from "react-i18next";
+import { useTranslation } from 'react-i18next';
 
-import { faMagnifyingGlass, faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { ChangeEventHandler, Dispatch, ReactNode, SetStateAction } from "react";
+import { faMagnifyingGlass, faSearch } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { ChangeEventHandler, ReactNode } from 'react';
 
 export function SearchBar({
   value,
@@ -45,7 +45,7 @@ export function TopNavSearchBar() {
         />
         <input
           type='text'
-          placeholder={t("component.topnav.search-bar.placeholder")}
+          placeholder={t('component.topnav.search-bar.placeholder')}
           className='searchbar-input w-full text-[15px] font-semibold mx-5! my-0 border-0 placeholder:text-brand5 placeholder:font-semibold placeholder:text-[15px]'
         />
       </div>
