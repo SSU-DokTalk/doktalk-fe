@@ -60,7 +60,7 @@ function Landing() {
 
   return (
     <div id='landing-page'>
-      <div className='post-container px-4! md:px-0! md:w-3/5'>
+      <div className='post-container px-4! w-full md:px-0! md:w-3/5'>
         {user.id != 0 ? (
           <div className='write-post'>
             <div className='for-pc hidden md:block'>
