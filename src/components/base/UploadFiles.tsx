@@ -1,5 +1,5 @@
-import { getFileTypeFromUrl } from "@/functions";
-import { PreviewType } from "@/types/components";
+import { getFileTypeFromUrl } from '@/functions';
+import { PreviewType } from '@/types/components';
 import {
   ChangeEvent,
   Dispatch,
@@ -8,15 +8,15 @@ import {
   useEffect,
   useRef,
   useState,
-} from "react";
-import PDFThumbnail from "@/assets/images/pdf-thumbnail.svg";
+} from 'react';
+import PDFThumbnail from '@/assets/images/pdf-thumbnail.svg';
 import {
   ACCEPTABLE,
   ACCEPTABLE_IMAGE,
   ACCEPTABLE_FILE,
-} from "@/common/variables";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faX, faLink, IconDefinition } from "@fortawesome/free-solid-svg-icons";
+} from '@/common/variables';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faX, faLink, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 /**
  * 파일 업로드 및 미리보기
@@ -40,7 +40,7 @@ import { faX, faLink, IconDefinition } from "@fortawesome/free-solid-svg-icons";
 
 function UploadFiles({
   setFiles,
-  buttonText = "파일 첨부",
+  buttonText = '파일 첨부',
   buttonIcon = faLink,
   buttonIconImage = undefined,
   accept = ACCEPTABLE.join(),
@@ -69,11 +69,11 @@ function UploadFiles({
   const fitImage = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     const { naturalHeight, naturalWidth } = e.currentTarget;
     if (naturalHeight > naturalWidth) {
-      e.currentTarget.style.height = "auto";
-      e.currentTarget.style.width = "100%";
+      e.currentTarget.style.height = 'auto';
+      e.currentTarget.style.width = '100%';
     } else {
-      e.currentTarget.style.height = "100%";
-      e.currentTarget.style.width = "auto";
+      e.currentTarget.style.height = '100%';
+      e.currentTarget.style.width = 'auto';
     }
   };
 
@@ -82,22 +82,22 @@ function UploadFiles({
       return (
         <img
           src={preview.url}
-          alt="preview"
-          className="preview-image"
+          alt='preview'
+          className='preview-image'
           onLoad={fitImage}
         />
       );
     } else if (ACCEPTABLE_FILE.includes(ext)) {
       return (
-        <div className="preview-file">
+        <div className='preview-file'>
           <a
             href={preview.url}
             download={preview.filename}
-            className="download-file"
+            className='download-file'
           >
-            <img src={PDFThumbnail} alt="" width={36} height={36} />
-            <div className="preview-filename">
-              <div className="preview-filename-text">{preview.filename}</div>
+            <img src={PDFThumbnail} alt='' width={36} height={36} />
+            <div className='preview-filename'>
+              <div className='preview-filename-text'>{preview.filename}</div>
             </div>
           </a>
         </div>
@@ -128,7 +128,7 @@ function UploadFiles({
       fileList.some(
         (file) =>
           !accept
-            .split(",")
+            .split(',')
             .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
             .includes(`.${getFileTypeFromUrl(file.name)}`)
       )
@@ -157,68 +157,68 @@ function UploadFiles({
   useEffect(() => {}, [previews]);
 
   return (
-    <div id="upload-files">
+    <div id='upload-files'>
       <input
-        type="file"
+        type='file'
         multiple
         accept={accept}
         ref={inputRef}
         onChange={handleFileChange}
       />
       <button
-        className="upload-button"
+        className='upload-button'
         onClick={() => inputRef.current?.click()}
       >
         <span>{buttonText}</span>
         {buttonIconImage ? (
           <img
             src={buttonIconImage}
-            alt="attach file"
-            className="button-icon"
+            alt='attach file'
+            className='button-icon'
           />
         ) : buttonIcon ? (
-          <FontAwesomeIcon icon={buttonIcon} className="button-icon" />
+          <FontAwesomeIcon icon={buttonIcon} className='button-icon' />
         ) : null}
       </button>
       {hasTooManyFiles && (
-        <div className="input-alert">
+        <div className='input-alert'>
           파일은 최대 {limit}개까지 업로드 가능합니다.
         </div>
       )}
       {hasTooLargeFile && (
-        <div className="input-alert">
+        <div className='input-alert'>
           각 파일은 최대 {Math.trunc(maxSize / 1024 / 1024)}MB까지 업로드
           가능합니다.
         </div>
       )}
       {hasUnacceptableFile && (
-        <div className="input-alert">
+        <div className='input-alert'>
           {accept
-            .split(",")
+            .split(',')
             .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
-            .join(", ")}{" "}
+            .join(', ')}{' '}
           파일만 업로드 가능합니다.
         </div>
       )}
-      <div className="preview-container">
+      <div className='preview-container'>
         {previews.map((preview, index) => {
           let ext = `.${getFileTypeFromUrl(preview.filename)}`;
           return (
             <div
-              className="content-container"
-              key={"uf" + index}
+              className='content-container'
+              key={'uf' + index}
               style={{
                 margin: `5px ${itemMargin}px`,
                 width: `${previewSize}px`,
                 height: `${previewSize}px`,
               }}
             >
-              <div className="content">{previewComponent(ext, preview)}</div>
+              <div className='content'>{previewComponent(ext, preview)}</div>
               <button
-                className="delete-content-button"
+                className='delete-content-button'
                 onClick={() => removeFile(index)}
               >
-                <FontAwesomeIcon icon={faX} className="delete-content-icon" />
+                <FontAwesomeIcon icon={faX} className='delete-content-icon' />
               </button>
             </div>
           );

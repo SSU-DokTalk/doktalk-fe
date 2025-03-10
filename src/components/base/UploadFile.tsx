@@ -1,5 +1,5 @@
-import { ACCEPTABLE_FILE } from "@/common/variables";
-import { getFileTypeFromUrl } from "@/functions";
+import { ACCEPTABLE_FILE } from '@/common/variables';
+import { getFileTypeFromUrl } from '@/functions';
 import React, {
   Dispatch,
   JSXElementConstructor,
@@ -7,8 +7,8 @@ import React, {
   SetStateAction,
   useRef,
   useState,
-} from "react";
-import Chain from "@/assets/images/chain.svg";
+} from 'react';
+import Chain from '@/assets/images/chain.svg';
 
 /**
  * 파일 업로드 버튼
@@ -62,7 +62,7 @@ function UploadFile({
 
     if (
       !accept
-        .split(",")
+        .split(',')
         .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
         .includes(`.${getFileTypeFromUrl(file.name)}`)
     ) {
@@ -74,15 +74,15 @@ function UploadFile({
   };
 
   return (
-    <div id="upload-file">
+    <div id='upload-file'>
       <input
-        type="file"
+        type='file'
         accept={accept}
         ref={inputRef}
-        style={{ display: "none" }}
+        style={{ display: 'none' }}
         onChange={handleFileChange}
       />
-      <div className="error-message" style={{ color: "red" }}>
+      <div className='error-message' style={{ color: 'red' }}>
         {!hasTooLargeFile &&
           inherentHasTooLargeFile &&
           `파일은 최대 ${Math.trunc(
@@ -91,9 +91,9 @@ function UploadFile({
         {!hasUnacceptableFile &&
           inherentHasUnacceptableFile &&
           `파일은 ${accept
-            .split(",")
+            .split(',')
             .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
-            .join(", ")} 형식만 업로드 가능합니다`}
+            .join(', ')} 형식만 업로드 가능합니다`}
       </div>
       {children ? (
         React.cloneElement(children, {
@@ -101,10 +101,10 @@ function UploadFile({
         })
       ) : (
         <button
-          className="upload-button"
+          className='upload-button'
           onClick={() => inputRef.current?.click()}
         >
-          <span>파일 첨부</span> <img src={Chain} alt="attach file" />
+          <span>파일 첨부</span> <img src={Chain} alt='attach file' />
         </button>
       )}
     </div>

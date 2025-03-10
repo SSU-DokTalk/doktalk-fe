@@ -18,43 +18,45 @@
   .lower-content-container {
     display: flex;
     .left-container {
-      width: 60%;
-      padding-right: 20px;
-      .searchbox-container {
-        width: 100%;
-        display: flex;
-        border: 1px solid v.$brand-color1;
-        border-radius: 10px;
-        align-items: center;
-        padding: 0px 12px;
-        color: v.$brand-color1;
-        .searchbox-icon {
-          font-size: 20px;
-        }
-        .dropdown {
-          .dropdown-toggle {
-            background-color: inherit;
-            border: none;
-            color: v.$brand-color1;
-            font-size: 15px;
-            font-weight: 400;
-          }
-        }
-        input {
-          border: none;
-          background-color: inherit;
-          color: black;
-          font-size: 15px;
-          font-weight: 400;
-          width: 100%;
-          &:focus {
-            outline: none;
-          }
-          &::placeholder {
-            color: v.$brand-color5;
-          }
-        }
-      }
+      // width: 60%;
+      // padding-right: 20px;
+      // .searchbox-container {
+      //   width: 100%;
+      //   display: flex;
+      //   border: 1px solid v.$brand-color1;
+      //   border-radius: 10px;
+      //   align-items: center;
+      //   padding: 0px 12px;
+      //   color: v.$brand-color1;
+      //   .searchbox-icon {
+      //     font-size: 20px;
+      //   }
+      //   .search-by-dropdown {
+      //     .MuiButtonBase-root {
+      //       background-color: inherit;
+      //       border: none;
+      //       color: v.$brand-color1;
+      //       font-size: 15px;
+      //       font-weight: 400;
+      //       width: max-content;
+      //       padding: 0.5rem;
+      //     }
+      //   }
+      //   input {
+      //     border: none;
+      //     background-color: inherit;
+      //     color: black;
+      //     font-size: 15px;
+      //     font-weight: 400;
+      //     width: 100%;
+      //     &:focus {
+      //       outline: none;
+      //     }
+      //     &::placeholder {
+      //       color: v.$brand-color5;
+      //     }
+      //   }
+      // }
       .content-header {
         display: flex;
         justify-content: space-between;

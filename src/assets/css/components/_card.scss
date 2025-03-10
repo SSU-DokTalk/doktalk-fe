@@ -1,7 +1,7 @@
 @use "../variables" as v;
 
 #book-card {
-  display: flex;
+  // display: flex;
   align-items: center;
 
   .image-container {
@@ -58,10 +58,10 @@
     }
   }
   .button-container {
-    display: flex;
-    flex-direction: column;
+    // display: flex;
+    // flex-direction: column;
     align-items: center;
-    margin-left: 30px;
+    // margin-left: 30px;
 
     button {
       border-radius: 10px;
@@ -79,7 +79,7 @@
     .look-summary {
       border: 1px solid v.$brand-color1;
       color: v.$brand-color1;
-      margin-top: 10px;
+      // margin-top: 10px;
       background-color: white;
     }
   }
@@ -642,83 +642,83 @@
 }
 
 #category-card {
-  .accordion {
-    margin-bottom: 20px;
-    .accordion-item {
-      border: 1px solid v.$brand-color4;
-      .accordion-header {
-        .accordion-button {
-          color: v.$brand-color1;
-          font-size: 20px;
-          font-weight: 600;
-          padding: 16px 30px;
-          &::after,
-          &::before {
-            display: none;
-          }
-          .fa-chevron-down,
-          .fa-chevron-up {
-            margin-left: 15px;
-          }
-          &:focus {
-            box-shadow: none;
-          }
-          &:not(.collapsed) {
-            background-color: inherit;
-            box-shadow: none;
-          }
+  margin-bottom: 20px;
+  .accordion-item {
+    border: 1px solid v.$brand-color4;
+    .MuiAccordion-heading {
+      .MuiButtonBase-root {
+        padding: 0;
+
+        color: v.$brand-color1;
+        font-size: 20px;
+        font-weight: 600;
+        padding: 0px 30px;
+        &::after,
+        &::before {
+          display: none;
+        }
+        .fa-chevron-down,
+        .fa-chevron-up {
+          margin-left: 15px;
+        }
+        &:focus {
+          box-shadow: none;
+        }
+        &:not(.collapsed) {
+          background-color: inherit;
+          box-shadow: none;
         }
       }
-      .accordion-collapse {
-        .accordion-body {
-          padding: 0 0 5px;
-          .category-list {
-            display: flex;
-            justify-content: stretch;
-            flex-wrap: wrap;
-            padding: 0 30px;
-            gap: 10px;
-            .category-item {
-              flex-shrink: 0;
-              font-size: 12px;
-              font-weight: 400;
-              color: v.$brand-color5;
-              cursor: pointer;
-            }
-            .selected {
-              color: v.$brand-color1;
-              text-decoration: underline;
-            }
+    }
+    .MuiCollapse-root {
+      .MuiAccordionDetails-root {
+        padding: 0 0 5px;
+        .category-list {
+          display: flex;
+          justify-content: stretch;
+          flex-wrap: wrap;
+          padding: 0 30px;
+          gap: 10px;
+          .category-item {
+            flex-shrink: 0;
+            font-size: 12px;
+            font-weight: 400;
+            color: v.$brand-color5;
+            cursor: pointer;
+          }
+          .selected {
+            color: v.$brand-color1;
+            text-decoration: underline;
           }
         }
       }
     }
-    .selected-category-container {
-      border-top: none;
-      padding: 8px 15px;
-      display: flex;
-      justify-content: flex-start;
-      flex-wrap: wrap;
-      gap: 5px;
+  }
+  .selected-category-container {
+    border-top: none;
+    padding: 8px 15px;
+    display: flex;
+    justify-content: flex-start;
+    flex-wrap: wrap;
+    gap: 5px;
 
-      .selected-category {
-        border-radius: 10px;
-        padding: 4px 10px;
-        font-size: 12px;
-        font-weight: 400;
-        background-color: v.$brand-color1;
-        color: white;
-        .fa-xmark {
-          margin-left: 5px;
-          cursor: pointer;
-        }
+    .selected-category {
+      border-radius: 10px;
+      padding: 4px 10px;
+      font-size: 12px;
+      font-weight: 400;
+      background-color: v.$brand-color1;
+      color: white;
+      .fa-xmark {
+        margin-left: 5px;
+        cursor: pointer;
       }
-      .no-category {
-        padding: 2px 10px;
-        font-size: 16px;
-        font-weight: 400;
-        color: v.$brand-color5;
-      }
+    }
+    .no-category {
+      padding: 2px 10px;
+      font-size: 16px;
+      font-weight: 400;
+      color: v.$brand-color5;
     }
   }
 }

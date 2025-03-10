@@ -52,16 +52,16 @@
   }
   .accordion {
     .accordion-item {
-      border: none;
+      border: none !important;
       border-top: 1px solid v.$brand-color3;
       border-radius: 0;
       margin: 0 10px;
-      .accordion-header {
+      .MuiAccordion-heading {
         font-size: 15px;
         font-weight: 600;
-        .accordion-button {
+        .MuiButtonBase-root {
           color: v.$brand-color1;
-          padding: 10px 10px;
+          // padding: 10px 10px;
           &::after,
           &::before {
             display: none;
@@ -75,7 +75,7 @@
           }
         }
       }
-      .accordion-collapse {
+      .MuiCollapse-root {
         .accordion-body {
           padding: 0 10px 5px;
         }

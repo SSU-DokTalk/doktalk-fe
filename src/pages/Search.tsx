@@ -1,23 +1,22 @@
-import BookCard from "@/components/card/BookCard";
-import useDebounce from "@/hooks/useDebounce";
-import { BookType } from "@/types/data";
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import InfiniteScroll from "@/components/base/InfiniteScroll";
+import BookCard from '@/components/card/BookCard';
+import useDebounce from '@/hooks/useDebounce';
+import { BookType } from '@/types/data';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import InfiniteScroll from '@/components/base/InfiniteScroll';
+import { SearchBar } from '@/components/input/searchbar';
 
 const sortBys: {
   name: string;
-  value: "latest" | "popular";
+  value: 'latest' | 'popular';
 }[] = [
   {
-    name: "page.search.sort.latest",
-    value: "latest",
+    name: 'page.search.sort.latest',
+    value: 'latest',
   },
   {
-    name: "page.search.sort.popular",
-    value: "popular",
+    name: 'page.search.sort.popular',
+    value: 'popular',
   },
 ];
 
@@ -27,13 +26,13 @@ function Search() {
   const [bookHasMore, setBookHasMore] = useState<boolean>(true);
   const [isInLibrary, setIsInLibrary] = useState<number[]>([]);
 
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
   const [sortByIdx, setSortByIdx] = useState<number>(0);
   const debouncedSearch = useDebounce(search, 500);
   const prevValueRef = useRef<{
     debouncedSearch: string;
     sortByIdx: number;
-  }>({ debouncedSearch: "", sortByIdx: 0 });
+  }>({ debouncedSearch: '', sortByIdx: 0 });
 
   const { t } = useTranslation();
 
@@ -47,30 +46,25 @@ function Search() {
   }, [debouncedSearch, sortByIdx]);
 
   return (
-    <div id="search-page">
-      <div className="page-container">
-        <div className="page-title">{t("page.search.title.page")}</div>
-        <div className="search-bar">
-          <FontAwesomeIcon icon={faSearch} className="search-icon" />
-          <input
-            className="search-input"
-            type="text"
-            placeholder={t("page.search.search.placeholder")}
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-          />
-        </div>
-        <div className="result-container">
-          <div className="sort-by-container">
+    <div id='search-page' className='px-4! md:px-0! md:w-7/10'>
+      <div className='page-container'>
+        <div className='page-title'>{t('page.search.title.page')}</div>
+        <SearchBar
+          placeholder={t('page.search.search.placeholder')}
+          value={search}
+          onChange={(e) => setSearch(e.target.value)}
+        />
+        <div className='result-container'>
+          <div className='sort-by-container'>
             {sortBys.map((sortBy, index) => (
               <div
-                key={"sortBy" + index}
-                className={"sort-by-item"}
+                key={'sortBy' + index}
+                className={'sort-by-item'}
                 onClick={() => setSortByIdx(index)}
                 style={
                   sortByIdx === index
                     ? {
-                        color: "#000080",
+                        color: '#000080',
                       }
                     : {}
                 }
@@ -79,11 +73,11 @@ function Search() {
               </div>
             ))}
           </div>
-          <div className="result-content-container">
+          <div className='result-content-container'>
             <InfiniteScroll
               api={`books?search=${debouncedSearch}&sortby=${sortBys[sortByIdx].value}`}
-              likes_api={"librarys/is_in_library"}
-              itemId="isbn"
+              likes_api={'librarys/is_in_library'}
+              itemId='isbn'
               setItems={setBooks}
               page={bookPage}
               setPage={setBookPage}
@@ -92,7 +86,7 @@ function Search() {
               likes={isInLibrary}
               setLikes={setIsInLibrary}
               hasNoItem={books.length === 0}
-              hasNoItemMessage={t("page.search.item.no-book-item")}
+              hasNoItemMessage={t('page.search.item.no-book-item')}
               refreshCondition={
                 debouncedSearch !== prevValueRef.current.debouncedSearch ||
                 sortByIdx !== prevValueRef.current.sortByIdx
@@ -102,7 +96,7 @@ function Search() {
               {books.map((book, index) => {
                 return (
                   <BookCard
-                    key={"book" + index}
+                    key={'book' + index}
                     book={book}
                     isInLibrary={isInLibrary.includes(book.isbn)}
                     setIsInLibrary={setIsInLibrary}

@@ -1,11 +1,11 @@
-import ProfileIcon from "@/components/base/ProfileIcon";
-import CommentCard from "../card/CommentCard";
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import { CommentType } from "@/types/data";
-import axios from "axios";
-import { useAppSelector } from "@/stores/hooks";
-import { selectUser } from "@/stores/user";
-import InfiniteScroll from "@/components/base/InfiniteScroll";
+import ProfileIcon from '@/components/base/ProfileIcon';
+import CommentCard from '../card/CommentCard';
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { CommentType } from '@/types/data';
+import axios from 'axios';
+import { useAppSelector } from '@/stores/hooks';
+import { selectUser } from '@/stores/user';
+import InfiniteScroll from '@/components/base/InfiniteScroll';
 
 function CommentSection({
   itemType,
@@ -16,7 +16,7 @@ function CommentSection({
   commentsApi,
   commentLikesApi,
 }: {
-  itemType: "post" | "summary" | "debate";
+  itemType: 'post' | 'summary' | 'debate';
   itemId: number;
   total: number;
   setItem: Dispatch<SetStateAction<any>>;
@@ -24,7 +24,7 @@ function CommentSection({
   commentsApi: string;
   commentLikesApi: string;
 }) {
-  const [commentData, setCommentData] = useState<string>("");
+  const [commentData, setCommentData] = useState<string>('');
   const [upperComment, setUpperComment] = useState<number | undefined>(
     undefined
   );
@@ -52,7 +52,7 @@ function CommentSection({
           };
         });
         setDidComment(true);
-        setCommentData("");
+        setCommentData('');
         setUpperComment(undefined);
       });
   };
@@ -60,19 +60,19 @@ function CommentSection({
   useEffect(() => {}, [itemId, total]);
 
   return (
-    <div id="comment-section">
-      <p className="title">댓글 {total}</p>
-      <div className="comment-box">
-        <div className="comment-box__upper">
+    <div id='comment-section'>
+      <p className='title'>댓글 {total}</p>
+      <div className='comment-box'>
+        <div className='comment-box__upper'>
           <ProfileIcon profile={user.profile} size={34} />
           <textarea
             value={commentData}
             onChange={(e) => setCommentData(e.target.value)}
-            className="comment-box__input"
-            placeholder="댓글을 입력해주세요"
+            className='comment-box__input'
+            placeholder='댓글을 입력해주세요'
           />
         </div>
-        <div className="comment-box__lower">
+        <div className='comment-box__lower'>
           <button onClick={doComment}>등록</button>
         </div>
       </div>
@@ -100,7 +100,7 @@ function CommentSection({
       >
         {comments.map((comment, idx) => (
           <CommentCard
-            key={"comment" + idx}
+            key={'comment' + idx}
             itemType={itemType}
             comment={comment}
             hasLiked={commentLikes.includes(comment.id)}

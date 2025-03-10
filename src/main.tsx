@@ -1,21 +1,28 @@
-import { createRoot } from "react-dom/client";
-import { BrowserRouter } from "react-router-dom";
-import { Provider } from "react-redux";
-import { store } from "@/stores/store.ts";
+import { createRoot } from 'react-dom/client';
+import { BrowserRouter } from 'react-router-dom';
+import { Provider } from 'react-redux';
 
-import "@/locales/i18n.ts";
+import CssBaseline from '@mui/material/CssBaseline';
+import { StyledEngineProvider } from '@mui/material/styles';
 
-import App from "@/App.tsx";
-import TokenRefresher from "@/TokenRefresher";
+import { store } from '@/stores/store.ts';
 
-createRoot(document.getElementById("root")!).render(
-  <BrowserRouter
-    future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
-  >
-    <Provider store={store}>
-      <TokenRefresher>
-        <App />
-      </TokenRefresher>
-    </Provider>
-  </BrowserRouter>
+import '@/locales/i18n.ts';
+
+import App from '@/App.tsx';
+import TokenRefresher from '@/TokenRefresher';
+
+createRoot(document.getElementById('root')!).render(
+  <StyledEngineProvider injectFirst>
+    <CssBaseline />
+    <BrowserRouter
+      future={{ v7_startTransition: true, v7_relativeSplatPath: true }}
+    >
+      <Provider store={store}>
+        <TokenRefresher>
+          <App />
+        </TokenRefresher>
+      </Provider>
+    </BrowserRouter>
+  </StyledEngineProvider>
 );

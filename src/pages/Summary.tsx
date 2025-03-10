@@ -1,48 +1,53 @@
-import Carousel from "@/components/carousel/Carousel";
-import InfiniteScroll from "@/components/base/InfiniteScroll";
-import { useEffect, useRef, useState } from "react";
-import { DebateType, SummaryType } from "@/types/data";
-import SummaryCard from "@/components/card/SummaryCard";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faMagnifyingGlass } from "@fortawesome/free-solid-svg-icons";
-import Dropdown from "react-bootstrap/Dropdown";
-import axios from "axios";
-import { DUMMY_SUMMARIES } from "@/common/dummy_data";
-import CarouselSummaryCard from "@/components/card/CarouselSummaryCard";
-import PopularDebateCard from "@/components/card/PopularDebateCard";
-import WriteIcon from "@/assets/images/write.svg?react";
-import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
-import { useAppSelector } from "@/stores/hooks";
-import { selectUser } from "@/stores/user";
-import useDebounce from "@/hooks/useDebounce";
-import CategoryCard from "@/components/card/CategoryCard";
+import Carousel from '@/components/carousel/Carousel';
+import InfiniteScroll from '@/components/base/InfiniteScroll';
+import { useEffect, useRef, useState } from 'react';
+import { DebateType, SummaryType } from '@/types/data';
+import SummaryCard from '@/components/card/SummaryCard';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faPen } from '@fortawesome/free-solid-svg-icons';
+import axios from 'axios';
+import { DUMMY_SUMMARIES } from '@/common/dummy_data';
+import CarouselSummaryCard from '@/components/card/CarouselSummaryCard';
+import PopularDebateCard from '@/components/card/PopularDebateCard';
+import WriteIcon from '@/assets/images/write.svg?react';
+import { useTranslation } from 'react-i18next';
+import { useNavigate } from 'react-router-dom';
+import { useAppSelector } from '@/stores/hooks';
+import { selectUser } from '@/stores/user';
+import useDebounce from '@/hooks/useDebounce';
+import CategoryCard from '@/components/card/CategoryCard';
+import SearchDropdown from '@/components/dropdown/SearchByDropdown';
+
+import { isMd } from '@/functions/breakpoint';
+import { SearchBar } from '@/components/input/searchbar';
+import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
+import { Fab, IconButton } from '@mui/material';
 
 const searchBys: {
   name: string;
-  value: "bt" | "it";
+  value: 'bt' | 'it';
 }[] = [
   {
-    name: "page.summary.search.book-title",
-    value: "bt",
+    name: 'page.summary.search.book-title',
+    value: 'bt',
   },
   {
-    name: "page.summary.search.item-title",
-    value: "it",
+    name: 'page.summary.search.item-title',
+    value: 'it',
   },
 ];
 
 const sortBys: {
   name: string;
-  value: "latest" | "popular";
+  value: 'latest' | 'popular';
 }[] = [
   {
-    name: "page.summary.sort.latest",
-    value: "latest",
+    name: 'page.summary.sort.latest',
+    value: 'latest',
   },
   {
-    name: "page.summary.sort.popular",
-    value: "popular",
+    name: 'page.summary.sort.popular',
+    value: 'popular',
   },
 ];
 
@@ -60,7 +65,7 @@ function Summary() {
     useState<boolean>(false);
 
   const [categories, setCategories] = useState<number>(0);
-  const [search, setSearch] = useState<string>("");
+  const [search, setSearch] = useState<string>('');
   const [searchByIdx, setSearchByIdx] = useState<number>(0);
   const [sortByIdx, setSortByIdx] = useState<number>(0);
   const debouncedSearch = useDebounce(search, 500);
@@ -69,7 +74,7 @@ function Summary() {
     debouncedSearch: string;
     searchByIdx: number;
     sortByIdx: number;
-  }>({ categories: 0, debouncedSearch: "", searchByIdx: 0, sortByIdx: 0 });
+  }>({ categories: 0, debouncedSearch: '', searchByIdx: 0, sortByIdx: 0 });
 
   const user = useAppSelector(selectUser);
   const { t } = useTranslation();
@@ -104,8 +109,8 @@ function Summary() {
           await axios
             .get(
               `/api/debates/like?${items
-                .map((item) => "ids=" + item.id)
-                .join("&")}`
+                .map((item) => 'ids=' + item.id)
+                .join('&')}`
             )
             .then(
               (res) => {
@@ -124,74 +129,60 @@ function Summary() {
   });
 
   return (
-    <div id="summary-page">
-      <div className="popular-content-container">
-        <div className="popular-content-title">
-          {t("page.summary.title.recommend")}
+    <div id='summary-page'>
+      <div className='popular-content-container'>
+        <div className='popular-content-title  ml-6!'>
+          {t('page.summary.title.recommend')}
         </div>
         <Carousel
-          items={recommendSummaries}
-          size={3}
-          className="popular-content"
+          size={isMd() ? 3 : 1}
+          className='popular-content mx-auto! md:mx-0!'
         >
           {recommendSummaries.map((summary, index) => (
             <CarouselSummaryCard
-              key={"popular-summary" + index}
+              key={'popular-summary' + index}
               summary={summary}
             />
           ))}
         </Carousel>
       </div>
-      <div className="content-container">
-        <div className="lower-content-container">
-          <CategoryCard
-            categories={categories}
-            setCategories={setCategories}
-            className="left-container"
-          />
-          <div className="right-container"></div>
+
+      <div className='content-container mx-4!'>
+        <div className='lower-content-container md:flex'>
+          <MiddlePanel>
+            <CategoryCard
+              categories={categories}
+              setCategories={setCategories}
+              className='left-container'
+            />
+          </MiddlePanel>
+          <RightPanel />
         </div>
-        <div className="lower-content-container">
-          <div className="left-container">
-            <div className="searchbox-container">
-              <FontAwesomeIcon
-                icon={faMagnifyingGlass}
-                className="searchbox-icon"
+        <div className='lower-content-container md:flex'>
+          <MiddlePanel className='left-container'>
+            <SearchBar
+              placeholder={t('page.summary.search.placeholder')}
+              value={search}
+              onChange={(e) => setSearch(e.target.value)}
+            >
+              <SearchDropdown
+                searchBys={searchBys}
+                searchByIdx={searchByIdx}
+                setSearchByIdx={setSearchByIdx}
               />
-              <Dropdown>
-                <Dropdown.Toggle>
-                  {t(searchBys[searchByIdx].name)}
-                </Dropdown.Toggle>
-                <Dropdown.Menu>
-                  {searchBys.map((searchBy, index) => (
-                    <Dropdown.Item
-                      key={"search-by" + index}
-                      onClick={() => setSearchByIdx(index)}
-                    >
-                      {t(searchBy.name)}
-                    </Dropdown.Item>
-                  ))}
-                </Dropdown.Menu>
-              </Dropdown>
-              <input
-                type="text"
-                placeholder={t("page.summary.search.placeholder")}
-                className="searchbox"
-                value={search}
-                onChange={(e) => setSearch(e.target.value)}
-              />
-            </div>
-            <div className="content-header">
-              <div className="sort-by">
+            </SearchBar>
+
+            <div className='content-header'>
+              <div className='sort-by'>
                 {sortBys.map((sortBy, index) => {
                   return (
                     <div
-                      key={"sort-by" + index}
-                      className="sort-by-text"
+                      key={'sort-by' + index}
+                      className='sort-by-text'
                       style={
                         sortByIdx === index
                           ? {
-                              color: "#000080",
+                              color: '#000080',
                             }
                           : {}
                       }
@@ -202,12 +193,30 @@ function Summary() {
                   );
                 })}
               </div>
-              <button onClick={() => navigate("/summary/create")}>
-                <span>{t("page.summary.button.write")}</span>
-                <WriteIcon className="write-icon" width={17} fill={"#ffffff"} />
-              </button>
+              <div className='create-summary'>
+                <div className='for-pc hidden md:block'>
+                  <button
+                    className='create-summary-button'
+                    onClick={() => navigate('/summary/create')}
+                  >
+                    <span>{t('page.summary.button.write')}</span>
+                    <WriteIcon
+                      className='write-icon'
+                      width={17}
+                      fill={'#ffffff'}
+                    />
+                  </button>
+                </div>
+                <div className='for-mobile md:hidden'>
+                  <Fab className='create-summary-floating-button fixed! bottom-20 right-4 bg-brand1!'>
+                    <IconButton onClick={() => navigate('/summary/create')}>
+                      <FontAwesomeIcon icon={faPen} color='white' />
+                    </IconButton>
+                  </Fab>
+                </div>
+              </div>
             </div>
-            <div className="content-container">
+            <div className='content-container'>
               <InfiniteScroll
                 api={`summary?category=${categories}&search=${debouncedSearch}&searchby=${searchBys[searchByIdx].value}&sortby=${sortBys[sortByIdx].value}`}
                 likes_api={`summarys/like`}
@@ -219,7 +228,7 @@ function Summary() {
                 likes={summaryLikes}
                 setLikes={setSummaryLikes}
                 hasNoItem={summaries.length === 0}
-                hasNoItemMessage={t("page.summary.item.no-summary-item")}
+                hasNoItemMessage={t('page.summary.item.no-summary-item')}
                 refreshCondition={
                   categories !== prevValueRef.current.categories ||
                   debouncedSearch !== prevValueRef.current.debouncedSearch ||
@@ -230,7 +239,7 @@ function Summary() {
               >
                 {summaries.map((summary, index) => (
                   <SummaryCard
-                    key={"summary" + index}
+                    key={'summary' + index}
                     summary={summary}
                     hasLiked={summaryLikes.includes(summary.id)}
                     setHasLiked={setSummaryLikes}
@@ -238,25 +247,26 @@ function Summary() {
                 ))}
               </InfiniteScroll>
             </div>
-          </div>
-          <div className="right-container">
-            <div className="right-container-title">
-              {t("page.summary.title.popular")}
+          </MiddlePanel>
+
+          <RightPanel className='right-container hidden lg:block'>
+            <div className='right-container-title'>
+              {t('page.summary.title.popular')}
             </div>
-            <div className="right-container-content">
+            <div className='right-container-content'>
               {popularDebates.map((debate, index) => (
                 <PopularDebateCard
-                  key={"debate" + index}
+                  key={'debate' + index}
                   debate={debate}
                   hasLiked={popularDebateLikes.includes(debate.id)}
                   setHasLiked={setPopularDebateLikes}
                 />
               ))}
             </div>
-          </div>
+          </RightPanel>
         </div>
       </div>
-      <div className="footer" />
+      <div className='footer' />
     </div>
   );
 }

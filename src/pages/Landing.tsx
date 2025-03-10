@@ -1,14 +1,15 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 
-import PostCard from "@/components/card/PostCard";
-import InfiniteScroll from "@/components/base/InfiniteScroll";
-import { PostType, SummaryType } from "@/types/data";
-import { useAppSelector } from "@/stores/hooks";
-import { selectUser } from "@/stores/user";
-import WritePostCard from "@/components/card/WritePostCard";
-import PopularSummaryCard from "../components/card/PopularSummaryCard";
-import { useTranslation } from "react-i18next";
-import axios from "axios";
+import PostCard from '@/components/card/PostCard';
+import InfiniteScroll from '@/components/base/InfiniteScroll';
+import { PostType, SummaryType } from '@/types/data';
+import { useAppSelector } from '@/stores/hooks';
+import { selectUser } from '@/stores/user';
+import WritePostCard from '@/components/card/WritePostCard';
+import WritePostFloatingButton from '@/components/floating/WritePostFloatingButton';
+import PopularSummaryCard from '../components/card/PopularSummaryCard';
+import { useTranslation } from 'react-i18next';
+import axios from 'axios';
 
 function Landing() {
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -38,8 +39,8 @@ function Landing() {
           await axios
             .get(
               `/api/summarys/like?${items
-                .map((item) => "ids=" + item.id)
-                .join("&")}`
+                .map((item) => 'ids=' + item.id)
+                .join('&')}`
             )
             .then(
               (res) => {
@@ -58,10 +59,19 @@ function Landing() {
   });
 
   return (
-    <div id="landing-page">
-      <div className="post-container">
-        <div className="post-title">{t("page.landing.title.post")}</div>
-        {user.id != 0 ? <WritePostCard setDidPost={setDidPost} /> : null}
+    <div id='landing-page'>
+      <div className='post-container px-4! w-full md:px-0! md:w-3/5'>
+        {user.id != 0 ? (
+          <div className='write-post'>
+            <div className='for-pc hidden md:block'>
+              <div className='post-title'>{t('page.landing.title.post')}</div>
+              <WritePostCard setDidPost={setDidPost} />
+            </div>
+            <div className='for-mobile md:hidden'>
+              <WritePostFloatingButton />
+            </div>
+          </div>
+        ) : null}
         <InfiniteScroll
           api={`post/recent`}
           likes_api={`posts/like`}
@@ -73,7 +83,7 @@ function Landing() {
           likes={postLikes}
           setLikes={setPostLikes}
           hasNoItem={posts.length === 0}
-          hasNoItemMessage={t("page.landing.item.no-post-item")}
+          hasNoItemMessage={t('page.landing.item.no-post-item')}
           refreshCondition={didPost}
           dependency={[didPost]}
           afterFetchSuccess={async () => {
@@ -85,7 +95,7 @@ function Landing() {
         >
           {posts.map((post) => (
             <PostCard
-              key={"post" + post.id}
+              key={'post' + post.id}
               post={post}
               hasLiked={postLikes.includes(post.id)}
               setHasLiked={setPostLikes}
@@ -93,13 +103,13 @@ function Landing() {
           ))}
         </InfiniteScroll>
       </div>
-      <div className="summary-container">
-        <div className="summary-section-title">
-          {t("page.landing.title.popular-summary")}
+      <div className='summary-container hidden md:block'>
+        <div className='summary-section-title'>
+          {t('page.landing.title.popular-summary')}
         </div>
         {popularSummaries.map((summary, index) => (
           <PopularSummaryCard
-            key={"popular-summary" + index}
+            key={'popular-summary' + index}
             summary={summary}
             hasLiked={popularSummaryLikes.includes(summary.id)}
             setHasLiked={setPopularSummaryLikes}

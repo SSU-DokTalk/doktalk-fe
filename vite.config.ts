@@ -2,11 +2,13 @@ import { defineConfig, loadEnv, UserConfig } from "vite";
 import react from "@vitejs/plugin-react-swc";
 import svgr from "vite-plugin-svgr";
 
+import tailwindcss from "@tailwindcss/vite";
+
 // https://vite.dev/config/
 export default defineConfig(({ mode }) => {
   const env = loadEnv(mode, process.cwd(), "");
   const config: UserConfig = {
-    plugins: [react(), svgr()],
+    plugins: [tailwindcss(), react(), svgr()],
     resolve: {
       alias: [{ find: "@", replacement: "/src" }],
     },

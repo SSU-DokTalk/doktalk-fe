@@ -1,18 +1,18 @@
-import axios from "axios";
-import { useState } from "react";
-import { Link } from "react-router-dom";
-import { useNavigate } from "react-router-dom";
-import { useTranslation } from "react-i18next";
+import axios from 'axios';
+import { useState } from 'react';
+import { Link } from 'react-router-dom';
+import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
-import naverIcon from "@/assets/images/naver.svg";
-import kakaoIcon from "@/assets/images/kakao.svg";
-import googleIcon from "@/assets/images/google.svg";
-import facebookIcon from "@/assets/images/facebook.svg";
+import naverIcon from '@/assets/images/naver.svg';
+import kakaoIcon from '@/assets/images/kakao.svg';
+import googleIcon from '@/assets/images/google.svg';
+import facebookIcon from '@/assets/images/facebook.svg';
 
-import { setUser } from "@/stores/user";
-import { useAppDispatch } from "@/stores/hooks";
-import { LoginUserInfoType } from "@/types";
-import { initialLoginUserInfo } from "@/types/initialValue";
+import { setUser } from '@/stores/user';
+import { useAppDispatch } from '@/stores/hooks';
+import { LoginUserInfoType } from '@/types';
+import { initialLoginUserInfo } from '@/types/initialValue';
 
 const NAVER_CLIENT_ID = import.meta.env.VITE_NAVER_CLIENT_ID;
 const KAKAO_CLIENT_ID = import.meta.env.VITE_KAKAO_CLIENT_ID;
@@ -29,14 +29,14 @@ function Login() {
   const navigate = useNavigate();
 
   const doLogin = async () => {
-    await axios.post("/api/user/login", userInfo).then(async (res) => {
+    await axios.post('/api/user/login', userInfo).then(async (res) => {
       const {
         id,
         name,
         role,
-      }: { id: number; name: string; role: "USER" | "ADMIN" } = res.data;
+      }: { id: number; name: string; role: 'USER' | 'ADMIN' } = res.data;
       const token = res.headers.authorization;
-      axios.defaults.headers.common["Authorization"] = token;
+      axios.defaults.headers.common['Authorization'] = token;
       await dispatch(
         setUser({
           id: id,
@@ -46,7 +46,7 @@ function Login() {
       );
     });
 
-    navigate("/");
+    navigate('/');
   };
 
   const nonce = () => {
@@ -70,19 +70,19 @@ function Login() {
   };
 
   return (
-    <div id="login">
-      <div className="login-container">
-        <Link to={"/"} className="logo-container">
-          <div className="logo dok">독</div>
-          <div className="logo colon">:</div>
-          <div className="logo talk">TALK</div>
+    <div id='login'>
+      <div className='login-container'>
+        <Link to={'/'} className='logo-container'>
+          <div className='logo dok'>독</div>
+          <div className='logo colon'>:</div>
+          <div className='logo talk'>TALK</div>
         </Link>
-        <div className="login-form">
-          <div className="login-box">
+        <div className='login-form'>
+          <div className='login-box'>
             <input
-              type="email"
-              className="login-input"
-              placeholder={t("page.login.email")}
+              type='email'
+              className='login-input'
+              placeholder={t('page.login.email')}
               value={userInfo.email}
               onChange={(e) =>
                 setUserInfo({
@@ -92,11 +92,11 @@ function Login() {
               }
             />
           </div>
-          <div className="login-box">
+          <div className='login-box'>
             <input
-              type="password"
-              className="login-input"
-              placeholder={t("page.login.password")}
+              type='password'
+              className='login-input'
+              placeholder={t('page.login.password')}
               value={userInfo.password}
               onChange={(e) =>
                 setUserInfo({
@@ -106,61 +106,64 @@ function Login() {
               }
             />
           </div>
-          <button className="login-button" onClick={doLogin}>
-            {t("page.login.login")}
+          <button className='login-button' onClick={doLogin}>
+            {t('page.login.login')}
           </button>
         </div>
-        <div className="additional-container">
-          <div className="checkbox-container">
-            <input type="checkbox" name="" id="keep-login" />
-            <label htmlFor="keep-login">{t("page.login.keep-login")}</label>
-            <input type="checkbox" name="" id="save-id" />
-            <label htmlFor="save-id">{t("page.login.save-id")}</label>
+        <div className='additional-container'>
+          <div className='checkbox-container'>
+            <input type='checkbox' name='' id='keep-login' />
+            <label htmlFor='keep-login'>{t('page.login.keep-login')}</label>
+            <input type='checkbox' name='' id='save-id' />
+            <label htmlFor='save-id'>{t('page.login.save-id')}</label>
           </div>
-          <div className="find-myinfo">
-            <div className="myinfo">{t("page.login.find-id")}</div>
-            <div className="divider">|</div>
-            <div className="myinfo">{t("page.login.find-password")}</div>
+          <div className='find-myinfo'>
+            <div className='myinfo'>{t('page.login.find-id')}</div>
+            <div className='divider'>|</div>
+            <div className='myinfo'>{t('page.login.find-password')}</div>
           </div>
         </div>
-        <div className="social-login-box">
-          <div className="social-login-text-container">
+        <div className='social-login-box'>
+          <div className='social-login-text-container'>
             <hr />
-            <div className="social-login-text">
-              {t("page.login.social-login-text")}
+            <div className='social-login-text'>
+              {t('page.login.social-login-text')}
             </div>
             <hr />
           </div>
-          <div className="social-login-container">
+          <div className='social-login-container'>
             <img
               src={naverIcon}
-              alt="naver"
-              className="social-login-button naver"
+              alt='naver'
+              className='social-login-button naver'
               onClick={doNaverLogin}
             />
             <img
               src={kakaoIcon}
-              alt="kakao"
-              className="social-login-button kakao"
+              alt='kakao'
+              className='social-login-button kakao'
               onClick={doKakaoLogin}
             />
             <img
               src={googleIcon}
-              alt="google"
-              className="social-login-button google"
+              alt='google'
+              className='social-login-button google'
               onClick={doGoogleLogin}
             />
             <img
               src={facebookIcon}
-              alt="facebook"
-              className="social-login-button facebook"
+              alt='facebook'
+              className='social-login-button facebook'
               onClick={doFacebookLogin}
             />
           </div>
         </div>
-        <div className="register-container">
-          <button className="register-button">
-            {t("page.login.register")}
+        <div className='register-container'>
+          <button
+            className='register-button'
+            onClick={() => navigate('/register')}
+          >
+            {t('page.login.register')}
           </button>
         </div>
       </div>

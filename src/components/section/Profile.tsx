@@ -1,22 +1,22 @@
-import { Dispatch, SetStateAction, useEffect, useState } from "react";
-import axios from "axios";
+import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import axios from 'axios';
 
-import FriendListModal from "@/components/modal/FriendListModal";
-import EditProfileModal from "@/components/modal/EditProfileModal";
+import FriendListModal from '@/components/modal/FriendListModal';
+import EditProfileModal from '@/components/modal/EditProfileModal';
 
-import { UserType } from "@/types/data";
-import { useAppDispatch, useAppSelector } from "@/stores/hooks";
-import { selectUser } from "@/stores/user";
-import { useNavigate } from "react-router-dom";
-import ProfileIcon from "@/components/base/ProfileIcon";
+import { UserType } from '@/types/data';
+import { useAppDispatch, useAppSelector } from '@/stores/hooks';
+import { selectUser } from '@/stores/user';
+import { useNavigate } from 'react-router-dom';
+import ProfileIcon from '@/components/base/ProfileIcon';
 import {
   MyTabs,
   MyTabsCandidate,
   UserTabs,
   UserTabsCandidate,
-} from "@/types/initialValue";
-import { useTranslation } from "react-i18next";
-import { updateGlobalState } from "@/stores/globalStates";
+} from '@/types/initialValue';
+import { useTranslation } from 'react-i18next';
+import { updateGlobalState } from '@/stores/globalStates';
 
 function Profile({
   userProfile,
@@ -34,7 +34,7 @@ function Profile({
       UserTabs
     );
   const [inherentCurrentTab, setInherentCurrentTab] =
-    useState<MyTabsCandidate>("/post");
+    useState<MyTabsCandidate>('/post');
   const [showFriendsModal, setShowFriendsModal] = useState(false);
   const [showEditProfileModal, setShowEditProfileModal] = useState(false);
   const [isFollowing, setIsFollowing] = useState(false);
@@ -52,7 +52,7 @@ function Profile({
     }
     if (user.id != 0 && userProfile.id == user.id) {
       setTabs(MyTabs);
-      navigate("/mypage");
+      navigate('/mypage');
     } else {
       setTabs(UserTabs);
     }
@@ -87,7 +87,7 @@ function Profile({
   };
 
   return (
-    <div id="profile">
+    <div id='profile'>
       <FriendListModal
         showModal={showFriendsModal}
         setShowModal={setShowFriendsModal}
@@ -98,24 +98,23 @@ function Profile({
         setShowModal={setShowEditProfileModal}
         setDidEdit={setDidEdit}
       />
-      <div className="pre-offset" />
-      <div className="profile-container">
-        <div className="upper-container">
-          <div className="profile-image-container">
+      <div className='profile-container w-full! mx-8! md:w-3/5! md:mx-auto!'>
+        <div className='upper-container'>
+          <div className='profile-image-container'>
             <ProfileIcon profile={userProfile.profile} size={100} />
-            <div className="button-container">
+            <div className='button-container'>
               {user.id != 0 && userProfile.id == user.id ? (
                 <button
-                  className="edit-profile"
+                  className='edit-profile'
                   onClick={() => {
                     setShowEditProfileModal(true);
                   }}
                 >
-                  {t("component.section.profile.button.edit-profile")}
+                  {t('component.section.profile.button.edit-profile')}
                 </button>
               ) : (
                 <button
-                  className="be-friend"
+                  className='be-friend'
                   onClick={() => {
                     if (isFollowing) {
                       unfollow();
@@ -125,55 +124,55 @@ function Profile({
                   }}
                 >
                   {isFollowing
-                    ? t("component.section.profile.button.unfollow")
-                    : t("component.section.profile.button.follow")}
+                    ? t('component.section.profile.button.unfollow')
+                    : t('component.section.profile.button.follow')}
                 </button>
               )}
             </div>
           </div>
         </div>
-        <div className="lower-container">
-          <div className="name-container">{userProfile.name}</div>
-          <div className="follow-container">
+        <div className='lower-container'>
+          <div className='name-container'>{userProfile.name}</div>
+          <div className='follow-container'>
             <div
-              className="follower"
+              className='follower'
               onClick={() => {
                 setShowFriendsModal(true);
               }}
             >
-              {t("component.section.profile.text.follower-prefix")}
+              {t('component.section.profile.text.follower-prefix')}
               {userProfile.follower_num}
-              {t("component.section.profile.text.follower-postfix")}
+              {t('component.section.profile.text.follower-postfix')}
             </div>
             <div
-              className="following"
+              className='following'
               onClick={() => {
                 setShowFriendsModal(true);
               }}
             >
-              {t("component.section.profile.text.following-prefix")}
+              {t('component.section.profile.text.following-prefix')}
               {userProfile.following_num}
-              {t("component.section.profile.text.following-postfix")}
+              {t('component.section.profile.text.following-postfix')}
             </div>
           </div>
-          <div className="introduction-container">
-            <pre className="introduction">
+          <div className='introduction-container'>
+            <pre className='introduction'>
               {userProfile.introduction ??
-                t("component.section.profile.text.no-introduction")}
+                t('component.section.profile.text.no-introduction')}
             </pre>
           </div>
         </div>
-        <div className="tabs">
+        <div className='tabs'>
           {tabs.map((tab, idx) => {
             return (
               <div
-                key={"tab" + idx}
+                key={'tab' + idx}
                 className={[
-                  "tab-item",
+                  'tab-item ml-1! mr-4! md:mx-6!',
                   (currentTab ?? inherentCurrentTab) == tab.url
-                    ? "current-tab"
-                    : "",
-                ].join(" ")}
+                    ? 'current-tab'
+                    : '',
+                ].join(' ')}
                 data-value={tab.url}
                 onClick={(e) => {
                   (setCurrentTab ?? setInherentCurrentTab)(
@@ -183,13 +182,12 @@ function Profile({
                   );
                 }}
               >
-                {t(tab.text)}
+                <span className='text-base! md:text-xl!'>{t(tab.text)}</span>
               </div>
             );
           })}
         </div>
       </div>
-      <div className="post-offset" />
     </div>
   );
 }

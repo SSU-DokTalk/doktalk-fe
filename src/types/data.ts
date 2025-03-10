@@ -8,7 +8,7 @@ export type BasicUserType = {
   name: string;
   profile?: string;
   is_deleted: boolean;
-  role: "USER" | "ADMIN";
+  role: 'USER' | 'ADMIN';
 };
 
 export type UserType = {
@@ -21,7 +21,7 @@ export type UserType = {
   introduction?: string;
   follower_num: number;
   following_num: number;
-  role: "USER" | "ADMIN";
+  role: 'USER' | 'ADMIN';
   created: Date;
   updated: Date;
   is_deleted: boolean;
@@ -125,7 +125,7 @@ export type PaymentType = {
   id: number;
   user_id: number;
   user: BasicUserType;
-  product_type: "D" | "S";
+  product_type: 'D' | 'S';
   product_id: number;
   content?: string;
   price: number;

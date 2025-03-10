@@ -1,8 +1,8 @@
-import axios from "axios";
-import cookie from "react-cookies";
-import { useEffect } from "react";
-import { useAppDispatch } from "@/stores/hooks";
-import { unsetUser } from "./stores/user";
+import axios from 'axios';
+import cookie from 'react-cookies';
+import { useEffect } from 'react';
+import { useAppDispatch } from '@/stores/hooks';
+import { unsetUser } from './stores/user';
 
 function TokenRefresher({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
@@ -10,7 +10,7 @@ function TokenRefresher({ children }: { children: React.ReactNode }) {
   useEffect(() => {
     const refreshAPI = axios.create({
       headers: {
-        "Content-Type": "application/json",
+        'Content-Type': 'application/json',
       },
     });
 
@@ -27,31 +27,31 @@ function TokenRefresher({ children }: { children: React.ReactNode }) {
 
         // access_token 재발급
         if (status === 401) {
-          if (errorCode == "MD1002") {
+          if (errorCode == 'MD1002') {
             let res = await axios
               .post(
                 `/api/user/access-token`,
                 {},
                 {
                   params: {
-                    refresh_token: cookie.load("Authorization"),
+                    refresh_token: cookie.load('Authorization'),
                   },
                 }
               )
               .then(async (res) => {
                 // 새 토큰 저장
                 let token = res.headers.authorization;
-                axios.defaults.headers.common["Authorization"] = token;
+                axios.defaults.headers.common['Authorization'] = token;
 
                 // 새로 응답받은 데이터로 실패한 요청 재시도
-                config.headers["Authorization"] = token;
+                config.headers['Authorization'] = token;
                 return refreshAPI(config);
               });
             return res;
           }
           // 잘못됐거나 만료된 refresh_token인 경우 모든 token 초기화
-          axios.defaults.headers.common["Authorization"] = "";
-          cookie.remove("Authorization", { path: "/" });
+          axios.defaults.headers.common['Authorization'] = '';
+          cookie.remove('Authorization', { path: '/' });
           await dispatch(unsetUser());
         }
         // 다른 오류들에 대해 범용적인 처리가 필요할 경우 여기에 추가
