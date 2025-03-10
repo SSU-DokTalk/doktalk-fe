@@ -20,7 +20,9 @@ function Carousel({
         <div
           className='carousel-button left'
           onClick={() =>
-            setCurrentIdx((prev) => (prev + items.length - 1) % items.length)
+            setCurrentIdx(
+              (prev) => (prev + children.length - 1) % children.length
+            )
           }
         >
           <FontAwesomeIcon icon={faChevronLeft} />
@@ -29,8 +31,8 @@ function Carousel({
       {children.length < size ? null : (
         <div
           className='carousel-button right'
-          onClick={() => setCurrentIdx((prev) => (prev + 1) % children.length)}>
-
+          onClick={() => setCurrentIdx((prev) => (prev + 1) % children.length)}
+        >
           <FontAwesomeIcon icon={faChevronRight} />
         </div>
       )}
