@@ -50,13 +50,13 @@
         "post": "My Post",
         "summary": "My Summary",
         "shopping-cart": "Shopping Cart",
-        "debate": "Participating Debate",
+        "debate": "Participating Discussion",
         "library": "Library"
       }
     },
     "topnav": {
       "main-page": "Community",
-      "debate": "Debate",
+      "debate": "Discussion",
       "summary": "Summary",
       "search": "Explore",
       "search-bar": {
@@ -105,7 +105,7 @@
             "post": "Post",
             "summary": "My Summary",
             "library": "My Library",
-            "debate": "Debate",
+            "debate": "Discussion",
             "payment": "Payment"
           },
           "user-tab": {
@@ -119,7 +119,7 @@
           "no-post-item": "There is no post item",
           "no-summary-item": "There is no summary item",
           "no-library-item": "There is no book in the library",
-          "no-debate-item": "There is no participating debate room",
+          "no-debate-item": "There is no participating discussion room",
           "no-payment-item": "There is no payment item",
           "no-book-item": "There is no book",
           "currently-reading-book-prefix": "Currently reading",
@@ -158,7 +158,7 @@
       "title": {
         "post": "Post",
         "popular-summary": "Popular Summaries",
-        "recommend-prefix": "Recommended Debate Rooms ",
+        "recommend-prefix": "Recommended Discussion Rooms ",
         "recommend-postfix": "",
         "for-you-prefix": "For ",
         "for-you-postfix": ""
@@ -181,13 +181,13 @@
     },
     "debate": {
       "title": {
-        "recommend": "Recommended Debate Rooms",
+        "recommend": "Recommended Discussion Rooms",
         "popular": "Popular Summaries"
       },
       "search": {
         "book-title": "Book Title",
         "item-title": "Room Title",
-        "placeholder": "Search for debate rooms!"
+        "placeholder": "Search for discussion rooms!"
       },
       "sort": {
         "latest": "Latest",
@@ -198,14 +198,14 @@
         "create": "Create"
       },
       "item": {
-        "no-debate-item": "There is no debate item",
+        "no-debate-item": "There is no discussion item",
         "no-summary-item": "There is no summary item"
       }
     },
     "summary": {
       "title": {
         "recommend": "Recommended Summaries",
-        "popular": "Popular Debate Rooms"
+        "popular": "Popular Discussion Rooms"
       },
       "search": {
         "book-title": "Book Title",
@@ -221,7 +221,7 @@
       },
       "item": {
         "no-summary-item": "There is no summary item",
-        "no-debate-item": "There is no debate item"
+        "no-debate-item": "There is no discussion item"
       }
     },
     "search": {
