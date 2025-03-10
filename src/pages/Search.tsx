@@ -1,10 +1,10 @@
-import BookCard from "@/components/card/BookCard";
-import useDebounce from "@/hooks/useDebounce";
-import { BookType } from "@/types/data";
-import { useEffect, useRef, useState } from "react";
-import { useTranslation } from "react-i18next";
-import InfiniteScroll from "@/components/base/InfiniteScroll";
-import { SearchBar } from "@/components/input/searchbar";
+import BookCard from '@/components/card/BookCard';
+import useDebounce from '@/hooks/useDebounce';
+import { BookType } from '@/types/data';
+import { useEffect, useRef, useState } from 'react';
+import { useTranslation } from 'react-i18next';
+import InfiniteScroll from '@/components/base/InfiniteScroll';
+import { SearchBar } from '@/components/input/searchbar';
 
 const sortBys: {
   name: string;
@@ -46,11 +46,11 @@ function Search() {
   }, [debouncedSearch, sortByIdx]);
 
   return (
-    <div id='search-page' className='px-4! md:px-0! md:w-4/5'>
+    <div id='search-page' className='px-4! md:px-0! md:w-7/10'>
       <div className='page-container'>
-        <div className='page-title'>{t("page.search.title.page")}</div>
+        <div className='page-title'>{t('page.search.title.page')}</div>
         <SearchBar
-          placeholder={t("page.search.search.placeholder")}
+          placeholder={t('page.search.search.placeholder')}
           value={search}
           onChange={(e) => setSearch(e.target.value)}
         />

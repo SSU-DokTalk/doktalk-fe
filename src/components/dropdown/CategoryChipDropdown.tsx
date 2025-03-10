@@ -34,14 +34,12 @@ function CategoryDropdown({
   return (
     <>
       <ClickAwayListener onClickAway={() => setAnchorEl(null)}>
-        <div className='input-container'>
-          <label htmlFor='category'>카테고리</label>
-
+        <div className='grow'>
           <div
             className='input-box category-input'
             onClick={(event) => setAnchorEl(event.currentTarget)}
           >
-            <div className='category-container'>
+            <div className='category-container text-base! md:text-lg!'>
               {data.category == 0
                 ? '토론 주제의 카테고리를 선택해주세요'
                 : getCategoryFromNumber(data.category).map(

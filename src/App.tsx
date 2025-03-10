@@ -123,10 +123,10 @@ function App() {
           }
         >
           <Route path='/' element={<Landing />}></Route>
-          <Route path='/debate' element={<Debate />}></Route>
         </Route>
         <Route element={<ContentMainLayout />}>
           <Route path='/search' element={<Search />}></Route>
+          <Route path='/debate' element={<Debate />}></Route>
           <Route path='/summary' element={<Summary />}></Route>
           <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>
           <Route

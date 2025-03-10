@@ -91,7 +91,7 @@ function CreateDebate() {
 
   return (
     <div id='create-debate-page'>
-      <div className='container'>
+      <div className='container mx-4! w-full md:w-[65%]'>
         <h1>토론방 생성하기</h1>
         <div className='input-container__title'>
           <input
@@ -106,8 +106,13 @@ function CreateDebate() {
           />
         </div>
         <div className='input-container'>
-          <label htmlFor='location'>모임 장소</label>
-          <div className='input-box'>
+          <label
+            htmlFor='location'
+            className='w-22 text-base! md:w-1/5 md:text-xl!'
+          >
+            모임 장소
+          </label>
+          <div className='input-box grow'>
             <input
               id='location'
               type='text'
@@ -118,12 +123,18 @@ function CreateDebate() {
                   return { ...prev, location: e.target.value };
                 });
               }}
+              className='placeholder:text-base'
             />
           </div>
         </div>
         <div className='input-container'>
-          <label htmlFor='link'>온라인 링크</label>
-          <div className='input-box'>
+          <label
+            htmlFor='link'
+            className='w-22 text-base! md:w-1/5 md:text-xl!'
+          >
+            온라인 링크
+          </label>
+          <div className='input-box grow'>
             <input
               id='link'
               type='text'
@@ -134,12 +145,18 @@ function CreateDebate() {
                   return { ...prev, link: e.target.value };
                 });
               }}
+              className='placeholder:text-base'
             />
           </div>
         </div>
         <div className='input-container'>
-          <label htmlFor='held_at'>모임 시간</label>
-          <div className='input-box'>
+          <label
+            htmlFor='held_at'
+            className='w-22 text-base! md:w-1/5 md:text-xl!'
+          >
+            모임 시간
+          </label>
+          <div className='input-box grow'>
             <DatePicker
               selected={debateData.held_at}
               onChange={(date) =>
@@ -212,12 +229,33 @@ function CreateDebate() {
             />
           </div>
         </div>
-        <BookSearchDropdown setBookIsbnData={setDebateData} />
+        <div className='input-container'>
+          <label
+            htmlFor='book'
+            className='w-22 text-base! md:w-1/5 md:text-xl!'
+          >
+            도서 선택
+          </label>
+          <BookSearchDropdown setBookIsbnData={setDebateData} />
+        </div>
+        <div className='input-container'>
+          <label
+            htmlFor='category'
+            className='w-22 text-base! md:w-1/5 md:text-xl!'
+          >
+            카테고리
+          </label>
 
-        <CategoryDropdown data={debateData} setData={setDebateData} />
+          <CategoryDropdown data={debateData} setData={setDebateData} />
+        </div>
 
         <div className='input-container'>
-          <label htmlFor='limit'>인원 제한</label>
+          <label
+            htmlFor='limit'
+            className='w-22 text-base! md:w-1/5 md:text-xl!'
+          >
+            인원 제한
+          </label>
           <div className='input-box-short'>
             <input
               id='limit'
@@ -256,13 +294,13 @@ function CreateDebate() {
               width: '30px',
             }}
           />
-          <label htmlFor='price' className='price-label'>
+          <label htmlFor='price' className='price-label text-base! md:text-xl!'>
             가격
           </label>
           <input
             id='price'
             type='number'
-            className='price-input'
+            className='price-input grow'
             step={1000}
             min={0}
             placeholder='가격을 입력해주세요'
@@ -281,7 +319,6 @@ function CreateDebate() {
           </button>
         </div>
       </div>
-      <div className='offset'></div>
     </div>
   );
 }

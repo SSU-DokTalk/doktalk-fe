@@ -6,6 +6,7 @@ import { PostType, SummaryType } from '@/types/data';
 import { useAppSelector } from '@/stores/hooks';
 import { selectUser } from '@/stores/user';
 import WritePostCard from '@/components/card/WritePostCard';
+import WritePostFloatingButton from '@/components/floating/WritePostFloatingButton';
 import PopularSummaryCard from '../components/card/PopularSummaryCard';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
@@ -59,11 +60,18 @@ function Landing() {
 
   return (
     <div id='landing-page'>
-      <div className='post-container px-4! md:px-0! md:w-3/5'>
-        <div className='post-title hidden md:block'>
-          {t('page.landing.title.post')}
-        </div>
-        {user.id != 0 ? <WritePostCard setDidPost={setDidPost} /> : null}
+      <div className='post-container px-4! w-full md:px-0! md:w-3/5'>
+        {user.id != 0 ? (
+          <div className='write-post'>
+            <div className='for-pc hidden md:block'>
+              <div className='post-title'>{t('page.landing.title.post')}</div>
+              <WritePostCard setDidPost={setDidPost} />
+            </div>
+            <div className='for-mobile md:hidden'>
+              <WritePostFloatingButton />
+            </div>
+          </div>
+        ) : null}
         <InfiniteScroll
           api={`post/recent`}
           likes_api={`posts/like`}

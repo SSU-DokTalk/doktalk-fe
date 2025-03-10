@@ -31,7 +31,7 @@ function MyPage() {
         setCurrentTab={setCurrentTab}
       />
       <div className='content-container'>
-        <div className='content md:w-1/2 md:mx-auto!'>
+        <div className='content w-full mx-4! md:w-1/2 md:mx-auto!'>
           <ProfileTabDetails
             currentTab={currentTab}
             userProfile={userProfile}

@@ -41,15 +41,15 @@ function ProfileTabDetails({
   if (userProfile) {
     return (
       <div id='profile-tab-details'>
-        {currentTab === "/post" ? (
+        {currentTab === '/post' ? (
           <PostTab userProfile={userProfile} />
-        ) : currentTab === "/summary" ? (
+        ) : currentTab === '/summary' ? (
           <SummaryTab userProfile={userProfile} />
-        ) : currentTab === "/library" ? (
+        ) : currentTab === '/library' ? (
           <LibraryTab userProfile={userProfile} />
-        ) : currentTab === "/debate" ? (
+        ) : currentTab === '/debate' ? (
           <DebateTab userProfile={userProfile} />
-        ) : currentTab === "/payment" ? (
+        ) : currentTab === '/payment' ? (
           <PaymentTab userProfile={userProfile} />
         ) : undefined}
       </div>
@@ -102,7 +102,8 @@ function PaymentTab({ userProfile }: { userProfile: UserType }) {
               await setPaymentCurTime(
                 new Date(paymentCurTime.setMonth(paymentCurTime.getMonth() - 1))
               );
-            }}>
+            }}
+          >
             <FontAwesomeIcon icon={faChevronLeft} />
           </div>
           <div
@@ -112,12 +113,13 @@ function PaymentTab({ userProfile }: { userProfile: UserType }) {
               await setPaymentCurTime(
                 new Date(paymentCurTime.setMonth(paymentCurTime.getMonth() + 1))
               );
-            }}>
+            }}
+          >
             <FontAwesomeIcon icon={faChevronRight} />
           </div>
           <div className='cur-month'>
             {paymentCurTime.getFullYear()}
-            {t("component.section.profile-tab-details.time.year")}{" "}
+            {t('component.section.profile-tab-details.time.year')}{' '}
             {t(
               `component.section.profile-tab-details.time.month.${(
                 paymentCurTime.getMonth() + 1
@@ -125,7 +127,7 @@ function PaymentTab({ userProfile }: { userProfile: UserType }) {
             )}
           </div>
           <div className='total-payment'>
-            {t("component.section.profile-tab-details.item.currency")}
+            {t('component.section.profile-tab-details.item.currency')}
             {payments
               .filter((payment) => {
                 let time = new Date(getDateTime(new Date(payment.created)));
@@ -171,9 +173,10 @@ function PaymentTab({ userProfile }: { userProfile: UserType }) {
           </div>
         }
         condition={userProfile && userProfile.id != 0}
-        dependency={[isCurTimeChanged.current]}>
+        dependency={[isCurTimeChanged.current]}
+      >
         {payments.map((payment, index) => (
-          <PaymentCard key={"payment" + index} payment={payment} />
+          <PaymentCard key={'payment' + index} payment={payment} />
         ))}
       </InfiniteScroll>
     </div>
@@ -208,12 +211,13 @@ function DebateTab({ userProfile }: { userProfile: UserType }) {
         setLikes={setDebateLikes}
         hasNoItem={debates.length === 0}
         hasNoItemMessage={t(
-          "component.section.profile-tab-details.item.no-debate-item"
+          'component.section.profile-tab-details.item.no-debate-item'
         )}
-        condition={userProfile && userProfile.id != 0}>
+        condition={userProfile && userProfile.id != 0}
+      >
         {debates.map((debate, index) => (
           <DebateCard
-            key={"debate" + index}
+            key={'debate' + index}
             hasLiked={debateLikes.includes(debate.id)}
             setHasLiked={setDebateLikes}
             debate={debate}
@@ -243,7 +247,6 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
 
   useEffect(() => {
     if (userProfile.id != 0) {
-
       if (!hasLoadedMyBook) {
         axios
           .get(`/api/user/${userProfile.id}/mybooks`, {
@@ -273,22 +276,22 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
   }, [userProfile]);
 
   return (
-    <div className='library-tab'>
+    <div className='library-tab mx-4!'>
       <div className='currently-reading-books-container'>
         <div className='currently-reading-header'>
           <div className='currently-reading-title'>
             {t(
-              "component.section.profile-tab-details.item.currently-reading-book-prefix"
-            ) + " "}
+              'component.section.profile-tab-details.item.currently-reading-book-prefix'
+            ) + ' '}
             <span className='item-count'>
               {totalMyBooks}
               {t(
-                "component.section.profile-tab-details.item.currently-reading-book-postfix"
+                'component.section.profile-tab-details.item.currently-reading-book-postfix'
               )}
             </span>
           </div>
           <div className='show-more'>
-            {t("component.section.profile-tab-details.item.show-more") + " >"}
+            {t('component.section.profile-tab-details.item.show-more') + ' >'}
           </div>
         </div>
         {!hasLoadedMyBook ? (
@@ -300,16 +303,16 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
           <div className='no-item'>
             <img src={noImage} alt='no image' width='122px' />
             <p className='no-item-message'>
-              {t("component.section.profile-tab-details.item.no-book-item")}
+              {t('component.section.profile-tab-details.item.no-book-item')}
             </p>
             <Link to='/search' className='go-to'>
-              {t("component.section.profile-tab-details.go-to.search") + " >"}
+              {t('component.section.profile-tab-details.go-to.search') + ' >'}
             </Link>
           </div>
         ) : (
           <div className='currently-reading-books'>
             {myBooks.slice(0, 4).map((mybook, index) => {
-              return <Book key={"book" + index} book={mybook.book} />;
+              return <Book key={'book' + index} book={mybook.book} />;
             })}
           </div>
         )}
@@ -318,17 +321,17 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
         <div className='currently-reading-header'>
           <div className='currently-reading-title'>
             {t(
-              "component.section.profile-tab-details.item.currently-reading-summary-prefix"
-            ) + " "}
+              'component.section.profile-tab-details.item.currently-reading-summary-prefix'
+            ) + ' '}
             <span className='item-count'>
               {totalPurchasedSummaries}
               {t(
-                "component.section.profile-tab-details.item.currently-reading-summary-postfix"
+                'component.section.profile-tab-details.item.currently-reading-summary-postfix'
               )}
             </span>
           </div>
           <div className='show-more'>
-            {t("component.section.profile-tab-details.item.show-more") + " >"}
+            {t('component.section.profile-tab-details.item.show-more') + ' >'}
           </div>
         </div>
         {!hasLoadedPurchaseSummary ? (
@@ -340,10 +343,10 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
           <div className='no-item'>
             <img src={noImage} alt='no image' width='122px' />
             <p className='no-item-message'>
-              {t("component.section.profile-tab-details.item.no-summary-item")}
+              {t('component.section.profile-tab-details.item.no-summary-item')}
             </p>
             <Link to='/summary' className='go-to'>
-              {t("component.section.profile-tab-details.go-to.summary") + " >"}
+              {t('component.section.profile-tab-details.go-to.summary') + ' >'}
             </Link>
           </div>
         ) : (
@@ -351,7 +354,7 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
             {purchasedSummaries.slice(0, 4).map((summary, index) => {
               return (
                 <SummaryCard
-                  key={"purchased_summary" + index}
+                  key={'purchased_summary' + index}
                   summary={summary}
                   hasLiked={purchasedSummaryLikes.includes(summary.id)}
                   setHasLiked={setPurchasedSummaryLikes}
@@ -393,12 +396,13 @@ function SummaryTab({ userProfile }: { userProfile: UserType }) {
         setLikes={setSummaryLikes}
         hasNoItem={summaries.length === 0}
         hasNoItemMessage={t(
-          "component.section.profile-tab-details.item.no-summary-item"
+          'component.section.profile-tab-details.item.no-summary-item'
         )}
-        condition={userProfile && userProfile.id != 0}>
+        condition={userProfile && userProfile.id != 0}
+      >
         {summaries.map((summary, index) => (
           <SummaryCard
-            key={"summary" + index}
+            key={'summary' + index}
             summary={summary}
             hasLiked={summaryLikes.includes(summary.id)}
             setHasLiked={setSummaryLikes}
@@ -438,7 +442,7 @@ function PostTab({ userProfile }: { userProfile: UserType }) {
         setLikes={setPostLikes}
         hasNoItem={posts.length === 0}
         hasNoItemMessage={t(
-          "component.section.profile-tab-details.item.no-post-item"
+          'component.section.profile-tab-details.item.no-post-item'
         )}
         condition={userProfile && userProfile.id != 0}
         refreshCondition={didPost}
@@ -448,10 +452,11 @@ function PostTab({ userProfile }: { userProfile: UserType }) {
         }}
         afterFetchFail={async () => {
           await setDidPost(false);
-        }}>
+        }}
+      >
         {posts.map((post) => (
           <PostCard
-            key={"post" + post.id}
+            key={'post' + post.id}
             post={post}
             hasLiked={postLikes.includes(post.id)}
             setHasLiked={setPostLikes}

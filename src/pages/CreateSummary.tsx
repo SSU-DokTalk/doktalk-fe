@@ -53,7 +53,7 @@ function CreateSummary() {
 
   return (
     <div id='create-summary-page'>
-      <div className='container'>
+      <div className='container mx-4! w-full md:w-[65%]'>
         <h1>요약 작성하기</h1>
         <div className='input-container__title'>
           <input
@@ -66,9 +66,26 @@ function CreateSummary() {
             }
           />
         </div>
-        <BookSearchDropdown setBookIsbnData={setSummaryData} />
+        <div className='input-container'>
+          <label
+            htmlFor='book'
+            className='w-22 text-base! md:w-1/5 md:text-xl!'
+          >
+            도서 선택
+          </label>
+          <BookSearchDropdown setBookIsbnData={setSummaryData} />
+        </div>
 
-        <CategoryDropdown data={summaryData} setData={setSummaryData} />
+        <div className='input-container'>
+          <label
+            htmlFor='category'
+            className='w-22 text-base! md:w-1/5 md:text-xl!'
+          >
+            카테고리
+          </label>
+
+          <CategoryDropdown data={summaryData} setData={setSummaryData} />
+        </div>
 
         <UploadFiles
           setFiles={setFiles}
@@ -105,13 +122,13 @@ function CreateSummary() {
               width: '30px',
             }}
           />
-          <label htmlFor='price' className='price-label'>
+          <label htmlFor='price' className='price-label text-base! md:text-xl!'>
             가격
           </label>
           <input
             id='price'
             type='number'
-            className='price-input'
+            className='price-input grow'
             step={1000}
             min={0}
             placeholder='가격을 입력해주세요'
@@ -130,7 +147,6 @@ function CreateSummary() {
           </button>
         </div>
       </div>
-      <div className='offset'></div>
     </div>
   );
 }

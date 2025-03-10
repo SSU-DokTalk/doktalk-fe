@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import { DebateType, SummaryType } from '@/types/data';
 import SummaryCard from '@/components/card/SummaryCard';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import { faMagnifyingGlass } from '@fortawesome/free-solid-svg-icons';
+import { faMagnifyingGlass, faPen } from '@fortawesome/free-solid-svg-icons';
 import axios from 'axios';
 import { DUMMY_SUMMARIES } from '@/common/dummy_data';
 import CarouselSummaryCard from '@/components/card/CarouselSummaryCard';
@@ -18,10 +18,10 @@ import useDebounce from '@/hooks/useDebounce';
 import CategoryCard from '@/components/card/CategoryCard';
 import SearchDropdown from '@/components/dropdown/SearchByDropdown';
 
-import { isMd } from "@/functions/breakpoint";
-import { SearchBar } from "@/components/input/searchbar";
-import { MiddlePanel, RightPanel } from "@/components/panel/sidePanel";
-
+import { isMd } from '@/functions/breakpoint';
+import { SearchBar } from '@/components/input/searchbar';
+import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
+import { Fab, IconButton } from '@mui/material';
 
 const searchBys: {
   name: string;
@@ -131,12 +131,12 @@ function Summary() {
   return (
     <div id='summary-page'>
       <div className='popular-content-container'>
-        <div className='popular-content-title'>
+        <div className='popular-content-title  ml-6!'>
           {t('page.summary.title.recommend')}
         </div>
         <Carousel
           size={isMd() ? 3 : 1}
-          className='popular-content mx-auto md:mx-0!'
+          className='popular-content mx-auto! md:mx-0!'
         >
           {recommendSummaries.map((summary, index) => (
             <CarouselSummaryCard
@@ -161,9 +161,10 @@ function Summary() {
         <div className='lower-content-container md:flex'>
           <MiddlePanel className='left-container'>
             <SearchBar
-              placeholder={t("page.summary.search.placeholder")}
+              placeholder={t('page.summary.search.placeholder')}
               value={search}
-              onChange={(e) => setSearch(e.target.value)}>
+              onChange={(e) => setSearch(e.target.value)}
+            >
               <SearchDropdown
                 searchBys={searchBys}
                 searchByIdx={searchByIdx}
@@ -192,10 +193,28 @@ function Summary() {
                   );
                 })}
               </div>
-              <button onClick={() => navigate('/summary/create')}>
-                <span>{t('page.summary.button.write')}</span>
-                <WriteIcon className='write-icon' width={17} fill={'#ffffff'} />
-              </button>
+              <div className='create-summary'>
+                <div className='for-pc hidden md:block'>
+                  <button
+                    className='create-summary-button'
+                    onClick={() => navigate('/summary/create')}
+                  >
+                    <span>{t('page.summary.button.write')}</span>
+                    <WriteIcon
+                      className='write-icon'
+                      width={17}
+                      fill={'#ffffff'}
+                    />
+                  </button>
+                </div>
+                <div className='for-mobile md:hidden'>
+                  <Fab className='create-summary-floating-button fixed! bottom-20 right-4 bg-brand1!'>
+                    <IconButton onClick={() => navigate('/summary/create')}>
+                      <FontAwesomeIcon icon={faPen} color='white' />
+                    </IconButton>
+                  </Fab>
+                </div>
+              </div>
             </div>
             <div className='content-container'>
               <InfiniteScroll
