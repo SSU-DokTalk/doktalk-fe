@@ -187,9 +187,9 @@ function Debate() {
           <CategoryCard
             categories={categories}
             setCategories={setCategories}
-            className='left-container mx-4! w-screen'
+            className='left-container mx-4! w-full'
           />
-          {/* <div className='right-container'></div> */}
+          <div className='right-container hidden md:block'></div>
         </div>
         <div className='lower-content-container'>
           <div className='left-container mx-4! w-full'>
