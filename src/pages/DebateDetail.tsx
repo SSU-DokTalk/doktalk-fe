@@ -165,7 +165,7 @@ function DebateDetail() {
           </div>
           <div className='discussion-info__item'>
             <strong>온라인 링크</strong>
-            <span>{debate.link}</span>
+            <a href={debate.link}>{debate.link}</a>
           </div>
           <div className='discussion-info__item'>
             <strong>시간</strong>
