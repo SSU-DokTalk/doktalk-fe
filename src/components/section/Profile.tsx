@@ -98,7 +98,7 @@ function Profile({
         setShowModal={setShowEditProfileModal}
         setDidEdit={setDidEdit}
       />
-      <div className='profile-container mx-8! md:w-3/5! md:mx-auto!'>
+      <div className='profile-container w-full! mx-8! md:w-3/5! md:mx-auto!'>
         <div className='upper-container'>
           <div className='profile-image-container'>
             <ProfileIcon profile={userProfile.profile} size={100} />
@@ -168,7 +168,7 @@ function Profile({
               <div
                 key={'tab' + idx}
                 className={[
-                  'tab-item',
+                  'tab-item ml-1! mr-4! md:mx-6!',
                   (currentTab ?? inherentCurrentTab) == tab.url
                     ? 'current-tab'
                     : '',
@@ -182,7 +182,7 @@ function Profile({
                   );
                 }}
               >
-                {t(tab.text)}
+                <span className='text-base! md:text-xl!'>{t(tab.text)}</span>
               </div>
             );
           })}
