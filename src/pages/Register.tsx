@@ -109,14 +109,7 @@ const Register: React.FC = () => {
   return (
     <div
       id='register'
-      style={{
-        display: 'flex',
-        flexDirection: 'column',
-        gap: '30px',
-        alignItems: 'center',
-        flexWrap: 'wrap',
-        width: '100%',
-      }}
+      className='flex flex-col gap-[30px] items-center flex-wrap w-full'
     >
       <div className='logo-container'>
         <div className='logo dok'>讀</div>
@@ -124,60 +117,30 @@ const Register: React.FC = () => {
         <div className='logo talk'>TALK</div>
       </div>
       <div>독서토론 커뮤니티 독TALK에 오신 것을 환영합니다!</div>
-      <div
-        style={{
-          width: '30%',
-          padding: '20px',
-          display: 'flex',
-          flexDirection: 'column',
-          gap: '64px',
-        }}
-      >
-        <form
-          onSubmit={handleSubmit(onSubmit)}
-          style={{
-            display: 'flex',
-            flexDirection: 'column',
-            gap: '16px',
-          }}
-        >
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <label style={{ fontWeight: 'bold' }}>이메일</label>
+      <div className='w-[30%] flex flex-col gap-16 p-5!'>
+        <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
+          <div className='flex flex-col'>
+            <label className='font-bold!'>이메일</label>
             <input
-              style={{
-                border: '2px solid gray',
-                borderRadius: '8px',
-                height: '40px',
-                padding: '8px',
-              }}
+              className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
               {...register('email', { required: '이메일을 입력해주세요' })}
             />
             {errors.email && <span>{errors.email.message}</span>}
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
-            <label style={{ fontWeight: 'bold' }}>닉네임</label>
+          <div className='flex flex-col'>
+            <label className='font-bold!'>닉네임</label>
             <input
-              style={{
-                border: '2px solid gray',
-                borderRadius: '8px',
-                height: '40px',
-                padding: '8px',
-              }}
+              className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
               {...register('nickname', { required: '닉네임을 입력해주세요' })}
             />
             {errors.nickname && <span>{errors.nickname.message}</span>}
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '4px' }}>
-            <label style={{ fontWeight: 'bold' }}>비밀번호</label>
+          <div className='flex flex-col gap-1'>
+            <label className='font-bold!'>비밀번호</label>
             <input
-              style={{
-                border: '2px solid gray',
-                borderRadius: '8px',
-                height: '40px',
-                padding: '8px',
-              }}
+              className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
               type='password'
               {...register('password', {
                 required: '비밀번호를 입력해주세요',
@@ -190,12 +153,7 @@ const Register: React.FC = () => {
             {errors.password && <span>{errors.password.message}</span>}
 
             <input
-              style={{
-                border: '2px solid gray',
-                borderRadius: '8px',
-                height: '40px',
-                padding: '8px',
-              }}
+              className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
               type='password'
               placeholder='비밀번호 확인'
               {...register('passwordConfirmation', {
@@ -209,16 +167,11 @@ const Register: React.FC = () => {
             )}
           </div>
 
-          <div style={{ display: 'flex', justifyContent: 'space-between' }}>
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={{ fontWeight: 'bold' }}>생년월일</label>
+          <div className='flex justify-between'>
+            <div className='flex flex-col'>
+              <label className='font-bold!'>생년월일</label>
               <input
-                style={{
-                  border: '2px solid gray',
-                  borderRadius: '8px',
-                  height: '40px',
-                  padding: '8px',
-                }}
+                className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
                 type='text'
                 placeholder='YYYY-MM-DD'
                 {...register('birthdate', {
@@ -232,49 +185,23 @@ const Register: React.FC = () => {
               {errors.birthdate && <span>{errors.birthdate.message}</span>}
             </div>
 
-            <div style={{ display: 'flex', flexDirection: 'column' }}>
-              <label style={{ fontWeight: 'bold' }}>성별</label>
-              <div style={{ display: 'flex', gap: '4px', width: '100%' }}>
-                <label
-                  style={{
-                    border: '2px solid gray',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    paddingLeft: '16px',
-                    paddingRight: '16px',
-                    paddingTop: '8px',
-                    paddingBottom: '8px',
-                    backgroundColor: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
+            <div className='flex flex-col'>
+              <label className='font-bold!'>성별</label>
+              <div className='flex gap-1 w-full'>
+                <label className='cursor-pointer bg-white flex items-center px-4! py-2! rounded-lg border-2! border-solid border-[gray]!'>
                   <input
                     type='radio'
                     value='male'
-                    style={{ marginRight: '8px' }}
+                    className='mr-2!'
                     {...register('gender', { required: '성별을 선택해주세요' })}
                   />
                   남자
                 </label>
-                <label
-                  style={{
-                    border: '2px solid gray',
-                    borderRadius: '8px',
-                    cursor: 'pointer',
-                    paddingLeft: '16px',
-                    paddingRight: '16px',
-                    paddingTop: '8px',
-                    paddingBottom: '8px',
-                    backgroundColor: 'white',
-                    display: 'flex',
-                    alignItems: 'center',
-                  }}
-                >
+                <label className='cursor-pointer bg-white flex items-center px-4! py-2! rounded-lg! border-2! border-solid! border-[gray]!'>
                   <input
                     type='radio'
                     value='female'
-                    style={{ marginRight: '8px' }}
+                    className='mr-2!'
                     {...register('gender', { required: '성별을 선택해주세요' })}
                   />
                   여자
@@ -284,15 +211,9 @@ const Register: React.FC = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column' }}>
+          <div className='flex flex-col'>
             <button
-              style={{
-                height: '48px',
-                backgroundColor: 'white',
-                color: '#000080',
-                border: 'solid 2px #000080',
-                borderRadius: '8px',
-              }}
+              className='h-12 bg-white text-[#000080] border-2 rounded-lg border-solid border-[#000080]'
               type='button'
               onClick={() => {
                 // 실제 본인인증 로직 필요
@@ -305,43 +226,25 @@ const Register: React.FC = () => {
             </button>
           </div>
 
-          <div
-            style={{ display: 'flex', flexDirection: 'column', gap: '16px' }}
-          >
+          <div className='flex flex-col gap-4'>
             <div>
-              <div style={{ fontWeight: 'bold' }}>관심분야 선택</div>
-              <div style={{ fontSize: '13px' }}>
+              <div className='font-bold!'>관심분야 선택</div>
+              <div className='text-[13px]!'>
                 선택한 관심분야는 개인 맞춤 도서 추천 / 토론방 매칭에
                 사용됩니다.
               </div>
             </div>
-            <div
-              style={{
-                display: 'flex',
-                flexWrap: 'wrap',
-                columnGap: '6px',
-                rowGap: '6px',
-                justifyContent: 'center',
-              }}
-            >
+            <div className='flex flex-wrap gap-x-1.5 gap-y-1.5 justify-center'>
               {SELECTIONS.map((selection, index) => (
                 <label
                   key={index}
-                  style={{
-                    borderRadius: '20px',
-                    border: '1px solid #ccc',
-                    paddingLeft: '24px',
-                    paddingRight: '24px',
-                    paddingTop: '8px',
-                    paddingBottom: '8px',
-                    cursor: 'pointer',
-                  }}
+                  className='border! cursor-pointer px-6! py-2! rounded-[20px] border-solid border-[#ccc]!'
                 >
                   <input
                     type='checkbox'
                     value={selection}
                     {...register('interests')}
-                    style={{ marginRight: '8px' }}
+                    className='mr-2!'
                   />
                   {selection}
                 </label>
@@ -349,73 +252,49 @@ const Register: React.FC = () => {
             </div>
           </div>
 
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '8px' }}>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+          <div className='flex flex-col gap-2'>
+            <div className='flex items-center'>
               <input
                 type='checkbox'
                 {...register('allAgreements')}
                 onChange={handleAllAgreementsChange}
               />
-              <label style={{ fontWeight: 'bold', marginLeft: '8px' }}>
-                약관 전체동의
-              </label>
+              <label className='font-bold! ml-2!'>약관 전체동의</label>
             </div>
-            <div
-              style={{ width: '100%', height: '1px', background: 'black' }}
-            ></div>
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <hr className='h-px bg-black'></hr>
+            <div className='flex items-center'>
               <input
                 type='checkbox'
                 {...register('agreement1', {
                   validate: (val) => val === true || '약관 1에 동의해주세요',
                 })}
               />
-              <label style={{ marginLeft: '8px' }}>
-                {'(필수) 약관 1 동의'}
-              </label>
-              <div style={{ marginLeft: 'auto', marginRight: '16px' }}>
-                보기
-              </div>
+              <label className='ml-2!'>{'(필수) 약관 1 동의'}</label>
+              <div className='ml-auto! mr-4!'>보기</div>
             </div>
             {errors.agreement1 && <span>{errors.agreement1.message}</span>}
 
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className='flex items-center'>
               <input
                 type='checkbox'
                 {...register('agreement2', {
                   validate: (val) => val === true || '약관 2에 동의해주세요',
                 })}
               />
-              <label style={{ marginLeft: '8px' }}>
-                {'(필수) 약관 2 동의'}
-              </label>
-              <div style={{ marginLeft: 'auto', marginRight: '16px' }}>
-                보기
-              </div>
+              <label className='ml-2!'>{'(필수) 약관 2 동의'}</label>
+              <div className='ml-auto! mr-4!'>보기</div>
             </div>
             {errors.agreement2 && <span>{errors.agreement2.message}</span>}
 
-            <div style={{ display: 'flex', alignItems: 'center' }}>
+            <div className='flex items-center'>
               <input type='checkbox' {...register('agreement3')} />
-              <label style={{ marginLeft: '8px' }}>
-                {'(선택) 약관 3 동의'}{' '}
-              </label>
-              <div style={{ marginLeft: 'auto', marginRight: '16px' }}>
-                보기
-              </div>
+              <label className='ml-2!'>{'(선택) 약관 3 동의'} </label>
+              <div className='ml-auto! mr-4!'>보기</div>
             </div>
           </div>
 
           <button
-            style={{
-              width: '100%',
-              padding: '10px',
-              backgroundColor: '#000080',
-              color: 'white',
-              border: 'none',
-              borderRadius: '10px',
-              cursor: 'pointer',
-            }}
+            className='w-full bg-[#000080] text-[white] cursor-pointer p-2.5 rounded-[10px] border-[none]'
             type='submit'
           >
             회원가입
