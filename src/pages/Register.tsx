@@ -117,7 +117,7 @@ const Register: React.FC = () => {
         <div className='logo talk'>TALK</div>
       </div>
       <div>독서토론 커뮤니티 독TALK에 오신 것을 환영합니다!</div>
-      <div className='w-[30%] flex flex-col gap-16 p-5!'>
+      <div className='w-[350px] md:w-[460px] flex flex-col gap-16 p-5!'>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
           <div className='flex flex-col'>
             <label className='font-bold!'>이메일</label>
@@ -167,7 +167,7 @@ const Register: React.FC = () => {
             )}
           </div>
 
-          <div className='flex justify-between'>
+          <div className='flex flex-col gap-4 md:flex-row md:justify-between'>
             <div className='flex flex-col'>
               <label className='font-bold!'>생년월일</label>
               <input
