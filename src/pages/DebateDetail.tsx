@@ -9,11 +9,11 @@ import {
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
 import ProfileIcon from '@/components/base/ProfileIcon';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import axios from 'axios';
 import { DebateType, PaymentType } from '@/types/data';
 import { InitialDebate } from '@/types/initialValue';
-import { getDateTime, getTimeDiff } from '@/functions';
+import { getCategoryFromNumber, getDateTime, getTimeDiff } from '@/functions';
 import Image from '@/components/base/Image';
 import { selectUser } from '@/stores/user';
 import { useAppSelector } from '@/stores/hooks';
@@ -26,8 +26,11 @@ import {
   ListItemIcon,
   Paper,
 } from '@mui/material';
+import { useTranslation } from 'react-i18next';
 
 function DebateDetail() {
+  const { t } = useTranslation();
+
   const { debate_id } = useParams();
   const [debate, setDebate] = useState<DebateType>(InitialDebate);
 
@@ -158,25 +161,31 @@ function DebateDetail() {
       <div className='discussion-info'>
         <h2 className='discussion-info__title'>{debate.title}</h2>
 
-        <div className='discussion-info__grid'>
-          <div className='discussion-info__item'>
-            <strong>모임 장소</strong>
-            <span>{debate.location}</span>
-          </div>
-          <div className='discussion-info__item'>
-            <strong>온라인 링크</strong>
-            <a href={debate.link}>{debate.link}</a>
-          </div>
-          <div className='discussion-info__item'>
-            <strong>시간</strong>
-            <span>{getDateTime(new Date(debate.held_at))}</span>
-          </div>
-          <div className='discussion-info__item'>
-            <strong>카테고리</strong>
-            <span>인문</span>
-          </div>
-          <div className='discussion-info__item book'>
-            <strong>지정 도서</strong>
+        <div className='discussion-info-list'>
+          <DebateDetailListItem name='모임 장소'>
+            {debate.location}
+          </DebateDetailListItem>
+
+          <DebateDetailListItem name='온라인 링크'>
+            <a
+              className='whitespace-nowrap overflow-hidden text-ellipsis block'
+              href={debate.link}
+            >
+              {debate.link}
+            </a>
+          </DebateDetailListItem>
+
+          <DebateDetailListItem name='시간'>
+            {getDateTime(new Date(debate.held_at))}
+          </DebateDetailListItem>
+
+          <DebateDetailListItem name='카테고리'>
+            {getCategoryFromNumber(debate.category)
+              .map((category) => t(category.name))
+              .join(', ')}
+          </DebateDetailListItem>
+
+          <DebateDetailListItem name='지정 도서'>
             <div>
               <span>{debate.book.title}</span>
               <Image
@@ -186,7 +195,7 @@ function DebateDetail() {
                 className='discussion-info__cover'
               />
             </div>
-          </div>
+          </DebateDetailListItem>
         </div>
 
         <pre className='discussion-info__description'>{debate.content}</pre>
@@ -231,3 +240,20 @@ function DebateDetail() {
 }
 
 export default DebateDetail;
+
+function DebateDetailListItem({
+  name,
+  children,
+}: {
+  name: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className='list-row flex my-1!'>
+      <div className='flex-none flex justify-center items-center w-[100px] p-1! rounded-[5px] bg-brand3'>
+        <strong className='font-medium! text-brand1 '>{name}</strong>
+      </div>
+      <div className='grow ml-2! p-1! min-w-0'>{children}</div>
+    </div>
+  );
+}
