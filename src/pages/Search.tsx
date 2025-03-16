@@ -5,6 +5,7 @@ import { useEffect, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import InfiniteScroll from '@/components/base/InfiniteScroll';
 import { SearchBar } from '@/components/input/searchbar';
+import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
 
 const sortBys: {
   name: string;
@@ -46,8 +47,8 @@ function Search() {
   }, [debouncedSearch, sortByIdx]);
 
   return (
-    <div id='search-page' className='px-4! md:px-0! md:w-7/10'>
-      <div className='page-container'>
+    <div id='search-page' className='flex'>
+      <MiddlePanel className='page-container'>
         <div className='page-title'>{t('page.search.title.page')}</div>
         <SearchBar
           placeholder={t('page.search.search.placeholder')}
@@ -106,7 +107,9 @@ function Search() {
             </InfiniteScroll>
           </div>
         </div>
-      </div>
+      </MiddlePanel>
+
+      <RightPanel />
     </div>
   );
 }

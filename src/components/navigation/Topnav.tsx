@@ -135,7 +135,7 @@ function Topnav() {
           </div>
 
           <div className='right-container col-span-2 md:col-span-1 md:order-3 '>
-            <div className='user-container'>
+            <div className='user-container mr-4! md:mr-auto!'>
               {user.id != 0 ? (
                 <LoginedInfo doLogout={doLogout} />
               ) : (

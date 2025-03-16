@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useTranslation } from 'react-i18next';
 
 import { isMd } from '@/functions/breakpoint';
+import { MiddlePanel, RightPanel } from '../panel/sidePanel';
 
 function LandingUpper() {
   const user = useAppSelector(selectUser);
@@ -24,19 +25,20 @@ function LandingUpper() {
   }, []);
 
   return (
-    <div id='landing-page-upper-container'>
-      <div className='container-title'>
-        {t('page.landing.title.recommend-prefix')}
-        {user.id == 0 ? null : (
-          <span>
-            {t('page.landing.title.for-you-prefix')}
-            <span className='user-name'>{user.name}</span>
-            {t('page.landing.title.for-you-postfix')}
-          </span>
-        )}
-        {t('page.landing.title.recommend-postfix')}
-      </div>
-      <div className='container-contents mx-auto! md:m-0!'>
+    <div className='flex'>
+      <MiddlePanel id='landing-page-upper-container'>
+        <div className='container-title'>
+          {t('page.landing.title.recommend-prefix')}
+          {user.id == 0 ? null : (
+            <span>
+              {t('page.landing.title.for-you-prefix')}
+              <span className='user-name'>{user.name}</span>
+              {t('page.landing.title.for-you-postfix')}
+            </span>
+          )}
+          {t('page.landing.title.recommend-postfix')}
+        </div>
+
         <Carousel size={isMd() ? 3 : 1} className='container-contents-carousel'>
           {debates.map((debate, idx) => (
             <CarouselDebateCard
@@ -45,7 +47,9 @@ function LandingUpper() {
             />
           ))}
         </Carousel>
-      </div>
+      </MiddlePanel>
+
+      <RightPanel />
     </div>
   );
 }

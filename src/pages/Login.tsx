@@ -71,7 +71,7 @@ function Login() {
 
   return (
     <div id='login'>
-      <div className='login-container'>
+      <div className='login-container w-[350px] md:w-[460px]'>
         <Link to={'/'} className='logo-container'>
           <div className='logo dok'>독</div>
           <div className='logo colon'>:</div>
