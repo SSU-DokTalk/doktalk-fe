@@ -24,6 +24,7 @@ import SearchDropdown from '@/components/dropdown/SearchByDropdown';
 import { isMd } from '@/functions/breakpoint';
 import { SearchBar } from '@/components/input/searchbar';
 import { Fab, IconButton } from '@mui/material';
+import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
 
 const searchBys: {
   name: string;
@@ -166,33 +167,34 @@ function Debate() {
 
   return (
     <div id='debate-page'>
-      <div className='recommend-content-container'>
-        <div className='recommend-content-title ml-6!'>
-          {t('page.debate.title.recommend')}
-        </div>
-        <Carousel
-          size={isMd() ? 3 : 1}
-          className='recommend-content mx-auto! md:m-0!'
-        >
-          {recommendDebates.map((debate, idx) => (
-            <CarouselDebateCard
-              key={'recommend-debate' + idx}
-              debate={debate}
-            />
-          ))}
-        </Carousel>
+      <div className='upper-content flex'>
+        <MiddlePanel>
+          <div className='recommend-content-container'>
+            <div className='recommend-content-title ml-6!'>
+              {t('page.debate.title.recommend')}
+            </div>
+            <Carousel
+              size={isMd() ? 3 : 1}
+              className='recommend-content mx-auto! md:m-0!'
+            >
+              {recommendDebates.map((debate, idx) => (
+                <CarouselDebateCard
+                  key={'recommend-debate' + idx}
+                  debate={debate}
+                />
+              ))}
+            </Carousel>
+          </div>
+
+          <CategoryCard categories={categories} setCategories={setCategories} />
+        </MiddlePanel>
+
+        <RightPanel />
       </div>
-      <div className='content-container'>
-        <div className='lower-content-container'>
-          <CategoryCard
-            categories={categories}
-            setCategories={setCategories}
-            className='left-container mx-4! w-full'
-          />
-          <div className='right-container hidden md:block'></div>
-        </div>
-        <div className='lower-content-container'>
-          <div className='left-container mx-4! w-full'>
+
+      <div className='lower-content flex'>
+        <MiddlePanel>
+          <div className='left-container w-full'>
             <SearchBar
               placeholder={t('page.debate.search.placeholder')}
               value={search}
@@ -321,6 +323,7 @@ function Debate() {
                 </div>
               </div>
             </div>
+
             <div className='content-container'>
               <InfiniteScroll
                 api={`debate?category=${categories}&search=${debouncedSearch}&searchby=${
@@ -358,6 +361,9 @@ function Debate() {
               </InfiniteScroll>
             </div>
           </div>
+        </MiddlePanel>
+
+        <RightPanel>
           <div className='right-container hidden md:block'>
             <div className='right-container-title'>
               {t('page.debate.title.popular')}
@@ -373,8 +379,9 @@ function Debate() {
               ))}
             </div>
           </div>
-        </div>
+        </RightPanel>
       </div>
+
       <div className='footer' />
     </div>
   );
