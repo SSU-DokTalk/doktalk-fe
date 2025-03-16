@@ -2,10 +2,7 @@ export function LeftPanel({
   children,
   className = '',
   ...props
-}: {
-  className?: string;
-  children?: React.ReactNode | React.ReactNode[];
-}) {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}
@@ -20,10 +17,7 @@ export function MiddlePanel({
   children,
   className = '',
   ...props
-}: {
-  className?: string;
-  children?: React.ReactNode | React.ReactNode[];
-}) {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}
@@ -41,10 +35,7 @@ export function RightPanel({
   children,
   className = '',
   ...props
-}: {
-  className?: string;
-  children?: React.ReactNode | React.ReactNode[];
-}) {
+}: React.HTMLAttributes<HTMLDivElement>) {
   return (
     <div
       {...props}
