@@ -49,10 +49,11 @@ export function RightPanel({
     <div
       {...props}
       className={
-        'right-panel hidden w-72! flex-none lg:block xl:w-96! ' + className
+        'right-panel hidden w-14! flex-none md:block lg:w-72! xl:w-96! ' +
+        className
       }
     >
-      {children}
+      <div className='hidden lg:block'>{children}</div>
     </div>
   );
 }
