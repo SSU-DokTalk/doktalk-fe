@@ -3,8 +3,6 @@
 #summary-detail {
   display: flex;
   margin-top: 40px;
-  .container {
-    // width: 70%;
     .header {
       display: flex;
       justify-content: space-between;
@@ -81,7 +79,6 @@
         cursor: pointer;
       }
     }
-  }
 
   .additional-info {
     margin-top: 16px;

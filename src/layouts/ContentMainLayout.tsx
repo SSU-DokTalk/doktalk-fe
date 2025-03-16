@@ -1,9 +1,9 @@
-import { Outlet } from "react-router-dom";
-import FloatingUserProfile from "../components/floating/FloatingUserProfile";
-import { useEffect } from "react";
-import { updateGlobalState } from "@/stores/globalStates";
-import { useAppDispatch } from "@/stores/hooks";
-import { LeftPanel, MiddlePanel } from "@/components/panel/sidePanel";
+import { Outlet } from 'react-router-dom';
+import FloatingUserProfile from '../components/floating/FloatingUserProfile';
+import { useEffect } from 'react';
+import { updateGlobalState } from '@/stores/globalStates';
+import { useAppDispatch } from '@/stores/hooks';
+import { LeftPanel } from '@/components/panel/sidePanel';
 
 function ContentMainLayout({ children }: { children?: React.ReactNode }) {
   const dispatch = useAppDispatch();
@@ -23,9 +23,9 @@ function ContentMainLayout({ children }: { children?: React.ReactNode }) {
       <div className='upper-container md:pl-72!'>{children}</div>
       <div className='lower-container flex'>
         <LeftPanel />
-        <MiddlePanel>
+        <div className='w-full min-w-0 block'>
           <Outlet />
-        </MiddlePanel>
+        </div>
       </div>
     </div>
   );

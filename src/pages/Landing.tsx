@@ -10,6 +10,7 @@ import WritePostFloatingButton from '@/components/floating/WritePostFloatingButt
 import PopularSummaryCard from '../components/card/PopularSummaryCard';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
+import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
 
 function Landing() {
   const [posts, setPosts] = useState<PostType[]>([]);
@@ -60,7 +61,7 @@ function Landing() {
 
   return (
     <div id='landing-page'>
-      <div className='post-container px-4! w-full md:px-0! md:w-3/5'>
+      <MiddlePanel className='post-container px-4! w-full'>
         {user.id != 0 ? (
           <div className='write-post'>
             <div className='for-pc hidden md:block'>
@@ -102,20 +103,23 @@ function Landing() {
             />
           ))}
         </InfiniteScroll>
-      </div>
-      <div className='summary-container hidden md:block'>
-        <div className='summary-section-title'>
-          {t('page.landing.title.popular-summary')}
+      </MiddlePanel>
+
+      <RightPanel>
+        <div className='summary-container ml-4! mr-8!'>
+          <div className='summary-section-title'>
+            {t('page.landing.title.popular-summary')}
+          </div>
+          {popularSummaries.map((summary, index) => (
+            <PopularSummaryCard
+              key={'popular-summary' + index}
+              summary={summary}
+              hasLiked={popularSummaryLikes.includes(summary.id)}
+              setHasLiked={setPopularSummaryLikes}
+            />
+          ))}
         </div>
-        {popularSummaries.map((summary, index) => (
-          <PopularSummaryCard
-            key={'popular-summary' + index}
-            summary={summary}
-            hasLiked={popularSummaryLikes.includes(summary.id)}
-            setHasLiked={setPopularSummaryLikes}
-          />
-        ))}
-      </div>
+      </RightPanel>
     </div>
   );
 }

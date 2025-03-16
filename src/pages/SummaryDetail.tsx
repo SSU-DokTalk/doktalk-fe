@@ -35,6 +35,7 @@ import {
   ListItemIcon,
   Paper,
 } from '@mui/material';
+import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
 
 function SummaryDetail() {
   const { summary_id } = useParams();
@@ -122,8 +123,8 @@ function SummaryDetail() {
   };
 
   return (
-    <div id='summary-detail'>
-      <div className='container md:w-7/10!'>
+    <div id='summary-detail' className='flex'>
+      <MiddlePanel>
         <div className='header'>
           <ProfileIcon profile={summary.user.profile} size={50} />
           <div className='header__container'>
@@ -190,22 +191,20 @@ function SummaryDetail() {
         </div>
         <div className='content'>
           <h2 className='title'>{summary.title}</h2>
+
           <div className='additional-info'>
-            <div className='item'>
-              <div className='label'>카테고리</div>
-              <div className='content'>
-                {getCategoryFromNumber(summary.category)
-                  .map((category) => t(category.name))
-                  .join(', ')}
-              </div>
-            </div>
-            <div className='item'>
-              <div className='label'>지정 도서</div>
+            <SummaryDetailListItem name='카테고리'>
+              {getCategoryFromNumber(summary.category)
+                .map((category) => t(category.name))
+                .join(', ')}
+            </SummaryDetailListItem>
+
+            <SummaryDetailListItem name='지정 도서'>
               <div className='content'>
                 <span>{summary.book.title}</span>
                 <Image src={summary.book.image} width='100px' height='140px' />
               </div>
-            </div>
+            </SummaryDetailListItem>
           </div>
 
           <pre className='content__text free-content'>
@@ -305,10 +304,28 @@ function SummaryDetail() {
           commentsApi={`summary/${summary.id}/comments`}
           commentLikesApi={`summary/comments/like`}
         />
-      </div>
-      <div className='offset hidden md:block'></div>
+      </MiddlePanel>
+
+      <RightPanel />
     </div>
   );
 }
 
 export default SummaryDetail;
+
+function SummaryDetailListItem({
+  name,
+  children,
+}: {
+  name: string;
+  children: React.ReactNode;
+}) {
+  return (
+    <div className='list-row flex my-1!'>
+      <div className='flex-none flex justify-center items-center w-[100px] p-1! rounded-[5px] bg-brand3'>
+        <strong className='font-medium! text-brand1 '>{name}</strong>
+      </div>
+      <div className='grow ml-2! p-1! min-w-0'>{children}</div>
+    </div>
+  );
+}

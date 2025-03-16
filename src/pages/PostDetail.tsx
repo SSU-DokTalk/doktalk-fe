@@ -28,6 +28,7 @@ import {
   ListItemIcon,
   Paper,
 } from '@mui/material';
+import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
 
 function PostDetail() {
   const { post_id } = useParams();
@@ -82,7 +83,7 @@ function PostDetail() {
 
   return (
     <div id='post-detail'>
-      <div className='container md:w-7/10!'>
+      <MiddlePanel>
         <div className='header'>
           <ProfileIcon profile={post.user.profile} size={50} />
           <div className='header__container'>
@@ -217,8 +218,9 @@ function PostDetail() {
           commentsApi={`post/${post.id}/comments`}
           commentLikesApi={`post/comments/like`}
         />
-      </div>
-      <div className='offset hidden md:block'></div>
+      </MiddlePanel>
+
+      <RightPanel />
     </div>
   );
 }
