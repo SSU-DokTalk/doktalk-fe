@@ -3,7 +3,7 @@ import FloatingUserProfile from '../components/floating/FloatingUserProfile';
 import { useEffect } from 'react';
 import { updateGlobalState } from '@/stores/globalStates';
 import { useAppDispatch } from '@/stores/hooks';
-import { LeftPanel, MiddlePanel } from '@/components/panel/sidePanel';
+import { LeftPanel } from '@/components/panel/sidePanel';
 
 function ContentMainLayout({ children }: { children?: React.ReactNode }) {
   const dispatch = useAppDispatch();
