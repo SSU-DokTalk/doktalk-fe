@@ -48,7 +48,9 @@ export function RightPanel({
   return (
     <div
       {...props}
-      className={'right-panel hidden w-72! flex-none lg:block ' + className}
+      className={
+        'right-panel hidden w-72! flex-none lg:block xl:w-96! ' + className
+      }
     >
       {children}
     </div>

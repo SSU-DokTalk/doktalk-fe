@@ -364,7 +364,7 @@ function Debate() {
         </MiddlePanel>
 
         <RightPanel>
-          <div className='right-container hidden md:block'>
+          <div className='right-container ml-4! mr-8!'>
             <div className='right-container-title'>
               {t('page.debate.title.popular')}
             </div>

@@ -105,18 +105,20 @@ function Landing() {
         </InfiniteScroll>
       </MiddlePanel>
 
-      <RightPanel className='summary-container'>
-        <div className='summary-section-title'>
-          {t('page.landing.title.popular-summary')}
+      <RightPanel>
+        <div className='summary-container ml-4! mr-8!'>
+          <div className='summary-section-title'>
+            {t('page.landing.title.popular-summary')}
+          </div>
+          {popularSummaries.map((summary, index) => (
+            <PopularSummaryCard
+              key={'popular-summary' + index}
+              summary={summary}
+              hasLiked={popularSummaryLikes.includes(summary.id)}
+              setHasLiked={setPopularSummaryLikes}
+            />
+          ))}
         </div>
-        {popularSummaries.map((summary, index) => (
-          <PopularSummaryCard
-            key={'popular-summary' + index}
-            summary={summary}
-            hasLiked={popularSummaryLikes.includes(summary.id)}
-            setHasLiked={setPopularSummaryLikes}
-          />
-        ))}
       </RightPanel>
     </div>
   );

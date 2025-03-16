@@ -247,19 +247,21 @@ function Summary() {
           </div>
         </MiddlePanel>
 
-        <RightPanel className='right-container hidden lg:block'>
-          <div className='right-container-title'>
-            {t('page.summary.title.popular')}
-          </div>
-          <div className='right-container-content'>
-            {popularDebates.map((debate, index) => (
-              <PopularDebateCard
-                key={'debate' + index}
-                debate={debate}
-                hasLiked={popularDebateLikes.includes(debate.id)}
-                setHasLiked={setPopularDebateLikes}
-              />
-            ))}
+        <RightPanel>
+          <div className='right-container ml-4! mr-8!'>
+            <div className='right-container-title'>
+              {t('page.summary.title.popular')}
+            </div>
+            <div className='right-container-content'>
+              {popularDebates.map((debate, index) => (
+                <PopularDebateCard
+                  key={'debate' + index}
+                  debate={debate}
+                  hasLiked={popularDebateLikes.includes(debate.id)}
+                  setHasLiked={setPopularDebateLikes}
+                />
+              ))}
+            </div>
           </div>
         </RightPanel>
       </div>
