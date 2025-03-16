@@ -35,6 +35,7 @@ import {
   ListItemIcon,
   Paper,
 } from '@mui/material';
+import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
 
 function SummaryDetail() {
   const { summary_id } = useParams();
@@ -122,8 +123,8 @@ function SummaryDetail() {
   };
 
   return (
-    <div id='summary-detail'>
-      <div className='container md:w-7/10!'>
+    <div id='summary-detail' className='flex'>
+      <MiddlePanel>
         <div className='header'>
           <ProfileIcon profile={summary.user.profile} size={50} />
           <div className='header__container'>
@@ -303,8 +304,9 @@ function SummaryDetail() {
           commentsApi={`summary/${summary.id}/comments`}
           commentLikesApi={`summary/comments/like`}
         />
-      </div>
-      <div className='offset hidden md:block'></div>
+      </MiddlePanel>
+
+      <RightPanel />
     </div>
   );
 }
