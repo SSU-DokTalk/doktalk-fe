@@ -169,7 +169,7 @@ function Debate() {
     <div id='debate-page'>
       <div className='upper-content flex'>
         <MiddlePanel>
-          <div className='recommend-content-container'>
+          <div className='recommend-content-container md:my-9!'>
             <div className='recommend-content-title ml-6!'>
               {t('page.debate.title.recommend')}
             </div>

@@ -35,8 +35,17 @@ function CategoryCard({
   };
 
   return (
-    <Paper id='category-card' className='accordion' {...props}>
-      <Accordion className='accordion-item'>
+    <Paper
+      id='category-card'
+      className='accordion'
+      sx={{ boxShadow: 'none' }}
+      {...props}
+    >
+      <Accordion
+        disableGutters
+        sx={{ boxShadow: 'none' }}
+        className='accordion-item rounded-t-xl!'
+      >
         <AccordionSummary onClick={() => setIsCollapsed((prev) => !prev)}>
           <span>카테고리 선택</span>
           {isCollapsed ? (
@@ -69,7 +78,7 @@ function CategoryCard({
         </AccordionDetails>
       </Accordion>
 
-      <div className='selected-category-container'>
+      <div className='selected-category-container rounded-b-xl!'>
         {categories == 0 ? (
           <div className='no-category'>선택한 카테고리가 없습니다.</div>
         ) : (

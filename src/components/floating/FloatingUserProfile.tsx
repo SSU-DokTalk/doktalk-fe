@@ -83,7 +83,11 @@ function FloatingUserProfile() {
         </div>
       </div>
       <div className='accordion'>
-        <Accordion className='accordion-item'>
+        <Accordion
+          disableGutters
+          sx={{ boxShadow: 'none' }}
+          className='accordion-item'
+        >
           <AccordionSummary>
             {t('component.floating.text.my-activity')}
           </AccordionSummary>
@@ -100,7 +104,11 @@ function FloatingUserProfile() {
           </AccordionDetails>
         </Accordion>
 
-        <Accordion className='accordion-item'>
+        <Accordion
+          disableGutters
+          sx={{ boxShadow: 'none' }}
+          className='accordion-item'
+        >
           <AccordionSummary>
             {t('component.floating.text.library')}
           </AccordionSummary>
