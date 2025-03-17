@@ -695,6 +695,7 @@
     }
   }
   .selected-category-container {
+    border: 1px solid v.$brand-color4;
     border-top: none;
     padding: 8px 15px;
     display: flex;

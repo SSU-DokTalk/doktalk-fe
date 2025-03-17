@@ -132,8 +132,8 @@ function Summary() {
     <div id='summary-page'>
       <div className='upper-content flex'>
         <MiddlePanel>
-          <div className='popular-content-container'>
-            <div className='popular-content-title  ml-6!'>
+          <div className='popular-content-container md:my-9!'>
+            <div className='popular-content-title ml-6!'>
               {t('page.summary.title.recommend')}
             </div>
             <Carousel size={isMd() ? 3 : 1}>

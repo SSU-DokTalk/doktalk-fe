@@ -26,7 +26,7 @@ function LandingUpper() {
 
   return (
     <div className='flex'>
-      <MiddlePanel id='landing-page-upper-container'>
+      <MiddlePanel id='landing-page-upper-container' className='mb-8 md:mb-15!'>
         <div className='container-title'>
           {t('page.landing.title.recommend-prefix')}
           {user.id == 0 ? null : (
