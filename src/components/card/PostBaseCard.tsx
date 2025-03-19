@@ -1,10 +1,7 @@
-import { BasicUserType, SummaryType, UserType } from '@/types/data';
+import { BasicUserType } from '@/types/data';
 import Image from '@/components/base/Image';
 import ProfileIcon from '@/components/base/ProfileIcon';
 import { getTimeDiff } from '@/functions';
-import { Dispatch, SetStateAction } from 'react';
-import axios from 'axios';
-import { useNavigate } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faComment,

@@ -1,16 +1,7 @@
-import { BasicUserType, SummaryType, UserType } from '@/types/data';
-import Image from '@/components/base/Image';
-import ProfileIcon from '@/components/base/ProfileIcon';
-import { getTimeDiff } from '@/functions';
+import { SummaryType } from '@/types/data';
 import { Dispatch, SetStateAction } from 'react';
 import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faComment,
-  faHeart as faHeartRegular,
-} from '@fortawesome/free-regular-svg-icons';
-import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
 import { PostBaseCard } from './PostBaseCard';
 
 function SummaryCard({
