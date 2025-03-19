@@ -183,11 +183,30 @@
 #debate-card {
   border: 1px solid v.$brand-color4;
   border-radius: 20px;
-  padding: 20px 45px;
+  // padding: 20px 45px;
   margin-bottom: 10px;
-  display: flex;
-  align-items: center;
-  height: 182px;
+  // display: flex;
+  // align-items: center;
+  // height: 185px; // 12.5rem
+
+  .user-info-for-mobile {
+    // display: flex;
+    align-items: center;
+
+    .user-icon {
+    }
+    .user-name {
+      font-size: 15px;
+      font-weight: 400;
+      color: black;
+      margin: 0 15px;
+    }
+    .created-time {
+      font-size: 12px;
+      font-weight: 400;
+      color: v.$brand-color5;
+    }
+  }
 
   .image-container {
   }
@@ -195,7 +214,7 @@
   .item-container {
     width: calc(100% - 117px);
     height: 100%;
-    margin-left: 20px;
+    // margin-left: 20px;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
@@ -233,8 +252,8 @@
       display: flex;
       align-items: center;
       justify-content: space-between;
-      .user-info {
-        display: flex;
+      .user-info-for-pc {
+        // display: flex;
         align-items: center;
 
         .user-icon {
