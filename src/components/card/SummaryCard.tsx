@@ -1,4 +1,4 @@
-import { SummaryType } from '@/types/data';
+import { BasicUserType, SummaryType, UserType } from '@/types/data';
 import Image from '@/components/base/Image';
 import ProfileIcon from '@/components/base/ProfileIcon';
 import { getTimeDiff } from '@/functions';
@@ -11,6 +11,7 @@ import {
   faHeart as faHeartRegular,
 } from '@fortawesome/free-regular-svg-icons';
 import { faHeart as faHeartSolid } from '@fortawesome/free-solid-svg-icons';
+import { PostBaseCard } from './PostBaseCard';
 
 function SummaryCard({
   summary,
@@ -39,58 +40,25 @@ function SummaryCard({
     });
   };
 
+  const onClick = () => navigate(`/summary/${summary.id}`);
+
   return (
     <div id='summary-card'>
-      <div className='image-container'>
-        <Image
-          src={summary.book.image}
-          alt='summary image'
-          width='97px'
-          height='142px'
-        />
-      </div>
-      <div className='item-container'>
-        <div
-          className='item-content-container'
-          onClick={() => navigate(`/summary/${summary.id}`)}
-        >
-          <div className='title'>{summary.title}</div>
-          <div className='content'>{summary.free_content}</div>
-        </div>
-        <div className='info-container'>
-          <div className='user-info'>
-            <ProfileIcon
-              profile={summary.user.profile}
-              size={28}
-              className='user-icon'
-            />
-            <div className='user-name'>{summary.user.name}</div>
-            <div className='created-time'>{getTimeDiff(summary.created)}</div>
-          </div>
-          <div className='additional-info'>
-            <div className='like-container'>
-              {hasLiked ? (
-                <FontAwesomeIcon
-                  icon={faHeartSolid}
-                  onClick={doUnlike}
-                  className='like-icon liked'
-                />
-              ) : (
-                <FontAwesomeIcon
-                  icon={faHeartRegular}
-                  onClick={doLike}
-                  className='like-icon'
-                />
-              )}
-              <div className='like-text'>{summary.likes_num}</div>
-            </div>
-            <div className='comment-container'>
-              <FontAwesomeIcon icon={faComment} />
-              <div className='comment-text'>{summary.comments_num}</div>
-            </div>
-          </div>
-        </div>
-      </div>
+      <PostBaseCard
+        // user={summary.user}
+        // title={summary.title}
+        // created={summary.created}
+        // imgSrc={summary.book.image}
+        // likes_num={summary.likes_num}
+        // comments_num={summary.comments_num}
+        {...summary}
+        content={summary.free_content}
+        imgSrc={summary.book.image}
+        hasLiked={hasLiked}
+        onClick={onClick}
+        doLike={doLike}
+        doUnlike={doUnlike}
+      />
     </div>
   );
 }

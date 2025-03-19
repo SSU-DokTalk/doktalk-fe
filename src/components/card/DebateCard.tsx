@@ -11,6 +11,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { PostBaseCard } from './PostBaseCard';
 
 function DebateCard({
   debate,
@@ -38,6 +39,21 @@ function DebateCard({
       debate.likes_num--;
     });
   };
+
+  const onClick = () => navigate(`/debate/${debate.id}`);
+
+  return (
+    <div id='debate-card'>
+      <PostBaseCard
+        {...debate}
+        imgSrc={debate.book.image}
+        hasLiked={hasLiked}
+        onClick={onClick}
+        doLike={doLike}
+        doUnlike={doUnlike}
+      />
+    </div>
+  );
 
   return (
     <div id='debate-card'>
