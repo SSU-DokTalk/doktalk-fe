@@ -9,3 +9,13 @@
   --color-brand4: #d9d9d9;
   --color-brand5: #666565;
 }
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 400px) {
+  html {
+    font-size: 16px;
+  }
+}
