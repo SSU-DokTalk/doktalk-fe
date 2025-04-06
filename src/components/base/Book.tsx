@@ -3,26 +3,18 @@ import Image from '@/components/base/Image';
 
 function Book({ book }: { book: BookType }) {
   return (
-    <div
-      id='book'
-      style={{
-        display: 'flex',
-        width: '150px',
-        flexDirection: 'column',
-        justifyContent: 'center',
-        alignItems: 'center',
-      }}
-    >
-      <Image
-        src={book.image}
-        width='100%'
-        height='212px'
-        alt={'book thumbnail'}
-        className='book-thumbnail'
-        style={{
-          boxShadow: '0px 6px 6px 0px rgba(0, 0, 0, 0.25)',
-        }}
-      />
+    <div id='book' className='w-1/4 mx-1!'>
+      <div className='aspect-2/3'>
+        <Image
+          src={book.image}
+          alt={'book thumbnail'}
+          className='book-thumbnail w-full h-full object-fill'
+          objectFit='fill'
+          style={{
+            boxShadow: '0px 6px 6px 0px rgba(0, 0, 0, 0.25)',
+          }}
+        />
+      </div>
       <div
         className='book-title'
         style={{
