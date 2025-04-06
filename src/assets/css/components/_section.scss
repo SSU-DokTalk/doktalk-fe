@@ -17,12 +17,12 @@
       .profile-image-container {
         display: flex;
         .button-container {
-          margin-left: 30px;
+          margin-left: 1.875rem;
           align-self: center;
           button {
             width: 96px;
-            height: 30px;
-            border-radius: 10px;
+            height: 1.875rem;
+            border-radius: 0.625rem;
             font-size: 15px;
           }
           .edit-profile {
@@ -41,18 +41,18 @@
       }
     }
     .lower-container {
-      margin-top: 20px;
-      padding-left: 10px;
+      margin-top: 1.25rem;
+      padding-left: 0.625rem;
       .name-container {
-        font-size: 30px;
+        font-size: 1.875rem;
         font-weight: 600;
         color: black;
       }
       .follow-container {
-        margin-top: 10px;
+        margin-top: 0.625rem;
         display: flex;
         color: v.$brand-color5;
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: 600;
         .follower {
           cursor: pointer;
@@ -68,7 +68,7 @@
         font-weight: 400;
         color: black;
         .introduction {
-          height: 40px;
+          height: 2.5rem;
           overflow: hidden;
           white-space: normal;
           text-overflow: ellipsis;
@@ -81,12 +81,12 @@
       }
     }
     .tabs {
-      margin-top: 40px;
+      margin-top: 2.5rem;
       display: flex;
       justify-self: center;
       color: v.$brand-color5;
       font-weight: 600;
-      // font-size: 20px;
+      // font-size: 1.25rem;
       height: 36px;
 
       .tab-item {
@@ -108,10 +108,10 @@
     text-align: center;
   }
   .post-tab {
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
   .summary-tab {
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
   .library-tab {
     .currently-reading-header {
@@ -120,17 +120,17 @@
       align-items: center;
       color: black;
       font-weight: 600;
-      margin-bottom: 28px;
+      margin-bottom: 1.75rem;
 
       .currently-reading-title {
-        font-size: 30px;
+        font-size: 1.8rem;
 
         .item-count {
           color: v.$brand-color1;
         }
       }
       .show-more {
-        font-size: 20px;
+        font-size: 1.25rem;
       }
     }
     .no-item {
@@ -139,19 +139,19 @@
       justify-content: center;
       align-items: center;
       .no-item-message {
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: 400;
         color: v.$brand-color5;
       }
       .go-to {
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: 700;
         color: v.$brand-color1;
       }
     }
 
     .currently-reading-books-container {
-      margin-top: 40px;
+      margin-top: 2.5rem;
       .currently-reading-books {
         display: flex;
         justify-content: space-between;
@@ -159,25 +159,25 @@
       }
     }
     .currently-reading-summaries-container {
-      margin-top: 90px;
+      margin-top: 5.625rem;
       .currently-reading-summaries {
       }
     }
   }
   .debate-tab {
-    margin-top: 20px;
+    margin-top: 1.25rem;
   }
   .payment-tab {
     .select-month-container {
       display: flex;
       justify-content: center;
-      margin-top: 10px;
+      margin-top: 0.625rem;
       .month-box {
         position: relative;
         width: 50%;
-        height: 130px;
+        height: 11.875rem;
         border: 1px solid v.$brand-color4;
-        border-radius: 10px;
+        border-radius: 0.625rem;
         display: flex;
         flex-direction: column;
         justify-content: center;
@@ -205,11 +205,11 @@
         }
         .cur-month {
           color: black;
-          font-size: 20px;
+          font-size: 1.25rem;
           font-weight: 600;
         }
         .total-payment {
-          margin-top: 10px;
+          margin-top: 0.625rem;
           color: v.$brand-color1;
           font-size: 25px;
           font-weight: 600;
@@ -220,7 +220,7 @@
       display: flex;
       justify-content: center;
       .no-item-message {
-        font-size: 20px;
+        font-size: 1.25rem;
         font-weight: 400;
         color: v.$brand-color5;
         margin-top: 85px;
@@ -233,16 +233,16 @@
 }
 
 #landing-page-upper-container {
-  // height: 330px;
+  // height: 31.875rem;
   background-color: v.$brand-color3;
-  padding-top: 30px;
+  padding-top: 1.875rem;
 
   .container-title {
     justify-self: start;
     font-size: 25px;
     font-weight: 400;
     // margin-left: 34px;
-    margin-bottom: 40px;
+    margin-bottom: 2.5rem;
     .user-name {
       font-weight: 700;
       color: v.$brand-color1;
@@ -255,19 +255,19 @@
 
 #comment-section {
   background-color: v.$brand-color3;
-  border-radius: 30px;
-  padding: 20px 30px;
+  border-radius: 1.875rem;
+  padding: 1.25rem 1.875rem;
 
   .title {
-    font-size: 20px;
+    font-size: 1.25rem;
     font-weight: 600;
     margin-bottom: 15px;
   }
   .comment-box {
     border: 1px solid v.$brand-color4;
-    border-radius: 10px;
+    border-radius: 0.625rem;
     background-color: white;
-    padding: 20px 20px;
+    padding: 1.25rem 1.25rem;
 
     &__upper {
       display: flex;
@@ -275,23 +275,23 @@
     }
     &__input {
       border: 1px solid v.$brand-color4;
-      border-radius: 10px;
-      padding: 10px 15px;
+      border-radius: 0.625rem;
+      padding: 0.625rem 15px;
       width: calc(100% - (34px + 25px));
       resize: none;
     }
     &__lower {
       display: flex;
       justify-content: flex-end;
-      margin-top: 10px;
+      margin-top: 0.625rem;
       button {
         width: 100px;
-        height: 40px;
+        height: 2.5rem;
         border: none;
-        border-radius: 10px;
+        border-radius: 0.625rem;
         background-color: v.$brand-color1;
         color: white;
-        padding: 5px 10px;
+        padding: 5px 0.625rem;
         font-size: 15px;
         font-weight: 600;
       }
