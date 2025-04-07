@@ -4,11 +4,6 @@ export type LinkItemType = {
   icon?: any;
 };
 
-export type PreviewType = {
-  url: string;
-  filename: string;
-};
-
 export type RegisterType = {
   email: string;
   nickname: string;
