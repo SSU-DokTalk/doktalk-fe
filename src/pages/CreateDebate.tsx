@@ -134,10 +134,10 @@ function CreateDebate() {
           >
             온라인 링크
           </label>
-          <div className='input-box grow'>
+          <div className='input-box grow flex-col'>
             <input
               id='link'
-              type='text'
+              type='url'
               placeholder='온라인 모임일 경우 참여 링크를 입력해주세요'
               value={debateData.link}
               onChange={(e) => {
@@ -145,8 +145,11 @@ function CreateDebate() {
                   return { ...prev, link: e.target.value };
                 });
               }}
-              className='placeholder:text-base'
+              className='peer placeholder:text-base invalid:border-b-2! invalid:border-red-500 invalid:text-red-600'
             />
+            <div className='hidden text-sm! peer-invalid:block'>
+              https://url 형식으로 적어주세요
+            </div>
           </div>
         </div>
         <div className='input-container'>
