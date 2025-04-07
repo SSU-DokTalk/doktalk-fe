@@ -12,10 +12,12 @@ import BookSearchResult from '@/components/base/BookSearchResult';
 
 function BookSearchDropdown({
   setBookIsbnData,
+  bookTitle = '',
 }: {
   setBookIsbnData:
     | Dispatch<SetStateAction<DebateType>>
     | Dispatch<SetStateAction<SummaryType>>;
+  bookTitle?: string;
 }): React.ReactNode {
   const [bookQuery, setBookQuery] = useState('');
 
@@ -32,6 +34,10 @@ function BookSearchDropdown({
 
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
+
+  useEffect(() => {
+    setBookQuery(bookTitle);
+  }, [bookTitle]);
 
   useEffect(() => {
     if (prevValueRef.current.debouncedSearch === debouncedSearch) return;

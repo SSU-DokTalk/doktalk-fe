@@ -1,5 +1,4 @@
 import { getFileTypeFromUrl } from '@/functions';
-import { PreviewType } from '@/types/components';
 import {
   ChangeEvent,
   Dispatch,
@@ -17,6 +16,7 @@ import {
 } from '@/common/variables';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX, faLink, IconDefinition } from '@fortawesome/free-solid-svg-icons';
+import { FileType } from '@/types/data';
 
 /**
  * 파일 업로드 및 미리보기
@@ -40,6 +40,8 @@ import { faX, faLink, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 
 function UploadFiles({
   setFiles,
+  uploadedFiles, // update시 이미 서버에 저장된 파일들을 다루기 위한 param
+  setUploadedFiles,
   buttonText = '파일 첨부',
   buttonIcon = faLink,
   buttonIconImage = undefined,
@@ -50,6 +52,8 @@ function UploadFiles({
   itemMargin = 5,
 }: {
   setFiles: Dispatch<SetStateAction<File[]>>;
+  uploadedFiles?: FileType[];
+  setUploadedFiles?: Dispatch<SetStateAction<FileType[]>>;
   buttonText?: string;
   buttonIcon?: IconDefinition;
   buttonIconImage?: string;
@@ -64,7 +68,7 @@ function UploadFiles({
   const [hasTooLargeFile, setHasTooLargeFile] = useState<boolean>(false);
   const [hasUnacceptableFile, setHasUnacceptableFile] =
     useState<boolean>(false);
-  const [previews, setPreviews] = useState<PreviewType[]>([]);
+  const [previews, setPreviews] = useState<FileType[]>([]);
 
   const fitImage = (e: SyntheticEvent<HTMLImageElement, Event>) => {
     const { naturalHeight, naturalWidth } = e.currentTarget;
@@ -77,7 +81,7 @@ function UploadFiles({
     }
   };
 
-  const previewComponent = (ext: string, preview: PreviewType) => {
+  const previewComponent = (ext: string, preview: FileType) => {
     if (ACCEPTABLE_IMAGE.includes(ext)) {
       return (
         <img
@@ -92,12 +96,12 @@ function UploadFiles({
         <div className='preview-file'>
           <a
             href={preview.url}
-            download={preview.filename}
+            download={preview.name}
             className='download-file'
           >
             <img src={PDFThumbnail} alt='' width={36} height={36} />
             <div className='preview-filename'>
-              <div className='preview-filename-text'>{preview.filename}</div>
+              <div className='preview-filename-text'>{preview.name}</div>
             </div>
           </a>
         </div>
@@ -138,10 +142,10 @@ function UploadFiles({
     }
     setPreviews((prev) =>
       prev.concat(
-        fileList.reduce<PreviewType[]>((acc, file) => {
+        fileList.reduce<FileType[]>((acc, file) => {
           return acc.concat({
             url: URL.createObjectURL(file),
-            filename: file.name,
+            name: file.name,
           });
         }, [])
       )
@@ -152,6 +156,14 @@ function UploadFiles({
   const removeFile = (index: number) => {
     setPreviews((prev) => prev.slice(0, index).concat(prev.slice(index + 1)));
     setFiles((prev) => prev.slice(0, index).concat(prev.slice(index + 1)));
+  };
+
+  const removeUploadedFile = (index: number) => {
+    if (setUploadedFiles) {
+      setUploadedFiles((prev) =>
+        prev.slice(0, index).concat(prev.slice(index + 1))
+      );
+    }
   };
 
   useEffect(() => {}, [previews]);
@@ -201,28 +213,55 @@ function UploadFiles({
         </div>
       )}
       <div className='preview-container'>
-        {previews.map((preview, index) => {
-          let ext = `.${getFileTypeFromUrl(preview.filename)}`;
+        {// 이미 올라간 파일들 (update시 사용될)
+        uploadedFiles?.map((uploaded, index) => {
+          let ext = `.${getFileTypeFromUrl(uploaded.name)}`;
           return (
             <div
               className='content-container'
-              key={'uf' + index}
+              key={'serverf' + index}
               style={{
                 margin: `5px ${itemMargin}px`,
                 width: `${previewSize}px`,
                 height: `${previewSize}px`,
               }}
             >
-              <div className='content'>{previewComponent(ext, preview)}</div>
+              <div className='content'>{previewComponent(ext, uploaded)}</div>
               <button
                 className='delete-content-button'
-                onClick={() => removeFile(index)}
+                onClick={() => removeUploadedFile(index)}
               >
                 <FontAwesomeIcon icon={faX} className='delete-content-icon' />
               </button>
             </div>
           );
         })}
+
+        {
+          // 아직 안 올라간 파일들
+          previews.map((preview, index) => {
+            let ext = `.${getFileTypeFromUrl(preview.name)}`;
+            return (
+              <div
+                className='content-container'
+                key={'uf' + index}
+                style={{
+                  margin: `5px ${itemMargin}px`,
+                  width: `${previewSize}px`,
+                  height: `${previewSize}px`,
+                }}
+              >
+                <div className='content'>{previewComponent(ext, preview)}</div>
+                <button
+                  className='delete-content-button'
+                  onClick={() => removeFile(index)}
+                >
+                  <FontAwesomeIcon icon={faX} className='delete-content-icon' />
+                </button>
+              </div>
+            );
+          })
+        }
       </div>
     </div>
   );

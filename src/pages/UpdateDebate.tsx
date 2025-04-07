@@ -1,9 +1,10 @@
-import { forwardRef, useState } from 'react';
+import { useEffect, forwardRef, useState } from 'react';
+import { useNavigate, useParams } from 'react-router-dom';
 
 import { faImage } from '@fortawesome/free-solid-svg-icons';
 import UploadFiles from '@/components/base/UploadFiles';
 import { ACCEPTABLE } from '@/common/variables';
-import { DebateType } from '@/types/data';
+import { DebateType, FileType } from '@/types/data';
 import { InitialDebate } from '@/types/initialValue';
 import { range } from '@/functions';
 import { useTranslation } from 'react-i18next';
@@ -11,7 +12,6 @@ import IonIcon from '@reacticons/ionicons';
 import axios from 'axios';
 import { getMonth, getYear } from 'date-fns';
 import DatePicker from 'react-datepicker';
-import { useNavigate } from 'react-router-dom';
 
 import BookSearchDropdown from '@/components/dropdown/BookSearchDropdown';
 import CategoryDropdown from '@/components/dropdown/CategoryChipDropdown';
@@ -32,7 +32,9 @@ const months = [
   'function.time.months.12',
 ];
 
-function CreateDebate() {
+function UpdateDebate() {
+  const { debate_id } = useParams();
+
   const [debateData, setDebateData] = useState<DebateType>({
     ...InitialDebate,
     limit: 2,
@@ -40,6 +42,7 @@ function CreateDebate() {
   });
 
   const [files, setFiles] = useState<File[]>([]);
+  const [uploadedFiles, setUploadedFiles] = useState<FileType[]>([]);
 
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -53,7 +56,17 @@ function CreateDebate() {
     )
   );
 
-  const doSubmit = async () => {
+  useEffect(() => {
+    if (parseInt(debate_id ?? '0') == 0) return;
+    axios.get(`/api/debate/${debate_id}`).then((res) => {
+      let { data }: { data: DebateType } = res;
+      data.held_at = new Date(data.held_at);
+      setDebateData(data);
+      setUploadedFiles(data.files ?? []);
+    });
+  }, [debate_id]);
+
+  const doUpdate = async () => {
     const fileRes = await Promise.all(
       files.map(async (file) => {
         const formData = new FormData();
@@ -71,8 +84,21 @@ function CreateDebate() {
       })
     );
 
+    console.log({
+      title: debateData.title,
+      location: debateData.location,
+      link: debateData.link,
+      held_at: debateData.held_at,
+      isbn: debateData.isbn,
+      category: debateData.category,
+      limit: debateData.limit,
+      files: uploadedFiles.concat(fileRes),
+      content: debateData.content,
+      price: debateData.price,
+    });
+
     await axios
-      .post('/api/debate', {
+      .put(`/api/debate/${debate_id}`, {
         title: debateData.title,
         location: debateData.location,
         link: debateData.link,
@@ -85,14 +111,14 @@ function CreateDebate() {
         price: debateData.price,
       })
       .then(() => {
-        navigate('/debate');
+        navigate(`/debate/${debate_id}`);
       });
   };
 
   return (
     <div id='create-debate-page'>
       <div className='container mx-4! w-full md:w-[65%]'>
-        <h1>토론방 생성하기</h1>
+        <h1>토론방 수정하기</h1>
         <div className='input-container__title'>
           <input
             type='text'
@@ -239,7 +265,10 @@ function CreateDebate() {
           >
             도서 선택
           </label>
-          <BookSearchDropdown setBookIsbnData={setDebateData} />
+          <BookSearchDropdown
+            setBookIsbnData={setDebateData}
+            bookTitle={debateData.book.title}
+          />
         </div>
         <div className='input-container'>
           <label
@@ -277,6 +306,8 @@ function CreateDebate() {
         </div>
         <UploadFiles
           setFiles={setFiles}
+          uploadedFiles={uploadedFiles}
+          setUploadedFiles={setUploadedFiles}
           accept={ACCEPTABLE.join()}
           buttonText='파일 추가'
           buttonIcon={faImage}
@@ -316,9 +347,8 @@ function CreateDebate() {
           />
         </div>
         <div className='button-container'>
-          <button className='temp'>임시 저장</button>
-          <button className='submit' onClick={doSubmit}>
-            작성 완료
+          <button className='submit' onClick={doUpdate}>
+            수정 완료
           </button>
         </div>
       </div>
@@ -326,4 +356,4 @@ function CreateDebate() {
   );
 }
 
-export default CreateDebate;
+export default UpdateDebate;

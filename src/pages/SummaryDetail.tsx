@@ -116,7 +116,12 @@ function SummaryDetail() {
     });
   };
 
+  const doUpdate = () => {
+    navigate('./update');
+  };
+
   const doDelete = () => {
+    // TODO: 삭제전 경고
     axios.delete(`/api/summary/${summary.id}`).then(() => {
       navigate('/summary');
     });
@@ -135,7 +140,9 @@ function SummaryDetail() {
             {summary.user.id == user.id && (
               <div className='actions'>
                 <div className='for-pc hidden md:block'>
-                  <button className='edit'>수정</button>
+                  <button className='edit' onClick={doUpdate}>
+                    수정
+                  </button>
                   <button className='delete' onClick={doDelete}>
                     삭제
                   </button>
@@ -159,14 +166,11 @@ function SummaryDetail() {
                     }}
                   >
                     <Paper className='rounded-t-2xl!'>
-                      <hr className='w-15 h-1 mx-auto my-4 bg-gray-100 border-0 rounded-sm dark:bg-gray-700' />
+                      <hr className='w-15 h-1 mx-auto! my-4! bg-gray-100 border-0 rounded-sm dark:bg-gray-700' />
                       <p className='text-center'>게시글 옵션</p>
                       <List>
                         <ListItem>
-                          <ListItemButton
-                            className='edit'
-                            onClick={() => alert('미구현입니당')}
-                          >
+                          <ListItemButton className='edit' onClick={doUpdate}>
                             <ListItemIcon>
                               <FontAwesomeIcon icon={faPen} />
                             </ListItemIcon>
