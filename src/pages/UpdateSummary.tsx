@@ -63,7 +63,7 @@ function UpdateSummary() {
   return (
     <div id='create-summary-page'>
       <div className='container mx-4! w-full md:w-[65%]'>
-        <h1>요약 작성하기</h1>
+        <h1>요약 수정하기</h1>
         <div className='input-container__title'>
           <input
             type='text'

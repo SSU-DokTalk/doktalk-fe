@@ -118,7 +118,7 @@ function UpdateDebate() {
   return (
     <div id='create-debate-page'>
       <div className='container mx-4! w-full md:w-[65%]'>
-        <h1>토론방 생성하기</h1>
+        <h1>토론방 수정하기</h1>
         <div className='input-container__title'>
           <input
             type='text'
