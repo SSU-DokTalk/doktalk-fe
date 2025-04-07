@@ -18,7 +18,6 @@ import axios from 'axios';
 import CommentSection from '../components/section/CommentSection';
 import { ACCEPTABLE_FILE, ACCEPTABLE_IMAGE } from '@/common/variables';
 import FileCard from '@/components/card/FileCard';
-import WritePostModal from '@/components/modal/WritePostModal';
 import {
   Drawer,
   IconButton,
@@ -29,6 +28,7 @@ import {
   Paper,
 } from '@mui/material';
 import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
+import UpdatePostModal from '@/components/modal/UpdatePostModal';
 
 function PostDetail() {
   const { post_id } = useParams();
@@ -94,7 +94,7 @@ function PostDetail() {
             {post.user.id == user.id && (
               <div className='actions'>
                 <div className='for-pc hidden md:block'>
-                  <WritePostModal
+                  <UpdatePostModal
                     post={post}
                     isEdit={true}
                     showModal={showModal}
