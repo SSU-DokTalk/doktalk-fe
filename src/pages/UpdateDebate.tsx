@@ -62,6 +62,7 @@ function UpdateDebate() {
       let { data }: { data: DebateType } = res;
       data.held_at = new Date(data.held_at);
       setDebateData(data);
+      setUploadedFiles(data.files ?? []);
     });
   }, [debate_id]);
 
@@ -91,7 +92,7 @@ function UpdateDebate() {
       isbn: debateData.isbn,
       category: debateData.category,
       limit: debateData.limit,
-      files: fileRes,
+      files: uploadedFiles.concat(fileRes),
       content: debateData.content,
       price: debateData.price,
     });

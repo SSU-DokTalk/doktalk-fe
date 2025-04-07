@@ -138,7 +138,7 @@ function DebateDetail() {
                 }}
               >
                 <Paper className='rounded-t-2xl!'>
-                  <hr className='w-15 h-1 mx-auto my-4 bg-gray-100 border-0 rounded-sm dark:bg-gray-700' />
+                  <hr className='w-15 h-1 mx-auto! my-4! bg-gray-100 border-0 rounded-sm dark:bg-gray-700' />
                   <p className='text-center'>게시글 옵션</p>
                   <List>
                     <ListItem>
