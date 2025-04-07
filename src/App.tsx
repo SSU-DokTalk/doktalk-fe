@@ -34,6 +34,7 @@ import DebateDetail from './pages/DebateDetail';
 import SummaryDetail from './pages/SummaryDetail';
 import PostDetail from './pages/PostDetail';
 import UpdateSummary from './pages/UpdateSummary';
+import UpdateDebate from './pages/UpdateDebate';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -131,6 +132,10 @@ function App() {
           <Route path='/debate' element={<Debate />}></Route>
           <Route path='/debate/create' element={<CreateDebate />}></Route>
           <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>
+          <Route
+            path='/debate/:debate_id/update'
+            element={<UpdateDebate />}
+          ></Route>
 
           <Route path='/summary' element={<Summary />}></Route>
           <Route path='/summary/create' element={<CreateSummary />}></Route>
