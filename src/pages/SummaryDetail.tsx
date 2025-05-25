@@ -36,6 +36,7 @@ import {
   Paper,
 } from '@mui/material';
 import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
+import { CheckoutButton } from '@/components/Payments/CheckoutButton';
 
 function SummaryDetail() {
   const { summary_id } = useParams();
@@ -80,21 +81,21 @@ function SummaryDetail() {
     getPurchase(parseInt(summary_id ?? '0'));
   }, [summary_id, purchaseId]);
 
-  const doPurchase = () => {
-    // 추후 PG사 연동하여 API 작성
-    // 현재는 결제 API가 없으므로 무조건 성공으로 가정
-    axios
-      .post(`/api/purchase`, {
-        product_type: 'S',
-        product_id: summary.id,
-        content: '요약 구매',
-        price: summary.price,
-        quantity: 1,
-      })
-      .then(() => {
-        getPurchase(parseInt(summary_id ?? '0'));
-      });
-  };
+  // const doPurchase = () => {
+  //   // 추후 PG사 연동하여 API 작성
+  //   // 현재는 결제 API가 없으므로 무조건 성공으로 가정
+  //   axios
+  //     .post(`/api/purchase`, {
+  //       product_type: 'S',
+  //       product_id: summary.id,
+  //       content: '요약 구매',
+  //       price: summary.price,
+  //       quantity: 1,
+  //     })
+  //     .then(() => {
+  //       getPurchase(parseInt(summary_id ?? '0'));
+  //     });
+  // };
 
   const cancelPurchase = () => {
     axios.delete(`/api/purchase/${purchaseId}`);
@@ -215,7 +216,9 @@ function SummaryDetail() {
             {summary.free_content}
           </pre>
 
-          {purchaseId == 0 ? (
+          <CheckoutButton />
+
+          {/* {purchaseId == 0 ? (
             <div className='payment__container'>
               <pre className='content__text charged-content'>
                 {summary.charged_content}
@@ -245,7 +248,7 @@ function SummaryDetail() {
             </div>
           ) : (
             <pre className='content__text'>{summary.charged_content}</pre>
-          )}
+          )} */}
 
           <div className='content__image-container'>
             {summary.files
