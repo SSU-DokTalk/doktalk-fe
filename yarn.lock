@@ -1159,6 +1159,11 @@
     lightningcss "^1.29.1"
     tailwindcss "4.0.8"
 
+"@tosspayments/tosspayments-sdk@^2.3.5":
+  version "2.3.5"
+  resolved "https://registry.yarnpkg.com/@tosspayments/tosspayments-sdk/-/tosspayments-sdk-2.3.5.tgz#40747414be9e782694e09252614fd923318a5c40"
+  integrity sha512-XHi6e9LrF02vm4vuhrt8B4BaDUuyL0sQtdp21HITCUFdyRRB+lQKLZSRcBb8VTpymrCISlg/j8mT2r/QlJmipg==
+
 "@types/body-parser@*":
   version "1.19.5"
   resolved "https://registry.yarnpkg.com/@types/body-parser/-/body-parser-1.19.5.tgz#04ce9a3b677dc8bd681a17da1ab9835dc9d3ede4"
