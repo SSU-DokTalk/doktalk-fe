@@ -17,6 +17,7 @@ export function CheckoutSuccess() {
 
     // TODO: 인증 절차는 추후 백엔드에서 구현 후 작업할 예정
     axios.post(`/api/purchase`, requestData).then(() => {
+      // alert(JSON.stringify(requestData));
       navigate(searchParams.get('redirect') ?? '#');
     });
   }, []);
