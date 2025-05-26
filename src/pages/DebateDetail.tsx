@@ -2,12 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
-import {
-  faBars,
-  faChevronRight,
-  faPen,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ProfileIcon from '@/components/base/ProfileIcon';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -28,6 +23,7 @@ import {
 } from '@mui/material';
 import { useTranslation } from 'react-i18next';
 import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
+import { CheckoutButton } from '@/components/Payments/CheckoutButton';
 
 function DebateDetail() {
   const { t } = useTranslation();
@@ -42,28 +38,32 @@ function DebateDetail() {
   const navigate = useNavigate();
 
   useEffect(() => {
+    if (parseInt(debate_id ?? '0') == 0) return;
     axios.get(`/api/debate/${debate_id}`).then((res) => {
       let { data }: { data: DebateType } = res;
       setDebate(data);
     });
-  }, [debate_id]);
 
-  const doPurchase = () => {
-    // 추후 PG사 연동하여 API 작성
-    // 현재는 결제 API가 없으므로 무조건 성공으로 가정
-    console.log({
-      product_type: 'D',
-      product_id: debate.id,
-      price: debate.price,
-      quantity: 1,
-    });
-    axios.post(`/api/purchase`, {
-      product_type: 'D',
-      product_id: debate.id,
-      price: debate.price,
-      quantity: 1,
-    });
-  };
+    getPurchase(debate_id);
+  }, [debate_id, purchaseId]);
+
+  // const doPurchase = () => {
+  //   // 추후 PG사 연동하여 API 작성
+  //   // 현재는 결제 API가 없으므로 무조건 성공으로 가정
+  //   console.log({
+  //     product_type: 'D',
+  //     product_id: debate.id,
+  //     price: debate.price,
+  //     quantity: 1,
+  //   });
+  //   axios.post(`/api/purchase`, {
+  //     product_type: 'D',
+  //     product_id: debate.id,
+  //     content: '토론방 참여',
+  //     price: debate.price,
+  //     quantity: 1,
+  //   });
+  // };
 
   const cancelPurchase = () => {
     axios.delete(`/api/purchase/${purchaseId}`).then((res) => {
@@ -71,8 +71,8 @@ function DebateDetail() {
     });
   };
 
-  const getPurchase = () => {
-    axios.get(`/api/purchase/D/${debate.id}`).then((res) => {
+  const getPurchase = (debate_id?: string) => {
+    axios.get(`/api/purchase/D/${debate_id}`).then((res) => {
       let { data }: { data: PaymentType } = res;
       setPurchaseId(data.id);
       console.log(data);
@@ -213,34 +213,61 @@ function DebateDetail() {
             </span>
           </div>
         </div>
-        <div className='payment-box'>
-          <p className='payment-box__title'>
-            토론방에 참여하시려면 결제가 필요합니다.
-          </p>
 
-          <div className='payment-box__info'>
-            <button
-              className='payment-box__currency'
-              onClick={() => cancelPurchase()} // 결제 테스트용
-            >
-              <FontAwesomeIcon icon={faCartPlus} />
-              {''} 찜
-            </button>
-            <span
-              className='payment-box__amount'
-              onClick={getPurchase} // 결제 테스트용
-            >
-              1,000 원
-            </span>
-            <button className='payment-box__button' onClick={doPurchase}>
-              결제하기{' '}
-              <FontAwesomeIcon
-                icon={faChevronRight}
-                className='payment-box__button-icon'
+        {purchaseId == 0 ? (
+          <div className='payment-box'>
+            <p className='payment-box__title'>
+              토론방에 참여하시려면 결제가 필요합니다.
+            </p>
+
+            <div className='payment-box__info'>
+              <button
+                className='payment-box__currency'
+                onClick={() => cancelPurchase()} // 결제 테스트용
+              >
+                <FontAwesomeIcon icon={faCartPlus} />
+                {''} 찜
+              </button>
+              <span
+                className='payment-box__amount'
+                onClick={() => getPurchase(debate_id)} // 결제 테스트용
+              >
+                1,000 원
+              </span>
+              {/* <button className='payment-box__button' onClick={doPurchase}>
+                결제하기{' '}
+                <FontAwesomeIcon
+                  icon={faChevronRight}
+                  className='payment-box__button-icon'
+                />
+              </button> */}
+              <CheckoutButton
+                checkoutKey={{
+                  clientKey: 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm', // 공식문서에 있는 테스트용 키
+                  customerKey: 'GSpd_oQzjDH9sGptWJQSg', // 공식문서에 있는 테스트용 키
+                }}
+                checkoutAmount={{
+                  value: 1_000,
+                  currency: 'KRW',
+                }}
+                checkoutData={{
+                  orderId: 'H_9uNV6Uz4Kt-eM9GrGYG', // random id
+                  orderName: '독톡 테스트용',
+                }}
+                tmp={{
+                  // 아직 백엔드를 제대로 구현하지 않아서 기존에 있던 더미 api 사용
+                  product_type: 'D',
+                  product_id: debate.id,
+                  content: '토론방 참여',
+                  price: debate.price,
+                  quantity: 1,
+                }}
               />
-            </button>
+            </div>
           </div>
-        </div>
+        ) : (
+          <pre className='content__text'>토론방에 이미 참가하셨습니다</pre>
+        )}
       </MiddlePanel>
 
       <RightPanel />

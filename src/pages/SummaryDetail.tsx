@@ -8,7 +8,6 @@ import {
   faPen,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
 import ProfileIcon from '@/components/base/ProfileIcon';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -36,6 +35,7 @@ import {
   Paper,
 } from '@mui/material';
 import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
+import { CheckoutContainer } from '@/components/Payments/CheckoutContainer';
 
 function SummaryDetail() {
   const { summary_id } = useParams();
@@ -80,25 +80,25 @@ function SummaryDetail() {
     getPurchase(parseInt(summary_id ?? '0'));
   }, [summary_id, purchaseId]);
 
-  const doPurchase = () => {
-    // 추후 PG사 연동하여 API 작성
-    // 현재는 결제 API가 없으므로 무조건 성공으로 가정
-    axios
-      .post(`/api/purchase`, {
-        product_type: 'S',
-        product_id: summary.id,
-        content: '요약 구매',
-        price: summary.price,
-        quantity: 1,
-      })
-      .then(() => {
-        getPurchase(parseInt(summary_id ?? '0'));
-      });
-  };
+  // const doPurchase = () => {
+  //   // 추후 PG사 연동하여 API 작성
+  //   // 현재는 결제 API가 없으므로 무조건 성공으로 가정
+  //   axios
+  //     .post(`/api/purchase`, {
+  //       product_type: 'S',
+  //       product_id: summary.id,
+  //       content: '요약 구매',
+  //       price: summary.price,
+  //       quantity: 1,
+  //     })
+  //     .then(() => {
+  //       getPurchase(parseInt(summary_id ?? '0'));
+  //     });
+  // };
 
-  const cancelPurchase = () => {
-    axios.delete(`/api/purchase/${purchaseId}`);
-  };
+  // const cancelPurchase = () => {
+  //   axios.delete(`/api/purchase/${purchaseId}`);
+  // };
 
   const doLike = () => {
     // Like API 호출
@@ -216,33 +216,25 @@ function SummaryDetail() {
           </pre>
 
           {purchaseId == 0 ? (
-            <div className='payment__container'>
-              <pre className='content__text charged-content'>
-                {summary.charged_content}
-              </pre>
-              <div className='payment__box '>
-                <p className='payment__box__title'>
-                  이어서 읽으시려면 결제가 필요합니다.
-                </p>
-
-                <div className='payment__box__info'>
-                  <button
-                    className='box into-cart'
-                    onClick={() => cancelPurchase()} // 결제 테스트용
-                  >
-                    <FontAwesomeIcon icon={faCartPlus} />
-                    {''} 찜
-                  </button>
-                  <button
-                    className='box purchase'
-                    onClick={doPurchase} // 결제 테스트용
-                  >
-                    <span className='price'>{summary.price} 원</span>
-                    <span className='do-purchase'>결제하기 →</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+            <CheckoutContainer
+              checkoutAmount={{
+                value: 100,
+                currency: 'KRW',
+              }}
+              checkoutData={{
+                orderId: 'H_9uNV6Uz4Kt-eM9GrGYG', // random id
+                orderName: '독톡 테스트용',
+              }}
+              charged_content={''}
+              tmp={{
+                // 아직 백엔드를 제대로 구현하지 않아서 기존에 있던 더미 api 사용
+                product_type: 'S',
+                product_id: summary.id,
+                content: '요약 구매',
+                price: summary.price,
+                quantity: 1,
+              }}
+            />
           ) : (
             <pre className='content__text'>{summary.charged_content}</pre>
           )}

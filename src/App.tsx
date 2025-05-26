@@ -35,6 +35,8 @@ import SummaryDetail from './pages/SummaryDetail';
 import PostDetail from './pages/PostDetail';
 import UpdateSummary from './pages/UpdateSummary';
 import UpdateDebate from './pages/UpdateDebate';
+import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
+import { CheckoutFail } from './components/Payments/CheckoutFail';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -116,6 +118,10 @@ function App() {
 
   return (
     <Routes>
+      <Route path='/checkout'>
+        <Route path='/checkout/success' element={<CheckoutSuccess />}></Route>
+        <Route path='/checkout/fail' element={<CheckoutFail />}></Route>
+      </Route>
       <Route element={<BasicLayout />}>
         <Route
           element={
