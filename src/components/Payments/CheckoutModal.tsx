@@ -29,21 +29,23 @@ export function CheckoutModal({
   const [widgets, setWidgets] = useState(null);
 
   useEffect(() => {
-    async function fetchPaymentWidgets() {
-      // ------  결제위젯 초기화 ------
-      const tossPayments = await loadTossPayments(checkoutKey.clientKey);
-      // 회원 결제
-      const widgets = tossPayments.widgets({
-        customerKey: checkoutKey.customerKey,
-      });
-      // 비회원 결제
-      // const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
+    if (showModal) {
+      async function fetchPaymentWidgets() {
+        // ------  결제위젯 초기화 ------
+        const tossPayments = await loadTossPayments(checkoutKey.clientKey);
+        // 회원 결제
+        const widgets = tossPayments.widgets({
+          customerKey: checkoutKey.customerKey,
+        });
+        // 비회원 결제
+        // const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
 
-      setWidgets(widgets);
+        setWidgets(widgets);
+      }
+
+      fetchPaymentWidgets();
     }
-
-    fetchPaymentWidgets();
-  }, [checkoutData]);
+  }, [showModal]);
 
   useEffect(() => {
     async function renderPaymentWidgets() {
