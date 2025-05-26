@@ -10,19 +10,18 @@ import {
 
 import { loadTossPayments, ANONYMOUS } from '@tosspayments/tosspayments-sdk';
 
+import { CheckoutAmount, CheckoutData, CheckoutKey } from './CheckoutType';
+
 export function CheckoutModal({
-  data,
+  checkoutKey,
+  checkoutAmount,
+  checkoutData,
   showModal,
   setShowModal,
 }: {
-  data: {
-    clientKey: string;
-    customerKey: string;
-    amount: {
-      currency: string; // KRW
-      value: number;
-    };
-  }; // TODO:
+  checkoutKey: CheckoutKey;
+  checkoutAmount: CheckoutAmount;
+  checkoutData: CheckoutData;
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
@@ -32,10 +31,10 @@ export function CheckoutModal({
   useEffect(() => {
     async function fetchPaymentWidgets() {
       // ------  결제위젯 초기화 ------
-      const tossPayments = await loadTossPayments(data.clientKey);
+      const tossPayments = await loadTossPayments(checkoutKey.clientKey);
       // 회원 결제
       const widgets = tossPayments.widgets({
-        customerKey: data.customerKey,
+        customerKey: checkoutKey.customerKey,
       });
       // 비회원 결제
       // const widgets = tossPayments.widgets({ customerKey: ANONYMOUS });
@@ -44,7 +43,7 @@ export function CheckoutModal({
     }
 
     fetchPaymentWidgets();
-  }, [data]);
+  }, [checkoutData]);
 
   useEffect(() => {
     async function renderPaymentWidgets() {
@@ -52,7 +51,7 @@ export function CheckoutModal({
         return;
       }
       // ------ 주문의 결제 금액 설정 ------
-      await widgets.setAmount(data.amount);
+      await widgets.setAmount(checkoutAmount);
 
       await Promise.all([
         // ------  결제 UI 렌더링 ------
@@ -72,14 +71,6 @@ export function CheckoutModal({
 
     renderPaymentWidgets();
   }, [widgets]);
-
-  useEffect(() => {
-    if (widgets == null) {
-      return;
-    }
-
-    widgets.setAmount(data.amount);
-  }, [widgets, data.amount]);
 
   const successUrl =
     window.location.origin +
@@ -114,13 +105,9 @@ export function CheckoutModal({
                 // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
                 // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
                 await widgets.requestPayment({
-                  orderId: 'H_9uNV6Uz4Kt-eM9GrGYG',
-                  orderName: '토스 티셔츠 외 2건',
-                  successUrl: successUrl,
+                  ...checkoutData,
                   failUrl: failUrl,
-                  customerEmail: 'customer123@gmail.com',
-                  customerName: '김토스',
-                  customerMobilePhone: '01012341234',
+                  successUrl: successUrl,
                 });
               } catch (error) {
                 // 에러 처리하기

@@ -1,8 +1,17 @@
 import { useState } from 'react';
 
 import { CheckoutModal } from './CheckoutModal';
+import { CheckoutAmount, CheckoutData, CheckoutKey } from './CheckoutType';
 
-export function CheckoutButton({}: {}) {
+export function CheckoutButton({
+  checkoutKey,
+  checkoutAmount,
+  checkoutData,
+}: {
+  checkoutKey: CheckoutKey;
+  checkoutAmount: CheckoutAmount;
+  checkoutData: CheckoutData;
+}) {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
@@ -12,14 +21,9 @@ export function CheckoutButton({}: {}) {
           결제하기 →
         </span>
         <CheckoutModal
-          data={{
-            clientKey: 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm', // 공식문서에 있는 테스트용 키
-            customerKey: 'GSpd_oQzjDH9sGptWJQSg', // 공식문서에 있는 테스트용 키
-            amount: {
-              currency: 'KRW',
-              value: 100,
-            },
-          }}
+          checkoutKey={checkoutKey}
+          checkoutAmount={checkoutAmount}
+          checkoutData={checkoutData}
           showModal={showModal}
           setShowModal={setShowModal}
         />
