@@ -13,12 +13,14 @@ import { loadTossPayments, ANONYMOUS } from '@tosspayments/tosspayments-sdk';
 import { CheckoutAmount, CheckoutData, CheckoutKey } from './CheckoutType';
 
 export function CheckoutModal({
+  tmp,
   checkoutKey,
   checkoutAmount,
   checkoutData,
   showModal,
   setShowModal,
 }: {
+  tmp: Object;
   checkoutKey: CheckoutKey;
   checkoutAmount: CheckoutAmount;
   checkoutData: CheckoutData;
@@ -75,13 +77,14 @@ export function CheckoutModal({
   }, [widgets]);
 
   const successUrl =
-    window.location.origin +
-    '/checkout/success?redirect=' +
-    window.location.pathname;
+    `${window.location.origin}/checkout/success?` +
+    `redirect=${window.location.pathname}&` +
+    `tmp=${btoa(encodeURI(JSON.stringify(tmp)))}&`;
+
   const failUrl =
-    window.location.origin +
-    '/checkout/fail?redirect=' +
-    window.location.pathname;
+    `${window.location.origin}/checkout/fail?` +
+    `redirect=${window.location.pathname}&`;
+
   return (
     <Modal
       className='flex items-center justify-center'

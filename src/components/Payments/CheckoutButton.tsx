@@ -7,10 +7,12 @@ export function CheckoutButton({
   checkoutKey,
   checkoutAmount,
   checkoutData,
+  tmp,
 }: {
   checkoutKey: CheckoutKey;
   checkoutAmount: CheckoutAmount;
   checkoutData: CheckoutData;
+  tmp: Object;
 }) {
   const [showModal, setShowModal] = useState<boolean>(false);
 
@@ -26,6 +28,7 @@ export function CheckoutButton({
           checkoutData={checkoutData}
           showModal={showModal}
           setShowModal={setShowModal}
+          tmp={tmp}
         />
       </div>
     </>

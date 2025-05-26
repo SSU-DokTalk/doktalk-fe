@@ -227,6 +227,14 @@ function SummaryDetail() {
                 orderName: '독톡 테스트용',
               }}
               charged_content={''}
+              tmp={{
+                // 아직 백엔드를 제대로 구현하지 않아서 기존에 있던 더미 api 사용
+                product_type: 'S',
+                product_id: summary.id,
+                content: '요약 구매',
+                price: summary.price,
+                quantity: 1,
+              }}
             />
           ) : (
             <pre className='content__text'>{summary.charged_content}</pre>

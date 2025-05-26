@@ -9,10 +9,12 @@ export function CheckoutContainer({
   charged_content,
   checkoutAmount,
   checkoutData,
+  tmp,
 }: {
   charged_content: string;
   checkoutAmount: CheckoutAmount;
   checkoutData: CheckoutData;
+  tmp: Object;
 }) {
   return (
     <div className='payment__container'>
@@ -40,6 +42,7 @@ export function CheckoutContainer({
                 clientKey: 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm', // 공식문서에 있는 테스트용 키
                 customerKey: 'GSpd_oQzjDH9sGptWJQSg', // 공식문서에 있는 테스트용 키
               }}
+              tmp={tmp}
             />
           </div>
         </div>
