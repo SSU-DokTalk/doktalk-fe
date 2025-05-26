@@ -1,3 +1,10 @@
+# 결제 파트
+
+https://www.tosspayments.com/about/fee
+https://docs.tosspayments.com/guides/v2/payment-widget/integration?frontend=react&backend=node
+
+현재 공식문서에서 제공하는 테스트용 key로 되어있으며, 추후 테스트가 끝나면 백엔드에 인증로직을 추가하면서 수정을 해야함.
+
 # React + TypeScript + Vite
 
 This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
@@ -22,7 +29,7 @@ export default tseslint.config({
       tsconfigRootDir: import.meta.dirname,
     },
   },
-})
+});
 ```
 
 - Replace `tseslint.configs.recommended` to `tseslint.configs.recommendedTypeChecked` or `tseslint.configs.strictTypeChecked`
@@ -31,7 +38,7 @@ export default tseslint.config({
 
 ```js
 // eslint.config.js
-import react from 'eslint-plugin-react'
+import react from 'eslint-plugin-react';
 
 export default tseslint.config({
   // Set the react version
@@ -46,5 +53,5 @@ export default tseslint.config({
     ...react.configs.recommended.rules,
     ...react.configs['jsx-runtime'].rules,
   },
-})
+});
 ```
