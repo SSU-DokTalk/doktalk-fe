@@ -8,7 +8,6 @@ import {
   faPen,
   faTrash,
 } from '@fortawesome/free-solid-svg-icons';
-import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
 import ProfileIcon from '@/components/base/ProfileIcon';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -97,9 +96,9 @@ function SummaryDetail() {
   //     });
   // };
 
-  const cancelPurchase = () => {
-    axios.delete(`/api/purchase/${purchaseId}`);
-  };
+  // const cancelPurchase = () => {
+  //   axios.delete(`/api/purchase/${purchaseId}`);
+  // };
 
   const doLike = () => {
     // Like API 호출

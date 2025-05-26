@@ -1,14 +1,12 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
 
-import {
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  IconButton,
-  Modal,
-} from '@mui/material';
+import { Modal } from '@mui/material';
 
-import { loadTossPayments, ANONYMOUS } from '@tosspayments/tosspayments-sdk';
+// import { ANONYMOUS } from '@tosspayments/tosspayments-sdk';
+import {
+  loadTossPayments,
+  TossPaymentsWidgets,
+} from '@tosspayments/tosspayments-sdk';
 
 import { CheckoutAmount, CheckoutData, CheckoutKey } from './CheckoutType';
 
@@ -28,7 +26,7 @@ export function CheckoutModal({
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
   const [ready, setReady] = useState(false);
-  const [widgets, setWidgets] = useState(null);
+  const [widgets, setWidgets] = useState<TossPaymentsWidgets | null>(null);
 
   useEffect(() => {
     if (showModal) {
@@ -109,7 +107,7 @@ export function CheckoutModal({
                 // ------ '결제하기' 버튼 누르면 결제창 띄우기 ------
                 // 결제를 요청하기 전에 orderId, amount를 서버에 저장하세요.
                 // 결제 과정에서 악의적으로 결제 금액이 바뀌는 것을 확인하는 용도입니다.
-                await widgets.requestPayment({
+                await widgets!.requestPayment({
                   ...checkoutData,
                   failUrl: failUrl,
                   successUrl: successUrl,

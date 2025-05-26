@@ -2,12 +2,7 @@ import { useNavigate, useParams } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faHeart } from '@fortawesome/free-regular-svg-icons';
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons/faCartPlus';
-import {
-  faBars,
-  faChevronRight,
-  faPen,
-  faTrash,
-} from '@fortawesome/free-solid-svg-icons';
+import { faBars, faPen, faTrash } from '@fortawesome/free-solid-svg-icons';
 import ProfileIcon from '@/components/base/ProfileIcon';
 import React, { useEffect, useState } from 'react';
 import axios from 'axios';
@@ -235,7 +230,7 @@ function DebateDetail() {
               </button>
               <span
                 className='payment-box__amount'
-                onClick={getPurchase} // 결제 테스트용
+                onClick={() => getPurchase(debate_id)} // 결제 테스트용
               >
                 1,000 원
               </span>

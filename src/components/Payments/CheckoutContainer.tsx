@@ -1,7 +1,7 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import { CheckoutButton } from './CheckoutButton';
-import { CheckoutAmount, CheckoutData, CheckoutKey } from './CheckoutType';
+import { CheckoutAmount, CheckoutData } from './CheckoutType';
 
 import { faCartPlus } from '@fortawesome/free-solid-svg-icons';
 
