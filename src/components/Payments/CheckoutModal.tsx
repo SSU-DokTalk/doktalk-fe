@@ -81,6 +81,14 @@ export function CheckoutModal({
     widgets.setAmount(data.amount);
   }, [widgets, data.amount]);
 
+  const successUrl =
+    window.location.origin +
+    '/checkout/success?redirect=' +
+    window.location.pathname;
+  const failUrl =
+    window.location.origin +
+    '/checkout/fail?redirect=' +
+    window.location.pathname;
   return (
     <Modal
       className='flex items-center justify-center'
@@ -108,8 +116,8 @@ export function CheckoutModal({
                 await widgets.requestPayment({
                   orderId: 'H_9uNV6Uz4Kt-eM9GrGYG',
                   orderName: '토스 티셔츠 외 2건',
-                  successUrl: window.location.origin + '/success',
-                  failUrl: window.location.origin + '/fail',
+                  successUrl: successUrl,
+                  failUrl: failUrl,
                   customerEmail: 'customer123@gmail.com',
                   customerName: '김토스',
                   customerMobilePhone: '01012341234',
