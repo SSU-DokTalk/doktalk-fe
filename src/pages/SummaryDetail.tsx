@@ -36,7 +36,7 @@ import {
   Paper,
 } from '@mui/material';
 import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
-import { CheckoutButton } from '@/components/Payments/CheckoutButton';
+import { CheckoutContainer } from '@/components/Payments/CheckoutContainer';
 
 function SummaryDetail() {
   const { summary_id } = useParams();
@@ -216,39 +216,21 @@ function SummaryDetail() {
             {summary.free_content}
           </pre>
 
-          <CheckoutButton />
-
-          {/* {purchaseId == 0 ? (
-            <div className='payment__container'>
-              <pre className='content__text charged-content'>
-                {summary.charged_content}
-              </pre>
-              <div className='payment__box '>
-                <p className='payment__box__title'>
-                  이어서 읽으시려면 결제가 필요합니다.
-                </p>
-
-                <div className='payment__box__info'>
-                  <button
-                    className='box into-cart'
-                    onClick={() => cancelPurchase()} // 결제 테스트용
-                  >
-                    <FontAwesomeIcon icon={faCartPlus} />
-                    {''} 찜
-                  </button>
-                  <button
-                    className='box purchase'
-                    onClick={doPurchase} // 결제 테스트용
-                  >
-                    <span className='price'>{summary.price} 원</span>
-                    <span className='do-purchase'>결제하기 →</span>
-                  </button>
-                </div>
-              </div>
-            </div>
+          {purchaseId == 0 ? (
+            <CheckoutContainer
+              checkoutAmount={{
+                value: 100,
+                currency: 'KRW',
+              }}
+              checkoutData={{
+                orderId: 'H_9uNV6Uz4Kt-eM9GrGYG', // random id
+                orderName: '독톡 테스트용',
+              }}
+              charged_content={''}
+            />
           ) : (
             <pre className='content__text'>{summary.charged_content}</pre>
-          )} */}
+          )}
 
           <div className='content__image-container'>
             {summary.files
