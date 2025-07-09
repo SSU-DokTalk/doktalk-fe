@@ -73,7 +73,7 @@ function Login() {
     <div id='login'>
       <div className='login-container w-[350px] md:w-[460px]'>
         <Link to={'/'} className='logo-container'>
-          <div className='logo dok'>독</div>
+          <div className='logo dok'>讀</div>
           <div className='logo colon'>:</div>
           <div className='logo talk'>TALK</div>
         </Link>
