@@ -147,7 +147,7 @@ export const DUMMY_PAYMENTS: PaymentType[] = [
 
 export const DUMMY_SUMMARIES: SummaryType[] = [
   {
-    id: 6,
+    id: 21,
     user_id: 5,
     isbn: 9788936473235,
     title: DUMMY_BOOKS[3].title,
@@ -171,7 +171,7 @@ export const DUMMY_SUMMARIES: SummaryType[] = [
     book: DUMMY_BOOKS[3],
   },
   {
-    id: 5,
+    id: 22,
     user_id: 5,
     isbn: 9791192988191,
     title: DUMMY_BOOKS[4].title,
@@ -195,7 +195,7 @@ export const DUMMY_SUMMARIES: SummaryType[] = [
     book: DUMMY_BOOKS[4],
   },
   {
-    id: 4,
+    id: 23,
     user_id: 5,
     isbn: 9791192595481,
     title: DUMMY_BOOKS[5].title,
@@ -294,7 +294,7 @@ export const DUMMY_SUMMARIES: SummaryType[] = [
 
 export const DUMMY_DEBATES: DebateType[] = [
   {
-    id: 0,
+    id: 12,
     user_id: 0,
     isbn: 0,
     location: 'string',
@@ -320,7 +320,7 @@ export const DUMMY_DEBATES: DebateType[] = [
     book: DUMMY_BOOKS[0],
   },
   {
-    id: 0,
+    id: 13,
     user_id: 0,
     isbn: 0,
     location: 'string',
@@ -346,7 +346,7 @@ export const DUMMY_DEBATES: DebateType[] = [
     book: DUMMY_BOOKS[1],
   },
   {
-    id: 0,
+    id: 14,
     user_id: 0,
     isbn: 0,
     location: 'string',
@@ -371,7 +371,7 @@ export const DUMMY_DEBATES: DebateType[] = [
     book: DUMMY_BOOKS[3],
   },
   {
-    id: 0,
+    id: 10,
     user_id: 0,
     isbn: 0,
     location: 'string',
@@ -397,7 +397,7 @@ export const DUMMY_DEBATES: DebateType[] = [
     book: DUMMY_BOOKS[4],
   },
   {
-    id: 0,
+    id: 10,
     user_id: 0,
     isbn: 0,
     location: 'string',

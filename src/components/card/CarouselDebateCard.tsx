@@ -1,13 +1,20 @@
 import { DebateType } from '@/types/data';
 import Image from '@/components/base/Image';
 import ProfileIcon from '@/components/base/ProfileIcon';
+import { useNavigate } from 'react-router-dom';
 
 function CarouselDebateCard({
   debate,
   ...props
 }: { debate: DebateType } & React.HTMLProps<HTMLDivElement>) {
+  const navigate = useNavigate();
+
   return (
-    <div id='carousel-debate-card' {...props}>
+    <div
+      id='carousel-debate-card'
+      onClick={() => navigate(`/debate/${debate.id}`)}
+      {...props}
+    >
       <Image
         src={debate.book.image}
         alt={'debate book image'}

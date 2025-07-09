@@ -1,10 +1,16 @@
 import { SummaryType } from '@/types/data';
 import Image from '@/components/base/Image';
 import ProfileIcon from '@/components/base/ProfileIcon';
+import { useNavigate } from 'react-router-dom';
 
 function CarouselSummaryCard({ summary }: { summary: SummaryType }) {
+  const navigate = useNavigate();
+
   return (
-    <div id='carousel-summary-card'>
+    <div
+      id='carousel-summary-card'
+      onClick={() => navigate(`/summary/${summary.id}`)}
+    >
       <Image
         src={summary.book.image}
         alt='book cover'
