@@ -36,7 +36,8 @@ const SlideTransition = React.forwardRef(function Transition(
 const ChatbotFloatingButton = (): JSX.Element => {
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: '안녕하세요! 무엇이든 물어보세요 👋', sender: 'ai' },
+    { text: '아쉽게도 아직은 테스트중이라 동작하지 않아요', sender: 'ai' },
+    // { text: '안녕하세요! 무엇이든 물어보세요 👋', sender: 'ai' },
   ]);
   const [inputValue, setInputValue] = useState<string>('');
 
