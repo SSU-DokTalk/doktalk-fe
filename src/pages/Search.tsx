@@ -37,6 +37,9 @@ function Search() {
 
   const { t } = useTranslation();
 
+  const apiProvider =
+    localStorage.getItem('lang') === 'us' ? 'google' : 'naver';
+
   useEffect(() => {
     if (
       prevValueRef.current.debouncedSearch === debouncedSearch &&
@@ -76,7 +79,7 @@ function Search() {
           </div>
           <div className='result-content-container'>
             <InfiniteScroll
-              api={`books?search=${debouncedSearch}&sortby=${sortBys[sortByIdx].value}`}
+              api={`books?search=${debouncedSearch}&sortby=${sortBys[sortByIdx].value}&api_provider=${apiProvider}`}
               likes_api={'librarys/is_in_library'}
               itemId='isbn'
               setItems={setBooks}
