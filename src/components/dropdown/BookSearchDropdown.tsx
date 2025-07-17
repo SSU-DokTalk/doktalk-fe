@@ -35,6 +35,9 @@ function BookSearchDropdown({
   const [anchorEl, setAnchorEl] = useState<null | HTMLElement>(null);
   const open = Boolean(anchorEl);
 
+  const apiProvider =
+    localStorage.getItem('lang') === 'us' ? 'google' : 'naver';
+
   useEffect(() => {
     setBookQuery(bookTitle);
   }, [bookTitle]);
@@ -85,7 +88,7 @@ function BookSearchDropdown({
           >
             <Paper sx={{ maxHeight: 400, overflow: 'auto' }}>
               <InfiniteScroll
-                api={`books?search=${debouncedSearch}&sortby=latest`}
+                api={`books?search=${debouncedSearch}&sortby=latest&api_provider=${apiProvider}`}
                 likes_api={'librarys/is_in_library'}
                 itemId='isbn'
                 setItems={setBooks}
