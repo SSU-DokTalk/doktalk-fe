@@ -156,7 +156,7 @@ function Profile({
             </div>
           </div>
           <div className='introduction-container'>
-            <pre className='introduction'>
+            <pre className='introduction  whitespace-pre-wrap break-words'>
               {userProfile.introduction ??
                 t('component.section.profile.text.no-introduction')}
             </pre>

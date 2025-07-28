@@ -56,6 +56,7 @@
     },
     "topnav": {
       "main-page": "메인 페이지",
+      "post": "게시글",
       "debate": "독서 토론",
       "summary": "도서 요약",
       "search": "도서 검색",

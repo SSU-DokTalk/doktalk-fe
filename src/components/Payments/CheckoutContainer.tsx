@@ -18,7 +18,9 @@ export function CheckoutContainer({
 }) {
   return (
     <div className='payment__container'>
-      <pre className='content__text charged-content'>{charged_content}</pre>
+      <pre className='content__text charged-content  whitespace-pre-wrap break-words'>
+        {charged_content}
+      </pre>
       <div className='payment__box '>
         <p className='payment__box__title'>
           이어서 읽으시려면 결제가 필요합니다.

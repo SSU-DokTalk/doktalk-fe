@@ -1,5 +1,6 @@
 import { Outlet } from 'react-router-dom';
 import Topnav from '@/components/navigation/Topnav';
+import ChatbotFloatingButton from '@/components/floating/ChatbotFloatingButton';
 
 function BasicLayout() {
   return (
@@ -16,6 +17,7 @@ function BasicLayout() {
           height: '70px',
         }}
       />
+      <ChatbotFloatingButton />
     </div>
   );
 }

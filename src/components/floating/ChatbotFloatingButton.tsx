@@ -90,7 +90,7 @@ const ChatbotFloatingButton = (): JSX.Element => {
       {/* 플로팅 버튼 */}
       <button
         onClick={handleToggleChat}
-        className='fixed bottom-6 right-6 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-brand1 text-white shadow-xl transition-transform duration-300 ease-in-out hover:scale-110 md:bottom-10 md:right-10'
+        className='fixed bottom-20 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-brand1 text-white shadow-xl transition-transform duration-300 ease-in-out hover:scale-110 md:bottom-10 md:right-10'
         aria-label='채팅 열기'
       >
         <FontAwesomeIcon icon={faRobot} size='2x' />

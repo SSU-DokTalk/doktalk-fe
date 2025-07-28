@@ -10,6 +10,7 @@ import '@/assets/css/tailwind.css';
 import BasicLayout from '@/layouts/BasicLayout';
 
 import Landing from '@/pages/Landing';
+import Post from '@/pages/Post';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
 import Register from '@/pages/Register';
@@ -22,7 +23,6 @@ import { useAppDispatch, useAppSelector } from './stores/hooks';
 import { selectUser, setUser } from './stores/user';
 import cookie from 'react-cookies';
 import ContentMainLayout from './layouts/ContentMainLayout';
-import LandingUpper from './components/section/LandingUpper';
 import Debate from './pages/Debate';
 import Search from './pages/Search';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -123,16 +123,11 @@ function App() {
         <Route path='/checkout/fail' element={<CheckoutFail />}></Route>
       </Route>
       <Route element={<BasicLayout />}>
-        <Route
-          element={
-            <ContentMainLayout>
-              <LandingUpper />
-            </ContentMainLayout>
-          }
-        >
-          <Route path='/' element={<Landing />}></Route>
-        </Route>
+        <Route path='/' element={<Landing />}></Route>
+
         <Route element={<ContentMainLayout />}>
+          <Route path='/post' element={<Post />}></Route>
+
           <Route path='/search' element={<Search />}></Route>
 
           <Route path='/debate' element={<Debate />}></Route>
