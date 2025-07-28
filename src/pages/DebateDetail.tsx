@@ -204,7 +204,9 @@ function DebateDetail() {
             </DebateDetailListItem>
           </div>
 
-          <pre className='discussion-info__description'>{debate.content}</pre>
+          <pre className='discussion-info__description whitespace-pre-wrap break-words'>
+            {debate.content}
+          </pre>
 
           <div className='discussion-info__likes'>
             <FontAwesomeIcon icon={faHeart} className='like-icon' />
@@ -266,7 +268,9 @@ function DebateDetail() {
             </div>
           </div>
         ) : (
-          <pre className='content__text'>토론방에 이미 참가하셨습니다</pre>
+          <pre className='content__text  whitespace-pre-wrap break-words'>
+            토론방에 이미 참가하셨습니다
+          </pre>
         )}
       </MiddlePanel>
 

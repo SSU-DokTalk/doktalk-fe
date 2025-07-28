@@ -211,7 +211,7 @@ function SummaryDetail() {
             </SummaryDetailListItem>
           </div>
 
-          <pre className='content__text free-content'>
+          <pre className='content__text free-content  whitespace-pre-wrap break-words'>
             {summary.free_content}
           </pre>
 
@@ -236,7 +236,9 @@ function SummaryDetail() {
               }}
             />
           ) : (
-            <pre className='content__text'>{summary.charged_content}</pre>
+            <pre className='content__text whitespace-pre-wrap break-words'>
+              {summary.charged_content}
+            </pre>
           )}
 
           <div className='content__image-container'>

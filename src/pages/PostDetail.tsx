@@ -158,7 +158,9 @@ function PostDetail() {
         </div>
         <div className='content'>
           <div className='title'>{post.title}</div>
-          <pre className='content__text'>{post.content}</pre>
+          <pre className='content__text  whitespace-pre-wrap break-words'>
+            {post.content}
+          </pre>
           <div className='content__image-container'>
             {post.files
               ?.filter((file) =>

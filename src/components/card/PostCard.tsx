@@ -59,7 +59,10 @@ function PostCard({
       <div className='title' onClick={() => navigate(`/post/${post.id}`)}>
         {post.title}
       </div>
-      <pre className='content' onClick={() => navigate(`/post/${post.id}`)}>
+      <pre
+        className='content whitespace-pre-wrap break-words'
+        onClick={() => navigate(`/post/${post.id}`)}
+      >
         {post.content}
       </pre>
       <div
