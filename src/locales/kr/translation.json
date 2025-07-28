@@ -109,7 +109,8 @@
       },
       "language": {
         "korean": "한국어",
-        "english": "English"
+        "english": "English",
+        "mongolian": "Монгол хэл"
       },
       "register": "회원가입",
       "login": "로그인"
