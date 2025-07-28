@@ -92,11 +92,11 @@ function CreateDebate() {
   return (
     <div id='create-debate-page'>
       <div className='container mx-4! w-full md:w-[65%]'>
-        <h1>토론방 생성하기</h1>
+        <h1>{t('page.create-debate.title')}</h1>
         <div className='input-container__title'>
           <input
             type='text'
-            placeholder='제목을 입력해주세요'
+            placeholder={t('page.create-debate.input.title-placeholder')}
             value={debateData.title}
             onChange={(e) => {
               setDebateData((prev) => {
@@ -110,13 +110,13 @@ function CreateDebate() {
             htmlFor='location'
             className='w-22 text-base! md:w-1/5 md:text-xl!'
           >
-            모임 장소
+            {t('page.create-debate.input.location-label')}
           </label>
           <div className='input-box grow'>
             <input
               id='location'
               type='text'
-              placeholder='모일 장소를 입력해주세요'
+              placeholder={t('page.create-debate.input.location-placeholder')}
               value={debateData.location}
               onChange={(e) => {
                 setDebateData((prev) => {
@@ -132,13 +132,13 @@ function CreateDebate() {
             htmlFor='link'
             className='w-22 text-base! md:w-1/5 md:text-xl!'
           >
-            온라인 링크
+            {t('page.create-debate.input.link-label')}
           </label>
           <div className='input-box grow flex-col'>
             <input
               id='link'
               type='url'
-              placeholder='온라인 모임일 경우 참여 링크를 입력해주세요'
+              placeholder={t('page.create-debate.input.link-placeholder')}
               value={debateData.link}
               onChange={(e) => {
                 setDebateData((prev) => {
@@ -148,7 +148,7 @@ function CreateDebate() {
               className='peer placeholder:text-base invalid:border-b-2! invalid:border-red-500 invalid:text-red-600'
             />
             <div className='hidden text-sm! peer-invalid:block'>
-              https://url 형식으로 적어주세요
+              {t('page.create-debate.input.link-error')}
             </div>
           </div>
         </div>
@@ -157,7 +157,7 @@ function CreateDebate() {
             htmlFor='held_at'
             className='w-22 text-base! md:w-1/5 md:text-xl!'
           >
-            모임 시간
+            {t('page.create-debate.input.meeting-time')}
           </label>
           <div className='input-box grow'>
             <DatePicker
@@ -237,7 +237,7 @@ function CreateDebate() {
             htmlFor='book'
             className='w-22 text-base! md:w-1/5 md:text-xl!'
           >
-            도서 선택
+            {t('page.create-debate.input.book-select')}
           </label>
           <BookSearchDropdown setBookIsbnData={setDebateData} />
         </div>
@@ -246,7 +246,7 @@ function CreateDebate() {
             htmlFor='category'
             className='w-22 text-base! md:w-1/5 md:text-xl!'
           >
-            카테고리
+            {t('page.create-debate.input.category')}
           </label>
 
           <CategoryDropdown data={debateData} setData={setDebateData} />
@@ -257,7 +257,7 @@ function CreateDebate() {
             htmlFor='limit'
             className='w-22 text-base! md:w-1/5 md:text-xl!'
           >
-            인원 제한
+            {t('page.create-debate.input.limit')}
           </label>
           <div className='input-box-short'>
             <input
@@ -273,17 +273,17 @@ function CreateDebate() {
               }}
             />
           </div>
-          <span>명</span>
+          <span>{t('page.create-debate.input.limit-unit')}</span>
         </div>
         <UploadFiles
           setFiles={setFiles}
           accept={ACCEPTABLE.join()}
-          buttonText='파일 추가'
+          buttonText={t('page.create-debate.button.file-add')}
           buttonIcon={faImage}
         />
         <textarea
           value={debateData.content}
-          placeholder='나누고 싶은 이야기를 적어주세요'
+          placeholder={t('page.create-debate.input.content-placeholder')}
           onChange={(e) =>
             setDebateData((prev) => ({ ...prev, content: e.target.value }))
           }
@@ -298,7 +298,7 @@ function CreateDebate() {
             }}
           />
           <label htmlFor='price' className='price-label text-base! md:text-xl!'>
-            가격
+            {t('page.create-debate.input.price')}
           </label>
           <input
             id='price'
@@ -306,7 +306,7 @@ function CreateDebate() {
             className='price-input grow'
             step={1000}
             min={0}
-            placeholder='가격을 입력해주세요'
+            placeholder={t('page.create-debate.input.price-placeholder')}
             value={debateData.price}
             onChange={(e) => {
               setDebateData((prev) => {
@@ -316,9 +316,11 @@ function CreateDebate() {
           />
         </div>
         <div className='button-container'>
-          <button className='temp'>임시 저장</button>
+          <button className='temp'>
+            {t('page.create-debate.button.temp-save')}
+          </button>
           <button className='submit' onClick={doSubmit}>
-            작성 완료
+            {t('page.create-debate.button.submit')}
           </button>
         </div>
       </div>

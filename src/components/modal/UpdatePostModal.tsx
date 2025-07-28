@@ -9,6 +9,7 @@ import { faImage } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { FileType, PostType } from '@/types/data';
 import { useParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function UpdatePostModal({
   post,
@@ -21,6 +22,7 @@ function UpdatePostModal({
   isEdit?: boolean;
   setDidPost?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
   const { post_id } = useParams();
 
   const [postData, setPostData] = useState<{
@@ -76,7 +78,7 @@ function UpdatePostModal({
       scroll='body'
     >
       <DialogTitle>
-        <b>게시글 수정</b>
+        <b>{t('component.modal.update-post.title')}</b>
       </DialogTitle>
       <IconButton
         className='btn-close'

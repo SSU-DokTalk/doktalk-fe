@@ -9,6 +9,7 @@ import axios from 'axios';
 import { useNavigate } from 'react-router-dom';
 import BookSearchDropdown from '@/components/dropdown/BookSearchDropdown';
 import CategoryDropdown from '@/components/dropdown/CategoryChipDropdown';
+import { useTranslation } from 'react-i18next';
 
 function CreateSummary() {
   const [summaryData, setSummaryData] = useState<SummaryType>({
@@ -17,6 +18,7 @@ function CreateSummary() {
 
   const [files, setFiles] = useState<File[]>([]);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const doSubmit = async () => {
     const fileRes = await Promise.all(
@@ -54,12 +56,12 @@ function CreateSummary() {
   return (
     <div id='create-summary-page'>
       <div className='container mx-4! w-full md:w-[65%]'>
-        <h1>요약 작성하기</h1>
+        <h1>{t('page.create-summary.title')}</h1>
         <div className='input-container__title'>
           <input
             type='text'
             className='title-input'
-            placeholder='제목을 입력해주세요.'
+            placeholder={t('page.create-summary.input.title-placeholder')}
             value={summaryData.title}
             onChange={(e) =>
               setSummaryData((prev) => ({ ...prev, title: e.target.value }))
@@ -71,7 +73,7 @@ function CreateSummary() {
             htmlFor='book'
             className='w-22 text-base! md:w-1/5 md:text-xl!'
           >
-            도서 선택
+            {t('page.create-summary.input.book-select')}
           </label>
           <BookSearchDropdown setBookIsbnData={setSummaryData} />
         </div>
@@ -81,7 +83,7 @@ function CreateSummary() {
             htmlFor='category'
             className='w-22 text-base! md:w-1/5 md:text-xl!'
           >
-            카테고리
+            {t('page.create-summary.input.category')}
           </label>
 
           <CategoryDropdown data={summaryData} setData={setSummaryData} />
@@ -90,12 +92,12 @@ function CreateSummary() {
         <UploadFiles
           setFiles={setFiles}
           accept={ACCEPTABLE.join()}
-          buttonText='파일 추가'
+          buttonText={t('page.create-summary.button.file-add')}
           buttonIcon={faImage}
         />
         <textarea
           value={summaryData.free_content}
-          placeholder='미리보기로 공유하고 싶은 내용을 작성해주세요.'
+          placeholder={t('page.create-summary.input.free-content-placeholder')}
           onChange={(e) =>
             setSummaryData((prev) => ({
               ...prev,
@@ -105,7 +107,9 @@ function CreateSummary() {
         />
         <textarea
           value={summaryData.charged_content}
-          placeholder='유료로 공유하고 싶은 내용을 작성해주세요.'
+          placeholder={t(
+            'page.create-summary.input.charged-content-placeholder'
+          )}
           onChange={(e) =>
             setSummaryData((prev) => ({
               ...prev,
@@ -123,7 +127,7 @@ function CreateSummary() {
             }}
           />
           <label htmlFor='price' className='price-label text-base! md:text-xl!'>
-            가격
+            {t('page.create-summary.input.price')}
           </label>
           <input
             id='price'
@@ -131,7 +135,7 @@ function CreateSummary() {
             className='price-input grow'
             step={1000}
             min={0}
-            placeholder='가격을 입력해주세요'
+            placeholder={t('page.create-summary.input.price-placeholder')}
             value={summaryData.price}
             onChange={(e) => {
               setSummaryData((prev) => {
@@ -141,9 +145,11 @@ function CreateSummary() {
           />
         </div>
         <div className='button-container'>
-          <button className='temp'>임시 저장</button>
+          <button className='temp'>
+            {t('page.create-summary.button.temp-save')}
+          </button>
           <button className='submit' onClick={doSubmit}>
-            작성 완료
+            {t('page.create-summary.button.submit')}
           </button>
         </div>
       </div>

@@ -6,6 +6,8 @@ import { faThumbsUp as faThumbsUpRegular } from '@fortawesome/free-regular-svg-i
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import axios from 'axios';
 import { Dispatch, SetStateAction } from 'react';
+import { useTranslation } from 'react-i18next';
+
 function CommentCard({
   comment,
   itemType,
@@ -17,6 +19,7 @@ function CommentCard({
   hasLiked: boolean;
   setHasLiked: Dispatch<SetStateAction<number[]>>;
 }) {
+  const { t } = useTranslation();
   const doLike = () => {
     axios.post(`/api/${itemType}/comment/${comment.id}/like`).then(() => {
       setHasLiked((prv) => prv.concat([comment.id]));
@@ -39,7 +42,9 @@ function CommentCard({
         <div className='comment-card__time'>{getTimeDiff(comment.created)}</div>
         <div className='comment-card__content'>{comment.content}</div>
         <div className='comment-card__additional'>
-          <div className='comment-card__reply'>답글 {comment.comments_num}</div>
+          <div className='comment-card__reply'>
+            {t('component.card.comment.reply')} {comment.comments_num}
+          </div>
           <div className='comment-card__like'>
             {hasLiked ? (
               <FontAwesomeIcon icon={faThumbsUpSolid} onClick={doUnlike} />

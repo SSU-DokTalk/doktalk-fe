@@ -2,8 +2,10 @@ import { useEffect } from 'react';
 import axios from 'axios';
 
 import { useNavigate, useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 export function CheckoutSuccess() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
@@ -25,8 +27,8 @@ export function CheckoutSuccess() {
   return (
     <div className='result wrapper'>
       <div className='box_section'>
-        <h2>결제 성공</h2>
-        <p>{`주문번호: ${searchParams.get('orderId')}`}</p>
+        <h2>{t('component.payments.checkout-success.title')}</h2>
+        <p>{`${t('component.payments.checkout-success.order-id')}: ${searchParams.get('orderId')}`}</p>
         <p>{`결제 금액: ${Number(
           searchParams.get('amount')
         ).toLocaleString()}원`}</p>

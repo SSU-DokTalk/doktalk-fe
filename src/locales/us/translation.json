@@ -40,6 +40,11 @@
     }
   },
   "component": {
+    "base": {
+      "upload-file": {
+        "attach": "Attach File"
+      }
+    },
     "floating": {
       "text": {
         "login": "Login",
@@ -78,6 +83,23 @@
     "card": {
       "write-post": {
         "placeholder": "Write your post!"
+      },
+      "write-summary": {
+        "placeholder": "Write a summary!"
+      },
+      "write-debate": {
+        "placeholder": "Create a new discussion room!"
+      },
+      "comment": {
+        "reply": "Reply"
+      },
+      "payment": {
+        "cancelled": "Cancelled",
+        "currency": "$"
+      },
+      "category": {
+        "select": "Select Category",
+        "no-selected": "No category selected."
       },
       "book": {
         "button": {
@@ -122,6 +144,7 @@
           "no-library-item": "There is no book in the library",
           "no-debate-item": "There is no participating discussion room",
           "no-payment-item": "There is no payment item",
+          "no-payment-date": "No payment history for this date",
           "no-book-item": "There is no book",
           "currently-reading-book-prefix": "Currently reading",
           "currently-reading-book-postfix": " books",
@@ -151,6 +174,70 @@
             "12": "Dec"
           }
         }
+      },
+      "settings": {
+        "privacy-scope": "Privacy Scope",
+        "my-activity": "My Activity"
+      },
+      "comment": {
+        "title": "Comments",
+        "placeholder": "Write a comment",
+        "button": {
+          "submit": "Submit"
+        }
+      }
+    },
+    "modal": {
+      "edit-profile": {
+        "title": "Edit Profile",
+        "button": {
+          "image-upload": "Upload Image",
+          "image-remove": "Remove Image",
+          "submit": "Save Changes"
+        },
+        "label": {
+          "nickname": "Nickname",
+          "introduction": "Introduction"
+        },
+        "placeholder": {
+          "nickname": "(Required) Please enter your nickname.",
+          "introduction": "Tell us about yourself."
+        }
+      },
+      "update-post": {
+        "title": "Edit Post"
+      },
+      "write-post": {
+        "title": "Write Post",
+        "button": {
+          "temp-save": "Save Draft",
+          "submit": "Publish"
+        }
+      },
+      "friend-list": {
+        "button": {
+          "delete": "Delete"
+        }
+      }
+    },
+    "navigation": {
+      "topnav": {
+        "explore": "Explore",
+        "nickname-fallback": "Username",
+        "language": {
+          "korean": "Korean"
+        }
+      }
+    },
+    "payments": {
+      "checkout-success": {
+        "title": "Payment Successful",
+        "order-id": "Order ID"
+      },
+      "checkout-fail": {
+        "title": "Payment Failed",
+        "error-code": "Error Code",
+        "fail-reason": "Failure Reason"
       }
     }
   },
@@ -165,9 +252,11 @@
         "for-you-postfix": ""
       },
       "item": {
-        "no-post-item": "There is no post item",
+        "no-post-item": "No posts to display",
         "no-summary-item": "There is no summary item"
-      }
+      },
+      "loading": "Loading...",
+      "error": "Failed to load data"
     },
     "login": {
       "email": "email",
@@ -226,6 +315,9 @@
       }
     },
     "search": {
+      "item": {
+        "no-book-item": "No search results found"
+      },
       "title": {
         "page": "Search Books"
       },
@@ -236,6 +328,153 @@
       "search": {
         "placeholder": "Search for books!"
       }
+    },
+    "create-debate": {
+      "title": "Create Discussion Room",
+      "input": {
+        "title-placeholder": "Please enter a title",
+        "location-label": "Meeting Location",
+        "location-placeholder": "Please enter the meeting location",
+        "link-label": "Online Link",
+        "link-placeholder": "Please enter the participation link for online meetings",
+        "link-error": "Please write in https://url format",
+        "meeting-time": "Meeting Time",
+        "book-select": "Select Book",
+        "category": "Category",
+        "limit": "Participant Limit",
+        "limit-unit": "people",
+        "content-placeholder": "Write about what you want to discuss",
+        "price": "Price",
+        "price-placeholder": "Please enter the price"
+      },
+      "button": {
+        "file-add": "Add Files",
+        "temp-save": "Save Draft",
+        "submit": "Create"
+      }
+    },
+    "create-summary": {
+      "title": "Write Summary",
+      "input": {
+        "title-placeholder": "Please enter a title.",
+        "book-select": "Select Book",
+        "category": "Category",
+        "free-content-placeholder": "Write content you want to share as a preview.",
+        "charged-content-placeholder": "Write content you want to share for a fee.",
+        "price": "Price",
+        "price-placeholder": "Please enter the price"
+      },
+      "button": {
+        "file-add": "Add Files",
+        "temp-save": "Save Draft",
+        "submit": "Publish"
+      }
+    },
+    "debate-detail": {
+      "button": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "info": {
+        "location": "Meeting Location",
+        "link": "Online Link",
+        "time": "Time",
+        "category": "Category",
+        "book": "Selected Book"
+      },
+      "modal": {
+        "title": "Post Options"
+      },
+      "payment": {
+        "title": "Payment is required to join this discussion room.",
+        "bookmark": "Bookmark",
+        "currency": "$",
+        "already-joined": "You have already joined this discussion room"
+      }
+    },
+    "update-debate": {
+      "title": "Edit Discussion Room",
+      "button": {
+        "submit": "Save Changes"
+      }
+    },
+    "update-summary": {
+      "title": "Edit Summary",
+      "button": {
+        "submit": "Save Changes"
+      }
+    },
+    "post-detail": {
+      "button": {
+        "edit": "Edit",
+        "delete": "Delete"
+      },
+      "modal": {
+        "title": "Post Options"
+      }
+    },
+    "register": {
+      "welcome": "Welcome to DokTalk, the book discussion community!",
+      "form": {
+        "email": "Email",
+        "email-required": "Please enter your email",
+        "nickname": "Nickname",
+        "nickname-required": "Please enter your nickname",
+        "password": "Password",
+        "password-required": "Please enter your password",
+        "password-min": "Password must be at least 8 characters",
+        "password-confirm": "Confirm Password",
+        "password-confirm-required": "Please confirm your password",
+        "password-match": "Passwords do not match",
+        "birthdate": "Date of Birth",
+        "birthdate-required": "Please enter your date of birth",
+        "birthdate-format": "Please enter in the correct format (YYYY-MM-DD)",
+        "gender": "Gender",
+        "gender-required": "Please select your gender",
+        "male": "Male",
+        "female": "Female",
+        "validation": "Identity Verification",
+        "validation-complete": "Identity verification completed.",
+        "interests": "Select Interests",
+        "interests-description": "Selected interests will be used for personalized book recommendations and discussion room matching.",
+        "all-agreements": "Agree to All Terms",
+        "agreement1": "(Required) Agreement 1",
+        "agreement2": "(Required) Agreement 2",
+        "agreement3": "(Optional) Agreement 3",
+        "view": "View",
+        "submit": "Sign Up"
+      },
+      "alerts": {
+        "validation-required": "Please complete identity verification",
+        "interests-required": "Please select your interests",
+        "agreements-required": "Please agree to the required terms",
+        "password-length": "Password must be at least 8 characters",
+        "password-mismatch": "Passwords do not match",
+        "register-error": "An error occurred during registration."
+      },
+      "interests": {
+        "politics": "Politics",
+        "business": "Business / Economics",
+        "religion": "Religion",
+        "webtoon": "Webtoon",
+        "philosophy": "Philosophy",
+        "exhibition": "Concerts / Exhibitions",
+        "self-development": "Self Development"
+      }
+    },
+    "settings": {
+      "privacy": {
+        "title": "Edit Privacy Settings"
+      },
+      "notifications": {
+        "likes": "Likes",
+        "comments": "Comments",
+        "notifications": "Notifications",
+        "page": " Page"
+      }
+    },
+    "not-found": {
+      "message": "Page Not Found!"
     }
   }
 }

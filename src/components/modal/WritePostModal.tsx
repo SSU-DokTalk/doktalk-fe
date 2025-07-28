@@ -8,6 +8,7 @@ import { ACCEPTABLE } from '@/common/variables';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { PostType } from '@/types/data';
+import { useTranslation } from 'react-i18next';
 
 function WritePostModal({
   post,
@@ -22,6 +23,7 @@ function WritePostModal({
   isEdit?: boolean;
   setDidPost?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
   const [postData, setPostData] = useState<{
     title: string;
     content: string;
@@ -88,7 +90,7 @@ function WritePostModal({
       scroll='body'
     >
       <DialogTitle>
-        <b>게시글 작성</b>
+        <b>{t('component.modal.write-post.title')}</b>
       </DialogTitle>
       <IconButton
         className='btn-close'
@@ -132,9 +134,11 @@ function WritePostModal({
             />
           </div>
           <div className='button-container'>
-            <button className='temporary-save-button'>임시 저장</button>
+            <button className='temporary-save-button'>
+              {t('component.modal.write-post.button.temp-save')}
+            </button>
             <button className='post-button' onClick={doPost}>
-              작성 완료
+              {t('component.modal.write-post.button.submit')}
             </button>
           </div>
         </div>

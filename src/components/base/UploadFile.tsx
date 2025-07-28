@@ -9,6 +9,7 @@ import React, {
   useState,
 } from 'react';
 import Chain from '@/assets/images/chain.svg';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 파일 업로드 버튼
@@ -42,6 +43,7 @@ function UploadFile({
   hasUnacceptableFile?: boolean;
   setHasUnacceptableFile?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [inherentHasTooLargeFile, setInherentHasTooLargeFile] =
     useState<boolean>(false);
@@ -104,7 +106,8 @@ function UploadFile({
           className='upload-button'
           onClick={() => inputRef.current?.click()}
         >
-          <span>파일 첨부</span> <img src={Chain} alt='attach file' />
+          <span>{t('component.base.upload-file.attach')}</span>{' '}
+          <img src={Chain} alt='attach file' />
         </button>
       )}
     </div>

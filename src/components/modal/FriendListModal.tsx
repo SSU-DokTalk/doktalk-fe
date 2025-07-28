@@ -9,17 +9,7 @@ import userIcon from '@/assets/images/profile.svg';
 import InfiniteScroll from '../base/InfiniteScroll';
 import { useAppDispatch, useAppSelector } from '@/stores/hooks';
 import { selectGlobalState, updateGlobalState } from '@/stores/globalStates';
-
-const tabs = [
-  {
-    name: '팔로워',
-    key: 'follower',
-  },
-  {
-    name: '팔로잉',
-    key: 'following',
-  },
-];
+import { useTranslation } from 'react-i18next';
 
 function FriendListModal({
   userProfile,
@@ -30,6 +20,19 @@ function FriendListModal({
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
+
+  const tabs = [
+    {
+      name: t('component.floating.text.follower'),
+      key: 'follower',
+    },
+    {
+      name: t('component.floating.text.following'),
+      key: 'following',
+    },
+  ];
+
   const [followers, setFollowers] = useState<FollowType[]>([]);
   const [followings, setFollowings] = useState<FollowType[]>([]);
   const [followerPage, setFollowerPage] = useState(1);
@@ -136,7 +139,9 @@ function FriendListModal({
                     </div>
                     <div className='right-container'>
                       <div className='delete-friend-button-container'>
-                        <button className='delete-friend-button'>삭제</button>
+                        <button className='delete-friend-button'>
+                          {t('component.modal.friend-list.button.delete')}
+                        </button>
                       </div>
                     </div>
                   </div>

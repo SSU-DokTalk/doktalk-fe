@@ -6,17 +6,12 @@ import {
   faHeart,
 } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 interface MenuItem {
   name: string;
   icon: any;
 }
-
-const menuItems: MenuItem[] = [
-  { name: '좋아요', icon: faHeart },
-  { name: '댓글', icon: faComment },
-  { name: '알림', icon: faBell },
-];
 
 interface SettingsSidebarProps {
   tabIndex: number;
@@ -24,23 +19,35 @@ interface SettingsSidebarProps {
 }
 
 function SettingsSidebar({ tabIndex, setTabIndex }: SettingsSidebarProps) {
+  const { t } = useTranslation();
+
+  const menuItems: MenuItem[] = [
+    { name: t('page.settings.notifications.likes'), icon: faHeart },
+    { name: t('page.settings.notifications.comments'), icon: faComment },
+    { name: t('page.settings.notifications.notifications'), icon: faBell },
+  ];
+
   const getButtonClassName = (isActive: boolean) =>
     `tab-button${isActive ? ' activated' : ''}`;
 
   return (
     <div id='settings-sidebar'>
-      <h1>설정</h1>
+      <h1>{t('page.settings.privacy.title').replace(' 수정', '')}</h1>
 
-      <h4 className='subtitle'>공개 범위</h4>
+      <h4 className='subtitle'>
+        {t('component.section.settings.privacy-scope')}
+      </h4>
       <button
         className={getButtonClassName(tabIndex === 0)}
         onClick={() => setTabIndex(0)}
       >
         <FontAwesomeIcon className='icon' icon={faLock} fill='white' />
-        공개 범위 수정
+        {t('page.settings.privacy.title')}
       </button>
 
-      <h4 className='subtitle'>내 활동</h4>
+      <h4 className='subtitle'>
+        {t('component.section.settings.my-activity')}
+      </h4>
       {menuItems.map((item, index) => {
         const isActive = tabIndex === index + 1;
         return (

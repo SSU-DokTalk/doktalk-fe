@@ -169,7 +169,9 @@ function PaymentTab({ userProfile }: { userProfile: UserType }) {
         refreshCondition={isCurTimeChanged.current}
         hasNoItemComponent={
           <div className='no-item'>
-            <p className='no-item-message'>해당 날짜의 결제 내역이 없습니다</p>
+            <p className='no-item-message'>
+              {t('component.section.profile-tab-details.item.no-payment-date')}
+            </p>
           </div>
         }
         condition={userProfile && userProfile.id != 0}

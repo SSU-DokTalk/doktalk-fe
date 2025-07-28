@@ -7,15 +7,17 @@ import {
 } from '@fortawesome/free-regular-svg-icons';
 import { faLock } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 
 const items = [
-  { name: '좋아요', icon: faHeart },
-  { name: '댓글', icon: faComment },
-  { name: '알림', icon: faBell },
+  { name: 'page.settings.notifications.likes', icon: faHeart },
+  { name: 'page.settings.notifications.comments', icon: faComment },
+  { name: 'page.settings.notifications.notifications', icon: faBell },
 ];
 
 function Settings() {
   const [tabIndex, setTabIndex] = useState(0);
+  const { t } = useTranslation();
 
   return (
     <div id='settings'>
@@ -25,13 +27,16 @@ function Settings() {
           <div>
             <div className='settings-content-header'>
               <FontAwesomeIcon className='icon' icon={faLock} />
-              <h2>공개 범위 수정</h2>
+              <h2>{t('page.settings.privacy.title')}</h2>
             </div>
           </div>
         ) : (
           <div>
-            <h1>{items[tabIndex - 1].name}</h1>
-            <p>{items[tabIndex - 1].name} 페이지</p>
+            <h1>{t(items[tabIndex - 1].name)}</h1>
+            <p>
+              {t(items[tabIndex - 1].name)}
+              {t('page.settings.notifications.page')}
+            </p>
           </div>
         )}
       </div>

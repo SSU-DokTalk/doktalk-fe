@@ -112,9 +112,11 @@ function DebateDetail() {
             <div className='for-pc hidden md:block'>
               {user.id === debate.user.id && (
                 <>
-                  <button onClick={doUpdate}>수정</button>
+                  <button onClick={doUpdate}>
+                    {t('page.debate-detail.button.edit')}
+                  </button>
                   <button className='delete' onClick={doDelete}>
-                    삭제
+                    {t('page.debate-detail.button.delete')}
                   </button>
                 </>
               )}
@@ -139,14 +141,16 @@ function DebateDetail() {
               >
                 <Paper className='rounded-t-2xl!'>
                   <hr className='w-15 h-1 mx-auto! my-4! bg-gray-100 border-0 rounded-sm dark:bg-gray-700' />
-                  <p className='text-center'>게시글 옵션</p>
+                  <p className='text-center'>
+                    {t('page.debate-detail.modal.title')}
+                  </p>
                   <List>
                     <ListItem>
                       <ListItemButton className='edit' onClick={doUpdate}>
                         <ListItemIcon>
                           <FontAwesomeIcon icon={faPen} />
                         </ListItemIcon>
-                        수정
+                        {t('page.debate-detail.button.edit')}
                       </ListItemButton>
                     </ListItem>
                     <ListItem>
@@ -154,7 +158,7 @@ function DebateDetail() {
                         <ListItemIcon>
                           <FontAwesomeIcon icon={faTrash} />
                         </ListItemIcon>
-                        삭제
+                        {t('page.debate-detail.button.delete')}
                       </ListItemButton>
                     </ListItem>
                   </List>
@@ -168,11 +172,11 @@ function DebateDetail() {
           <h2 className='discussion-info__title'>{debate.title}</h2>
 
           <div className='discussion-info-list'>
-            <DebateDetailListItem name='모임 장소'>
+            <DebateDetailListItem name={t('page.debate-detail.info.location')}>
               {debate.location}
             </DebateDetailListItem>
 
-            <DebateDetailListItem name='온라인 링크'>
+            <DebateDetailListItem name={t('page.debate-detail.info.link')}>
               <a
                 className='whitespace-nowrap overflow-hidden text-ellipsis block'
                 href={debate.link}
@@ -181,17 +185,17 @@ function DebateDetail() {
               </a>
             </DebateDetailListItem>
 
-            <DebateDetailListItem name='시간'>
+            <DebateDetailListItem name={t('page.debate-detail.info.time')}>
               {getDateTime(new Date(debate.held_at))}
             </DebateDetailListItem>
 
-            <DebateDetailListItem name='카테고리'>
+            <DebateDetailListItem name={t('page.debate-detail.info.category')}>
               {getCategoryFromNumber(debate.category)
                 .map((category) => t(category.name))
                 .join(', ')}
             </DebateDetailListItem>
 
-            <DebateDetailListItem name='지정 도서'>
+            <DebateDetailListItem name={t('page.debate-detail.info.book')}>
               <div>
                 <span>{debate.book.title}</span>
                 <Image
@@ -219,7 +223,7 @@ function DebateDetail() {
         {purchaseId == 0 ? (
           <div className='payment-box'>
             <p className='payment-box__title'>
-              토론방에 참여하시려면 결제가 필요합니다.
+              {t('page.debate-detail.payment.title')}
             </p>
 
             <div className='payment-box__info'>
@@ -228,13 +232,13 @@ function DebateDetail() {
                 onClick={() => cancelPurchase()} // 결제 테스트용
               >
                 <FontAwesomeIcon icon={faCartPlus} />
-                {''} 찜
+                {''} {t('page.debate-detail.payment.bookmark')}
               </button>
               <span
                 className='payment-box__amount'
                 onClick={() => getPurchase(debate_id)} // 결제 테스트용
               >
-                1,000 원
+                1,000 {t('page.debate-detail.payment.currency')}
               </span>
               {/* <button className='payment-box__button' onClick={doPurchase}>
                 결제하기{' '}
@@ -269,7 +273,7 @@ function DebateDetail() {
           </div>
         ) : (
           <pre className='content__text  whitespace-pre-wrap break-words'>
-            토론방에 이미 참가하셨습니다
+            {t('page.debate-detail.payment.already-joined')}
           </pre>
         )}
       </MiddlePanel>
