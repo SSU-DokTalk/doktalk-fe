@@ -38,7 +38,7 @@ function SimpleCard({
         />
       </div>
       <div className='p-4!'>
-        <h2 className='text-xl font-semibold text-gray-800 line-clamp-1'>
+        <h2 className='text-xl font-bold! text-gray-800 line-clamp-1'>
           {title}
         </h2>
         <p className='text-gray-600 mt-2! line-clamp-1'>

@@ -110,7 +110,7 @@ function Landing() {
         id='landing-page-upper-container'
         className='pb-8! mb-8! md:pb-15! md:mb-15!'
       >
-        <div className='container-title md:ml-8! px-24!'>
+        <div className='container-title md:ml-8! md:px-24! px-4!'>
           {t('page.landing.title.recommend-prefix')}
           {user.id == 0 ? null : (
             <span>
@@ -122,7 +122,7 @@ function Landing() {
           {t('page.landing.title.recommend-postfix')}
         </div>
 
-        <div className='container-contents-carousel flex items-end justify-items-center gap-4 overflow-x-auto h-72 w-full px-24!'>
+        <div className='container-contents-carousel flex items-end justify-items-center gap-4 overflow-x-auto h-72 w-full md:px-24! px-4!'>
           {debates.map((debate, idx) => (
             <SimplePostCard
               key={'recommend-debate' + idx}
