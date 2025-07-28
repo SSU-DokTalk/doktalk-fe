@@ -28,7 +28,6 @@ function ContentMainLayout({ children }: { children?: React.ReactNode }) {
           <Outlet />
         </div>
       </div>
-      <ChatbotFloatingButton />
     </div>
   );
 }

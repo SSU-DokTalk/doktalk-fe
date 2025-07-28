@@ -51,6 +51,11 @@ const navTabs: LinkItemType[] = [
     icon: <FontAwesomeIcon icon={faHouse} />,
   },
   {
+    title: 'component.topnav.post',
+    url: '/post',
+    icon: <FontAwesomeIcon icon={faFileLines} />,
+  },
+  {
     title: 'component.topnav.debate',
     url: '/debate',
     icon: <FontAwesomeIcon icon={faComments} />,

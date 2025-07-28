@@ -10,6 +10,7 @@ import '@/assets/css/tailwind.css';
 import BasicLayout from '@/layouts/BasicLayout';
 
 import Landing from '@/pages/Landing';
+import Post from '@/pages/Post';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
 import Register from '@/pages/Register';
@@ -37,7 +38,6 @@ import UpdateSummary from './pages/UpdateSummary';
 import UpdateDebate from './pages/UpdateDebate';
 import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
 import { CheckoutFail } from './components/Payments/CheckoutFail';
-import LandingV2 from './pages/LandingV2';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -124,18 +124,11 @@ function App() {
         <Route path='/checkout/fail' element={<CheckoutFail />}></Route>
       </Route>
       <Route element={<BasicLayout />}>
-        {/* <Route
-          element={
-            <ContentMainLayout>
-              <LandingUpper />
-            </ContentMainLayout>
-          }
-        > */}
-        {/* <Route path='/' element={<Landing />}></Route> */}
-        {/* </Route> */}
-        <Route path='/' element={<LandingV2 />}></Route>
+        <Route path='/' element={<Landing />}></Route>
 
         <Route element={<ContentMainLayout />}>
+          <Route path='/post' element={<Post />}></Route>
+
           <Route path='/search' element={<Search />}></Route>
 
           <Route path='/debate' element={<Debate />}></Route>
