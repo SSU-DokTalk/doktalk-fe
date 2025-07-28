@@ -37,6 +37,7 @@ import UpdateSummary from './pages/UpdateSummary';
 import UpdateDebate from './pages/UpdateDebate';
 import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
 import { CheckoutFail } from './components/Payments/CheckoutFail';
+import LandingV2 from './pages/LandingV2';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -123,15 +124,17 @@ function App() {
         <Route path='/checkout/fail' element={<CheckoutFail />}></Route>
       </Route>
       <Route element={<BasicLayout />}>
-        <Route
+        {/* <Route
           element={
             <ContentMainLayout>
               <LandingUpper />
             </ContentMainLayout>
           }
-        >
-          <Route path='/' element={<Landing />}></Route>
-        </Route>
+        > */}
+        {/* <Route path='/' element={<Landing />}></Route> */}
+        {/* </Route> */}
+        <Route path='/' element={<LandingV2 />}></Route>
+
         <Route element={<ContentMainLayout />}>
           <Route path='/search' element={<Search />}></Route>
 

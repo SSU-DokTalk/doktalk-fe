@@ -12,12 +12,14 @@ import { useNavigate } from 'react-router-dom';
 
 function PopularSummaryCard({
   summary,
+  showInfo = true,
   hasLiked = false,
   setHasLiked,
 }: {
   summary: SummaryType;
+  showInfo?: boolean;
   hasLiked?: boolean;
-  setHasLiked: Dispatch<SetStateAction<number[]>>;
+  setHasLiked?: Dispatch<SetStateAction<number[]>>;
 }) {
   const navigate = useNavigate();
 
@@ -25,14 +27,14 @@ function PopularSummaryCard({
     // Like API 호출
     axios.post(`/api/summary/${summary.id}/like`).then(() => {
       // 좋아요 성공
-      setHasLiked((prv) => prv.concat([summary.id]));
+      setHasLiked?.((prv) => prv.concat([summary.id]));
       summary.likes_num++;
     });
   };
 
   const doUnlike = () => {
     axios.delete(`/api/summary/${summary.id}/like`).then(() => {
-      setHasLiked((prv) => prv.filter((val) => val !== summary.id));
+      setHasLiked?.((prv) => prv.filter((val) => val !== summary.id));
       summary.likes_num--;
     });
   };
@@ -51,34 +53,36 @@ function PopularSummaryCard({
       >
         {summary.free_content}
       </div>
-      <div className='info-container'>
-        <div className='user-info'>
-          <ProfileIcon profile={summary.user.profile} size={15} />
-          <div className='user-name'>{summary.user.name}</div>
-        </div>
-        <div className='additional-info'>
-          <div className='like-container'>
-            {hasLiked ? (
-              <FontAwesomeIcon
-                icon={faHeartSolid}
-                onClick={doUnlike}
-                className='like-icon liked'
-              />
-            ) : (
-              <FontAwesomeIcon
-                icon={faHeartRegular}
-                onClick={doLike}
-                className='like-icon'
-              />
-            )}
-            <div className='like-text'>{summary.likes_num}</div>
+      {showInfo && (
+        <div className='info-container'>
+          <div className='user-info'>
+            <ProfileIcon profile={summary.user.profile} size={15} />
+            <div className='user-name'>{summary.user.name}</div>
           </div>
-          <div className='comment-container'>
-            <FontAwesomeIcon icon={faComment} />
-            <div className='comment-text'>{summary.comments_num}</div>
+          <div className='additional-info'>
+            <div className='like-container'>
+              {hasLiked ? (
+                <FontAwesomeIcon
+                  icon={faHeartSolid}
+                  onClick={doUnlike}
+                  className='like-icon liked'
+                />
+              ) : (
+                <FontAwesomeIcon
+                  icon={faHeartRegular}
+                  onClick={doLike}
+                  className='like-icon'
+                />
+              )}
+              <div className='like-text'>{summary.likes_num}</div>
+            </div>
+            <div className='comment-container'>
+              <FontAwesomeIcon icon={faComment} />
+              <div className='comment-text'>{summary.comments_num}</div>
+            </div>
           </div>
         </div>
-      </div>
+      )}
     </div>
   );
 }
