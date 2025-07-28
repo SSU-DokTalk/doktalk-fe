@@ -1,32 +1,24 @@
 import { useEffect, useState } from 'react';
 
-import InfiniteScroll from '@/components/base/InfiniteScroll';
 import { PostType, SummaryType } from '@/types/data';
 import { useAppSelector } from '@/stores/hooks';
 import { selectUser } from '@/stores/user';
-import WritePostCard from '@/components/card/WritePostCard';
-import WritePostFloatingButton from '@/components/floating/WritePostFloatingButton';
 import PopularSummaryCard from '../components/card/PopularSummaryCard';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
 import SimplePostCard from '@/components/card/SimplePostCard';
-import LandingUpper from '@/components/section/LandingUpper';
 import { DebateType } from '@/types/data';
 import { DUMMY_DEBATES } from '@/common/dummy_data';
-import Carousel from '@/components/carousel/Carousel';
-import { isMd } from '@/functions/breakpoint';
-import CarouselDebateCard from '@/components/card/CarouselDebateCard';
 
 function Landing() {
-  const [debates, setDebates] = useState<DebateType[]>(DUMMY_DEBATES);
+  const [debates, _] = useState<DebateType[]>(DUMMY_DEBATES);
 
   const [posts, setPosts] = useState<PostType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
   const [popularSummaries, setPopularSummaries] = useState<SummaryType[]>([]);
-  const [popularSummaryLikes, setPopularSummaryLikes] = useState<number[]>([]);
   const [isPopularSummaryLoaded, setIsPopularSummaryLoaded] =
     useState<boolean>(false);
 
@@ -61,24 +53,6 @@ function Landing() {
         .then(async (res) => {
           let { data: items }: { data: SummaryType[] } = res;
           setPopularSummaries(items);
-
-          if (user.id == 0) return;
-
-          await axios
-            .get(
-              `/api/summarys/like?${items
-                .map((item) => 'ids=' + item.id)
-                .join('&')}`
-            )
-            .then(
-              (res) => {
-                let { data: itemLikes }: { data: number[] } = res;
-                setPopularSummaryLikes((prev) => [...prev, ...itemLikes]);
-              },
-              () => {
-                setPopularSummaryLikes(new Array(items.length).fill(false));
-              }
-            );
         })
         .finally(() => {
           setIsPopularSummaryLoaded(true);

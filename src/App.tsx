@@ -23,7 +23,6 @@ import { useAppDispatch, useAppSelector } from './stores/hooks';
 import { selectUser, setUser } from './stores/user';
 import cookie from 'react-cookies';
 import ContentMainLayout from './layouts/ContentMainLayout';
-import LandingUpper from './components/section/LandingUpper';
 import Debate from './pages/Debate';
 import Search from './pages/Search';
 import CircularProgress from '@mui/material/CircularProgress';

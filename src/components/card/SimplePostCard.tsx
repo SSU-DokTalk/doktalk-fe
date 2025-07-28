@@ -1,4 +1,3 @@
-import React from 'react';
 import Image from '@/components/base/Image';
 import { useNavigate } from 'react-router-dom';
 

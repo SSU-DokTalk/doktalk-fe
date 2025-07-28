@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 import { updateGlobalState } from '@/stores/globalStates';
 import { useAppDispatch } from '@/stores/hooks';
 import { LeftPanel } from '@/components/panel/sidePanel';
-import ChatbotFloatingButton from '@/components/floating/ChatbotFloatingButton';
 
 function ContentMainLayout({ children }: { children?: React.ReactNode }) {
   const dispatch = useAppDispatch();
