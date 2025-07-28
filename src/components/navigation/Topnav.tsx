@@ -346,7 +346,7 @@ function LoginedInfo({
           }}
         >
           <ProfileIcon profile={user.profile} size={38} className='user-icon' />
-          <div className='user-name-container'>
+          <div className='user-name-container shrink-0'>
             <span className='user-name'>{user.name ?? '닉네임'}</span>
             {t('component.topnav.user.postfix')}
             <ArrowDropDown />
