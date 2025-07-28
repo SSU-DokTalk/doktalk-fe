@@ -1,4 +1,5 @@
 import { Dispatch, SetStateAction, useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { Modal } from '@mui/material';
 
@@ -25,6 +26,7 @@ export function CheckoutModal({
   showModal: boolean;
   setShowModal: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
   const [ready, setReady] = useState(false);
   const [widgets, setWidgets] = useState<TossPaymentsWidgets | null>(null);
 
@@ -118,7 +120,7 @@ export function CheckoutModal({
               }
             }}
           >
-            결제하기
+            {t('component.payments.checkout-modal.button')}
           </button>
         </div>
       </div>

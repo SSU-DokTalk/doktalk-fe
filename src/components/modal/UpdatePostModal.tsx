@@ -94,7 +94,7 @@ function UpdatePostModal({
           <div className='post-title-container'>
             <input
               type='text'
-              placeholder='제목을 입력해주세요.'
+              placeholder={t('component.modal.update-post.placeholder.title')}
               onChange={(e) => {
                 setPostData({ ...postData, title: e.target.value });
               }}
@@ -108,14 +108,14 @@ function UpdatePostModal({
               uploadedFiles={uploadedFiles}
               setUploadedFiles={setUploadedFiles}
               accept={ACCEPTABLE.join()}
-              buttonText='사진 추가'
+              buttonText={t('component.modal.update-post.button.add-photo')}
               buttonIcon={faImage}
               previewSize={102}
             />
           </div>
           <div className='post-content-container'>
             <textarea
-              placeholder='나누고 싶은 이야기를 적어주세요.'
+              placeholder={t('component.modal.update-post.placeholder.content')}
               className='post-content'
               value={postData.content}
               onChange={(e) => {
@@ -125,7 +125,7 @@ function UpdatePostModal({
           </div>
           <div className='button-container'>
             <button className='post-button' onClick={doUpdate}>
-              수정 완료
+              {t('component.modal.update-post.button.submit')}
             </button>
           </div>
         </div>

@@ -87,15 +87,17 @@ function UploadFile({
       <div className='error-message' style={{ color: 'red' }}>
         {!hasTooLargeFile &&
           inherentHasTooLargeFile &&
-          `파일은 최대 ${Math.trunc(
-            maxSize / 1024 / 1024
-          )}MB까지만 업로드 가능합니다`}
+          t('component.base.upload-file.error.too-large', {
+            size: Math.trunc(maxSize / 1024 / 1024),
+          })}
         {!hasUnacceptableFile &&
           inherentHasUnacceptableFile &&
-          `파일은 ${accept
-            .split(',')
-            .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
-            .join(', ')} 형식만 업로드 가능합니다`}
+          t('component.base.upload-file.error.unacceptable', {
+            types: accept
+              .split(',')
+              .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
+              .join(', '),
+          })}
       </div>
       {children ? (
         React.cloneElement(children, {

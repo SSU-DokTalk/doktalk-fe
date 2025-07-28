@@ -1,4 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { useTranslation } from 'react-i18next';
 
 import { CheckoutButton } from './CheckoutButton';
 import { CheckoutAmount, CheckoutData } from './CheckoutType';
@@ -16,6 +17,8 @@ export function CheckoutContainer({
   checkoutData: CheckoutData;
   tmp: Object;
 }) {
+  const { t } = useTranslation();
+
   return (
     <div className='payment__container'>
       <pre className='content__text charged-content  whitespace-pre-wrap break-words'>
@@ -23,13 +26,13 @@ export function CheckoutContainer({
       </pre>
       <div className='payment__box '>
         <p className='payment__box__title'>
-          이어서 읽으시려면 결제가 필요합니다.
+          {t('component.payments.checkout-container.message')}
         </p>
 
         <div className='payment__box__info'>
           <button className='box into-cart'>
             <FontAwesomeIcon icon={faCartPlus} />
-            {''} 찜
+            {''} {t('component.payments.checkout-container.wishlist')}
           </button>
           <div className='box purchase'>
             <span className='price'>

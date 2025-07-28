@@ -55,7 +55,7 @@ function BookSearchDropdown({
             <input
               id='book'
               type='text'
-              placeholder='토론할 도서를 검색해주세요'
+              placeholder={t('component.dropdown.book-search.placeholder')}
               value={bookQuery}
               onClick={(event) => {
                 setAnchorEl(event.currentTarget);

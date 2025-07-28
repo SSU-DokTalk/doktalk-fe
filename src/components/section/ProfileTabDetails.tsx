@@ -299,7 +299,9 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
         {!hasLoadedMyBook ? (
           <div>
             <CircularProgress className='loading-spinner' />
-            <span className='visually-hidden'>Loading...</span>
+            <span className='visually-hidden'>
+              {t('component.base.infinite-scroll.loading')}
+            </span>
           </div>
         ) : myBooks.length === 0 ? (
           <div className='no-item'>
@@ -339,7 +341,9 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
         {!hasLoadedPurchaseSummary ? (
           <div>
             <CircularProgress className='loading-spinner' />
-            <span className='visually-hidden'>Loading...</span>
+            <span className='visually-hidden'>
+              {t('component.base.infinite-scroll.loading')}
+            </span>
           </div>
         ) : purchasedSummaries.length === 0 ? (
           <div className='no-item'>

@@ -106,7 +106,7 @@ function WritePostModal({
           <div className='post-title-container'>
             <input
               type='text'
-              placeholder='제목을 입력해주세요.'
+              placeholder={t('component.modal.write-post.placeholder.title')}
               onChange={(e) => {
                 setPostData({ ...postData, title: e.target.value });
               }}
@@ -118,14 +118,14 @@ function WritePostModal({
             <UploadFiles
               setFiles={setFiles}
               accept={ACCEPTABLE.join()}
-              buttonText='사진 추가'
+              buttonText={t('component.modal.write-post.button.add-photo')}
               buttonIcon={faImage}
               previewSize={102}
             />
           </div>
           <div className='post-content-container'>
             <textarea
-              placeholder='나누고 싶은 이야기를 적어주세요.'
+              placeholder={t('component.modal.write-post.placeholder.content')}
               className='post-content'
               value={postData.content}
               onChange={(e) => {

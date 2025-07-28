@@ -41,7 +41,7 @@ function CategoryDropdown({
           >
             <div className='category-container text-base! md:text-lg!'>
               {data.category == 0
-                ? '토론 주제의 카테고리를 선택해주세요'
+                ? t('component.dropdown.category-chip.placeholder')
                 : getCategoryFromNumber(data.category).map(
                     (category, index) => {
                       return (

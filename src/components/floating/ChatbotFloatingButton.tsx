@@ -8,6 +8,7 @@ import {
   faTimes,
   faRobot,
 } from '@fortawesome/free-solid-svg-icons';
+import { useTranslation } from 'react-i18next';
 
 /**
  * @interface Message
@@ -34,9 +35,10 @@ const SlideTransition = React.forwardRef(function Transition(
  * @returns {JSX.Element} 개선된 챗봇 컴포넌트
  */
 const ChatbotFloatingButton = (): JSX.Element => {
+  const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: '아쉽게도 아직은 테스트중이라 동작하지 않아요', sender: 'ai' },
+    { text: t('component.floating.chatbot.test-message'), sender: 'ai' },
     // { text: '안녕하세요! 무엇이든 물어보세요 👋', sender: 'ai' },
   ]);
   const [inputValue, setInputValue] = useState<string>('');
@@ -44,9 +46,9 @@ const ChatbotFloatingButton = (): JSX.Element => {
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
   const examplePrompts: string[] = [
-    '뭐하는 사이트야?',
-    '넌 뭘 할 수 있어?',
-    '추천하는 책 있어?',
+    t('component.floating.chatbot.prompt1'),
+    t('component.floating.chatbot.prompt2'),
+    t('component.floating.chatbot.prompt3'),
   ];
 
   const scrollToBottom = (): void => {
@@ -77,7 +79,7 @@ const ChatbotFloatingButton = (): JSX.Element => {
       // TODO: Gemini API 호출 로직으로 교체
       setTimeout(() => {
         const aiMessage: Message = {
-          text: '아직 지원되지 않습니다 ㅠㅠ',
+          text: t('component.floating.chatbot.not-supported'),
           sender: 'ai',
         };
         setMessages((prev) => [...prev, aiMessage]);
@@ -91,7 +93,7 @@ const ChatbotFloatingButton = (): JSX.Element => {
       <button
         onClick={handleToggleChat}
         className='fixed bottom-20 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-brand1 text-white shadow-xl transition-transform duration-300 ease-in-out hover:scale-110 md:bottom-10 md:right-10'
-        aria-label='채팅 열기'
+        aria-label={t('component.floating.chatbot.aria.open-chat')}
       >
         <FontAwesomeIcon icon={faRobot} size='2x' />
       </button>
@@ -135,7 +137,7 @@ const ChatbotFloatingButton = (): JSX.Element => {
             <FontAwesomeIcon icon={faRobot} size='2x' />
             <p className='text-xs opacity-90'>DokTalk AI</p>
             <IconButton
-              aria-label='채팅 닫기'
+              aria-label={t('component.floating.chatbot.aria.close-chat')}
               onClick={handleToggleChat}
               sx={{
                 position: 'absolute',
@@ -172,7 +174,7 @@ const ChatbotFloatingButton = (): JSX.Element => {
           {/* ✨ 예시 질문 영역 추가 */}
           <div className='border-t border-gray-200 bg-white px-4! pt-3! pb-1!'>
             <p className='text-center text-xs text-gray-500 mb-2!'>
-              이렇게 물어보세요!
+              {t('component.floating.chatbot.ask-like-this')}
             </p>
             <div className='flex flex-wrap justify-center gap-2'>
               {examplePrompts.map((prompt, i) => (
@@ -197,14 +199,14 @@ const ChatbotFloatingButton = (): JSX.Element => {
                 type='text'
                 value={inputValue}
                 onChange={(e) => setInputValue(e.target.value)}
-                placeholder='메시지를 입력해주세요...'
+                placeholder={t('component.floating.chatbot.placeholder')}
                 className='flex-1 rounded-full border-gray-300 bg-gray-50 px-5 py-3 focus:border-brand1/50 focus:outline-none focus:ring-2 focus:ring-brand1/50'
-                aria-label='채팅 입력'
+                aria-label={t('component.floating.chatbot.aria.input')}
               />
               <button
                 type='submit'
                 className='flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-full bg-brand1 text-white transition-colors duration-200 hover:bg-brand1/90 focus:outline-none focus:ring-4 focus:ring-brand1/50'
-                aria-label='메시지 전송'
+                aria-label={t('component.floating.chatbot.aria.send')}
               >
                 <FontAwesomeIcon icon={faPaperPlane} />
               </button>

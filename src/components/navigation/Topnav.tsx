@@ -87,23 +87,6 @@ const dropdownItems: LinkItemType[] = [
   },
 ];
 
-const languageDropdownItems: {
-  name: string;
-  value: string;
-  icon: any;
-}[] = [
-  {
-    name: '한국어',
-    value: 'kr',
-    icon: <KR className='lang-menu-icon' />,
-  },
-  {
-    name: 'English',
-    value: 'us',
-    icon: <US className='lang-menu-icon' />,
-  },
-];
-
 function Topnav() {
   const currentTab = useLocation();
   const user = useAppSelector(selectUser);
@@ -114,6 +97,24 @@ function Topnav() {
   const open = Boolean(anchorEl);
 
   const { t } = useTranslation();
+
+  const languageDropdownItems: {
+    name: string;
+    value: string;
+    icon: any;
+  }[] = [
+    {
+      name: t('component.topnav.language.korean'),
+      value: 'kr',
+      icon: <KR className='lang-menu-icon' />,
+    },
+    {
+      name: t('component.topnav.language.english'),
+      value: 'us',
+      icon: <US className='lang-menu-icon' />,
+    },
+  ];
+
   const changeLanguage = (item: { name: string; value: string }) => {
     localStorage.setItem('lang', item.value);
     i18n.changeLanguage(item.value);

@@ -42,7 +42,22 @@
   "component": {
     "base": {
       "upload-file": {
-        "attach": "Attach File"
+        "attach": "Attach File",
+        "error": {
+          "too-large": "File must be under {{size}}MB",
+          "unacceptable": "Only {{types}} file formats are allowed"
+        }
+      },
+      "upload-files": {
+        "error": {
+          "too-many": "Maximum {{limit}} files can be uploaded.",
+          "too-large": "Each file must be under {{size}}MB.",
+          "unacceptable": "Only {{types}} files can be uploaded."
+        }
+      },
+      "infinite-scroll": {
+        "loading": "Loading...",
+        "no-item": "No items yet"
       }
     },
     "floating": {
@@ -57,6 +72,21 @@
         "shopping-cart": "Shopping Cart",
         "debate": "Participating Discussion",
         "library": "Library"
+      },
+      "chatbot": {
+        "test-message": "Hello! Ask me anything 👋",
+        "not-supported": "Sorry, the chatbot feature is still in development. Please wait a little longer! 🙏",
+        "ask-like-this": "Try asking like this!",
+        "placeholder": "Type a message...",
+        "prompt1": "What was the most impressive part of this book?",
+        "prompt2": "What's the core message the author wants to convey?",
+        "prompt3": "Can you recommend other books on similar topics?",
+        "aria": {
+          "open-chat": "Open AI chatbot",
+          "close-chat": "Close chatbot",
+          "input": "Type message",
+          "send": "Send message"
+        }
       }
     },
     "topnav": {
@@ -76,6 +106,10 @@
         "my-activity": "My Activity",
         "settings": "Settings",
         "logout": "Logout"
+      },
+      "language": {
+        "korean": "한국어",
+        "english": "English"
       },
       "register": "Register",
       "login": "Login"
@@ -209,7 +243,12 @@
       },
       "write-post": {
         "title": "Write Post",
+        "placeholder": {
+          "title": "Enter title",
+          "content": "Enter content"
+        },
         "button": {
+          "add-photo": "Add Photo",
           "temp-save": "Save Draft",
           "submit": "Publish"
         }
@@ -238,6 +277,14 @@
         "title": "Payment Failed",
         "error-code": "Error Code",
         "fail-reason": "Failure Reason"
+      },
+      "checkout-button": "Pay →",
+      "checkout-modal": {
+        "button": "Pay"
+      },
+      "checkout-container": {
+        "message": "Payment required to continue reading.",
+        "wishlist": "Wishlist"
       }
     }
   },

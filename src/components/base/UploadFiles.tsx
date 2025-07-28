@@ -17,6 +17,7 @@ import {
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faX, faLink, IconDefinition } from '@fortawesome/free-solid-svg-icons';
 import { FileType } from '@/types/data';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 파일 업로드 및 미리보기
@@ -42,7 +43,7 @@ function UploadFiles({
   setFiles,
   uploadedFiles, // update시 이미 서버에 저장된 파일들을 다루기 위한 param
   setUploadedFiles,
-  buttonText = '파일 첨부',
+  buttonText,
   buttonIcon = faLink,
   buttonIconImage = undefined,
   accept = ACCEPTABLE.join(),
@@ -63,6 +64,7 @@ function UploadFiles({
   previewSize?: number;
   itemMargin?: number;
 }) {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [hasTooManyFiles, setHasTooManyFiles] = useState<boolean>(false);
   const [hasTooLargeFile, setHasTooLargeFile] = useState<boolean>(false);
@@ -181,7 +183,7 @@ function UploadFiles({
         className='upload-button'
         onClick={() => inputRef.current?.click()}
       >
-        <span>{buttonText}</span>
+        <span>{buttonText || t('component.base.upload-file.attach')}</span>
         {buttonIconImage ? (
           <img
             src={buttonIconImage}
@@ -194,22 +196,24 @@ function UploadFiles({
       </button>
       {hasTooManyFiles && (
         <div className='input-alert'>
-          파일은 최대 {limit}개까지 업로드 가능합니다.
+          {t('component.base.upload-files.error.too-many', { limit })}
         </div>
       )}
       {hasTooLargeFile && (
         <div className='input-alert'>
-          각 파일은 최대 {Math.trunc(maxSize / 1024 / 1024)}MB까지 업로드
-          가능합니다.
+          {t('component.base.upload-files.error.too-large', {
+            size: Math.trunc(maxSize / 1024 / 1024),
+          })}
         </div>
       )}
       {hasUnacceptableFile && (
         <div className='input-alert'>
-          {accept
-            .split(',')
-            .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
-            .join(', ')}{' '}
-          파일만 업로드 가능합니다.
+          {t('component.base.upload-files.error.unacceptable', {
+            types: accept
+              .split(',')
+              .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
+              .join(', '),
+          })}
         </div>
       )}
       <div className='preview-container'>

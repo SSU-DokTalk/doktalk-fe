@@ -1,5 +1,6 @@
 import Image from '@/components/base/Image';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function SimpleCard({
   title,
@@ -18,6 +19,7 @@ function SimpleCard({
   height?: string;
   imageHeight?: string;
 }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   return (
@@ -41,7 +43,7 @@ function SimpleCard({
           {title}
         </h2>
         <p className='text-gray-600 mt-2! line-clamp-1'>
-          {content || '내용이 없습니다.'}
+          {content || t('component.card.simple-post.no-content')}
         </p>
       </div>
     </div>
