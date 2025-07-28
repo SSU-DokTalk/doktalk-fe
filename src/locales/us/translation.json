@@ -67,11 +67,11 @@
         "following": "Following",
         "my-activity": "My Activity",
         "likes": "Likes",
-        "post": "My Post",
-        "summary": "My Summary",
-        "shopping-cart": "Shopping Cart",
-        "debate": "Participating Discussion",
-        "library": "Library"
+        "post": "My Posts",
+        "summary": "My Summaries",
+        "shopping-cart": "Saved Books",
+        "debate": "Joined Discussions",
+        "library": "My Library"
       },
       "chatbot": {
         "test-message": "Hello! Ask me anything 👋",
@@ -90,11 +90,11 @@
       }
     },
     "topnav": {
-      "main-page": "Community",
-      "post": "Post",
-      "debate": "Discussion",
-      "summary": "Summary",
-      "search": "Explore",
+      "main-page": "Home",
+      "post": "Posts",
+      "debate": "Discussions",
+      "summary": "Summaries",
+      "search": "Find Books",
       "search-bar": {
         "placeholder": "Find out your interests!"
       },
@@ -112,8 +112,8 @@
         "english": "English",
         "mongolian": "Монгол хэл"
       },
-      "register": "Register",
-      "login": "Login"
+      "register": "Sign up",
+      "login": "Log in"
     },
     "card": {
       "write-post": {
@@ -125,6 +125,9 @@
       "write-debate": {
         "placeholder": "Create a new discussion room!"
       },
+      "post": {
+        "more-comments": "More comments"
+      },
       "comment": {
         "reply": "Reply"
       },
@@ -133,13 +136,13 @@
         "currency": "$"
       },
       "category": {
-        "select": "Select Category",
+        "select": "Category",
         "no-selected": "No category selected."
       },
       "book": {
         "button": {
-          "add-to-library": "Add to Library",
-          "remove-from-library": "Remove from Library",
+          "add-to-library": "Add to My Library",
+          "remove-from-library": "Remove from My Library",
           "in-library-num": "In Library"
         }
       }
@@ -168,7 +171,7 @@
           },
           "user-tab": {
             "post": "Post",
-            "library": "Library"
+            "library": "My Library"
           }
         }
       },
@@ -216,7 +219,7 @@
       },
       "comment": {
         "title": "Comments",
-        "placeholder": "Write a comment",
+        "placeholder": "Add a comment",
         "button": {
           "submit": "Submit"
         }
@@ -293,8 +296,8 @@
     "landing": {
       "title": {
         "post": "Post",
-        "popular-summary": "Popular Summaries",
-        "recommend-prefix": "Recommended Discussion Rooms ",
+        "popular-summary": "Trending Summaries",
+        "recommend-prefix": "Recommended Discussions ",
         "recommend-postfix": "",
         "for-you-prefix": "For ",
         "for-you-postfix": ""
@@ -307,25 +310,25 @@
       "error": "Failed to load data"
     },
     "login": {
-      "email": "email",
-      "password": "password",
-      "login": "Login",
-      "keep-login": "Keep Login",
-      "save-id": "Save ID",
+      "email": "E-mail",
+      "password": "Password",
+      "login": "Log in",
+      "keep-login": "Keep me logged in",
+      "save-id": "Remember Me",
       "find-id": "Find ID",
-      "find-password": "Find Password",
-      "social-login-text": "Social Login",
-      "register": "Register"
+      "find-password": "Forgot Password",
+      "social-login-text": "Log in with Social accounts",
+      "register": "Sign up"
     },
     "debate": {
       "title": {
-        "recommend": "Recommended Discussion Rooms",
-        "popular": "Popular Summaries"
+        "recommend": "Recommended Discussions",
+        "popular": "Trending Summaries"
       },
       "search": {
         "book-title": "Book Title",
         "item-title": "Room Title",
-        "placeholder": "Search for discussion rooms!"
+        "placeholder": "Search for discussions!"
       },
       "sort": {
         "latest": "Latest",
@@ -333,7 +336,7 @@
         "from": "From"
       },
       "button": {
-        "create": "Create"
+        "create": "Start a Discussion"
       },
       "item": {
         "no-debate-item": "There is no discussion item",
@@ -343,7 +346,7 @@
     "summary": {
       "title": {
         "recommend": "Recommended Summaries",
-        "popular": "Popular Discussion Rooms"
+        "popular": "Trending Discussions"
       },
       "search": {
         "book-title": "Book Title",
@@ -355,7 +358,7 @@
         "popular": "Popular"
       },
       "button": {
-        "write": "Write"
+        "write": "Write a Summary"
       },
       "item": {
         "no-summary-item": "There is no summary item",
@@ -367,7 +370,7 @@
         "no-book-item": "No search results found"
       },
       "title": {
-        "page": "Search Books"
+        "page": "Book Search"
       },
       "sort": {
         "latest": "Latest",
@@ -464,7 +467,7 @@
     "register": {
       "welcome": "Welcome to DokTalk, the book discussion community!",
       "form": {
-        "email": "Email",
+        "email": "E-mail",
         "email-required": "Please enter your email",
         "nickname": "Nickname",
         "nickname-required": "Please enter your nickname",
@@ -486,10 +489,10 @@
         "interests": "Select Interests",
         "interests-description": "Selected interests will be used for personalized book recommendations and discussion room matching.",
         "all-agreements": "Agree to All Terms",
-        "agreement1": "(Required) Agreement 1",
-        "agreement2": "(Required) Agreement 2",
-        "agreement3": "(Optional) Agreement 3",
-        "view": "View",
+        "agreement1": "Agree to Terms 1 (Required)",
+        "agreement2": "Agree to Terms 2 (Required)",
+        "agreement3": "Agree to Terms 3 (Optional)",
+        "view": "View Terms",
         "submit": "Sign Up"
       },
       "alerts": {
@@ -504,10 +507,10 @@
         "politics": "Politics",
         "business": "Business / Economics",
         "religion": "Religion",
-        "webtoon": "Webtoon",
+        "webtoon": "Webtoon / Comics",
         "philosophy": "Philosophy",
-        "exhibition": "Concerts / Exhibitions",
-        "self-development": "Self Development"
+        "exhibition": "Performances / Exhibitions",
+        "self-development": "Personal Development"
       }
     },
     "settings": {

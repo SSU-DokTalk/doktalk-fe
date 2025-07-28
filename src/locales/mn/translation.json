@@ -125,6 +125,9 @@
       "write-debate": {
         "placeholder": "Шинэ хэлэлцүүлгийн өрөө үүсгээрэй!"
       },
+      "post": {
+        "more-comments": "Бусад сэтгэгдэл үзэх"
+      },
       "comment": {
         "reply": "Хариулах"
       },

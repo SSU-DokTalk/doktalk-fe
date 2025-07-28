@@ -12,6 +12,7 @@ import { ACCEPTABLE_IMAGE } from '@/common/variables';
 import axios from 'axios';
 import { Dispatch, SetStateAction } from 'react';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 function PostCard({
   post,
@@ -23,6 +24,7 @@ function PostCard({
   setHasLiked: Dispatch<SetStateAction<number[]>>;
 }) {
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   const doLike = () => {
     // Like API 호출
@@ -114,9 +116,7 @@ function PostCard({
         <div
           className='more-comment'
           onClick={() => navigate(`/post/${post.id}`)}
-        >
-          댓글 더보기
-        </div>
+        ></div>
       </div>
     </div>
   );
