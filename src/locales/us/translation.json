@@ -128,6 +128,9 @@
       "post": {
         "more-comments": "More comments"
       },
+      "simple-post": {
+        "no-content": "No content available."
+      },
       "comment": {
         "reply": "Reply"
       },
@@ -145,6 +148,14 @@
           "remove-from-library": "Remove from My Library",
           "in-library-num": "In Library"
         }
+      }
+    },
+    "dropdown": {
+      "category-chip": {
+        "placeholder": "Please select a discussion topic category"
+      },
+      "book-search": {
+        "placeholder": "Search for books to discuss"
       }
     },
     "section": {
@@ -243,7 +254,14 @@
         }
       },
       "update-post": {
-        "title": "Edit Post"
+        "title": "Edit Post",
+        "placeholder": {
+          "content": "Share your thoughts here."
+        },
+        "button": {
+          "add-photo": "Add Photo",
+          "submit": "Save Changes"
+        }
       },
       "write-post": {
         "title": "Write Post",
@@ -499,6 +517,8 @@
         "validation-required": "Please complete identity verification",
         "interests-required": "Please select your interests",
         "agreements-required": "Please agree to the required terms",
+        "agreement1-error": "Please agree to Terms 1",
+        "agreement2-error": "Please agree to Terms 2",
         "password-length": "Password must be at least 8 characters",
         "password-mismatch": "Passwords do not match",
         "register-error": "An error occurred during registration."

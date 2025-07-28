@@ -128,6 +128,9 @@
       "post": {
         "more-comments": "Бусад сэтгэгдэл үзэх"
       },
+      "simple-post": {
+        "no-content": "Агуулга байхгүй байна."
+      },
       "comment": {
         "reply": "Хариулах"
       },
@@ -145,6 +148,14 @@
           "remove-from-library": "Номын сангаас устгах",
           "in-library-num": "Хадгалсан тоо"
         }
+      }
+    },
+    "dropdown": {
+      "category-chip": {
+        "placeholder": "Хэлэлцүүлгийн сэдвийн ангилал сонгоно уу"
+      },
+      "book-search": {
+        "placeholder": "Хэлэлцүүлэх номыг хайна уу"
       }
     },
     "section": {
@@ -243,7 +254,14 @@
         }
       },
       "update-post": {
-        "title": "Нийтлэл засах"
+        "title": "Нийтлэл засах",
+        "placeholder": {
+          "content": "Хуваалцахыг хүсэж буй үгээ энд бичнэ үү."
+        },
+        "button": {
+          "add-photo": "Зураг нэмэх",
+          "submit": "Засварыг хадгалах"
+        }
       },
       "write-post": {
         "title": "Нийтлэл бичих",
@@ -499,6 +517,8 @@
         "validation-required": "Хувийн баталгаажуулалт хийнэ үү",
         "interests-required": "Сонирхлын салбар сонгоно уу",
         "agreements-required": "Заавал байх гэрээнд зөвшөөрнө үү",
+        "agreement1-error": "Гэрээ 1-д зөвшөөрнө үү",
+        "agreement2-error": "Гэрээ 2-д зөвшөөрнө үү",
         "password-length": "Нууц үг дор хаяж 8 тэмдэгт байх ёстой",
         "password-mismatch": "Нууц үг таарахгүй байна",
         "register-error": "Бүртгүүлэх явцад алдаа гарлаа."

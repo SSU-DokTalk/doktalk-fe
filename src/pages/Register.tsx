@@ -290,7 +290,7 @@ const Register: React.FC = () => {
                 type='checkbox'
                 {...register('agreement1', {
                   validate: (val) =>
-                    val === true || 'agreement1 에 동의해주세요',
+                    val === true || t('page.register.alerts.agreement1-error'),
                 })}
               />
               <label className='ml-2!'>
@@ -307,7 +307,7 @@ const Register: React.FC = () => {
                 type='checkbox'
                 {...register('agreement2', {
                   validate: (val) =>
-                    val === true || 'agreement2 에 동의해주세요',
+                    val === true || t('page.register.alerts.agreement2-error'),
                 })}
               />
               <label className='ml-2!'>
