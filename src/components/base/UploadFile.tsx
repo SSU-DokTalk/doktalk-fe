@@ -9,6 +9,7 @@ import React, {
   useState,
 } from 'react';
 import Chain from '@/assets/images/chain.svg';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 파일 업로드 버튼
@@ -42,6 +43,7 @@ function UploadFile({
   hasUnacceptableFile?: boolean;
   setHasUnacceptableFile?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
   const inputRef = useRef<HTMLInputElement | null>(null);
   const [inherentHasTooLargeFile, setInherentHasTooLargeFile] =
     useState<boolean>(false);
@@ -85,15 +87,17 @@ function UploadFile({
       <div className='error-message' style={{ color: 'red' }}>
         {!hasTooLargeFile &&
           inherentHasTooLargeFile &&
-          `파일은 최대 ${Math.trunc(
-            maxSize / 1024 / 1024
-          )}MB까지만 업로드 가능합니다`}
+          t('component.base.upload-file.error.too-large', {
+            size: Math.trunc(maxSize / 1024 / 1024),
+          })}
         {!hasUnacceptableFile &&
           inherentHasUnacceptableFile &&
-          `파일은 ${accept
-            .split(',')
-            .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
-            .join(', ')} 형식만 업로드 가능합니다`}
+          t('component.base.upload-file.error.unacceptable', {
+            types: accept
+              .split(',')
+              .reduce<string[]>((acc, cur) => acc.concat(cur.trim()), [])
+              .join(', '),
+          })}
       </div>
       {children ? (
         React.cloneElement(children, {
@@ -104,7 +108,8 @@ function UploadFile({
           className='upload-button'
           onClick={() => inputRef.current?.click()}
         >
-          <span>파일 첨부</span> <img src={Chain} alt='attach file' />
+          <span>{t('component.base.upload-file.attach')}</span>{' '}
+          <img src={Chain} alt='attach file' />
         </button>
       )}
     </div>

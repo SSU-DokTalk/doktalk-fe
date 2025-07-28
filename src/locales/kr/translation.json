@@ -40,6 +40,26 @@
     }
   },
   "component": {
+    "base": {
+      "upload-file": {
+        "attach": "파일 첨부",
+        "error": {
+          "too-large": "파일은 최대 {{size}}MB까지만 업로드 가능합니다",
+          "unacceptable": "파일은 {{types}} 형식만 업로드 가능합니다"
+        }
+      },
+      "upload-files": {
+        "error": {
+          "too-many": "파일은 최대 {{limit}}개까지 업로드 가능합니다.",
+          "too-large": "각 파일은 최대 {{size}}MB까지 업로드 가능합니다.",
+          "unacceptable": "{{types}} 파일만 업로드 가능합니다."
+        }
+      },
+      "infinite-scroll": {
+        "loading": "로딩 중...",
+        "no-item": "아직 항목이 없습니다"
+      }
+    },
     "floating": {
       "text": {
         "login": "로그인",
@@ -52,6 +72,21 @@
         "shopping-cart": "찜 내역",
         "debate": "참여중인 토론방",
         "library": "내 서재"
+      },
+      "chatbot": {
+        "test-message": "안녕하세요! 무엇이든 물어보세요 👋",
+        "not-supported": "죄송합니다. 아직 챗봇 기능을 개발 중입니다. 조금만 기다려주세요! 🙏",
+        "ask-like-this": "이렇게 물어보세요!",
+        "placeholder": "메시지를 입력하세요...",
+        "prompt1": "이 책에서 가장 인상 깊었던 부분은?",
+        "prompt2": "작가가 전하고 싶은 핵심 메시지는 뭘까?",
+        "prompt3": "비슷한 주제의 다른 책도 추천해줘!",
+        "aria": {
+          "open-chat": "AI 챗봇 열기",
+          "close-chat": "챗봇 닫기",
+          "input": "메시지 입력",
+          "send": "메시지 보내기"
+        }
       }
     },
     "topnav": {
@@ -72,6 +107,11 @@
         "settings": "설정",
         "logout": "로그아웃"
       },
+      "language": {
+        "korean": "한국어",
+        "english": "English",
+        "mongolian": "Монгол хэл"
+      },
       "register": "회원가입",
       "login": "로그인"
     },
@@ -79,12 +119,43 @@
       "write-post": {
         "placeholder": "게시글을 작성해보세요!"
       },
+      "write-summary": {
+        "placeholder": "요약을 작성해보세요!"
+      },
+      "write-debate": {
+        "placeholder": "새로운 토론방을 생성해보세요!"
+      },
+      "post": {
+        "more-comments": "댓글 더보기"
+      },
+      "simple-post": {
+        "no-content": "내용이 없습니다."
+      },
+      "comment": {
+        "reply": "답글"
+      },
+      "payment": {
+        "cancelled": "취소",
+        "currency": "원"
+      },
+      "category": {
+        "select": "카테고리 선택",
+        "no-selected": "선택한 카테고리가 없습니다."
+      },
       "book": {
         "button": {
           "add-to-library": "내 서재에 담기",
           "remove-from-library": "서재에서 삭제",
           "in-library-num": "담은 수"
         }
+      }
+    },
+    "dropdown": {
+      "category-chip": {
+        "placeholder": "토론 주제의 카테고리를 선택해주세요"
+      },
+      "book-search": {
+        "placeholder": "토론할 도서를 검색해주세요"
       }
     },
     "section": {
@@ -122,6 +193,7 @@
           "no-library-item": "서재에 담긴 도서가 없습니다",
           "no-debate-item": "참여중인 토론방이 없습니다",
           "no-payment-item": "결제 내역이 없습니다",
+          "no-payment-date": "해당 날짜의 결제 내역이 없습니다",
           "no-book-item": "읽고 있는 책이 없습니다",
           "currently-reading-book-prefix": "내가 읽고 있는 책",
           "currently-reading-book-postfix": "개",
@@ -151,6 +223,90 @@
             "12": "12월"
           }
         }
+      },
+      "settings": {
+        "privacy-scope": "공개 범위",
+        "my-activity": "내 활동"
+      },
+      "comment": {
+        "title": "댓글",
+        "placeholder": "댓글을 입력해주세요",
+        "button": {
+          "submit": "등록"
+        }
+      }
+    },
+    "modal": {
+      "edit-profile": {
+        "title": "프로필 편집",
+        "button": {
+          "image-upload": "이미지 업로드",
+          "image-remove": "이미지 제거",
+          "submit": "편집 완료"
+        },
+        "label": {
+          "nickname": "닉네임",
+          "introduction": "자기소개"
+        },
+        "placeholder": {
+          "nickname": "(필수) 닉네임을 입력해주세요.",
+          "introduction": "회원님에 대해 소개해주세요."
+        }
+      },
+      "update-post": {
+        "title": "게시글 수정",
+        "placeholder": {
+          "content": "나누고 싶은 이야기를 적어주세요."
+        },
+        "button": {
+          "add-photo": "사진 추가",
+          "submit": "수정 완료"
+        }
+      },
+      "write-post": {
+        "title": "게시글 작성",
+        "placeholder": {
+          "title": "제목을 입력해주세요",
+          "content": "내용을 입력해주세요"
+        },
+        "button": {
+          "add-photo": "사진 추가",
+          "temp-save": "임시 저장",
+          "submit": "작성 완료"
+        }
+      },
+      "friend-list": {
+        "button": {
+          "delete": "삭제"
+        }
+      }
+    },
+    "navigation": {
+      "topnav": {
+        "explore": "탐색",
+        "nickname-fallback": "닉네임",
+        "language": {
+          "korean": "한국어"
+        }
+      }
+    },
+    "payments": {
+      "checkout-success": {
+        "title": "결제 성공",
+        "order-id": "주문번호"
+      },
+      "checkout-fail": {
+        "title": "결제 실패",
+        "error-code": "에러 코드",
+        "fail-reason": "실패 사유"
+      },
+      "checkout-button": "결제하기 →",
+      "checkout-modal": {
+        "button": "결제하기"
+      },
+      "checkout-container": {
+        "message": "이어서 읽으시려면 결제가 필요합니다.",
+        "wishlist": "찜"
       }
     }
   },
@@ -165,9 +321,11 @@
         "for-you-postfix": "님을 위한 "
       },
       "item": {
-        "no-post-item": "아직 작성된 게시글이 없습니다",
+        "no-post-item": "표시할 게시글이 없습니다",
         "no-summary-item": "아직 작성된 요약이 없습니다"
-      }
+      },
+      "loading": "로딩 중...",
+      "error": "데이터를 불러오는 데 실패했습니다"
     },
     "login": {
       "email": "이메일",
@@ -239,6 +397,155 @@
       "search": {
         "placeholder": "관심 도서를 검색해보세요!"
       }
+    },
+    "create-debate": {
+      "title": "토론방 생성하기",
+      "input": {
+        "title-placeholder": "제목을 입력해주세요",
+        "location-label": "모임 장소",
+        "location-placeholder": "모일 장소를 입력해주세요",
+        "link-label": "온라인 링크",
+        "link-placeholder": "온라인 모임일 경우 참여 링크를 입력해주세요",
+        "link-error": "https://url 형식으로 적어주세요",
+        "meeting-time": "모임 시간",
+        "book-select": "도서 선택",
+        "category": "카테고리",
+        "limit": "인원 제한",
+        "limit-unit": "명",
+        "content-placeholder": "나누고 싶은 이야기를 적어주세요",
+        "price": "가격",
+        "price-placeholder": "가격을 입력해주세요"
+      },
+      "button": {
+        "file-add": "파일 추가",
+        "temp-save": "임시 저장",
+        "submit": "작성 완료"
+      }
+    },
+    "create-summary": {
+      "title": "요약 작성하기",
+      "input": {
+        "title-placeholder": "제목을 입력해주세요.",
+        "book-select": "도서 선택",
+        "category": "카테고리",
+        "free-content-placeholder": "미리보기로 공유하고 싶은 내용을 작성해주세요.",
+        "charged-content-placeholder": "유료로 공유하고 싶은 내용을 작성해주세요.",
+        "price": "가격",
+        "price-placeholder": "가격을 입력해주세요"
+      },
+      "button": {
+        "file-add": "파일 추가",
+        "temp-save": "임시 저장",
+        "submit": "작성 완료"
+      }
+    },
+    "debate-detail": {
+      "button": {
+        "edit": "수정",
+        "delete": "삭제"
+      },
+      "info": {
+        "location": "모임 장소",
+        "link": "온라인 링크",
+        "time": "시간",
+        "category": "카테고리",
+        "book": "지정 도서"
+      },
+      "modal": {
+        "title": "게시글 옵션"
+      },
+      "payment": {
+        "title": "토론방에 참여하시려면 결제가 필요합니다.",
+        "bookmark": "찜",
+        "currency": "원",
+        "already-joined": "토론방에 이미 참가하셨습니다"
+      }
+    },
+    "update-debate": {
+      "title": "토론방 수정하기",
+      "button": {
+        "submit": "수정 완료"
+      }
+    },
+    "update-summary": {
+      "title": "요약 수정하기",
+      "button": {
+        "submit": "수정 완료"
+      }
+    },
+    "post-detail": {
+      "button": {
+        "edit": "수정",
+        "delete": "삭제"
+      },
+      "modal": {
+        "title": "게시글 옵션"
+      }
+    },
+    "register": {
+      "welcome": "독서토론 커뮤니티 독TALK에 오신 것을 환영합니다!",
+      "form": {
+        "email": "이메일",
+        "email-required": "이메일을 입력해주세요",
+        "nickname": "닉네임",
+        "nickname-required": "닉네임을 입력해주세요",
+        "password": "비밀번호",
+        "password-required": "비밀번호를 입력해주세요",
+        "password-min": "비밀번호는 8자 이상이어야 합니다",
+        "password-confirm": "비밀번호 확인",
+        "password-confirm-required": "비밀번호 확인을 입력해주세요",
+        "password-match": "비밀번호가 일치하지 않습니다",
+        "birthdate": "생년월일",
+        "birthdate-required": "생년월일을 입력해주세요",
+        "birthdate-format": "올바른 형식(YYYY-MM-DD)으로 입력해주세요",
+        "gender": "성별",
+        "gender-required": "성별을 선택해주세요",
+        "male": "남자",
+        "female": "여자",
+        "validation": "본인인증",
+        "validation-complete": "본인인증이 완료되었습니다.",
+        "interests": "관심분야 선택",
+        "interests-description": "선택한 관심분야는 개인 맞춤 도서 추천 / 토론방 매칭에 사용됩니다.",
+        "all-agreements": "약관 전체동의",
+        "agreement1": "(필수) 약관 1 동의",
+        "agreement2": "(필수) 약관 2 동의",
+        "agreement3": "(선택) 약관 3 동의",
+        "view": "보기",
+        "submit": "회원가입"
+      },
+      "alerts": {
+        "validation-required": "본인인증을 해주세요",
+        "interests-required": "관심분야를 선택해주세요",
+        "agreements-required": "필수 약관에 동의해주세요",
+        "agreement1-error": "약관 1에 동의해주세요",
+        "agreement2-error": "약관 2에 동의해주세요",
+        "password-length": "비밀번호는 8자 이상이어야 합니다",
+        "password-mismatch": "비밀번호가 일치하지 않습니다",
+        "register-error": "회원가입 중 오류가 발생했습니다."
+      },
+      "interests": {
+        "politics": "정치",
+        "business": "경영 / 경제",
+        "religion": "종교",
+        "webtoon": "웹툰",
+        "philosophy": "철학",
+        "exhibition": "연주회 / 전시회",
+        "self-development": "자기계발"
+      }
+    },
+    "settings": {
+      "privacy": {
+        "title": "공개 범위 수정"
+      },
+      "notifications": {
+        "likes": "좋아요",
+        "comments": "댓글",
+        "notifications": "알림",
+        "page": " 페이지"
+      }
+    },
+    "not-found": {
+      "message": "Page Not Found!"
     }
   }
 }

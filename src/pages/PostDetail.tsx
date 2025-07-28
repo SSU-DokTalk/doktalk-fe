@@ -29,6 +29,7 @@ import {
 } from '@mui/material';
 import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
 import UpdatePostModal from '@/components/modal/UpdatePostModal';
+import { useTranslation } from 'react-i18next';
 
 function PostDetail() {
   const { post_id } = useParams();
@@ -41,6 +42,7 @@ function PostDetail() {
 
   const user = useAppSelector(selectUser);
   const navigate = useNavigate();
+  const { t } = useTranslation();
 
   useEffect(() => {
     axios.get(`/api/post/${post_id}`).then((res) => {
@@ -102,10 +104,10 @@ function PostDetail() {
                     setDidPost={setDidPost}
                   />
                   <button className='edit' onClick={() => setShowModal(true)}>
-                    수정
+                    {t('page.post-detail.button.edit')}
                   </button>
                   <button className='delete' onClick={doDelete}>
-                    삭제
+                    {t('page.post-detail.button.delete')}
                   </button>
                 </div>
                 <div className='for-mobile md:hidden'>
@@ -127,7 +129,9 @@ function PostDetail() {
                   >
                     <Paper className='rounded-t-2xl!'>
                       <hr className='w-15 h-1 mx-auto! my-4! bg-gray-100 border-0 rounded-sm dark:bg-gray-700' />
-                      <p className='text-center'>게시글 옵션</p>
+                      <p className='text-center'>
+                        {t('page.post-detail.modal.title')}
+                      </p>
                       <List>
                         <ListItem>
                           <ListItemButton
@@ -137,7 +141,7 @@ function PostDetail() {
                             <ListItemIcon>
                               <FontAwesomeIcon icon={faPen} />
                             </ListItemIcon>
-                            수정
+                            {t('page.post-detail.button.edit')}
                           </ListItemButton>
                         </ListItem>
                         <ListItem>
@@ -145,7 +149,7 @@ function PostDetail() {
                             <ListItemIcon>
                               <FontAwesomeIcon icon={faTrash} />
                             </ListItemIcon>
-                            삭제
+                            {t('page.post-detail.button.delete')}
                           </ListItemButton>
                         </ListItem>
                       </List>

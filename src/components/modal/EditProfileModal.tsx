@@ -20,6 +20,7 @@ import CloseIcon from '@mui/icons-material/Close';
 import { useAppDispatch, useAppSelector } from '@/stores/hooks';
 import { selectUser, setUser } from '@/stores/user';
 import ProfileIcon from '@/components/base/ProfileIcon';
+import { useTranslation } from 'react-i18next';
 
 function EditProfileModal({
   showModal,
@@ -42,6 +43,7 @@ function EditProfileModal({
   const inputRef = useRef<HTMLInputElement | null>(null);
   const dispatch = useAppDispatch();
   const user = useAppSelector(selectUser);
+  const { t } = useTranslation();
 
   useEffect(() => {
     if (user.id != 0 && showModal) {
@@ -112,7 +114,7 @@ function EditProfileModal({
       fullWidth
       scroll='body'
     >
-      <DialogTitle>프로필 편집</DialogTitle>
+      <DialogTitle>{t('component.modal.edit-profile.title')}</DialogTitle>
       <IconButton
         className='btn-close'
         aria-label='close'
@@ -143,23 +145,27 @@ function EditProfileModal({
               className='profile-image-button image-upload'
               onClick={clickUploadImageButton}
             >
-              이미지 업로드
+              {t('component.modal.edit-profile.button.image-upload')}
             </Button>
             <Button
               className='profile-image-button image-delete'
               onClick={deleteImage}
             >
-              이미지 제거
+              {t('component.modal.edit-profile.button.image-remove')}
             </Button>
           </div>
         </div>
         <div className='user-info-container'>
           <div className='attribute-container'>
-            <div className='attribute'>닉네임</div>
+            <div className='attribute'>
+              {t('component.modal.edit-profile.label.nickname')}
+            </div>
             <input
               className='nickname'
               type='text'
-              placeholder='(필수) 닉네임을 입력해주세요.'
+              placeholder={t(
+                'component.modal.edit-profile.placeholder.nickname'
+              )}
               value={userInfo.name!}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, name: e.target.value })
@@ -168,10 +174,14 @@ function EditProfileModal({
           </div>
 
           <div className='attribute-container'>
-            <div className='attribute'>자기소개</div>
+            <div className='attribute'>
+              {t('component.modal.edit-profile.label.introduction')}
+            </div>
             <textarea
               className='introduction'
-              placeholder='회원님에 대해 소개해주세요.'
+              placeholder={t(
+                'component.modal.edit-profile.placeholder.introduction'
+              )}
               value={userInfo.introduction!}
               onChange={(e) =>
                 setUserInfo({ ...userInfo, introduction: e.target.value })
@@ -182,7 +192,7 @@ function EditProfileModal({
         <div className='submit-button-container'>
           <div className='submit-button-offset' />
           <button className='submit-user-info' onClick={updateUserInfo}>
-            편집 완료
+            {t('component.modal.edit-profile.button.submit')}
           </button>
         </div>
       </DialogContent>

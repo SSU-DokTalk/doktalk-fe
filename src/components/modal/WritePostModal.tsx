@@ -8,6 +8,7 @@ import { ACCEPTABLE } from '@/common/variables';
 import { faImage } from '@fortawesome/free-regular-svg-icons';
 import axios from 'axios';
 import { PostType } from '@/types/data';
+import { useTranslation } from 'react-i18next';
 
 function WritePostModal({
   post,
@@ -22,6 +23,7 @@ function WritePostModal({
   isEdit?: boolean;
   setDidPost?: Dispatch<SetStateAction<boolean>>;
 }) {
+  const { t } = useTranslation();
   const [postData, setPostData] = useState<{
     title: string;
     content: string;
@@ -88,7 +90,7 @@ function WritePostModal({
       scroll='body'
     >
       <DialogTitle>
-        <b>게시글 작성</b>
+        <b>{t('component.modal.write-post.title')}</b>
       </DialogTitle>
       <IconButton
         className='btn-close'
@@ -104,7 +106,7 @@ function WritePostModal({
           <div className='post-title-container'>
             <input
               type='text'
-              placeholder='제목을 입력해주세요.'
+              placeholder={t('component.modal.write-post.placeholder.title')}
               onChange={(e) => {
                 setPostData({ ...postData, title: e.target.value });
               }}
@@ -116,14 +118,14 @@ function WritePostModal({
             <UploadFiles
               setFiles={setFiles}
               accept={ACCEPTABLE.join()}
-              buttonText='사진 추가'
+              buttonText={t('component.modal.write-post.button.add-photo')}
               buttonIcon={faImage}
               previewSize={102}
             />
           </div>
           <div className='post-content-container'>
             <textarea
-              placeholder='나누고 싶은 이야기를 적어주세요.'
+              placeholder={t('component.modal.write-post.placeholder.content')}
               className='post-content'
               value={postData.content}
               onChange={(e) => {
@@ -132,9 +134,11 @@ function WritePostModal({
             />
           </div>
           <div className='button-container'>
-            <button className='temporary-save-button'>임시 저장</button>
+            <button className='temporary-save-button'>
+              {t('component.modal.write-post.button.temp-save')}
+            </button>
             <button className='post-button' onClick={doPost}>
-              작성 완료
+              {t('component.modal.write-post.button.submit')}
             </button>
           </div>
         </div>

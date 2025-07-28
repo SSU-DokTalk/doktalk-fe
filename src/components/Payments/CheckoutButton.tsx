@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 
 import { CheckoutModal } from './CheckoutModal';
 import { CheckoutAmount, CheckoutData, CheckoutKey } from './CheckoutType';
@@ -14,13 +15,14 @@ export function CheckoutButton({
   checkoutData: CheckoutData;
   tmp: Object;
 }) {
+  const { t } = useTranslation();
   const [showModal, setShowModal] = useState<boolean>(false);
 
   return (
     <>
       <div className='checkout-container'>
         <span className='checkout-button' onClick={() => setShowModal(true)}>
-          결제하기 →
+          {t('component.payments.checkout-button')}
         </span>
         <CheckoutModal
           checkoutKey={checkoutKey}

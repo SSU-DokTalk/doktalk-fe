@@ -6,6 +6,7 @@ import axios from 'axios';
 import { useAppSelector } from '@/stores/hooks';
 import { selectUser } from '@/stores/user';
 import InfiniteScroll from '@/components/base/InfiniteScroll';
+import { useTranslation } from 'react-i18next';
 
 function CommentSection({
   itemType,
@@ -24,6 +25,7 @@ function CommentSection({
   commentsApi: string;
   commentLikesApi: string;
 }) {
+  const { t } = useTranslation();
   const [commentData, setCommentData] = useState<string>('');
   const [upperComment, setUpperComment] = useState<number | undefined>(
     undefined
@@ -61,7 +63,9 @@ function CommentSection({
 
   return (
     <div id='comment-section'>
-      <p className='title'>댓글 {total}</p>
+      <p className='title'>
+        {t('component.section.comment.title')} {total}
+      </p>
       <div className='comment-box'>
         <div className='comment-box__upper'>
           <ProfileIcon profile={user.profile} size={34} />
@@ -69,11 +73,13 @@ function CommentSection({
             value={commentData}
             onChange={(e) => setCommentData(e.target.value)}
             className='comment-box__input'
-            placeholder='댓글을 입력해주세요'
+            placeholder={t('component.section.comment.placeholder')}
           />
         </div>
         <div className='comment-box__lower'>
-          <button onClick={doComment}>등록</button>
+          <button onClick={doComment}>
+            {t('component.section.comment.button.submit')}
+          </button>
         </div>
       </div>
       <InfiniteScroll

@@ -4,6 +4,7 @@ import { useEffect, useRef, useState } from 'react';
 import NoItem from '@/assets/images/no-item.svg';
 import { selectUser } from '@/stores/user';
 import { useAppSelector } from '@/stores/hooks';
+import { useTranslation } from 'react-i18next';
 
 /**
  * 무한 스크롤
@@ -51,7 +52,7 @@ function InfiniteScroll({
   afterFetchSuccess = undefined,
   afterFetchFail = undefined,
   hasNoItem = false,
-  hasNoItemMessage = '아직 항목이 없습니다',
+  hasNoItemMessage,
   hasNoItemComponent = undefined,
   condition = true,
   refreshCondition = false,
@@ -82,6 +83,7 @@ function InfiniteScroll({
   dependency?: any[];
   size?: number;
 }) {
+  const { t } = useTranslation();
   const [inherentHasMore, setInherentHasMore] = useState<boolean>(true);
   const [inherentPage, setInherentPage] = useState<number>(1);
 
@@ -192,7 +194,9 @@ function InfiniteScroll({
           }}
         >
           <CircularProgress ref={elementRef} className='loading-spinner' />
-          <span className='visually-hidden'>Loading...</span>
+          <span className='visually-hidden'>
+            {t('component.base.infinite-scroll.loading')}
+          </span>
         </div>
       )}
       {!(hasMore ?? inherentHasMore) &&
@@ -211,7 +215,9 @@ function InfiniteScroll({
             }}
           >
             <img src={NoItem} alt='no item' />
-            <span>{hasNoItemMessage}</span>
+            <span>
+              {hasNoItemMessage || t('component.base.infinite-scroll.no-item')}
+            </span>
           </div>
         ))}
     </>

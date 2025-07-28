@@ -114,9 +114,7 @@ function PostCard({
         <div
           className='more-comment'
           onClick={() => navigate(`/post/${post.id}`)}
-        >
-          댓글 더보기
-        </div>
+        ></div>
       </div>
     </div>
   );

@@ -169,7 +169,9 @@ function PaymentTab({ userProfile }: { userProfile: UserType }) {
         refreshCondition={isCurTimeChanged.current}
         hasNoItemComponent={
           <div className='no-item'>
-            <p className='no-item-message'>해당 날짜의 결제 내역이 없습니다</p>
+            <p className='no-item-message'>
+              {t('component.section.profile-tab-details.item.no-payment-date')}
+            </p>
           </div>
         }
         condition={userProfile && userProfile.id != 0}
@@ -297,7 +299,9 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
         {!hasLoadedMyBook ? (
           <div>
             <CircularProgress className='loading-spinner' />
-            <span className='visually-hidden'>Loading...</span>
+            <span className='visually-hidden'>
+              {t('component.base.infinite-scroll.loading')}
+            </span>
           </div>
         ) : myBooks.length === 0 ? (
           <div className='no-item'>
@@ -337,7 +341,9 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
         {!hasLoadedPurchaseSummary ? (
           <div>
             <CircularProgress className='loading-spinner' />
-            <span className='visually-hidden'>Loading...</span>
+            <span className='visually-hidden'>
+              {t('component.base.infinite-scroll.loading')}
+            </span>
           </div>
         ) : purchasedSummaries.length === 0 ? (
           <div className='no-item'>

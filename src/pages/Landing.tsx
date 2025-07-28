@@ -63,7 +63,7 @@ function Landing() {
   if (loading) {
     return (
       <div className='flex justify-center items-center h-screen'>
-        <p className='text-lg text-gray-700'>로딩 중...</p>
+        <p className='text-lg text-gray-700'>{t('page.landing.loading')}</p>
       </div>
     );
   }
@@ -72,7 +72,7 @@ function Landing() {
     return (
       <div className='flex justify-center items-center h-screen'>
         <p className='text-lg text-red-600'>
-          데이터를 불러오는 데 실패했습니다: {error}
+          {t('page.landing.error')}: {error}
         </p>
       </div>
     );
@@ -114,9 +114,13 @@ function Landing() {
       <div className='flex flex-row md:pl-24! pr-12'>
         <MiddlePanel className='post-container px-4! w-full'>
           <div className='container mx-auto px-4 py-8'>
-            <h1 className='text-3xl! font-bold! text-brand1 mb-6!'>게시글</h1>
+            <h1 className='text-3xl! font-bold! text-brand1 mb-6!'>
+              {t('page.landing.title.post')}
+            </h1>
             {posts.length === 0 ? (
-              <p className='text-gray-600'>표시할 게시글이 없습니다.</p>
+              <p className='text-gray-600'>
+                {t('page.landing.item.no-post-item')}
+              </p>
             ) : (
               <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2'>
                 {posts.map((post) => (

@@ -2,6 +2,7 @@ import i18n from 'i18next';
 import { initReactI18next } from 'react-i18next';
 import translationUS from './us/translation.json';
 import translationKR from './kr/translation.json';
+import translationMN from './mn/translation.json';
 
 const resources = {
   us: {
@@ -9,6 +10,9 @@ const resources = {
   },
   kr: {
     translation: translationKR,
+  },
+  mn: {
+    translation: translationMN,
   },
 };
 

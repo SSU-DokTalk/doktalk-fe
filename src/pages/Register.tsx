@@ -3,6 +3,7 @@
 import React from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 import axios from 'axios';
 
@@ -22,13 +23,13 @@ type FormData = {
 };
 
 const SELECTIONS = [
-  '정치',
-  '경영 / 경제',
-  '종교',
-  '웹툰',
-  '철학',
-  '연주회 / 전시회',
-  '자기계발',
+  'page.register.interests.politics',
+  'page.register.interests.business',
+  'page.register.interests.religion',
+  'page.register.interests.webtoon',
+  'page.register.interests.philosophy',
+  'page.register.interests.exhibition',
+  'page.register.interests.self-development',
 ];
 
 const Register: React.FC = () => {
@@ -57,30 +58,31 @@ const Register: React.FC = () => {
 
   const navigate = useNavigate();
   const password = watch('password');
+  const { t } = useTranslation();
 
   const onSubmit = async (data: FormData) => {
     if (!data.validation) {
-      alert('본인인증을 해주세요');
+      alert(t('page.register.alerts.validation-required'));
       return;
     }
 
     if (data.interests.length === 0) {
-      alert('관심분야를 선택해주세요');
+      alert(t('page.register.alerts.interests-required'));
       return;
     }
 
     if (!data.agreement1 || !data.agreement2) {
-      alert('필수 약관에 동의해주세요');
+      alert(t('page.register.alerts.agreements-required'));
       return;
     }
 
     if (data.password.length < 8) {
-      alert('비밀번호는 8자 이상이어야 합니다');
+      alert(t('page.register.alerts.password-length'));
       return;
     }
 
     if (data.password !== data.passwordConfirmation) {
-      alert('비밀번호가 일치하지 않습니다');
+      alert(t('page.register.alerts.password-mismatch'));
       return;
     }
 
@@ -92,7 +94,7 @@ const Register: React.FC = () => {
       });
       navigate('/login');
     } catch (error: any) {
-      alert(error?.message || '회원가입 중 오류가 발생했습니다.');
+      alert(error?.message || t('page.register.alerts.register-error'));
     }
   };
 
@@ -116,37 +118,47 @@ const Register: React.FC = () => {
         <div className='logo colon'>:</div>
         <div className='logo talk'>TALK</div>
       </div>
-      <div>독서토론 커뮤니티 독TALK에 오신 것을 환영합니다!</div>
+      <div>{t('page.register.welcome')}</div>
       <div className='w-[350px] md:w-[460px] flex flex-col gap-16 p-5!'>
         <form onSubmit={handleSubmit(onSubmit)} className='flex flex-col gap-4'>
           <div className='flex flex-col'>
-            <label className='font-bold!'>이메일</label>
+            <label className='font-bold!'>
+              {t('page.register.form.email')}
+            </label>
             <input
               className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
-              {...register('email', { required: '이메일을 입력해주세요' })}
+              {...register('email', {
+                required: t('page.register.form.email-required'),
+              })}
             />
             {errors.email && <span>{errors.email.message}</span>}
           </div>
 
           <div className='flex flex-col'>
-            <label className='font-bold!'>닉네임</label>
+            <label className='font-bold!'>
+              {t('page.register.form.nickname')}
+            </label>
             <input
               className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
-              {...register('nickname', { required: '닉네임을 입력해주세요' })}
+              {...register('nickname', {
+                required: t('page.register.form.nickname-required'),
+              })}
             />
             {errors.nickname && <span>{errors.nickname.message}</span>}
           </div>
 
           <div className='flex flex-col gap-1'>
-            <label className='font-bold!'>비밀번호</label>
+            <label className='font-bold!'>
+              {t('page.register.form.password')}
+            </label>
             <input
               className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
               type='password'
               {...register('password', {
-                required: '비밀번호를 입력해주세요',
+                required: t('page.register.form.password-required'),
                 minLength: {
                   value: 8,
-                  message: '비밀번호는 8자 이상이어야 합니다',
+                  message: t('page.register.form.password-min'),
                 },
               })}
             />
@@ -155,11 +167,11 @@ const Register: React.FC = () => {
             <input
               className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
               type='password'
-              placeholder='비밀번호 확인'
+              placeholder={t('page.register.form.password-confirm')}
               {...register('passwordConfirmation', {
-                required: '비밀번호 확인을 입력해주세요',
+                required: t('page.register.form.password-confirm-required'),
                 validate: (value) =>
-                  value === password || '비밀번호가 일치하지 않습니다',
+                  value === password || t('page.register.form.password-match'),
               })}
             />
             {errors.passwordConfirmation && (
@@ -169,16 +181,18 @@ const Register: React.FC = () => {
 
           <div className='flex flex-col gap-4 md:flex-row md:justify-between'>
             <div className='flex flex-col'>
-              <label className='font-bold!'>생년월일</label>
+              <label className='font-bold!'>
+                {t('page.register.form.birthdate')}
+              </label>
               <input
                 className='h-10 p-2 rounded-lg border-2 border-solid border-[gray]'
                 type='text'
                 placeholder='YYYY-MM-DD'
                 {...register('birthdate', {
-                  required: '생년월일을 입력해주세요',
+                  required: t('page.register.form.birthdate-required'),
                   pattern: {
                     value: /^\d{4}-\d{2}-\d{2}$/,
-                    message: '올바른 형식(YYYY-MM-DD)으로 입력해주세요',
+                    message: t('page.register.form.birthdate-format'),
                   },
                 })}
               />
@@ -186,25 +200,31 @@ const Register: React.FC = () => {
             </div>
 
             <div className='flex flex-col'>
-              <label className='font-bold!'>성별</label>
+              <label className='font-bold!'>
+                {t('page.register.form.gender')}
+              </label>
               <div className='flex gap-1 w-full'>
                 <label className='cursor-pointer bg-white flex items-center px-4! py-2! rounded-lg border-2! border-solid border-[gray]!'>
                   <input
                     type='radio'
                     value='male'
                     className='mr-2!'
-                    {...register('gender', { required: '성별을 선택해주세요' })}
+                    {...register('gender', {
+                      required: t('page.register.form.gender-required'),
+                    })}
                   />
-                  남자
+                  {t('page.register.form.male')}
                 </label>
                 <label className='cursor-pointer bg-white flex items-center px-4! py-2! rounded-lg! border-2! border-solid! border-[gray]!'>
                   <input
                     type='radio'
                     value='female'
                     className='mr-2!'
-                    {...register('gender', { required: '성별을 선택해주세요' })}
+                    {...register('gender', {
+                      required: t('page.register.form.gender-required'),
+                    })}
                   />
-                  여자
+                  {t('page.register.form.female')}
                 </label>
               </div>
               {errors.gender && <span>{errors.gender.message}</span>}
@@ -219,19 +239,20 @@ const Register: React.FC = () => {
                 // 실제 본인인증 로직 필요
                 // 인증 성공 시:
                 setValue('validation', true);
-                alert('본인인증이 완료되었습니다.');
+                alert(t('page.register.form.validation-complete'));
               }}
             >
-              본인인증
+              {t('page.register.form.validation')}
             </button>
           </div>
 
           <div className='flex flex-col gap-4'>
             <div>
-              <div className='font-bold!'>관심분야 선택</div>
+              <div className='font-bold!'>
+                {t('page.register.form.interests')}
+              </div>
               <div className='text-[13px]!'>
-                선택한 관심분야는 개인 맞춤 도서 추천 / 토론방 매칭에
-                사용됩니다.
+                {t('page.register.form.interests-description')}
               </div>
             </div>
             <div className='flex flex-wrap gap-x-1.5 gap-y-1.5 justify-center'>
@@ -242,11 +263,11 @@ const Register: React.FC = () => {
                 >
                   <input
                     type='checkbox'
-                    value={selection}
+                    value={t(selection)}
                     {...register('interests')}
                     className='mr-2!'
                   />
-                  {selection}
+                  {t(selection)}
                 </label>
               ))}
             </div>
@@ -259,18 +280,25 @@ const Register: React.FC = () => {
                 {...register('allAgreements')}
                 onChange={handleAllAgreementsChange}
               />
-              <label className='font-bold! ml-2!'>약관 전체동의</label>
+              <label className='font-bold! ml-2!'>
+                {t('page.register.form.all-agreements')}
+              </label>
             </div>
             <hr className='h-px bg-black'></hr>
             <div className='flex items-center'>
               <input
                 type='checkbox'
                 {...register('agreement1', {
-                  validate: (val) => val === true || '약관 1에 동의해주세요',
+                  validate: (val) =>
+                    val === true || t('page.register.alerts.agreement1-error'),
                 })}
               />
-              <label className='ml-2!'>{'(필수) 약관 1 동의'}</label>
-              <div className='ml-auto! mr-4!'>보기</div>
+              <label className='ml-2!'>
+                {t('page.register.form.agreement1')}
+              </label>
+              <div className='ml-auto! mr-4!'>
+                {t('page.register.form.view')}
+              </div>
             </div>
             {errors.agreement1 && <span>{errors.agreement1.message}</span>}
 
@@ -278,18 +306,27 @@ const Register: React.FC = () => {
               <input
                 type='checkbox'
                 {...register('agreement2', {
-                  validate: (val) => val === true || '약관 2에 동의해주세요',
+                  validate: (val) =>
+                    val === true || t('page.register.alerts.agreement2-error'),
                 })}
               />
-              <label className='ml-2!'>{'(필수) 약관 2 동의'}</label>
-              <div className='ml-auto! mr-4!'>보기</div>
+              <label className='ml-2!'>
+                {t('page.register.form.agreement2')}
+              </label>
+              <div className='ml-auto! mr-4!'>
+                {t('page.register.form.view')}
+              </div>
             </div>
             {errors.agreement2 && <span>{errors.agreement2.message}</span>}
 
             <div className='flex items-center'>
               <input type='checkbox' {...register('agreement3')} />
-              <label className='ml-2!'>{'(선택) 약관 3 동의'} </label>
-              <div className='ml-auto! mr-4!'>보기</div>
+              <label className='ml-2!'>
+                {t('page.register.form.agreement3')}{' '}
+              </label>
+              <div className='ml-auto! mr-4!'>
+                {t('page.register.form.view')}
+              </div>
             </div>
           </div>
 
@@ -297,7 +334,7 @@ const Register: React.FC = () => {
             className='w-full bg-[#000080] text-[white] cursor-pointer p-2.5 rounded-[10px] border-[none]'
             type='submit'
           >
-            회원가입
+            {t('page.register.form.submit')}
           </button>
         </form>
       </div>

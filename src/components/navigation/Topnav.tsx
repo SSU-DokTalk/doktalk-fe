@@ -41,6 +41,7 @@ import { LinkItemType } from '@/types/components';
 import ProfileIcon from '../base/ProfileIcon';
 import KR from '@/assets/images/flags/kr.svg?react';
 import US from '@/assets/images/flags/us.svg?react';
+import MN from '@/assets/images/flags/mn.svg?react';
 
 import { TopNavSearchBar } from '@/components/input/searchbar';
 
@@ -87,23 +88,6 @@ const dropdownItems: LinkItemType[] = [
   },
 ];
 
-const languageDropdownItems: {
-  name: string;
-  value: string;
-  icon: any;
-}[] = [
-  {
-    name: '한국어',
-    value: 'kr',
-    icon: <KR className='lang-menu-icon' />,
-  },
-  {
-    name: 'English',
-    value: 'us',
-    icon: <US className='lang-menu-icon' />,
-  },
-];
-
 function Topnav() {
   const currentTab = useLocation();
   const user = useAppSelector(selectUser);
@@ -114,6 +98,29 @@ function Topnav() {
   const open = Boolean(anchorEl);
 
   const { t } = useTranslation();
+
+  const languageDropdownItems: {
+    name: string;
+    value: string;
+    icon: any;
+  }[] = [
+    {
+      name: t('component.topnav.language.korean'),
+      value: 'kr',
+      icon: <KR className='lang-menu-icon' />,
+    },
+    {
+      name: t('component.topnav.language.english'),
+      value: 'us',
+      icon: <US className='lang-menu-icon' />,
+    },
+    {
+      name: t('component.topnav.language.mongolian'),
+      value: 'mn',
+      icon: <MN className='lang-menu-icon' />,
+    },
+  ];
+
   const changeLanguage = (item: { name: string; value: string }) => {
     localStorage.setItem('lang', item.value);
     i18n.changeLanguage(item.value);
@@ -235,7 +242,9 @@ function Topnav() {
         <Drawer open={drawerOpen} onClose={() => setDrawerOpen(false)}>
           <Box className='w-[60vw]'>
             <div className='flex justify-between px-5!'>
-              <span className='text-2xl! py-6!'>탐색</span>
+              <span className='text-2xl! py-6!'>
+                {t('component.navigation.topnav.explore')}
+              </span>
               <IconButton onClick={() => setDrawerOpen(false)}>
                 <FontAwesomeIcon icon={faXmark} />
               </IconButton>
@@ -347,7 +356,9 @@ function LoginedInfo({
         >
           <ProfileIcon profile={user.profile} size={38} className='user-icon' />
           <div className='user-name-container shrink-0'>
-            <span className='user-name'>{user.name ?? '닉네임'}</span>
+            <span className='user-name'>
+              {user.name ?? t('component.navigation.topnav.nickname-fallback')}
+            </span>
             {t('component.topnav.user.postfix')}
             <ArrowDropDown />
           </div>
