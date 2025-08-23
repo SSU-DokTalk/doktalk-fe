@@ -3,6 +3,8 @@
 @theme {
   --font-display: "Satoshi", "sans-serif";
 
+  --breakpoint-xs: 24rem;
+
   --color-brand1: #000080;
   --color-brand2: #539ab9;
   --color-brand3: #f3f4f7;
@@ -17,5 +19,15 @@ html {
 @media (min-width: 400px) {
   html {
     font-size: 16px;
+  }
+}
+
+@layer utilities {
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+  .no-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
   }
 }

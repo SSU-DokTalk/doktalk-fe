@@ -13,11 +13,8 @@ import {
   Drawer,
   Divider,
   Box,
-  Paper,
   List,
   ListItem,
-  BottomNavigation,
-  BottomNavigationAction,
 } from '@mui/material';
 
 import i18n from '@/locales/i18n';
@@ -205,12 +202,12 @@ function Topnav() {
           <TopNavSearchBar />
         </div>
 
-        <div className='lower-container hidden md:block'>
-          <div className='tab-container'>
+        <div className='lower-container'>
+          <div className='tab-container overflow-x-auto no-scrollbar gap-1 md:gap-10 xs:justify-center'>
             {navTabs.map((tab, idx) => {
               return (
                 <div
-                  className='tab'
+                  className='tab flex-shrink-0 w-20 md:w-30'
                   style={
                     tab.url != '/' + currentTab.pathname.split('/')[1]
                       ? {
@@ -222,7 +219,7 @@ function Topnav() {
                 >
                   <Link
                     to={tab.url}
-                    className='tab-title'
+                    className='tab-title text-sm! md:text-xl!'
                     style={
                       tab.url != '/' + currentTab.pathname.split('/')[1]
                         ? {
@@ -296,41 +293,39 @@ function Topnav() {
           </Box>
         </Drawer>
       </div>
-
-      <BottomNav />
     </>
   );
 }
 
-function BottomNav() {
-  const { t } = useTranslation();
-  const navigate = useNavigate();
-  const [pageIdx, setPageIdx] = React.useState(0);
+// function BottomNav() {
+//   const { t } = useTranslation();
+//   const navigate = useNavigate();
+//   const [pageIdx, setPageIdx] = React.useState(0);
 
-  return (
-    <>
-      <div className='bottom-nav md:hidden'>
-        <Paper
-          sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
-          elevation={3}
-        >
-          <BottomNavigation
-            showLabels
-            value={pageIdx}
-            onChange={(_, newPageIdx) => {
-              setPageIdx(newPageIdx);
-              navigate(navTabs[newPageIdx].url);
-            }}
-          >
-            {navTabs.map((item) => (
-              <BottomNavigationAction label={t(item.title)} icon={item.icon} />
-            ))}
-          </BottomNavigation>
-        </Paper>
-      </div>
-    </>
-  );
-}
+//   return (
+//     <>
+//       <div className='bottom-nav md:hidden'>
+//         <Paper
+//           sx={{ position: 'fixed', bottom: 0, left: 0, right: 0 }}
+//           elevation={3}
+//         >
+//           <BottomNavigation
+//             showLabels
+//             value={pageIdx}
+//             onChange={(_, newPageIdx) => {
+//               setPageIdx(newPageIdx);
+//               navigate(navTabs[newPageIdx].url);
+//             }}
+//           >
+//             {navTabs.map((item) => (
+//               <BottomNavigationAction label={t(item.title)} icon={item.icon} />
+//             ))}
+//           </BottomNavigation>
+//         </Paper>
+//       </div>
+//     </>
+//   );
+// }
 
 function LoginedInfo({
   doLogout,
