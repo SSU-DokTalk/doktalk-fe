@@ -13,11 +13,8 @@ import {
   Drawer,
   Divider,
   Box,
-  Paper,
   List,
   ListItem,
-  BottomNavigation,
-  BottomNavigationAction,
 } from '@mui/material';
 
 import i18n from '@/locales/i18n';
