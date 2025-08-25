@@ -26,7 +26,7 @@ function WritePostCard({
       />
       <ProfileIcon profile={user.profile} size={45} />
       <div
-        className='input-container'
+        className='input-container cursor-pointer'
         onClick={() => {
           setShowModal(true);
         }}

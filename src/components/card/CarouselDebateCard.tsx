@@ -12,6 +12,7 @@ function CarouselDebateCard({
   return (
     <div
       id='carousel-debate-card'
+      className='cursor-pointer'
       onClick={() => navigate(`/debate/${debate.id}`)}
       {...props}
     >

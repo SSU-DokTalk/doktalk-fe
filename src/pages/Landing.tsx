@@ -96,7 +96,7 @@ function Landing() {
           {t('page.landing.title.recommend-postfix')}
         </div>
 
-        <div className='container-contents-carousel flex items-end justify-items-center gap-4 overflow-x-auto h-72 w-full md:px-24! px-4!'>
+        <div className='container-contents-carousel flex items-end justify-items-center gap-4 overflow-x-auto w-full md:px-24! px-4!'>
           {debates.map((debate, idx) => (
             <SimplePostCard
               key={'recommend-debate' + idx}
@@ -104,8 +104,8 @@ function Landing() {
               content={debate.content}
               thumbnail={debate.book.image}
               navigateTo={`/debate/${debate.id}`}
-              width={idx === 0 ? 'w-64 flex-shrink-0' : 'w-48 flex-shrink-0'}
-              imageHeight={idx === 0 ? 'h-48' : 'h-32'}
+              width='group w-48 hover:w-64 flex-shrink-0 transition-all duration-300 ease-in-out'
+              imageHeight='h-32 group-hover:h-48 transition-all duration-300 ease-in-out'
             />
           ))}
         </div>

@@ -24,7 +24,7 @@ function SimpleCard({
 
   return (
     <div
-      className={`bg-white rounded-lg shadow-lg overflow-hidden ${width} ${height} `}
+      className={`bg-white rounded-lg shadow-lg overflow-hidden cursor-pointer ${width} ${height} `}
       onClick={() => navigate(navigateTo)}
     >
       <div

@@ -40,7 +40,7 @@ function PopularSummaryCard({
   };
 
   return (
-    <div id='popular-summary-card'>
+    <div id='popular-summary-card' className='cursor-pointer'>
       <div
         className='summary-title'
         onClick={() => navigate(`/summary/${summary.id}`)}

@@ -35,7 +35,7 @@ export function PostBaseCard({
   doUnlike: () => void;
 }) {
   return (
-    <div className='post-base-card w-full py-4! px-4! md:py-5! md:px-11!'>
+    <div className='post-base-card cursor-pointer w-full py-4! px-4! md:py-5! md:px-11!'>
       <div className='user-info-for-mobile mb-2! flex md:hidden'>
         <ProfileIcon profile={user.profile} size={28} className='user-icon' />
         <div className='user-name'>{user.name}</div>
