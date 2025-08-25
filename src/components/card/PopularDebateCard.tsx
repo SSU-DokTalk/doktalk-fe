@@ -38,7 +38,7 @@ function PopularDebateCard({
   };
 
   return (
-    <div id='popular-debate-card'>
+    <div id='popular-debate-card' className='cursor-pointer'>
       <div className='title' onClick={() => navigate(`/debate/${debate.id}`)}>
         {debate.title}
       </div>

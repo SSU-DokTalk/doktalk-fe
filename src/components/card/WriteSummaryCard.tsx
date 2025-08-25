@@ -15,7 +15,7 @@ function WriteSummaryCard() {
     <div id='write-summary-card'>
       <ProfileIcon profile={user.profile} size={45} />
       <div
-        className='input-container'
+        className='input-container cursor-pointer'
         onClick={() => navigate('/summary/create')}
       >
         <div className='write-input'>

@@ -41,7 +41,7 @@ function PostCard({
   };
 
   return (
-    <div id='post-card'>
+    <div id='post-card' className='cursor-pointer'>
       <div className='header-container'>
         <ProfileIcon
           profile={post.user.profile}

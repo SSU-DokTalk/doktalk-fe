@@ -9,6 +9,7 @@ function CarouselSummaryCard({ summary }: { summary: SummaryType }) {
   return (
     <div
       id='carousel-summary-card'
+      className='cursor-pointer'
       onClick={() => navigate(`/summary/${summary.id}`)}
     >
       <Image
