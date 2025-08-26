@@ -37,6 +37,7 @@ import UpdateSummary from './pages/UpdateSummary';
 import UpdateDebate from './pages/UpdateDebate';
 import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
 import { CheckoutFail } from './components/Payments/CheckoutFail';
+import IntegratedSearch from './pages/IntegratedSearch';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -129,6 +130,10 @@ function App() {
           <Route path='/post' element={<Post />}></Route>
 
           <Route path='/search' element={<Search />}></Route>
+          <Route
+            path='/integrated-search'
+            element={<IntegratedSearch />}
+          ></Route>
 
           <Route path='/debate' element={<Debate />}></Route>
           <Route path='/debate/create' element={<CreateDebate />}></Route>
