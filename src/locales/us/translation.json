@@ -544,6 +544,17 @@
         "page": " Page"
       }
     },
+    "integrated-search": {
+      "title": "Integrated Search Results",
+      "search-result": "Search Results",
+      "sections": {
+        "debate": "Discussions",
+        "summary": "Summaries",
+        "post": "Posts",
+        "book": "Books"
+      },
+      "no-results": "No search results found."
+    },
     "not-found": {
       "message": "Page Not Found!"
     }

@@ -544,6 +544,17 @@
         "page": " 페이지"
       }
     },
+    "integrated-search": {
+      "title": "통합 검색 결과",
+      "search-result": "검색 결과",
+      "sections": {
+        "debate": "독서토론",
+        "summary": "도서 요약",
+        "post": "게시글",
+        "book": "도서 검색"
+      },
+      "no-results": "검색 결과가 없습니다."
+    },
     "not-found": {
       "message": "Page Not Found!"
     }
