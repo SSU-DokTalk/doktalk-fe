@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import { useSearchParams } from 'react-router-dom';
+import { useTranslation } from 'react-i18next';
 
 // Import card components
 import DebateCard from '@/components/card/DebateCard';
@@ -204,6 +205,7 @@ const DUMMY_BOOKS: BookType[] = [
 function IntegratedSearch() {
   const [searchParams] = useSearchParams();
   const searchQuery = searchParams.get('q') || '';
+  const { t } = useTranslation();
 
   // State for liked items
   const [likedDebates, setLikedDebates] = useState<number[]>([]);
@@ -224,12 +226,12 @@ function IntegratedSearch() {
       {/* Search Header */}
       <div className='search-header !mb-8'>
         <h1 className='!text-3xl !font-bold !text-brand1 !mb-2'>
-          통합 검색 결과
+          {t('page.integrated-search.title')}
         </h1>
         {searchQuery && (
           <p className='!text-lg !text-gray-600'>
             "<span className='!font-semibold !text-brand1'>{searchQuery}</span>"
-            검색 결과
+            {t('page.integrated-search.search-result')}
           </p>
         )}
       </div>
@@ -238,7 +240,7 @@ function IntegratedSearch() {
       <section className='search-section !mb-12'>
         <div className='section-header !mb-6'>
           <h2 className='!text-2xl !font-bold !text-gray-800 !mb-2'>
-            독서토론
+            {t('page.integrated-search.sections.debate')}
           </h2>
           <div className='!w-full !h-px !bg-gray-200'></div>
         </div>
@@ -260,7 +262,9 @@ function IntegratedSearch() {
             </div>
           ) : (
             <div className='no-results !text-center !py-8'>
-              <p className='!text-gray-500'>검색 결과가 없습니다.</p>
+              <p className='!text-gray-500'>
+                {t('page.integrated-search.no-results')}
+              </p>
             </div>
           )}
         </div>
@@ -270,7 +274,7 @@ function IntegratedSearch() {
       <section className='search-section !mb-12'>
         <div className='section-header !mb-6'>
           <h2 className='!text-2xl !font-bold !text-gray-800 !mb-2'>
-            도서 요약
+            {t('page.integrated-search.sections.summary')}
           </h2>
           <div className='!w-full !h-px !bg-gray-200'></div>
         </div>
@@ -292,7 +296,9 @@ function IntegratedSearch() {
             </div>
           ) : (
             <div className='no-results !text-center !py-8'>
-              <p className='!text-gray-500'>검색 결과가 없습니다.</p>
+              <p className='!text-gray-500'>
+                {t('page.integrated-search.no-results')}
+              </p>
             </div>
           )}
         </div>
@@ -301,7 +307,9 @@ function IntegratedSearch() {
       {/* 게시글 섹션 */}
       <section className='search-section !mb-12'>
         <div className='section-header !mb-6'>
-          <h2 className='!text-2xl !font-bold !text-gray-800 !mb-2'>게시글</h2>
+          <h2 className='!text-2xl !font-bold !text-gray-800 !mb-2'>
+            {t('page.integrated-search.sections.post')}
+          </h2>
           <div className='!w-full !h-px !bg-gray-200'></div>
         </div>
         <div className='results-container'>
@@ -319,7 +327,9 @@ function IntegratedSearch() {
             </div>
           ) : (
             <div className='no-results !text-center !py-8'>
-              <p className='!text-gray-500'>검색 결과가 없습니다.</p>
+              <p className='!text-gray-500'>
+                {t('page.integrated-search.no-results')}
+              </p>
             </div>
           )}
         </div>
@@ -329,7 +339,7 @@ function IntegratedSearch() {
       <section className='search-section !mb-12'>
         <div className='section-header !mb-6'>
           <h2 className='!text-2xl !font-bold !text-gray-800 !mb-2'>
-            도서 검색
+            {t('page.integrated-search.sections.book')}
           </h2>
           <div className='!w-full !h-px !bg-gray-200'></div>
         </div>
@@ -351,7 +361,9 @@ function IntegratedSearch() {
             </div>
           ) : (
             <div className='no-results !text-center !py-8'>
-              <p className='!text-gray-500'>검색 결과가 없습니다.</p>
+              <p className='!text-gray-500'>
+                {t('page.integrated-search.no-results')}
+              </p>
             </div>
           )}
         </div>
