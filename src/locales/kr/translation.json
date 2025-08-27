@@ -385,7 +385,8 @@
     },
     "search": {
       "item": {
-        "no-book-item": "검색 결과가 없습니다"
+        "no-book-item": "검색 결과가 없습니다",
+        "search-prompt": "원하는 도서를 검색해보세요!"
       },
       "title": {
         "page": "도서 검색"

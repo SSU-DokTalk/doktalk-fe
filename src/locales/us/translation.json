@@ -385,7 +385,8 @@
     },
     "search": {
       "item": {
-        "no-book-item": "No search results found"
+        "no-book-item": "No search results found",
+        "search-prompt": "Search for your favorite books!"
       },
       "title": {
         "page": "Book Search"
