@@ -46,7 +46,7 @@ function App() {
 
   useEffect(() => {
     if (localStorage.getItem('lang') == null) {
-      localStorage.setItem('lang', 'kr');
+      localStorage.setItem('lang', 'mn');
     }
     i18n.changeLanguage(localStorage.getItem('lang') as string);
 
