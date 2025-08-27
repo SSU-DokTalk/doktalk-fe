@@ -1,4 +1,8 @@
+import { useTranslation } from 'react-i18next';
+
 export default function Footer() {
+  const { t } = useTranslation();
+
   return (
     <footer className='!bg-gray-800 !text-white !mt-12 !py-12 !px-6'>
       <div className='!max-w-6xl !mx-auto'>
@@ -7,27 +11,32 @@ export default function Footer() {
           <div className='!col-span-1 md:!col-span-2'>
             <h3 className='!text-xl !font-bold !mb-4'>DokTalk</h3>
             <p className='!text-gray-300 !mb-4'>
-              독서토론과 도서 요약을 통해 지식을 나누고 성장하는 플랫폼입니다.
+              {t('footer.company.description')}
               <br />
-              함께 읽고, 함께 토론하며, 함께 성장해요.
+              {t('footer.company.motto')}
             </p>
             <div className='!text-sm !text-gray-400'>
-              <p>주소: 서울특별시 동작구 상도동 사당로 46 숭실대학교 창의관</p>
-              <p>이메일: doktalk.official@gmail.com</p>
-              <p>전화: ???-????-????</p>
+              <p>
+                {t('footer.company.address')}:{' '}
+                {t('footer.company.address_value')}
+              </p>
+              <p>{t('footer.company.email')}: doktalk.official@gmail.com</p>
+              <p>{t('footer.company.phone')}: ???-????-????</p>
             </div>
           </div>
 
           {/* 서비스 */}
           <div>
-            <h4 className='!text-lg !font-semibold !mb-4'>서비스</h4>
+            <h4 className='!text-lg !font-semibold !mb-4'>
+              {t('footer.services.title')}
+            </h4>
             <ul className='!space-y-2 !text-gray-300'>
               <li>
                 <a
                   href='/debate'
                   className='hover:!text-white !transition-colors'
                 >
-                  독서토론
+                  {t('footer.services.debate')}
                 </a>
               </li>
               <li>
@@ -35,7 +44,7 @@ export default function Footer() {
                   href='/summary'
                   className='hover:!text-white !transition-colors'
                 >
-                  도서요약
+                  {t('footer.services.summary')}
                 </a>
               </li>
               <li>
@@ -43,7 +52,7 @@ export default function Footer() {
                   href='/post'
                   className='hover:!text-white !transition-colors'
                 >
-                  게시판
+                  {t('footer.services.post')}
                 </a>
               </li>
               <li>
@@ -51,7 +60,7 @@ export default function Footer() {
                   href='/search'
                   className='hover:!text-white !transition-colors'
                 >
-                  도서검색
+                  {t('footer.services.search')}
                 </a>
               </li>
             </ul>
@@ -59,11 +68,13 @@ export default function Footer() {
 
           {/* 고객지원 */}
           <div>
-            <h4 className='!text-lg !font-semibold !mb-4'>고객지원</h4>
+            <h4 className='!text-lg !font-semibold !mb-4'>
+              {t('footer.support.title')}
+            </h4>
             <ul className='!space-y-2 !text-gray-300'>
               <li>
                 <a href='/faq' className='hover:!text-white !transition-colors'>
-                  자주묻는질문
+                  {t('footer.support.faq')}
                 </a>
               </li>
               <li>
@@ -71,7 +82,7 @@ export default function Footer() {
                   href='/notice'
                   className='hover:!text-white !transition-colors'
                 >
-                  공지사항
+                  {t('footer.support.notice')}
                 </a>
               </li>
               <li>
@@ -79,7 +90,7 @@ export default function Footer() {
                   href='/contact'
                   className='hover:!text-white !transition-colors'
                 >
-                  문의하기
+                  {t('footer.support.contact')}
                 </a>
               </li>
               <li>
@@ -87,7 +98,7 @@ export default function Footer() {
                   href='/terms'
                   className='hover:!text-white !transition-colors'
                 >
-                  이용약관
+                  {t('footer.support.terms')}
                 </a>
               </li>
               <li>
@@ -95,7 +106,7 @@ export default function Footer() {
                   href='/privacy'
                   className='hover:!text-white !transition-colors'
                 >
-                  개인정보처리방침
+                  {t('footer.support.privacy')}
                 </a>
               </li>
             </ul>
@@ -105,12 +116,12 @@ export default function Footer() {
         {/* 하단 저작권 */}
         <div className='!border-t !border-gray-700 !mt-8 !pt-6 !flex !flex-col md:!flex-row !justify-between !items-center'>
           <div className='!text-gray-400 !text-sm !mb-4 md:!mb-0'>
-            © 2024 DokTalk. All rights reserved.
+            {t('footer.copyright.text')}
           </div>
           <div className='!flex !space-x-4 !text-gray-400 !text-sm'>
-            <span>버전 1.0.0</span>
+            <span>{t('footer.version.label')} 1.0.0</span>
             <span>|</span>
-            <span>마지막 업데이트: 2024.12.25</span>
+            <span>{t('footer.version.last_update')}: 2024.12.25</span>
           </div>
         </div>
       </div>

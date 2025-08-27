@@ -558,5 +558,37 @@
     "not-found": {
       "message": "Хуудас олдсонгүй!"
     }
+  },
+  "footer": {
+    "company": {
+      "description": "Номын хэлэлцүүлэг болон хураангуйгаар дамжуулан мэдлэгээ хуваалцаж өсөх платформ.",
+      "motto": "Хамтдаа уншиж, хамтдаа хэлэлцэж, хамтдаа өсье.",
+      "address": "Хаяг",
+      "address_value": "46 Sangdo-dong, Dongjak-gu, Seoul, Soongsil University Changui Hall",
+      "email": "И-мэйл",
+      "phone": "Утас"
+    },
+    "services": {
+      "title": "Үйлчилгээ",
+      "debate": "Уншлагын маргаан",
+      "summary": "Номын хураангуй",
+      "post": "Самбар",
+      "search": "Номын хайлт"
+    },
+    "support": {
+      "title": "Тусламж",
+      "faq": "Түгээмэл асуулт",
+      "notice": "Мэдэгдэл",
+      "contact": "Холбоо барих",
+      "terms": "Үйлчилгээний нөхцөл",
+      "privacy": "Нууцлалын бодлого"
+    },
+    "copyright": {
+      "text": "© 2024 DokTalk. Бүх эрх хуулиар хамгаалагдсан."
+    },
+    "version": {
+      "label": "Хувилбар",
+      "last_update": "Сүүлд шинэчилсэн"
+    }
   }
 }

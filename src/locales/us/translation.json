@@ -558,5 +558,37 @@
     "not-found": {
       "message": "Page Not Found!"
     }
+  },
+  "footer": {
+    "company": {
+      "description": "A platform for sharing knowledge and growing through book discussions and summaries.",
+      "motto": "Read together, discuss together, grow together.",
+      "address": "Address",
+      "address_value": "46 Sangdo-dong, Dongjak-gu, Seoul, Soongsil University Changui Hall",
+      "email": "Email",
+      "phone": "Phone"
+    },
+    "services": {
+      "title": "Services",
+      "debate": "Discussions",
+      "summary": "Summaries",
+      "post": "Posts",
+      "search": "Find Books"
+    },
+    "support": {
+      "title": "Support",
+      "faq": "FAQ",
+      "notice": "Notice",
+      "contact": "Contact Us",
+      "terms": "Terms of Service",
+      "privacy": "Privacy Policy"
+    },
+    "copyright": {
+      "text": "© 2024 DokTalk. All rights reserved."
+    },
+    "version": {
+      "label": "Version",
+      "last_update": "Last Updated"
+    }
   }
 }

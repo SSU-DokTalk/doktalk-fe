@@ -558,5 +558,37 @@
     "not-found": {
       "message": "Page Not Found!"
     }
+  },
+  "footer": {
+    "company": {
+      "description": "독서토론과 도서 요약을 통해 지식을 나누고 성장하는 플랫폼입니다.",
+      "motto": "함께 읽고, 함께 토론하며, 함께 성장해요.",
+      "address": "주소",
+      "address_value": "서울특별시 동작구 상도동 사당로 46 숭실대학교 창의관",
+      "email": "이메일",
+      "phone": "전화"
+    },
+    "services": {
+      "title": "서비스",
+      "debate": "독서토론",
+      "summary": "도서요약",
+      "post": "게시판",
+      "search": "도서검색"
+    },
+    "support": {
+      "title": "고객지원",
+      "faq": "자주묻는질문",
+      "notice": "공지사항",
+      "contact": "문의하기",
+      "terms": "이용약관",
+      "privacy": "개인정보처리방침"
+    },
+    "copyright": {
+      "text": "© 2024 DokTalk. All rights reserved."
+    },
+    "version": {
+      "label": "버전",
+      "last_update": "마지막 업데이트"
+    }
   }
 }
