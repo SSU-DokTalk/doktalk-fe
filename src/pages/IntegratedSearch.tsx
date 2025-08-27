@@ -45,14 +45,22 @@ function IntegratedSearch() {
   const fetchAllData = async () => {
     setIsLoading(true);
     try {
-      await Promise.all([
+      const results = await Promise.allSettled([
         fetchDebates(),
         fetchSummaries(),
         fetchPosts(),
         fetchBooks(),
       ]);
+
+      results.forEach((result, idx) => {
+        if (result.status === 'rejected') {
+          const source = ['Debates', 'Summaries', 'Posts', 'Books'][idx];
+          console.error(`Error fetching ${source}:`, result.reason);
+        }
+      });
     } catch (error) {
-      console.error('Error fetching search results:', error);
+      // This catch block is unlikely to be reached with allSettled, but keep for safety
+      console.error('Unexpected error fetching search results:', error);
     } finally {
       setIsLoading(false);
     }
