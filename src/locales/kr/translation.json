@@ -558,6 +558,17 @@
     },
     "not-found": {
       "message": "Page Not Found!"
+    },
+    "mypage.library": {
+      "title": "내 서재",
+      "description": "읽고 있는 책과 요약을 관리하세요",
+      "sections": {
+        "my-books": "읽고 있는 책",
+        "purchased-summaries": "읽고 있는 요약들"
+      },
+      "no-books": "읽고 있는 책이 없습니다",
+      "no-summaries": "읽고 있는 요약이 없습니다",
+      "go-to-search": "도서 검색하기"
     }
   },
   "footer": {

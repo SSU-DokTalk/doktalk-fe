@@ -38,6 +38,7 @@ import UpdateDebate from './pages/UpdateDebate';
 import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
 import { CheckoutFail } from './components/Payments/CheckoutFail';
 import IntegratedSearch from './pages/IntegratedSearch';
+import MyLibrary from './pages/MyLibrary';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -157,6 +158,8 @@ function App() {
           <Route path='/post/:post_id' element={<PostDetail />}></Route>
         </Route>
         <Route path='/mypage' element={<MyPage />}></Route>
+        <Route path='/mypage/library' element={<MyLibrary />}></Route>
+
         <Route path='/user/:user_id' element={<UserProfile />}></Route>
         <Route path='settings' element={<Settings />}></Route>
       </Route>

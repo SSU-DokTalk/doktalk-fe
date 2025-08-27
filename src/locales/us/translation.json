@@ -558,6 +558,17 @@
     },
     "not-found": {
       "message": "Page Not Found!"
+    },
+    "mypage.library": {
+      "title": "My Library",
+      "description": "Manage your reading books and summaries",
+      "sections": {
+        "my-books": "Currently Reading",
+        "purchased-summaries": "Reading Summaries"
+      },
+      "no-books": "No books in your library",
+      "no-summaries": "No reading summaries",
+      "go-to-search": "Search for Books"
     }
   },
   "footer": {

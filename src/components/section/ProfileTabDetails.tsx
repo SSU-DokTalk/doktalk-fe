@@ -292,9 +292,9 @@ function LibraryTab({ userProfile }: { userProfile: UserType }) {
               )}
             </span>
           </div>
-          <div className='show-more'>
+          <a href='/mypage/library' className='show-more'>
             {t('component.section.profile-tab-details.item.show-more') + ' >'}
-          </div>
+          </a>
         </div>
         {!hasLoadedMyBook ? (
           <div>
