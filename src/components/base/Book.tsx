@@ -3,7 +3,7 @@ import Image from '@/components/base/Image';
 
 function Book({ book }: { book: BookType }) {
   return (
-    <div id='book' className='w-1/4 mx-1!'>
+    <div id='book' className='mx-1!'>
       <div className='aspect-2/3'>
         <Image
           src={book.image}

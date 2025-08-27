@@ -1,6 +1,7 @@
 import { Outlet } from 'react-router-dom';
 import Topnav from '@/components/navigation/Topnav';
 import ChatbotFloatingButton from '@/components/floating/ChatbotFloatingButton';
+import Footer from '@/components/footers/Footer';
 
 function BasicLayout() {
   return (
@@ -11,12 +12,7 @@ function BasicLayout() {
     >
       <Topnav />
       <Outlet />
-      <div
-        className='footer'
-        style={{
-          height: '70px',
-        }}
-      />
+      <Footer />
       <ChatbotFloatingButton />
     </div>
   );

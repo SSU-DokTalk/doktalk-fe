@@ -29,7 +29,7 @@ function Landing() {
     const fetchPosts = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/post/recent?page=1&size=6');
+        const response = await fetch('/api/post/recent?page=1&size=12');
         if (!response.ok) {
           throw new Error(`HTTP error! status: ${response.status}`);
         }
@@ -122,7 +122,7 @@ function Landing() {
                 {t('page.landing.item.no-post-item')}
               </p>
             ) : (
-              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-2'>
+              <div className='grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2'>
                 {posts.map((post) => (
                   <SimplePostCard
                     key={post.id}

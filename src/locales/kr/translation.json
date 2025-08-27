@@ -385,7 +385,8 @@
     },
     "search": {
       "item": {
-        "no-book-item": "검색 결과가 없습니다"
+        "no-book-item": "검색 결과가 없습니다",
+        "search-prompt": "원하는 도서를 검색해보세요!"
       },
       "title": {
         "page": "도서 검색"
@@ -557,6 +558,55 @@
     },
     "not-found": {
       "message": "Page Not Found!"
+    },
+    "mypage.library": {
+      "title": "내 서재",
+      "description": "읽고 있는 책과 요약을 관리하세요",
+      "sections": {
+        "my-books": "읽고 있는 책",
+        "purchased-summaries": "읽고 있는 요약들"
+      },
+      "no-books": "읽고 있는 책이 없습니다",
+      "no-summaries": "읽고 있는 요약이 없습니다",
+      "go-to-search": "도서 검색하기",
+      "delete": {
+        "button": "도서 삭제",
+        "confirm": "이 책을 서재에서 삭제하시겠습니까?",
+        "success": "책이 서재에서 삭제되었습니다",
+        "error": "삭제 중 오류가 발생했습니다"
+      }
+    }
+  },
+  "footer": {
+    "company": {
+      "description": "독서토론과 도서 요약을 통해 지식을 나누고 성장하는 플랫폼입니다.",
+      "motto": "함께 읽고, 함께 토론하며, 함께 성장해요.",
+      "address": "주소",
+      "address_value": "서울특별시 동작구 상도동 사당로 46 숭실대학교 창의관",
+      "email": "이메일",
+      "phone": "전화"
+    },
+    "services": {
+      "title": "서비스",
+      "debate": "독서토론",
+      "summary": "도서요약",
+      "post": "게시판",
+      "search": "도서검색"
+    },
+    "support": {
+      "title": "고객지원",
+      "faq": "자주묻는질문",
+      "notice": "공지사항",
+      "contact": "문의하기",
+      "terms": "이용약관",
+      "privacy": "개인정보처리방침"
+    },
+    "copyright": {
+      "text": "© 2024 DokTalk. All rights reserved."
+    },
+    "version": {
+      "label": "버전",
+      "last_update": "마지막 업데이트"
     }
   }
 }

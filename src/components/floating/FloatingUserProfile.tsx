@@ -116,14 +116,16 @@ function FloatingUserProfile() {
             <div className='books-container'>
               {books.slice(0, 6).map((mybook, idx) => {
                 return (
-                  <Image
-                    key={'my-library-book' + idx}
-                    src={mybook.book.image}
-                    width='40px'
-                    height='55px'
-                    noImageFontSize={16}
-                    noImageTextFontSize={6}
-                  />
+                  <Link to='/mypage/library'>
+                    <Image
+                      key={'my-library-book' + idx}
+                      src={mybook.book.image}
+                      width='40px'
+                      height='55px'
+                      noImageFontSize={16}
+                      noImageTextFontSize={6}
+                    />
+                  </Link>
                 );
               })}
             </div>

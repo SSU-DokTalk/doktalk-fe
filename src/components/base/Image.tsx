@@ -39,7 +39,7 @@ function Image({
       style={{
         width: width,
         height: height ?? '200px',
-        border: '1px solid #e9ecef',
+        // border: '1px solid #e9ecef',
         display: 'flex',
         flexDirection: 'column',
         justifyContent: 'center',

@@ -90,7 +90,11 @@ function Search() {
               likes={isInLibrary}
               setLikes={setIsInLibrary}
               hasNoItem={books.length === 0}
-              hasNoItemMessage={t('page.search.item.no-book-item')}
+              hasNoItemMessage={
+                debouncedSearch.trim() === ''
+                  ? t('page.search.item.search-prompt')
+                  : t('page.search.item.no-book-item')
+              }
               refreshCondition={
                 debouncedSearch !== prevValueRef.current.debouncedSearch ||
                 sortByIdx !== prevValueRef.current.sortByIdx
