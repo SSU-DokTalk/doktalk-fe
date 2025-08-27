@@ -117,7 +117,7 @@ function MyLibrary() {
                   <button
                     className='absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full transition-all duration-200 z-0 shadow-lg flex items-center justify-center border-2 border-white cursor-pointer'
                     onClick={() => handleDeleteBook(mybook.book.isbn)}
-                    title='도서 삭제'
+                    title={t('page.mypage.library.delete.button')}
                   >
                     <FontAwesomeIcon icon={faTimes} className='text-sm' />
                   </button>

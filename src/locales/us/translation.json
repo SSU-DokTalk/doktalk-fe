@@ -570,6 +570,7 @@
       "no-summaries": "No reading summaries",
       "go-to-search": "Search for Books",
       "delete": {
+        "button": "Delete Book",
         "confirm": "Are you sure you want to remove this book from your library?",
         "success": "The book has been removed from your library",
         "error": "An error occurred while deleting the book"
