@@ -1,4 +1,5 @@
 import { useTranslation } from 'react-i18next';
+import { Link } from 'react-router-dom';
 
 export default function Footer() {
   const { t } = useTranslation();
@@ -32,36 +33,36 @@ export default function Footer() {
             </h4>
             <ul className='!space-y-2 !text-gray-300'>
               <li>
-                <a
-                  href='/debate'
+                <Link
+                  to='/debate'
                   className='hover:!text-white !transition-colors'
                 >
                   {t('footer.services.debate')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href='/summary'
+                <Link
+                  to='/summary'
                   className='hover:!text-white !transition-colors'
                 >
                   {t('footer.services.summary')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href='/post'
+                <Link
+                  to='/post'
                   className='hover:!text-white !transition-colors'
                 >
                   {t('footer.services.post')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href='/search'
+                <Link
+                  to='/search'
                   className='hover:!text-white !transition-colors'
                 >
                   {t('footer.services.search')}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
@@ -73,41 +74,44 @@ export default function Footer() {
             </h4>
             <ul className='!space-y-2 !text-gray-300'>
               <li>
-                <a href='/faq' className='hover:!text-white !transition-colors'>
+                <Link
+                  to='/faq'
+                  className='hover:!text-white !transition-colors'
+                >
                   {t('footer.support.faq')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href='/notice'
+                <Link
+                  to='/notice'
                   className='hover:!text-white !transition-colors'
                 >
                   {t('footer.support.notice')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href='/contact'
+                <Link
+                  to='/contact'
                   className='hover:!text-white !transition-colors'
                 >
                   {t('footer.support.contact')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href='/terms'
+                <Link
+                  to='/terms'
                   className='hover:!text-white !transition-colors'
                 >
                   {t('footer.support.terms')}
-                </a>
+                </Link>
               </li>
               <li>
-                <a
-                  href='/privacy'
+                <Link
+                  to='/privacy'
                   className='hover:!text-white !transition-colors'
                 >
                   {t('footer.support.privacy')}
-                </a>
+                </Link>
               </li>
             </ul>
           </div>
