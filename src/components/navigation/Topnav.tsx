@@ -102,9 +102,9 @@ function Topnav() {
     icon: any;
   }[] = [
     {
-      name: t('component.topnav.language.korean'),
-      value: 'kr',
-      icon: <KR className='lang-menu-icon' />,
+      name: t('component.topnav.language.mongolian'),
+      value: 'mn',
+      icon: <MN className='lang-menu-icon' />,
     },
     {
       name: t('component.topnav.language.english'),
@@ -112,9 +112,9 @@ function Topnav() {
       icon: <US className='lang-menu-icon' />,
     },
     {
-      name: t('component.topnav.language.mongolian'),
-      value: 'mn',
-      icon: <MN className='lang-menu-icon' />,
+      name: t('component.topnav.language.korean'),
+      value: 'kr',
+      icon: <KR className='lang-menu-icon' />,
     },
   ];
 
