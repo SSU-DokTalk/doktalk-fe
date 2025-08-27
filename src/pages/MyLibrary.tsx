@@ -10,6 +10,8 @@ import { CircularProgress } from '@mui/material';
 import noImage from '@/assets/images/no-item.svg';
 import { Link } from 'react-router-dom';
 import InfiniteScroll from '@/components/base/InfiniteScroll';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 function MyLibrary() {
   const [myBooks, setMyBooks] = useState<MyBookType[]>([]);
@@ -45,6 +47,22 @@ function MyLibrary() {
         });
     }
   }, [user.id, hasLoadedMyBook]);
+
+  const handleDeleteBook = async (isbn: number) => {
+    if (confirm(t('page.mypage.library.delete.confirm'))) {
+      try {
+        await axios.delete(`/api/library/${isbn}`);
+        setMyBooks((prevBooks) =>
+          prevBooks.filter((book) => book.book.isbn !== isbn)
+        );
+        setTotalMyBooks((prevTotal) => prevTotal - 1);
+        alert(t('page.mypage.library.delete.success'));
+      } catch (error) {
+        console.error('Delete error:', error);
+        alert(t('page.mypage.library.delete.error'));
+      }
+    }
+  };
 
   return (
     <div className='my-library-page !max-w-6xl !mx-auto !px-4 !py-8'>
@@ -93,9 +111,18 @@ function MyLibrary() {
               </Link>
             </div>
           ) : (
-            <div className='books-grid !grid !grid-cols-2 sm:!grid-cols-3 md:!grid-cols-4 lg:!grid-cols-5 !gap-6'>
+            <div className='books-grid grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-5 gap-6'>
               {myBooks.map((mybook, index) => (
-                <Book key={'book' + index} book={mybook.book} />
+                <div key={'book' + index} className='relative group'>
+                  <button
+                    className='absolute -top-2 -right-2 bg-red-500 hover:bg-red-600 text-white w-8 h-8 rounded-full transition-all duration-200 z-10 shadow-lg flex items-center justify-center border-2 border-white cursor-pointer'
+                    onClick={() => handleDeleteBook(mybook.book.isbn)}
+                    title='도서 삭제'
+                  >
+                    <FontAwesomeIcon icon={faTimes} className='text-sm' />
+                  </button>
+                  <Book book={mybook.book} />
+                </div>
               ))}
             </div>
           )}
