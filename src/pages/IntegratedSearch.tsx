@@ -69,8 +69,12 @@ function IntegratedSearch() {
       // Fetch likes if user is logged in
       if (user.id !== 0 && debateItems.length > 0) {
         try {
+          const params = new URLSearchParams();
+          debateItems.forEach((item: DebateType) =>
+            params.append('ids', String(item.id))
+          );
           const likesResponse = await axios.get(
-            `/api/debates/like?${debateItems.map((item: DebateType) => 'ids=' + item.id).join('&')}`
+            `/api/debates/like?${params.toString()}`
           );
           setLikedDebates(likesResponse.data || []);
         } catch (error) {
@@ -95,8 +99,12 @@ function IntegratedSearch() {
       // Fetch likes if user is logged in
       if (user.id !== 0 && summaryItems.length > 0) {
         try {
+          const params = new URLSearchParams();
+          summaryItems.forEach((item: SummaryType) =>
+            params.append('ids', String(item.id))
+          );
           const likesResponse = await axios.get(
-            `/api/summarys/like?${summaryItems.map((item: SummaryType) => 'ids=' + item.id).join('&')}`
+            `/api/summarys/like?${params.toString()}`
           );
           setLikedSummaries(likesResponse.data || []);
         } catch (error) {
@@ -119,8 +127,12 @@ function IntegratedSearch() {
       // Fetch likes if user is logged in
       if (user.id !== 0 && postItems.length > 0) {
         try {
+          const params = new URLSearchParams();
+          postItems.forEach((item: PostType) =>
+            params.append('ids', String(item.id))
+          );
           const likesResponse = await axios.get(
-            `/api/posts/like?${postItems.map((item: PostType) => 'ids=' + item.id).join('&')}`
+            `/api/posts/like?${params.toString()}`
           );
           setLikedPosts(likesResponse.data || []);
         } catch (error) {
@@ -145,8 +157,12 @@ function IntegratedSearch() {
       // Fetch library status if user is logged in
       if (user.id !== 0 && bookItems.length > 0) {
         try {
+          const params = new URLSearchParams();
+          bookItems.forEach((item: BookType) =>
+            params.append('isbns', String(item.isbn))
+          );
           const libraryResponse = await axios.get(
-            `/api/books/library?${bookItems.map((item: BookType) => 'isbns=' + item.isbn).join('&')}`
+            `/api/books/library?${params.toString()}`
           );
           setBooksInLibrary(libraryResponse.data || []);
         } catch (error) {
