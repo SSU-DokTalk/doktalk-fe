@@ -39,6 +39,7 @@ import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
 import { CheckoutFail } from './components/Payments/CheckoutFail';
 import IntegratedSearch from './pages/IntegratedSearch';
 import MyLibrary from './pages/MyLibrary';
+import ScrollToTop from './components/utils/ScrollToTop';
 
 function App() {
   const dispatch = useAppDispatch();
@@ -119,56 +120,59 @@ function App() {
   }
 
   return (
-    <Routes>
-      <Route path='/checkout'>
-        <Route path='/checkout/success' element={<CheckoutSuccess />}></Route>
-        <Route path='/checkout/fail' element={<CheckoutFail />}></Route>
-      </Route>
-      <Route element={<BasicLayout />}>
-        <Route path='/' element={<Landing />}></Route>
-
-        <Route element={<ContentMainLayout />}>
-          <Route path='/post' element={<Post />}></Route>
-
-          <Route path='/search' element={<Search />}></Route>
-          <Route
-            path='/integrated-search'
-            element={<IntegratedSearch />}
-          ></Route>
-
-          <Route path='/debate' element={<Debate />}></Route>
-          <Route path='/debate/create' element={<CreateDebate />}></Route>
-          <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>
-          <Route
-            path='/debate/:debate_id/update'
-            element={<UpdateDebate />}
-          ></Route>
-
-          <Route path='/summary' element={<Summary />}></Route>
-          <Route path='/summary/create' element={<CreateSummary />}></Route>
-          <Route
-            path='/summary/:summary_id'
-            element={<SummaryDetail />}
-          ></Route>
-          <Route
-            path='/summary/:summary_id/update'
-            element={<UpdateSummary />}
-          ></Route>
-
-          <Route path='/post/:post_id' element={<PostDetail />}></Route>
+    <>
+      <ScrollToTop />
+      <Routes>
+        <Route path='/checkout'>
+          <Route path='/checkout/success' element={<CheckoutSuccess />}></Route>
+          <Route path='/checkout/fail' element={<CheckoutFail />}></Route>
         </Route>
-        <Route path='/mypage' element={<MyPage />}></Route>
-        <Route path='/mypage/library' element={<MyLibrary />}></Route>
+        <Route element={<BasicLayout />}>
+          <Route path='/' element={<Landing />}></Route>
 
-        <Route path='/user/:user_id' element={<UserProfile />}></Route>
-        <Route path='settings' element={<Settings />}></Route>
-      </Route>
-      <Route path='/login' element={<Login />}></Route>
-      <Route path='/register' element={<Register />}></Route>
-      <Route path='/auth/:provider' element={<Auth />}></Route>
+          <Route element={<ContentMainLayout />}>
+            <Route path='/post' element={<Post />}></Route>
 
-      <Route path='*' element={<NotFound />}></Route>
-    </Routes>
+            <Route path='/search' element={<Search />}></Route>
+            <Route
+              path='/integrated-search'
+              element={<IntegratedSearch />}
+            ></Route>
+
+            <Route path='/debate' element={<Debate />}></Route>
+            <Route path='/debate/create' element={<CreateDebate />}></Route>
+            <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>
+            <Route
+              path='/debate/:debate_id/update'
+              element={<UpdateDebate />}
+            ></Route>
+
+            <Route path='/summary' element={<Summary />}></Route>
+            <Route path='/summary/create' element={<CreateSummary />}></Route>
+            <Route
+              path='/summary/:summary_id'
+              element={<SummaryDetail />}
+            ></Route>
+            <Route
+              path='/summary/:summary_id/update'
+              element={<UpdateSummary />}
+            ></Route>
+
+            <Route path='/post/:post_id' element={<PostDetail />}></Route>
+          </Route>
+          <Route path='/mypage' element={<MyPage />}></Route>
+          <Route path='/mypage/library' element={<MyLibrary />}></Route>
+
+          <Route path='/user/:user_id' element={<UserProfile />}></Route>
+          <Route path='settings' element={<Settings />}></Route>
+        </Route>
+        <Route path='/login' element={<Login />}></Route>
+        <Route path='/register' element={<Register />}></Route>
+        <Route path='/auth/:provider' element={<Auth />}></Route>
+
+        <Route path='*' element={<NotFound />}></Route>
+      </Routes>
+    </>
   );
 }
 
