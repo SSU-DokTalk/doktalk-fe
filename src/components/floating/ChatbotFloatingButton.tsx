@@ -15,8 +15,8 @@ import { useTranslation } from 'react-i18next';
  * @description 채팅 메시지의 구조를 정의합니다.
  */
 interface Message {
-  text: string;
-  sender: 'user' | 'ai';
+  message: string;
+  role: 'user' | 'model';
 }
 
 /**
@@ -38,8 +38,7 @@ const ChatbotFloatingButton = (): JSX.Element => {
   const { t } = useTranslation();
   const [isOpen, setIsOpen] = useState<boolean>(false);
   const [messages, setMessages] = useState<Message[]>([
-    { text: t('component.floating.chatbot.test-message'), sender: 'ai' },
-    // { text: '안녕하세요! 무엇이든 물어보세요 👋', sender: 'ai' },
+    { message: t('component.floating.chatbot.test-message'), role: 'model' },
   ]);
   const [inputValue, setInputValue] = useState<string>('');
 
@@ -69,21 +68,52 @@ const ChatbotFloatingButton = (): JSX.Element => {
     setInputValue(prompt);
   };
 
-  const handleSendMessage = (e: React.FormEvent<HTMLFormElement>): void => {
+  const handleSendMessage = async (
+    e: React.FormEvent<HTMLFormElement>
+  ): Promise<void> => {
     e.preventDefault();
-    if (inputValue.trim()) {
-      const userMessage: Message = { text: inputValue, sender: 'user' };
+    const currentMessage = inputValue.trim();
+    if (currentMessage) {
+      const userMessage: Message = { message: currentMessage, role: 'user' };
+      const history = messages;
       setMessages((prev) => [...prev, userMessage]);
       setInputValue('');
 
-      // TODO: Gemini API 호출 로직으로 교체
-      setTimeout(() => {
+      try {
+        const response = await fetch('/api/chatbot', {
+          method: 'POST',
+          headers: {
+            'Content-Type': 'application/json',
+          },
+          body: JSON.stringify({
+            message: currentMessage,
+            chat_history: history,
+          }),
+        });
+
+        if (!response.ok) {
+          throw new Error(`HTTP error! status: ${response.status}`);
+        }
+
+        const data = await response.json();
+        if (!data.success) {
+          throw new Error('API response indicates failure');
+        }
+
         const aiMessage: Message = {
-          text: t('component.floating.chatbot.not-supported'),
-          sender: 'ai',
+          message:
+            data.message || t('component.floating.chatbot.not-supported'),
+          role: 'model',
         };
         setMessages((prev) => [...prev, aiMessage]);
-      }, 1000);
+      } catch (error) {
+        console.error('Chatbot API error:', error);
+        const errorMessage: Message = {
+          message: t('component.floating.chatbot.error-occurred'),
+          role: 'model',
+        };
+        setMessages((prev) => [...prev, errorMessage]);
+      }
     }
   };
 
@@ -157,13 +187,13 @@ const ChatbotFloatingButton = (): JSX.Element => {
               {messages.map((msg, index) => (
                 <div
                   key={index}
-                  className={`flex items-end gap-2 ${msg.sender === 'user' ? 'justify-end' : 'justify-start'}`}
+                  className={`flex items-end gap-2 ${msg.role === 'user' ? 'justify-end' : 'justify-start'}`}
                 >
                   {/* 2. 메시지 패딩 조정 */}
                   <div
-                    className={`max-w-xs rounded-2xl px-3! py-2! shadow-sm lg:max-w-md ${msg.sender === 'user' ? 'rounded-br-none bg-brand1 text-white' : 'rounded-bl-none bg-gray-100 text-gray-800'}`}
+                    className={`max-w-xs rounded-2xl px-3! py-2! shadow-sm lg:max-w-md ${msg.role === 'user' ? 'rounded-br-none bg-brand1 text-white' : 'rounded-bl-none bg-gray-100 text-gray-800'}`}
                   >
-                    {msg.text}
+                    {msg.message}
                   </div>
                 </div>
               ))}
