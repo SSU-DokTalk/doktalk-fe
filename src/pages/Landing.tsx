@@ -104,8 +104,9 @@ function Landing() {
               content={debate.content}
               thumbnail={debate.book.image}
               navigateTo={`/debate/${debate.id}`}
-              width='group w-48 hover:w-64 flex-shrink-0 transition-all duration-300 ease-in-out'
-              imageHeight='h-32 group-hover:h-48 transition-all duration-300 ease-in-out'
+              width='group w-44 hover:w-52 flex-shrink-0 transition-all duration-300 ease-in-out'
+              objectFit='cover'
+              imageHeight='h-64 group-hover:h-76 transition-all duration-300 ease-in-out'
             />
           ))}
         </div>
