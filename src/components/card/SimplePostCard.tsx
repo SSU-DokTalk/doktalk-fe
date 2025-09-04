@@ -10,6 +10,7 @@ function SimpleCard({
   width = '',
   height = '',
   imageHeight = 'h-36',
+  objectFit = 'contain',
 }: {
   title: string;
   content: string;
@@ -18,6 +19,7 @@ function SimpleCard({
   width?: string;
   height?: string;
   imageHeight?: string;
+  objectFit?: 'contain' | 'cover';
 }) {
   const { t } = useTranslation();
   const navigate = useNavigate();
@@ -33,8 +35,7 @@ function SimpleCard({
         <Image
           src={thumbnail}
           alt='post image'
-          objectFit='contain'
-          // objectFit='cover'
+          objectFit={objectFit}
           className='w-full h-full'
         />
       </div>
