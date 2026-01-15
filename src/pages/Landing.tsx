@@ -27,29 +27,54 @@ function Landing() {
 
   useEffect(() => {
     const fetchData = async () => {
-      try {
-        setLoading(true);
-        const [postsResponse, debatesResponse, summariesResponse] =
-          await Promise.all([
-            fetch('/api/post/recent?page=1&size=6'),
-            axios.get('/api/debate/popular'),
-            axios.get('/api/summary/popular'),
-          ]);
+      setLoading(true);
+      setError(null); // Reset error state
 
-        if (!postsResponse.ok) {
-          throw new Error(`HTTP error! status: ${postsResponse.status}`);
+      const results = await Promise.allSettled([
+        fetch('/api/post/recent?page=1&size=6'),
+        axios.get('/api/debate/popular'),
+        axios.get('/api/summary/popular'),
+      ]);
+
+      const [postsResult, debatesResult, summariesResult] = results;
+
+      // Handle Posts
+      if (postsResult.status === 'fulfilled') {
+        const response = postsResult.value;
+        if (response.ok) {
+          try {
+            const data = await response.json();
+            setPosts(data.items || []);
+          } catch (e) {
+            console.error('Error parsing posts JSON:', e);
+            setPosts([]);
+          }
+        } else {
+          console.error('Posts fetch failed with status:', response.status);
+          setPosts([]);
         }
-        const postsData = await postsResponse.json();
-        setPosts(postsData.items);
-
-        setRecommendDebates(debatesResponse.data);
-        setRecommendSummaries(summariesResponse.data);
-      } catch (e: any) {
-        setError(e.message);
-        console.error('Failed to fetch data:', e);
-      } finally {
-        setLoading(false);
+      } else {
+        console.error('Posts fetch rejected:', postsResult.reason);
+        setPosts([]);
       }
+
+      // Handle Debates
+      if (debatesResult.status === 'fulfilled') {
+        setRecommendDebates(debatesResult.value.data || []);
+      } else {
+        console.error('Debates fetch rejected:', debatesResult.reason);
+        setRecommendDebates([]);
+      }
+
+      // Handle Summaries
+      if (summariesResult.status === 'fulfilled') {
+        setRecommendSummaries(summariesResult.value.data || []);
+      } else {
+        console.error('Summaries fetch rejected:', summariesResult.reason);
+        setRecommendSummaries([]);
+      }
+
+      setLoading(false);
     };
 
     fetchData();
