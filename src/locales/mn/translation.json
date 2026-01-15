@@ -193,10 +193,10 @@
           "no-payment-item": "Төлбөрийн түүх байхгүй байна",
           "no-payment-date": "Тухайн өдрийн төлбөрийн түүх байхгүй байна",
           "no-book-item": "Уншиж буй ном байхгүй байна",
-          "currently-reading-book-prefix": "Би уншиж буй ном",
-          "currently-reading-book-postfix": "",
-          "currently-reading-summary-prefix": "Би уншиж буй хураангуй",
-          "currently-reading-summary-postfix": "",
+          "currently-reading-book-prefix": "Миний уншиж буй",
+          "currently-reading-book-postfix": " ном",
+          "currently-reading-summary-prefix": "Миний уншиж буй",
+          "currently-reading-summary-postfix": " хураангуй",
           "show-more": "Илүү харах",
           "currency": "₮"
         },
@@ -355,8 +355,8 @@
         "create": "Хэлэлцүүлгийн өрөө үүсгэх"
       },
       "item": {
-        "no-debate-item": "Одоогоор бичигдсэн хураангуй байхгүй байна",
-        "no-summary-item": "Одоогоор хэлэлцүүлгийн өрөө байхгүй байна"
+        "no-debate-item": "Одоогоор хэлэлцүүлгийн өрөө байхгүй байна",
+        "no-summary-item": "Одоогоор бичигдсэн хураангуй байхгүй байна"
       }
     },
     "summary": {
@@ -557,21 +557,23 @@
     "not-found": {
       "message": "Хуудас олдсонгүй!"
     },
-    "mypage.library": {
-      "title": "Миний номын сан",
-      "description": "Уншиж буй ном болон хураангуйгаа удирдах",
-      "sections": {
-        "my-books": "Уншиж буй номнууд",
-        "purchased-summaries": "Уншиж буй хураангуй"
-      },
-      "no-books": "Номын санд ном байхгүй байна",
-      "no-summaries": "Уншиж буй хураангуй байхгүй байна",
-      "go-to-search": "Ном хайх",
-      "delete": {
-        "button": "Ном устгах",
-        "confirm": "Энэ номыг номын сангаас устгахдаа итгэлтэй байна уу?",
-        "success": "Ном номын сангаас амжилттай устгагдлаа",
-        "error": "Номыг устгах явцад алдаа гарлаа"
+    "mypage": {
+      "library": {
+        "title": "Миний номын сан",
+        "description": "Уншиж буй ном болон хураангуйгаа удирдах",
+        "sections": {
+          "my-books": "Уншиж буй номнууд",
+          "purchased-summaries": "Уншиж буй хураангуй"
+        },
+        "no-books": "Номын санд ном байхгүй байна",
+        "no-summaries": "Уншиж буй хураангуй байхгүй байна",
+        "go-to-search": "Ном хайх",
+        "delete": {
+          "button": "Ном устгах",
+          "confirm": "Энэ номыг номын сангаас устгахдаа итгэлтэй байна уу?",
+          "success": "Ном номын сангаас амжилттай устгагдлаа",
+          "error": "Номыг устгах явцад алдаа гарлаа"
+        }
       }
     }
   },

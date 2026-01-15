@@ -355,8 +355,8 @@
         "create": "토론방 생성"
       },
       "item": {
-        "no-debate-item": "아직 작성된 요약이 없습니다",
-        "no-summary-item": "아직 토론방이 없습니다"
+        "no-debate-item": "아직 토론방이 없습니다",
+        "no-summary-item": "아직 작성된 요약이 없습니다"
       }
     },
     "summary": {
@@ -557,21 +557,23 @@
     "not-found": {
       "message": "Page Not Found!"
     },
-    "mypage.library": {
-      "title": "내 서재",
-      "description": "읽고 있는 책과 요약을 관리하세요",
-      "sections": {
-        "my-books": "읽고 있는 책",
-        "purchased-summaries": "읽고 있는 요약들"
-      },
-      "no-books": "읽고 있는 책이 없습니다",
-      "no-summaries": "읽고 있는 요약이 없습니다",
-      "go-to-search": "도서 검색하기",
-      "delete": {
-        "button": "도서 삭제",
-        "confirm": "이 책을 서재에서 삭제하시겠습니까?",
-        "success": "책이 서재에서 삭제되었습니다",
-        "error": "삭제 중 오류가 발생했습니다"
+    "mypage": {
+      "library": {
+        "title": "내 서재",
+        "description": "읽고 있는 책과 요약을 관리하세요",
+        "sections": {
+          "my-books": "읽고 있는 책",
+          "purchased-summaries": "읽고 있는 요약들"
+        },
+        "no-books": "읽고 있는 책이 없습니다",
+        "no-summaries": "읽고 있는 요약이 없습니다",
+        "go-to-search": "도서 검색하기",
+        "delete": {
+          "button": "도서 삭제",
+          "confirm": "이 책을 서재에서 삭제하시겠습니까?",
+          "success": "책이 서재에서 삭제되었습니다",
+          "error": "삭제 중 오류가 발생했습니다"
+        }
       }
     }
   },
