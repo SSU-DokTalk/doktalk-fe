@@ -125,7 +125,7 @@ export default function Footer() {
           <div className='!flex !space-x-4 !text-gray-400 !text-sm'>
             <span>{t('footer.version.label')} 2.0.0</span>
             <span>|</span>
-            <span>{t('footer.version.last_update')}: 2024.12.25</span>
+            <span>{t('footer.version.last_update')}: 2026.01.13</span>
           </div>
         </div>
       </div>
