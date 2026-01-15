@@ -1,3 +1,4 @@
+@use "sass:color";
 @use "../variables" as v;
 
 #integrated-search-page {
@@ -298,7 +299,7 @@
           &.add {
              background-color: v.$brand-color1;
              color: white;
-             &:hover { background-color: darken(v.$brand-color1, 5%); }
+             &:hover { background-color: color.adjust(v.$brand-color1, $lightness: -5%); }
           }
           &.remove {
              background-color: white;
