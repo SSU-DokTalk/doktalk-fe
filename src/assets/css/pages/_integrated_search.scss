@@ -151,7 +151,7 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    min-height: 0; // Fix flebox overflow
+    min-height: 0; // Fix flexbox overflow
 
     .card-title {
       font-size: 1rem;
