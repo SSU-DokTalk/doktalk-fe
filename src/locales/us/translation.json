@@ -78,9 +78,7 @@
         "not-supported": "Sorry, the chatbot feature is still in development. Please wait a little longer! 🙏",
         "ask-like-this": "Try asking like this!",
         "placeholder": "Type a message...",
-        "prompt1": "What was the most impressive part of this book?",
-        "prompt2": "What's the core message the author wants to convey?",
-        "prompt3": "Can you recommend other books on similar topics?",
+        "prompt1": "Can you recommend a good book for light reading?",
         "aria": {
           "open-chat": "Open AI chatbot",
           "close-chat": "Close chatbot",

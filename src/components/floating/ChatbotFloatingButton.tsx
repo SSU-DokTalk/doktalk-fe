@@ -44,11 +44,7 @@ const ChatbotFloatingButton = (): JSX.Element => {
 
   const messagesEndRef = useRef<HTMLDivElement>(null);
 
-  const examplePrompts: string[] = [
-    t('component.floating.chatbot.prompt1'),
-    t('component.floating.chatbot.prompt2'),
-    t('component.floating.chatbot.prompt3'),
-  ];
+  const examplePrompts: string[] = [t('component.floating.chatbot.prompt1')];
 
   const scrollToBottom = (): void => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' });

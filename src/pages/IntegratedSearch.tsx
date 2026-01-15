@@ -4,10 +4,10 @@ import { useTranslation } from 'react-i18next';
 import axios from 'axios';
 
 // Import card components
-import DebateCard from '@/components/card/DebateCard';
-import SummaryCard from '@/components/card/SummaryCard';
-import PostCard from '@/components/card/PostCard';
-import BookCard from '@/components/card/BookCard';
+import SearchDebateCard from '@/components/card/search/SearchDebateCard';
+import SearchSummaryCard from '@/components/card/search/SearchSummaryCard';
+import SearchPostCard from '@/components/card/search/SearchPostCard';
+import SearchBookCard from '@/components/card/search/SearchBookCard';
 
 // Import types
 import { DebateType, SummaryType, PostType, BookType } from '@/types/data';
@@ -20,10 +20,6 @@ function IntegratedSearch() {
   const { t } = useTranslation();
   const user = useAppSelector(selectUser);
 
-  // State for liked items
-  const [likedDebates, setLikedDebates] = useState<number[]>([]);
-  const [likedSummaries, setLikedSummaries] = useState<number[]>([]);
-  const [likedPosts, setLikedPosts] = useState<number[]>([]);
   const [booksInLibrary, setBooksInLibrary] = useState<number[]>([]);
 
   // Results state
@@ -59,7 +55,6 @@ function IntegratedSearch() {
         }
       });
     } catch (error) {
-      // This catch block is unlikely to be reached with allSettled, but keep for safety
       console.error('Unexpected error fetching search results:', error);
     } finally {
       setIsLoading(false);
@@ -71,25 +66,7 @@ function IntegratedSearch() {
       const response = await axios.get(
         `/api/debate?search=${searchQuery}&searchby=it&sortby=latest`
       );
-      const debateItems = response.data.items || [];
-      setDebates(debateItems);
-
-      // Fetch likes if user is logged in
-      if (user.id !== 0 && debateItems.length > 0) {
-        try {
-          const params = new URLSearchParams();
-          debateItems.forEach((item: DebateType) =>
-            params.append('ids', String(item.id))
-          );
-          const likesResponse = await axios.get(
-            `/api/debates/like?${params.toString()}`
-          );
-          setLikedDebates(likesResponse.data || []);
-        } catch (error) {
-          console.error('Error fetching debate likes:', error);
-          setLikedDebates([]);
-        }
-      }
+      setDebates(response.data.items || []);
     } catch (error) {
       console.error('Error fetching debates:', error);
       setDebates([]);
@@ -101,25 +78,7 @@ function IntegratedSearch() {
       const response = await axios.get(
         `/api/summary?search=${searchQuery}&searchby=it&sortby=latest`
       );
-      const summaryItems = response.data.items || [];
-      setSummaries(summaryItems);
-
-      // Fetch likes if user is logged in
-      if (user.id !== 0 && summaryItems.length > 0) {
-        try {
-          const params = new URLSearchParams();
-          summaryItems.forEach((item: SummaryType) =>
-            params.append('ids', String(item.id))
-          );
-          const likesResponse = await axios.get(
-            `/api/summarys/like?${params.toString()}`
-          );
-          setLikedSummaries(likesResponse.data || []);
-        } catch (error) {
-          console.error('Error fetching summary likes:', error);
-          setLikedSummaries([]);
-        }
-      }
+      setSummaries(response.data.items || []);
     } catch (error) {
       console.error('Error fetching summaries:', error);
       setSummaries([]);
@@ -129,25 +88,7 @@ function IntegratedSearch() {
   const fetchPosts = async () => {
     try {
       const response = await axios.get(`/api/post?search=${searchQuery}`);
-      const postItems = response.data.items || [];
-      setPosts(postItems);
-
-      // Fetch likes if user is logged in
-      if (user.id !== 0 && postItems.length > 0) {
-        try {
-          const params = new URLSearchParams();
-          postItems.forEach((item: PostType) =>
-            params.append('ids', String(item.id))
-          );
-          const likesResponse = await axios.get(
-            `/api/posts/like?${params.toString()}`
-          );
-          setLikedPosts(likesResponse.data || []);
-        } catch (error) {
-          console.error('Error fetching post likes:', error);
-          setLikedPosts([]);
-        }
-      }
+      setPosts(response.data.items || []);
     } catch (error) {
       console.error('Error fetching posts:', error);
       setPosts([]);
@@ -185,152 +126,115 @@ function IntegratedSearch() {
   };
 
   return (
-    <div className='integrated-search-page container !mx-auto !px-4 !py-8'>
+    <div id='integrated-search-page'>
       {/* Search Header */}
-      <div className='search-header !mb-8'>
-        <h1 className='!text-3xl !font-bold !text-brand1 !mb-2'>
-          {t('page.integrated-search.title')}
-        </h1>
+      <div className='search-header'>
+        <h1>{t('page.integrated-search.title')}</h1>
         {searchQuery && (
-          <p className='!text-lg !text-gray-600'>
-            "<span className='!font-semibold !text-brand1'>{searchQuery}</span>"
+          <p className='search-query-text'>
+            "<span className='query-highlight'>{searchQuery}</span>"
             {t('page.integrated-search.search-result')}
           </p>
         )}
       </div>
 
       {/* 독서토론 섹션 */}
-      <section className='search-section !mb-12'>
-        <div className='section-header !mb-6'>
-          <h2 className='!text-2xl !font-bold !text-gray-800 !mb-2'>
-            {t('page.integrated-search.sections.debate')}
-          </h2>
-          <div className='!w-full !h-px !bg-gray-200'></div>
+      <section className='search-section'>
+        <div className='section-header'>
+          <h2>{t('page.integrated-search.sections.debate')}</h2>
+          <div className='section-divider'></div>
         </div>
         <div className='results-container'>
           {isLoading ? (
-            <div className='loading !text-center !py-8'>
-              <p className='!text-gray-500'>{t('common.loading')}</p>
+            <div className='loading'>
+              <p>{t('common.loading')}</p>
             </div>
           ) : debates.length > 0 ? (
-            <div className='!flex !gap-6 !overflow-x-auto !pb-4 !scrollbar-thin !scrollbar-thumb-gray-300 !scrollbar-track-gray-100'>
+            <div className='results-list'>
               {debates.map((debate) => (
-                <div
-                  key={debate.id}
-                  className='result-card !flex-shrink-0 !w-80'
-                >
-                  <DebateCard
-                    debate={debate}
-                    hasLiked={likedDebates.includes(debate.id)}
-                    setHasLiked={setLikedDebates}
-                  />
+                <div key={debate.id} className='result-card'>
+                  <SearchDebateCard debate={debate} />
                 </div>
               ))}
             </div>
           ) : (
-            <div className='no-results !text-center !py-8'>
-              <p className='!text-gray-500'>
-                {t('page.integrated-search.no-results')}
-              </p>
+            <div className='no-results'>
+              <p>{t('page.integrated-search.no-results')}</p>
             </div>
           )}
         </div>
       </section>
 
       {/* 도서 요약 섹션 */}
-      <section className='search-section !mb-12'>
-        <div className='section-header !mb-6'>
-          <h2 className='!text-2xl !font-bold !text-gray-800 !mb-2'>
-            {t('page.integrated-search.sections.summary')}
-          </h2>
-          <div className='!w-full !h-px !bg-gray-200'></div>
+      <section className='search-section'>
+        <div className='section-header'>
+          <h2>{t('page.integrated-search.sections.summary')}</h2>
+          <div className='section-divider'></div>
         </div>
         <div className='results-container'>
           {isLoading ? (
-            <div className='loading !text-center !py-8'>
-              <p className='!text-gray-500'>{t('common.loading')}</p>
+            <div className='loading'>
+              <p>{t('common.loading')}</p>
             </div>
           ) : summaries.length > 0 ? (
-            <div className='!flex !gap-6 !overflow-x-auto !pb-4 !scrollbar-thin !scrollbar-thumb-gray-300 !scrollbar-track-gray-100'>
+            <div className='results-list'>
               {summaries.map((summary) => (
-                <div
-                  key={summary.id}
-                  className='result-card !flex-shrink-0 !w-80'
-                >
-                  <SummaryCard
-                    summary={summary}
-                    hasLiked={likedSummaries.includes(summary.id)}
-                    setHasLiked={setLikedSummaries}
-                  />
+                <div key={summary.id} className='result-card'>
+                  <SearchSummaryCard summary={summary} />
                 </div>
               ))}
             </div>
           ) : (
-            <div className='no-results !text-center !py-8'>
-              <p className='!text-gray-500'>
-                {t('page.integrated-search.no-results')}
-              </p>
+            <div className='no-results'>
+              <p>{t('page.integrated-search.no-results')}</p>
             </div>
           )}
         </div>
       </section>
 
       {/* 게시글 섹션 */}
-      <section className='search-section !mb-12'>
-        <div className='section-header !mb-6'>
-          <h2 className='!text-2xl !font-bold !text-gray-800 !mb-2'>
-            {t('page.integrated-search.sections.post')}
-          </h2>
-          <div className='!w-full !h-px !bg-gray-200'></div>
+      <section className='search-section'>
+        <div className='section-header'>
+          <h2>{t('page.integrated-search.sections.post')}</h2>
+          <div className='section-divider'></div>
         </div>
         <div className='results-container'>
           {isLoading ? (
-            <div className='loading !text-center !py-8'>
-              <p className='!text-gray-500'>{t('common.loading')}</p>
+            <div className='loading'>
+              <p>{t('common.loading')}</p>
             </div>
           ) : posts.length > 0 ? (
-            <div className='!flex !gap-6 !overflow-x-auto !pb-4 !scrollbar-thin !scrollbar-thumb-gray-300 !scrollbar-track-gray-100'>
+            <div className='results-list'>
               {posts.map((post) => (
-                <div key={post.id} className='result-card !flex-shrink-0 !w-80'>
-                  <PostCard
-                    post={post}
-                    hasLiked={likedPosts.includes(post.id)}
-                    setHasLiked={setLikedPosts}
-                  />
+                <div key={post.id} className='result-card'>
+                  <SearchPostCard post={post} />
                 </div>
               ))}
             </div>
           ) : (
-            <div className='no-results !text-center !py-8'>
-              <p className='!text-gray-500'>
-                {t('page.integrated-search.no-results')}
-              </p>
+            <div className='no-results'>
+              <p>{t('page.integrated-search.no-results')}</p>
             </div>
           )}
         </div>
       </section>
 
       {/* 도서 검색 섹션 */}
-      <section className='search-section !mb-12'>
-        <div className='section-header !mb-6'>
-          <h2 className='!text-2xl !font-bold !text-gray-800 !mb-2'>
-            {t('page.integrated-search.sections.book')}
-          </h2>
-          <div className='!w-full !h-px !bg-gray-200'></div>
+      <section className='search-section'>
+        <div className='section-header'>
+          <h2>{t('page.integrated-search.sections.book')}</h2>
+          <div className='section-divider'></div>
         </div>
         <div className='results-container'>
           {isLoading ? (
-            <div className='loading !text-center !py-8'>
-              <p className='!text-gray-500'>{t('common.loading')}</p>
+            <div className='loading'>
+              <p>{t('common.loading')}</p>
             </div>
           ) : books.length > 0 ? (
-            <div className='!flex !gap-6 !overflow-x-auto !pb-4 !scrollbar-thin !scrollbar-thumb-gray-300 !scrollbar-track-gray-100'>
+            <div className='results-list'>
               {books.map((book) => (
-                <div
-                  key={book.isbn}
-                  className='result-card !flex-shrink-0 !w-96'
-                >
-                  <BookCard
+                <div key={book.isbn} className='result-card book-card-wrapper'>
+                  <SearchBookCard
                     book={book}
                     isInLibrary={booksInLibrary.includes(book.isbn)}
                     setIsInLibrary={setBooksInLibrary}
@@ -339,10 +243,8 @@ function IntegratedSearch() {
               ))}
             </div>
           ) : (
-            <div className='no-results !text-center !py-8'>
-              <p className='!text-gray-500'>
-                {t('page.integrated-search.no-results')}
-              </p>
+            <div className='no-results'>
+              <p>{t('page.integrated-search.no-results')}</p>
             </div>
           )}
         </div>

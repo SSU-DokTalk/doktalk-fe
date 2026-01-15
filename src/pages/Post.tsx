@@ -60,7 +60,7 @@ function Post() {
   });
 
   return (
-    <div id='landing-page' className='pt-9!'>
+    <div id='landing-page' className='pt-9! md:flex-row!'>
       <MiddlePanel className='post-container px-4! w-full'>
         {user.id != 0 ? (
           <div className='write-post'>
