@@ -1,69 +1,59 @@
 import { useEffect, useState } from 'react';
 
 import { PostType, SummaryType } from '@/types/data';
-import { useAppSelector } from '@/stores/hooks';
-import { selectUser } from '@/stores/user';
-import PopularSummaryCard from '../components/card/PopularSummaryCard';
 import { useTranslation } from 'react-i18next';
 import axios from 'axios';
-import { MiddlePanel, RightPanel } from '@/components/panel/sidePanel';
-import SimplePostCard from '@/components/card/SimplePostCard';
 import { DebateType } from '@/types/data';
-import { DUMMY_DEBATES, DUMMY_SUMMARIES } from '@/common/dummy_data';
-import Carousel from '@/components/carousel/Carousel';
-import CarouselDebateCard from '@/components/card/CarouselDebateCard';
-import { isMd } from '@/functions/breakpoint';
-import CarouselSummaryCard from '@/components/card/CarouselSummaryCard';
+import LandingDebateCard from '@/components/card/LandingDebateCard';
+import LandingSummaryCard from '@/components/card/LandingSummaryCard';
+import LandingPostCard from '@/components/card/LandingPostCard';
+import { useNavigate } from 'react-router-dom';
+import WriteIcon from '@/assets/images/write.svg?react';
+import WritePostModal from '@/components/modal/WritePostModal';
 
 function Landing() {
-  const [recommendDebates, ..._] = useState<DebateType[]>(DUMMY_DEBATES);
-  const [recommendSummaries, ...__] = useState<SummaryType[]>(DUMMY_SUMMARIES);
+  const navigate = useNavigate();
+  const [recommendDebates, setRecommendDebates] = useState<DebateType[]>([]);
+  const [recommendSummaries, setRecommendSummaries] = useState<SummaryType[]>(
+    []
+  );
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const [posts, setPosts] = useState<PostType[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
 
-  const [popularSummaries, setPopularSummaries] = useState<SummaryType[]>([]);
-  const [isPopularSummaryLoaded, setIsPopularSummaryLoaded] =
-    useState<boolean>(false);
-
   const { t } = useTranslation();
-  const user = useAppSelector(selectUser);
 
   useEffect(() => {
-    const fetchPosts = async () => {
+    const fetchData = async () => {
       try {
         setLoading(true);
-        const response = await fetch('/api/post/recent?page=1&size=12');
-        if (!response.ok) {
-          throw new Error(`HTTP error! status: ${response.status}`);
+        const [postsResponse, debatesResponse, summariesResponse] =
+          await Promise.all([
+            fetch('/api/post/recent?page=1&size=6'),
+            axios.get('/api/debate/popular'),
+            axios.get('/api/summary/popular'),
+          ]);
+
+        if (!postsResponse.ok) {
+          throw new Error(`HTTP error! status: ${postsResponse.status}`);
         }
-        const data = await response.json();
-        setPosts(data.items);
+        const postsData = await postsResponse.json();
+        setPosts(postsData.items);
+
+        setRecommendDebates(debatesResponse.data);
+        setRecommendSummaries(summariesResponse.data);
       } catch (e: any) {
         setError(e.message);
-        console.error('Failed to fetch posts:', e);
+        console.error('Failed to fetch data:', e);
       } finally {
         setLoading(false);
       }
     };
 
-    fetchPosts();
+    fetchData();
   }, []); // 컴포넌트 마운트 시 한 번만 실행
-
-  useEffect(() => {
-    if (popularSummaries.length === 0 && !isPopularSummaryLoaded) {
-      axios
-        .get(`/api/summary/popular`)
-        .then(async (res) => {
-          let { data: items }: { data: SummaryType[] } = res;
-          setPopularSummaries(items);
-        })
-        .finally(() => {
-          setIsPopularSummaryLoaded(true);
-        });
-    }
-  });
 
   if (loading) {
     return (
@@ -84,62 +74,80 @@ function Landing() {
   }
 
   return (
-    <div id='landing-page' className='flex flex-col'>
-      <div className='recommendation-section'>
-        <div className='recommended-debates md:pl-24! pr-12 mb-8'>
-          <div className='recommend-content-container md:my-9!'>
-            <div className='recommend-content-title ml-6!'>
-              {t('page.debate.title.recommend')}
-            </div>
-            <Carousel size={3} className='recommend-content mx-auto! md:m-0!'>
-              {recommendDebates.map((debate, idx) => (
-                <CarouselDebateCard
-                  key={'recommend-debate' + idx}
-                  debate={debate}
-                />
-              ))}
-            </Carousel>
-          </div>
-        </div>
+    <div id='landing-page'>
+      <WritePostModal showModal={showModal} setShowModal={setShowModal} />
+      <div className='h-4'></div>
 
-        <div className='popular-content-container md:my-9!'>
-          <div className='popular-content-title ml-6!'>
-            {t('page.summary.title.recommend')}
-          </div>
-          <Carousel size={3}>
-            {recommendSummaries.map((summary, index) => (
-              <CarouselSummaryCard
-                key={'popular-summary' + index}
-                summary={summary}
-              />
-            ))}
-          </Carousel>
+      {/* 추천 토론방 섹션 */}
+      <div className='landing-section'>
+        <div className='section-header'>
+          <h2>추천 토론방</h2>
+          <button className='more-btn' onClick={() => navigate('/debate')}>
+            더보기
+            <span>+</span>
+          </button>
+        </div>
+        <div className='horizontal-scroll'>
+          {recommendDebates.map((debate, idx) => (
+            <LandingDebateCard
+              key={'recommend-debate-' + idx}
+              debate={debate}
+            />
+          ))}
         </div>
       </div>
 
-      <div className='flex flex-row md:pl-24! pr-12'>
-        <div className='container mx-auto px-4 py-8'>
-          <h1 className='text-3xl! font-bold! text-brand1 mb-6!'>
-            {t('page.landing.title.post')}
-          </h1>
-          {posts.length === 0 ? (
-            <p className='text-gray-600'>
-              {t('page.landing.item.no-post-item')}
-            </p>
-          ) : (
-            <div className=''>
-              {posts.map((post) => (
-                <SimplePostCard
-                  key={post.id}
-                  title={post.title}
-                  content={post.content}
-                  thumbnail={post.files?.[0].url}
-                  navigateTo={`/post/${post.id}`}
-                />
-              ))}
-            </div>
-          )}
+      {/* 인기 요약 섹션 */}
+      <div className='landing-section'>
+        <div className='section-header'>
+          <h2>인기 요약</h2>
+          <button className='more-btn' onClick={() => navigate('/summary')}>
+            더보기
+            <span>+</span>
+          </button>
         </div>
+        <div className='horizontal-scroll'>
+          {recommendSummaries.map((summary, index) => (
+            <LandingSummaryCard
+              key={'popular-summary-' + index}
+              summary={summary}
+            />
+          ))}
+        </div>
+      </div>
+
+      {/* 게시글 섹션 */}
+      <div className='landing-section'>
+        <div className='section-header'>
+          <h2>게시글</h2>
+          <button className='write-btn' onClick={() => setShowModal(true)}>
+            <span>게시글 쓰기</span>
+            <WriteIcon className='write-icon' width={17} fill={'#ffffff'} />
+          </button>
+        </div>
+        {posts.length === 0 ? (
+          <p className='no-content'>{t('page.landing.item.no-post-item')}</p>
+        ) : (
+          <div className='post-list'>
+            {posts.map((post) => (
+              <LandingPostCard
+                key={post.id}
+                id={post.id}
+                title={post.title}
+                content={post.content}
+                thumbnail={post.files?.[0]?.url}
+                likeCount={post.likes_num || 0}
+                commentCount={post.comments_num || 0}
+                author={post.user.name || '익명'}
+                createdAt={post.created}
+              />
+            ))}
+          </div>
+        )}
+        <button className='more-btn' onClick={() => navigate('/post')}>
+          더보기
+          <span>+</span>
+        </button>
       </div>
     </div>
   );
