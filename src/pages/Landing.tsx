@@ -81,7 +81,7 @@ function Landing() {
       {/* 추천 토론방 섹션 */}
       <div className='landing-section'>
         <div className='section-header'>
-          <h2>추천 토론방</h2>
+          <h2>{t('page.landing.title.recommend-postfix')}</h2>
           <button className='more-btn' onClick={() => navigate('/debate')}>
             더보기
             <span>+</span>
