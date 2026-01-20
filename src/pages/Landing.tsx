@@ -140,55 +140,62 @@ function Landing() {
           <h2>{t('page.landing.title.recommend')} 💬</h2>
         </div>
 
-        <div className='relative-container'>
-          {/* 좌측 화살표 버튼 */}
-          <button
-            className='scroll-nav prev'
-            onClick={goToPrevDebates}
-            aria-label={t('page.landing.button.previous')}
-          >
-            <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M15 19l-7-7 7-7'
-              />
-            </svg>
-          </button>
-
-          <div className='carousel-wrapper'>
-            <div className='carousel-header'>
-              <button className='more-btn' onClick={() => navigate('/debate')}>
-                {t('page.landing.button.more')}
-              </button>
-            </div>
-            <div className='carousel-container' ref={carouselRef}>
-              {recommendDebates.map((debate, idx) => (
-                <LandingDebateCard
-                  key={'recommend-debate-' + idx}
-                  debate={debate}
+        {recommendDebates.length === 0 ? (
+          <p className='no-content'>{t('page.landing.item.no-debate-item')}</p>
+        ) : (
+          <div className='relative-container'>
+            {/* 좌측 화살표 버튼 */}
+            <button
+              className='scroll-nav prev'
+              onClick={goToPrevDebates}
+              aria-label={t('page.landing.button.previous')}
+            >
+              <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M15 19l-7-7 7-7'
                 />
-              ))}
-            </div>
-          </div>
+              </svg>
+            </button>
 
-          {/* 우측 화살표 버튼 */}
-          <button
-            className='scroll-nav next'
-            onClick={goToNextDebates}
-            aria-label={t('page.landing.button.next')}
-          >
-            <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
-              <path
-                strokeLinecap='round'
-                strokeLinejoin='round'
-                strokeWidth={2}
-                d='M9 5l7 7-7 7'
-              />
-            </svg>
-          </button>
-        </div>
+            <div className='carousel-wrapper'>
+              <div className='carousel-header'>
+                <button
+                  className='more-btn'
+                  onClick={() => navigate('/debate')}
+                >
+                  {t('page.landing.button.more')}
+                </button>
+              </div>
+              <div className='carousel-container' ref={carouselRef}>
+                {recommendDebates.map((debate, idx) => (
+                  <LandingDebateCard
+                    key={'recommend-debate-' + idx}
+                    debate={debate}
+                  />
+                ))}
+              </div>
+            </div>
+
+            {/* 우측 화살표 버튼 */}
+            <button
+              className='scroll-nav next'
+              onClick={goToNextDebates}
+              aria-label={t('page.landing.button.next')}
+            >
+              <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+                <path
+                  strokeLinecap='round'
+                  strokeLinejoin='round'
+                  strokeWidth={2}
+                  d='M9 5l7 7-7 7'
+                />
+              </svg>
+            </button>
+          </div>
+        )}
       </div>
 
       {/* 인기 요약 섹션 */}

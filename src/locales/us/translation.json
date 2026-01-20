@@ -327,7 +327,8 @@
       },
       "item": {
         "no-post-item": "No posts to display",
-        "no-summary-item": "There is no summary item"
+        "no-summary-item": "There is no summary item",
+        "no-debate-item": "No recommended discussions"
       },
       "loading": "Loading...",
       "error": "Failed to load data"
