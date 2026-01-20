@@ -25,6 +25,27 @@ function Landing() {
 
   const { t } = useTranslation();
 
+  // 카로셀 상태 (현재 시작 인덱스)
+  const [debateStartIndex, setDebateStartIndex] = useState(0);
+  const CARDS_PER_PAGE = 4;
+
+  // 이전/다음으로 1개씩 이동
+  const goToPrevDebates = () => {
+    setDebateStartIndex((prev) => (prev > 0 ? prev - 1 : 0));
+  };
+
+  const goToNextDebates = () => {
+    setDebateStartIndex((prev) =>
+      prev + CARDS_PER_PAGE < recommendDebates.length ? prev + 1 : prev
+    );
+  };
+
+  // 현재 보여줄 카드들
+  const visibleDebates = recommendDebates.slice(
+    debateStartIndex,
+    debateStartIndex + CARDS_PER_PAGE
+  );
+
   useEffect(() => {
     const fetchData = async () => {
       setLoading(true);
@@ -107,18 +128,57 @@ function Landing() {
         <div className='section-header tab-style'>
           <h2>{t('page.landing.title.recommend-postfix')} 💬</h2>
         </div>
-        <div className='section-header-more'>
-          <button className='more-btn' onClick={() => navigate('/debate')}>
-            더보기 +
-          </button>
-        </div>
-        <div className='horizontal-scroll'>
-          {recommendDebates.map((debate, idx) => (
-            <LandingDebateCard
-              key={'recommend-debate-' + idx}
-              debate={debate}
+
+        {/* 좌측 화살표 버튼 */}
+        <button
+          className='scroll-nav prev'
+          onClick={goToPrevDebates}
+          aria-label='이전'
+          disabled={debateStartIndex === 0}
+        >
+          <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M15 19l-7-7 7-7'
             />
-          ))}
+          </svg>
+        </button>
+
+        {/* 우측 화살표 버튼 */}
+        <button
+          className='scroll-nav next'
+          onClick={goToNextDebates}
+          aria-label='다음'
+          disabled={
+            debateStartIndex + CARDS_PER_PAGE >= recommendDebates.length
+          }
+        >
+          <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+            <path
+              strokeLinecap='round'
+              strokeLinejoin='round'
+              strokeWidth={2}
+              d='M9 5l7 7-7 7'
+            />
+          </svg>
+        </button>
+
+        <div className='carousel-wrapper'>
+          <div className='carousel-header'>
+            <button className='more-btn' onClick={() => navigate('/debate')}>
+              더보기 +
+            </button>
+          </div>
+          <div className='carousel-container'>
+            {visibleDebates.map((debate, idx) => (
+              <LandingDebateCard
+                key={'recommend-debate-' + (debateStartIndex + idx)}
+                debate={debate}
+              />
+            ))}
+          </div>
         </div>
       </div>
 

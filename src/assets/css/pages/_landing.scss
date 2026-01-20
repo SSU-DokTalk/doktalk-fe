@@ -31,7 +31,21 @@ $border-color: #d9d9d9;
     // 추천 토론방 섹션 - 그라데이션 배경
     &.debate-section {
       background: linear-gradient(134deg, #f3f8ff 0%, #f5f6ff 50%, #f7f4ff 100%);
-      padding-top: 80px;
+      padding-top: 90px;
+      padding-left: 3.5rem;
+      padding-right: 3.5rem;
+      padding-bottom: 2.5rem;
+
+      @media (max-width: 1200px) {
+        padding-left: 3rem;
+        padding-right: 3rem;
+      }
+
+      @media (max-width: 767px) {
+        padding-left: 2.5rem;
+        padding-right: 2.5rem;
+        padding-top: 70px;
+      }
     }
 
     // 인기 요약 섹션
@@ -57,7 +71,7 @@ $border-color: #d9d9d9;
         top: 0;
         left: 0;
         background: white;
-        padding: 0.75rem 1.5rem;
+        padding: 0.75rem 3.5rem;
         border-top-left-radius: 30px;
         border-bottom-right-radius: 50px;
         box-shadow: 0px -1px 3px rgba(0, 0, 0, 0.25);
@@ -121,11 +135,11 @@ $border-color: #d9d9d9;
       }
     }
 
-    // 토론방 헤더 - 탭 스타일 위치에 더보기 버튼
+    // 토론방 헤더 - 더보기 버튼 (탭 헤더 오른쪽)
     .section-header-more {
       position: absolute;
-      top: 1rem;
-      right: 1.5rem;
+      top: 1.25rem;
+      right: 2rem;
 
       .more-btn {
         font-size: 15px;
@@ -143,10 +157,44 @@ $border-color: #d9d9d9;
       }
     }
 
-    // 가로 스크롤 영역 (토론, 요약)
+    // 카로셀 래퍼
+    .carousel-wrapper {
+      width: 100%;
+    }
+
+    // 카로셀 헤더 (더보기 버튼)
+    .carousel-header {
+      display: flex;
+      justify-content: flex-end;
+      margin-bottom: 0.75rem;
+
+      .more-btn {
+        font-size: 15px;
+        font-weight: 700;
+        color: black;
+        text-decoration: underline;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        transition: opacity 0.2s;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    // 카로셀 컨테이너 (4개 카드 고정 위치)
+    .carousel-container {
+      display: flex;
+      justify-content: center;
+      gap: 12px; // 카드 사이 간격 줄임
+    }
+
+    // 가로 스크롤 영역 (요약 섹션용)
     .horizontal-scroll {
       display: flex;
-      gap: 1rem;
+      gap: 20px;
       overflow-x: auto;
       padding: 0.5rem 0;
       scroll-behavior: smooth;
@@ -163,10 +211,10 @@ $border-color: #d9d9d9;
     // 스크롤 네비게이션 버튼
     .scroll-nav {
       position: absolute;
-      top: 50%;
+      top: 55%;
       transform: translateY(-50%);
-      width: 40px;
-      height: 40px;
+      width: 45px;
+      height: 45px;
       background: white;
       border-radius: 50%;
       border: none;
@@ -176,24 +224,30 @@ $border-color: #d9d9d9;
       align-items: center;
       justify-content: center;
       z-index: 10;
-      transition: box-shadow 0.2s;
+      transition: box-shadow 0.2s, transform 0.2s, opacity 0.2s;
 
-      &:hover {
+      &:hover:not(:disabled) {
         box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+        transform: translateY(-50%) scale(1.05);
+      }
+
+      &:disabled {
+        opacity: 0.4;
+        cursor: not-allowed;
       }
 
       &.prev {
-        left: 0.5rem;
+        left: 40px; // 버튼이 섹션 왼쪽 바깥으로 약간 나가도록
       }
 
       &.next {
-        right: 0.5rem;
+        right: 40px; // 버튼이 섹션 오른쪽 바깥으로 약간 나가도록
       }
 
       svg {
-        width: 12px;
-        height: 18px;
-        fill: $gray-text;
+        width: 16px;
+        height: 20px;
+        stroke: $gray-text;
       }
     }
 
@@ -235,7 +289,10 @@ $border-color: #d9d9d9;
 // 토론방 카드 스타일
 .landing-debate-card {
   flex-shrink: 0;
-  width: 188px;
+  // 4개 카드가 꽉 차도록: (100% - gap*3) / 4
+  width: calc((100% - 60px) / 4);
+  min-width: 180px;
+  max-width: 200px;
   background: white;
   border-radius: 15px;
   box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
