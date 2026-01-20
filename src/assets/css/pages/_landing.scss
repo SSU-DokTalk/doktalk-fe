@@ -143,6 +143,10 @@ $border-color: #d9d9d9;
           opacity: 0.9;
         }
 
+        span {
+          padding-left: 1.3rem; // 왼쪽 패딩 추가
+        }
+
         .write-icon {
           margin-left: 0.25rem;
         }
@@ -526,14 +530,15 @@ $border-color: #d9d9d9;
         svg {
           width: 14px;
           height: 12px;
-          fill: $gray-text;
+          fill: none; // 속이 빈 아이콘
           stroke: $gray-text;
         }
       }
 
       .divider {
-        color: $gray-text;
+        color: #333; // 더 진한 색상
         font-size: 14px;
+        font-weight: 500;
       }
 
       .stats {

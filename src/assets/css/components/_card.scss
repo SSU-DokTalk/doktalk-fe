@@ -892,8 +892,8 @@
 
     .post-thumbnail {
       flex-shrink: 0;
-      width: 11rem;
-      height: 11rem;
+      width: 171px;
+      height: 185px;
       background-color: #e5e7eb;
       border-radius: 0.5rem;
       overflow: hidden;
@@ -945,7 +945,7 @@
 
         .divider {
           margin: 0 0.5rem;
-          color: #d1d5db;
+          color: #666565; // 글자 색과 동일
         }
 
         .meta-item {
