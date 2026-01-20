@@ -313,10 +313,13 @@
       "title": {
         "post": "게시글",
         "popular-summary": "인기 요약",
-        "recommend-prefix": "",
-        "recommend-postfix": "추천 토론방",
+        "recommend": "추천 토론방",
         "for-you-prefix": "",
         "for-you-postfix": "님을 위한 "
+      },
+      "button": {
+        "more": "더보기 +",
+        "write-post": "글 작성하기"
       },
       "item": {
         "no-post-item": "표시할 게시글이 없습니다",

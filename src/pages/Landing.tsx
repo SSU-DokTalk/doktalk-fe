@@ -126,7 +126,7 @@ function Landing() {
       {/* 추천 토론방 섹션 */}
       <div className='landing-section debate-section'>
         <div className='section-header tab-style'>
-          <h2>{t('page.landing.title.recommend-postfix')} 💬</h2>
+          <h2>{t('page.landing.title.recommend')} 💬</h2>
         </div>
 
         {/* 좌측 화살표 버튼 */}
@@ -168,7 +168,7 @@ function Landing() {
         <div className='carousel-wrapper'>
           <div className='carousel-header'>
             <button className='more-btn' onClick={() => navigate('/debate')}>
-              더보기 +
+              {t('page.landing.button.more')}
             </button>
           </div>
           <div className='carousel-container'>
@@ -185,9 +185,9 @@ function Landing() {
       {/* 인기 요약 섹션 */}
       <div className='landing-section summary-section'>
         <div className='section-header'>
-          <h2>인기 요약 🔥</h2>
+          <h2>{t('page.landing.title.popular-summary')} 🔥</h2>
           <button className='more-btn' onClick={() => navigate('/summary')}>
-            더보기 +
+            {t('page.landing.button.more')}
           </button>
         </div>
         <div className='horizontal-scroll'>
@@ -203,9 +203,9 @@ function Landing() {
       {/* 게시글 섹션 */}
       <div className='landing-section post-section'>
         <div className='section-header'>
-          <h2>게시글 ✏️</h2>
+          <h2>{t('page.landing.title.post')} ✏️</h2>
           <button className='write-btn' onClick={() => setShowModal(true)}>
-            <span>글 작성하기</span>
+            <span>{t('page.landing.button.write-post')}</span>
             <WriteIcon className='write-icon' width={17} fill={'#ffffff'} />
           </button>
         </div>
@@ -229,7 +229,7 @@ function Landing() {
           </div>
         )}
         <button className='more-btn' onClick={() => navigate('/post')}>
-          더보기 +
+          {t('page.landing.button.more')}
         </button>
       </div>
     </div>
