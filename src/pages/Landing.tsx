@@ -1,4 +1,4 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 
 import { PostType, SummaryType } from '@/types/data';
 import { useTranslation } from 'react-i18next';
@@ -25,26 +25,37 @@ function Landing() {
 
   const { t } = useTranslation();
 
-  // 카로셀 상태 (현재 시작 인덱스)
-  const [debateStartIndex, setDebateStartIndex] = useState(0);
-  const CARDS_PER_PAGE = 4;
+  // 카로셀 상태 및 로직
+  const carouselRef = useRef<HTMLDivElement>(null);
 
-  // 이전/다음으로 1개씩 이동
+  const getScrollAmount = () => {
+    if (carouselRef.current) {
+      const card = carouselRef.current.firstElementChild as HTMLElement;
+      if (card) {
+        // 카드 너비 + gap (12px)
+        return card.offsetWidth + 12;
+      }
+    }
+    return 300; // 기본값
+  };
+
   const goToPrevDebates = () => {
-    setDebateStartIndex((prev) => (prev > 0 ? prev - 1 : 0));
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({
+        left: -getScrollAmount(),
+        behavior: 'smooth',
+      });
+    }
   };
 
   const goToNextDebates = () => {
-    setDebateStartIndex((prev) =>
-      prev + CARDS_PER_PAGE < recommendDebates.length ? prev + 1 : prev
-    );
+    if (carouselRef.current) {
+      carouselRef.current.scrollBy({
+        left: getScrollAmount(),
+        behavior: 'smooth',
+      });
+    }
   };
-
-  // 현재 보여줄 카드들
-  const visibleDebates = recommendDebates.slice(
-    debateStartIndex,
-    debateStartIndex + CARDS_PER_PAGE
-  );
 
   useEffect(() => {
     const fetchData = async () => {
@@ -129,56 +140,54 @@ function Landing() {
           <h2>{t('page.landing.title.recommend')} 💬</h2>
         </div>
 
-        {/* 좌측 화살표 버튼 */}
-        <button
-          className='scroll-nav prev'
-          onClick={goToPrevDebates}
-          aria-label='이전'
-          disabled={debateStartIndex === 0}
-        >
-          <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M15 19l-7-7 7-7'
-            />
-          </svg>
-        </button>
-
-        {/* 우측 화살표 버튼 */}
-        <button
-          className='scroll-nav next'
-          onClick={goToNextDebates}
-          aria-label='다음'
-          disabled={
-            debateStartIndex + CARDS_PER_PAGE >= recommendDebates.length
-          }
-        >
-          <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
-            <path
-              strokeLinecap='round'
-              strokeLinejoin='round'
-              strokeWidth={2}
-              d='M9 5l7 7-7 7'
-            />
-          </svg>
-        </button>
-
-        <div className='carousel-wrapper'>
-          <div className='carousel-header'>
-            <button className='more-btn' onClick={() => navigate('/debate')}>
-              {t('page.landing.button.more')}
-            </button>
-          </div>
-          <div className='carousel-container'>
-            {visibleDebates.map((debate, idx) => (
-              <LandingDebateCard
-                key={'recommend-debate-' + (debateStartIndex + idx)}
-                debate={debate}
+        <div className='relative-container'>
+          {/* 좌측 화살표 버튼 */}
+          <button
+            className='scroll-nav prev'
+            onClick={goToPrevDebates}
+            aria-label='이전'
+          >
+            <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M15 19l-7-7 7-7'
               />
-            ))}
+            </svg>
+          </button>
+
+          <div className='carousel-wrapper'>
+            <div className='carousel-header'>
+              <button className='more-btn' onClick={() => navigate('/debate')}>
+                {t('page.landing.button.more')}
+              </button>
+            </div>
+            <div className='carousel-container' ref={carouselRef}>
+              {recommendDebates.map((debate, idx) => (
+                <LandingDebateCard
+                  key={'recommend-debate-' + idx}
+                  debate={debate}
+                />
+              ))}
+            </div>
           </div>
+
+          {/* 우측 화살표 버튼 */}
+          <button
+            className='scroll-nav next'
+            onClick={goToNextDebates}
+            aria-label='다음'
+          >
+            <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
+              <path
+                strokeLinecap='round'
+                strokeLinejoin='round'
+                strokeWidth={2}
+                d='M9 5l7 7-7 7'
+              />
+            </svg>
+          </button>
         </div>
       </div>
 
