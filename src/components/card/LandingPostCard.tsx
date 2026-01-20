@@ -1,7 +1,8 @@
 import Image from '@/components/base/Image';
 import { useNavigate } from 'react-router-dom';
 import { formatDistanceToNow } from 'date-fns';
-import { ko } from 'date-fns/locale';
+import { ko, enUS, mn } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 
 interface LandingPostCardProps {
   id: number;
@@ -25,6 +26,13 @@ function LandingPostCard({
   createdAt = new Date(),
 }: LandingPostCardProps) {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+
+  const locales: { [key: string]: any } = {
+    kr: ko,
+    us: enUS,
+    mn: mn,
+  };
 
   return (
     <div className='landing-post-card' onClick={() => navigate(`/post/${id}`)}>
@@ -52,7 +60,7 @@ function LandingPostCard({
           <span className='meta-item date'>
             {formatDistanceToNow(new Date(createdAt), {
               addSuffix: true,
-              locale: ko,
+              locale: locales[i18n.language] || ko,
             })}
           </span>
           <span className='divider'>|</span>

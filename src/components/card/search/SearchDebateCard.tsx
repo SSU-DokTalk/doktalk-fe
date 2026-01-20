@@ -2,7 +2,8 @@ import { useNavigate } from 'react-router-dom';
 import Image from '@/components/base/Image';
 import { DebateType } from '@/types/data';
 import { formatDistanceToNow } from 'date-fns';
-import { ko } from 'date-fns/locale';
+import { ko, enUS, mn } from 'date-fns/locale';
+import { useTranslation } from 'react-i18next';
 
 interface SearchDebateCardProps {
   debate: DebateType;
@@ -10,6 +11,13 @@ interface SearchDebateCardProps {
 
 function SearchDebateCard({ debate }: SearchDebateCardProps) {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+
+  const locales: { [key: string]: any } = {
+    kr: ko,
+    us: enUS,
+    mn: mn,
+  };
 
   return (
     <div
@@ -35,7 +43,7 @@ function SearchDebateCard({ debate }: SearchDebateCardProps) {
             <span className='date'>
               {formatDistanceToNow(new Date(debate.created), {
                 addSuffix: true,
-                locale: ko,
+                locale: locales[i18n.language] || ko,
               })}
             </span>
           </div>
