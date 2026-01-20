@@ -530,37 +530,37 @@ $border-color: #d9d9d9;
       order: 1; // 1순위: 텍스트 (제목+내용)
       margin-bottom: 0.5rem;
     }
-      .post-title {
-        font-size: 20px; // 25px -> 20px (PC 폰트 크기 조정)
-        font-weight: 600;
-        color: black;
-        margin-bottom: 0.5rem;
-        white-space: nowrap;
-        overflow: hidden;
-        text-overflow: ellipsis;
+    .post-title {
+      font-size: 20px; // 25px -> 20px (PC 폰트 크기 조정)
+      font-weight: 600;
+      color: black;
+      margin-bottom: 0.5rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
 
-        @media (max-width: 767px) {
-          font-size: 18px;
-        }
+      @media (max-width: 767px) {
+        font-size: 18px;
       }
+    }
 
-      .post-content {
-        font-size: 16px; // 20px -> 16px
-        font-weight: 400;
-        color: $gray-text;
-        display: -webkit-box;
-        -webkit-line-clamp: 4;
-        line-clamp: 4; // 표준 속성 추가
-        -webkit-box-orient: vertical;
-        overflow: hidden;
-        line-height: 1.5;
+    .post-content {
+      font-size: 16px; // 20px -> 16px
+      font-weight: 400;
+      color: $gray-text;
+      display: -webkit-box;
+      -webkit-line-clamp: 4;
+      line-clamp: 4; // 표준 속성 추가
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.5;
 
-        @media (max-width: 767px) {
-          font-size: 14px;
-          -webkit-line-clamp: 5; // 태블릿/모바일: 2줄 -> 5줄로 확대
-          line-clamp: 5;
-        }
+      @media (max-width: 767px) {
+        font-size: 14px;
+        -webkit-line-clamp: 5; // 태블릿/모바일: 2줄 -> 5줄로 확대
+        line-clamp: 5;
       }
+    }
     } // .post-text 닫는 괄호
   
     .post-meta {
