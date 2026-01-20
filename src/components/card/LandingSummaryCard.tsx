@@ -10,20 +10,22 @@ function LandingSummaryCard({ summary }: { summary: SummaryType }) {
       className='landing-summary-card'
       onClick={() => navigate(`/summary/${summary.id}`)}
     >
-      <div className='relative'>
+      {/* 책 이미지 */}
+      <div className='summary-thumbnail'>
         <Image
           src={summary.book.image}
           alt={summary.book.title}
-          width='100%'
-          height='18rem'
-          className='rounded-lg shadow-md w-full'
-          noImageFontSize={40}
-          noImageTextFontSize={10}
+          width='75px'
+          height='114px'
+          objectFit='cover'
+          noImageFontSize={20}
+          noImageTextFontSize={8}
         />
       </div>
-      <div className='book-info'>
-        <div className='book-author'>{summary.book.author}</div>
-        <div className='book-title'>{summary.book.title}</div>
+      {/* 콘텐츠 영역 */}
+      <div className='summary-content'>
+        <div className='summary-title'>{summary.title}</div>
+        <div className='summary-preview'>{summary.free_content}</div>
       </div>
     </div>
   );
