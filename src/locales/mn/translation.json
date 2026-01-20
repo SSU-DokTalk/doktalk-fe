@@ -314,6 +314,8 @@
         "post": "Нийтлэл",
         "popular-summary": "Алдартай хураангуй",
         "recommend": "Санал болгох хэлэлцүүлгийн өрөө",
+        "recommend-prefix": "",
+        "recommend-postfix": "Санал болгох хэлэлцүүлгийн өрөө",
         "for-you-prefix": "",
         "for-you-postfix": "-д зориулсан "
       },

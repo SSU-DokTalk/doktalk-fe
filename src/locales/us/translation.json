@@ -314,6 +314,8 @@
         "post": "Post",
         "popular-summary": "Trending Summaries",
         "recommend": "Recommended Discussions",
+        "recommend-prefix": "Recommended Discussions ",
+        "recommend-postfix": "",
         "for-you-prefix": "For ",
         "for-you-postfix": ""
       },
