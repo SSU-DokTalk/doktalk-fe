@@ -101,15 +101,15 @@ function Landing() {
   return (
     <div id='landing-page'>
       <WritePostModal showModal={showModal} setShowModal={setShowModal} />
-      <div className='h-4'></div>
 
       {/* 추천 토론방 섹션 */}
-      <div className='landing-section'>
-        <div className='section-header'>
-          <h2>{t('page.landing.title.recommend-postfix')}</h2>
+      <div className='landing-section debate-section'>
+        <div className='section-header tab-style'>
+          <h2>{t('page.landing.title.recommend-postfix')} 💬</h2>
+        </div>
+        <div className='section-header-more'>
           <button className='more-btn' onClick={() => navigate('/debate')}>
-            더보기
-            <span>+</span>
+            더보기 +
           </button>
         </div>
         <div className='horizontal-scroll'>
@@ -123,12 +123,11 @@ function Landing() {
       </div>
 
       {/* 인기 요약 섹션 */}
-      <div className='landing-section'>
+      <div className='landing-section summary-section'>
         <div className='section-header'>
-          <h2>인기 요약</h2>
+          <h2>인기 요약 🔥</h2>
           <button className='more-btn' onClick={() => navigate('/summary')}>
-            더보기
-            <span>+</span>
+            더보기 +
           </button>
         </div>
         <div className='horizontal-scroll'>
@@ -142,11 +141,11 @@ function Landing() {
       </div>
 
       {/* 게시글 섹션 */}
-      <div className='landing-section'>
+      <div className='landing-section post-section'>
         <div className='section-header'>
-          <h2>게시글</h2>
+          <h2>게시글 ✏️</h2>
           <button className='write-btn' onClick={() => setShowModal(true)}>
-            <span>게시글 쓰기</span>
+            <span>글 작성하기</span>
             <WriteIcon className='write-icon' width={17} fill={'#ffffff'} />
           </button>
         </div>
@@ -170,8 +169,7 @@ function Landing() {
           </div>
         )}
         <button className='more-btn' onClick={() => navigate('/post')}>
-          더보기
-          <span>+</span>
+          더보기 +
         </button>
       </div>
     </div>

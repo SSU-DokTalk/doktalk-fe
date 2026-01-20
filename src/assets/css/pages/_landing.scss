@@ -1,104 +1,155 @@
 @use "../variables" as v;
 
+// 공통 색상
+$navy: #000080;
+$gray-text: #666565;
+$border-color: #d9d9d9;
+
 #landing-page {
   display: flex;
   flex-direction: column;
   align-items: center;
-  // background-color: #f9fafb;
   min-height: 100vh;
+  padding: 1rem;
+  gap: 1.5rem;
+
+  @media (min-width: 768px) {
+    padding: 2rem;
+    gap: 2rem;
+  }
 
   // 섹션 공통 스타일
   .landing-section {
     background-color: white;
-    padding: 1.5rem 1rem;
-    margin-bottom: 0.5rem;
+    padding: 1.5rem;
     width: 100%;
+    max-width: 1080px;
+    border-radius: 30px;
+    box-shadow: 0px 1px 4px rgba(0, 0, 0, 0.25);
+    position: relative;
 
-    @media (min-width: 768px) {
-      padding: 1.5rem 1.5rem;
-      width: calc(100% - 3rem);
-      max-width: 1024px;
-      border-radius: 1rem;
-      margin-bottom: 1rem;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+    // 추천 토론방 섹션 - 그라데이션 배경
+    &.debate-section {
+      background: linear-gradient(134deg, #f3f8ff 0%, #f5f6ff 50%, #f7f4ff 100%);
+      padding-top: 80px;
     }
 
-    .more-btn {
-      font-size: 0.875rem;
-      color: #6b7280;
-      display: flex;
-      align-items: center;
-      gap: 0.25rem;
-      cursor: pointer;
-      border: none;
-      background-color: transparent;
-      transition: color 0.2s;
-
-      &:hover {
-        color: #1f2937;
-      }
+    // 인기 요약 섹션
+    &.summary-section {
+      background: white;
     }
 
-    & > .more-btn {
-      margin-top: 1rem;
-      width: 100%;
-      justify-content: center;
-      padding: 0.75rem;
-      border: 1px solid #e5e7eb;
-      border-radius: 0.5rem;
-      background-color: white;
-      transition: all 0.2s;
-
-      &:hover {
-        background-color: #f9fafb;
-        border-color: #d1d5db;
-        color: #1f2937;
-      }
+    // 게시글 섹션
+    &.post-section {
+      background: white;
+      padding-bottom: 2rem;
     }
 
+    // 섹션 헤더 (탭 스타일)
     .section-header {
       display: flex;
       justify-content: space-between;
       align-items: center;
-      margin-bottom: 1rem;
+      margin-bottom: 1.5rem;
+
+      &.tab-style {
+        position: absolute;
+        top: 0;
+        left: 0;
+        background: white;
+        padding: 0.75rem 1.5rem;
+        border-top-left-radius: 30px;
+        border-bottom-right-radius: 50px;
+        box-shadow: 0px -1px 3px rgba(0, 0, 0, 0.25);
+        margin-bottom: 0;
+
+        h2 {
+          margin: 0;
+        }
+      }
 
       h2 {
-        font-size: 1.125rem;
+        font-size: 1.5rem;
         font-weight: 700;
-        color: #1f2937;
+        color: $navy;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
 
-        @media (min-width: 768px) {
+        @media (max-width: 767px) {
           font-size: 1.25rem;
+        }
+      }
+
+      .more-btn {
+        font-size: 15px;
+        font-weight: 700;
+        color: black;
+        text-decoration: underline;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        transition: opacity 0.2s;
+
+        &:hover {
+          opacity: 0.7;
         }
       }
 
       .write-btn {
         height: 38px;
-        background-color: v.$brand-color1;
+        background-color: $navy;
         color: white;
         font-size: 15px;
-        font-weight: 600;
+        font-weight: 700;
         border: none;
         border-radius: 10px;
         display: flex;
-        justify-content: space-between;
         align-items: center;
-        padding-left: 15px;
-        padding-right: 10px;
+        gap: 0.5rem;
+        padding: 0 1rem;
         cursor: pointer;
-        transition: background-color 0.2s; // kept the transition
+        transition: opacity 0.2s;
+
+        &:hover {
+          opacity: 0.9;
+        }
 
         .write-icon {
-          margin-left: 10px;
+          margin-left: 0.25rem;
         }
       }
     }
 
+    // 토론방 헤더 - 탭 스타일 위치에 더보기 버튼
+    .section-header-more {
+      position: absolute;
+      top: 1rem;
+      right: 1.5rem;
+
+      .more-btn {
+        font-size: 15px;
+        font-weight: 700;
+        color: black;
+        text-decoration: underline;
+        cursor: pointer;
+        border: none;
+        background-color: transparent;
+        transition: opacity 0.2s;
+
+        &:hover {
+          opacity: 0.7;
+        }
+      }
+    }
+
+    // 가로 스크롤 영역 (토론, 요약)
     .horizontal-scroll {
       display: flex;
-      gap: 0.75rem;
+      gap: 1rem;
       overflow-x: auto;
-      padding-bottom: 0.5rem;
+      padding: 0.5rem 0;
+      scroll-behavior: smooth;
 
       // 스크롤바 숨김
       -ms-overflow-style: none;
@@ -109,27 +160,329 @@
       }
     }
 
+    // 스크롤 네비게이션 버튼
+    .scroll-nav {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 40px;
+      height: 40px;
+      background: white;
+      border-radius: 50%;
+      border: none;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 10;
+      transition: box-shadow 0.2s;
+
+      &:hover {
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
+      }
+
+      &.prev {
+        left: 0.5rem;
+      }
+
+      &.next {
+        right: 0.5rem;
+      }
+
+      svg {
+        width: 12px;
+        height: 18px;
+        fill: $gray-text;
+      }
+    }
+
+    // 게시글 리스트
     .post-list {
       display: flex;
       flex-direction: column;
       gap: 0.75rem;
     }
 
+    // 하단 더보기 버튼
+    & > .more-btn {
+      margin-top: 1.5rem;
+      width: 100%;
+      display: flex;
+      justify-content: center;
+      font-size: 15px;
+      font-weight: 700;
+      color: black;
+      text-decoration: underline;
+      cursor: pointer;
+      border: none;
+      background-color: transparent;
+      transition: opacity 0.2s;
+
+      &:hover {
+        opacity: 0.7;
+      }
+    }
+
     .no-content {
-      color: #6b7280;
+      color: $gray-text;
       text-align: center;
       padding: 2rem 0;
     }
   }
+}
 
-  // 이전 스타일 (호환성 유지)
+// 토론방 카드 스타일
+.landing-debate-card {
+  flex-shrink: 0;
+  width: 188px;
+  background: white;
+  border-radius: 15px;
+  box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  overflow: hidden;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0px 6px 16px rgba(0, 0, 0, 0.3);
+  }
+
+  .debate-thumbnail {
+    width: 100%;
+    height: 166px;
+    overflow: hidden;
+    border-top-left-radius: 15px;
+    border-top-right-radius: 15px;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .book-info {
+    padding: 0.75rem;
+
+    .book-title {
+      font-size: 18px;
+      font-weight: 600;
+      color: black;
+      margin-bottom: 0.25rem;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .book-author,
+    .debate-content {
+      font-size: 15px;
+      font-weight: 400;
+      color: black;
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.4;
+    }
+  }
+}
+
+// 요약 카드 스타일
+.landing-summary-card {
+  flex-shrink: 0;
+  width: 314px;
+  height: 138px;
+  background: white;
+  border-radius: 20px;
+  box-shadow: 0px 1px 7px rgba(0, 0, 0, 0.25);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  padding: 0.75rem;
+  gap: 0.75rem;
+  transition: transform 0.2s, box-shadow 0.2s;
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0px 3px 12px rgba(0, 0, 0, 0.3);
+  }
+
+  .summary-thumbnail {
+    width: 75px;
+    height: 114px;
+    flex-shrink: 0;
+    border-radius: 10px;
+    overflow: hidden;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+  }
+
+  .book-info,
+  .summary-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    gap: 0.25rem;
+
+    .book-title,
+    .summary-title {
+      font-size: 20px;
+      font-weight: 700;
+      color: black;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+
+    .book-author,
+    .summary-content {
+      font-size: 14px;
+      font-weight: 400;
+      color: black;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+      line-height: 1.5;
+    }
+  }
+}
+
+// 게시글 카드 스타일
+.landing-post-card {
+  background: white;
+  border-radius: 10px;
+  border: 1px solid $border-color;
+  padding: 1.25rem;
+  cursor: pointer;
+  transition: box-shadow 0.2s, border-color 0.2s;
+
+  &:hover {
+    box-shadow: 0px 2px 8px rgba(0, 0, 0, 0.1);
+    border-color: #bbb;
+  }
+
+  .post-content-wrapper {
+    display: flex;
+    gap: 1.25rem;
+  }
+
+  .post-thumbnail {
+    flex-shrink: 0;
+    width: 171px;
+    height: 185px;
+    border-radius: 8px;
+    overflow: hidden;
+    background: #f5f5f5;
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    @media (max-width: 767px) {
+      width: 100px;
+      height: 120px;
+    }
+  }
+
+  .post-info {
+    flex: 1;
+    min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .post-text {
+      .post-title {
+        font-size: 25px;
+        font-weight: 600;
+        color: black;
+        margin-bottom: 0.5rem;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+
+        @media (max-width: 767px) {
+          font-size: 18px;
+        }
+      }
+
+      .post-content {
+        font-size: 20px;
+        font-weight: 400;
+        color: $gray-text;
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        line-height: 1.5;
+
+        @media (max-width: 767px) {
+          font-size: 14px;
+          -webkit-line-clamp: 2;
+        }
+      }
+    }
+
+    .post-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      flex-wrap: wrap;
+      margin-top: 0.75rem;
+
+      .meta-item {
+        font-size: 16px;
+        font-weight: 400;
+        color: $gray-text;
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+
+        @media (max-width: 767px) {
+          font-size: 12px;
+        }
+
+        svg {
+          width: 14px;
+          height: 12px;
+          fill: $gray-text;
+          stroke: $gray-text;
+        }
+      }
+
+      .divider {
+        color: $gray-text;
+        font-size: 14px;
+      }
+
+      .stats {
+        display: flex;
+        align-items: center;
+        gap: 0.25rem;
+      }
+    }
+  }
+}
+
+// 이전 스타일 (호환성 유지)
+#landing-page {
   .post-container {
     .post-title {
       font-size: 25px;
       font-weight: 700;
       margin-left: 10px;
       margin-bottom: 12px;
-      color: v.$brand-color1;
+      color: $navy;
     }
     #write-post-card {
       margin-bottom: 25px;
@@ -138,7 +491,7 @@
         font-weight: 700;
         margin-left: 10px;
         margin-bottom: 12px;
-        color: v.$brand-color1;
+        color: $navy;
       }
     }
   }
@@ -149,7 +502,7 @@
       font-weight: 700;
       margin-left: 10px;
       margin-bottom: 12px;
-      color: v.$brand-color1;
+      color: $navy;
     }
     #popular-summary-card {
       margin-bottom: 10px;
