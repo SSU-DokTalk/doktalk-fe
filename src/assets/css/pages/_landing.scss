@@ -308,9 +308,8 @@ $border-color: #d9d9d9;
 .landing-debate-card {
   flex-shrink: 0;
   // 4개 카드가 꽉 차도록: (100% - gap*3) / 4
-  width: calc((100% - 60px) / 4);
-  min-width: 180px;
-  max-width: 200px;
+  width: 189px;
+  height: 261px;
   background: white;
   border-radius: 15px;
   box-shadow: 0px 3px 11px rgba(0, 0, 0, 0.25);
@@ -329,34 +328,41 @@ $border-color: #d9d9d9;
     overflow: hidden;
     border-top-left-radius: 15px;
     border-top-right-radius: 15px;
+    background: linear-gradient(180deg, #f5f4f3 0%, #e9e9e9 100%); // 그라데이션 추가
 
     img {
       width: 100%;
       height: 100%;
-      object-fit: cover;
+      object-fit: contain;
+      filter: drop-shadow(0px 5px 10px rgba(0, 0, 0, 0.4)); // 책 그림자 효과
+      transform: scale(0.95); // 그림자 공간 확보 및 여백을 위해 약간 축소
     }
   }
 
-  .book-info {
-    padding: 0.75rem;
+  .debate-info {
+    padding: 10px 12px; // 패딩 조정하여 넘침 방지
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    flex: 1; // 남은 공간 채우기
 
-    .book-title {
+    .debate-title {
       font-size: 18px;
       font-weight: 600;
       color: black;
-      margin-bottom: 0.25rem;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
+      margin-bottom: 2px;
     }
 
-    .book-author,
-    .debate-content {
+    .debate-preview {
       font-size: 15px;
       font-weight: 400;
       color: black;
       display: -webkit-box;
       -webkit-line-clamp: 2;
+      line-clamp: 2; // 표준 속성 추가
       -webkit-box-orient: vertical;
       overflow: hidden;
       line-height: 1.4;
@@ -499,6 +505,7 @@ $border-color: #d9d9d9;
         color: $gray-text;
         display: -webkit-box;
         -webkit-line-clamp: 3;
+        line-clamp: 3; // 표준 속성 추가
         -webkit-box-orient: vertical;
         overflow: hidden;
         line-height: 1.5;

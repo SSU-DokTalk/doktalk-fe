@@ -16,14 +16,14 @@ function LandingDebateCard({ debate }: { debate: DebateType }) {
           alt={debate.book.title}
           width='100%'
           height='166px'
-          objectFit='cover'
+          objectFit='contain'
           noImageFontSize={30}
           noImageTextFontSize={8}
         />
       </div>
-      <div className='book-info'>
-        <div className='book-title'>{debate.book.title}</div>
-        <div className='book-author'>{debate.book.author}</div>
+      <div className='debate-info'>
+        <div className='debate-title'>{debate.title || debate.book.title}</div>
+        <div className='debate-preview'>{debate.content}</div>
       </div>
     </div>
   );
