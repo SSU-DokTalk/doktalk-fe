@@ -321,7 +321,9 @@
       },
       "button": {
         "more": "More +",
-        "write-post": "Write Post"
+        "write-post": "Write Post",
+        "previous": "Previous",
+        "next": "Next"
       },
       "item": {
         "no-post-item": "No posts to display",

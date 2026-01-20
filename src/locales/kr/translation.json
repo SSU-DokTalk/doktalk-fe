@@ -321,7 +321,9 @@
       },
       "button": {
         "more": "더보기 +",
-        "write-post": "글 작성하기"
+        "write-post": "글 작성하기",
+        "previous": "이전",
+        "next": "다음"
       },
       "item": {
         "no-post-item": "표시할 게시글이 없습니다",

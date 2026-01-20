@@ -145,7 +145,7 @@ function Landing() {
           <button
             className='scroll-nav prev'
             onClick={goToPrevDebates}
-            aria-label='이전'
+            aria-label={t('page.landing.button.previous')}
           >
             <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
               <path
@@ -177,7 +177,7 @@ function Landing() {
           <button
             className='scroll-nav next'
             onClick={goToNextDebates}
-            aria-label='다음'
+            aria-label={t('page.landing.button.next')}
           >
             <svg viewBox='0 0 24 24' fill='none' stroke='currentColor'>
               <path
