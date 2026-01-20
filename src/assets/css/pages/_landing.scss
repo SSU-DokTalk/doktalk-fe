@@ -226,6 +226,11 @@ $border-color: #d9d9d9;
       }
     }
 
+    // 레퍼런스 컨테이너
+    .relative-container {
+      position: relative;
+    }
+
     // 스크롤 네비게이션 버튼
     .scroll-nav {
       position: absolute;
