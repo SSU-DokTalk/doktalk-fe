@@ -135,7 +135,7 @@ function Topnav() {
 
   return (
     <>
-      <div id='topnav' style={{ zIndex: '10' }}>
+      <div id='topnav'>
         <div className='upper-container grid grid-cols-3 md:grid-cols-5'>
           <div className='left-container ml-4! my-2! md:mt-5!'>
             <Link to={'/'} className='logo-container'>
