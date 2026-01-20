@@ -192,10 +192,9 @@ $border-color: #d9d9d9;
       gap: 12px;
       overflow-x: auto;
       scroll-snap-type: x mandatory;
-      padding: 12px 2rem; // 데스크탑: 좌우 5rem 여백
+      padding: 12px 2rem; // 데스크탑: 좌우 2rem 여백
       scroll-padding-inline: 2rem; // 스냅 시 패딩 영역 제외하고 정렬
       width: 100%;
-
       
       // 스크롤바 숨김
       -ms-overflow-style: none;
@@ -313,7 +312,7 @@ $border-color: #d9d9d9;
   // 기본: 고정 크기 유지 (전구간 동일)
   width: 189px; 
   height: 261px;
-  // aspect-ratio: 189 / 261; // 고정 크기이므로 aspect-ratio 불필요할 수 있으나 유지 가능
+
 
   background: white;
   border-radius: 15px;
@@ -609,7 +608,6 @@ $border-color: #d9d9d9;
       }
     }
   }
-
 
 // 이전 스타일 (호환성 유지)
 #landing-page {
