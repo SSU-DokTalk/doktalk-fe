@@ -10,20 +10,20 @@ function LandingDebateCard({ debate }: { debate: DebateType }) {
       className='landing-debate-card'
       onClick={() => navigate(`/debate/${debate.id}`)}
     >
-      <div className='relative'>
+      <div className='debate-thumbnail'>
         <Image
           src={debate.book.image}
           alt={debate.book.title}
           width='100%'
-          height='18rem'
-          className='rounded-lg shadow-md w-full'
-          noImageFontSize={40}
-          noImageTextFontSize={10}
+          height='166px'
+          objectFit='contain'
+          noImageFontSize={30}
+          noImageTextFontSize={8}
         />
       </div>
-      <div className='book-info'>
-        <div className='book-author'>{debate.book.author}</div>
-        <div className='book-title'>{debate.book.title}</div>
+      <div className='debate-info'>
+        <div className='debate-title'>{debate.title || debate.book.title}</div>
+        <div className='debate-preview'>{debate.content}</div>
       </div>
     </div>
   );

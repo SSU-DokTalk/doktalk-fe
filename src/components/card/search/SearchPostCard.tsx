@@ -2,9 +2,10 @@ import { useNavigate } from 'react-router-dom';
 import Image from '@/components/base/Image';
 import { PostType } from '@/types/data';
 import { formatDistanceToNow } from 'date-fns';
-import { ko } from 'date-fns/locale';
+import { ko, enUS, mn } from 'date-fns/locale';
 import { getFileTypeFromUrl } from '@/functions';
 import { ACCEPTABLE_IMAGE } from '@/common/variables';
+import { useTranslation } from 'react-i18next';
 
 interface SearchPostCardProps {
   post: PostType;
@@ -12,6 +13,13 @@ interface SearchPostCardProps {
 
 function SearchPostCard({ post }: SearchPostCardProps) {
   const navigate = useNavigate();
+  const { i18n } = useTranslation();
+
+  const locales: { [key: string]: any } = {
+    kr: ko,
+    us: enUS,
+    mn: mn,
+  };
 
   // Logic to find thumbnail (logic taken from PostCard.tsx)
   const thumbnail = post.files?.find((file) =>
@@ -48,7 +56,7 @@ function SearchPostCard({ post }: SearchPostCardProps) {
             <span className='date'>
               {formatDistanceToNow(new Date(post.created), {
                 addSuffix: true,
-                locale: ko,
+                locale: locales[i18n.language] || ko,
               })}
             </span>
           </div>

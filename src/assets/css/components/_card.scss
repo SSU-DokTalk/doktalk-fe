@@ -824,53 +824,7 @@
 }
 
 // Landing 페이지 전용 카드 스타일
-.landing-debate-card,
-.landing-summary-card {
-  flex-shrink: 0;
-  width: 12rem; // 192px
-  cursor: pointer;
-  transition: transform 0.2s ease-in-out;
-
-  &:hover {
-    transform: translateY(-4px);
-  }
-
-  .relative {
-    position: relative;
-
-    img {
-      border-radius: 0.5rem;
-      box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
-      width: 100%;
-      height: 18rem;
-      object-fit: cover;
-    }
-  }
-
-  .book-info {
-    margin-top: 0.5rem;
-    padding: 0 0.25rem;
-    width: 100%;
-
-    .book-author {
-      font-size: 0.75rem;
-      color: #6b7280;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-
-    .book-title {
-      font-size: 0.875rem;
-      font-weight: 600;
-      color: #1f2937;
-      margin-top: 0.25rem;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-  }
-}
+// Landing 페이지 전용 카드 스타일은 _landing.scss에서 관리합니다.
 
 .landing-post-card {
   background-color: white;
@@ -892,8 +846,8 @@
 
     .post-thumbnail {
       flex-shrink: 0;
-      width: 11rem;
-      height: 11rem;
+      width: 171px;
+      height: 185px;
       background-color: #e5e7eb;
       border-radius: 0.5rem;
       overflow: hidden;
@@ -945,7 +899,7 @@
 
         .divider {
           margin: 0 0.5rem;
-          color: #d1d5db;
+          color: #666565; // 글자 색과 동일
         }
 
         .meta-item {

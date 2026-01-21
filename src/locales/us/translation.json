@@ -313,14 +313,22 @@
       "title": {
         "post": "Post",
         "popular-summary": "Trending Summaries",
+        "recommend": "Recommended Discussions",
         "recommend-prefix": "Recommended Discussions ",
         "recommend-postfix": "",
         "for-you-prefix": "For ",
         "for-you-postfix": ""
       },
+      "button": {
+        "more": "More +",
+        "write-post": "Write Post",
+        "previous": "Previous",
+        "next": "Next"
+      },
       "item": {
         "no-post-item": "No posts to display",
-        "no-summary-item": "There is no summary item"
+        "no-summary-item": "There is no summary item",
+        "no-debate-item": "No recommended discussions"
       },
       "loading": "Loading...",
       "error": "Failed to load data"

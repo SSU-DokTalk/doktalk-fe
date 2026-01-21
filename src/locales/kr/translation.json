@@ -313,14 +313,22 @@
       "title": {
         "post": "게시글",
         "popular-summary": "인기 요약",
+        "recommend": "추천 토론방",
         "recommend-prefix": "",
         "recommend-postfix": "추천 토론방",
         "for-you-prefix": "",
         "for-you-postfix": "님을 위한 "
       },
+      "button": {
+        "more": "더보기 +",
+        "write-post": "글 작성하기",
+        "previous": "이전",
+        "next": "다음"
+      },
       "item": {
         "no-post-item": "표시할 게시글이 없습니다",
-        "no-summary-item": "아직 작성된 요약이 없습니다"
+        "no-summary-item": "아직 작성된 요약이 없습니다",
+        "no-debate-item": "추천할 토론방이 없습니다"
       },
       "loading": "로딩 중...",
       "error": "데이터를 불러오는 데 실패했습니다"
