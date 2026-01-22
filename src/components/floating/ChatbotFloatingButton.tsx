@@ -6,7 +6,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faPaperPlane,
   faTimes,
-  faRobot,
+  faMessage,
 } from '@fortawesome/free-solid-svg-icons';
 import { useTranslation } from 'react-i18next';
 
@@ -121,7 +121,7 @@ const ChatbotFloatingButton = (): JSX.Element => {
         className='fixed bottom-20 right-4 z-50 flex h-16 w-16 items-center justify-center rounded-full bg-brand1 text-white shadow-xl transition-transform duration-300 ease-in-out hover:scale-110 md:bottom-10 md:right-10'
         aria-label={t('component.floating.chatbot.aria.open-chat')}
       >
-        <FontAwesomeIcon icon={faRobot} size='2x' />
+        <FontAwesomeIcon className='pt-1' icon={faMessage} size='xl' />
       </button>
 
       {/* 채팅 Dialog (MUI) */}
@@ -160,7 +160,7 @@ const ChatbotFloatingButton = (): JSX.Element => {
         <div className='flex h-full flex-col bg-white'>
           {/* 4. 헤더 수정 */}
           <header className='relative flex! flex-row items-center gap-4 bg-brand1 p-4! text-white shadow-md'>
-            <FontAwesomeIcon icon={faRobot} size='2x' />
+            <FontAwesomeIcon icon={faMessage} />
             <p className='text-xs opacity-90'>DokTalk AI</p>
             <IconButton
               aria-label={t('component.floating.chatbot.aria.close-chat')}
