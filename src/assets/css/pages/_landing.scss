@@ -540,7 +540,7 @@ $border-color: #d9d9d9;
       text-overflow: ellipsis;
 
       @media (max-width: 767px) {
-        font-size: 18px;
+        font-size: 19px; // 18px -> 19px
       }
     }
 
@@ -556,7 +556,7 @@ $border-color: #d9d9d9;
       line-height: 1.5;
 
       @media (max-width: 767px) {
-        font-size: 14px;
+        font-size: 16px; // 14px -> 16px
         -webkit-line-clamp: 5; // 태블릿/모바일: 2줄 -> 5줄로 확대
         line-clamp: 5;
       }
@@ -589,7 +589,7 @@ $border-color: #d9d9d9;
         gap: 0.25rem;
 
         @media (max-width: 767px) {
-          font-size: 12px;
+          font-size: 15px; // 12px -> 15px
         }
 
         svg {

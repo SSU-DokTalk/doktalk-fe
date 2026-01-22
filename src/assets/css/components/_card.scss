@@ -869,17 +869,21 @@
 
       .post-text {
         .post-title {
-          font-size: 1.125rem;
+          font-size: 1.25rem; // 18px -> 20px
           font-weight: 700;
           color: #1f2937;
           margin-bottom: 0.5rem;
           overflow: hidden;
           text-overflow: ellipsis;
           white-space: nowrap;
+
+          @media (max-width: 767px) {
+            font-size: 1.1875rem; // 모바일: 19px
+          }
         }
 
         .post-content {
-          font-size: 0.875rem;
+          font-size: 1rem; // 14px -> 16px
           color: #4b5563;
           display: -webkit-box;
           -webkit-line-clamp: 3;
@@ -887,6 +891,10 @@
           -webkit-box-orient: vertical;
           overflow: hidden;
           line-height: 1.5;
+
+          @media (max-width: 767px) {
+            font-size: 1rem; // 모바일: 16px
+          }
         }
       }
 
@@ -894,8 +902,12 @@
         display: flex;
         align-items: center;
         margin-top: auto; // Push to bottom
-        font-size: 0.875rem;
+        font-size: 0.9375rem; // 14px -> 15px
         color: #6b7280;
+
+        @media (max-width: 767px) {
+          font-size: 0.9375rem; // 모바일: 15px
+        }
 
         .divider {
           margin: 0 0.5rem;
@@ -905,6 +917,10 @@
         .meta-item {
           display: flex;
           align-items: center;
+
+          @media (max-width: 767px) {
+            font-size: 0.9375rem; // 모바일: 15px
+          }
 
           &.author {
             font-weight: 500;
