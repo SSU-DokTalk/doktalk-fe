@@ -16,6 +16,7 @@ import { usePostFeed, useTogglePostLike } from '../api';
 import { PostCard, PostCardSkeleton } from '../components/PostCard';
 import { PostComposer } from '../components/PostComposer';
 import * as prompt from '../components/WritePrompt.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 function PopularSummariesRail() {
   const { t, i18n } = useTranslation();
@@ -47,6 +48,7 @@ function PopularSummariesRail() {
 /** 게시글 피드 (/post). ?write=1로 들어오면 쓰기 창을 열어요. */
 function PostFeedPage() {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const navigate = useNavigate();
   const isWide = useMediaQuery(mq.xl);
   const { user, isLoggedIn } = useAuth();
@@ -108,7 +110,7 @@ function PostFeedPage() {
             <>
               <p className={prompt.loginText}>{t('page.post.login-prompt')}</p>
               <Link
-                to='/login'
+                to={loginHref}
                 className={buttonStyles({ variant: 'primary', size: 'sm' })}
               >
                 {t('component.topnav.login')}

@@ -18,10 +18,12 @@ import {
   summaryFormToRequest,
   type SummaryFormValues,
 } from '../form';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 요약 쓰기 (/summary/create) */
 function SummaryCreatePage() {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
   const create = useCreateSummary();
@@ -41,7 +43,7 @@ function SummaryCreatePage() {
         title={t('page.create-summary.state.login-title')}
         description={t('page.create-summary.state.login-description')}
         actions={
-          <Link to='/login' className={buttonStyles({ variant: 'primary' })}>
+          <Link to={loginHref} className={buttonStyles({ variant: 'primary' })}>
             {t('component.topnav.login')}
           </Link>
         }

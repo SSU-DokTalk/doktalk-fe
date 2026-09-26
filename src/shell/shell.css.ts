@@ -100,3 +100,20 @@ export const main = style({
   flex: '1 1 0',
   minWidth: 0,
 });
+
+/**
+ * 가운데 880px 틀 (마이페이지·프로필·설정·결제 결과·404).
+ * 왼쪽 칼럼에도 내 프로필 카드가 있어서, 같은 카드가 두 번 나오지 않게 이 화면들은 가운데로 모았어요.
+ */
+export const centered = style({
+  boxSizing: 'border-box',
+  width: '100%',
+  maxWidth: '928px',
+  margin: '0 auto',
+  paddingBottom: '40px',
+  wordBreak: 'keep-all',
+  overflowWrap: 'break-word',
+  '@media': {
+    [mq.md]: { padding: '32px 24px 56px' },
+  },
+});

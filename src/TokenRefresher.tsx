@@ -2,6 +2,7 @@ import axios from 'axios';
 import cookie from 'react-cookies';
 import { useEffect } from 'react';
 import { useAppDispatch } from '@/stores/hooks';
+import { queryClient } from '@/shared/api/queryClient';
 import { unsetUser } from './stores/user';
 
 function TokenRefresher({ children }: { children: React.ReactNode }) {
@@ -21,14 +22,16 @@ function TokenRefresher({ children }: { children: React.ReactNode }) {
       },
       // 응답 에러 처리
       async (error) => {
-        let { config } = error;
-        let { status } = error.response;
-        let { errorCode } = error.response.data;
+        const { config } = error;
+        // 네트워크 오류처럼 응답이 없으면 그대로 넘겨요.
+        if (!error.response) return Promise.reject(error);
+        const { status } = error.response;
+        const errorCode = error.response.data?.errorCode;
 
         // access_token 재발급
         if (status === 401) {
           if (errorCode == 'MD1002') {
-            let res = await axios
+            const res = await axios
               .post(
                 `/api/user/access-token`,
                 {},
@@ -40,7 +43,7 @@ function TokenRefresher({ children }: { children: React.ReactNode }) {
               )
               .then(async (res) => {
                 // 새 토큰 저장
-                let token = res.headers.authorization;
+                const token = res.headers.authorization;
                 axios.defaults.headers.common['Authorization'] = token;
 
                 // 새로 응답받은 데이터로 실패한 요청 재시도
@@ -53,9 +56,8 @@ function TokenRefresher({ children }: { children: React.ReactNode }) {
           axios.defaults.headers.common['Authorization'] = '';
           cookie.remove('Authorization', { path: '/' });
           await dispatch(unsetUser());
-        }
-        // 다른 오류들에 대해 범용적인 처리가 필요할 경우 여기에 추가
-        else if (status == 400 || status == 404 || status == 409) {
+          // 로그아웃처럼 이전 사람의 캐시도 비워요.
+          queryClient.clear();
         }
 
         // 다른 모든 오류에 대해 처리를 거부하고 오류를 다시 throw
@@ -65,7 +67,7 @@ function TokenRefresher({ children }: { children: React.ReactNode }) {
     return () => {
       axios.interceptors.response.eject(interceptor);
     };
-  }, []);
+  }, [dispatch]);
   return <>{children}</>;
 }
 

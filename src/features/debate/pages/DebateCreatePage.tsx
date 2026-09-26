@@ -18,10 +18,12 @@ import {
   type DebateFormValues,
 } from '../form';
 import * as s from '@/shared/components/FormPage.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 토론방 만들기 (/debate/create) */
 function DebateCreatePage() {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
   const create = useCreateDebate();
@@ -41,7 +43,7 @@ function DebateCreatePage() {
         title={t('page.create-debate.state.login-title')}
         description={t('page.create-debate.state.login-description')}
         actions={
-          <Link to='/login' className={buttonStyles({ variant: 'primary' })}>
+          <Link to={loginHref} className={buttonStyles({ variant: 'primary' })}>
             {t('component.topnav.login')}
           </Link>
         }

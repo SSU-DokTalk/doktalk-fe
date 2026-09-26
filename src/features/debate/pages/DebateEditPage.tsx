@@ -11,10 +11,12 @@ import { UploadError, useDebate, useUpdateDebate } from '../api';
 import { DebateForm } from '../components/DebateForm';
 import { debateToForm, formToRequest, type DebateFormValues } from '../form';
 import * as s from '@/shared/components/FormPage.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 토론방 수정 (/debate/:debate_id/update). 개설자만 들어올 수 있어요. */
 function DebateEditPage() {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const navigate = useNavigate();
   const { debate_id } = useParams();
   const id = Number(debate_id);
@@ -50,7 +52,7 @@ function DebateEditPage() {
       title={t('page.debate-detail.state.login-title')}
       description={t('page.debate-detail.state.login-description')}
       actions={
-        <Link to='/login' className={buttonStyles({ variant: 'primary' })}>
+        <Link to={loginHref} className={buttonStyles({ variant: 'primary' })}>
           {t('component.topnav.login')}
         </Link>
       }

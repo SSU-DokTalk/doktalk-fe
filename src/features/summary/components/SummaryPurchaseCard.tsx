@@ -12,6 +12,7 @@ import type { Summary } from '@/shared/api/models';
 import { useFormat } from '@/shared/format';
 import type { SummaryAccess } from '../useSummaryAccess';
 import * as s from './SummaryDetail.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 오른쪽 칸의 구매 카드 (xl 이상) */
 export function SummaryPurchaseCard({
@@ -24,6 +25,7 @@ export function SummaryPurchaseCard({
   onPay: () => void;
 }) {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const format = useFormat();
   const headingId = useId();
   const free = summary.price <= 0;
@@ -87,7 +89,7 @@ export function SummaryPurchaseCard({
         </p>
         {!access.isLoggedIn ? (
           <Link
-            to='/login'
+            to={loginHref}
             className={buttonStyles({ size: 'lg', fullWidth: true })}
           >
             {t('component.topnav.login')}

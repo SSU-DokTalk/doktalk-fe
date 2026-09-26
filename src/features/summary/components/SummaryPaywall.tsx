@@ -7,6 +7,7 @@ import type { Summary } from '@/shared/api/models';
 import { useFormat } from '@/shared/format';
 import type { SummaryAccess } from '../useSummaryAccess';
 import * as s from './SummaryDetail.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 본문 안의 결제 안내. 로그인 전·유료·무료에 따라 버튼이 달라요. */
 export function SummaryPaywall({
@@ -19,6 +20,7 @@ export function SummaryPaywall({
   onPay: () => void;
 }) {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const format = useFormat();
   const titleId = useId();
   const free = summary.price <= 0;
@@ -47,7 +49,7 @@ export function SummaryPaywall({
       </p>
       <div className={s.paywallActions}>
         {!access.isLoggedIn ? (
-          <Link to='/login' className={buttonStyles({ size: 'lg' })}>
+          <Link to={loginHref} className={buttonStyles({ size: 'lg' })}>
             {t('component.topnav.login')}
           </Link>
         ) : free ? (

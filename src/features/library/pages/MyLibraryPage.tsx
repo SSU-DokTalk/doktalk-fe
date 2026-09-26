@@ -8,10 +8,12 @@ import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
 import { useAuth } from '@/shell/hooks';
 import { MyLibrary } from '../components/MyLibrary';
 import * as s from './MyLibraryPage.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 내 서재 (/mypage/library) */
 function MyLibraryPage() {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const { user, isLoggedIn } = useAuth();
 
   useDocumentTitle(t('page.mypage.library.title'));
@@ -23,7 +25,7 @@ function MyLibraryPage() {
         title={t('page.profile.state.login-title')}
         description={t('page.profile.state.login-description')}
         actions={
-          <Link to='/login' className={buttonStyles({ variant: 'primary' })}>
+          <Link to={loginHref} className={buttonStyles({ variant: 'primary' })}>
             {t('component.topnav.login')}
           </Link>
         }

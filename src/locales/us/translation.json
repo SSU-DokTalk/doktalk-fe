@@ -852,7 +852,25 @@
         "comments": "Comments",
         "notifications": "Notifications",
         "page": " Page"
-      }
+      },
+      "title": "Settings",
+      "account": "Account",
+      "email": "Email",
+      "profile": "Profile",
+      "profile-description": "Nickname, introduction and photo",
+      "language": "Language",
+      "language-description": "The language of menus and messages. Posts written by others don't change.",
+      "support": "Support",
+      "manage": "Account management",
+      "logout-description": "Log out on this device",
+      "delete": "Delete account",
+      "delete-description": "You won't be able to use the service with this account. You can restore it by logging in again.",
+      "delete-button": "Delete",
+      "delete-confirm-title": "Delete your account?",
+      "delete-confirm-description": "You'll be logged out right away. You can restore the account later by logging in with it.",
+      "delete-error": "Couldn't delete the account. Please try again in a moment.",
+      "version": "Version {{version}}",
+      "login-prompt": "Log in to manage your account and profile."
     },
     "integrated-search": {
       "title": "Integrated Search Results",
@@ -877,7 +895,11 @@
       "book": "Books"
     },
     "not-found": {
-      "message": "Page Not Found!"
+      "message": "Page Not Found!",
+      "title": "Page not found",
+      "description": "The page was moved or deleted. Please check the address.",
+      "home": "Go to home",
+      "search": "Search"
     },
     "mypage": {
       "library": {
@@ -1079,6 +1101,126 @@
         "save": "Save",
         "upload-error": "Couldn't upload the photo. Please try another one.",
         "saved": "Profile saved"
+      }
+    },
+    "auth": {
+      "login": {
+        "title": "Log in",
+        "subtitle": "Talk with people who read the same books",
+        "invalid": "The email or password is incorrect. Please check and try again.",
+        "failed": "Couldn't log in. Please try again in a moment.",
+        "no-account": "New to DokTalk?",
+        "signed-up": "You're signed up. Please log in."
+      },
+      "field": {
+        "email-placeholder": "Enter your email address",
+        "email-required": "Please enter your email.",
+        "email-invalid": "Please enter a valid email address.",
+        "password-placeholder": "Enter your password",
+        "password-required": "Please enter your password.",
+        "show-password": "Show password"
+      },
+      "social": {
+        "login-title": "Or log in with",
+        "start-title": "Get started with a social account",
+        "login": {
+          "kakao": "Log in with Kakao",
+          "google": "Log in with Google",
+          "naver": "Log in with Naver",
+          "facebook": "Log in with Facebook"
+        },
+        "start": {
+          "kakao": "Continue with Kakao",
+          "google": "Continue with Google",
+          "naver": "Continue with Naver",
+          "facebook": "Continue with Facebook"
+        }
+      },
+      "register": {
+        "title": "Sign up",
+        "email-divider": "Or sign up with email",
+        "has-account": "Already have an account?",
+        "nickname-placeholder": "The name others will see",
+        "nickname-required": "Please enter a nickname.",
+        "password-rules": "Password requirements",
+        "rule": {
+          "length": "8–30 characters",
+          "letter": "A letter",
+          "digit": "A number",
+          "special": "A symbol {{chars}}",
+          "met": "met",
+          "unmet": "not met"
+        },
+        "password-invalid": "Please meet all the password requirements.",
+        "password-confirm-placeholder": "Enter the password again",
+        "password-confirm-required": "Please enter the password again.",
+        "password-mismatch": "The passwords don't match.",
+        "agreements": "Agreements",
+        "required-tag": "(Required)",
+        "terms": "I agree to the Terms of Service",
+        "privacy": "I agree to the collection and use of personal information",
+        "view-terms": "View the Terms of Service",
+        "view-privacy": "View the Privacy Policy",
+        "agreements-required": "Please accept the required agreements.",
+        "submit": "Sign up",
+        "email-taken": "This email is already registered. Try logging in.",
+        "failed": "Couldn't sign you up. Please check your details and try again."
+      },
+      "restore": {
+        "title": "This account was deleted",
+        "description": "Restore the account to use it again.",
+        "submit": "Restore account",
+        "cancel": "Use another account",
+        "failed": "Couldn't restore the account. Please try again in a moment."
+      },
+      "callback": {
+        "loading": "Logging you in",
+        "failed-title": "Couldn't log you in",
+        "failed-description": "The social login was cancelled or has expired. Please try again.",
+        "back": "Back to log in"
+      }
+    },
+    "checkout": {
+      "title": "Checkout",
+      "item": "Item",
+      "type": {
+        "D": "Discussion",
+        "S": "Book summary"
+      },
+      "method": "Payment method",
+      "widget-loading": "Loading payment methods",
+      "widget-error": "Couldn't load the payment form. Please try again in a moment.",
+      "total": "Total",
+      "pay": "Pay {{price}}",
+      "note": {
+        "S": "You can read the full summary right after paying.",
+        "D": "You'll join the discussion right after paying."
+      },
+      "request-error": "Couldn't start the payment. Please try again.",
+      "result": {
+        "checking": "Confirming your payment",
+        "success-title": "Payment complete",
+        "success-lead": {
+          "S": "You can now read the full summary. It's also in “Summaries I am reading” in your library.",
+          "D": "You joined the discussion. See the schedule under “Discussion” on your page."
+        },
+        "fail-title": "Payment failed",
+        "fail-lead": "The payment didn't go through. Check the reason below and try again.",
+        "record-error-title": "Couldn't save your purchase",
+        "record-error-lead": "The payment went through, but the purchase could not be saved. Contact us if retrying does not help.",
+        "missing-title": "Payment details not found",
+        "missing-lead": "The address is wrong or outdated. Please check your payments.",
+        "item": "Item",
+        "amount": "Amount",
+        "date": "Paid at",
+        "order": "Order number",
+        "reason": "Reason",
+        "code": "Error code",
+        "read-summary": "Read the summary",
+        "go-debate": "Go to the discussion",
+        "payments": "View payments",
+        "retry": "Try again",
+        "back": "Go back"
       }
     }
   },

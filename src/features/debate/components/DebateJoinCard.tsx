@@ -12,8 +12,10 @@ import {
 import type { Debate } from '@/shared/api/models';
 import { parseServerDate, useFormat } from '@/shared/format';
 import { useDebatePurchase, useJoinFreeDebate } from '../api';
-import { ProductCheckout } from '@/features/payment/components/ProductCheckout';
+import { CheckoutDialog } from '@/features/payment/components/CheckoutDialog';
+import { useReopenCheckout } from '@/features/payment/useReopenCheckout';
 import * as s from './DebateJoinCard.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 type DebateJoinCardProps = {
   debate: Debate;
@@ -35,9 +37,10 @@ export function DebateJoinCard({
   variant,
 }: DebateJoinCardProps) {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const format = useFormat();
   const headingId = useId();
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(useReopenCheckout());
   const purchase = useDebatePurchase(debate.id, isHost ? 0 : viewerId);
   const join = useJoinFreeDebate(debate, viewerId);
 
@@ -67,7 +70,7 @@ export function DebateJoinCard({
             {t('component.shell.login-card.title')}
           </p>
           <Link
-            to='/login'
+            to={loginHref}
             className={buttonStyles({ size: 'lg', fullWidth: true })}
           >
             {t('component.topnav.login')}
@@ -133,12 +136,16 @@ export function DebateJoinCard({
             <Button size='lg' fullWidth onClick={() => setCheckoutOpen(true)}>
               {t('page.debate-detail.join.pay')}
             </Button>
-            <ProductCheckout
+            <CheckoutDialog
               product={{
                 type: 'D',
                 id: debate.id,
                 title: debate.title,
                 price: debate.price,
+                cover: { title: debate.book.title, src: debate.book.image },
+                meta: [debate.user.name, debate.book.title]
+                  .filter(Boolean)
+                  .join(' · '),
               }}
               open={checkoutOpen}
               onOpenChange={setCheckoutOpen}

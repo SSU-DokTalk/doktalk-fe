@@ -3,6 +3,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { Badge, Button, buttonStyles, type ButtonProps } from '@/design-system';
 import { useToggleLibrary } from './api';
+import { useAuthHref } from '@/features/auth/redirect';
 
 type LibraryActionsProps = {
   isbn: number;
@@ -27,12 +28,13 @@ export function LibraryActions({
   compact = false,
 }: LibraryActionsProps) {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const toggle = useToggleLibrary(viewerId);
 
   if (viewerId <= 0) {
     return (
       <Link
-        to='/login'
+        to={loginHref}
         className={buttonStyles({ variant: 'secondary', size })}
       >
         <BookmarkPlus aria-hidden='true' />

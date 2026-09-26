@@ -18,10 +18,13 @@ import SiteLinks from './SiteLinks';
 import * as shell from './shell.css';
 import * as s from './nav.css';
 import * as side from './side.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 모바일 전체 메뉴 내용. 링크를 누르면 서랍을 닫아요. */
 function DrawerContent({ onNavigate }: { onNavigate: () => void }) {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
+  const registerHref = useAuthHref('register');
   const { user, isLoggedIn, logout } = useAuth();
   const { languages, current, change } = useLanguage();
   const name = user.name ?? t('component.navigation.topnav.nickname-fallback');
@@ -40,14 +43,14 @@ function DrawerContent({ onNavigate }: { onNavigate: () => void }) {
           </p>
           <div className={side.drawerCtaActions}>
             <Link
-              to='/login'
+              to={loginHref}
               onClick={onNavigate}
               className={buttonStyles({ variant: 'primary', size: 'md' })}
             >
               {t('component.topnav.login')}
             </Link>
             <Link
-              to='/register'
+              to={registerHref}
               onClick={onNavigate}
               className={buttonStyles({ variant: 'secondary', size: 'md' })}
             >

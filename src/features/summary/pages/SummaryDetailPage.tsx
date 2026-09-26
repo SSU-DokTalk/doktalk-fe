@@ -4,7 +4,8 @@ import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { Badge, Button, buttonStyles, mq, Skeleton } from '@/design-system';
 import { CommentSection } from '@/features/comment/components/CommentSection';
-import { ProductCheckout } from '@/features/payment/components/ProductCheckout';
+import { CheckoutDialog } from '@/features/payment/components/CheckoutDialog';
+import { useReopenCheckout } from '@/features/payment/useReopenCheckout';
 import { httpStatus } from '@/shared/api/client';
 import type { Summary } from '@/shared/api/models';
 import { categoryLabelKeys } from '@/shared/categories';
@@ -77,7 +78,7 @@ function SummaryDetail({ summary }: { summary: Summary }) {
   const backTo = useBackToList();
   const access = useSummaryAccess(summary);
   const { viewerId, isOwner } = access;
-  const [checkoutOpen, setCheckoutOpen] = useState(false);
+  const [checkoutOpen, setCheckoutOpen] = useState(useReopenCheckout());
 
   const liked = useSummaryLiked(summary.id, viewerId);
   const toggleLike = useToggleSummaryLike(summary.id, viewerId);
@@ -240,12 +241,16 @@ function SummaryDetail({ summary }: { summary: Summary }) {
       )}
 
       {!free && !access.unlocked && !isOwner && (
-        <ProductCheckout
+        <CheckoutDialog
           product={{
             type: 'S',
             id: summary.id,
             title: summary.title,
             price: summary.price,
+            cover: { title: summary.book.title, src: summary.book.image },
+            meta: [summary.user.name, summary.book.title]
+              .filter(Boolean)
+              .join(' · '),
           }}
           open={checkoutOpen}
           onOpenChange={setCheckoutOpen}

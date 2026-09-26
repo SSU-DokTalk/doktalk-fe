@@ -10,6 +10,7 @@ import { CreateMenu, LanguageMenu, ProfileMenu } from './menus';
 import { MAIN_NAV } from './navigation';
 import * as shell from './shell.css';
 import * as s from './nav.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 통합 검색 입력칸. 결과 화면에서는 지금 검색어를 채워 둬요. */
 function NavSearch() {
@@ -58,6 +59,8 @@ function NavSearch() {
 /** 데스크톱 상단 내비 (md 이상). 로그인 여부에 따라 오른쪽이 바뀌어요. */
 function TopNav() {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
+  const registerHref = useAuthHref('register');
   const { isLoggedIn } = useAuth();
 
   return (
@@ -99,13 +102,13 @@ function TopNav() {
           ) : (
             <>
               <Link
-                to='/login'
+                to={loginHref}
                 className={buttonStyles({ variant: 'ghost', size: 'md' })}
               >
                 {t('component.topnav.login')}
               </Link>
               <Link
-                to='/register'
+                to={registerHref}
                 className={buttonStyles({ variant: 'primary', size: 'md' })}
               >
                 {t('component.topnav.register')}

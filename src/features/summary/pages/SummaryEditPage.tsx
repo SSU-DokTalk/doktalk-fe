@@ -22,10 +22,12 @@ import {
   summaryToForm,
   type SummaryFormValues,
 } from '../form';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 요약 수정 (/summary/:summary_id/update). 작성자만 들어올 수 있어요. */
 function SummaryEditPage() {
   const { t, i18n } = useTranslation();
+  const loginHref = useAuthHref();
   const navigate = useNavigate();
   const { summary_id } = useParams();
   const id = Number(summary_id);
@@ -66,7 +68,7 @@ function SummaryEditPage() {
         title={t('page.create-summary.state.login-title')}
         description={t('page.create-summary.state.login-description')}
         actions={
-          <Link to='/login' className={buttonStyles({ variant: 'primary' })}>
+          <Link to={loginHref} className={buttonStyles({ variant: 'primary' })}>
             {t('component.topnav.login')}
           </Link>
         }

@@ -8,6 +8,7 @@ import { useAuth, useMyProfileCounts } from './hooks';
 import { ACTIVITY_LINKS } from './navigation';
 import SiteLinks from './SiteLinks';
 import * as s from './side.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 function ProfileSummary() {
   const { t } = useTranslation();
@@ -67,6 +68,8 @@ function ProfileSummary() {
 
 function LoginPrompt() {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
+  const registerHref = useAuthHref('register');
 
   return (
     <Card className={s.loginCard}>
@@ -78,13 +81,13 @@ function LoginPrompt() {
         {t('component.shell.login-card.description')}
       </p>
       <Link
-        to='/login'
+        to={loginHref}
         className={buttonStyles({ variant: 'primary', fullWidth: true })}
       >
         {t('component.topnav.login')}
       </Link>
       <Link
-        to='/register'
+        to={registerHref}
         className={buttonStyles({ variant: 'secondary', fullWidth: true })}
       >
         {t('component.topnav.register')}

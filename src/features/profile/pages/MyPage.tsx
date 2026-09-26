@@ -20,6 +20,7 @@ import { ProfileMeetings } from '../components/ProfileMeetings';
 import { ProfilePosts } from '../components/ProfilePosts';
 import { ProfileSummaries } from '../components/ProfileSummaries';
 import * as s from './ProfilePage.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 탭 주소(?tab=)와 이름. 왼쪽 칼럼 '내 활동' 링크가 이 주소로 들어와요. */
 const MY_TABS = ['post', 'summary', 'library', 'debate', 'payment'] as const;
@@ -31,6 +32,7 @@ const parseTab = (value: string | null): MyTab =>
 /** 마이페이지 (/mypage?tab=post|summary|library|debate|payment) */
 function MyPage() {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const isDesktop = useMediaQuery(mq.md);
   const { user, isLoggedIn } = useAuth();
   const viewerId = isLoggedIn ? (user.id ?? 0) : 0;
@@ -49,7 +51,7 @@ function MyPage() {
         title={t('page.profile.state.login-title')}
         description={t('page.profile.state.login-description')}
         actions={
-          <Link to='/login' className={buttonStyles({ variant: 'primary' })}>
+          <Link to={loginHref} className={buttonStyles({ variant: 'primary' })}>
             {t('component.topnav.login')}
           </Link>
         }

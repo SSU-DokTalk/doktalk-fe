@@ -12,6 +12,7 @@ import {
 import type { Comment } from '@/shared/api/models';
 import { parseServerDate, useFormat } from '@/shared/format';
 import * as s from './CommentSection.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 const PAGE_SIZE = 10;
 
@@ -190,6 +191,7 @@ export function CommentSection({
   className,
 }: CommentSectionProps) {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const headingId = useId();
   const [visible, setVisible] = useState(PAGE_SIZE);
   const [replyTo, setReplyTo] = useState<number | null>(null);
@@ -216,7 +218,7 @@ export function CommentSection({
         <p className={s.loginPrompt}>
           {t('component.comments.login')}
           <Link
-            to='/login'
+            to={loginHref}
             className={buttonStyles({ variant: 'secondary', size: 'sm' })}
           >
             {t('component.topnav.login')}

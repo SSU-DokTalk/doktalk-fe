@@ -852,7 +852,25 @@
         "comments": "댓글",
         "notifications": "알림",
         "page": " 페이지"
-      }
+      },
+      "title": "설정",
+      "account": "계정",
+      "email": "이메일",
+      "profile": "프로필",
+      "profile-description": "닉네임, 자기소개, 프로필 사진",
+      "language": "언어",
+      "language-description": "화면에 보이는 메뉴와 안내 문구의 언어예요. 다른 사람이 쓴 글은 바뀌지 않아요.",
+      "support": "고객 지원",
+      "manage": "계정 관리",
+      "logout-description": "이 기기에서 로그아웃해요",
+      "delete": "회원 탈퇴",
+      "delete-description": "탈퇴하면 이 계정으로 서비스를 이용할 수 없어요. 같은 계정으로 다시 로그인하면 복구할 수 있어요.",
+      "delete-button": "탈퇴하기",
+      "delete-confirm-title": "정말 탈퇴할까요?",
+      "delete-confirm-description": "탈퇴하면 바로 로그아웃돼요. 나중에 같은 계정으로 로그인하면 복구할 수 있어요.",
+      "delete-error": "탈퇴하지 못했어요. 잠시 후 다시 시도해 주세요.",
+      "version": "버전 {{version}}",
+      "login-prompt": "로그인하면 계정과 프로필을 관리할 수 있어요."
     },
     "integrated-search": {
       "title": "통합 검색 결과",
@@ -877,7 +895,11 @@
       "book": "도서"
     },
     "not-found": {
-      "message": "Page Not Found!"
+      "message": "Page Not Found!",
+      "title": "페이지를 찾을 수 없어요",
+      "description": "주소가 바뀌었거나 삭제된 페이지예요. 입력한 주소를 다시 확인해 주세요.",
+      "home": "메인으로 가기",
+      "search": "검색하기"
     },
     "mypage": {
       "library": {
@@ -1079,6 +1101,126 @@
         "save": "저장",
         "upload-error": "사진을 올리지 못했어요. 다른 사진으로 다시 시도해 주세요.",
         "saved": "프로필을 저장했어요"
+      }
+    },
+    "auth": {
+      "login": {
+        "title": "로그인",
+        "subtitle": "같은 책을 읽은 사람들과 이야기를 나눠 보세요",
+        "invalid": "이메일 또는 비밀번호가 맞지 않아요. 다시 확인해 주세요.",
+        "failed": "로그인하지 못했어요. 잠시 후 다시 시도해 주세요.",
+        "no-account": "아직 회원이 아니신가요?",
+        "signed-up": "가입했어요. 로그인해 주세요."
+      },
+      "field": {
+        "email-placeholder": "이메일 주소를 입력해주세요",
+        "email-required": "이메일을 입력해 주세요.",
+        "email-invalid": "이메일 형식이 맞지 않아요.",
+        "password-placeholder": "비밀번호를 입력해주세요",
+        "password-required": "비밀번호를 입력해 주세요.",
+        "show-password": "비밀번호 보기"
+      },
+      "social": {
+        "login-title": "소셜 계정으로 간편 로그인",
+        "start-title": "소셜 계정으로 빠르게 시작하기",
+        "login": {
+          "kakao": "카카오로 로그인",
+          "google": "구글로 로그인",
+          "naver": "네이버로 로그인",
+          "facebook": "페이스북으로 로그인"
+        },
+        "start": {
+          "kakao": "카카오로 시작하기",
+          "google": "구글로 시작하기",
+          "naver": "네이버로 시작하기",
+          "facebook": "페이스북으로 시작하기"
+        }
+      },
+      "register": {
+        "title": "회원가입",
+        "email-divider": "또는 이메일로 가입",
+        "has-account": "이미 계정이 있으신가요?",
+        "nickname-placeholder": "다른 사람에게 보일 이름이에요",
+        "nickname-required": "닉네임을 입력해 주세요.",
+        "password-rules": "비밀번호 조건",
+        "rule": {
+          "length": "8~30자",
+          "letter": "영문",
+          "digit": "숫자",
+          "special": "특수문자 {{chars}}",
+          "met": "충족",
+          "unmet": "미충족"
+        },
+        "password-invalid": "비밀번호 조건을 모두 채워 주세요.",
+        "password-confirm-placeholder": "비밀번호를 한 번 더 입력해주세요",
+        "password-confirm-required": "비밀번호를 한 번 더 입력해 주세요.",
+        "password-mismatch": "비밀번호가 일치하지 않아요.",
+        "agreements": "약관 동의",
+        "required-tag": "(필수)",
+        "terms": "서비스 이용약관 동의",
+        "privacy": "개인정보 수집·이용 동의",
+        "view-terms": "이용약관 보기",
+        "view-privacy": "개인정보처리방침 보기",
+        "agreements-required": "필수 약관에 동의해 주세요.",
+        "submit": "가입하기",
+        "email-taken": "이미 가입된 이메일이에요. 로그인해 보세요.",
+        "failed": "가입하지 못했어요. 입력한 내용을 확인하고 다시 시도해 주세요."
+      },
+      "restore": {
+        "title": "탈퇴한 계정이에요",
+        "description": "다시 사용하려면 계정을 복구해 주세요.",
+        "submit": "계정 복구하기",
+        "cancel": "다른 계정으로 로그인",
+        "failed": "계정을 복구하지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "callback": {
+        "loading": "로그인하고 있어요",
+        "failed-title": "로그인하지 못했어요",
+        "failed-description": "소셜 로그인이 취소되었거나 시간이 지났어요. 다시 시도해 주세요.",
+        "back": "로그인 화면으로"
+      }
+    },
+    "checkout": {
+      "title": "결제하기",
+      "item": "주문 상품",
+      "type": {
+        "D": "독서 토론",
+        "S": "도서 요약"
+      },
+      "method": "결제 수단",
+      "widget-loading": "결제 수단을 불러오고 있어요",
+      "widget-error": "결제 창을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.",
+      "total": "최종 결제 금액",
+      "pay": "{{price}} 결제하기",
+      "note": {
+        "S": "결제가 끝나면 바로 전체 요약을 읽을 수 있어요.",
+        "D": "결제가 끝나면 바로 토론방에 참여해요."
+      },
+      "request-error": "결제를 시작하지 못했어요. 다시 시도해 주세요.",
+      "result": {
+        "checking": "결제를 확인하고 있어요",
+        "success-title": "결제가 완료됐어요",
+        "success-lead": {
+          "S": "이제 전체 요약을 읽을 수 있어요. 내 서재의 ‘읽고 있는 요약’에도 담아 두었어요.",
+          "D": "토론방에 참여했어요. 마이페이지 ‘토론방’에서 모임 일정을 확인할 수 있어요."
+        },
+        "fail-title": "결제하지 못했어요",
+        "fail-lead": "결제가 완료되지 않았어요. 아래 사유를 확인하고 다시 시도해 주세요.",
+        "record-error-title": "구매 기록을 남기지 못했어요",
+        "record-error-lead": "결제는 끝났지만 구매 기록을 저장하지 못했어요. 다시 시도해도 해결되지 않으면 문의해 주세요.",
+        "missing-title": "결제 정보를 찾을 수 없어요",
+        "missing-lead": "주소가 잘못되었거나 오래되었어요. 결제 내역에서 결제를 확인해 주세요.",
+        "item": "상품",
+        "amount": "결제 금액",
+        "date": "결제 일시",
+        "order": "주문번호",
+        "reason": "실패 사유",
+        "code": "오류 코드",
+        "read-summary": "요약 읽으러 가기",
+        "go-debate": "토론방으로 가기",
+        "payments": "결제 내역 보기",
+        "retry": "다시 결제하기",
+        "back": "돌아가기"
       }
     }
   },

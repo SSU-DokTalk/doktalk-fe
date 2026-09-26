@@ -33,6 +33,7 @@ import { DebateJoinCard } from '../components/DebateJoinCard';
 import { DebateOwnerMenu } from '../components/DebateOwnerMenu';
 import { RelatedDebates } from '../components/RelatedDebates';
 import * as s from '@/shared/components/DetailPage.css';
+import { useAuthHref } from '@/features/auth/redirect';
 
 /** 목록에서 왔으면 그 목록(검색 조건 포함)으로 돌아가요. */
 function useBackToList() {
@@ -159,6 +160,7 @@ function DetailState({
   onRetry?: () => void;
 }) {
   const { t } = useTranslation();
+  const loginHref = useAuthHref();
   const backTo = useBackToList();
   const toList = (
     <Link to={backTo} className={buttonStyles({ variant: 'secondary' })}>
@@ -174,7 +176,10 @@ function DetailState({
         description={t('page.debate-detail.state.login-description')}
         actions={
           <>
-            <Link to='/login' className={buttonStyles({ variant: 'primary' })}>
+            <Link
+              to={loginHref}
+              className={buttonStyles({ variant: 'primary' })}
+            >
               {t('component.topnav.login')}
             </Link>
             {toList}

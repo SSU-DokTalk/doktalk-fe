@@ -56,14 +56,11 @@ export function SideColumnLayout() {
   );
 }
 
-/**
- * 마이페이지·프로필·설정. 아직 기존 페이지가 폭을 스스로 정해서 틀은 넓이를 건드리지 않아요.
- * 페이지를 새로 만들 때 가운데 880px 틀로 옮겨요.
- */
+/** 마이페이지·프로필·설정·결제 결과·404. 왼쪽 칼럼 없이 가운데 880px 틀이에요. */
 export function PageLayout() {
   return (
     <>
-      <main>
+      <main className={s.centered}>
         <Outlet />
       </main>
       <SiteLinks variant='bar' />
