@@ -306,6 +306,24 @@
         "message": "이어서 읽으시려면 결제가 필요합니다.",
         "wishlist": "찜"
       }
+    },
+    "shell": {
+      "home": "讀:TALK 홈",
+      "main-nav": "주요 메뉴",
+      "bottom-nav": "하단 메뉴",
+      "my-menu": "내 메뉴",
+      "footer-nav": "약관과 고객지원",
+      "skip-to-content": "본문으로 건너뛰기",
+      "search": "통합 검색",
+      "open-menu": "메뉴 열기",
+      "close-menu": "메뉴 닫기",
+      "language": "언어",
+      "language-current": "언어 선택, 현재 {{lang}}",
+      "create": "만들기",
+      "login-card": {
+        "title": "로그인하고 토론에 참여해 보세요",
+        "description": "관심 분야에 맞는 토론방과 요약을 추천해 드려요."
+      }
     }
   },
   "page": {

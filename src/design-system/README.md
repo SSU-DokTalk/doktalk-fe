@@ -18,12 +18,12 @@ yarn storybook
 
 ## 구성
 
-| 폴더                  | 내용                                                                                                                                      |
-| --------------------- | ----------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens/theme.css.ts` | 색·반경·그림자·글꼴 CSS 변수. 이름이 `--dt-*`로 고정돼 있어요.                                                                            |
-| `tokens/scale.ts`     | 간격, 기준점(`mq`), 글자 크기(`typeScale`), z-index                                                                                       |
-| `styles/`             | 포커스 링, 스크린 리더 전용 텍스트, 글꼴                                                                                                  |
-| `components/`         | Button, IconButton, Chip, Badge, TextField/Textarea, Tabs, SegmentedControl, Avatar, BookCover, Card, Text, EmptyState, Skeleton, Spinner |
+| 폴더                  | 내용                                                                                                                                                    |
+| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens/theme.css.ts` | 색·반경·그림자·글꼴 CSS 변수. 이름이 `--dt-*`로 고정돼 있어요.                                                                                          |
+| `tokens/scale.ts`     | 간격, 기준점(`mq`), 글자 크기(`typeScale`), z-index                                                                                                     |
+| `styles/`             | 포커스 링, 스크린 리더 전용 텍스트, 글꼴                                                                                                                |
+| `components/`         | Button, IconButton, Chip, Badge, TextField/Textarea, Tabs, SegmentedControl, Menu, Dialog, Avatar, BookCover, Card, Text, EmptyState, Skeleton, Spinner |
 
 ## 규칙
 
@@ -40,3 +40,21 @@ yarn storybook
 - 기존 `_reset.scss`가 `button:focus { outline: none }`으로 포커스 표시를 지워서, 컴포넌트는 `:focus-visible`로 포커스 링을 다시 그려요.
 - 기존 `tailwind.css`가 400px 미만 화면에서 `html` 글자 크기를 15px로 줄여요. 그 규칙을 지우기 전까지는 좁은 화면에서 글자가 약 6% 작게 보여요. 입력칸은 iOS 확대를 막으려고 16px로 고정했어요.
 - `vite.config.ts`의 `tailwindSkippingVirtualCss`는 @tailwindcss/vite 4.0.x가 디스크에 없는 CSS(vanilla-extract 결과물, Storybook 가상 파일)에서 멈추는 문제를 피하는 우회예요. Tailwind를 올리면 지워요.
+
+## 앱 셸 (`src/shell`)
+
+모든 화면을 감싸는 틀이에요. 디자인 시스템 컴포넌트로 만들었어요.
+
+| 라우트 묶음                         | 틀                                             |
+| ----------------------------------- | ---------------------------------------------- |
+| `/`                                 | `LandingLayout` — 기존 랜딩 + 기존 푸터        |
+| 목록·상세·작성, `/mypage/library`   | `SideColumnLayout` — 왼쪽 칼럼(lg 이상) + 본문 |
+| `/mypage`, `/user/:id`, `/settings` | `PageLayout` — 본문 + 한 줄 푸터               |
+
+- 데스크톱(md 이상)은 `TopNav`, 모바일은 `MobileTopBar`를 보여줘요. 로그인하면 모바일에 `BottomTabs`가 고정돼요.
+- 로그인·회원가입·결제 결과 화면은 셸 밖에 있어요.
+
+## 기존 색과 연결
+
+- `tailwind.css`의 `--color-brand1~5`와 `_variables.scss`의 `$brand-color1~5`가 `--dt-*` 토큰을 가리켜요. 값은 전과 같아서 화면은 그대로예요.
+- CSS 변수라서 `color.adjust()` 같은 Sass 색 함수에는 넣을 수 없어요. 어두운 색이 필요하면 `var(--dt-color-brand-active)`처럼 토큰을 써요.

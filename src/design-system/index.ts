@@ -6,6 +6,22 @@
  */
 import './styles/fonts.css';
 
+import { Dialog as BaseDialog } from '@base-ui/react/dialog';
+import { Menu as BaseMenu } from '@base-ui/react/menu';
+import {
+  DialogBody,
+  DialogContent,
+  DialogFooter,
+  DialogHeader,
+} from './components/Dialog/Dialog';
+import {
+  MenuContent,
+  MenuGroupLabel,
+  MenuItem,
+  MenuLinkItem,
+  MenuRadioItem,
+  MenuSeparator,
+} from './components/Menu/Menu';
 import { TabsList, TabsPanel, TabsRoot, TabsTab } from './components/Tabs/Tabs';
 
 export { vars } from './tokens/theme.css';
@@ -88,4 +104,55 @@ export const Tabs = {
   List: TabsList,
   Tab: TabsTab,
   Panel: TabsPanel,
+};
+
+/**
+ * 버튼을 누르면 뜨는 메뉴예요. 화살표 키로 항목을 옮겨 다니고 Esc로 닫혀요.
+ *
+ * ```tsx
+ * <Menu.Root>
+ *   <Menu.Trigger className={buttonStyles({ variant: 'ghost' })}>열기</Menu.Trigger>
+ *   <Menu.Content>
+ *     <Menu.LinkItem render={<Link to='/mypage' />}>마이페이지</Menu.LinkItem>
+ *     <Menu.Separator />
+ *     <Menu.Item onClick={logout}>로그아웃</Menu.Item>
+ *   </Menu.Content>
+ * </Menu.Root>
+ * ```
+ */
+export const Menu = {
+  Root: BaseMenu.Root,
+  Trigger: BaseMenu.Trigger,
+  Content: MenuContent,
+  Item: MenuItem,
+  LinkItem: MenuLinkItem,
+  Group: BaseMenu.Group,
+  GroupLabel: MenuGroupLabel,
+  RadioGroup: BaseMenu.RadioGroup,
+  RadioItem: MenuRadioItem,
+  Separator: MenuSeparator,
+};
+
+/**
+ * 모달·시트·서랍이에요. 열린 동안 뒤 화면은 조작할 수 없고 포커스가 안에 머물러요.
+ *
+ * ```tsx
+ * <Dialog.Root open={open} onOpenChange={setOpen}>
+ *   <Dialog.Content placement='right'>
+ *     <Dialog.Header title='메뉴' closeLabel='메뉴 닫기' />
+ *     <Dialog.Body>…</Dialog.Body>
+ *   </Dialog.Content>
+ * </Dialog.Root>
+ * ```
+ */
+export const Dialog = {
+  Root: BaseDialog.Root,
+  Trigger: BaseDialog.Trigger,
+  Close: BaseDialog.Close,
+  Content: DialogContent,
+  Header: DialogHeader,
+  Body: DialogBody,
+  Footer: DialogFooter,
+  Title: BaseDialog.Title,
+  Description: BaseDialog.Description,
 };

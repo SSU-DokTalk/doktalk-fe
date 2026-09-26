@@ -1,4 +1,7 @@
 #settings {
+    // 고정 사이드바가 화면 끝까지 내려와서, 내용이 짧아도 아래 푸터가 첫 화면 밖에 있게 해요.
+    box-sizing: border-box;
+    min-height: calc(100vh - 72px);
     padding-left: calc(300px + 108px);
     padding-top: 64px;
     padding-right: 108px;

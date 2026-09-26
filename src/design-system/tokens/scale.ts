@@ -29,6 +29,12 @@ export const mq = {
   md: `screen and (min-width: ${breakpoints.md}px)`,
   lg: `screen and (min-width: ${breakpoints.lg}px)`,
   xl: `screen and (min-width: ${breakpoints.xl}px)`,
+  /** md 미만 (모바일) */
+  belowMd: `screen and (max-width: ${breakpoints.md - 0.02}px)`,
+  /** lg 미만 (모바일·태블릿) */
+  belowLg: `screen and (max-width: ${breakpoints.lg - 0.02}px)`,
+  /** xl 미만 */
+  belowXl: `screen and (max-width: ${breakpoints.xl - 0.02}px)`,
   reducedMotion: '(prefers-reduced-motion: reduce)',
 } as const;
 

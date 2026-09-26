@@ -7,7 +7,7 @@ import '@/assets/css/components/_sidebar.scss';
 import 'react-datepicker/dist/react-datepicker.css';
 import '@/assets/css/tailwind.css';
 
-import BasicLayout from '@/layouts/BasicLayout';
+import { AppShell, LandingLayout, PageLayout, SideColumnLayout } from '@/shell';
 
 import Landing from '@/pages/Landing';
 import Post from '@/pages/Post';
@@ -22,7 +22,6 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './stores/hooks';
 import { selectUser, setUser } from './stores/user';
 import cookie from 'react-cookies';
-import ContentMainLayout from './layouts/ContentMainLayout';
 import Debate from './pages/Debate';
 import Search from './pages/Search';
 import CircularProgress from '@mui/material/CircularProgress';
@@ -127,10 +126,12 @@ function App() {
           <Route path='/checkout/success' element={<CheckoutSuccess />}></Route>
           <Route path='/checkout/fail' element={<CheckoutFail />}></Route>
         </Route>
-        <Route element={<BasicLayout />}>
-          <Route path='/' element={<Landing />}></Route>
+        <Route element={<AppShell />}>
+          <Route element={<LandingLayout />}>
+            <Route path='/' element={<Landing />}></Route>
+          </Route>
 
-          <Route element={<ContentMainLayout />}>
+          <Route element={<SideColumnLayout />}>
             <Route path='/post' element={<Post />}></Route>
 
             <Route path='/search' element={<Search />}></Route>
@@ -159,12 +160,14 @@ function App() {
             ></Route>
 
             <Route path='/post/:post_id' element={<PostDetail />}></Route>
+            <Route path='/mypage/library' element={<MyLibrary />}></Route>
           </Route>
-          <Route path='/mypage' element={<MyPage />}></Route>
-          <Route path='/mypage/library' element={<MyLibrary />}></Route>
 
-          <Route path='/user/:user_id' element={<UserProfile />}></Route>
-          <Route path='settings' element={<Settings />}></Route>
+          <Route element={<PageLayout />}>
+            <Route path='/mypage' element={<MyPage />}></Route>
+            <Route path='/user/:user_id' element={<UserProfile />}></Route>
+            <Route path='settings' element={<Settings />}></Route>
+          </Route>
         </Route>
         <Route path='/login' element={<Login />}></Route>
         <Route path='/register' element={<Register />}></Route>

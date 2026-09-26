@@ -2,7 +2,11 @@
 
 #settings-sidebar {
     position: fixed;
-    top: 170px;
+    // 새 상단 내비 높이(src/shell)에 맞췄어요. 모바일 상단 바는 56px이에요.
+    top: 72px;
+    @media (max-width: 767.98px) {
+        top: 56px;
+    }
     left: 0;
     bottom: 0;
     width: 300px;

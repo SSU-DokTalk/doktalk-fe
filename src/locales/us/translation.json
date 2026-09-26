@@ -306,6 +306,24 @@
         "message": "Payment required to continue reading.",
         "wishlist": "Wishlist"
       }
+    },
+    "shell": {
+      "home": "讀:TALK home",
+      "main-nav": "Main menu",
+      "bottom-nav": "Bottom menu",
+      "my-menu": "My menu",
+      "footer-nav": "Terms and support",
+      "skip-to-content": "Skip to content",
+      "search": "Search",
+      "open-menu": "Open menu",
+      "close-menu": "Close menu",
+      "language": "Language",
+      "language-current": "Language, current: {{lang}}",
+      "create": "Create",
+      "login-card": {
+        "title": "Log in to join the discussion",
+        "description": "We'll recommend discussions and summaries that fit your interests."
+      }
     }
   },
   "page": {
