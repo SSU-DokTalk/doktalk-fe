@@ -72,6 +72,10 @@ export {
   type SegmentedOption,
 } from './components/SegmentedControl/SegmentedControl';
 export {
+  default as Select,
+  type SelectProps,
+} from './components/Select/Select';
+export {
   default as Skeleton,
   type SkeletonProps,
 } from './components/Skeleton/Skeleton';

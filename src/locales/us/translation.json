@@ -36,6 +36,24 @@
         "10": "Oct",
         "11": "Nov",
         "12": "Dec"
+      },
+      "weekdays": {
+        "0": "Sun",
+        "1": "Mon",
+        "2": "Tue",
+        "3": "Wed",
+        "4": "Thu",
+        "5": "Fri",
+        "6": "Sat"
+      },
+      "relative": {
+        "second": "{{count}}s ago",
+        "minute": "{{count}}m ago",
+        "hour": "{{count}}h ago",
+        "day": "{{count}}d ago",
+        "week": "{{count}}w ago",
+        "month": "{{count}}mo ago",
+        "year": "{{count}}y ago"
       }
     }
   },
@@ -324,6 +342,9 @@
         "title": "Log in to join the discussion",
         "description": "We'll recommend discussions and summaries that fit your interests."
       }
+    },
+    "user": {
+      "unknown": "Unknown user"
     }
   },
   "page": {
@@ -370,20 +391,49 @@
       "search": {
         "book-title": "Book Title",
         "item-title": "Room Title",
-        "placeholder": "Search for discussions!"
+        "placeholder": "Search for discussions!",
+        "by": "Search by",
+        "label": "Search discussions"
       },
       "sort": {
         "latest": "Latest",
         "popular": "Popular",
-        "from": "From"
+        "from": "From",
+        "label": "Sort",
+        "from-date": "Start date"
       },
       "button": {
         "create": "Start a Discussion"
       },
       "item": {
         "no-debate-item": "There is no discussion item",
-        "no-summary-item": "There is no summary item"
-      }
+        "no-summary-item": "There is no summary item",
+        "online": "Online",
+        "offline": "In person",
+        "limit": "Up to {{count}}",
+        "free": "Free",
+        "likes": "{{count}} likes",
+        "comments": "{{count}} comments",
+        "empty-description": "Be the first to start one",
+        "no-result": "No discussions match your filters",
+        "no-result-description": "Try a different keyword or category",
+        "error": "Couldn't load discussions",
+        "error-description": "Please try again in a moment",
+        "retry": "Try again"
+      },
+      "subtitle": "Host meetups and talk with people who read the same book",
+      "filters": "Search and filters",
+      "list": "Discussion list",
+      "category-all": "All",
+      "recommend": {
+        "prev": "Previous recommended discussions",
+        "next": "Next recommended discussions"
+      },
+      "popular": {
+        "more": "See more",
+        "more-label": "See more trending summaries"
+      },
+      "category-label": "Category"
     },
     "summary": {
       "title": {

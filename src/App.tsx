@@ -22,7 +22,7 @@ import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './stores/hooks';
 import { selectUser, setUser } from './stores/user';
 import cookie from 'react-cookies';
-import Debate from './pages/Debate';
+import DebateListPage from './features/debate/pages/DebateListPage';
 import Search from './pages/Search';
 import CircularProgress from '@mui/material/CircularProgress';
 import i18n from './locales/i18n';
@@ -140,7 +140,7 @@ function App() {
               element={<IntegratedSearch />}
             ></Route>
 
-            <Route path='/debate' element={<Debate />}></Route>
+            <Route path='/debate' element={<DebateListPage />}></Route>
             <Route path='/debate/create' element={<CreateDebate />}></Route>
             <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>
             <Route

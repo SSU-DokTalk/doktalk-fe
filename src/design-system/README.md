@@ -18,12 +18,12 @@ yarn storybook
 
 ## 구성
 
-| 폴더                  | 내용                                                                                                                                                    |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens/theme.css.ts` | 색·반경·그림자·글꼴 CSS 변수. 이름이 `--dt-*`로 고정돼 있어요.                                                                                          |
-| `tokens/scale.ts`     | 간격, 기준점(`mq`), 글자 크기(`typeScale`), z-index                                                                                                     |
-| `styles/`             | 포커스 링, 스크린 리더 전용 텍스트, 글꼴                                                                                                                |
-| `components/`         | Button, IconButton, Chip, Badge, TextField/Textarea, Tabs, SegmentedControl, Menu, Dialog, Avatar, BookCover, Card, Text, EmptyState, Skeleton, Spinner |
+| 폴더                  | 내용                                                                                                                                                            |
+| --------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens/theme.css.ts` | 색·반경·그림자·글꼴 CSS 변수. 이름이 `--dt-*`로 고정돼 있어요.                                                                                                  |
+| `tokens/scale.ts`     | 간격, 기준점(`mq`), 글자 크기(`typeScale`), z-index                                                                                                             |
+| `styles/`             | 포커스 링, 스크린 리더 전용 텍스트, 글꼴                                                                                                                        |
+| `components/`         | Button, IconButton, Chip, Badge, TextField/Textarea, Select, Tabs, SegmentedControl, Menu, Dialog, Avatar, BookCover, Card, Text, EmptyState, Skeleton, Spinner |
 
 ## 규칙
 

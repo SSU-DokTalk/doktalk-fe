@@ -36,6 +36,24 @@
         "10": "10월",
         "11": "11월",
         "12": "12월"
+      },
+      "weekdays": {
+        "0": "일",
+        "1": "월",
+        "2": "화",
+        "3": "수",
+        "4": "목",
+        "5": "금",
+        "6": "토"
+      },
+      "relative": {
+        "second": "{{count}}초 전",
+        "minute": "{{count}}분 전",
+        "hour": "{{count}}시간 전",
+        "day": "{{count}}일 전",
+        "week": "{{count}}주 전",
+        "month": "{{count}}개월 전",
+        "year": "{{count}}년 전"
       }
     }
   },
@@ -324,6 +342,9 @@
         "title": "로그인하고 토론에 참여해 보세요",
         "description": "관심 분야에 맞는 토론방과 요약을 추천해 드려요."
       }
+    },
+    "user": {
+      "unknown": "알 수 없는 사용자"
     }
   },
   "page": {
@@ -370,20 +391,49 @@
       "search": {
         "book-title": "도서 제목",
         "item-title": "토론방 제목",
-        "placeholder": "토론방을 검색해보세요!"
+        "placeholder": "토론방을 검색해보세요!",
+        "by": "검색 기준",
+        "label": "토론방 검색"
       },
       "sort": {
         "latest": "최신순",
         "popular": "인기순",
-        "from": "날짜순"
+        "from": "날짜순",
+        "label": "정렬",
+        "from-date": "시작 날짜"
       },
       "button": {
         "create": "토론방 생성"
       },
       "item": {
         "no-debate-item": "아직 토론방이 없습니다",
-        "no-summary-item": "아직 작성된 요약이 없습니다"
-      }
+        "no-summary-item": "아직 작성된 요약이 없습니다",
+        "online": "온라인",
+        "offline": "오프라인",
+        "limit": "정원 {{count}}명",
+        "free": "무료",
+        "likes": "좋아요 {{count}}",
+        "comments": "댓글 {{count}}",
+        "empty-description": "첫 토론방을 열어 보세요",
+        "no-result": "조건에 맞는 토론방이 없어요",
+        "no-result-description": "검색어나 카테고리를 바꿔 보세요",
+        "error": "토론방을 불러오지 못했어요",
+        "error-description": "잠시 후 다시 시도해 주세요",
+        "retry": "다시 시도"
+      },
+      "subtitle": "같은 책을 읽은 사람들과 모임을 열고 이야기를 나눠요",
+      "filters": "검색과 필터",
+      "list": "토론방 목록",
+      "category-all": "전체",
+      "recommend": {
+        "prev": "이전 추천 토론방",
+        "next": "다음 추천 토론방"
+      },
+      "popular": {
+        "more": "더보기",
+        "more-label": "인기 요약 더보기"
+      },
+      "category-label": "카테고리"
     },
     "summary": {
       "title": {

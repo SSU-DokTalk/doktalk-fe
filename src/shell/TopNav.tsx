@@ -34,7 +34,12 @@ function NavSearch() {
   };
 
   return (
-    <form role='search' className={s.search} onSubmit={handleSubmit}>
+    <form
+      role='search'
+      aria-label={t('component.shell.search')}
+      className={s.search}
+      onSubmit={handleSubmit}
+    >
       <TextField
         label={t('component.shell.search')}
         hideLabel

@@ -171,13 +171,17 @@ export const siteLinkList = style({
   display: 'flex',
   flexWrap: 'wrap',
   columnGap: '12px',
-  rowGap: '2px',
+  rowGap: 0,
   margin: 0,
   padding: 0,
   listStyle: 'none',
 });
 
 export const siteLink = style({
+  // 몽골어처럼 줄이 바뀌어도 누르는 영역이 24px 이상이 되게 해요 (WCAG 2.5.8).
+  display: 'inline-flex',
+  alignItems: 'center',
+  minHeight: '24px',
   color: vars.color.textSecondary,
   textDecoration: 'none',
   selectors: {
