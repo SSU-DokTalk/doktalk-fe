@@ -14,7 +14,7 @@ export type TextFieldProps = Omit<
   'size'
 > &
   FieldProps &
-  Pick<s.ControlVariants, 'size' | 'variant'> & {
+  Pick<s.ControlVariants, 'size' | 'variant' | 'shape'> & {
     startIcon?: ReactNode;
     /** 입력칸 오른쪽 끝에 붙는 버튼 (비밀번호 보기, 지우기) */
     endSlot?: ReactNode;
@@ -39,6 +39,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
       error,
       size,
       variant,
+      shape,
       startIcon,
       endSlot,
       disabled,
@@ -62,7 +63,7 @@ const TextField = forwardRef<HTMLInputElement, TextFieldProps>(
         />
         <div
           className={clsx(
-            s.control({ size, variant, hasEnd: Boolean(endSlot) }),
+            s.control({ size, variant, shape, hasEnd: Boolean(endSlot) }),
             className
           )}
           data-invalid={error ? '' : undefined}

@@ -38,6 +38,11 @@ export const text = style({
   minWidth: 0,
 });
 
+/** 불러오는 동안 글자 자리가 남은 폭을 채워요. */
+export const grow = style({
+  flex: 1,
+});
+
 export const bookTitle = style({
   display: '-webkit-box',
   overflow: 'hidden',

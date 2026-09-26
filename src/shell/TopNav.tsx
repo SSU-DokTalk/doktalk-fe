@@ -4,7 +4,8 @@ import { useEffect, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
 import logo from '@/assets/images/logo.svg';
-import { buttonStyles, iconButtonStyles, TextField } from '@/design-system';
+import { buttonStyles, iconButtonStyles, mq, TextField } from '@/design-system';
+import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { useAuth } from './hooks';
 import { CreateMenu, LanguageMenu, ProfileMenu } from './menus';
 import { MAIN_NAV } from './navigation';
@@ -62,9 +63,10 @@ function TopNav() {
   const loginHref = useAuthHref();
   const registerHref = useAuthHref('register');
   const { isLoggedIn } = useAuth();
+  const isWide = useMediaQuery(mq.lg);
 
   return (
-    <header className={clsx(s.topNav, shell.desktopOnly)}>
+    <header className={s.topNav}>
       <div className={clsx(shell.container, s.topNavInner)}>
         <Link
           to='/'
@@ -84,13 +86,16 @@ function TopNav() {
 
         <div className={s.spacer} />
         <NavSearch />
-        <Link
-          to='/integrated-search'
-          aria-label={t('component.shell.search')}
-          className={clsx(iconButtonStyles({ variant: 'ghost' }), s.searchIcon)}
-        >
-          <Search aria-hidden='true' />
-        </Link>
+        {/* lg 미만에서는 검색창 대신 검색 화면으로 가는 아이콘 */}
+        {!isWide && (
+          <Link
+            to='/integrated-search'
+            aria-label={t('component.shell.search')}
+            className={iconButtonStyles({ variant: 'ghost' })}
+          >
+            <Search aria-hidden='true' />
+          </Link>
+        )}
 
         <div className={s.actions}>
           <LanguageMenu />

@@ -1,6 +1,7 @@
 import { globalStyle, style, type StyleRule } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
+import { fontSize, fontWeight, layout, mq, space } from '../../tokens/scale';
 import { focusRing } from '../../styles/utils.css';
 
 const interactive = ':not(:disabled):not([aria-disabled="true"])';
@@ -14,13 +15,21 @@ const states = (hover: string, active: string): StyleRule => ({
 
 const sizeSm = style({ width: '36px', height: '36px' });
 const sizeMd = style({ width: '44px', height: '44px' });
-const sizeLg = style({ width: '52px', height: '52px' });
-const sizeXl = style({ width: '60px', height: '60px' });
+/** 입력칸(md, 48px) 옆에 나란히 두는 크기 */
+const sizeLg = style({ width: '48px', height: '48px' });
+/** 화면에 떠 있는 버튼 (AI 챗봇) */
+const sizeFab = style({
+  width: layout.fabSize,
+  height: layout.fabSize,
+  '@media': {
+    [mq.md]: { width: layout.fabSizeDesktop, height: layout.fabSizeDesktop },
+  },
+});
 
 globalStyle(`${sizeSm} svg`, { width: '18px', height: '18px', flexShrink: 0 });
 globalStyle(`${sizeMd} svg`, { width: '22px', height: '22px', flexShrink: 0 });
 globalStyle(`${sizeLg} svg`, { width: '22px', height: '22px', flexShrink: 0 });
-globalStyle(`${sizeXl} svg`, { width: '28px', height: '28px', flexShrink: 0 });
+globalStyle(`${sizeFab} svg`, { width: '26px', height: '26px', flexShrink: 0 });
 
 export const iconButtonStyles = recipe({
   base: [
@@ -72,6 +81,20 @@ export const iconButtonStyles = recipe({
         { backgroundColor: vars.color.brandSubtle, color: vars.color.brand },
         states(vars.color.brandMuted, vars.color.brandBorder),
       ],
+      /** 남색 바탕 위 아이콘만 (챗봇 창 머리의 닫기) */
+      onBrand: [
+        {
+          backgroundColor: 'transparent',
+          color: vars.color.textOnBrand,
+          selectors: {
+            '&:focus-visible': {
+              outline: `2px solid ${vars.color.textOnBrand}`,
+              outlineOffset: '-4px',
+            },
+          },
+        },
+        states(vars.color.onBrandHover, vars.color.onBrandActive),
+      ],
       /** 이미지 위에 올리는 흰 버튼 (표지 위 삭제) */
       overlay: [
         {
@@ -86,15 +109,39 @@ export const iconButtonStyles = recipe({
       sm: sizeSm,
       md: sizeMd,
       lg: sizeLg,
-      xl: sizeXl,
+      fab: sizeFab,
     },
     shape: {
       circle: { borderRadius: vars.radius.pill },
       rounded: { borderRadius: vars.radius.lg },
     },
-    /** 떠 있는 버튼 그림자 (AI 챗봇 버튼) */
+    /** 떠 있는 버튼 (AI 챗봇): 그림자, 굵은 포커스 링, 누르면 살짝 작아져요. */
     elevated: {
-      true: { boxShadow: vars.shadow.fab },
+      true: {
+        boxShadow: vars.shadow.fab,
+        transition: 'background-color 120ms ease, transform 160ms ease',
+        selectors: {
+          '&:active': { transform: 'scale(0.96)' },
+          '&:focus-visible': {
+            outline: `3px solid ${vars.color.brand}`,
+            outlineOffset: '3px',
+          },
+        },
+        '@media': {
+          [mq.reducedMotion]: { transition: 'none' },
+        },
+      },
+    },
+    /** 아이콘 옆에 짧은 글자를 같이 보여줄 때 (로그인 화면의 언어 버튼) */
+    labelled: {
+      true: {
+        width: 'auto',
+        gap: space[6],
+        padding: `0 ${space[10]}`,
+        fontFamily: vars.font.family,
+        fontSize: fontSize[14],
+        fontWeight: fontWeight.semibold,
+      },
     },
   },
   defaultVariants: {

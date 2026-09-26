@@ -1,3 +1,4 @@
+import clsx from 'clsx';
 import { ChevronRight, FileText } from 'lucide-react';
 import { useId, useMemo } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -28,7 +29,7 @@ function SummariesSkeleton() {
         <li key={index} className={s.card}>
           <div className={s.top}>
             <Skeleton width={64} height={93} radius={4} />
-            <div className={s.text} style={{ flex: 1 }}>
+            <div className={clsx(s.text, s.grow)}>
               <Skeleton width='80%' height={18} />
               <Skeleton width='50%' height={14} />
             </div>

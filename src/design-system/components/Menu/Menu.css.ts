@@ -62,6 +62,13 @@ globalStyle(`${item} > svg`, {
   color: vars.color.textSecondary,
 });
 
+/** 되돌리기 어려운 항목 (삭제) */
+export const itemDanger = style({
+  color: vars.color.danger,
+});
+
+globalStyle(`${itemDanger} > svg`, { color: vars.color.danger });
+
 export const radioItem = style([
   item,
   {

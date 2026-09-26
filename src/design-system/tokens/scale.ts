@@ -99,7 +99,15 @@ export const layout = {
   stickyTop: px(72 + 24),
   /** 모바일 상단 바 아래 16px */
   stickyTopMobile: px(56 + 16),
+  /** 화면 오른쪽 아래에 떠 있는 버튼 (AI 챗봇) 크기와 화면 끝에서 떨어진 거리 */
+  fabSize: px(56),
+  fabSizeDesktop: px(60),
+  fabInset: px(16),
+  fabInsetDesktop: px(32),
 } as const;
+
+/** 책 표지 비율 (높이 ÷ 너비). 국내 도서 평균이에요. */
+export const coverRatio = 1.45;
 
 /** 글자 크기. 키가 px 값이고 값은 rem이라 브라우저 글자 크기 설정을 따라가요: `fontSize[15]` → '0.9375rem'. */
 export const fontSize = {

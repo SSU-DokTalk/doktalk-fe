@@ -2,7 +2,7 @@ import clsx from 'clsx';
 import { MessageCircle, X } from 'lucide-react';
 import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Dialog, mq } from '@/design-system';
+import { Dialog, IconButton, mq } from '@/design-system';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { useAuth } from '@/shell/hooks';
 import { useChatbot } from '../api';
@@ -23,8 +23,10 @@ export function ChatbotLauncher() {
 
   return (
     <>
-      <button
-        type='button'
+      <IconButton
+        variant='solid'
+        size='fab'
+        elevated
         aria-haspopup='dialog'
         aria-expanded={open}
         aria-label={t(
@@ -35,12 +37,8 @@ export function ChatbotLauncher() {
         className={clsx(s.fab, isLoggedIn && s.fabAboveTabs)}
         onClick={() => setOpen((value) => !value)}
       >
-        {open ? (
-          <X aria-hidden='true' className={s.fabIcon} />
-        ) : (
-          <MessageCircle aria-hidden='true' className={s.fabIcon} />
-        )}
-      </button>
+        {open ? <X aria-hidden='true' /> : <MessageCircle aria-hidden='true' />}
+      </IconButton>
 
       <Dialog.Root open={open} onOpenChange={setOpen}>
         <Dialog.Content

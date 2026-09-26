@@ -59,15 +59,6 @@ export const profileActions = style({
   gap: space[8],
 });
 
-// 몽골어 버튼 이름("Миний номын сан")이 반 칸에 안 들어가서 줄바꿈을 허용해요.
-globalStyle(`${profileActions} > a`, {
-  height: 'auto',
-  minHeight: '36px',
-  padding: `${space[6]} ${space[8]}`,
-  whiteSpace: 'normal',
-  lineHeight: 1.3,
-});
-
 export const activityCard = style({
   display: 'flex',
   flexDirection: 'column',

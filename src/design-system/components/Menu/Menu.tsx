@@ -39,10 +39,19 @@ export function MenuContent({
 }
 
 export function MenuItem({
+  tone,
   className,
   ...rest
-}: WithStringClassName<ComponentProps<typeof BaseMenu.Item>>) {
-  return <BaseMenu.Item {...rest} className={clsx(s.item, className)} />;
+}: WithStringClassName<ComponentProps<typeof BaseMenu.Item>> & {
+  /** danger: 삭제처럼 되돌리기 어려운 항목을 빨간 글자로 */
+  tone?: 'danger';
+}) {
+  return (
+    <BaseMenu.Item
+      {...rest}
+      className={clsx(s.item, tone === 'danger' && s.itemDanger, className)}
+    />
+  );
 }
 
 /**

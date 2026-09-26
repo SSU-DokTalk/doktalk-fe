@@ -140,3 +140,8 @@ export const tabs = style({
     [mq.md]: { padding: `0 ${space[20]}` },
   },
 });
+
+/** 불러오는 동안 탭 자리 */
+export const tabsSkeleton = style({
+  margin: `${space[16]} 0`,
+});

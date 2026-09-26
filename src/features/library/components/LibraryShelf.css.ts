@@ -1,5 +1,6 @@
 import { style } from '@vanilla-extract/css';
 import {
+  coverRatio,
   fontSize,
   fontWeight,
   mq,
@@ -120,7 +121,7 @@ export const addBox = style({
   justifyContent: 'center',
   gap: space[8],
   boxSizing: 'border-box',
-  aspectRatio: '1 / 1.45',
+  aspectRatio: `1 / ${coverRatio}`,
   border: `1.5px dashed ${vars.color.brandBorder}`,
   borderRadius: vars.radius.xs,
   backgroundColor: vars.color.brandFaint,
@@ -159,4 +160,9 @@ export const error = style({
 
 export const state = style({
   padding: `${space[8]} 0 ${space[24]}`,
+});
+
+/** 불러오는 동안 표지 자리 */
+export const coverSkeleton = style({
+  aspectRatio: `1 / ${coverRatio}`,
 });

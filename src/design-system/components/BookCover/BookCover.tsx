@@ -1,6 +1,7 @@
 import clsx from 'clsx';
 import { useState, type HTMLAttributes, type ReactNode } from 'react';
 import { coverTones } from '../../tokens/palette';
+import { coverRatio } from '../../tokens/scale';
 import * as s from './BookCover.css';
 
 /** 표지 이미지가 없을 때 쓰는 색. 제목으로 골라서 같은 책은 늘 같은 색이에요. */
@@ -19,7 +20,7 @@ export type BookCoverProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
    * 'fill'이면 칸 너비를 다 채우고, 글자 크기도 표지 너비에 맞춰 줄고 늘어요 (서재 그리드).
    */
   width: number | 'fill';
-  /** 높이 ÷ 너비. 국내 도서 평균에 맞춰 1.45가 기본이에요. */
+  /** 높이 ÷ 너비. 기본은 국내 도서 평균(coverRatio, 1.45)이에요. */
   ratio?: number;
   /**
    * 대체 텍스트. 제목이 옆에 같이 보이면 비워 두세요(장식으로 처리).
@@ -39,7 +40,7 @@ function BookCover({
   author,
   src,
   width,
-  ratio = 1.45,
+  ratio = coverRatio,
   alt = '',
   className,
   style,

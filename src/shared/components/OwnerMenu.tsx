@@ -77,7 +77,7 @@ export function OwnerMenu({
             </Menu.Item>
           )}
           <Menu.Item
-            className={s.danger}
+            tone='danger'
             onClick={() => {
               setFailed(false);
               setConfirmOpen(true);

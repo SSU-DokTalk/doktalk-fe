@@ -58,18 +58,6 @@ export const withBottomTabs = style({
   },
 });
 
-export const desktopOnly = style({
-  '@media': {
-    [mq.belowMd]: { display: 'none !important' },
-  },
-});
-
-export const mobileOnly = style({
-  '@media': {
-    [mq.md]: { display: 'none !important' },
-  },
-});
-
 /**
  * 왼쪽 칼럼 + 본문 (앱 셸 F안).
  * 모바일에서는 여백을 주지 않아요. 기존 페이지가 모바일 여백을 스스로 갖고 있어서예요.

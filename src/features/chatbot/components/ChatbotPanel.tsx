@@ -70,9 +70,8 @@ export function ChatbotPanel({
         <Dialog.Close
           render={
             <IconButton
-              variant='ghost'
+              variant='onBrand'
               aria-label={t('component.floating.chatbot.aria.close-chat')}
-              className={s.close}
             >
               <X />
             </IconButton>
@@ -158,20 +157,20 @@ export function ChatbotPanel({
             label={t('component.floating.chatbot.aria.input')}
             hideLabel
             variant='filled'
+            shape='pill'
             autoComplete='off'
             enterKeyHint='send'
             placeholder={t('component.floating.chatbot.placeholder')}
             value={text}
             onChange={(event) => setText(event.target.value)}
             fieldClassName={s.inputField}
-            className={s.input}
           />
           <IconButton
             type='submit'
             variant='solid'
+            size='lg'
             aria-label={t('component.floating.chatbot.aria.send')}
             aria-disabled={chat.isPending || !text.trim() || undefined}
-            className={s.send}
           >
             <Send />
           </IconButton>

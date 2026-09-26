@@ -1,7 +1,14 @@
 import { style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { fontSize, fontWeight, mq, space, zIndex } from '../../tokens/scale';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  zIndex,
+} from '../../tokens/scale';
 
 export const backdrop = style({
   position: 'fixed',
@@ -16,6 +23,9 @@ export const backdrop = style({
     [mq.reducedMotion]: { transition: 'none' },
   },
 });
+
+/** corner 창의 아래 위치: 떠 있는 버튼의 자리 + 크기 + 사이 20px */
+const cornerBottom = `calc(${layout.fabInsetDesktop} + ${layout.fabSizeDesktop} + ${space[20]})`;
 
 export const popup = recipe({
   base: {
@@ -40,8 +50,8 @@ export const popup = recipe({
       center: {
         top: '50%',
         left: '50%',
-        width: 'min(calc(100vw - 32px), var(--dialog-width, 520px))',
-        maxHeight: 'calc(100dvh - 64px)',
+        width: `min(calc(100vw - ${space[32]}), var(--dialog-width, 520px))`,
+        maxHeight: `calc(100dvh - ${space[64]})`,
         borderRadius: vars.radius['3xl'],
         overflow: 'auto',
         transform: 'translate(-50%, -50%)',
@@ -67,12 +77,15 @@ export const popup = recipe({
           },
         },
       },
-      /** 오른쪽 아래에 떠 있는 창 (데스크톱 챗봇). 여는 버튼 바로 위에 놓여요. */
+      /**
+       * 오른쪽 아래에 떠 있는 창 (데스크톱 챗봇). 떠 있는 버튼(IconButton fab)
+       * 바로 위 20px에 놓이고, 화면 위쪽으로는 32px을 남겨요.
+       */
       corner: {
-        right: '32px',
-        bottom: '112px',
-        width: 'min(calc(100vw - 32px), var(--dialog-width, 400px))',
-        height: 'min(656px, calc(100dvh - 144px))',
+        right: layout.fabInsetDesktop,
+        bottom: cornerBottom,
+        width: `min(calc(100vw - ${space[32]}), var(--dialog-width, 400px))`,
+        height: `min(656px, calc(100dvh - ${cornerBottom} - ${space[32]}))`,
         borderRadius: vars.radius['2xl'],
         overflow: 'hidden',
         transformOrigin: 'bottom right',

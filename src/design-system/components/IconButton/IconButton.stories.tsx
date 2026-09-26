@@ -2,13 +2,15 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import {
   ArrowUp,
   Bookmark,
+  Globe,
   MessageCircleMore,
   MoreHorizontal,
   Search,
   Settings,
   Trash2,
+  X,
 } from 'lucide-react';
-import { BookCover, IconButton } from '@/design-system';
+import { BookCover, IconButton, vars } from '@/design-system';
 
 const meta = {
   title: 'Components/IconButton',
@@ -23,9 +25,9 @@ const meta = {
   argTypes: {
     variant: {
       control: 'select',
-      options: ['ghost', 'outline', 'solid', 'tonal', 'overlay'],
+      options: ['ghost', 'outline', 'solid', 'tonal', 'onBrand', 'overlay'],
     },
-    size: { control: 'inline-radio', options: ['sm', 'md', 'lg', 'xl'] },
+    size: { control: 'inline-radio', options: ['sm', 'md', 'lg', 'fab'] },
     shape: { control: 'inline-radio', options: ['circle', 'rounded'] },
   },
 } satisfies Meta<typeof IconButton>;
@@ -62,9 +64,25 @@ export const Variants: Story = {
       >
         <Bookmark />
       </IconButton>
-      <IconButton aria-label='메시지 보내기' variant='solid'>
+      <IconButton aria-label='메시지 보내기' variant='solid' size='lg'>
         <ArrowUp />
       </IconButton>
+      <IconButton aria-label='화면 언어: 한국어' shape='rounded' labelled>
+        <Globe />
+        한국어
+      </IconButton>
+      <span
+        style={{
+          display: 'inline-flex',
+          padding: 8,
+          borderRadius: 12,
+          background: vars.color.brand,
+        }}
+      >
+        <IconButton aria-label='챗봇 닫기' variant='onBrand'>
+          <X />
+        </IconButton>
+      </span>
       <BookCover title='넛지' author='리처드 탈러' width={96}>
         <IconButton
           aria-label='서재에서 삭제: 넛지'
@@ -75,7 +93,7 @@ export const Variants: Story = {
           <Trash2 />
         </IconButton>
       </BookCover>
-      <IconButton aria-label='AI 챗봇 열기' variant='solid' size='xl' elevated>
+      <IconButton aria-label='AI 챗봇 열기' variant='solid' size='fab' elevated>
         <MessageCircleMore />
       </IconButton>
     </div>

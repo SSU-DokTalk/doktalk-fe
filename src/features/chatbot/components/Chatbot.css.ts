@@ -12,40 +12,14 @@ import {
 
 /* ---------- 여는 버튼 ---------- */
 
+/** 버튼 모양은 IconButton(fab)이 정하고, 여기서는 화면 오른쪽 아래 자리만 정해요. */
 export const fab = style({
   position: 'fixed',
-  right: space[16],
-  bottom: `calc(${space[16]} + env(safe-area-inset-bottom))`,
+  right: layout.fabInset,
+  bottom: `calc(${layout.fabInset} + env(safe-area-inset-bottom))`,
   zIndex: zIndex.fab,
-  display: 'flex',
-  alignItems: 'center',
-  justifyContent: 'center',
-  width: '56px',
-  height: '56px',
-  padding: 0,
-  border: 0,
-  borderRadius: vars.radius.pill,
-  backgroundColor: vars.color.brand,
-  color: vars.color.textOnBrand,
-  boxShadow: vars.shadow.fab,
-  cursor: 'pointer',
-  transition: 'background-color 120ms ease, transform 160ms ease',
-  selectors: {
-    '&:hover': { backgroundColor: vars.color.brandHover },
-    '&:active': { transform: 'scale(0.96)' },
-    '&:focus-visible': {
-      outline: `3px solid ${vars.color.brand}`,
-      outlineOffset: '3px',
-    },
-  },
   '@media': {
-    [mq.md]: {
-      right: space[32],
-      bottom: space[32],
-      width: '60px',
-      height: '60px',
-    },
-    [mq.reducedMotion]: { transition: 'none' },
+    [mq.md]: { right: layout.fabInsetDesktop, bottom: layout.fabInsetDesktop },
   },
 });
 
@@ -53,14 +27,9 @@ export const fab = style({
 export const fabAboveTabs = style({
   '@media': {
     [mq.belowMd]: {
-      bottom: `calc(${layout.bottomTabsHeight} + ${space[16]} + env(safe-area-inset-bottom))`,
+      bottom: `calc(${layout.bottomTabsHeight} + ${layout.fabInset} + env(safe-area-inset-bottom))`,
     },
   },
-});
-
-export const fabIcon = style({
-  width: '26px',
-  height: '26px',
 });
 
 /* ---------- 창 ---------- */
@@ -114,23 +83,6 @@ export const subtitle = style({
   fontSize: fontSize[13],
   lineHeight: 1.4,
   color: vars.color.textOnBrandMuted,
-});
-
-export const close = style({
-  color: vars.color.textOnBrand,
-  selectors: {
-    // 기본 ghost 버튼의 hover(밝은 회색)보다 우선하도록 같은 선택자를 써요.
-    '&:hover:not(:disabled):not([aria-disabled="true"])': {
-      backgroundColor: vars.color.onBrandHover,
-    },
-    '&:active:not(:disabled):not([aria-disabled="true"])': {
-      backgroundColor: vars.color.onBrandActive,
-    },
-    '&:focus-visible': {
-      outline: `2px solid ${vars.color.textOnBrand}`,
-      outlineOffset: '-4px',
-    },
-  },
 });
 
 export const log = style({
@@ -290,18 +242,6 @@ export const inputRow = style({
 export const inputField = style({
   flex: '1 1 auto',
   minWidth: 0,
-});
-
-/** 둥근 회색 입력칸 */
-export const input = style({
-  borderRadius: vars.radius.pill,
-  paddingLeft: space[18],
-});
-
-export const send = style({
-  width: '48px',
-  height: '48px',
-  borderRadius: vars.radius.pill,
 });
 
 export const disclaimer = style({

@@ -48,11 +48,7 @@ function ShelfSkeleton() {
     >
       {Array.from({ length: 6 }, (_, index) => (
         <li key={index} className={s.book}>
-          <Skeleton
-            height='auto'
-            radius={4}
-            style={{ aspectRatio: '1 / 1.45' }}
-          />
+          <Skeleton height='auto' radius={4} className={s.coverSkeleton} />
           <Skeleton width='80%' height={16} />
           <Skeleton width='50%' height={12} />
         </li>

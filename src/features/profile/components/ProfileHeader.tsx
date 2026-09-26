@@ -148,7 +148,7 @@ export function ProfileHeaderSkeleton() {
         <Skeleton width='60%' height={18} className={s.intro} />
       </div>
       <div className={s.tabs}>
-        <Skeleton width='70%' height={20} style={{ margin: '16px 0' }} />
+        <Skeleton width='70%' height={20} className={s.tabsSkeleton} />
       </div>
     </div>
   );

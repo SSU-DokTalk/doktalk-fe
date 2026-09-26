@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import { LogOut, Menu as MenuIcon, Search } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
@@ -15,7 +14,6 @@ import {
 import { useAuth, useLanguage, type LanguageValue } from './hooks';
 import { MAIN_NAV } from './navigation';
 import SiteLinks from './SiteLinks';
-import * as shell from './shell.css';
 import * as s from './nav.css';
 import * as side from './side.css';
 import { useAuthHref } from '@/features/auth/redirect';
@@ -148,7 +146,7 @@ function MobileTopBar() {
   const [open, setOpen] = useState(false);
 
   return (
-    <header className={clsx(s.mobileBar, shell.mobileOnly)}>
+    <header className={s.mobileBar}>
       <Link to='/' aria-label={t('component.shell.home')}>
         <img src={logo} alt='' className={s.mobileLogo} />
       </Link>

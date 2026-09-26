@@ -17,12 +17,16 @@ const focusVisible = {
 
 /* ---------- 데스크톱 상단 내비 ---------- */
 
+/** 데스크톱(md 이상)에만 보여요. */
 export const topNav = style({
   position: 'sticky',
   top: 0,
   zIndex: zIndex.sticky,
   backgroundColor: vars.color.surface,
   borderBottom: `1px solid ${vars.color.borderSubtle}`,
+  '@media': {
+    [mq.belowMd]: { display: 'none' },
+  },
 });
 
 export const topNavInner = style({
@@ -97,14 +101,6 @@ export const search = style({
   },
 });
 
-/** lg 미만에서는 검색창 대신 검색 화면으로 가는 아이콘 */
-export const searchIcon = style({
-  '@media': {
-    // iconButtonStyles의 display보다 앞서도록 !important를 써요 (shell.desktopOnly와 같은 방식).
-    [mq.lg]: { display: 'none !important' },
-  },
-});
-
 /** 만들기 버튼 글자. lg 미만에서는 아이콘만 보이고 스크린 리더는 계속 읽어요. */
 export const createLabel = style({
   '@media': {
@@ -123,17 +119,6 @@ export const actions = style({
   alignItems: 'center',
   gap: space[8],
   flexShrink: 0,
-});
-
-/** 언어 버튼에 현재 언어 이름을 같이 보여줄 때 */
-export const languageTriggerLabelled = style({
-  width: 'auto',
-  gap: space[6],
-  padding: `0 ${space[10]}`,
-  fontFamily: vars.font.family,
-  fontSize: fontSize[14],
-  fontWeight: fontWeight.semibold,
-  color: vars.color.textMuted,
 });
 
 export const profileTrigger = style({
@@ -194,6 +179,7 @@ export const menuHeader = style({
 
 /* ---------- 모바일 상단 바 ---------- */
 
+/** 모바일(md 미만)에만 보여요. */
 export const mobileBar = style({
   position: 'sticky',
   top: 0,
@@ -206,6 +192,9 @@ export const mobileBar = style({
   gap: space[2],
   backgroundColor: vars.color.surface,
   borderBottom: `1px solid ${vars.color.borderSubtle}`,
+  '@media': {
+    [mq.md]: { display: 'none' },
+  },
 });
 
 export const mobileLogo = style({
@@ -229,6 +218,9 @@ export const bottomTabs = style({
   backgroundColor: vars.color.surface,
   borderTop: `1px solid ${vars.color.border}`,
   fontFamily: vars.font.family,
+  '@media': {
+    [mq.md]: { display: 'none' },
+  },
 });
 
 export const bottomTab = style({

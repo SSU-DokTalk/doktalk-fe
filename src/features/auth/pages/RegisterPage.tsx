@@ -249,17 +249,22 @@ function RegisterPage() {
           <legend className={visuallyHidden}>
             {t('page.auth.register.agreements')}
           </legend>
-          <Checkbox
-            label={t('page.register.form.all-agreements')}
-            checked={allAgreed}
-            className={s.agreeAll}
-            onChange={(event) =>
-              setAgreed({
-                terms: event.target.checked,
-                privacy: event.target.checked,
-              })
-            }
-          />
+          <div className={s.agreeAll}>
+            <Checkbox
+              label={
+                <span className={s.agreeAllLabel}>
+                  {t('page.register.form.all-agreements')}
+                </span>
+              }
+              checked={allAgreed}
+              onChange={(event) =>
+                setAgreed({
+                  terms: event.target.checked,
+                  privacy: event.target.checked,
+                })
+              }
+            />
+          </div>
           {(['terms', 'privacy'] as const).map((key) => (
             <div key={key} className={s.agreement}>
               <Checkbox

@@ -14,7 +14,16 @@ export type IconButtonProps = Omit<
 
 const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
   function IconButton(
-    { variant, size, shape, elevated, type = 'button', className, ...rest },
+    {
+      variant,
+      size,
+      shape,
+      elevated,
+      labelled,
+      type = 'button',
+      className,
+      ...rest
+    },
     ref
   ) {
     return (
@@ -23,7 +32,7 @@ const IconButton = forwardRef<HTMLButtonElement, IconButtonProps>(
         ref={ref}
         type={type}
         className={clsx(
-          iconButtonStyles({ variant, size, shape, elevated }),
+          iconButtonStyles({ variant, size, shape, elevated, labelled }),
           className
         )}
       />

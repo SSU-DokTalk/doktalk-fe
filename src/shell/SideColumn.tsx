@@ -31,16 +31,25 @@ function ProfileSummary() {
           {t('component.floating.text.follower')} {counts?.follower ?? '–'} ·{' '}
           {t('component.floating.text.following')} {counts?.following ?? '–'}
         </p>
+        {/* 몽골어 버튼 이름("Миний номын сан")이 반 칸에 안 들어가서 두 줄을 허용해요. */}
         <div className={s.profileActions}>
           <Link
             to='/mypage'
-            className={buttonStyles({ variant: 'secondary', size: 'sm' })}
+            className={buttonStyles({
+              variant: 'secondary',
+              size: 'sm',
+              wrap: true,
+            })}
           >
             {t('component.topnav.dropdown.mypage')}
           </Link>
           <Link
             to='/mypage/library'
-            className={buttonStyles({ variant: 'secondary', size: 'sm' })}
+            className={buttonStyles({
+              variant: 'secondary',
+              size: 'sm',
+              wrap: true,
+            })}
           >
             {t('component.floating.text.library')}
           </Link>

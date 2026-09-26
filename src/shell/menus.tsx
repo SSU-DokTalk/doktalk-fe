@@ -1,4 +1,3 @@
-import clsx from 'clsx';
 import {
   ChevronDown,
   FileText,
@@ -31,10 +30,12 @@ export function LanguageMenu({ showLabel = false }: { showLabel?: boolean }) {
         aria-label={t('component.shell.language-current', {
           lang: currentLabel,
         })}
-        className={clsx(
-          iconButtonStyles({ variant: 'ghost', size: 'md', shape: 'rounded' }),
-          showLabel && s.languageTriggerLabelled
-        )}
+        className={iconButtonStyles({
+          variant: 'ghost',
+          size: 'md',
+          shape: 'rounded',
+          labelled: showLabel,
+        })}
       >
         <Globe aria-hidden='true' />
         {showLabel && <span aria-hidden='true'>{currentLabel}</span>}

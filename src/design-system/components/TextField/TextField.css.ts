@@ -83,14 +83,34 @@ export const control = recipe({
         },
       },
     },
+    /** 알약 모양 (챗봇 입력칸). 둥근 끝만큼 왼쪽 여백을 4px 더 줘요. */
+    shape: {
+      rounded: {},
+      pill: { borderRadius: vars.radius.pill },
+    },
     /** 오른쪽에 버튼(비밀번호 보기, 지우기)이 있을 때 여백을 줄여요 */
     hasEnd: {
       true: { paddingRight: space[4] },
     },
   },
+  compoundVariants: [
+    {
+      variants: { shape: 'pill', size: 'sm' },
+      style: { paddingLeft: space[16] },
+    },
+    {
+      variants: { shape: 'pill', size: 'md' },
+      style: { paddingLeft: space[18] },
+    },
+    {
+      variants: { shape: 'pill', size: 'lg' },
+      style: { paddingLeft: space[20] },
+    },
+  ],
   defaultVariants: {
     size: 'md',
     variant: 'outlined',
+    shape: 'rounded',
   },
 });
 

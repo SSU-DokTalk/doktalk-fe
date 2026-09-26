@@ -178,7 +178,28 @@ export const buttonStyles = recipe({
     fullWidth: {
       true: { width: '100%' },
     },
+    /**
+     * 좁은 칸에서 긴 이름(몽골어)을 두 줄로 내려요. 높이는 크기만큼을 최소로 두고,
+     * 옆 여백을 줄여 한 줄에 더 들어가게 해요.
+     */
+    wrap: {
+      true: { height: 'auto', whiteSpace: 'normal', lineHeight: 1.3 },
+    },
   },
+  compoundVariants: [
+    {
+      variants: { wrap: true, size: 'sm' },
+      style: { minHeight: '36px', padding: `${space[6]} ${space[8]}` },
+    },
+    {
+      variants: { wrap: true, size: 'md' },
+      style: { minHeight: '44px', padding: `${space[8]} ${space[12]}` },
+    },
+    {
+      variants: { wrap: true, size: 'lg' },
+      style: { minHeight: '52px', padding: `${space[10]} ${space[16]}` },
+    },
+  ],
   defaultVariants: {
     variant: 'primary',
     size: 'md',

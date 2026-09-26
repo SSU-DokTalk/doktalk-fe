@@ -58,9 +58,16 @@ export const agreements = style({
   borderRadius: vars.radius.xl,
 });
 
+/** '전체 동의' 줄. 체크박스는 줄 가운데에 오고 줄 전체를 차지해요. */
 export const agreeAll = style({
+  display: 'flex',
+  flexDirection: 'column',
+  justifyContent: 'center',
   minHeight: '52px',
   borderBottom: `1px solid ${vars.color.borderSubtle}`,
+});
+
+export const agreeAllLabel = style({
   fontSize: fontSize[16],
   fontWeight: fontWeight.bold,
 });

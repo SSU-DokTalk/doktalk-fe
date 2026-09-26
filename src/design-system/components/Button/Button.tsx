@@ -25,6 +25,7 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
     variant,
     size,
     fullWidth,
+    wrap,
     loading = false,
     startIcon,
     endIcon,
@@ -53,7 +54,10 @@ const Button = forwardRef<HTMLButtonElement, ButtonProps>(function Button(
       {...rest}
       ref={ref}
       type={type}
-      className={clsx(buttonStyles({ variant, size, fullWidth }), className)}
+      className={clsx(
+        buttonStyles({ variant, size, fullWidth, wrap }),
+        className
+      )}
       aria-busy={loading || undefined}
       aria-disabled={loading || ariaDisabled || undefined}
       data-loading={loading ? '' : undefined}

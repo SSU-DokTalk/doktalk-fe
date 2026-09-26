@@ -1,8 +1,6 @@
-import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { NavLink } from 'react-router-dom';
 import { BOTTOM_TABS } from './navigation';
-import * as shell from './shell.css';
 import * as s from './nav.css';
 
 /**
@@ -12,10 +10,7 @@ function BottomTabs() {
   const { t } = useTranslation();
 
   return (
-    <nav
-      aria-label={t('component.shell.bottom-nav')}
-      className={clsx(s.bottomTabs, shell.mobileOnly)}
-    >
+    <nav aria-label={t('component.shell.bottom-nav')} className={s.bottomTabs}>
       {BOTTOM_TABS.map((tab) => (
         <NavLink
           key={tab.key}
