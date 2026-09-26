@@ -71,6 +71,28 @@ export const BookCovers: Story = {
   ),
 };
 
+/** width='fill'이면 그리드 칸을 채우고, 색 표지의 글자 크기도 칸 너비에 맞춰요. */
+export const BookCoverGrid: Story = {
+  render: () => (
+    <div
+      style={{
+        display: 'grid',
+        gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+        gap: 12,
+        maxWidth: 360,
+      }}
+    >
+      <BookCover
+        title='넛지: 파이널 에디션'
+        author='리처드 탈러'
+        width='fill'
+      />
+      <BookCover title='코스모스' author='칼 세이건' width='fill' />
+      <BookCover title='총, 균, 쇠' author='재레드 다이아몬드' width='fill' />
+    </div>
+  ),
+};
+
 export const Cards: Story = {
   render: () => (
     <div

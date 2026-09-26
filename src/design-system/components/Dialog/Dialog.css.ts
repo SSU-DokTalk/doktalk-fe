@@ -67,6 +67,18 @@ export const popup = recipe({
           },
         },
       },
+      /** 화면 전체 (모바일 프로필 편집·팔로우 목록) */
+      full: {
+        inset: 0,
+        paddingBottom: 'env(safe-area-inset-bottom)',
+        overflow: 'auto',
+        selectors: {
+          '&[data-starting-style], &[data-ending-style]': {
+            opacity: 0,
+            transform: 'translateY(16px)',
+          },
+        },
+      },
       /** 오른쪽에서 나오는 서랍 (모바일 전체 메뉴) */
       right: {
         top: 0,

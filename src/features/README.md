@@ -31,7 +31,9 @@ await api.post('/debate/{debate_id}/like', { path: { debate_id: 3 } });
 ## 캐시 (TanStack Query)
 
 - 도메인마다 `api.ts`에 캐시 키 모음(`debateKeys`)과 쿼리 훅을 둬요.
-- 글을 쓰거나 지운 뒤에는 `queryClient.invalidateQueries({ queryKey: debateKeys.all })`처럼 도메인 단위로 다시 불러와요. Redux의 `isXxxUpdated` 플래그는 새 화면에서 쓰지 않아요.
+- 글을 쓰거나 지운 뒤에는 `queryClient.invalidateQueries({ queryKey: debateKeys.all })`처럼 도메인 단위로 다시 불러와요.
+- 화면끼리 같은 값을 나눌 때도 캐시를 써요. 예를 들어 팔로우하면 `useToggleFollow`가 `userKeys.me`를 고쳐서 왼쪽 칼럼의 팔로잉 수도 같이 바뀌어요. Redux에는 로그인한 사용자(`user`)만 남아 있어요.
+- 로그아웃하면 캐시를 모두 비워요 (`useAuth().logout`).
 - 무한 스크롤은 `useInfiniteQuery` + `useLoadMoreOnScroll`로 만들어요. 다음 페이지만 실패해도 `status`가 `error`가 되니, 불러 둔 목록이 있으면(`data`) 목록을 유지하고 다시 시도 버튼을 보여줘요.
 
 ## 날짜·가격

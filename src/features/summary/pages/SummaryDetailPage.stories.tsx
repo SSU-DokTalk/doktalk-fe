@@ -7,7 +7,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { userKeys } from '@/features/user/api';
 import type { Purchase, Summary } from '@/shared/api/models';
 import { AppShell, SideColumnLayout } from '@/shell';
-import globalStateReducer from '@/stores/globalStates';
 import userReducer from '@/stores/user';
 import { libraryKeys } from '@/features/library/api';
 import { summaryKeys } from '../api';
@@ -101,7 +100,7 @@ function setup(scenario: Scenario) {
     client.setQueryData(userKeys.following(AUTHOR_ID, viewerId), false);
   }
   const store = configureStore({
-    reducer: { user: userReducer, globalState: globalStateReducer },
+    reducer: { user: userReducer },
     preloadedState: {
       user: viewerId
         ? {
@@ -111,7 +110,6 @@ function setup(scenario: Scenario) {
             role: 'USER' as const,
           }
         : { id: 0, name: undefined, profile: undefined, role: 'USER' as const },
-      globalState: { isFollowerUpdated: false, isLibraryUpdated: false },
     },
   });
   return { client, store };

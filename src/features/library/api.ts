@@ -1,4 +1,6 @@
 import {
+  infiniteQueryOptions,
+  useInfiniteQuery,
   useMutation,
   useQuery,
   useQueryClient,
@@ -6,13 +8,96 @@ import {
 } from '@tanstack/react-query';
 import { bookKeys, type BookSearchPage } from '@/features/book/api';
 import { api } from '@/shared/api/client';
+import { nextPageParam, type Page } from '@/shared/api/models';
+import type { components } from '@/shared/api/schema';
+
+export type LibraryBook = components['schemas']['BasicMyBookRes'];
+
+/** 서재 한 번에 24권 (6·4·3칸 그리드가 모두 딱 떨어져요) */
+export const LIBRARY_PAGE_SIZE = 24;
 
 export const libraryKeys = {
   all: ['library'] as const,
   contains: (isbn: number, viewerId: number) =>
     [...libraryKeys.all, 'contains', isbn, viewerId] as const,
   mine: (viewerId: number) => [...libraryKeys.all, 'mine', viewerId] as const,
+  /** 한 사람의 서재 전체 (페이지로) */
+  books: (userId: number) => [...libraryKeys.all, 'books', userId] as const,
 };
+
+/** 한 사람의 서재 (최근에 담은 순) */
+export function libraryBooksQuery(userId: number) {
+  return infiniteQueryOptions({
+    queryKey: libraryKeys.books(userId),
+    queryFn: ({ pageParam, signal }) =>
+      api.get('/user/{user_id}/mybooks', {
+        path: { user_id: userId },
+        query: { page: pageParam, size: LIBRARY_PAGE_SIZE },
+        signal,
+      }),
+    initialPageParam: 1,
+    getNextPageParam: nextPageParam,
+  });
+}
+
+export function useLibraryBooks(userId: number) {
+  return useInfiniteQuery({
+    ...libraryBooksQuery(userId),
+    enabled: userId > 0,
+  });
+}
+
+type BooksData = InfiniteData<Page<LibraryBook>>;
+
+/** 내 서재에서 빼기. 목록에서 바로 지우고 실패하면 되돌려요. */
+export function useRemoveFromLibrary(viewerId: number) {
+  const queryClient = useQueryClient();
+  const booksKey = libraryKeys.books(viewerId);
+
+  return useMutation({
+    mutationKey: [...booksKey, 'remove'],
+    mutationFn: (isbn: number) =>
+      api.delete('/library/{isbn}', { path: { isbn } }),
+    onMutate: async (isbn) => {
+      await queryClient.cancelQueries({ queryKey: booksKey });
+      const previous = queryClient.getQueryData<BooksData>(booksKey);
+      queryClient.setQueryData<BooksData>(booksKey, (data) =>
+        data
+          ? {
+              ...data,
+              pages: data.pages.map((page) => ({
+                ...page,
+                items: page.items.filter((item) => item.isbn !== isbn),
+                total: page.total === null ? null : Math.max(0, page.total - 1),
+              })),
+            }
+          : data
+      );
+      queryClient.setQueryData(libraryKeys.contains(isbn, viewerId), false);
+      return { previous };
+    },
+    onError: (_error, isbn, context) => {
+      queryClient.setQueryData(booksKey, context?.previous);
+      void queryClient.invalidateQueries({
+        queryKey: libraryKeys.contains(isbn, viewerId),
+      });
+    },
+    onSettled: () => {
+      void queryClient.invalidateQueries({
+        queryKey: libraryKeys.mine(viewerId),
+      });
+      // 도서 검색 결과의 '담은 수'도 맞춰요.
+      void queryClient.invalidateQueries({ queryKey: bookKeys.pages() });
+      // 페이지 경계가 밀려서 서재를 다시 불러와요. 여러 권을 연달아 빼는 중이면
+      // 마지막 요청이 끝난 뒤 한 번만 불러와서 빠진 책이 잠깐 되살아나지 않게 해요.
+      if (
+        queryClient.isMutating({ mutationKey: [...booksKey, 'remove'] }) <= 1
+      ) {
+        void queryClient.invalidateQueries({ queryKey: booksKey });
+      }
+    },
+  });
+}
 
 /** 이 책이 내 서재에 있는지 */
 export function useInLibrary(isbn: number, viewerId: number) {
@@ -124,6 +209,9 @@ export function useToggleLibrary(viewerId: number) {
     onSettled: () => {
       void queryClient.invalidateQueries({
         queryKey: libraryKeys.mine(viewerId),
+      });
+      void queryClient.invalidateQueries({
+        queryKey: libraryKeys.books(viewerId),
       });
     },
   });

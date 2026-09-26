@@ -2,9 +2,12 @@ import {
   infiniteQueryOptions,
   queryOptions,
   useMutation,
+  useQueries,
   useQuery,
   useQueryClient,
+  type UseQueryResult,
 } from '@tanstack/react-query';
+import { purchaseKeys } from '@/features/payment/api';
 import { api, httpStatus } from '@/shared/api/client';
 import {
   nextPageParam,
@@ -42,6 +45,8 @@ export const summaryKeys = {
   lists: () => [...summaryKeys.all, 'list'] as const,
   list: (filters: SummaryListFilters) =>
     [...summaryKeys.lists(), filters] as const,
+  /** 한 사람이 쓴 요약. 목록(lists) 아래라 글을 쓰거나 지우면 같이 새로 불러와요. */
+  byUser: (userId: number) => [...summaryKeys.lists(), 'user', userId] as const,
   popular: (lang: MaskLanguage) =>
     [...summaryKeys.all, 'popular', lang] as const,
   detail: (id: number, lang: MaskLanguage) =>
@@ -79,6 +84,21 @@ export function summaryListQuery(filters: SummaryListFilters) {
   });
 }
 
+/** 한 사람이 쓴 요약 (최근 순) */
+export function userSummariesQuery(userId: number) {
+  return infiniteQueryOptions({
+    queryKey: summaryKeys.byUser(userId),
+    queryFn: ({ pageParam, signal }) =>
+      api.get('/user/{user_id}/summaries', {
+        path: { user_id: userId },
+        query: { page: pageParam, size: PAGE_SIZE },
+        signal,
+      }),
+    initialPageParam: 1,
+    getNextPageParam: nextPageParam,
+  });
+}
+
 /** 좋아요가 많은 요약 */
 export function popularSummariesQuery(lang: MaskLanguage = 'kr') {
   return queryOptions({
@@ -94,8 +114,8 @@ export function usePopularSummaries(lang: MaskLanguage = 'kr') {
 
 /* ---------- 상세 ---------- */
 
-export function useSummary(id: number, lang: MaskLanguage) {
-  return useQuery({
+export function summaryQuery(id: number, lang: MaskLanguage) {
+  return queryOptions({
     queryKey: summaryKeys.detail(id, lang),
     queryFn: ({ signal }) =>
       api.get('/summary/{summary_id}', {
@@ -103,7 +123,29 @@ export function useSummary(id: number, lang: MaskLanguage) {
         query: { lang },
         signal,
       }),
-    enabled: id > 0,
+  });
+}
+
+export function useSummary(id: number, lang: MaskLanguage) {
+  return useQuery({ ...summaryQuery(id, lang), enabled: id > 0 });
+}
+
+function combineSummaries(results: UseQueryResult<Summary>[]) {
+  return {
+    summaries: results.flatMap((result) => (result.data ? [result.data] : [])),
+    isPending: results.some((result) => result.isPending),
+    /** 지워진 요약(404)은 오류로 치지 않고 빼요. */
+    isError: results.some(
+      (result) => result.isError && httpStatus(result.error) !== 404
+    ),
+  };
+}
+
+/** 여러 요약을 id로 (산 요약). 상세 화면과 캐시를 같이 써요. */
+export function useSummariesByIds(ids: number[], lang: MaskLanguage) {
+  return useQueries({
+    queries: ids.map((id) => summaryQuery(id, lang)),
+    combine: combineSummaries,
   });
 }
 
@@ -228,6 +270,7 @@ export function useUnlockFreeSummary(summary: Summary, viewerId: number) {
       }
     },
     onSuccess: async () => {
+      void queryClient.invalidateQueries({ queryKey: purchaseKeys.all });
       await queryClient.invalidateQueries({
         queryKey: summaryKeys.purchase(summary.id, viewerId),
       });

@@ -26,6 +26,9 @@ export type PostFeedPage = Page<Post> & { likedIds: number[] };
 export const postKeys = {
   all: ['posts'] as const,
   feed: (viewerId: number) => [...postKeys.all, 'feed', viewerId] as const,
+  /** 한 사람의 글. 내 피드 키 아래에 둬서 좋아요를 누르면 같이 고쳐져요. */
+  userFeed: (userId: number, viewerId: number) =>
+    [...postKeys.feed(viewerId), 'user', userId] as const,
   feeds: () => [...postKeys.all, 'feed'] as const,
   detail: (id: number) => [...postKeys.all, 'detail', id] as const,
   liked: (id: number, viewerId: number) =>
@@ -33,15 +36,24 @@ export const postKeys = {
   comments: (id: number) => [...postKeys.all, 'comments', id] as const,
 };
 
-/** 최신 게시글. 로그인했으면 페이지마다 좋아요 여부를 같이 불러와요. */
-export function postFeedQuery(viewerId: number) {
+/**
+ * 최신 게시글, userId를 주면 그 사람의 글.
+ * 로그인했으면 페이지마다 좋아요 여부를 같이 불러와요.
+ */
+export function postFeedQuery(viewerId: number, userId?: number) {
   return infiniteQueryOptions({
-    queryKey: postKeys.feed(viewerId),
+    queryKey: userId
+      ? postKeys.userFeed(userId, viewerId)
+      : postKeys.feed(viewerId),
     queryFn: async ({ pageParam, signal }): Promise<PostFeedPage> => {
-      const page = await api.get('/post/recent', {
-        query: { page: pageParam, size: PAGE_SIZE },
-        signal,
-      });
+      const query = { page: pageParam, size: PAGE_SIZE };
+      const page = userId
+        ? await api.get('/user/{user_id}/posts', {
+            path: { user_id: userId },
+            query,
+            signal,
+          })
+        : await api.get('/post/recent', { query, signal });
       const ids = page.items.map((post) => post.id);
       const likedIds =
         viewerId > 0 && ids.length > 0
@@ -57,8 +69,11 @@ export function postFeedQuery(viewerId: number) {
   });
 }
 
-export function usePostFeed(viewerId: number) {
-  return useInfiniteQuery(postFeedQuery(viewerId));
+export function usePostFeed(viewerId: number, userId?: number) {
+  return useInfiniteQuery({
+    ...postFeedQuery(viewerId, userId),
+    enabled: userId === undefined || userId > 0,
+  });
 }
 
 export function usePost(id: number) {
@@ -107,7 +122,8 @@ export function useTogglePostLike(viewerId: number) {
         queryClient.cancelQueries({ queryKey: likedKey }),
       ]);
       const previous = {
-        feed: queryClient.getQueryData<FeedData>(feedKey),
+        // 전체 피드와 프로필의 글 목록을 모두 담아 둬요.
+        feeds: queryClient.getQueriesData<FeedData>({ queryKey: feedKey }),
         liked: queryClient.getQueryData<boolean>(likedKey),
         detail: queryClient.getQueryData<Post>(detailKey),
       };
@@ -119,7 +135,7 @@ export function useTogglePostLike(viewerId: number) {
             }
           : post;
 
-      queryClient.setQueryData<FeedData>(feedKey, (data) =>
+      queryClient.setQueriesData<FeedData>({ queryKey: feedKey }, (data) =>
         data
           ? {
               ...data,
@@ -140,7 +156,9 @@ export function useTogglePostLike(viewerId: number) {
       return previous;
     },
     onError: (_error, { id }, previous) => {
-      queryClient.setQueryData(postKeys.feed(viewerId), previous?.feed);
+      for (const [key, data] of previous?.feeds ?? []) {
+        queryClient.setQueryData(key, data);
+      }
       queryClient.setQueryData(postKeys.liked(id, viewerId), previous?.liked);
       queryClient.setQueryData(postKeys.detail(id), previous?.detail);
     },

@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type { Post } from '@/shared/api/models';
 import { AppShell, SideColumnLayout } from '@/shell';
-import globalStateReducer from '@/stores/globalStates';
 import userReducer from '@/stores/user';
 import { postKeys, type PostFeedPage } from '../api';
 import PostFeedPageView from './PostFeedPage';
@@ -67,7 +66,7 @@ function Preview({ write }: { write: boolean }) {
     });
     queryClient.setQueryData(['summaries', 'popular', 'kr'], []);
     const reduxStore = configureStore({
-      reducer: { user: userReducer, globalState: globalStateReducer },
+      reducer: { user: userReducer },
       preloadedState: {
         user: {
           id: VIEWER_ID,
@@ -75,7 +74,6 @@ function Preview({ write }: { write: boolean }) {
           profile: undefined,
           role: 'USER' as const,
         },
-        globalState: { isFollowerUpdated: false, isLibraryUpdated: false },
       },
     });
     return { client: queryClient, store: reduxStore };

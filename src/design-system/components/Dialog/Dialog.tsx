@@ -22,7 +22,7 @@ export type DialogContentProps = Omit<
 
 /**
  * 뒷배경과 함께 뜨는 창이에요. 포커스를 안에 가두고 Esc로 닫혀요.
- * placement로 가운데 모달, 아래 시트, 오른쪽 서랍을 골라요.
+ * placement로 가운데 모달, 아래 시트, 화면 전체, 오른쪽 서랍을 골라요.
  */
 export function DialogContent({
   placement,

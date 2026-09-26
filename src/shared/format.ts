@@ -100,6 +100,11 @@ function createFormatters(language: string, t: TFunction) {
       return `${numericDay(date)} ${clock(date)}`;
     },
 
+    /** 시각: 19:30 */
+    time(value: string | Date) {
+      return clock(parseServerDate(value));
+    },
+
     /** 모임 날짜: 10.06 (화) */
     meetingDate(value: string | Date) {
       const date = parseServerDate(value);

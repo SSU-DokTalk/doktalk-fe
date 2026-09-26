@@ -84,3 +84,26 @@ export const Filled: Story = {
     );
   },
 };
+
+/** 회색 틀 안의 흰 알약. 모바일 내 서재에서 책과 요약을 나눠 봐요. */
+export const Segmented: Story = {
+  render: function Render() {
+    const [tab, setTab] = useState<string>('books');
+    return (
+      <div style={{ maxWidth: 350 }}>
+        <Tabs.Root value={tab} onValueChange={(value) => setTab(String(value))}>
+          <Tabs.List aria-label='서재 구분' segmented>
+            <Tabs.Tab value='books'>읽고 있는 책 24</Tabs.Tab>
+            <Tabs.Tab value='summaries'>읽고 있는 요약 3</Tabs.Tab>
+          </Tabs.List>
+          <Tabs.Panel value='books' style={{ padding: '16px 4px' }}>
+            <Text tone='secondary'>책 그리드</Text>
+          </Tabs.Panel>
+          <Tabs.Panel value='summaries' style={{ padding: '16px 4px' }}>
+            <Text tone='secondary'>요약 카드</Text>
+          </Tabs.Panel>
+        </Tabs.Root>
+      </div>
+    );
+  },
+};

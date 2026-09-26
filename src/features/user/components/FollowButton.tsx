@@ -1,10 +1,19 @@
+import { Check, UserPlus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Button, type ButtonProps } from '@/design-system';
 import { useIsFollowing, useToggleFollow } from '../api';
 
-type FollowButtonProps = Pick<ButtonProps, 'size' | 'className'> & {
+type FollowButtonProps = Pick<
+  ButtonProps,
+  'size' | 'className' | 'fullWidth'
+> & {
   targetId: number;
   viewerId: number;
+  /**
+   * default: 작성자 줄의 작은 버튼.
+   * strong: 프로필·팔로우 목록 버튼. 팔로우는 남색 채움, 팔로잉은 흰 버튼에 체크.
+   */
+  emphasis?: 'default' | 'strong';
 };
 
 /**
@@ -15,6 +24,8 @@ export function FollowButton({
   targetId,
   viewerId,
   size = 'sm',
+  emphasis = 'default',
+  fullWidth,
   className,
 }: FollowButtonProps) {
   const { t } = useTranslation();
@@ -23,13 +34,35 @@ export function FollowButton({
 
   if (viewerId <= 0 || targetId === viewerId) return null;
 
+  const strong = emphasis === 'strong';
+  const variant = strong
+    ? following
+      ? 'neutral'
+      : 'primary'
+    : following
+      ? 'tonal'
+      : 'outline';
+
   return (
     <Button
       size={size}
-      variant={following ? 'tonal' : 'outline'}
+      variant={variant}
+      fullWidth={fullWidth}
       className={className}
-      disabled={isPending || toggle.isPending}
-      onClick={() => toggle.mutate(!following)}
+      startIcon={
+        strong ? (
+          following ? (
+            <Check aria-hidden='true' />
+          ) : (
+            <UserPlus aria-hidden='true' />
+          )
+        ) : undefined
+      }
+      // 누르는 중에 disabled로 바꾸면 키보드 포커스가 사라져서, 클릭만 무시해요.
+      disabled={isPending}
+      onClick={() => {
+        if (!toggle.isPending) toggle.mutate(!following);
+      }}
     >
       {following
         ? t('component.follow.following')

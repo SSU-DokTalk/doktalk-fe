@@ -1,4 +1,4 @@
-import { style } from '@vanilla-extract/css';
+import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '../../tokens/theme.css';
 
 export const cover = style({
@@ -70,3 +70,12 @@ export const stage = style({
   borderRadius: vars.radius.lg,
   background: 'linear-gradient(180deg, #F5F4F3 0%, #E9E9E9 100%)',
 });
+
+/** 칸을 채우는 표지. 안쪽 여백·글자 크기를 표지 너비(cqw)에 맞춰요. */
+export const fill = style({
+  containerType: 'inline-size',
+});
+
+globalStyle(`${fill} ${art}`, { padding: 'max(6px, 10cqw)' });
+globalStyle(`${fill} ${fallbackTitle}`, { fontSize: 'max(9px, 13cqw)' });
+globalStyle(`${fill} ${fallbackAuthor}`, { fontSize: 'max(7px, 7.5cqw)' });

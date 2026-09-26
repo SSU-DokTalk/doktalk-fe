@@ -7,7 +7,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { bookKeys } from '@/features/book/api';
 import type { Debate } from '@/shared/api/models';
 import { AppShell, SideColumnLayout } from '@/shell';
-import globalStateReducer from '@/stores/globalStates';
 import userReducer from '@/stores/user';
 import { debateKeys } from '../api';
 import DebateCreatePage from './DebateCreatePage';
@@ -85,7 +84,7 @@ function Preview({ page }: Args) {
     client.setQueryData(debateKeys.detail(debate.id), debate);
     client.setQueryData(bookKeys.search('한강', 'naver', 5), searchResults);
     const reduxStore = configureStore({
-      reducer: { user: userReducer, globalState: globalStateReducer },
+      reducer: { user: userReducer },
       preloadedState: {
         user: {
           id: HOST_ID,
@@ -93,7 +92,6 @@ function Preview({ page }: Args) {
           profile: undefined,
           role: 'USER' as const,
         },
-        globalState: { isFollowerUpdated: false, isLibraryUpdated: false },
       },
     });
     return { queryClient: client, store: reduxStore };

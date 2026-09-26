@@ -26,6 +26,17 @@ export const list = recipe({
     divider: {
       true: { borderBottom: `1px solid ${vars.color.border}` },
     },
+    /** 회색 틀 안의 흰 알약 (모바일 내 서재: 읽고 있는 책 / 요약) */
+    segmented: {
+      true: {
+        display: 'grid',
+        gridAutoColumns: 'minmax(0, 1fr)',
+        gridAutoFlow: 'column',
+        padding: '4px',
+        borderRadius: vars.radius.lg,
+        backgroundColor: vars.color.surfaceSubtle,
+      },
+    },
   },
 });
 
@@ -69,6 +80,25 @@ export const tab = recipe({
     },
     fill: {
       true: { flex: '1 1 0' },
+    },
+    segmented: {
+      true: {
+        // 긴 이름(몽골어)은 두 줄로 내려요.
+        height: 'auto',
+        minHeight: '44px',
+        padding: '4px 8px',
+        whiteSpace: 'normal',
+        textAlign: 'center',
+        lineHeight: 1.3,
+        borderRadius: '9px',
+        selectors: {
+          '&[data-active]': {
+            backgroundColor: vars.color.surface,
+            boxShadow: '0 1px 3px rgba(17, 24, 39, 0.1)',
+          },
+          '&:focus-visible': { outlineOffset: '1px' },
+        },
+      },
     },
   },
   defaultVariants: {

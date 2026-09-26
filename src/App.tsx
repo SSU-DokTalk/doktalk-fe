@@ -14,8 +14,8 @@ import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
 import Register from '@/pages/Register';
 import Auth from '@/pages/Auth';
-import MyPage from '@/pages/MyPage';
-import UserProfile from '@/pages/UserProfile';
+import MyPage from '@/features/profile/pages/MyPage';
+import UserProfilePage from '@/features/profile/pages/UserProfilePage';
 import SummaryListPage from '@/features/summary/pages/SummaryListPage';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './stores/hooks';
@@ -36,7 +36,7 @@ import DebateEditPage from './features/debate/pages/DebateEditPage';
 import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
 import { CheckoutFail } from './components/Payments/CheckoutFail';
 import IntegratedSearchPage from './features/search/pages/IntegratedSearchPage';
-import MyLibrary from './pages/MyLibrary';
+import MyLibraryPage from './features/library/pages/MyLibraryPage';
 import ScrollToTop from './components/utils/ScrollToTop';
 
 function App() {
@@ -165,12 +165,12 @@ function App() {
             ></Route>
 
             <Route path='/post/:post_id' element={<PostDetailPage />}></Route>
-            <Route path='/mypage/library' element={<MyLibrary />}></Route>
+            <Route path='/mypage/library' element={<MyLibraryPage />}></Route>
           </Route>
 
           <Route element={<PageLayout />}>
             <Route path='/mypage' element={<MyPage />}></Route>
-            <Route path='/user/:user_id' element={<UserProfile />}></Route>
+            <Route path='/user/:user_id' element={<UserProfilePage />}></Route>
             <Route path='settings' element={<Settings />}></Route>
           </Route>
         </Route>

@@ -5,9 +5,14 @@ import * as s from './Tabs.css';
 
 type Size = 'md' | 'lg';
 
-const TabsStyleContext = createContext<{ size: Size; fill: boolean }>({
+const TabsStyleContext = createContext<{
+  size: Size;
+  fill: boolean;
+  segmented: boolean;
+}>({
   size: 'md',
   fill: false,
+  segmented: false,
 });
 
 type RootProps = Omit<ComponentProps<typeof BaseTabs.Root>, 'className'> & {
@@ -31,18 +36,25 @@ export function TabsList({
   fill = false,
   scroll,
   divider,
+  segmented = false,
   className,
   children,
   ...rest
 }: ListProps) {
   return (
-    <TabsStyleContext.Provider value={{ size, fill: Boolean(fill) }}>
+    <TabsStyleContext.Provider
+      value={{ size, fill: Boolean(fill), segmented: Boolean(segmented) }}
+    >
       <BaseTabs.List
         {...rest}
-        className={clsx(s.list({ fill, scroll, divider }), className)}
+        className={clsx(
+          s.list({ fill, scroll, divider, segmented }),
+          className
+        )}
       >
         {children}
-        <BaseTabs.Indicator className={s.indicator} />
+        {/* 알약 모양은 흰 배경이 선택 표시라서 밑줄을 그리지 않아요. */}
+        {!segmented && <BaseTabs.Indicator className={s.indicator} />}
       </BaseTabs.List>
     </TabsStyleContext.Provider>
   );
@@ -53,11 +65,11 @@ type TabProps = Omit<ComponentProps<typeof BaseTabs.Tab>, 'className'> & {
 };
 
 export function TabsTab({ className, ...rest }: TabProps) {
-  const { size, fill } = useContext(TabsStyleContext);
+  const { size, fill, segmented } = useContext(TabsStyleContext);
   return (
     <BaseTabs.Tab
       {...rest}
-      className={clsx(s.tab({ size, fill }), className)}
+      className={clsx(s.tab({ size, fill, segmented }), className)}
     />
   );
 }

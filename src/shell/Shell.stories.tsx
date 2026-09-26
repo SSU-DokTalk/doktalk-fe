@@ -1,20 +1,40 @@
 import { configureStore } from '@reduxjs/toolkit';
 import type { Meta, StoryObj } from '@storybook/react-vite';
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { Card, EmptyState, Text } from '@/design-system';
-import globalStateReducer from '@/stores/globalStates';
+import { userKeys } from '@/features/user/api';
 import userReducer from '@/stores/user';
 import { AppShell, PageLayout, SideColumnLayout } from './layouts';
 
+/** 왼쪽 칼럼의 팔로워·팔로잉 수 (요청 없이 캐시에서 읽어요) */
+function makeQueryClient() {
+  const client = new QueryClient({
+    defaultOptions: { queries: { retry: false, staleTime: Infinity } },
+  });
+  client.setQueryData(userKeys.me(1), {
+    id: 1,
+    email: 'reader@example.com',
+    name: '김지현',
+    follower_num: 128,
+    following_num: 64,
+    role: 'USER',
+    created: '2025-01-01T00:00:00',
+    updated: '2025-01-01T00:00:00',
+    is_deleted: false,
+  });
+  return client;
+}
+
 function makeStore(loggedIn: boolean) {
   return configureStore({
-    reducer: { user: userReducer, globalState: globalStateReducer },
+    reducer: { user: userReducer },
     preloadedState: {
       user: loggedIn
         ? { id: 1, name: '김지현', profile: undefined, role: 'USER' as const }
         : { id: 0, name: undefined, profile: undefined, role: 'USER' as const },
-      globalState: { isFollowerUpdated: false, isLibraryUpdated: false },
     },
   });
 }
@@ -37,30 +57,33 @@ function PlaceholderPage({ title }: { title: string }) {
 type ShellArgs = { loggedIn: boolean; path: string };
 
 function ShellPreview({ loggedIn, path }: ShellArgs) {
+  const client = useMemo(makeQueryClient, []);
   return (
     <Provider store={makeStore(loggedIn)}>
-      <MemoryRouter initialEntries={[path]}>
-        <Routes>
-          <Route element={<AppShell />}>
-            <Route element={<SideColumnLayout />}>
-              <Route
-                path='/debate'
-                element={<PlaceholderPage title='독서 토론' />}
-              />
-              <Route
-                path='/post'
-                element={<PlaceholderPage title='게시글' />}
-              />
+      <QueryClientProvider client={client}>
+        <MemoryRouter initialEntries={[path]}>
+          <Routes>
+            <Route element={<AppShell />}>
+              <Route element={<SideColumnLayout />}>
+                <Route
+                  path='/debate'
+                  element={<PlaceholderPage title='독서 토론' />}
+                />
+                <Route
+                  path='/post'
+                  element={<PlaceholderPage title='게시글' />}
+                />
+              </Route>
+              <Route element={<PageLayout />}>
+                <Route
+                  path='/mypage'
+                  element={<PlaceholderPage title='마이페이지' />}
+                />
+              </Route>
             </Route>
-            <Route element={<PageLayout />}>
-              <Route
-                path='/mypage'
-                element={<PlaceholderPage title='마이페이지' />}
-              />
-            </Route>
-          </Route>
-        </Routes>
-      </MemoryRouter>
+          </Routes>
+        </MemoryRouter>
+      </QueryClientProvider>
     </Provider>
   );
 }

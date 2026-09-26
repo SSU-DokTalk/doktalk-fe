@@ -3,9 +3,12 @@ import {
   queryOptions,
   useInfiniteQuery,
   useMutation,
+  useQueries,
   useQuery,
   useQueryClient,
+  type UseQueryResult,
 } from '@tanstack/react-query';
+import { purchaseKeys } from '@/features/payment/api';
 import { api, httpStatus } from '@/shared/api/client';
 import {
   nextPageParam,
@@ -41,6 +44,9 @@ export const debateKeys = {
   list: (filters: DebateListFilters) =>
     [...debateKeys.lists(), filters] as const,
   popular: () => [...debateKeys.all, 'popular'] as const,
+  /** 이 사람이 연 토론방. 목록(lists) 아래에 있어서 글을 쓰거나 지우면 같이 새로 불러와요. */
+  hosted: (userId: number) =>
+    [...debateKeys.lists(), 'hosted', userId] as const,
   detail: (id: number) => [...debateKeys.all, 'detail', id] as const,
   comments: (id: number) => [...debateKeys.all, 'comments', id] as const,
   /** 보는 사람마다 다른 값(좋아요·참여)은 로그인한 사용자 id를 키에 넣어요. */
@@ -99,6 +105,46 @@ export function debateQuery(id: number) {
 
 export function useDebate(id: number) {
   return useQuery({ ...debateQuery(id), enabled: id > 0 });
+}
+
+/** 한 사람이 연 토론방 전부 (최근에 연 순) */
+export function useHostedDebates(userId: number) {
+  return useQuery({
+    queryKey: debateKeys.hosted(userId),
+    queryFn: async ({ signal }) => {
+      const debates: Debate[] = [];
+      for (let page = 1; page <= 5; page += 1) {
+        const result = await api.get('/user/{user_id}/debates', {
+          path: { user_id: userId },
+          query: { page, size: 100 },
+          signal,
+        });
+        debates.push(...result.items);
+        if (!result.pages || page >= result.pages) break;
+      }
+      return debates;
+    },
+    enabled: userId > 0,
+  });
+}
+
+function combineDebates(results: UseQueryResult<Debate>[]) {
+  return {
+    debates: results.flatMap((result) => (result.data ? [result.data] : [])),
+    isPending: results.some((result) => result.isPending),
+    /** 지워진 토론방(404)은 오류로 치지 않고 빼요. */
+    isError: results.some(
+      (result) => result.isError && httpStatus(result.error) !== 404
+    ),
+  };
+}
+
+/** 여러 토론방을 id로 (참여한 토론방). 상세 화면과 캐시를 같이 써요. */
+export function useDebatesByIds(ids: number[]) {
+  return useQueries({
+    queries: ids.map((id) => debateQuery(id)),
+    combine: combineDebates,
+  });
 }
 
 /** 댓글 전체 (토론 댓글은 페이지 없이 한 번에 와요) */
@@ -209,10 +255,12 @@ export function useJoinFreeDebate(debate: Debate, viewerId: number) {
         if (httpStatus(error) !== 409) throw error;
       }
     },
-    onSuccess: () =>
-      queryClient.invalidateQueries({
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: purchaseKeys.all });
+      return queryClient.invalidateQueries({
         queryKey: debateKeys.purchase(debate.id, viewerId),
-      }),
+      });
+    },
   });
 }
 

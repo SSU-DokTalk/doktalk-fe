@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import type { Summary } from '@/shared/api/models';
 import { AppShell, SideColumnLayout } from '@/shell';
-import globalStateReducer from '@/stores/globalStates';
 import userReducer from '@/stores/user';
 import { summaryKeys } from '../api';
 import SummaryCreatePage from './SummaryCreatePage';
@@ -50,7 +49,7 @@ function Preview({ scenario }: { scenario: Scenario }) {
       scenario === 'edit' ? '1장. 편향과 실수 — 진짜 유료 내용' : null
     );
     const reduxStore = configureStore({
-      reducer: { user: userReducer, globalState: globalStateReducer },
+      reducer: { user: userReducer },
       preloadedState: {
         user: {
           id: AUTHOR_ID,
@@ -58,7 +57,6 @@ function Preview({ scenario }: { scenario: Scenario }) {
           profile: undefined,
           role: 'USER' as const,
         },
-        globalState: { isFollowerUpdated: false, isLibraryUpdated: false },
       },
     });
     return { client: queryClient, store: reduxStore };

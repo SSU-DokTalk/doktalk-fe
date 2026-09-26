@@ -12,7 +12,7 @@ import * as s from './side.css';
 function ProfileSummary() {
   const { t } = useTranslation();
   const { user } = useAuth();
-  const counts = useMyProfileCounts(true);
+  const counts = useMyProfileCounts(user.id ?? 0);
   const activityTitleId = useId();
   const name = user.name ?? t('component.navigation.topnav.nickname-fallback');
 

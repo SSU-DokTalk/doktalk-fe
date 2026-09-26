@@ -405,7 +405,9 @@
       "summary": "Please check what you entered",
       "submit": "Couldn't save. Please try again in a moment.",
       "upload": "Couldn't upload the files. Check them and try again.",
-      "cancel": "Cancel"
+      "cancel": "Cancel",
+      "required": "Required",
+      "counter": "{{count}}/{{max}}"
     },
     "post-composer": {
       "title-create": "New post",
@@ -961,6 +963,123 @@
         "to-list": "Back to posts"
       },
       "untitled": "Untitled post"
+    },
+    "profile": {
+      "region": "Profile",
+      "my-tabs": "My page menu",
+      "user-tabs": "Profile menu",
+      "followers": "Followers <b>{{number}}</b>",
+      "followings": "Following <b>{{number}}</b>",
+      "state": {
+        "login-title": "Please log in",
+        "login-description": "Log in to see your posts, library and payments.",
+        "not-found-title": "User not found",
+        "not-found-description": "The account was deleted or the address is wrong.",
+        "error-title": "Couldn't load the profile",
+        "error-description": "Please try again in a moment."
+      },
+      "posts": {
+        "heading": "Posts",
+        "empty": "No posts yet",
+        "empty-description": "Share a few thoughts about what you are reading.",
+        "error": "Couldn't load posts"
+      },
+      "summaries": {
+        "heading": "My summaries",
+        "prompt-title": "Summarize a book you have read",
+        "prompt-description": "Your key points can help other readers too",
+        "empty": "No summaries yet",
+        "error": "Couldn't load summaries"
+      },
+      "meetings": {
+        "prompt-title": "Want to read a book together?",
+        "prompt-description": "Open a discussion room and gather fellow readers",
+        "upcoming": "Upcoming meetings",
+        "past": "Past meetings",
+        "host": "Host",
+        "guest": "Joined",
+        "d-day": "D-{{count}}",
+        "today": "Today",
+        "date-tbd": "Date to be set",
+        "open-link": "Open meeting link",
+        "open-map": "View place",
+        "new-window": "Opens in a new window",
+        "more-past": "More past meetings",
+        "empty-upcoming": "No upcoming meetings",
+        "empty-upcoming-description": "Join a discussion room that interests you.",
+        "browse": "Browse discussion rooms",
+        "empty-past": "No past meetings",
+        "error": "Couldn't load meetings",
+        "partial-error": "Some joined rooms couldn't be loaded.",
+        "create-short": "Create"
+      },
+      "payments": {
+        "month-label": "{{month}} {{year}}",
+        "previous-month": "Previous month, {{label}}",
+        "next-month": "Next month, {{label}}",
+        "total": "Total paid",
+        "cancelled-note": "Cancelled payments are not included in the total.",
+        "cancelled": "Cancelled",
+        "type": {
+          "D": "Discussion",
+          "S": "Summary"
+        },
+        "list": "Payments in {{label}}",
+        "empty": "No payments this month",
+        "error": "Couldn't load payments",
+        "untitled": "Untitled item"
+      },
+      "library": {
+        "books": "Books I am reading",
+        "summaries": "Summaries I am reading",
+        "sections": "Library sections",
+        "recent": "Recently added",
+        "edit": "Edit",
+        "done": "Done",
+        "remove": "Remove from library: {{title}}",
+        "removed": "Removed from library: {{title}}",
+        "remove-error": "Couldn't remove the book. Please try again.",
+        "add": "Add books",
+        "add-hint": "From book search",
+        "more": "Show {{count}} more",
+        "empty": "No books in the library yet",
+        "empty-description": "Add the books you are reading from book search.",
+        "empty-user": "No books in this library",
+        "error": "Couldn't load the library",
+        "summary-by": "Summary · {{name}}",
+        "bought": "Bought {{date}}",
+        "read": "Continue reading",
+        "read-label": "Continue reading: {{title}}",
+        "summaries-empty": "No summaries yet",
+        "summaries-empty-description": "Find a summary you like and start reading.",
+        "browse-summaries": "Browse summaries",
+        "summaries-error": "Couldn't load summaries",
+        "summaries-partial-error": "Some summaries couldn't be loaded.",
+        "books-tab": "Books",
+        "summaries-tab": "Summaries"
+      },
+      "follow-list": {
+        "tabs": "Follow lists",
+        "followers": "Followers {{number}}",
+        "followings": "Following {{number}}",
+        "empty-followers": "No followers yet",
+        "empty-followings": "Not following anyone yet",
+        "error": "Couldn't load the list"
+      },
+      "edit": {
+        "change-photo": "Change photo",
+        "remove-photo": "Remove photo",
+        "photo-hint": "JPG, PNG, GIF · up to 10MB",
+        "photo-type-error": "Only JPG, PNG or GIF photos can be used.",
+        "photo-size-error": "Photos must be 10MB or smaller.",
+        "name-placeholder": "Enter a nickname",
+        "name-required": "Please enter a nickname.",
+        "name-too-long": "Nicknames can be up to {{max}} characters.",
+        "introduction-too-long": "The introduction can be up to {{max}} characters.",
+        "save": "Save",
+        "upload-error": "Couldn't upload the photo. Please try another one.",
+        "saved": "Profile saved"
+      }
     }
   },
   "footer": {

@@ -27,8 +27,11 @@ export type BookCoverProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
   title: string;
   author?: string;
   src?: string | null;
-  /** 너비(px). 높이는 비율로 정해져요. */
-  width: number;
+  /**
+   * 너비(px). 높이는 비율로 정해져요.
+   * 'fill'이면 칸 너비를 다 채우고, 글자 크기도 표지 너비에 맞춰 줄고 늘어요 (서재 그리드).
+   */
+  width: number | 'fill';
   /** 높이 ÷ 너비. 국내 도서 평균에 맞춰 1.45가 기본이에요. */
   ratio?: number;
   /**
@@ -59,14 +62,19 @@ function BookCover({
   const [failedSrc, setFailedSrc] = useState<string | null>(null);
   const showImage = Boolean(src) && failedSrc !== src;
   const tone = toneFor(title);
+  const fill = width === 'fill';
+  /** 고정 너비일 때 너비에 비례한 크기(px). 'fill'은 CSS(cqw)가 맡아요. */
+  const scaled = (factor: number, min: number) =>
+    fill ? undefined : Math.max(min, Math.round(width * factor));
 
   return (
     <div
       {...rest}
-      className={clsx(s.cover, className)}
+      className={clsx(s.cover, fill && s.fill, className)}
       style={{
-        width,
-        height: Math.round(width * ratio),
+        width: fill ? '100%' : width,
+        height: fill ? undefined : Math.round(width * ratio),
+        aspectRatio: fill ? `1 / ${ratio}` : undefined,
         backgroundColor: tone.bg,
         color: tone.ink,
         ...style,
@@ -78,7 +86,7 @@ function BookCover({
         role={alt ? 'img' : undefined}
         aria-label={alt || undefined}
         aria-hidden={alt ? undefined : true}
-        style={{ padding: Math.max(6, Math.round(width * 0.1)) }}
+        style={{ padding: scaled(0.1, 6) }}
       >
         {showImage ? (
           <img
@@ -93,14 +101,14 @@ function BookCover({
           <>
             <span
               className={s.fallbackTitle}
-              style={{ fontSize: Math.max(9, Math.round(width * 0.13)) }}
+              style={{ fontSize: scaled(0.13, 9) }}
             >
               {title}
             </span>
             {author && (
               <span
                 className={s.fallbackAuthor}
-                style={{ fontSize: Math.max(7, Math.round(width * 0.075)) }}
+                style={{ fontSize: scaled(0.075, 7) }}
               >
                 {author}
               </span>

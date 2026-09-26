@@ -405,7 +405,9 @@
       "summary": "입력한 내용을 확인해주세요",
       "submit": "저장하지 못했어요. 잠시 후 다시 시도해 주세요.",
       "upload": "파일을 올리지 못했어요. 파일을 확인하고 다시 시도해 주세요.",
-      "cancel": "취소"
+      "cancel": "취소",
+      "required": "필수",
+      "counter": "{{count}}/{{max}}"
     },
     "post-composer": {
       "title-create": "게시글 작성",
@@ -961,6 +963,123 @@
         "to-list": "게시글 목록으로"
       },
       "untitled": "제목 없는 글"
+    },
+    "profile": {
+      "region": "프로필",
+      "my-tabs": "마이페이지 메뉴",
+      "user-tabs": "프로필 메뉴",
+      "followers": "팔로워 <b>{{number}}</b>명",
+      "followings": "팔로잉 <b>{{number}}</b>명",
+      "state": {
+        "login-title": "로그인이 필요해요",
+        "login-description": "로그인하면 내 글과 서재, 결제 내역을 볼 수 있어요.",
+        "not-found-title": "사용자를 찾을 수 없어요",
+        "not-found-description": "탈퇴했거나 주소가 잘못되었어요.",
+        "error-title": "프로필을 불러오지 못했어요",
+        "error-description": "잠시 후 다시 시도해 주세요."
+      },
+      "posts": {
+        "heading": "게시글 목록",
+        "empty": "아직 쓴 게시글이 없어요",
+        "empty-description": "읽은 책 이야기를 가볍게 남겨 보세요.",
+        "error": "게시글을 불러오지 못했어요"
+      },
+      "summaries": {
+        "heading": "내 요약 목록",
+        "prompt-title": "읽은 책을 요약해 볼까요?",
+        "prompt-description": "핵심을 정리해 두면 다른 사람에게도 도움이 돼요",
+        "empty": "아직 쓴 요약이 없어요",
+        "error": "요약을 불러오지 못했어요"
+      },
+      "meetings": {
+        "prompt-title": "같이 읽고 싶은 책이 있나요?",
+        "prompt-description": "토론방을 열고 함께 읽을 사람을 모아 보세요",
+        "upcoming": "다가오는 모임",
+        "past": "지난 모임",
+        "host": "주최",
+        "guest": "참여",
+        "d-day": "D-{{count}}",
+        "today": "오늘",
+        "date-tbd": "일정 미정",
+        "open-link": "모임 링크 열기",
+        "open-map": "장소 보기",
+        "new-window": "새 창에서 열려요",
+        "more-past": "지난 모임 더보기",
+        "empty-upcoming": "다가오는 모임이 없어요",
+        "empty-upcoming-description": "관심 있는 토론방에 참여해 보세요.",
+        "browse": "토론방 둘러보기",
+        "empty-past": "지난 모임이 없어요",
+        "error": "모임을 불러오지 못했어요",
+        "partial-error": "참여한 토론방 일부를 불러오지 못했어요.",
+        "create-short": "생성"
+      },
+      "payments": {
+        "month-label": "{{year}}년 {{month}}",
+        "previous-month": "이전 달, {{label}}",
+        "next-month": "다음 달, {{label}}",
+        "total": "결제 합계",
+        "cancelled-note": "취소된 결제는 합계에서 제외돼요.",
+        "cancelled": "결제 취소",
+        "type": {
+          "D": "토론",
+          "S": "요약"
+        },
+        "list": "{{label}} 결제 목록",
+        "empty": "이 달에는 결제 내역이 없어요",
+        "error": "결제 내역을 불러오지 못했어요",
+        "untitled": "이름 없는 상품"
+      },
+      "library": {
+        "books": "읽고 있는 책",
+        "summaries": "읽고 있는 요약",
+        "sections": "서재 구분",
+        "recent": "최근 담은 순",
+        "edit": "편집",
+        "done": "완료",
+        "remove": "서재에서 빼기: {{title}}",
+        "removed": "서재에서 뺐어요: {{title}}",
+        "remove-error": "서재에서 빼지 못했어요. 다시 시도해 주세요.",
+        "add": "책 담기",
+        "add-hint": "도서 검색에서 담아요",
+        "more": "{{count}}권 더보기",
+        "empty": "아직 서재에 담은 책이 없어요",
+        "empty-description": "도서 검색에서 읽고 있는 책을 담아 보세요.",
+        "empty-user": "서재에 담긴 책이 없어요",
+        "error": "서재를 불러오지 못했어요",
+        "summary-by": "요약 · {{name}}",
+        "bought": "{{date}} 구매",
+        "read": "이어 읽기",
+        "read-label": "이어 읽기: {{title}}",
+        "summaries-empty": "아직 산 요약이 없어요",
+        "summaries-empty-description": "마음에 드는 요약을 찾아 읽어 보세요.",
+        "browse-summaries": "요약 둘러보기",
+        "summaries-error": "요약을 불러오지 못했어요",
+        "summaries-partial-error": "요약 일부를 불러오지 못했어요.",
+        "books-tab": "읽고 있는 책",
+        "summaries-tab": "읽고 있는 요약"
+      },
+      "follow-list": {
+        "tabs": "팔로우 목록",
+        "followers": "팔로워 {{number}}",
+        "followings": "팔로잉 {{number}}",
+        "empty-followers": "아직 팔로워가 없어요",
+        "empty-followings": "아직 팔로우한 사람이 없어요",
+        "error": "목록을 불러오지 못했어요"
+      },
+      "edit": {
+        "change-photo": "사진 변경",
+        "remove-photo": "사진 삭제",
+        "photo-hint": "JPG, PNG, GIF · 10MB 이하",
+        "photo-type-error": "JPG, PNG, GIF 사진만 올릴 수 있어요.",
+        "photo-size-error": "10MB 이하 사진만 올릴 수 있어요.",
+        "name-placeholder": "닉네임을 입력해주세요",
+        "name-required": "닉네임을 입력해 주세요.",
+        "name-too-long": "닉네임은 {{max}}자까지 쓸 수 있어요.",
+        "introduction-too-long": "자기소개는 {{max}}자까지 쓸 수 있어요.",
+        "save": "저장",
+        "upload-error": "사진을 올리지 못했어요. 다른 사진으로 다시 시도해 주세요.",
+        "saved": "프로필을 저장했어요"
+      }
     }
   },
   "footer": {

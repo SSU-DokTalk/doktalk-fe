@@ -7,7 +7,6 @@ import { MemoryRouter, Route, Routes } from 'react-router-dom';
 import { userKeys } from '@/features/user/api';
 import type { Comment, Debate, Purchase } from '@/shared/api/models';
 import { AppShell, SideColumnLayout } from '@/shell';
-import globalStateReducer from '@/stores/globalStates';
 import userReducer from '@/stores/user';
 import { debateKeys } from '../api';
 import DebateDetailPage from './DebateDetailPage';
@@ -143,7 +142,7 @@ function setup(scenario: Scenario) {
   queryClient.setQueryData(userKeys.following(HOST_ID, viewerId), false);
 
   const store = configureStore({
-    reducer: { user: userReducer, globalState: globalStateReducer },
+    reducer: { user: userReducer },
     preloadedState: {
       user: {
         id: viewerId,
@@ -151,7 +150,6 @@ function setup(scenario: Scenario) {
         profile: undefined,
         role: 'USER' as const,
       },
-      globalState: { isFollowerUpdated: false, isLibraryUpdated: false },
     },
   });
 
