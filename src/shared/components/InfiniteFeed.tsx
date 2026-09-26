@@ -30,6 +30,8 @@ type InfiniteFeedProps<T> = {
   errorTitle: string;
   errorDescription: string;
   errorIcon: ReactNode;
+  /** rows: 흰 카드 안에 줄로(기본), cards: 글마다 따로 카드 */
+  variant?: 'rows' | 'cards';
 };
 
 /**
@@ -46,6 +48,7 @@ export function InfiniteFeed<T>({
   errorTitle,
   errorDescription,
   errorIcon,
+  variant = 'rows',
 }: InfiniteFeedProps<T>) {
   const { t } = useTranslation();
   const headingId = useId();
@@ -109,7 +112,7 @@ export function InfiniteFeed<T>({
 
     return (
       <>
-        <ul className={s.items}>
+        <ul className={variant === 'cards' ? s.cardItems : s.items}>
           {items.map((item) => (
             <li key={getKey(item)}>{renderItem(item)}</li>
           ))}
@@ -138,12 +141,17 @@ export function InfiniteFeed<T>({
     <section
       aria-labelledby={headingId}
       aria-busy={query.isPlaceholderData || undefined}
-      className={s.list}
+      className={variant === 'cards' ? s.cards : s.list}
     >
       <h2 id={headingId} className={visuallyHidden}>
         {heading}
       </h2>
-      {renderBody()}
+      {variant === 'cards' &&
+      (query.isPending || !data || items.length === 0) ? (
+        <div className={s.stateCard}>{renderBody()}</div>
+      ) : (
+        renderBody()
+      )}
     </section>
   );
 }

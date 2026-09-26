@@ -406,6 +406,22 @@
       "submit": "저장하지 못했어요. 잠시 후 다시 시도해 주세요.",
       "upload": "파일을 올리지 못했어요. 파일을 확인하고 다시 시도해 주세요.",
       "cancel": "취소"
+    },
+    "post-composer": {
+      "title-create": "게시글 작성",
+      "title-edit": "게시글 수정",
+      "title-label": "제목",
+      "content-label": "내용",
+      "photos-label": "사진",
+      "add": "사진 추가",
+      "hint": "JPG, PNG, GIF · 최대 {{max}}장 · 장당 {{size}}MB 이하",
+      "remove": "사진 {{index}} 삭제",
+      "photo-alt": "첨부한 사진 {{index}}",
+      "too-many": "사진은 최대 {{max}}장까지 올릴 수 있어요",
+      "too-large": "{{size}}MB보다 큰 사진은 올릴 수 없어요",
+      "unacceptable": "JPG, PNG, GIF 사진만 올릴 수 있어요",
+      "title-required": "제목을 입력해주세요",
+      "discard-confirm": "작성 중인 내용이 사라져요. 닫을까요?"
     }
   },
   "page": {
@@ -894,6 +910,26 @@
         "not-found-title": "요약을 찾을 수 없어요",
         "to-list": "요약 목록으로"
       }
+    },
+    "post": {
+      "subtitle": "독후감, 토론 후기, 추천 도서를 자유롭게 나눠요",
+      "list": "게시글 목록",
+      "options": "게시글 옵션",
+      "photo-alt": "첨부 사진 {{index}}",
+      "more-photos": "사진 {{count}}장 더 있음",
+      "empty-description": "첫 게시글을 남겨 보세요",
+      "error": "게시글을 불러오지 못했어요",
+      "error-description": "잠시 후 다시 시도해 주세요",
+      "login-prompt": "로그인하고 게시글을 남겨 보세요",
+      "delete-dialog": {
+        "title": "게시글을 삭제할까요?",
+        "description": "삭제한 게시글은 되돌릴 수 없어요."
+      },
+      "state": {
+        "not-found-title": "게시글을 찾을 수 없어요",
+        "to-list": "게시글 목록으로"
+      },
+      "untitled": "제목 없는 글"
     }
   },
   "footer": {

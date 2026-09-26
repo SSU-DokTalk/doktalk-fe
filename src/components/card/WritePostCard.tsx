@@ -3,7 +3,7 @@ import { selectUser } from '@/stores/user';
 
 import ProfileIcon from '@/components/base/ProfileIcon';
 import { Dispatch, SetStateAction, useState } from 'react';
-import WritePostModal from '../modal/WritePostModal';
+import { PostComposer } from '@/features/post/components/PostComposer';
 import WriteIcon from '@/assets/images/write.svg?react';
 import { useTranslation } from 'react-i18next';
 
@@ -19,10 +19,10 @@ function WritePostCard({
 
   return (
     <div id='write-post-card'>
-      <WritePostModal
-        showModal={showModal}
-        setShowModal={setShowModal}
-        setDidPost={setDidPost}
+      <PostComposer
+        open={showModal}
+        onOpenChange={setShowModal}
+        onSaved={() => setDidPost?.(true)}
       />
       <ProfileIcon profile={user.profile} size={45} />
       <div

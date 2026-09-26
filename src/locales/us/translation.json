@@ -406,6 +406,22 @@
       "submit": "Couldn't save. Please try again in a moment.",
       "upload": "Couldn't upload the files. Check them and try again.",
       "cancel": "Cancel"
+    },
+    "post-composer": {
+      "title-create": "New post",
+      "title-edit": "Edit post",
+      "title-label": "Title",
+      "content-label": "Content",
+      "photos-label": "Photos",
+      "add": "Add photos",
+      "hint": "JPG, PNG, GIF · up to {{max}} · {{size}}MB each",
+      "remove": "Remove photo {{index}}",
+      "photo-alt": "Attached photo {{index}}",
+      "too-many": "You can attach up to {{max}} photos",
+      "too-large": "Photos larger than {{size}}MB can't be uploaded",
+      "unacceptable": "Only JPG, PNG, and GIF photos are allowed",
+      "title-required": "Please enter a title",
+      "discard-confirm": "Your changes will be lost. Close anyway?"
     }
   },
   "page": {
@@ -894,6 +910,26 @@
         "not-found-title": "We couldn't find this summary",
         "to-list": "Back to summaries"
       }
+    },
+    "post": {
+      "subtitle": "Share book reviews, discussion notes, and recommendations",
+      "list": "Posts",
+      "options": "Post options",
+      "photo-alt": "Attached photo {{index}}",
+      "more-photos": "{{count}} more photos",
+      "empty-description": "Be the first to post",
+      "error": "Couldn't load posts",
+      "error-description": "Please try again in a moment",
+      "login-prompt": "Log in to write a post",
+      "delete-dialog": {
+        "title": "Delete this post?",
+        "description": "A deleted post can't be restored."
+      },
+      "state": {
+        "not-found-title": "We couldn't find this post",
+        "to-list": "Back to posts"
+      },
+      "untitled": "Untitled post"
     }
   },
   "footer": {

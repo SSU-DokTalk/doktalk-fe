@@ -44,6 +44,14 @@ globalStyle(`${sizeSm} svg`, { width: '16px', height: '16px', flexShrink: 0 });
 globalStyle(`${sizeMd} svg`, { width: '18px', height: '18px', flexShrink: 0 });
 globalStyle(`${sizeLg} svg`, { width: '20px', height: '20px', flexShrink: 0 });
 
+/** 배경 없는 버튼은 비활성일 때도 배경 없이 글자만 흐리게 */
+const transparentDisabled = {
+  selectors: {
+    '&:disabled:not([data-loading]), &[aria-disabled="true"]:not([data-loading])':
+      { backgroundColor: 'transparent' },
+  },
+};
+
 export const buttonStyles = recipe({
   base: [
     focusRing,
@@ -132,6 +140,16 @@ export const buttonStyles = recipe({
           color: vars.color.brand,
         },
         states(vars.color.brandSubtle, vars.color.brandMuted),
+        transparentDisabled,
+      ],
+      /** 글자만 회색 (좋아요·댓글·공유처럼 곁들이는 행동) */
+      plain: [
+        {
+          backgroundColor: 'transparent',
+          color: vars.color.textSecondary,
+        },
+        states(vars.color.surfaceSubtle, vars.color.border),
+        transparentDisabled,
       ],
       /** 되돌리기 어려운 행동 (탈퇴하기) */
       danger: [
@@ -149,6 +167,7 @@ export const buttonStyles = recipe({
           color: vars.color.danger,
         },
         states(vars.color.dangerSubtle, vars.color.dangerBorder),
+        transparentDisabled,
       ],
     },
     size: {

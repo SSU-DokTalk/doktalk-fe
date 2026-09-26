@@ -19,7 +19,9 @@ export type OwnerMenuLabels = {
 };
 
 type OwnerMenuProps = {
-  editTo: string;
+  /** 수정 화면 주소. 창으로 고치면 onEdit을 넘겨요. */
+  editTo?: string;
+  onEdit?: () => void;
   labels: OwnerMenuLabels;
   /** 삭제 요청. 성공하면 onDeleted로 이동해요. */
   onDelete: () => Promise<unknown>;
@@ -29,6 +31,7 @@ type OwnerMenuProps = {
 /** 작성자 메뉴: 수정 링크, 삭제(확인 창). */
 export function OwnerMenu({
   editTo,
+  onEdit,
   labels,
   onDelete,
   onDeleted,
@@ -62,10 +65,17 @@ export function OwnerMenu({
           <MoreHorizontal aria-hidden='true' />
         </Menu.Trigger>
         <Menu.Content>
-          <Menu.LinkItem render={<Link to={editTo} />}>
-            <Pencil aria-hidden='true' />
-            {labels.edit}
-          </Menu.LinkItem>
+          {editTo ? (
+            <Menu.LinkItem render={<Link to={editTo} />}>
+              <Pencil aria-hidden='true' />
+              {labels.edit}
+            </Menu.LinkItem>
+          ) : (
+            <Menu.Item onClick={onEdit}>
+              <Pencil aria-hidden='true' />
+              {labels.edit}
+            </Menu.Item>
+          )}
           <Menu.Item
             className={s.danger}
             onClick={() => {

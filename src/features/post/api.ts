@@ -1,0 +1,251 @@
+import {
+  infiniteQueryOptions,
+  useInfiniteQuery,
+  useMutation,
+  useQuery,
+  useQueryClient,
+  type InfiniteData,
+} from '@tanstack/react-query';
+import { api } from '@/shared/api/client';
+import {
+  nextPageParam,
+  type AttachedFile,
+  type Comment,
+  type Page,
+  type Post,
+} from '@/shared/api/models';
+import { uploadFiles } from '@/shared/api/upload';
+
+const PAGE_SIZE = 10;
+const COMMENT_PAGE_SIZE = 10;
+
+/** 피드 한 페이지 + 그중 내가 좋아요한 글 id */
+export type PostFeedPage = Page<Post> & { likedIds: number[] };
+
+/** 캐시 키. 글을 쓰거나 지우면 postKeys.all로 한 번에 다시 불러와요. */
+export const postKeys = {
+  all: ['posts'] as const,
+  feed: (viewerId: number) => [...postKeys.all, 'feed', viewerId] as const,
+  feeds: () => [...postKeys.all, 'feed'] as const,
+  detail: (id: number) => [...postKeys.all, 'detail', id] as const,
+  liked: (id: number, viewerId: number) =>
+    [...postKeys.all, 'liked', id, viewerId] as const,
+  comments: (id: number) => [...postKeys.all, 'comments', id] as const,
+};
+
+/** 최신 게시글. 로그인했으면 페이지마다 좋아요 여부를 같이 불러와요. */
+export function postFeedQuery(viewerId: number) {
+  return infiniteQueryOptions({
+    queryKey: postKeys.feed(viewerId),
+    queryFn: async ({ pageParam, signal }): Promise<PostFeedPage> => {
+      const page = await api.get('/post/recent', {
+        query: { page: pageParam, size: PAGE_SIZE },
+        signal,
+      });
+      const ids = page.items.map((post) => post.id);
+      const likedIds =
+        viewerId > 0 && ids.length > 0
+          ? ((await api.get('/posts/like', {
+              query: { ids },
+              signal,
+            })) as number[])
+          : [];
+      return { ...page, likedIds };
+    },
+    initialPageParam: 1,
+    getNextPageParam: nextPageParam,
+  });
+}
+
+export function usePostFeed(viewerId: number) {
+  return useInfiniteQuery(postFeedQuery(viewerId));
+}
+
+export function usePost(id: number) {
+  return useQuery({
+    queryKey: postKeys.detail(id),
+    queryFn: ({ signal }) =>
+      api.get('/post/{post_id}', { path: { post_id: id }, signal }),
+    enabled: id > 0,
+  });
+}
+
+export function usePostLiked(id: number, viewerId: number) {
+  return useQuery({
+    queryKey: postKeys.liked(id, viewerId),
+    queryFn: async ({ signal }) => {
+      const liked = (await api.get('/posts/like', {
+        query: { ids: [id] },
+        signal,
+      })) as number[];
+      return liked.includes(id);
+    },
+    enabled: id > 0 && viewerId > 0,
+  });
+}
+
+type FeedData = InfiniteData<PostFeedPage>;
+
+/**
+ * 좋아요 누르기·취소. 피드와 상세에 바로 반영하고 실패하면 되돌려요.
+ * 피드에서는 페이지에 담긴 likedIds와 글의 likes_num을 함께 고쳐요.
+ */
+export function useTogglePostLike(viewerId: number) {
+  const queryClient = useQueryClient();
+
+  return useMutation({
+    mutationFn: ({ id, like }: { id: number; like: boolean }) =>
+      like
+        ? api.post('/post/{post_id}/like', { path: { post_id: id } })
+        : api.delete('/post/{post_id}/like', { path: { post_id: id } }),
+    onMutate: async ({ id, like }) => {
+      const feedKey = postKeys.feed(viewerId);
+      const likedKey = postKeys.liked(id, viewerId);
+      const detailKey = postKeys.detail(id);
+      await Promise.all([
+        queryClient.cancelQueries({ queryKey: feedKey }),
+        queryClient.cancelQueries({ queryKey: likedKey }),
+      ]);
+      const previous = {
+        feed: queryClient.getQueryData<FeedData>(feedKey),
+        liked: queryClient.getQueryData<boolean>(likedKey),
+        detail: queryClient.getQueryData<Post>(detailKey),
+      };
+      const bump = (post: Post) =>
+        post.id === id
+          ? {
+              ...post,
+              likes_num: Math.max(0, post.likes_num + (like ? 1 : -1)),
+            }
+          : post;
+
+      queryClient.setQueryData<FeedData>(feedKey, (data) =>
+        data
+          ? {
+              ...data,
+              pages: data.pages.map((page) => ({
+                ...page,
+                items: page.items.map(bump),
+                likedIds: like
+                  ? [...page.likedIds, id]
+                  : page.likedIds.filter((likedId) => likedId !== id),
+              })),
+            }
+          : data
+      );
+      queryClient.setQueryData(likedKey, like);
+      queryClient.setQueryData<Post>(detailKey, (post) =>
+        post ? bump(post) : post
+      );
+      return previous;
+    },
+    onError: (_error, { id }, previous) => {
+      queryClient.setQueryData(postKeys.feed(viewerId), previous?.feed);
+      queryClient.setQueryData(postKeys.liked(id, viewerId), previous?.liked);
+      queryClient.setQueryData(postKeys.detail(id), previous?.detail);
+    },
+  });
+}
+
+/** 댓글 (최신순, 10개씩) */
+export function usePostComments(id: number) {
+  return useInfiniteQuery({
+    queryKey: postKeys.comments(id),
+    queryFn: async ({ pageParam, signal }) =>
+      (await api.get('/post/{post_id}/comments', {
+        path: { post_id: id },
+        query: { page: pageParam, size: COMMENT_PAGE_SIZE },
+        signal,
+      })) as Page<Comment>,
+    initialPageParam: 1,
+    getNextPageParam: nextPageParam,
+    enabled: id > 0,
+  });
+}
+
+export function useCreatePostComment(id: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (input: { content: string; upperCommentId?: number }) =>
+      api.post('/post/{post_id}/comment', {
+        path: { post_id: id },
+        body: {
+          content: input.content,
+          upper_comment_id: input.upperCommentId ?? null,
+        },
+      }),
+    onSuccess: () => {
+      queryClient.setQueryData<Post>(postKeys.detail(id), (post) =>
+        post ? { ...post, comments_num: post.comments_num + 1 } : post
+      );
+      void queryClient.invalidateQueries({ queryKey: postKeys.comments(id) });
+      void queryClient.invalidateQueries({ queryKey: postKeys.feeds() });
+    },
+  });
+}
+
+/* ---------- 쓰기·수정·삭제 ---------- */
+
+export type PostInput = {
+  title: string;
+  content: string;
+  /** 이미 올라가 있는 사진 (수정할 때) */
+  existingFiles: AttachedFile[];
+  /** 새로 고른 사진. 먼저 올리고 요청에 붙여요. */
+  files: File[];
+};
+
+/** 사진 업로드 단계에서 실패했는지 구분해요 (안내 문구가 달라요). */
+export class PostUploadError extends Error {}
+
+async function toPostBody(input: PostInput) {
+  let uploaded: AttachedFile[];
+  try {
+    uploaded = await uploadFiles(input.files, 'post');
+  } catch (error) {
+    throw new PostUploadError(String(error));
+  }
+  return {
+    title: input.title.trim(),
+    content: input.content.trim() || null,
+    files: [...input.existingFiles, ...uploaded],
+  };
+}
+
+export function useCreatePost() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (input: PostInput) =>
+      api.post('/post', { body: await toPostBody(input) }),
+    onSuccess: () =>
+      queryClient.invalidateQueries({ queryKey: postKeys.feeds() }),
+  });
+}
+
+export function useUpdatePost(id: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async (input: PostInput) => {
+      await api.put('/post/{post_id}', {
+        path: { post_id: id },
+        body: await toPostBody(input),
+      });
+    },
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: postKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: postKeys.feeds() });
+    },
+  });
+}
+
+export function useDeletePost() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: number) =>
+      api.delete('/post/{post_id}', { path: { post_id: id } }),
+    onSuccess: (_data, id) => {
+      queryClient.removeQueries({ queryKey: postKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: postKeys.feeds() });
+    },
+  });
+}

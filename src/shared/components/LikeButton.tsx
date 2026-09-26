@@ -19,7 +19,7 @@ export function LikeButton({
 }: LikeButtonProps) {
   return (
     <Button
-      variant='ghost'
+      variant='plain'
       aria-pressed={liked}
       disabled={disabled}
       className={liked ? s.liked : undefined}

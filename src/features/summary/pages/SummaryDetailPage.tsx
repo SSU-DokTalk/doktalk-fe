@@ -17,6 +17,7 @@ import { PageState } from '@/shared/components/PageState';
 import { ShareButton } from '@/shared/components/ShareButton';
 import { useFormat } from '@/shared/format';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
+import { useScrollToHash } from '@/shared/hooks/useScrollToHash';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import {
   maskLanguageFor,
@@ -29,6 +30,7 @@ import {
 } from '../api';
 import { SummaryBookCard } from '../components/SummaryBookCard';
 import * as s from '../components/SummaryDetail.css';
+import * as content from '@/shared/components/DetailContent.css';
 import { SummaryOwnerMenu } from '../components/SummaryOwnerMenu';
 import { SummaryPaywall } from '../components/SummaryPaywall';
 import { SummaryPurchaseCard } from '../components/SummaryPurchaseCard';
@@ -80,6 +82,7 @@ function SummaryDetail({ summary }: { summary: Summary }) {
   const liked = useSummaryLiked(summary.id, viewerId);
   const toggleLike = useToggleSummaryLike(summary.id, viewerId);
   const comments = useSummaryComments(summary.id);
+  useScrollToHash(comments.status !== 'pending');
   const createComment = useCreateSummaryComment(summary.id);
 
   const preview = summary.free_content?.trim();
@@ -134,7 +137,7 @@ function SummaryDetail({ summary }: { summary: Summary }) {
     return (
       <>
         {summary.charged_content?.trim() && (
-          <p className={`${s.text} ${s.teaser}`} aria-hidden='true'>
+          <p className={`${content.text} ${s.teaser}`} aria-hidden='true'>
             {summary.charged_content}
           </p>
         )}
@@ -160,15 +163,15 @@ function SummaryDetail({ summary }: { summary: Summary }) {
             {!isDesktop && <div className={page.topActions}>{actions}</div>}
           </div>
 
-          <header className={s.heading}>
-            <div className={s.badges}>
+          <header className={content.heading}>
+            <div className={content.badges}>
               {categoryLabelKeys(summary.category).map((key) => (
                 <Badge key={key} tone='info' shape='pill' size='lg'>
                   {t(key)}
                 </Badge>
               ))}
             </div>
-            <h1 className={s.title}>{summary.title}</h1>
+            <h1 className={content.title}>{summary.title}</h1>
             <AuthorRow
               author={summary.user}
               viewerId={viewerId}
@@ -179,7 +182,7 @@ function SummaryDetail({ summary }: { summary: Summary }) {
 
           <SummaryBookCard book={summary.book} viewerId={viewerId} />
 
-          <div className={s.body}>
+          <div className={content.body}>
             <Badge
               tone={access.unlocked ? 'brand' : 'info'}
               size='md'
@@ -187,9 +190,9 @@ function SummaryDetail({ summary }: { summary: Summary }) {
             >
               {badge}
             </Badge>
-            {preview && <p className={s.text}>{preview}</p>}
+            {preview && <p className={content.text}>{preview}</p>}
             {access.unlocked ? (
-              <p className={s.text}>{access.charged.data}</p>
+              <p className={content.text}>{access.charged.data}</p>
             ) : (
               renderLocked()
             )}
@@ -205,7 +208,7 @@ function SummaryDetail({ summary }: { summary: Summary }) {
               }
               onToggle={() => toggleLike.mutate(!liked.data)}
             />
-            <a href='#comments' className={buttonStyles({ variant: 'ghost' })}>
+            <a href='#comments' className={buttonStyles({ variant: 'plain' })}>
               <MessageCircle aria-hidden='true' />
               {t('component.stats.comments', {
                 count: comments.data?.length ?? summary.comments_num,

@@ -31,3 +31,30 @@ export const status = style({
   minHeight: '64px',
   padding: '12px 20px',
 });
+
+/** 글마다 따로 카드 (게시글 피드). 빈 목록·오류는 흰 카드 안에 보여줘요. */
+export const cards = style({
+  transition: 'opacity 120ms ease',
+  selectors: {
+    '&[aria-busy="true"]': { opacity: 0.6 },
+  },
+});
+
+export const cardItems = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '8px',
+  margin: 0,
+  padding: 0,
+  listStyle: 'none',
+  '@media': {
+    [mq.md]: { gap: '12px' },
+  },
+});
+
+export const stateCard = style({
+  backgroundColor: vars.color.surface,
+  '@media': {
+    [mq.md]: { borderRadius: vars.radius['2xl'] },
+  },
+});

@@ -9,7 +9,7 @@ import LandingSummaryCard from '@/components/card/LandingSummaryCard';
 import LandingPostCard from '@/components/card/LandingPostCard';
 import { useNavigate } from 'react-router-dom';
 import WriteIcon from '@/assets/images/write.svg?react';
-import WritePostModal from '@/components/modal/WritePostModal';
+import { PostComposer } from '@/features/post/components/PostComposer';
 
 function Landing() {
   const navigate = useNavigate();
@@ -132,7 +132,11 @@ function Landing() {
 
   return (
     <div id='landing-page'>
-      <WritePostModal showModal={showModal} setShowModal={setShowModal} />
+      <PostComposer
+        open={showModal}
+        onOpenChange={setShowModal}
+        onSaved={(id) => navigate(`/post/${id}`)}
+      />
 
       {/* 추천 토론방 섹션 */}
       <div className='landing-section debate-section'>

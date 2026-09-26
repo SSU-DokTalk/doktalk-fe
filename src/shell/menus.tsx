@@ -81,7 +81,7 @@ export function CreateMenu() {
           <FileText aria-hidden='true' />
           {t('page.create-summary.title')}
         </Menu.LinkItem>
-        <Menu.LinkItem render={<Link to='/post' />}>
+        <Menu.LinkItem render={<Link to='/post?write=1' />}>
           <PenLine aria-hidden='true' />
           {t('component.modal.write-post.title')}
         </Menu.LinkItem>

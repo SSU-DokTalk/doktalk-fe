@@ -22,6 +22,7 @@ const meta = {
         'outline',
         'tonal',
         'ghost',
+        'plain',
         'danger',
         'dangerGhost',
       ],
@@ -56,6 +57,7 @@ export const Variants: Story = {
           이어 읽기
         </Button>
         <Button variant='ghost'>전체 보기</Button>
+        <Button variant='plain'>좋아요 42</Button>
       </div>
       <div style={row}>
         <Button variant='danger'>탈퇴하기</Button>

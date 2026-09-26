@@ -9,7 +9,7 @@ import '@/assets/css/tailwind.css';
 import { AppShell, LandingLayout, PageLayout, SideColumnLayout } from '@/shell';
 
 import Landing from '@/pages/Landing';
-import Post from '@/pages/Post';
+import PostFeedPage from '@/features/post/pages/PostFeedPage';
 import Login from '@/pages/Login';
 import NotFound from '@/pages/NotFound';
 import Register from '@/pages/Register';
@@ -30,7 +30,7 @@ import SummaryCreatePage from './features/summary/pages/SummaryCreatePage';
 import Settings from './pages/Settings';
 import DebateDetailPage from './features/debate/pages/DebateDetailPage';
 import SummaryDetailPage from './features/summary/pages/SummaryDetailPage';
-import PostDetail from './pages/PostDetail';
+import PostDetailPage from './features/post/pages/PostDetailPage';
 import SummaryEditPage from './features/summary/pages/SummaryEditPage';
 import DebateEditPage from './features/debate/pages/DebateEditPage';
 import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
@@ -131,7 +131,7 @@ function App() {
           </Route>
 
           <Route element={<SideColumnLayout />}>
-            <Route path='/post' element={<Post />}></Route>
+            <Route path='/post' element={<PostFeedPage />}></Route>
 
             <Route path='/search' element={<Search />}></Route>
             <Route
@@ -164,7 +164,7 @@ function App() {
               element={<SummaryEditPage />}
             ></Route>
 
-            <Route path='/post/:post_id' element={<PostDetail />}></Route>
+            <Route path='/post/:post_id' element={<PostDetailPage />}></Route>
             <Route path='/mypage/library' element={<MyLibrary />}></Route>
           </Route>
 

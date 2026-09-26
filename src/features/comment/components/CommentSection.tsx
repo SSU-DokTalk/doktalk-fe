@@ -168,6 +168,12 @@ export type CommentSectionProps = {
     content: string;
     upperCommentId?: number;
   }) => Promise<unknown>;
+  /** 서버에서 페이지로 받는 댓글(게시글)은 더보기를 눌렀을 때 다음 페이지를 불러와요. */
+  serverPaging?: {
+    hasMore: boolean;
+    loadingMore: boolean;
+    onLoadMore: () => void;
+  };
   className?: string;
 };
 
@@ -180,6 +186,7 @@ export function CommentSection({
   onRetry,
   canWrite,
   onSubmit,
+  serverPaging,
   className,
 }: CommentSectionProps) {
   const { t } = useTranslation();
@@ -249,66 +256,80 @@ export function CommentSection({
 
       {threads.length > 0 && (
         <ul className={s.list}>
-          {threads.slice(0, visible).map(({ comment, replies }) => {
-            const author = comment.user.name || t('component.user.unknown');
-            return (
-              <li key={comment.id}>
-                <CommentItem
-                  comment={comment}
-                  onReply={
-                    canWrite
-                      ? () =>
-                          setReplyTo((current) =>
-                            current === comment.id ? null : comment.id
-                          )
-                      : undefined
-                  }
-                />
-                {replies.length > 0 && (
-                  <ul
-                    className={s.replies}
-                    aria-label={t('component.comments.replies', {
-                      name: author,
-                    })}
-                  >
-                    {replies.map((reply) => (
-                      <li key={reply.id}>
-                        <CommentItem comment={reply} />
-                      </li>
-                    ))}
-                  </ul>
-                )}
-                {replyTo === comment.id && (
-                  <div className={s.replyForm}>
-                    <CommentComposer
-                      label={t('component.comments.reply-label', {
+          {(serverPaging ? threads : threads.slice(0, visible)).map(
+            ({ comment, replies }) => {
+              const author = comment.user.name || t('component.user.unknown');
+              return (
+                <li key={comment.id}>
+                  <CommentItem
+                    comment={comment}
+                    onReply={
+                      canWrite
+                        ? () =>
+                            setReplyTo((current) =>
+                              current === comment.id ? null : comment.id
+                            )
+                        : undefined
+                    }
+                  />
+                  {replies.length > 0 && (
+                    <ul
+                      className={s.replies}
+                      aria-label={t('component.comments.replies', {
                         name: author,
                       })}
-                      placeholder={t('component.comments.reply-placeholder')}
-                      autoFocus
-                      onCancel={() => setReplyTo(null)}
-                      onSubmit={(content) =>
-                        onSubmit({ content, upperCommentId: comment.id })
-                      }
-                    />
-                  </div>
-                )}
-              </li>
-            );
-          })}
+                    >
+                      {replies.map((reply) => (
+                        <li key={reply.id}>
+                          <CommentItem comment={reply} />
+                        </li>
+                      ))}
+                    </ul>
+                  )}
+                  {replyTo === comment.id && (
+                    <div className={s.replyForm}>
+                      <CommentComposer
+                        label={t('component.comments.reply-label', {
+                          name: author,
+                        })}
+                        placeholder={t('component.comments.reply-placeholder')}
+                        autoFocus
+                        onCancel={() => setReplyTo(null)}
+                        onSubmit={(content) =>
+                          onSubmit({ content, upperCommentId: comment.id })
+                        }
+                      />
+                    </div>
+                  )}
+                </li>
+              );
+            }
+          )}
         </ul>
       )}
 
-      {threads.length > visible && (
-        <Button
-          variant='neutral'
-          fullWidth
-          className={s.more}
-          onClick={() => setVisible((current) => current + PAGE_SIZE)}
-        >
-          {t('component.comments.more')}
-        </Button>
-      )}
+      {serverPaging
+        ? serverPaging.hasMore && (
+            <Button
+              variant='neutral'
+              fullWidth
+              className={s.more}
+              loading={serverPaging.loadingMore}
+              onClick={serverPaging.onLoadMore}
+            >
+              {t('component.comments.more')}
+            </Button>
+          )
+        : threads.length > visible && (
+            <Button
+              variant='neutral'
+              fullWidth
+              className={s.more}
+              onClick={() => setVisible((current) => current + PAGE_SIZE)}
+            >
+              {t('component.comments.more')}
+            </Button>
+          )}
     </section>
   );
 }

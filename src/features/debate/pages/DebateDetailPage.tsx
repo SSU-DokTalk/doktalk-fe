@@ -17,6 +17,7 @@ import { LikeButton } from '@/shared/components/LikeButton';
 import { PageState } from '@/shared/components/PageState';
 import { ShareButton } from '@/shared/components/ShareButton';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
+import { useScrollToHash } from '@/shared/hooks/useScrollToHash';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { useAuth } from '@/shell/hooks';
 import {
@@ -57,6 +58,7 @@ function DebateDetail({ debate }: { debate: Debate }) {
   const liked = useDebateLiked(debate.id, viewerId);
   const toggleLike = useToggleDebateLike(debate.id, viewerId);
   const comments = useDebateComments(debate.id, true);
+  useScrollToHash(comments.status !== 'pending');
   const createComment = useCreateDebateComment(debate.id);
 
   const content = debate.content?.trim();
@@ -117,7 +119,7 @@ function DebateDetail({ debate }: { debate: Debate }) {
               }
               onToggle={() => toggleLike.mutate(!liked.data)}
             />
-            <a href='#comments' className={buttonStyles({ variant: 'ghost' })}>
+            <a href='#comments' className={buttonStyles({ variant: 'plain' })}>
               <MessageCircle aria-hidden='true' />
               {t('page.debate-detail.comments', {
                 count: comments.data?.length ?? debate.comments_num,
