@@ -52,12 +52,15 @@ function TokenRefresher({ children }: { children: React.ReactNode }) {
               });
             return res;
           }
+          // 로그인하지 않고 보낸 요청이면 정리할 세션이 없어요. 오류만 넘겨서 화면이 로그인 안내를 보여줘요.
+          if (!config?.headers?.Authorization) return Promise.reject(error);
           // 잘못됐거나 만료된 refresh_token인 경우 모든 token 초기화
           axios.defaults.headers.common['Authorization'] = '';
           cookie.remove('Authorization', { path: '/' });
           await dispatch(unsetUser());
-          // 로그아웃처럼 이전 사람의 캐시도 비워요.
-          queryClient.clear();
+          // 이전 사람의 데이터를 지우고, 보고 있던 화면은 로그아웃 상태로 다시 불러와요.
+          // (clear()는 불러오던 요청까지 지워서 화면이 로딩 상태에 멈춰요.)
+          void queryClient.resetQueries();
         }
 
         // 다른 모든 오류에 대해 처리를 거부하고 오류를 다시 throw
