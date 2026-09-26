@@ -1,8 +1,5 @@
 import { Route, Routes } from 'react-router-dom';
 
-import '@/assets/css/main.scss';
-import '@/assets/css/tailwind.css';
-
 import ScrollToTop from '@/shell/ScrollToTop';
 import AuthCallbackPage from '@/features/auth/pages/AuthCallbackPage';
 import LoginPage from '@/features/auth/pages/LoginPage';

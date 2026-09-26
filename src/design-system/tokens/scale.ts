@@ -16,7 +16,7 @@ export const space = {
   14: '56px',
 } as const;
 
-/** Tailwind 기본값과 같은 기준점이에요. 기존 화면과 함께 쓰는 동안 어긋나지 않게 맞췄어요. */
+/** 화면 폭 기준점 (Tailwind 기본값과 같은 값) */
 export const breakpoints = {
   sm: 640,
   md: 768,
@@ -48,11 +48,7 @@ export const zIndex = {
 
 const rem = (px: number) => `${px / 16}rem`;
 
-/**
- * 글자 크기는 rem이라 브라우저 글자 크기 설정을 따라가요.
- * 기존 tailwind.css가 400px 미만 화면에서 html 글자 크기를 15px로 줄이고 있어서,
- * 그 규칙을 지우기 전까지는 좁은 화면에서 약 6% 작게 보여요.
- */
+/** 글자 크기는 rem이라 브라우저 글자 크기 설정을 따라가요. */
 export const typeScale = {
   display: {
     fontSize: rem(52),

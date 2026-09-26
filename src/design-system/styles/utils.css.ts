@@ -2,9 +2,8 @@ import { style, type StyleRule } from '@vanilla-extract/css';
 import { vars } from '../tokens/theme.css';
 
 /**
- * 키보드 포커스 표시예요.
- * 기존 _reset.scss가 `button:focus { outline: none }`으로 포커스 표시를 지우고 있어서,
- * 클래스 + :focus-visible 조합(명시도 0,2,0)으로 다시 그려요.
+ * 키보드 포커스 표시예요. reset.css의 기본 링과 같은 모양이라,
+ * 컴포넌트가 outline을 따로 바꾼 뒤에도 같은 링을 다시 쓰고 싶을 때 펼쳐 넣어요.
  */
 export const focusRing: StyleRule = {
   selectors: {

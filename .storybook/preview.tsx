@@ -1,13 +1,10 @@
 import type { Decorator, Preview } from '@storybook/react-vite';
 import i18n from '../src/locales/i18n';
 
-// 앱과 같은 전역 스타일 위에서 확인해요. 기존 reset·Tailwind와 부딪히는 곳이 있으면 여기서 드러나요.
-// 기존 SCSS·Tailwind 색도 --dt-* 토큰을 가리켜서 토큰 CSS를 함께 불러와요.
-// 레거시 스타일을 지우면 main.scss·tailwind.css 두 줄은 지워요.
-import '../src/assets/css/main.scss';
-import '../src/assets/css/tailwind.css';
+// 앱(main.tsx)과 같은 토큰·글꼴·전역 기본 스타일 위에서 확인해요.
 import '../src/design-system/tokens/theme.css';
 import '../src/design-system/styles/fonts.css';
+import '../src/design-system/styles/reset.css';
 
 const HTML_LANG: Record<string, string> = { kr: 'ko', mn: 'mn', us: 'en' };
 

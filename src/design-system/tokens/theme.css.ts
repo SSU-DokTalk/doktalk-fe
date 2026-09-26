@@ -9,7 +9,7 @@ const toKebab = (key: string) =>
 /**
  * 디자인 토큰 계약
  *
- * CSS 변수 이름을 `--dt-*`로 고정해 두었어요. 그래서 기존 SCSS나 Tailwind 코드에서도
+ * CSS 변수 이름을 `--dt-*`로 고정해 두었어요. 그래서 일반 CSS(styles/reset.css 등)에서도
  * `var(--dt-color-brand)`처럼 같은 값을 그대로 참조할 수 있어요.
  */
 export const vars = createGlobalThemeContract(
