@@ -1,13 +1,6 @@
 import clsx from 'clsx';
-import {
-  ChevronDown,
-  ChevronRight,
-  MapPin,
-  MessagesSquare,
-  Plus,
-  Video,
-} from 'lucide-react';
-import { useId, useMemo, useState } from 'react';
+import { ChevronDown, ChevronRight, MessagesSquare, Plus } from 'lucide-react';
+import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import {
@@ -19,83 +12,15 @@ import {
   Skeleton,
   visuallyHidden,
 } from '@/design-system';
-import { useDebatesByIds, useHostedDebates } from '@/features/debate/api';
 import { placeText } from '@/features/debate/display';
-import { productIds, usePurchaseHistory } from '@/features/payment/api';
-import type { Debate } from '@/shared/api/models';
-import { parseServerDate, useFormat } from '@/shared/format';
+import { useFormat } from '@/shared/format';
+import { daysUntil, useMyMeetings, type Meeting } from '../useMyMeetings';
 import { CreatePrompt } from './CreatePrompt';
+import { MeetingAction, MeetingDate } from './MeetingParts';
 import * as m from './ProfileMeetings.css';
 import * as s from '@/shared/components/Section.css';
 
 const PAST_STEP = 5;
-const DAY = 24 * 60 * 60 * 1000;
-
-type Meeting = {
-  debate: Debate;
-  role: 'host' | 'guest';
-  at: Date | null;
-};
-
-const isWebUrl = (value: string) => /^https?:\/\//i.test(value);
-
-/** 오늘부터 며칠 남았는지 (날짜 기준, 오늘이면 0) */
-function daysUntil(date: Date) {
-  const start = new Date();
-  start.setHours(0, 0, 0, 0);
-  const target = new Date(date);
-  target.setHours(0, 0, 0, 0);
-  return Math.round((target.getTime() - start.getTime()) / DAY);
-}
-
-/** 내가 연 토론방과 참여한 토론방을 합쳐서 다가오는 모임·지난 모임으로 나눠요. */
-function useMeetings(viewerId: number) {
-  const hosted = useHostedDebates(viewerId);
-  const history = usePurchaseHistory(viewerId);
-  const joinedIds = useMemo(
-    () => productIds(history.data, 'D'),
-    [history.data]
-  );
-  const joined = useDebatesByIds(joinedIds);
-
-  const { upcoming, past } = useMemo(() => {
-    const byId = new Map<number, Meeting>();
-    for (const debate of [...(hosted.data ?? []), ...joined.debates]) {
-      if (byId.has(debate.id)) continue;
-      byId.set(debate.id, {
-        debate,
-        role: debate.user_id === viewerId ? 'host' : 'guest',
-        at: debate.held_at ? parseServerDate(debate.held_at) : null,
-      });
-    }
-    const now = Date.now();
-    const all = [...byId.values()];
-    return {
-      // 날짜가 없는 모임은 다가오는 모임 맨 뒤에 둬요.
-      upcoming: all
-        .filter((meeting) => !meeting.at || meeting.at.getTime() >= now)
-        .sort(
-          (a, b) =>
-            (a.at?.getTime() ?? Infinity) - (b.at?.getTime() ?? Infinity)
-        ),
-      past: all
-        .filter((meeting) => meeting.at && meeting.at.getTime() < now)
-        .sort((a, b) => (b.at?.getTime() ?? 0) - (a.at?.getTime() ?? 0)),
-    };
-  }, [hosted.data, joined.debates, viewerId]);
-
-  return {
-    upcoming,
-    past,
-    isPending: hosted.isPending || history.isPending || joined.isPending,
-    isError: hosted.isError || history.isError,
-    isPartial: joined.isError,
-    retry: () => {
-      void hosted.refetch();
-      void history.refetch();
-    },
-  };
-}
 
 function RoleBadge({
   role,
@@ -113,74 +38,6 @@ function RoleBadge({
   );
 }
 
-function DateBlock({ date }: { date: Date | null }) {
-  const { t } = useTranslation();
-  if (!date) {
-    return (
-      <span aria-hidden='true' className={m.dateBlock}>
-        <span className={m.dateSmall}>
-          {t('page.profile.meetings.date-tbd')}
-        </span>
-      </span>
-    );
-  }
-  return (
-    <span aria-hidden='true' className={m.dateBlock}>
-      <span className={m.dateSmall}>
-        {t(`function.time.months.${date.getMonth() + 1}`)}
-      </span>
-      <span className={m.dateDay}>{date.getDate()}</span>
-      <span className={m.dateSmall}>
-        {t(`function.time.weekdays.${date.getDay()}`)}
-      </span>
-    </span>
-  );
-}
-
-/** 온라인이면 모임 링크, 오프라인이면 지도에서 장소 보기 (새 창) */
-function MeetingAction({ debate }: { debate: Debate }) {
-  const { t } = useTranslation();
-  const location = debate.location?.trim();
-  const link = debate.link?.trim();
-  const className = clsx(buttonStyles({ variant: 'secondary' }), m.action);
-  const newWindow = (
-    <span className={visuallyHidden}>
-      {' '}
-      ({t('page.profile.meetings.new-window')})
-    </span>
-  );
-
-  if (location) {
-    return (
-      <a
-        href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(location)}`}
-        target='_blank'
-        rel='noopener noreferrer'
-        className={className}
-      >
-        <MapPin aria-hidden='true' />
-        {t('page.profile.meetings.open-map')}
-        {newWindow}
-      </a>
-    );
-  }
-  if (link && isWebUrl(link)) {
-    return (
-      <a
-        href={link}
-        target='_blank'
-        rel='noopener noreferrer'
-        className={className}
-      >
-        <Video aria-hidden='true' />
-        {t('page.profile.meetings.open-link')}
-        {newWindow}
-      </a>
-    );
-  }
-  return null;
-}
-
 function UpcomingMeeting({ meeting }: { meeting: Meeting }) {
   const { t } = useTranslation();
   const format = useFormat();
@@ -195,7 +52,7 @@ function UpcomingMeeting({ meeting }: { meeting: Meeting }) {
 
   return (
     <li className={m.upcoming}>
-      <DateBlock date={at} />
+      <MeetingDate date={at} className={m.dateArea} />
       <Link to={`/debate/${debate.id}`} className={m.body}>
         <span className={m.badges}>
           <RoleBadge role={meeting.role} />
@@ -215,7 +72,7 @@ function UpcomingMeeting({ meeting }: { meeting: Meeting }) {
           {meta.join(' · ')}
         </span>
       </Link>
-      <MeetingAction debate={debate} />
+      <MeetingAction debate={debate} className={m.action} />
     </li>
   );
 }
@@ -275,7 +132,7 @@ export function ProfileMeetings({ viewerId }: { viewerId: number }) {
   const { t } = useTranslation();
   const upcomingId = useId();
   const pastId = useId();
-  const meetings = useMeetings(viewerId);
+  const meetings = useMyMeetings(viewerId);
   const [pastCount, setPastCount] = useState(PAST_STEP);
 
   const renderBody = () => {

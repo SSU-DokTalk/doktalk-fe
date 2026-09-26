@@ -12,6 +12,7 @@ import DebateCreatePage from '@/features/debate/pages/DebateCreatePage';
 import DebateDetailPage from '@/features/debate/pages/DebateDetailPage';
 import DebateEditPage from '@/features/debate/pages/DebateEditPage';
 import DebateListPage from '@/features/debate/pages/DebateListPage';
+import HomePage from '@/features/home/pages/HomePage';
 import MyLibraryPage from '@/features/library/pages/MyLibraryPage';
 import CheckoutResultPage from '@/features/payment/pages/CheckoutResultPage';
 import PostDetailPage from '@/features/post/pages/PostDetailPage';
@@ -25,12 +26,13 @@ import SummaryCreatePage from '@/features/summary/pages/SummaryCreatePage';
 import SummaryDetailPage from '@/features/summary/pages/SummaryDetailPage';
 import SummaryEditPage from '@/features/summary/pages/SummaryEditPage';
 import SummaryListPage from '@/features/summary/pages/SummaryListPage';
-import Landing from '@/pages/Landing';
 import { FullPageSpinner } from '@/shared/components/FullPageSpinner';
 import { AppShell, LandingLayout, PageLayout, SideColumnLayout } from '@/shell';
+import { useAuth } from '@/shell/hooks';
 import NotFoundPage from '@/shell/NotFoundPage';
 
 function App() {
+  const { isLoggedIn } = useAuth();
   // 새로고침하면 로그인 상태를 먼저 되살린 뒤 화면을 그려요.
   const ready = useRestoreSession();
   if (!ready) return <FullPageSpinner />;
@@ -40,8 +42,11 @@ function App() {
       <ScrollToTop />
       <Routes>
         <Route element={<AppShell />}>
-          <Route element={<LandingLayout />}>
-            <Route path='/' element={<Landing />} />
+          {/* 첫 화면: 로그아웃이면 넓은 랜딩, 로그인하면 왼쪽 칼럼이 있는 앱 틀 */}
+          <Route
+            element={isLoggedIn ? <SideColumnLayout /> : <LandingLayout />}
+          >
+            <Route path='/' element={<HomePage />} />
           </Route>
 
           <Route element={<SideColumnLayout />}>

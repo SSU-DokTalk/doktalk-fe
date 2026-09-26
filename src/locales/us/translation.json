@@ -1222,6 +1222,67 @@
         "retry": "Try again",
         "back": "Go back"
       }
+    },
+    "home": {
+      "hero": {
+        "badge": "Book discussions & summaries",
+        "title-1": "Read together, discuss together,",
+        "title-2": "and grow together.",
+        "browse-debates": "Browse discussions",
+        "browse-summaries": "See book summaries",
+        "featured": "Featured discussion",
+        "join": "Join"
+      },
+      "debates": {
+        "title": "Open discussions",
+        "description": "Talk with people who read the same book",
+        "sort-label": "Sort open discussions",
+        "soonest": "Soonest",
+        "see-all": "See all discussions",
+        "empty": "No discussions are open right now",
+        "empty-description": "Try another category or open one yourself.",
+        "recent-title": "Recent discussions",
+        "recent-description": "No discussions are open right now, so here are the latest ones",
+        "ended": "Ended"
+      },
+      "summaries": {
+        "title": "Popular summaries",
+        "description": "Start with the free preview",
+        "see-all": "See all summaries",
+        "preview": "Preview",
+        "rank": "No. {{rank}}",
+        "empty": "No summaries yet"
+      },
+      "posts": {
+        "description": "Share reviews, discussion notes and book picks",
+        "write": "Write a post",
+        "see-all": "See all posts",
+        "empty": "No posts yet"
+      },
+      "see-all": "See all",
+      "footer": {
+        "language": "Language",
+        "rights": "© DokTalk. All rights reserved."
+      },
+      "main": {
+        "greeting": "Welcome back, {{name}}",
+        "upcoming": "Upcoming meetings: {{count}}",
+        "no-upcoming": "No upcoming meetings. Join a discussion that interests you.",
+        "upcoming-label": "Upcoming meetings",
+        "feed": "Recommended feed",
+        "tab": {
+          "debates": "Discussions",
+          "posts": "Posts",
+          "summaries": "Summaries"
+        },
+        "more": {
+          "debates": "More discussions",
+          "posts": "More posts",
+          "summaries": "More summaries"
+        },
+        "all-meetings": "All my meetings",
+        "rail": "Popular summaries and my library"
+      }
     }
   },
   "footer": {

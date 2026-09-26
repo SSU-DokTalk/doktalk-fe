@@ -1,16 +1,8 @@
 import { CalendarDays, Search } from 'lucide-react';
-import {
-  Chip,
-  ChipGroup,
-  mq,
-  SegmentedControl,
-  Select,
-  TextField,
-} from '@/design-system';
-import { CATEGORY_OPTIONS } from '@/shared/categories';
+import { mq, SegmentedControl, Select, TextField } from '@/design-system';
+import { CategoryChips } from './CategoryChips';
 import type { ListParams, SearchBy } from '@/shared/hooks/useListParams';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
-import { useTranslation } from 'react-i18next';
 import * as s from './ListFilters.css';
 
 /** 날짜순의 가장 이른 날짜 (서비스 시작) */
@@ -42,7 +34,6 @@ export function ListFilters<S extends string>({
   labels,
   sortOptions,
 }: ListFiltersProps<S>) {
-  const { t } = useTranslation();
   const isDesktop = useMediaQuery(mq.md);
   const chipSize = isDesktop ? 'sm' : 'md';
 
@@ -84,31 +75,15 @@ export function ListFilters<S extends string>({
         />
       </form>
 
-      <ChipGroup
-        aria-label={labels.category}
+      <CategoryChips
+        value={params.category}
+        onChange={params.setCategory}
+        label={labels.category}
+        allLabel={labels.categoryAll}
+        size={chipSize}
         scroll={!isDesktop}
         className={s.chips}
-      >
-        <Chip
-          size={chipSize}
-          pressed={params.category === 0}
-          onPressedChange={() => params.setCategory(0)}
-        >
-          {labels.categoryAll}
-        </Chip>
-        {CATEGORY_OPTIONS.map((option) => (
-          <Chip
-            key={option.key}
-            size={chipSize}
-            pressed={params.category === option.value}
-            onPressedChange={(pressed) =>
-              params.setCategory(pressed ? option.value : 0)
-            }
-          >
-            {t(option.labelKey)}
-          </Chip>
-        ))}
-      </ChipGroup>
+      />
 
       <div className={s.sortRow}>
         <SegmentedControl

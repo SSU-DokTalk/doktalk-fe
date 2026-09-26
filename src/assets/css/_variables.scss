@@ -1,9 +1,0 @@
-/* Brand Color — 디자인 시스템 토큰(src/design-system/tokens/theme.css.ts)을 가리켜요.
-   CSS 변수라서 color.adjust() 같은 Sass 색 함수에는 넣을 수 없어요. */
-$brand-color1: var(--dt-color-brand);
-$brand-color2: var(--dt-color-info-icon);
-$brand-color3: var(--dt-color-canvas);
-$brand-color4: var(--dt-color-border-input);
-$brand-color5: var(--dt-color-text-tertiary);
-
-$red: #dd2033;

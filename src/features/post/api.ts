@@ -30,6 +30,8 @@ export const postKeys = {
   userFeed: (userId: number, viewerId: number) =>
     [...postKeys.feed(viewerId), 'user', userId] as const,
   feeds: () => [...postKeys.all, 'feed'] as const,
+  /** 첫 화면의 최신 글 몇 개. feeds 아래라 글을 쓰면 같이 새로 불러와요. */
+  recent: (size: number) => [...postKeys.feeds(), 'recent', size] as const,
   detail: (id: number) => [...postKeys.all, 'detail', id] as const,
   liked: (id: number, viewerId: number) =>
     [...postKeys.all, 'liked', id, viewerId] as const,
@@ -73,6 +75,15 @@ export function usePostFeed(viewerId: number, userId?: number) {
   return useInfiniteQuery({
     ...postFeedQuery(viewerId, userId),
     enabled: userId === undefined || userId > 0,
+  });
+}
+
+/** 최신 글 몇 개 (좋아요 여부 없이). 메인 화면 카드에 써요. */
+export function useRecentPosts(size: number) {
+  return useQuery({
+    queryKey: postKeys.recent(size),
+    queryFn: ({ signal }) =>
+      api.get('/post/recent', { query: { page: 1, size }, signal }),
   });
 }
 

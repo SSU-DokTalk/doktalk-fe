@@ -1222,6 +1222,67 @@
         "retry": "다시 결제하기",
         "back": "돌아가기"
       }
+    },
+    "home": {
+      "hero": {
+        "badge": "독서 토론 · 도서 요약 커뮤니티",
+        "title-1": "함께 읽고, 함께 토론하며,",
+        "title-2": "함께 성장해요.",
+        "browse-debates": "토론방 둘러보기",
+        "browse-summaries": "도서 요약 보기",
+        "featured": "추천 토론방",
+        "join": "참여하기"
+      },
+      "debates": {
+        "title": "모집 중인 토론방",
+        "description": "같은 책을 읽은 사람들과 이야기를 나눠보세요",
+        "sort-label": "모집 중인 토론방 정렬",
+        "soonest": "모임 가까운 순",
+        "see-all": "토론방 전체 보기",
+        "empty": "지금 모집 중인 토론방이 없어요",
+        "empty-description": "다른 카테고리를 보거나 직접 토론방을 열어 보세요.",
+        "recent-title": "최근 토론방",
+        "recent-description": "지금 모집 중인 토론방이 없어서 최근에 열린 토론방을 보여드려요",
+        "ended": "모임 종료"
+      },
+      "summaries": {
+        "title": "많이 읽는 요약",
+        "description": "무료 미리보기로 먼저 읽어보세요",
+        "see-all": "도서 요약 전체 보기",
+        "preview": "미리보기",
+        "rank": "{{rank}}위",
+        "empty": "아직 요약이 없어요"
+      },
+      "posts": {
+        "description": "독후감, 토론 후기, 추천 도서를 자유롭게 나눠요",
+        "write": "글 작성하기",
+        "see-all": "게시글 전체 보기",
+        "empty": "아직 게시글이 없어요"
+      },
+      "see-all": "전체 보기",
+      "footer": {
+        "language": "언어",
+        "rights": "© DokTalk. All rights reserved."
+      },
+      "main": {
+        "greeting": "{{name}}님, 반가워요",
+        "upcoming": "다가오는 모임이 {{count}}개 있어요.",
+        "no-upcoming": "다가오는 모임이 없어요. 관심 있는 토론방에 참여해 보세요.",
+        "upcoming-label": "다가오는 모임",
+        "feed": "추천 피드",
+        "tab": {
+          "debates": "추천 토론방",
+          "posts": "게시글",
+          "summaries": "도서 요약"
+        },
+        "more": {
+          "debates": "토론방 더보기",
+          "posts": "게시글 더보기",
+          "summaries": "요약 더보기"
+        },
+        "all-meetings": "내 모임 전체 보기",
+        "rail": "인기 요약과 내 서재"
+      }
     }
   },
   "footer": {

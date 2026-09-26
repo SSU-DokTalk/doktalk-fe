@@ -1,0 +1,101 @@
+import { style } from '@vanilla-extract/css';
+import { fontSize, mq, vars } from '@/design-system/tokens';
+
+/** 짧은 게시글 줄 (메인 화면 피드). 글자는 왼쪽, 사진이 있으면 오른쪽에 작게 */
+export const row = style({
+  position: 'relative',
+  display: 'flex',
+  gap: '14px',
+  padding: '16px 20px',
+  borderBottom: `1px solid ${vars.color.borderSubtle}`,
+  backgroundColor: vars.color.surface,
+  selectors: {
+    '&:hover': {
+      backgroundColor: `color-mix(in srgb, ${vars.color.surfaceSubtle} 55%, ${vars.color.surface})`,
+    },
+  },
+  '@media': {
+    [mq.md]: { gap: '18px', padding: '18px 20px' },
+  },
+});
+
+export const text = style({
+  display: 'flex',
+  flexDirection: 'column',
+  gap: '4px',
+  flex: '1 1 0',
+  minWidth: 0,
+});
+
+export const title = style({
+  margin: 0,
+  fontSize: fontSize.lg,
+  fontWeight: 700,
+  lineHeight: 1.4,
+  letterSpacing: '-0.3px',
+});
+
+/** 줄 전체를 누를 수 있게 제목 링크를 넓혀요. */
+export const link = style({
+  color: vars.color.text,
+  textDecoration: 'none',
+  selectors: {
+    '&::after': { content: '""', position: 'absolute', inset: 0, zIndex: 1 },
+    '&:hover': { color: vars.color.brand },
+    '&:focus-visible': { outline: 'none' },
+    '&:focus-visible::after': {
+      outline: `2px solid ${vars.color.brand}`,
+      outlineOffset: '-2px',
+    },
+  },
+});
+
+export const excerpt = style({
+  display: '-webkit-box',
+  overflow: 'hidden',
+  WebkitBoxOrient: 'vertical',
+  WebkitLineClamp: 2,
+  margin: 0,
+  fontSize: fontSize.base,
+  lineHeight: 1.6,
+  color: vars.color.textSecondary,
+  whiteSpace: 'pre-line',
+});
+
+export const meta = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '8px',
+  margin: '4px 0 0',
+  fontSize: fontSize.sm,
+  color: vars.color.textTertiary,
+});
+
+export const author = style({
+  overflow: 'hidden',
+  whiteSpace: 'nowrap',
+  textOverflow: 'ellipsis',
+  fontWeight: 600,
+  color: vars.color.textMuted,
+});
+
+export const stat = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: '3px',
+  flexShrink: 0,
+});
+
+export const statIcon = style({ width: '14px', height: '14px' });
+
+export const thumb = style({
+  flexShrink: 0,
+  width: '72px',
+  height: '72px',
+  borderRadius: vars.radius.md,
+  objectFit: 'cover',
+  backgroundColor: vars.color.surfaceSubtle,
+  '@media': {
+    [mq.md]: { width: '88px', height: '88px' },
+  },
+});

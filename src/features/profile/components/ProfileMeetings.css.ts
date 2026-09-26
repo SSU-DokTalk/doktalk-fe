@@ -31,40 +31,9 @@ export const upcoming = style({
   },
 });
 
-export const dateBlock = style({
+/** 날짜 칸 자리 (모양은 MeetingParts) */
+export const dateArea = style({
   gridArea: 'date',
-  display: 'flex',
-  flexDirection: 'column',
-  alignItems: 'center',
-  justifyContent: 'center',
-  height: '66px',
-  borderRadius: '12px',
-  backgroundColor: vars.color.brandSubtle,
-  color: vars.color.brand,
-  textAlign: 'center',
-  '@media': {
-    [mq.md]: { height: '76px', gap: '2px', borderRadius: '14px' },
-  },
-});
-
-export const dateSmall = style({
-  fontSize: '0.6875rem',
-  fontWeight: 600,
-  lineHeight: 1.4,
-  whiteSpace: 'nowrap',
-  '@media': {
-    [mq.md]: { fontSize: fontSize.xs },
-  },
-});
-
-export const dateDay = style({
-  fontSize: '1.3125rem',
-  fontWeight: 800,
-  lineHeight: 1.1,
-  letterSpacing: '-0.5px',
-  '@media': {
-    [mq.md]: { fontSize: '1.5rem' },
-  },
 });
 
 export const body = style({

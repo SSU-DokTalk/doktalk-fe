@@ -2,8 +2,8 @@ import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation } from 'react-router-dom';
 import ChatbotFloatingButton from '@/components/floating/ChatbotFloatingButton';
-import Footer from '@/components/footers/Footer';
 import BottomTabs from './BottomTabs';
+import LandingFooter from './LandingFooter';
 import { useAuth, useHtmlLang } from './hooks';
 import MobileTopBar from './MobileTopBar';
 import SideColumn from './SideColumn';
@@ -68,14 +68,14 @@ export function PageLayout() {
   );
 }
 
-/** 랜딩. 기존 푸터를 그대로 써요. */
+/** 로그아웃 랜딩. 넓은 구역들 아래에 어두운 푸터가 붙어요. */
 export function LandingLayout() {
   return (
     <>
       <main>
         <Outlet />
       </main>
-      <Footer />
+      <LandingFooter />
     </>
   );
 }
