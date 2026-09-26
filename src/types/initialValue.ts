@@ -3,7 +3,6 @@ import {
   UserType,
   PostType,
   BasicUserType,
-  DebateType,
   BookType,
   PaymentType,
   SummaryType,
@@ -52,27 +51,6 @@ export const InitialBook: BookType = {
   pubdate: '',
   description: '',
   in_library_num: 0,
-};
-
-export const InitialDebate: DebateType = {
-  id: 0,
-  user_id: 0,
-  user: InitialUser as BasicUserType,
-  isbn: 0,
-  book: InitialBook,
-  location: undefined,
-  link: undefined,
-  held_at: new Date(),
-  price: 0,
-  title: '',
-  content: '',
-  category: 0,
-  limit: 2,
-  likes_num: 0,
-  comments_num: 0,
-  created: new Date(),
-  updated: new Date(),
-  files: undefined,
 };
 
 export const InitialSummary: SummaryType = {

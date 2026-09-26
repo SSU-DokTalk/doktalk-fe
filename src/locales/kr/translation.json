@@ -373,6 +373,23 @@
     },
     "dialog": {
       "close": "닫기"
+    },
+    "book-picker": {
+      "change": "변경",
+      "results": "도서 검색 결과",
+      "empty": "검색 결과가 없어요",
+      "error": "도서를 검색하지 못했어요",
+      "more": "더 보기",
+      "selected": "고른 도서"
+    },
+    "attachments": {
+      "label": "첨부 파일",
+      "add": "파일 추가",
+      "hint": "PDF, JPG, PNG, GIF · 최대 {{max}}개 · 파일당 {{size}}MB 이하",
+      "remove": "{{name}} 삭제",
+      "too-many": "파일은 최대 {{max}}개까지 올릴 수 있어요",
+      "too-large": "{{size}}MB보다 큰 파일은 올릴 수 없어요",
+      "unacceptable": "PDF, JPG, PNG, GIF 파일만 올릴 수 있어요"
     }
   },
   "page": {
@@ -517,12 +534,56 @@
         "limit-unit": "명",
         "content-placeholder": "나누고 싶은 이야기를 적어주세요",
         "price": "가격",
-        "price-placeholder": "가격을 입력해주세요"
+        "price-placeholder": "가격을 입력해주세요",
+        "title-label": "제목",
+        "category-hint": "토론 주제의 카테고리를 선택해주세요 · 여러 개 선택할 수 있어요",
+        "mode": "모임 방식",
+        "mode-online": "온라인",
+        "mode-offline": "오프라인",
+        "date": "모임 날짜",
+        "time": "모임 시간",
+        "limit-decrease": "인원 줄이기",
+        "limit-increase": "인원 늘리기",
+        "price-unit": "원",
+        "free": "무료로 열기",
+        "content-label": "내용"
       },
       "button": {
         "file-add": "파일 추가",
         "temp-save": "임시 저장",
-        "submit": "작성 완료"
+        "submit": "작성 완료",
+        "cancel": "취소"
+      },
+      "section": {
+        "basic": "기본 정보",
+        "meeting": "모임 정보",
+        "intro": "소개"
+      },
+      "error": {
+        "summary": "입력한 내용을 확인해주세요",
+        "title-required": "제목을 입력해주세요",
+        "book-required": "토론할 도서를 골라주세요",
+        "category-required": "카테고리를 하나 이상 골라주세요",
+        "link-required": "온라인 링크를 입력해주세요",
+        "location-required": "모임 장소를 입력해주세요",
+        "date-required": "모임 날짜와 시간을 입력해주세요",
+        "date-past": "지금보다 뒤의 시간을 골라주세요",
+        "limit-range": "인원은 {{min}}~{{max}}명 사이로 정해주세요",
+        "price-range": "가격은 {{min}}~{{max}}원 사이로 입력해주세요. 무료라면 ‘무료로 열기’를 선택해요.",
+        "submit": "저장하지 못했어요. 잠시 후 다시 시도해 주세요.",
+        "upload": "파일을 올리지 못했어요. 파일을 확인하고 다시 시도해 주세요."
+      },
+      "draft": {
+        "saved": "임시 저장했어요",
+        "restored": "임시 저장한 내용을 불러왔어요",
+        "discard": "새로 쓰기"
+      },
+      "state": {
+        "login-title": "로그인하고 토론방을 만들어 보세요",
+        "login-description": "토론방은 로그인한 회원만 열 수 있어요.",
+        "forbidden-title": "직접 연 토론방만 수정할 수 있어요",
+        "forbidden-description": "토론방을 연 사람만 내용을 고칠 수 있어요.",
+        "to-debate": "토론방으로 돌아가기"
       }
     },
     "create-summary": {

@@ -12,17 +12,12 @@ import {
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useParams } from 'react-router-dom';
-import {
-  Button,
-  buttonStyles,
-  EmptyState,
-  mq,
-  Skeleton,
-} from '@/design-system';
+import { Button, buttonStyles, mq, Skeleton } from '@/design-system';
 import { CommentSection } from '@/features/comment/components/CommentSection';
 import { httpStatus } from '@/shared/api/client';
 import { downloadAttachment } from '@/shared/api/download';
 import type { AttachedFile, Debate } from '@/shared/api/models';
+import { PageState } from '@/shared/components/PageState';
 import { ShareButton } from '@/shared/components/ShareButton';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
@@ -218,57 +213,45 @@ function DetailState({
 
   if (kind === 'login') {
     return (
-      <div className={s.statePage}>
-        <EmptyState
-          titleAs='h1'
-          icon={<LogIn />}
-          title={t('page.debate-detail.state.login-title')}
-          description={t('page.debate-detail.state.login-description')}
-          actions={
-            <>
-              <Link
-                to='/login'
-                className={buttonStyles({ variant: 'primary' })}
-              >
-                {t('component.topnav.login')}
-              </Link>
-              {toList}
-            </>
-          }
-        />
-      </div>
+      <PageState
+        icon={<LogIn />}
+        title={t('page.debate-detail.state.login-title')}
+        description={t('page.debate-detail.state.login-description')}
+        actions={
+          <>
+            <Link to='/login' className={buttonStyles({ variant: 'primary' })}>
+              {t('component.topnav.login')}
+            </Link>
+            {toList}
+          </>
+        }
+      />
     );
   }
 
   if (kind === 'not-found') {
     return (
-      <div className={s.statePage}>
-        <EmptyState
-          titleAs='h1'
-          icon={<SearchX />}
-          title={t('page.debate-detail.state.not-found-title')}
-          description={t('page.debate-detail.state.not-found-description')}
-          actions={toList}
-        />
-      </div>
+      <PageState
+        icon={<SearchX />}
+        title={t('page.debate-detail.state.not-found-title')}
+        description={t('page.debate-detail.state.not-found-description')}
+        actions={toList}
+      />
     );
   }
 
   return (
-    <div className={s.statePage}>
-      <EmptyState
-        titleAs='h1'
-        tone='danger'
-        icon={<MessagesSquare />}
-        title={t('page.debate.item.error')}
-        description={t('page.debate.item.error-description')}
-        actions={
-          <Button variant='outline' onClick={onRetry}>
-            {t('page.debate.item.retry')}
-          </Button>
-        }
-      />
-    </div>
+    <PageState
+      tone='danger'
+      icon={<MessagesSquare />}
+      title={t('page.debate.item.error')}
+      description={t('page.debate.item.error-description')}
+      actions={
+        <Button variant='outline' onClick={onRetry}>
+          {t('page.debate.item.retry')}
+        </Button>
+      }
+    />
   );
 }
 

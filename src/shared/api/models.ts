@@ -38,7 +38,10 @@ export type Page<T> = {
 };
 
 /** 무한 스크롤의 다음 페이지 번호. 마지막 페이지면 undefined예요. */
-export function nextPageParam(last: Page<unknown>): number | undefined {
+export function nextPageParam(last: {
+  page?: number | null;
+  pages?: number | null;
+}): number | undefined {
   const page = last.page ?? 1;
   const pages = last.pages ?? 0;
   return page < pages ? page + 1 : undefined;

@@ -197,15 +197,6 @@ export const rail = style({
   gap: '16px',
 });
 
-export const statePage = style({
-  padding: '24px 20px',
-  borderRadius: vars.radius['3xl'],
-  backgroundColor: vars.color.surface,
-  '@media': {
-    [mq.md]: { padding: '48px 32px' },
-  },
-});
-
 export const skeleton = style({
   display: 'flex',
   flexDirection: 'column',

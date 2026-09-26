@@ -373,6 +373,23 @@
     },
     "dialog": {
       "close": "Close"
+    },
+    "book-picker": {
+      "change": "Change",
+      "results": "Book search results",
+      "empty": "No results",
+      "error": "Couldn't search books",
+      "more": "Show more",
+      "selected": "Selected book"
+    },
+    "attachments": {
+      "label": "Attachments",
+      "add": "Add files",
+      "hint": "PDF, JPG, PNG, GIF · up to {{max}} · {{size}}MB each",
+      "remove": "Remove {{name}}",
+      "too-many": "You can attach up to {{max}} files",
+      "too-large": "Files larger than {{size}}MB can't be uploaded",
+      "unacceptable": "Only PDF, JPG, PNG, and GIF files are allowed"
     }
   },
   "page": {
@@ -517,12 +534,56 @@
         "limit-unit": "people",
         "content-placeholder": "Write about what you want to discuss",
         "price": "Price",
-        "price-placeholder": "Please enter the price"
+        "price-placeholder": "Please enter the price",
+        "title-label": "Title",
+        "category-hint": "Choose categories for the topic · You can pick more than one",
+        "mode": "Format",
+        "mode-online": "Online",
+        "mode-offline": "In person",
+        "date": "Date",
+        "time": "Time",
+        "limit-decrease": "Fewer people",
+        "limit-increase": "More people",
+        "price-unit": "KRW",
+        "free": "Make it free",
+        "content-label": "Description"
       },
       "button": {
         "file-add": "Add Files",
         "temp-save": "Save Draft",
-        "submit": "Create"
+        "submit": "Create",
+        "cancel": "Cancel"
+      },
+      "section": {
+        "basic": "Basics",
+        "meeting": "Meetup",
+        "intro": "About"
+      },
+      "error": {
+        "summary": "Please check what you entered",
+        "title-required": "Please enter a title",
+        "book-required": "Please choose a book to discuss",
+        "category-required": "Please choose at least one category",
+        "link-required": "Please enter the online link",
+        "location-required": "Please enter the meetup place",
+        "date-required": "Please enter the date and time",
+        "date-past": "Please choose a time in the future",
+        "limit-range": "Set between {{min}} and {{max}} people",
+        "price-range": "Enter a price between {{min}} and {{max}} KRW. For a free discussion, choose ‘Make it free’.",
+        "submit": "Couldn't save. Please try again in a moment.",
+        "upload": "Couldn't upload the files. Check them and try again."
+      },
+      "draft": {
+        "saved": "Draft saved",
+        "restored": "Your draft has been restored",
+        "discard": "Start over"
+      },
+      "state": {
+        "login-title": "Log in to create a discussion",
+        "login-description": "Only members who are logged in can create discussions.",
+        "forbidden-title": "You can only edit discussions you created",
+        "forbidden-description": "Only the host can edit this discussion.",
+        "to-debate": "Back to the discussion"
       }
     },
     "create-summary": {

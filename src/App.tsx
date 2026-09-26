@@ -26,14 +26,14 @@ import DebateListPage from './features/debate/pages/DebateListPage';
 import Search from './pages/Search';
 import CircularProgress from '@mui/material/CircularProgress';
 import i18n from './locales/i18n';
-import CreateDebate from './pages/CreateDebate';
+import DebateCreatePage from './features/debate/pages/DebateCreatePage';
 import CreateSummary from './pages/CreateSummary';
 import Settings from './pages/Settings';
 import DebateDetailPage from './features/debate/pages/DebateDetailPage';
 import SummaryDetail from './pages/SummaryDetail';
 import PostDetail from './pages/PostDetail';
 import UpdateSummary from './pages/UpdateSummary';
-import UpdateDebate from './pages/UpdateDebate';
+import DebateEditPage from './features/debate/pages/DebateEditPage';
 import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
 import { CheckoutFail } from './components/Payments/CheckoutFail';
 import IntegratedSearch from './pages/IntegratedSearch';
@@ -141,14 +141,14 @@ function App() {
             ></Route>
 
             <Route path='/debate' element={<DebateListPage />}></Route>
-            <Route path='/debate/create' element={<CreateDebate />}></Route>
+            <Route path='/debate/create' element={<DebateCreatePage />}></Route>
             <Route
               path='/debate/:debate_id'
               element={<DebateDetailPage />}
             ></Route>
             <Route
               path='/debate/:debate_id/update'
-              element={<UpdateDebate />}
+              element={<DebateEditPage />}
             ></Route>
 
             <Route path='/summary' element={<Summary />}></Route>

@@ -13,6 +13,8 @@ import {
   type Debate,
   type Purchase,
 } from '@/shared/api/models';
+import type { components } from '@/shared/api/schema';
+import { uploadFiles } from '@/shared/api/upload';
 
 export type DebateSort = 'latest' | 'popular' | 'from';
 export type DebateSearchBy = 'bt' | 'it';
@@ -242,6 +244,60 @@ export function useDeleteDebate() {
       api.delete('/debate/{debate_id}', { path: { debate_id: id } }),
     onSuccess: (_data, id) => {
       queryClient.removeQueries({ queryKey: debateKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: debateKeys.lists() });
+      void queryClient.invalidateQueries({ queryKey: debateKeys.popular() });
+    },
+  });
+}
+
+/* ---------- 만들기·수정 ---------- */
+
+type DebateRequest = components['schemas']['CreateDebateReq'];
+
+type SaveDebateInput = {
+  /** 새로 고른 파일. 먼저 올리고 요청에 붙여요. */
+  files: File[];
+  toRequest: (uploaded: DebateRequest['files']) => DebateRequest;
+};
+
+/** 파일 업로드 단계에서 실패했는지 구분해요 (안내 문구가 달라요). */
+export class UploadError extends Error {}
+
+async function uploadForDebate(files: File[]) {
+  try {
+    return await uploadFiles(files, 'debate');
+  } catch (error) {
+    throw new UploadError(String(error));
+  }
+}
+
+/** 토론방 만들기. 성공하면 새 토론방 id를 돌려줘요. */
+export function useCreateDebate() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ files, toRequest }: SaveDebateInput) => {
+      const uploaded = await uploadForDebate(files);
+      return api.post('/debate', { body: toRequest(uploaded) });
+    },
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: debateKeys.lists() });
+      void queryClient.invalidateQueries({ queryKey: debateKeys.popular() });
+    },
+  });
+}
+
+export function useUpdateDebate(id: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async ({ files, toRequest }: SaveDebateInput) => {
+      const uploaded = await uploadForDebate(files);
+      await api.put('/debate/{debate_id}', {
+        path: { debate_id: id },
+        body: toRequest(uploaded),
+      });
+    },
+    onSuccess: () => {
+      void queryClient.invalidateQueries({ queryKey: debateKeys.detail(id) });
       void queryClient.invalidateQueries({ queryKey: debateKeys.lists() });
       void queryClient.invalidateQueries({ queryKey: debateKeys.popular() });
     },

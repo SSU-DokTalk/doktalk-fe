@@ -1,6 +1,6 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { Outlet } from 'react-router-dom';
+import { Outlet, useLocation } from 'react-router-dom';
 import ChatbotFloatingButton from '@/components/floating/ChatbotFloatingButton';
 import Footer from '@/components/footers/Footer';
 import BottomTabs from './BottomTabs';
@@ -15,9 +15,13 @@ import * as s from './shell.css';
  * 앱 전체 틀: 상단 내비(데스크톱) / 모바일 상단 바, 본문, 모바일 하단 탭, 챗봇 버튼.
  * 로그인·회원가입·결제 결과 화면은 이 틀 밖에 있어요.
  */
+/** 글쓰기 화면은 아래에 저장 버튼 줄이 붙어서 챗봇 버튼을 숨겨요. */
+const FORM_ROUTE = /\/(create|update)\/?$/;
+
 export function AppShell() {
   const { t } = useTranslation();
   const { isLoggedIn } = useAuth();
+  const { pathname } = useLocation();
   useHtmlLang();
 
   return (
@@ -35,7 +39,7 @@ export function AppShell() {
         <Outlet />
       </div>
       {isLoggedIn && <BottomTabs />}
-      <ChatbotFloatingButton />
+      {!FORM_ROUTE.test(pathname) && <ChatbotFloatingButton />}
     </div>
   );
 }

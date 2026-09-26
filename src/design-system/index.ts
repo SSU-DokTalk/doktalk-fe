@@ -52,6 +52,10 @@ export {
 export { buttonStyles } from './components/Button/Button.css';
 export { default as Card, type CardProps } from './components/Card/Card';
 export {
+  default as Checkbox,
+  type CheckboxProps,
+} from './components/Checkbox/Checkbox';
+export {
   default as Chip,
   ChipGroup,
   type ChipGroupProps,

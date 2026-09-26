@@ -132,6 +132,12 @@ function createFormatters(language: string, t: TFunction) {
 
 export type Formatters = ReturnType<typeof createFormatters>;
 
+/** 240KB · 1.2MB */
+export function formatFileSize(bytes: number) {
+  if (bytes < 1024 * 1024) return `${Math.max(1, Math.round(bytes / 1024))}KB`;
+  return `${(bytes / (1024 * 1024)).toFixed(1).replace(/\.0$/, '')}MB`;
+}
+
 /** 지금 언어에 맞춘 날짜·숫자·가격 표시 */
 export function useFormat(): Formatters {
   const { t, i18n } = useTranslation();
