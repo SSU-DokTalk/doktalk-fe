@@ -17,7 +17,6 @@ export const page = style({
 export const subtitle = style({
   margin: 0,
   ...typeScale.bodySm,
-
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { fontSize: fontSize[15] },

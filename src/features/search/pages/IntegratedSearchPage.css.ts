@@ -43,7 +43,6 @@ export const heading = style({
 
 export const eyebrow = style({
   ...typeScale.label,
-
   color: vars.color.info,
 });
 
@@ -87,7 +86,6 @@ export const sectionTitle = style({
   gap: space[6],
   margin: 0,
   ...typeScale.sectionTitle,
-
   color: vars.color.text,
 });
 
@@ -186,7 +184,6 @@ export const link = style({
 export const cardMeta = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
 });
@@ -194,7 +191,6 @@ export const cardMeta = style({
 export const excerpt = style({
   margin: 0,
   ...typeScale.bodySm,
-
   color: vars.color.textMuted,
   overflowWrap: 'anywhere',
   display: '-webkit-box',

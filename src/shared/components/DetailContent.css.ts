@@ -29,7 +29,6 @@ export const badges = style({
 export const title = style({
   margin: 0,
   ...typeScale.heading,
-
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {

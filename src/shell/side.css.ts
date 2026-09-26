@@ -48,7 +48,6 @@ export const profileName = style({
 export const profileMeta = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 
@@ -80,7 +79,6 @@ export const activityTitle = style({
   margin: 0,
   padding: `0 ${space[12]} ${space[6]}`,
   ...typeScale.captionStrong,
-
   color: vars.color.textTertiary,
 });
 
@@ -136,7 +134,6 @@ export const loginTitle = style({
 export const loginDescription = style({
   margin: `0 0 ${space[8]}`,
   ...typeScale.bodySm,
-
   color: vars.color.textTertiary,
 });
 
@@ -300,7 +297,6 @@ export const drawerSectionTitle = style({
   margin: `0 0 ${space[2]}`,
   padding: 0,
   ...typeScale.captionStrong,
-
   color: vars.color.textSecondary,
 });
 

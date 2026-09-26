@@ -89,14 +89,12 @@ export const count = style({
 export const hint = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.textSecondary,
 });
 
 export const error = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.danger,
 });
 

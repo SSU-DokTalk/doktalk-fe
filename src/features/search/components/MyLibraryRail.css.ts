@@ -20,7 +20,6 @@ export const head = style({
 export const heading = style({
   margin: 0,
   ...typeScale.sectionTitle,
-
   color: vars.color.brand,
 });
 

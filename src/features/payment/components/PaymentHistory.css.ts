@@ -129,7 +129,6 @@ export const title = styleVariants({
 
 export const date = style({
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 

@@ -28,7 +28,6 @@ export const head = style({
 export const heading = style({
   margin: 0,
   ...typeScale.sectionTitle,
-
   color: vars.color.brand,
 });
 
@@ -101,7 +100,6 @@ export const link = style({
 export const preview = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
   display: '-webkit-box',
@@ -116,7 +114,6 @@ export const footer = style({
   gap: space[8],
   margin: `${space[4]} 0 0`,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 

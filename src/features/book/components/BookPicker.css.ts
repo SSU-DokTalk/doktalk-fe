@@ -16,7 +16,6 @@ export const root = style({
 
 export const label = style({
   ...typeScale.label,
-
   color: vars.color.text,
 });
 
@@ -46,7 +45,6 @@ export const bookTitle = style({
 
 export const bookMeta = style({
   ...typeScale.caption,
-
   color: vars.color.textSecondary,
   overflowWrap: 'anywhere',
 });
@@ -96,6 +94,5 @@ export const status = style({
 export const error = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.danger,
 });

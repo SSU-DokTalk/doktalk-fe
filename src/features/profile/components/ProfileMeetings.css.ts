@@ -78,7 +78,6 @@ export const dday = style({
 
 export const title = style({
   ...typeScale.cardTitleSm,
-
   selectors: {
     [`${body}:hover &`]: { color: vars.color.brand },
   },
@@ -89,7 +88,6 @@ export const title = style({
 
 export const meta = style({
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { fontSize: fontSize[14] },

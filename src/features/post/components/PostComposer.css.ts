@@ -39,7 +39,6 @@ export const notice = style({
 export const alert = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.danger,
 });
 

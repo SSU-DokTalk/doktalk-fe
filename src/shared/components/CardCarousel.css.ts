@@ -40,7 +40,6 @@ export const head = style({
 export const heading = style({
   margin: 0,
   ...typeScale.sectionTitleSm,
-
   color: vars.color.text,
   '@media': {
     [mq.md]: { fontSize: fontSize[17] },
@@ -152,7 +151,6 @@ export const link = style({
 export const cardMeta = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
 });

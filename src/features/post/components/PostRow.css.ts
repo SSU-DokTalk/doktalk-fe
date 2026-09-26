@@ -71,7 +71,6 @@ export const excerpt = style({
   WebkitLineClamp: 2,
   margin: 0,
   ...typeScale.body,
-
   color: vars.color.textSecondary,
   whiteSpace: 'pre-line',
 });

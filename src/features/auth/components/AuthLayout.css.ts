@@ -126,7 +126,6 @@ export const title = style({
 export const subtitle = style({
   margin: 0,
   ...typeScale.body,
-
   color: vars.color.textSecondary,
 });
 
@@ -167,7 +166,6 @@ export const divider = style({
   alignItems: 'center',
   gap: space[12],
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   selectors: {
     '&::before, &::after': {
@@ -183,7 +181,6 @@ export const switchText = style({
   margin: 0,
   textAlign: 'center',
   ...typeScale.body,
-
   color: vars.color.textSecondary,
 });
 

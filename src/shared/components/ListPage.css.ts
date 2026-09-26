@@ -59,7 +59,6 @@ export const subtitle = style({
   display: 'none',
   margin: 0,
   ...typeScale.body,
-
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { display: 'block' },

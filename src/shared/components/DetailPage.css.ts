@@ -107,7 +107,6 @@ export const intro = style({
 export const sectionTitle = style({
   margin: 0,
   ...typeScale.sectionTitleSm,
-
   color: vars.color.text,
   '@media': {
     [mq.md]: { fontSize: fontSize[18] },

@@ -46,7 +46,6 @@ export const legend = style({
   padding: 0,
   marginBottom: space[14],
   ...typeScale.sectionTitleSm,
-
   color: vars.color.text,
   '@media': {
     [mq.md]: { marginBottom: space[16], fontSize: fontSize[17] },
@@ -77,21 +76,18 @@ export const group = style({
 
 export const label = style({
   ...typeScale.label,
-
   color: vars.color.text,
 });
 
 export const hint = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 
 export const error = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.danger,
 });
 

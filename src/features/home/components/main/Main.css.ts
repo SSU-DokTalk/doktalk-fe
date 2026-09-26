@@ -67,7 +67,6 @@ export const greeting = style({
 export const title = style({
   margin: 0,
   ...typeScale.heading,
-
   '@media': {
     [mq.md]: { fontSize: fontSize[24] },
   },
@@ -76,7 +75,6 @@ export const title = style({
 export const subtitle = style({
   margin: 0,
   ...typeScale.bodySm,
-
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { fontSize: fontSize[15] },

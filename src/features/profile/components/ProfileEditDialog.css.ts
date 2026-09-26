@@ -62,14 +62,12 @@ export const photoButtons = style({
 export const hint = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 
 export const photoError = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.danger,
 });
 

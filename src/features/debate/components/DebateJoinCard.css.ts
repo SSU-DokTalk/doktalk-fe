@@ -39,7 +39,6 @@ export const inline = style({
 export const label = style({
   margin: 0,
   ...typeScale.captionStrong,
-
   color: vars.color.textTertiary,
 });
 
@@ -70,6 +69,5 @@ export const description = style({
 export const alert = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.danger,
 });

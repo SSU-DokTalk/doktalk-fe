@@ -44,20 +44,17 @@ export const bookTitle = style({
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
   ...typeScale.cardTitleSm,
-
   color: vars.color.text,
 });
 
 export const by = style({
   ...typeScale.caption,
-
   color: vars.color.textSecondary,
   overflowWrap: 'anywhere',
 });
 
 export const bought = style({
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 

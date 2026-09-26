@@ -47,7 +47,6 @@ export const more = style({
 export const heading = style({
   margin: 0,
   ...typeScale.sectionTitle,
-
   color: vars.color.brand,
 });
 
@@ -102,6 +101,5 @@ export const link = style({
 
 export const meta = style({
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });

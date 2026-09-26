@@ -322,7 +322,6 @@ export const sectionTitles = style({
 export const sectionTitle = style({
   margin: 0,
   ...typeScale.heading,
-
   '@media': {
     [mq.md]: { fontSize: fontSize[28], letterSpacing: '-0.8px' },
   },
@@ -331,7 +330,6 @@ export const sectionTitle = style({
 export const sectionDescription = style({
   margin: 0,
   ...typeScale.bodySm,
-
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { fontSize: fontSize[15] },

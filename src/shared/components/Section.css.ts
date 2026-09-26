@@ -39,7 +39,6 @@ export const sectionTitle = style({
   gap: space[6],
   margin: `0 0 ${space[4]}`,
   ...typeScale.sectionTitleSm,
-
   color: vars.color.text,
   '@media': {
     [mq.md]: { margin: `0 0 ${space[6]}`, fontSize: fontSize[17] },

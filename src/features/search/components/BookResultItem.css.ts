@@ -41,7 +41,6 @@ export const text = style({
 export const title = style({
   margin: 0,
   ...typeScale.cardTitle,
-
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {

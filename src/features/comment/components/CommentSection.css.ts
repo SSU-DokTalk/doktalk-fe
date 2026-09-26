@@ -31,7 +31,6 @@ export const section = style({
 export const heading = style({
   margin: 0,
   ...typeScale.sectionTitleSm,
-
   color: vars.color.text,
   '@media': {
     [mq.md]: { fontSize: fontSize[18] },
@@ -52,7 +51,6 @@ export const composerField = style({
 export const alert = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.danger,
 });
 
@@ -120,7 +118,6 @@ export const time = style({
 export const content = style({
   margin: 0,
   ...typeScale.body,
-
   color: vars.color.textBody,
   whiteSpace: 'pre-wrap',
   overflowWrap: 'anywhere',

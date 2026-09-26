@@ -48,7 +48,6 @@ export const description = style({
   margin: 0,
   maxWidth: '320px',
   ...typeScale.bodySm,
-
   color: vars.color.textSecondary,
 });
 

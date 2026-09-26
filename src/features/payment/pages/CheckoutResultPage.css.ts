@@ -66,7 +66,6 @@ export const title = style({
 export const lead = style({
   margin: 0,
   ...typeScale.body,
-
   color: vars.color.textSecondary,
 });
 

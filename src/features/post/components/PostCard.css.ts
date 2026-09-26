@@ -59,7 +59,6 @@ globalStyle(`${author}:hover ${authorName}`, { textDecoration: 'underline' });
 
 export const time = style({
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 

@@ -53,7 +53,6 @@ globalStyle(`${link}:hover ${name}`, {
 
 export const meta = style({
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 

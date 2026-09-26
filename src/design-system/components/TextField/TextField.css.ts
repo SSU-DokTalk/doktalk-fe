@@ -16,7 +16,6 @@ export const label = style({
   gap: space[6],
   fontFamily: vars.font.family,
   ...typeScale.label,
-
   color: vars.color.text,
 });
 
@@ -139,7 +138,6 @@ export const helper = style({
   margin: 0,
   fontFamily: vars.font.family,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 

@@ -17,7 +17,6 @@ export const root = style({
 
 export const label = style({
   ...typeScale.label,
-
   color: vars.color.text,
 });
 
@@ -67,14 +66,12 @@ export const count = style({
 
 export const hint = style({
   ...typeScale.caption,
-
   color: vars.color.textSecondary,
 });
 
 export const error = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.danger,
 });
 

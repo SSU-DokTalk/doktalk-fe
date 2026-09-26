@@ -74,7 +74,6 @@ export const title = style({
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
   ...typeScale.cardTitleSm,
-
   selectors: {
     [`${card}:hover &`]: { color: vars.color.brand },
   },
@@ -89,7 +88,6 @@ export const excerpt = style({
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
   ...typeScale.body,
-
   color: vars.color.textSecondary,
   whiteSpace: 'pre-line',
 });

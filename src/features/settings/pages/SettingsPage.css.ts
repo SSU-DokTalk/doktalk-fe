@@ -50,7 +50,6 @@ export const sectionTitle = style({
 export const description = style({
   margin: `0 0 ${space[14]}`,
   ...typeScale.bodySm,
-
   color: vars.color.textTertiary,
 });
 
@@ -215,7 +214,6 @@ export const manageTitle = style({
 
 export const manageHint = style({
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
 });
 
@@ -233,7 +231,6 @@ export const footer = style({
 export const dialogText = style({
   margin: 0,
   ...typeScale.body,
-
   color: vars.color.textBody,
 });
 

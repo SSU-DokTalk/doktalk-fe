@@ -63,7 +63,6 @@ export const promptTitle = style({
 export const promptDescription = style({
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { fontSize: fontSize[14] },

@@ -37,13 +37,11 @@ export const bookText = style({
 
 export const bookLabel = style({
   ...typeScale.caption,
-
   color: vars.color.textSecondary,
 });
 
 export const bookTitle = style({
   ...typeScale.cardTitle,
-
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {
@@ -65,7 +63,6 @@ export const alert = style({
   flexBasis: '100%',
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.danger,
 });
 
@@ -94,7 +91,6 @@ export const ownerNote = style({
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.infoSubtle,
   ...typeScale.bodySm,
-
   color: vars.color.info,
 });
 
@@ -142,7 +138,6 @@ export const paywallTitle = style({
 export const paywallNote = style({
   margin: 0,
   ...typeScale.bodySm,
-
   color: vars.color.textSecondary,
 });
 
@@ -176,7 +171,6 @@ export const purchaseCard = style({
 export const purchaseLabel = style({
   margin: 0,
   ...typeScale.captionStrong,
-
   color: vars.color.textTertiary,
 });
 

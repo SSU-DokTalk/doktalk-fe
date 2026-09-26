@@ -106,7 +106,6 @@ export const title = style({
   WebkitLineClamp: 2,
   minHeight: '2.8em',
   ...typeScale.cardTitle,
-
   selectors: {
     [`${card}:hover &`]: { color: vars.color.brand },
   },

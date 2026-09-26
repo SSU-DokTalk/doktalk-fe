@@ -107,7 +107,6 @@ export const host = style({
   flex: '0 0 auto',
   minWidth: 0,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { marginTop: space[6] },
@@ -140,7 +139,6 @@ export const category = style({
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
   ...typeScale.captionStrong,
-
   color: vars.color.info,
   '@media': {
     [mq.md]: { maxWidth: 'none' },
@@ -151,7 +149,6 @@ export const title = style({
   gridArea: 'title',
   margin: 0,
   ...typeScale.cardTitleSm,
-
   color: vars.color.text,
   overflowWrap: 'anywhere',
   display: '-webkit-box',
@@ -192,7 +189,6 @@ export const body = style({
   display: 'none',
   margin: 0,
   ...typeScale.body,
-
   color: vars.color.textSecondary,
   overflowWrap: 'anywhere',
   whiteSpace: 'pre-line',
@@ -216,7 +212,6 @@ export const meta = style({
   padding: 0,
   listStyle: 'none',
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: {
@@ -264,7 +259,6 @@ export const stats = style({
   gap: space[10],
   marginTop: space[4],
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: {
@@ -325,7 +319,6 @@ export const metaText = style({
   gridArea: 'meta',
   margin: 0,
   ...typeScale.caption,
-
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
   '@media': {
