@@ -345,6 +345,34 @@
     },
     "user": {
       "unknown": "Unknown user"
+    },
+    "comments": {
+      "heading": "Comments {{count}}",
+      "label": "Write a comment",
+      "placeholder": "Write a comment",
+      "submit": "Post",
+      "reply": "Reply",
+      "reply-label": "Reply to {{name}}",
+      "reply-placeholder": "Write a reply",
+      "cancel": "Cancel",
+      "more": "More comments",
+      "empty": "Be the first to comment",
+      "login": "Log in to leave a comment",
+      "error": "Couldn't load comments",
+      "submit-error": "Couldn't post your comment. Please try again.",
+      "replies": "Replies to {{name}}"
+    },
+    "share": {
+      "share": "Share",
+      "copied": "Link copied",
+      "failed": "Couldn't copy the link"
+    },
+    "follow": {
+      "follow": "Follow",
+      "following": "Following"
+    },
+    "dialog": {
+      "close": "Close"
     }
   },
   "page": {
@@ -524,7 +552,11 @@
         "link": "Online Link",
         "time": "Time",
         "category": "Category",
-        "book": "Selected Book"
+        "book": "Selected Book",
+        "limit": "Capacity",
+        "limit-value": "{{count}} people",
+        "link-locked": "Join to see the link",
+        "label": "Meetup details"
       },
       "modal": {
         "title": "Post Options"
@@ -534,6 +566,44 @@
         "bookmark": "Bookmark",
         "currency": "$",
         "already-joined": "You have already joined this discussion room"
+      },
+      "back": "Back to discussions",
+      "host-label": "Host",
+      "options": "Discussion options",
+      "intro": "About",
+      "files": "Attachments",
+      "download": "Download {{name}}",
+      "like": "Like {{count}}",
+      "comments": "Comments {{count}}",
+      "join": {
+        "label": "Join",
+        "fee": "Fee",
+        "free": "Free",
+        "free-description": "This discussion is free. You can join right away.",
+        "pay": "Pay and join",
+        "join": "Join",
+        "joined": "You're in",
+        "joined-online": "Join with the online link at the meetup time.",
+        "joined-offline": "See you at the meetup place at the meetup time.",
+        "host": "You host this discussion",
+        "host-description": "Edit it from the menu at the top right.",
+        "ended": "This discussion has ended",
+        "ended-description": "The meetup time has passed, so you can no longer join.",
+        "error": "Couldn't join. Please try again in a moment."
+      },
+      "delete-dialog": {
+        "title": "Delete this discussion?",
+        "description": "A deleted discussion can't be restored.",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "error": "Couldn't delete. Please try again in a moment."
+      },
+      "state": {
+        "login-title": "Log in to see this discussion",
+        "login-description": "Discussions are visible to members who are logged in.",
+        "not-found-title": "We couldn't find this discussion",
+        "not-found-description": "It was deleted or the address is wrong.",
+        "to-list": "Back to discussions"
       }
     },
     "update-debate": {

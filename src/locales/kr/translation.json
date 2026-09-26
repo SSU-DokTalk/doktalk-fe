@@ -345,6 +345,34 @@
     },
     "user": {
       "unknown": "알 수 없는 사용자"
+    },
+    "comments": {
+      "heading": "댓글 {{count}}",
+      "label": "댓글 입력",
+      "placeholder": "댓글을 입력해주세요",
+      "submit": "등록",
+      "reply": "답글",
+      "reply-label": "{{name}}님에게 답글 입력",
+      "reply-placeholder": "답글을 입력해주세요",
+      "cancel": "취소",
+      "more": "댓글 더보기",
+      "empty": "첫 댓글을 남겨 보세요",
+      "login": "로그인하고 댓글을 남겨 보세요",
+      "error": "댓글을 불러오지 못했어요",
+      "submit-error": "댓글을 등록하지 못했어요. 다시 시도해 주세요.",
+      "replies": "{{name}}님 댓글의 답글"
+    },
+    "share": {
+      "share": "공유하기",
+      "copied": "링크를 복사했어요",
+      "failed": "링크를 복사하지 못했어요"
+    },
+    "follow": {
+      "follow": "팔로우",
+      "following": "팔로잉"
+    },
+    "dialog": {
+      "close": "닫기"
     }
   },
   "page": {
@@ -524,7 +552,11 @@
         "link": "온라인 링크",
         "time": "시간",
         "category": "카테고리",
-        "book": "지정 도서"
+        "book": "지정 도서",
+        "limit": "인원 제한",
+        "limit-value": "{{count}}명",
+        "link-locked": "참여하면 링크를 볼 수 있어요",
+        "label": "모임 정보"
       },
       "modal": {
         "title": "게시글 옵션"
@@ -534,6 +566,44 @@
         "bookmark": "찜",
         "currency": "원",
         "already-joined": "토론방에 이미 참가하셨습니다"
+      },
+      "back": "독서 토론 목록으로",
+      "host-label": "토론방 개설",
+      "options": "토론방 옵션",
+      "intro": "소개",
+      "files": "첨부파일",
+      "download": "{{name}} 내려받기",
+      "like": "좋아요 {{count}}",
+      "comments": "댓글 {{count}}",
+      "join": {
+        "label": "참여",
+        "fee": "참가비",
+        "free": "무료",
+        "free-description": "무료 토론방이에요. 바로 참여할 수 있어요.",
+        "pay": "결제하고 참여하기",
+        "join": "참여하기",
+        "joined": "참여 중이에요",
+        "joined-online": "모임 시간에 맞춰 온라인 링크로 들어와 주세요.",
+        "joined-offline": "모임 시간에 맞춰 모임 장소에서 만나요.",
+        "host": "내가 연 토론방이에요",
+        "host-description": "토론방 내용은 오른쪽 위 메뉴에서 고칠 수 있어요.",
+        "ended": "끝난 토론방이에요",
+        "ended-description": "모임 시간이 지나서 참여할 수 없어요.",
+        "error": "참여하지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "delete-dialog": {
+        "title": "토론방을 삭제할까요?",
+        "description": "삭제한 토론방은 되돌릴 수 없어요.",
+        "cancel": "취소",
+        "confirm": "삭제",
+        "error": "삭제하지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "state": {
+        "login-title": "로그인하고 토론방을 확인해 보세요",
+        "login-description": "토론방 내용은 로그인한 회원에게 보여요.",
+        "not-found-title": "토론방을 찾을 수 없어요",
+        "not-found-description": "삭제되었거나 주소가 잘못되었어요.",
+        "to-list": "토론방 목록으로"
       }
     },
     "update-debate": {

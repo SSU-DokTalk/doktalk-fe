@@ -40,6 +40,13 @@ export const badgeStyles = recipe({
         backgroundColor: vars.color.brand,
         color: vars.color.textOnBrand,
       },
+      /** 흰 바탕 위 테두리 (온라인·오프라인 같은 형식 정보) */
+      outline: {
+        backgroundColor: vars.color.surface,
+        borderColor: vars.color.border,
+        color: vars.color.text,
+        fontWeight: 600,
+      },
       /** 지난 모임의 역할처럼 강조가 필요 없는 정보 */
       neutral: {
         backgroundColor: vars.color.surfaceSubtle,

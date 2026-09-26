@@ -1,7 +1,7 @@
 import { ChevronLeft, ChevronRight } from 'lucide-react';
 import { useCallback, useEffect, useId, useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import { BookCover, IconButton, mq, Skeleton } from '@/design-system';
 import type { Debate } from '@/shared/api/models';
 import { useFormat } from '@/shared/format';
@@ -19,6 +19,7 @@ function RecommendedDebateCard({
 }) {
   const { t } = useTranslation();
   const format = useFormat();
+  const location = useLocation();
   const meta = [
     debate.held_at && format.meetingDate(debate.held_at),
     placeKindText(debate, t),
@@ -36,7 +37,11 @@ function RecommendedDebateCard({
       />
       <div className={s.cardBody}>
         <h3 className={s.cardTitle}>
-          <Link to={`/debate/${debate.id}`} className={s.link}>
+          <Link
+            to={`/debate/${debate.id}`}
+            state={{ from: location.pathname + location.search }}
+            className={s.link}
+          >
             {debate.title}
           </Link>
         </h3>

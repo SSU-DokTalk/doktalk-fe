@@ -12,6 +12,22 @@ export type User = Schemas['UserSchema'];
 export type Purchase = Schemas['PurchaseSchema'];
 export type AttachedFile = Schemas['FileDto'];
 
+/**
+ * 댓글. 백엔드 댓글 목록 API에 response_model이 없어서 직접 적었어요.
+ * 백엔드에 모델이 생기면 schema.d.ts의 타입으로 바꿔요.
+ */
+export type Comment = {
+  id: number;
+  user_id: number;
+  upper_comment_id?: number | null;
+  content?: string | null;
+  comments_num: number;
+  likes_num: number;
+  created: string;
+  updated: string;
+  user: UserBrief;
+};
+
 /** fastapi-pagination의 Page 응답 */
 export type Page<T> = {
   items: T[];

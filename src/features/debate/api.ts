@@ -2,10 +2,17 @@ import {
   infiniteQueryOptions,
   queryOptions,
   useInfiniteQuery,
+  useMutation,
   useQuery,
+  useQueryClient,
 } from '@tanstack/react-query';
-import { api } from '@/shared/api/client';
-import { nextPageParam } from '@/shared/api/models';
+import { api, httpStatus } from '@/shared/api/client';
+import {
+  nextPageParam,
+  type Comment,
+  type Debate,
+  type Purchase,
+} from '@/shared/api/models';
 
 export type DebateSort = 'latest' | 'popular' | 'from';
 export type DebateSearchBy = 'bt' | 'it';
@@ -31,6 +38,13 @@ export const debateKeys = {
   list: (filters: DebateListFilters) =>
     [...debateKeys.lists(), filters] as const,
   popular: () => [...debateKeys.all, 'popular'] as const,
+  detail: (id: number) => [...debateKeys.all, 'detail', id] as const,
+  comments: (id: number) => [...debateKeys.all, 'comments', id] as const,
+  /** 보는 사람마다 다른 값(좋아요·참여)은 로그인한 사용자 id를 키에 넣어요. */
+  liked: (id: number, viewerId: number) =>
+    [...debateKeys.all, 'liked', id, viewerId] as const,
+  purchase: (id: number, viewerId: number) =>
+    [...debateKeys.all, 'purchase', id, viewerId] as const,
 };
 
 export function debateListQuery(filters: DebateListFilters) {
@@ -68,4 +82,168 @@ export function useDebateList(filters: DebateListFilters) {
 
 export function usePopularDebates() {
   return useQuery(popularDebatesQuery());
+}
+
+/* ---------- 상세 ---------- */
+
+export function debateQuery(id: number) {
+  return queryOptions({
+    queryKey: debateKeys.detail(id),
+    queryFn: ({ signal }) =>
+      api.get('/debate/{debate_id}', { path: { debate_id: id }, signal }),
+  });
+}
+
+export function useDebate(id: number) {
+  return useQuery({ ...debateQuery(id), enabled: id > 0 });
+}
+
+/** 댓글 전체 (토론 댓글은 페이지 없이 한 번에 와요) */
+export function useDebateComments(id: number, enabled: boolean) {
+  return useQuery({
+    queryKey: debateKeys.comments(id),
+    queryFn: async ({ signal }) =>
+      (await api.get('/debate/{debate_id}/comments', {
+        path: { debate_id: id },
+        signal,
+      })) as Comment[],
+    enabled: enabled && id > 0,
+  });
+}
+
+/** 내가 좋아요를 눌렀는지 */
+export function useDebateLiked(id: number, viewerId: number) {
+  return useQuery({
+    queryKey: debateKeys.liked(id, viewerId),
+    queryFn: async ({ signal }) => {
+      const liked = await api.get('/debates/like', {
+        query: { ids: [id] },
+        signal,
+      });
+      return liked.includes(id);
+    },
+    enabled: id > 0 && viewerId > 0,
+  });
+}
+
+/** 내 참여(구매) 기록. 없으면 null */
+export function useDebatePurchase(id: number, viewerId: number) {
+  return useQuery({
+    queryKey: debateKeys.purchase(id, viewerId),
+    queryFn: async ({ signal }): Promise<Purchase | null> => {
+      try {
+        return await api.get('/purchase/{product_type}/{product_id}', {
+          path: { product_type: 'D', product_id: id },
+          signal,
+        });
+      } catch (error) {
+        if (httpStatus(error) === 404) return null;
+        throw error;
+      }
+    },
+    enabled: id > 0 && viewerId > 0,
+  });
+}
+
+/** 좋아요 누르기·취소. 누르는 즉시 화면에 반영하고 실패하면 되돌려요. */
+export function useToggleDebateLike(id: number, viewerId: number) {
+  const queryClient = useQueryClient();
+  const likedKey = debateKeys.liked(id, viewerId);
+  const detailKey = debateKeys.detail(id);
+
+  return useMutation({
+    mutationFn: (like: boolean) =>
+      like
+        ? api.post('/debate/{debate_id}/like', { path: { debate_id: id } })
+        : api.delete('/debate/{debate_id}/like', { path: { debate_id: id } }),
+    onMutate: async (like) => {
+      await queryClient.cancelQueries({ queryKey: likedKey });
+      const previousLiked = queryClient.getQueryData<boolean>(likedKey);
+      const previousDebate = queryClient.getQueryData<Debate>(detailKey);
+      queryClient.setQueryData(likedKey, like);
+      queryClient.setQueryData<Debate>(detailKey, (debate) =>
+        debate
+          ? {
+              ...debate,
+              likes_num: Math.max(0, debate.likes_num + (like ? 1 : -1)),
+            }
+          : debate
+      );
+      return { previousLiked, previousDebate };
+    },
+    onError: (_error, _like, context) => {
+      queryClient.setQueryData(likedKey, context?.previousLiked);
+      queryClient.setQueryData(detailKey, context?.previousDebate);
+    },
+    onSettled: () => {
+      // 목록의 좋아요 수도 맞춰요. 보고 있지 않은 목록은 다음에 열 때 다시 불러와요.
+      void queryClient.invalidateQueries({ queryKey: debateKeys.lists() });
+      void queryClient.invalidateQueries({ queryKey: debateKeys.popular() });
+    },
+  });
+}
+
+/**
+ * 무료 토론방 참여. 결제 없이 참여 기록만 만들어요.
+ * 유료는 결제를 마친 뒤 /checkout/success에서 기록을 만들어요.
+ */
+export function useJoinFreeDebate(debate: Debate, viewerId: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: async () => {
+      try {
+        await api.post('/purchase', {
+          body: {
+            product_type: 'D',
+            product_id: debate.id,
+            content: debate.title,
+            price: 0,
+            quantity: 1,
+          },
+        });
+      } catch (error) {
+        // 이미 참여한 경우예요. 참여 상태를 다시 불러오면 돼요.
+        if (httpStatus(error) !== 409) throw error;
+      }
+    },
+    onSuccess: () =>
+      queryClient.invalidateQueries({
+        queryKey: debateKeys.purchase(debate.id, viewerId),
+      }),
+  });
+}
+
+/** 댓글·답글 쓰기 */
+export function useCreateDebateComment(id: number) {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (input: { content: string; upperCommentId?: number }) =>
+      api.post('/debate/{debate_id}/comment', {
+        path: { debate_id: id },
+        body: {
+          content: input.content,
+          upper_comment_id: input.upperCommentId ?? null,
+        },
+      }),
+    onSuccess: () => {
+      queryClient.setQueryData<Debate>(debateKeys.detail(id), (debate) =>
+        debate ? { ...debate, comments_num: debate.comments_num + 1 } : debate
+      );
+      void queryClient.invalidateQueries({ queryKey: debateKeys.comments(id) });
+      void queryClient.invalidateQueries({ queryKey: debateKeys.lists() });
+    },
+  });
+}
+
+export function useDeleteDebate() {
+  const queryClient = useQueryClient();
+  return useMutation({
+    mutationFn: (id: number) =>
+      api.delete('/debate/{debate_id}', { path: { debate_id: id } }),
+    onSuccess: (_data, id) => {
+      queryClient.removeQueries({ queryKey: debateKeys.detail(id) });
+      void queryClient.invalidateQueries({ queryKey: debateKeys.lists() });
+      void queryClient.invalidateQueries({ queryKey: debateKeys.popular() });
+    },
+  });
 }

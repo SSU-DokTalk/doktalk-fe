@@ -11,7 +11,7 @@ export type EmptyStateProps = Omit<HTMLAttributes<HTMLDivElement>, 'title'> & {
   /** 다음 행동 버튼 */
   actions?: ReactNode;
   /** 제목 태그. 페이지 구조에 맞게 골라요. */
-  titleAs?: 'h2' | 'h3' | 'p';
+  titleAs?: 'h1' | 'h2' | 'h3' | 'p';
 };
 
 /** 목록이 비었거나 불러오지 못했을 때 이유와 다음 행동을 알려줘요. */

@@ -29,7 +29,7 @@ import i18n from './locales/i18n';
 import CreateDebate from './pages/CreateDebate';
 import CreateSummary from './pages/CreateSummary';
 import Settings from './pages/Settings';
-import DebateDetail from './pages/DebateDetail';
+import DebateDetailPage from './features/debate/pages/DebateDetailPage';
 import SummaryDetail from './pages/SummaryDetail';
 import PostDetail from './pages/PostDetail';
 import UpdateSummary from './pages/UpdateSummary';
@@ -142,7 +142,10 @@ function App() {
 
             <Route path='/debate' element={<DebateListPage />}></Route>
             <Route path='/debate/create' element={<CreateDebate />}></Route>
-            <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>
+            <Route
+              path='/debate/:debate_id'
+              element={<DebateDetailPage />}
+            ></Route>
             <Route
               path='/debate/:debate_id/update'
               element={<UpdateDebate />}

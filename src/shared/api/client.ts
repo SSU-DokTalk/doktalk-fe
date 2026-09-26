@@ -1,4 +1,4 @@
-import axios from 'axios';
+import axios, { isAxiosError } from 'axios';
 import type { paths } from './schema';
 
 type Method = 'get' | 'post' | 'put' | 'patch' | 'delete';
@@ -95,3 +95,8 @@ export const api = {
     options?: RequestOptions<Operation<P, 'delete'>>
   ) => request('delete', path, options),
 };
+
+/** 요청 실패의 HTTP 상태 코드 (네트워크 오류면 undefined) */
+export function httpStatus(error: unknown): number | undefined {
+  return isAxiosError(error) ? error.response?.status : undefined;
+}

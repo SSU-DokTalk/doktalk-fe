@@ -1,6 +1,6 @@
 import { Heart, MessageCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
+import { Link, useLocation } from 'react-router-dom';
 import {
   Avatar,
   Badge,
@@ -23,6 +23,7 @@ type DebateListItemProps = {
 export function DebateListItem({ debate, coverWidth }: DebateListItemProps) {
   const { t } = useTranslation();
   const format = useFormat();
+  const location = useLocation();
 
   const hostName = debate.user.name || t('component.user.unknown');
   const category = categoryText(debate.category, t);
@@ -42,7 +43,11 @@ export function DebateListItem({ debate, coverWidth }: DebateListItemProps) {
   return (
     <article className={s.item}>
       <h3 className={s.title}>
-        <Link to={`/debate/${debate.id}`} className={s.link}>
+        <Link
+          to={`/debate/${debate.id}`}
+          state={{ from: location.pathname + location.search }}
+          className={s.link}
+        >
           {debate.title}
         </Link>
       </h3>
