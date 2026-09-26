@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Eye, EyeOff, Search, X } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { IconButton, TextField, Textarea } from '@/design-system';
+import { IconButton, TextField, Textarea, vars } from '@/design-system';
 
 const meta = {
   title: 'Components/TextField',
@@ -48,7 +48,9 @@ export const States: Story = {
       <TextField
         label='닉네임'
         labelSuffix={
-          <span style={{ fontSize: 12, fontWeight: 700, color: '#000080' }}>
+          <span
+            style={{ fontSize: 12, fontWeight: 700, color: vars.color.brand }}
+          >
             필수
           </span>
         }

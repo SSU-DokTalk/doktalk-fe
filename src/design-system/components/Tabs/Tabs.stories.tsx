@@ -1,7 +1,7 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Card, Tabs, Text } from '@/design-system';
+import { Card, Tabs, Text, vars } from '@/design-system';
 
 const meta = {
   title: 'Components/Tabs',
@@ -47,7 +47,7 @@ export const MyPageMobile: Story = {
     const { t } = useTranslation();
     const [tab, setTab] = useState<string>('debate');
     return (
-      <div style={{ background: '#fff' }}>
+      <div style={{ background: vars.color.surface }}>
         <Tabs.Root value={tab} onValueChange={(value) => setTab(String(value))}>
           <Tabs.List aria-label='마이페이지 메뉴' scroll divider>
             {MY_TABS.map((key) => (
@@ -69,7 +69,7 @@ export const Filled: Story = {
     const { t } = useTranslation();
     const [tab, setTab] = useState<string>('library');
     return (
-      <div style={{ background: '#fff' }}>
+      <div style={{ background: vars.color.surface }}>
         <Tabs.Root value={tab} onValueChange={(value) => setTab(String(value))}>
           <Tabs.List aria-label='프로필 메뉴' fill divider>
             <Tabs.Tab value='post'>

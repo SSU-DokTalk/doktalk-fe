@@ -49,7 +49,7 @@ export const more = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  backgroundColor: 'rgba(17, 24, 39, 0.55)',
+  backgroundColor: vars.color.scrim,
   fontSize: fontSize[17],
   fontWeight: fontWeight.bold,
   color: vars.color.textOnBrand,

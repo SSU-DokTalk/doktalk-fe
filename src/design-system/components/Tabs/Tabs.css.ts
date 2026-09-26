@@ -98,7 +98,7 @@ export const tab = recipe({
         selectors: {
           '&[data-active]': {
             backgroundColor: vars.color.surface,
-            boxShadow: '0 1px 3px rgba(17, 24, 39, 0.1)',
+            boxShadow: vars.shadow.xs,
           },
           '&:focus-visible': { outlineOffset: '1px' },
         },

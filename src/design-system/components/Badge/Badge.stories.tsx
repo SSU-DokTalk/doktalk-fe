@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { Check, Video } from 'lucide-react';
-import { Badge } from '@/design-system';
+import { Badge, vars } from '@/design-system';
 
 const meta = {
   title: 'Components/Badge',
@@ -47,7 +47,13 @@ export const Tones: Story = {
       <Badge tone='info'>참여</Badge>
       <Badge tone='neutral'>지난 모임</Badge>
       <Badge tone='danger'>결제 취소</Badge>
-      <span style={{ padding: 12, background: '#E9E9E9', borderRadius: 12 }}>
+      <span
+        style={{
+          padding: 12,
+          background: vars.color.coverStageBottom,
+          borderRadius: 12,
+        }}
+      >
         <Badge tone='overlay' shape='pill' size='md' icon={<Video />}>
           온라인
         </Badge>

@@ -5,6 +5,7 @@ import axios, { type AxiosAdapter } from 'axios';
 import { useEffect, useMemo, useState } from 'react';
 import { Provider } from 'react-redux';
 import { MemoryRouter } from 'react-router-dom';
+import { vars } from '@/design-system';
 import userReducer from '@/stores/user';
 import { ChatbotLauncher } from './ChatbotLauncher';
 
@@ -58,7 +59,7 @@ function Preview({ reply }: { reply: Reply }) {
     <Provider store={store}>
       <QueryClientProvider client={client}>
         <MemoryRouter>
-          <div style={{ minHeight: '100vh', background: '#F3F4F7' }} />
+          <div style={{ minHeight: '100vh', background: vars.color.canvas }} />
           <ChatbotLauncher />
         </MemoryRouter>
       </QueryClientProvider>

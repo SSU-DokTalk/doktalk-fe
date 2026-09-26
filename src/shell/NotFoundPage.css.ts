@@ -32,8 +32,7 @@ const book = style({
   bottom: 0,
   boxSizing: 'border-box',
   borderRadius: '3px 6px 6px 3px',
-  boxShadow:
-    'inset 4px 0 0 rgba(0, 0, 0, 0.12), 0 10px 24px rgba(0, 0, 0, 0.16)',
+  boxShadow: vars.shadow.bookLarge,
 });
 
 export const backBook = style([

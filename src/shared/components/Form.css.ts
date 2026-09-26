@@ -205,7 +205,7 @@ export const actions = style({
   padding: `${space[12]} ${space[16]}`,
   borderTop: `1px solid ${vars.color.border}`,
   backgroundColor: vars.color.surface,
-  boxShadow: '0 -6px 16px rgba(17, 24, 39, 0.05)',
+  boxShadow: vars.shadow.bottomBar,
   '@media': {
     [mq.md]: {
       position: 'static',

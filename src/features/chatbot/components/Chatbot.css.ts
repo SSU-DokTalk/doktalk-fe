@@ -92,7 +92,7 @@ export const headerIcon = style({
   width: '40px',
   height: '40px',
   borderRadius: vars.radius.pill,
-  backgroundColor: 'rgba(255, 255, 255, 0.16)',
+  backgroundColor: vars.color.onBrandSubtle,
 });
 
 export const headerText = style({
@@ -112,8 +112,7 @@ export const title = style({
 export const subtitle = style({
   fontSize: fontSize[13],
   lineHeight: 1.4,
-  // 남색 위 옅은 글자 (대비 7:1 이상)
-  color: 'rgba(255, 255, 255, 0.84)',
+  color: vars.color.textOnBrandMuted,
 });
 
 export const close = style({
@@ -121,10 +120,10 @@ export const close = style({
   selectors: {
     // 기본 ghost 버튼의 hover(밝은 회색)보다 우선하도록 같은 선택자를 써요.
     '&:hover:not(:disabled):not([aria-disabled="true"])': {
-      backgroundColor: 'rgba(255, 255, 255, 0.12)',
+      backgroundColor: vars.color.onBrandHover,
     },
     '&:active:not(:disabled):not([aria-disabled="true"])': {
-      backgroundColor: 'rgba(255, 255, 255, 0.2)',
+      backgroundColor: vars.color.onBrandActive,
     },
     '&:focus-visible': {
       outline: `2px solid ${vars.color.textOnBrand}`,

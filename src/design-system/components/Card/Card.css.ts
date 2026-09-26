@@ -26,7 +26,7 @@ export const card = recipe({
       none: { borderRadius: 0 },
     },
     bordered: {
-      true: { border: '1px solid #ECEEF2' },
+      true: { border: `1px solid ${vars.color.borderSubtle}` },
     },
     elevated: {
       true: { boxShadow: vars.shadow.md },

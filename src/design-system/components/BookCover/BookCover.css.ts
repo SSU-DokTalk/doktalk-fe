@@ -10,9 +10,9 @@ export const cover = style({
   overflow: 'hidden',
   // 왼쪽이 책등처럼 보이도록 모서리를 다르게 둬요.
   borderRadius: '2px 5px 5px 2px',
-  outline: '1px solid rgba(0, 0, 0, 0.06)',
+  outline: `1px solid ${vars.color.coverEdge}`,
   outlineOffset: '-1px',
-  boxShadow: '0 6px 14px rgba(0, 0, 0, 0.16)',
+  boxShadow: vars.shadow.book,
   fontFamily: vars.font.family,
   selectors: {
     // 책등 그림자. 사진 위에도 보이게 가장 위에 겹쳐요.
@@ -20,7 +20,7 @@ export const cover = style({
       content: '""',
       position: 'absolute',
       inset: 0,
-      boxShadow: 'inset 3px 0 0 rgba(0, 0, 0, 0.12)',
+      boxShadow: vars.shadow.bookSpine,
       pointerEvents: 'none',
     },
   },
@@ -69,7 +69,7 @@ export const stage = style({
   alignItems: 'center',
   justifyContent: 'center',
   borderRadius: vars.radius.lg,
-  background: 'linear-gradient(180deg, #F5F4F3 0%, #E9E9E9 100%)',
+  background: `linear-gradient(180deg, ${vars.color.coverStageTop} 0%, ${vars.color.coverStageBottom} 100%)`,
 });
 
 /**

@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
+import { vars } from '@/design-system';
 import type { Debate } from '@/shared/api/models';
 import { DebateListItem, DebateListItemSkeleton } from './DebateListItem';
 import { COVER_WIDTH } from '@/shared/components/FeedItem.css';
@@ -68,7 +69,13 @@ type Args = { variant: keyof typeof debates; mobile: boolean };
 function Preview({ variant, mobile }: Args) {
   return (
     <MemoryRouter>
-      <div style={{ maxWidth: 720, background: '#fff', borderRadius: 20 }}>
+      <div
+        style={{
+          maxWidth: 720,
+          background: vars.color.surface,
+          borderRadius: 20,
+        }}
+      >
         <DebateListItem
           debate={debates[variant]}
           coverWidth={mobile ? COVER_WIDTH.mobile : COVER_WIDTH.desktop}
@@ -114,7 +121,7 @@ export const Loading: Story = {
     <div
       role='status'
       aria-label='로딩 중...'
-      style={{ maxWidth: 720, background: '#fff' }}
+      style={{ maxWidth: 720, background: vars.color.surface }}
     >
       <DebateListItemSkeleton
         coverWidth={mobile ? COVER_WIDTH.mobile : COVER_WIDTH.desktop}

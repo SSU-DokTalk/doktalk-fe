@@ -60,7 +60,7 @@ export const badgeStyles = recipe({
       },
       /** 표지·사진 위 */
       overlay: {
-        backgroundColor: 'rgba(255, 255, 255, 0.94)',
+        backgroundColor: vars.color.surfaceTranslucent,
         color: vars.color.text,
         fontWeight: fontWeight.semibold,
       },

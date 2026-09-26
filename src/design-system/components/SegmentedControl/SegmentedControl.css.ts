@@ -18,7 +18,7 @@ export const root = recipe({
     /** 흰 카드 위에서는 surface, 회색 페이지 위에서는 canvas */
     on: {
       surface: { backgroundColor: vars.color.surfaceSubtle },
-      canvas: { backgroundColor: '#E9EAF0' },
+      canvas: { backgroundColor: vars.color.canvasInset },
     },
     fullWidth: {
       true: { display: 'flex', width: '100%' },
@@ -57,7 +57,7 @@ export const item = recipe({
         backgroundColor: vars.color.surface,
         color: vars.color.brand,
         fontWeight: fontWeight.semibold,
-        boxShadow: '0 1px 3px rgba(17, 24, 39, 0.1)',
+        boxShadow: vars.shadow.xs,
       },
       '&:focus-visible': {
         outline: `2px solid ${vars.color.brand}`,

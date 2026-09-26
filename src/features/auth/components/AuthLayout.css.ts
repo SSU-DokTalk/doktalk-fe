@@ -78,7 +78,7 @@ export const card = style({
       padding: space[40],
       borderRadius: vars.radius['3xl'],
       backgroundColor: vars.color.surface,
-      boxShadow: '0 12px 40px rgba(17, 24, 39, 0.08)',
+      boxShadow: vars.shadow.panel,
     },
   },
 });

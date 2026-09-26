@@ -123,7 +123,7 @@ export const addBox = style({
   aspectRatio: '1 / 1.45',
   border: `1.5px dashed ${vars.color.brandBorder}`,
   borderRadius: vars.radius.xs,
-  backgroundColor: '#F8F9FE',
+  backgroundColor: vars.color.brandFaint,
   fontSize: fontSize[14],
   fontWeight: fontWeight.bold,
   selectors: {

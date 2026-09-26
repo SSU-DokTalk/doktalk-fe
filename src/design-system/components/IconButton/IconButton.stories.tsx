@@ -8,7 +8,7 @@ import {
   Settings,
   Trash2,
 } from 'lucide-react';
-import { IconButton } from '@/design-system';
+import { BookCover, IconButton } from '@/design-system';
 
 const meta = {
   title: 'Components/IconButton',
@@ -65,15 +65,7 @@ export const Variants: Story = {
       <IconButton aria-label='메시지 보내기' variant='solid'>
         <ArrowUp />
       </IconButton>
-      <div
-        style={{
-          position: 'relative',
-          width: 96,
-          height: 140,
-          borderRadius: 4,
-          background: '#F2C94C',
-        }}
-      >
+      <BookCover title='넛지' author='리처드 탈러' width={96}>
         <IconButton
           aria-label='서재에서 삭제: 넛지'
           variant='overlay'
@@ -82,7 +74,7 @@ export const Variants: Story = {
         >
           <Trash2 />
         </IconButton>
-      </div>
+      </BookCover>
       <IconButton aria-label='AI 챗봇 열기' variant='solid' size='xl' elevated>
         <MessageCircleMore />
       </IconButton>

@@ -75,9 +75,9 @@ export const iconButtonStyles = recipe({
       /** 이미지 위에 올리는 흰 버튼 (표지 위 삭제) */
       overlay: [
         {
-          backgroundColor: 'rgba(255, 255, 255, 0.94)',
+          backgroundColor: vars.color.surfaceTranslucent,
           color: vars.color.textSecondary,
-          boxShadow: '0 2px 8px rgba(17, 24, 39, 0.18)',
+          boxShadow: vars.shadow.overlay,
         },
         states(vars.color.surface, vars.color.surfaceSubtle),
       ],

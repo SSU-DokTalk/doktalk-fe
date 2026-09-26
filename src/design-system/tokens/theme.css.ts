@@ -21,6 +21,13 @@ export const vars = createGlobalThemeContract(
       surface: null,
       /** 카드 안의 회색 영역 */
       surfaceSubtle: null,
+      /** 회색 페이지 위에 파인 영역 (SegmentedControl 트랙) */
+      canvasInset: null,
+      /** 사진·표지 위에 올리는 흰 바탕 (배지·버튼) */
+      surfaceTranslucent: null,
+      /** 그라디언트 위 반투명 판 (장식) */
+      surfaceGlass: null,
+      surfaceGlassBorder: null,
 
       /** 주요 버튼·활성 상태 (Navy) */
       brand: null,
@@ -32,6 +39,8 @@ export const vars = createGlobalThemeContract(
       brandMuted: null,
       /** 연한 강조 테두리 */
       brandBorder: null,
+      /** 가장 옅은 남색 배경 (서재의 책 담기 칸) */
+      brandFaint: null,
 
       /** 카테고리·보조 강조 텍스트 (Steel Text) */
       info: null,
@@ -55,6 +64,8 @@ export const vars = createGlobalThemeContract(
       /** 메타 정보·캡션 */
       textTertiary: null,
       textOnBrand: null,
+      /** 남색 위 보조 글자 (대비 7:1 이상) */
+      textOnBrandMuted: null,
       textDisabled: null,
 
       /** 구분선·카드 테두리 */
@@ -69,9 +80,32 @@ export const vars = createGlobalThemeContract(
       /** 토스트·푸터 배경 */
       inverse: null,
       inverseText: null,
+      /** 어두운 푸터의 보조 글자 */
+      inverseTextMuted: null,
+      /** 어두운 푸터의 옅은 글자 (저작권 줄) */
+      inverseTextSubtle: null,
+      /** 어두운 푸터의 구분선 */
+      inverseBorder: null,
+
+      /** 남색 위 옅은 흰 배경 (챗봇 머리 아이콘) */
+      onBrandSubtle: null,
+      /** 남색 위 버튼 hover·누름 */
+      onBrandHover: null,
+      onBrandActive: null,
+      /** 남색 위 스피너 트랙 */
+      onBrandTrack: null,
+
       /** 모달·시트 뒤 배경 */
       overlay: null,
+      /** 사진 위에 글자를 올릴 때 덮는 어두운 막 (+3) */
+      scrim: null,
       skeleton: null,
+
+      /** 표지 가장자리 선 */
+      coverEdge: null,
+      /** 표지 뒤 회색 판 (위 → 아래 그라디언트) */
+      coverStageTop: null,
+      coverStageBottom: null,
     },
     font: {
       family: null,
@@ -89,6 +123,8 @@ export const vars = createGlobalThemeContract(
       pill: null,
     },
     shadow: {
+      /** 탭·세그먼트에서 고른 알약 */
+      xs: null,
       sm: null,
       md: null,
       lg: null,
@@ -96,6 +132,17 @@ export const vars = createGlobalThemeContract(
       dialog: null,
       fab: null,
       focus: null,
+      /** 사진 위에 올린 버튼 */
+      overlay: null,
+      /** 화면 아래 붙은 버튼 줄 (모바일 작성 화면) */
+      bottomBar: null,
+      /** 회색 화면 가운데 떠 있는 판 (로그인·회원가입) */
+      panel: null,
+      /** 책 표지와 왼쪽 책등 */
+      book: null,
+      bookSpine: null,
+      /** 큰 책 그림 (404) */
+      bookLarge: null,
     },
   },
   (_value, path) => `dt-${path.map(toKebab).join('-')}`
@@ -106,6 +153,10 @@ createGlobalTheme(':root', vars, {
     canvas: '#F3F4F7',
     surface: '#FFFFFF',
     surfaceSubtle: '#F3F4F7',
+    canvasInset: '#E9EAF0',
+    surfaceTranslucent: 'rgba(255, 255, 255, 0.94)',
+    surfaceGlass: 'rgba(255, 255, 255, 0.6)',
+    surfaceGlassBorder: 'rgba(255, 255, 255, 0.9)',
 
     brand: '#000080',
     brandHover: '#1C1CA8',
@@ -113,6 +164,7 @@ createGlobalTheme(':root', vars, {
     brandSubtle: '#EEF0FB',
     brandMuted: '#E0E3F7',
     brandBorder: '#B9BFE8',
+    brandFaint: '#F8F9FE',
 
     info: '#2B6C8C',
     infoIcon: '#539AB9',
@@ -128,6 +180,7 @@ createGlobalTheme(':root', vars, {
     textSecondary: '#4B5563',
     textTertiary: '#666565',
     textOnBrand: '#FFFFFF',
+    textOnBrandMuted: 'rgba(255, 255, 255, 0.84)',
     textDisabled: '#666565',
 
     border: '#E5E7EB',
@@ -137,8 +190,22 @@ createGlobalTheme(':root', vars, {
     disabled: '#E5E7EB',
     inverse: '#1F2937',
     inverseText: '#FFFFFF',
+    inverseTextMuted: 'rgba(255, 255, 255, 0.8)',
+    inverseTextSubtle: 'rgba(255, 255, 255, 0.64)',
+    inverseBorder: 'rgba(255, 255, 255, 0.14)',
+
+    onBrandSubtle: 'rgba(255, 255, 255, 0.16)',
+    onBrandHover: 'rgba(255, 255, 255, 0.12)',
+    onBrandActive: 'rgba(255, 255, 255, 0.2)',
+    onBrandTrack: 'rgba(255, 255, 255, 0.35)',
+
     overlay: 'rgba(17, 24, 39, 0.48)',
+    scrim: 'rgba(17, 24, 39, 0.55)',
     skeleton: '#EEF0F3',
+
+    coverEdge: 'rgba(0, 0, 0, 0.06)',
+    coverStageTop: '#F5F4F3',
+    coverStageBottom: '#E9E9E9',
   },
   font: {
     family:
@@ -156,6 +223,7 @@ createGlobalTheme(':root', vars, {
     pill: '9999px',
   },
   shadow: {
+    xs: '0 1px 3px rgba(17, 24, 39, 0.1)',
     sm: '0 1px 2px rgba(17, 24, 39, 0.06)',
     md: '0 1px 2px rgba(17, 24, 39, 0.06), 0 6px 16px rgba(17, 24, 39, 0.08)',
     lg: '0 2px 6px rgba(17, 24, 39, 0.06), 0 24px 48px rgba(0, 0, 128, 0.12)',
@@ -163,5 +231,12 @@ createGlobalTheme(':root', vars, {
     dialog: '0 24px 64px rgba(0, 0, 0, 0.24)',
     fab: '0 10px 24px rgba(0, 0, 128, 0.3)',
     focus: '0 0 0 4px rgba(0, 0, 128, 0.1)',
+    overlay: '0 2px 8px rgba(17, 24, 39, 0.18)',
+    bottomBar: '0 -6px 16px rgba(17, 24, 39, 0.05)',
+    panel: '0 12px 40px rgba(17, 24, 39, 0.08)',
+    book: '0 6px 14px rgba(0, 0, 0, 0.16)',
+    bookSpine: 'inset 3px 0 0 rgba(0, 0, 0, 0.12)',
+    bookLarge:
+      'inset 4px 0 0 rgba(0, 0, 0, 0.12), 0 10px 24px rgba(0, 0, 0, 0.16)',
   },
 });

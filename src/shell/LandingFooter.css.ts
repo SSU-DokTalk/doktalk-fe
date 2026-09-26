@@ -2,9 +2,9 @@ import { style } from '@vanilla-extract/css';
 import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 /** 어두운 바탕 위 보조 글자 (대비 7:1 이상) */
-const soft = 'rgba(255, 255, 255, 0.8)';
+const soft = vars.color.inverseTextMuted;
 /** 어두운 바탕 위 옅은 글자 (대비 4.5:1 이상) */
-const faint = 'rgba(255, 255, 255, 0.64)';
+const faint = vars.color.inverseTextSubtle;
 
 export const footer = style({
   backgroundColor: vars.color.inverse,
@@ -118,7 +118,7 @@ export const bottom = style({
   justifyContent: 'space-between',
   gap: `${space[8]} ${space[16]}`,
   paddingTop: space[20],
-  borderTop: '1px solid rgba(255, 255, 255, 0.14)',
+  borderTop: `1px solid ${vars.color.inverseBorder}`,
   fontSize: fontSize[13],
   color: faint,
 });

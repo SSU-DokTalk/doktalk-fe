@@ -33,7 +33,7 @@ export const spinner = recipe({
         borderTopColor: vars.color.brand,
       },
       onBrand: {
-        borderColor: 'rgba(255, 255, 255, 0.35)',
+        borderColor: vars.color.onBrandTrack,
         borderTopColor: vars.color.textOnBrand,
       },
       current: {
