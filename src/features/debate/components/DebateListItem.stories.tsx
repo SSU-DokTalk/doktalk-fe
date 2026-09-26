@@ -2,7 +2,7 @@ import type { Meta, StoryObj } from '@storybook/react-vite';
 import { MemoryRouter } from 'react-router-dom';
 import type { Debate } from '@/shared/api/models';
 import { DebateListItem, DebateListItemSkeleton } from './DebateListItem';
-import { COVER_WIDTH } from './DebateListItem.css';
+import { COVER_WIDTH } from '@/shared/components/FeedItem.css';
 
 const hoursAgo = (hours: number) =>
   new Date(Date.now() - hours * 3_600_000).toISOString().replace('Z', '');

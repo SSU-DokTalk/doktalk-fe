@@ -10,7 +10,7 @@ import { useAuth } from '@/shell/hooks';
 import { UploadError, useDebate, useUpdateDebate } from '../api';
 import { DebateForm } from '../components/DebateForm';
 import { debateToForm, formToRequest, type DebateFormValues } from '../form';
-import * as s from './DebateFormPage.css';
+import * as s from '@/shared/components/FormPage.css';
 
 /** 토론방 수정 (/debate/:debate_id/update). 개설자만 들어올 수 있어요. */
 function DebateEditPage() {

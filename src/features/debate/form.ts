@@ -1,6 +1,7 @@
 import type { PickedBook } from '@/features/book/components/BookPicker';
 import type { components } from '@/shared/api/schema';
 import type { AttachedFile, Debate } from '@/shared/api/models';
+import { createDraftStore } from '@/shared/draft';
 import { parseServerDate } from '@/shared/format';
 
 export const LIMIT_RANGE = { min: 2, max: 99 } as const;
@@ -183,35 +184,21 @@ export function formToRequest(
 
 /* ---------- 임시 저장 (이 브라우저에만) ---------- */
 
-const DRAFT_KEY = 'doktalk:debate-draft:v1';
+// 첨부 파일은 저장하지 않아요 (새 파일은 브라우저를 닫으면 사라져요).
+const draftStore = createDraftStore<DebateFormValues>(
+  'doktalk:debate-draft:v1',
+  EMPTY_DEBATE_FORM
+);
 
 export function loadDebateDraft(): DebateFormValues | null {
-  try {
-    const raw = window.localStorage.getItem(DRAFT_KEY);
-    if (!raw) return null;
-    return { ...EMPTY_DEBATE_FORM, ...JSON.parse(raw), existingFiles: [] };
-  } catch {
-    return null;
-  }
+  const draft = draftStore.load();
+  return draft ? { ...draft, existingFiles: [] } : null;
 }
 
 export function saveDebateDraft(values: DebateFormValues) {
-  try {
-    // 첨부 파일은 저장하지 않아요 (새 파일은 브라우저를 닫으면 사라져요).
-    window.localStorage.setItem(
-      DRAFT_KEY,
-      JSON.stringify({ ...values, existingFiles: undefined })
-    );
-    return true;
-  } catch {
-    return false;
-  }
+  return draftStore.save({ ...values, existingFiles: [] });
 }
 
 export function clearDebateDraft() {
-  try {
-    window.localStorage.removeItem(DRAFT_KEY);
-  } catch {
-    // 저장소를 쓸 수 없는 환경이면 지울 것도 없어요.
-  }
+  draftStore.clear();
 }

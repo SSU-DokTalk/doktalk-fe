@@ -10,8 +10,35 @@ export const section = style({
   backgroundColor: vars.color.surface,
 });
 
+export const head = style({
+  display: 'flex',
+  alignItems: 'center',
+  justifyContent: 'space-between',
+  gap: '8px',
+  marginBottom: '4px',
+});
+
+export const more = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  minHeight: '32px',
+  padding: '0 4px',
+  borderRadius: vars.radius.xs,
+  fontSize: fontSize.sm,
+  fontWeight: 600,
+  color: vars.color.text,
+  textDecoration: 'none',
+  selectors: {
+    '&:hover': { color: vars.color.brand },
+    '&:focus-visible': {
+      outline: `2px solid ${vars.color.brand}`,
+      outlineOffset: '2px',
+    },
+  },
+});
+
 export const heading = style({
-  margin: '0 0 4px',
+  margin: 0,
   fontSize: fontSize.xl,
   fontWeight: 700,
   lineHeight: 1.5,

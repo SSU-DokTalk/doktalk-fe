@@ -1,10 +1,9 @@
 import { BookOpen, Clock, Link2, MapPin, Users, Wifi } from 'lucide-react';
 import type { ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link } from 'react-router-dom';
-import { Avatar, Badge, BookCover, bookCoverStage, mq } from '@/design-system';
-import { FollowButton } from '@/features/user/components/FollowButton';
+import { Badge, BookCover, bookCoverStage, mq } from '@/design-system';
 import type { Debate } from '@/shared/api/models';
+import { AuthorRow } from '@/shared/components/AuthorRow';
 import { useFormat } from '@/shared/format';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { categoryLabelKeys } from '@/shared/categories';
@@ -51,7 +50,6 @@ export function DebateHero({
   const { t } = useTranslation();
   const format = useFormat();
   const isDesktop = useMediaQuery(mq.md);
-  const hostName = debate.user.name || t('component.user.unknown');
   const placeKind = placeKindText(debate, t);
   const location = debate.location?.trim();
   const bookText = [debate.book.title, debate.book.author]
@@ -98,23 +96,12 @@ export function DebateHero({
 
         <h1 className={s.title}>{debate.title}</h1>
 
-        <div className={s.hostRow}>
-          <Avatar name={hostName} src={debate.user.profile} size={40} />
-          <Link to={`/user/${debate.user.id}`} className={s.hostLink}>
-            <span className={s.hostName}>{hostName}</span>
-            <span className={s.hostMeta}>
-              {format.relativeTime(debate.created)} ·{' '}
-              {t('page.debate-detail.host-label')}
-            </span>
-          </Link>
-          <FollowButton
-            targetId={debate.user.id}
-            viewerId={viewerId}
-            size={isDesktop ? 'sm' : 'md'}
-          />
-          <span className={s.spacer} />
-          {actions && <div className={s.actions}>{actions}</div>}
-        </div>
+        <AuthorRow
+          author={debate.user}
+          viewerId={viewerId}
+          meta={`${format.relativeTime(debate.created)} · ${t('page.debate-detail.host-label')}`}
+          actions={actions}
+        />
 
         <dl className={s.info}>
           {debate.held_at && (

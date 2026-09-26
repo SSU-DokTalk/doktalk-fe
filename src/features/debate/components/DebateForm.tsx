@@ -11,9 +11,6 @@ import {
 import { useTranslation } from 'react-i18next';
 import {
   Button,
-  Checkbox,
-  Chip,
-  ChipGroup,
   IconButton,
   SegmentedControl,
   TextField,
@@ -21,9 +18,11 @@ import {
   visuallyHidden,
 } from '@/design-system';
 import { BookPicker } from '@/features/book/components/BookPicker';
-import { CATEGORY_OPTIONS } from '@/shared/categories';
+import { CategoryField } from '@/shared/components/CategoryField';
 import { FileAttachments } from '@/shared/components/FileAttachments';
-import { useFormat } from '@/shared/format';
+import { PriceField } from '@/shared/components/PriceField';
+import { focusFirstInvalid } from '@/shared/draft';
+import { useLeaveGuard } from '@/shared/hooks/useLeaveGuard';
 import {
   LIMIT_RANGE,
   TITLE_MAX,
@@ -33,7 +32,7 @@ import {
   type DebateFormField,
   type DebateFormValues,
 } from '../form';
-import * as s from './DebateForm.css';
+import * as s from '@/shared/components/Form.css';
 
 /** 값 → 그 값이 틀렸을 때 오류가 붙는 칸 */
 const ERROR_FIELD: Partial<Record<keyof DebateFormValues, DebateFormField>> = {
@@ -161,12 +160,8 @@ export function DebateForm({
   cancelAction,
 }: DebateFormProps) {
   const { t } = useTranslation();
-  const format = useFormat();
   const formRef = useRef<HTMLFormElement>(null);
   const summaryRef = useRef<HTMLParagraphElement>(null);
-  const categoryLabelId = useId();
-  const categoryHintId = useId();
-  const categoryErrorId = useId();
   const modeLabelId = useId();
 
   const [values, setValues] = useState(initialValues);
@@ -188,16 +183,7 @@ export function DebateForm({
     [values, files, initialValues]
   );
 
-  // 저장하지 않고 창을 닫거나 새로 고치면 한 번 더 물어봐요.
-  useEffect(() => {
-    if (!dirty || submitting) return;
-    const handler = (event: BeforeUnloadEvent) => {
-      event.preventDefault();
-      event.returnValue = '';
-    };
-    window.addEventListener('beforeunload', handler);
-    return () => window.removeEventListener('beforeunload', handler);
-  }, [dirty, submitting]);
+  useLeaveGuard(dirty && !submitting);
 
   useEffect(() => {
     if (!draftSaved) return;
@@ -238,12 +224,7 @@ export function DebateForm({
     if (Object.keys(nextErrors).length > 0) {
       setShowSummary(true);
       // 첫 번째 오류 칸으로 옮겨서 무엇을 고쳐야 하는지 바로 알 수 있게 해요.
-      requestAnimationFrame(() => {
-        const first = formRef.current?.querySelector<HTMLElement>(
-          '[aria-invalid="true"], [data-invalid-focus]'
-        );
-        (first ?? summaryRef.current)?.focus();
-      });
+      focusFirstInvalid(formRef.current, summaryRef.current);
       return;
     }
     setShowSummary(false);
@@ -251,9 +232,6 @@ export function DebateForm({
   };
 
   const today = toDateInput(new Date());
-  const priceText = Number.isFinite(values.price)
-    ? format.number(values.price)
-    : '';
 
   return (
     <form ref={formRef} noValidate className={s.form} onSubmit={handleSubmit}>
@@ -283,49 +261,13 @@ export function DebateForm({
           error={errorText('book')}
           onChange={(book) => update('book', book)}
         />
-        <div className={s.group}>
-          <span id={categoryLabelId} className={s.label}>
-            {t('page.create-debate.input.category')}
-          </span>
-          <p id={categoryHintId} className={s.hint}>
-            {t('page.create-debate.input.category-hint')}
-          </p>
-          <ChipGroup
-            aria-label={t('page.create-debate.input.category')}
-            aria-labelledby={categoryLabelId}
-            aria-describedby={clsxIds(
-              categoryHintId,
-              errors.category && categoryErrorId
-            )}
-          >
-            {CATEGORY_OPTIONS.map((option, index) => (
-              <Chip
-                key={option.key}
-                size='md'
-                selection='multi'
-                pressed={(values.category & option.value) !== 0}
-                data-invalid-focus={
-                  errors.category && index === 0 ? '' : undefined
-                }
-                onPressedChange={(pressed) =>
-                  update(
-                    'category',
-                    pressed
-                      ? values.category | option.value
-                      : values.category & ~option.value
-                  )
-                }
-              >
-                {t(option.labelKey)}
-              </Chip>
-            ))}
-          </ChipGroup>
-          {errors.category && (
-            <p id={categoryErrorId} className={s.error}>
-              {errorText('category')}
-            </p>
-          )}
-        </div>
+        <CategoryField
+          label={t('page.create-debate.input.category')}
+          hint={t('page.create-debate.input.category-hint')}
+          value={values.category}
+          error={errorText('category')}
+          onChange={(category) => update('category', category)}
+        />
       </fieldset>
 
       <hr className={s.divider} />
@@ -414,31 +356,16 @@ export function DebateForm({
             error={errorText('limit')}
             onChange={(limit) => update('limit', limit)}
           />
-          <div className={s.priceGroup}>
-            <TextField
-              label={t('page.create-debate.input.price')}
-              inputMode='numeric'
-              value={values.free ? '0' : priceText}
-              disabled={values.free}
-              error={values.free ? undefined : errorText('price')}
-              endSlot={
-                <span className={s.unit}>
-                  {t('page.create-debate.input.price-unit')}
-                </span>
-              }
-              onChange={(event) => {
-                const digits = event.target.value
-                  .replace(/\D/g, '')
-                  .slice(0, 7);
-                update('price', digits ? Number(digits) : Number.NaN);
-              }}
-            />
-            <Checkbox
-              label={t('page.create-debate.input.free')}
-              checked={values.free}
-              onChange={(event) => update('free', event.target.checked)}
-            />
-          </div>
+          <PriceField
+            label={t('page.create-debate.input.price')}
+            unit={t('page.create-debate.input.price-unit')}
+            freeLabel={t('page.create-debate.input.free')}
+            price={values.price}
+            free={values.free}
+            error={errorText('price')}
+            onPriceChange={(price) => update('price', price)}
+            onFreeChange={(free) => update('free', free)}
+          />
         </div>
       </fieldset>
 
@@ -494,9 +421,4 @@ export function DebateForm({
       </span>
     </form>
   );
-}
-
-/** aria-describedby처럼 공백으로 이은 id 목록 */
-function clsxIds(...ids: (string | false | undefined)[]) {
-  return ids.filter(Boolean).join(' ') || undefined;
 }

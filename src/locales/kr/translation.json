@@ -390,6 +390,22 @@
       "too-many": "파일은 최대 {{max}}개까지 올릴 수 있어요",
       "too-large": "{{size}}MB보다 큰 파일은 올릴 수 없어요",
       "unacceptable": "PDF, JPG, PNG, GIF 파일만 올릴 수 있어요"
+    },
+    "stats": {
+      "likes": "좋아요 {{count}}",
+      "comments": "댓글 {{count}}",
+      "free": "무료"
+    },
+    "draft": {
+      "saved": "임시 저장했어요",
+      "restored": "임시 저장한 내용을 불러왔어요",
+      "discard": "새로 쓰기"
+    },
+    "form": {
+      "summary": "입력한 내용을 확인해주세요",
+      "submit": "저장하지 못했어요. 잠시 후 다시 시도해 주세요.",
+      "upload": "파일을 올리지 못했어요. 파일을 확인하고 다시 시도해 주세요.",
+      "cancel": "취소"
     }
   },
   "page": {
@@ -488,18 +504,38 @@
       "search": {
         "book-title": "도서 제목",
         "item-title": "요약 제목",
-        "placeholder": "관심 도서의 요약을 검색해보세요!"
+        "placeholder": "관심 도서의 요약을 검색해보세요!",
+        "by": "검색 기준",
+        "label": "요약 검색"
       },
       "sort": {
         "latest": "최신순",
-        "popular": "인기순"
+        "popular": "인기순",
+        "label": "정렬"
       },
       "button": {
         "write": "요약 작성"
       },
       "item": {
         "no-summary-item": "아직 작성된 요약이 없습니다",
-        "no-debate-item": "아직 토론방이 없습니다"
+        "no-debate-item": "아직 토론방이 없습니다",
+        "no-result": "조건에 맞는 요약이 없어요",
+        "no-result-description": "검색어나 카테고리를 바꿔 보세요",
+        "empty-description": "첫 요약을 써 보세요",
+        "error": "요약을 불러오지 못했어요",
+        "error-description": "잠시 후 다시 시도해 주세요"
+      },
+      "subtitle": "무료 미리보기로 먼저 읽고, 더 읽고 싶은 요약만 구매해요",
+      "filters": "검색과 필터",
+      "list": "요약 목록",
+      "category-label": "카테고리",
+      "category-all": "전체",
+      "recommend": {
+        "prev": "이전 추천 요약",
+        "next": "다음 추천 요약"
+      },
+      "popular-debates": {
+        "more-label": "인기 토론방 더보기"
       }
     },
     "search": {
@@ -595,12 +631,42 @@
         "free-content-placeholder": "미리보기로 공유하고 싶은 내용을 작성해주세요.",
         "charged-content-placeholder": "유료로 공유하고 싶은 내용을 작성해주세요.",
         "price": "가격",
-        "price-placeholder": "가격을 입력해주세요"
+        "price-placeholder": "가격을 입력해주세요",
+        "title-label": "제목",
+        "category-hint": "요약한 책의 카테고리를 선택해주세요 · 여러 개 선택할 수 있어요",
+        "free-label": "무료 미리보기",
+        "free-hint": "누구나 읽을 수 있어요",
+        "charged-label": "유료 내용",
+        "charged-hint": "결제한 사람만 읽을 수 있어요",
+        "paywall-divider": "여기부터 결제 후 공개",
+        "price-unit": "원",
+        "free": "전체 무료로 공개"
       },
       "button": {
         "file-add": "파일 추가",
         "temp-save": "임시 저장",
         "submit": "작성 완료"
+      },
+      "section": {
+        "basic": "기본 정보",
+        "content": "내용",
+        "sale": "판매와 첨부"
+      },
+      "error": {
+        "title-required": "제목을 입력해주세요",
+        "book-required": "요약할 도서를 골라주세요",
+        "category-required": "카테고리를 하나 이상 골라주세요",
+        "free-required": "무료 미리보기를 입력해주세요",
+        "charged-required": "유료 내용을 입력해주세요",
+        "price-range": "가격은 {{min}}~{{max}}원 사이로 입력해주세요. 무료라면 ‘전체 무료로 공개’를 선택해요."
+      },
+      "charged-unavailable": "유료 내용을 불러오지 못했어요. 저장하면 아래에 입력한 내용으로 바뀌니, 유료 내용을 다시 입력해 주세요.",
+      "state": {
+        "login-title": "로그인하고 요약을 써 보세요",
+        "login-description": "요약은 로그인한 회원만 쓸 수 있어요.",
+        "forbidden-title": "직접 쓴 요약만 수정할 수 있어요",
+        "forbidden-description": "요약을 쓴 사람만 내용을 고칠 수 있어요.",
+        "to-summary": "요약으로 돌아가기"
       }
     },
     "debate-detail": {
@@ -781,6 +847,52 @@
           "success": "책이 서재에서 삭제되었습니다",
           "error": "삭제 중 오류가 발생했습니다"
         }
+      }
+    },
+    "summary-detail": {
+      "options": "요약 옵션",
+      "book-label": "요약한 책",
+      "library": {
+        "add": "내 서재에 담기",
+        "error": "서재에 담지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "badge": {
+        "preview": "무료 미리보기",
+        "purchased": "구매한 요약",
+        "free": "무료 요약",
+        "own": "내가 쓴 요약"
+      },
+      "paywall": {
+        "title": "이어서 읽으시려면 결제가 필요합니다.",
+        "note": "구매한 요약은 내 서재의 ‘읽고 있는 요약’에서 언제든 다시 볼 수 있어요.",
+        "pay": "결제하기",
+        "free-title": "무료로 공개된 요약이에요",
+        "free-note": "버튼을 누르면 바로 전체 내용을 읽을 수 있어요.",
+        "read-free": "무료로 전체 읽기",
+        "login": "로그인하고 전체 요약을 읽어 보세요",
+        "error": "열지 못했어요. 잠시 후 다시 시도해 주세요.",
+        "locked": "결제 후 공개되는 내용"
+      },
+      "owner": {
+        "note": "내가 쓴 요약이에요. 유료 내용은 구매한 사람에게만 보여요."
+      },
+      "charged-error": "유료 내용을 불러오지 못했어요",
+      "rail": {
+        "label": "구매 정보",
+        "full": "전체 요약",
+        "toss-note": "토스페이먼츠로 결제돼요. 결제 후 바로 전체 요약을 읽을 수 있어요.",
+        "purchased": "구매 완료",
+        "purchased-note": "{{date}}에 {{price}}으로 구매한 요약이에요. 내 서재의 ‘읽고 있는 요약’에서 언제든 다시 볼 수 있어요.",
+        "library-link": "내 서재에서 보기",
+        "payments-link": "결제 내역"
+      },
+      "delete-dialog": {
+        "title": "요약을 삭제할까요?",
+        "description": "삭제한 요약은 되돌릴 수 없어요. 구매한 사람도 더 이상 볼 수 없어요."
+      },
+      "state": {
+        "not-found-title": "요약을 찾을 수 없어요",
+        "to-list": "요약 목록으로"
       }
     }
   },

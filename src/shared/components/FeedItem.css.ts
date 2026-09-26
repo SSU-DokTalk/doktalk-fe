@@ -60,6 +60,20 @@ export const item = style({
   },
 });
 
+/** 요약처럼 부가 정보(책)를 소개보다 먼저 보여줄 때 (데스크톱) */
+export const metaFirst = style({
+  '@media': {
+    [mq.md]: {
+      gridTemplateAreas: `
+        "cover category category"
+        "cover title title"
+        "cover meta meta"
+        "cover body body"
+        "cover host stats"`,
+    },
+  },
+});
+
 /** 모바일에서만 한 줄로 묶어요. 데스크톱에서는 풀어서 각자 자리로 가요. */
 export const header = style({
   gridArea: 'header',
@@ -290,4 +304,24 @@ export const skeletonText = style({
   flexDirection: 'column',
   gap: '8px',
   minWidth: 0,
+});
+
+/** 한 줄 부가 정보 (요약: 책 제목 · 저자) */
+export const metaText = style({
+  gridArea: 'meta',
+  margin: 0,
+  fontSize: fontSize.sm,
+  lineHeight: 1.5,
+  color: vars.color.textTertiary,
+  overflowWrap: 'anywhere',
+  '@media': {
+    [mq.md]: { fontSize: fontSize.md, color: vars.color.textSecondary },
+  },
+});
+
+globalStyle(`${priceText} svg`, {
+  width: '14px',
+  height: '14px',
+  marginRight: '3px',
+  verticalAlign: '-1px',
 });

@@ -12,7 +12,7 @@ import {
 import type { Debate } from '@/shared/api/models';
 import { parseServerDate, useFormat } from '@/shared/format';
 import { useDebatePurchase, useJoinFreeDebate } from '../api';
-import { DebateCheckout } from './DebateCheckout';
+import { ProductCheckout } from '@/features/payment/components/ProductCheckout';
 import * as s from './DebateJoinCard.css';
 
 type DebateJoinCardProps = {
@@ -133,8 +133,13 @@ export function DebateJoinCard({
             <Button size='lg' fullWidth onClick={() => setCheckoutOpen(true)}>
               {t('page.debate-detail.join.pay')}
             </Button>
-            <DebateCheckout
-              debate={debate}
+            <ProductCheckout
+              product={{
+                type: 'D',
+                id: debate.id,
+                title: debate.title,
+                price: debate.price,
+              }}
               open={checkoutOpen}
               onOpenChange={setCheckoutOpen}
             />

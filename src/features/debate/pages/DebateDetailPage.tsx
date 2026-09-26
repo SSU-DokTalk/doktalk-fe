@@ -1,22 +1,19 @@
 import {
   ChevronLeft,
-  Download,
-  FileText,
-  Heart,
-  Image as ImageIcon,
   LogIn,
   MessageCircle,
   MessagesSquare,
   SearchX,
 } from 'lucide-react';
-import { useId, useState } from 'react';
+import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useLocation, useParams } from 'react-router-dom';
 import { Button, buttonStyles, mq, Skeleton } from '@/design-system';
 import { CommentSection } from '@/features/comment/components/CommentSection';
 import { httpStatus } from '@/shared/api/client';
-import { downloadAttachment } from '@/shared/api/download';
-import type { AttachedFile, Debate } from '@/shared/api/models';
+import type { Debate } from '@/shared/api/models';
+import { Attachments } from '@/shared/components/Attachments';
+import { LikeButton } from '@/shared/components/LikeButton';
 import { PageState } from '@/shared/components/PageState';
 import { ShareButton } from '@/shared/components/ShareButton';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
@@ -34,36 +31,7 @@ import { DebateHero } from '../components/DebateHero';
 import { DebateJoinCard } from '../components/DebateJoinCard';
 import { DebateOwnerMenu } from '../components/DebateOwnerMenu';
 import { RelatedDebates } from '../components/RelatedDebates';
-import * as s from './DebateDetailPage.css';
-
-const IMAGE_FILE = /\.(jpe?g|png|gif|webp)$/i;
-
-function FileDownload({ file }: { file: AttachedFile }) {
-  const { t } = useTranslation();
-  const [pending, setPending] = useState(false);
-  const Icon = IMAGE_FILE.test(file.name || file.url) ? ImageIcon : FileText;
-
-  return (
-    <button
-      type='button'
-      className={s.fileButton}
-      aria-label={t('page.debate-detail.download', { name: file.name })}
-      disabled={pending}
-      onClick={async () => {
-        setPending(true);
-        try {
-          await downloadAttachment(file);
-        } finally {
-          setPending(false);
-        }
-      }}
-    >
-      <Icon aria-hidden='true' />
-      <span className={s.fileName}>{file.name}</span>
-      <Download aria-hidden='true' />
-    </button>
-  );
-}
+import * as s from '@/shared/components/DetailPage.css';
 
 /** 목록에서 왔으면 그 목록(검색 조건 포함)으로 돌아가요. */
 function useBackToList() {
@@ -136,34 +104,19 @@ function DebateDetail({ debate }: { debate: Debate }) {
                 {t('page.debate-detail.intro')}
               </h2>
               {content && <p className={s.introText}>{content}</p>}
-              {files.length > 0 && (
-                <ul
-                  aria-label={t('page.debate-detail.files')}
-                  className={s.files}
-                >
-                  {files.map((file) => (
-                    <li key={file.url}>
-                      <FileDownload file={file} />
-                    </li>
-                  ))}
-                </ul>
-              )}
+              <Attachments files={files} />
             </section>
           )}
 
           <div className={s.footer}>
-            <Button
-              variant='ghost'
-              aria-pressed={liked.data ?? false}
+            <LikeButton
+              liked={liked.data ?? false}
+              label={t('page.debate-detail.like', { count: debate.likes_num })}
               disabled={
                 viewerId <= 0 || liked.isPending || toggleLike.isPending
               }
-              className={liked.data ? s.liked : undefined}
-              onClick={() => toggleLike.mutate(!liked.data)}
-            >
-              <Heart aria-hidden='true' />
-              {t('page.debate-detail.like', { count: debate.likes_num })}
-            </Button>
+              onToggle={() => toggleLike.mutate(!liked.data)}
+            />
             <a href='#comments' className={buttonStyles({ variant: 'ghost' })}>
               <MessageCircle aria-hidden='true' />
               {t('page.debate-detail.comments', {
@@ -187,7 +140,7 @@ function DebateDetail({ debate }: { debate: Debate }) {
       {isWide && (
         <aside className={s.rail}>
           {joinCard('rail')}
-          <RelatedDebates currentId={debate.id} />
+          <RelatedDebates excludeId={debate.id} />
         </aside>
       )}
     </div>

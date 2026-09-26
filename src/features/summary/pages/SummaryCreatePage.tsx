@@ -3,43 +3,43 @@ import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate } from 'react-router-dom';
 import { Button, buttonStyles } from '@/design-system';
+import { notice as noticeStyle } from '@/shared/components/Form.css';
+import * as s from '@/shared/components/FormPage.css';
 import { PageState } from '@/shared/components/PageState';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
 import { useAuth } from '@/shell/hooks';
-import { UploadError, useCreateDebate } from '../api';
-import { DebateForm } from '../components/DebateForm';
-import { notice as noticeStyle } from '@/shared/components/Form.css';
+import { SummaryUploadError, useCreateSummary } from '../api';
+import { SummaryForm } from '../components/SummaryForm';
 import {
-  clearDebateDraft,
-  EMPTY_DEBATE_FORM,
-  formToRequest,
-  loadDebateDraft,
-  saveDebateDraft,
-  type DebateFormValues,
+  clearSummaryDraft,
+  EMPTY_SUMMARY_FORM,
+  loadSummaryDraft,
+  saveSummaryDraft,
+  summaryFormToRequest,
+  type SummaryFormValues,
 } from '../form';
-import * as s from '@/shared/components/FormPage.css';
 
-/** 토론방 만들기 (/debate/create) */
-function DebateCreatePage() {
+/** 요약 쓰기 (/summary/create) */
+function SummaryCreatePage() {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const { isLoggedIn } = useAuth();
-  const create = useCreateDebate();
-  const [draft] = useState(loadDebateDraft);
-  const [initialValues, setInitialValues] = useState<DebateFormValues>(
-    draft ?? EMPTY_DEBATE_FORM
+  const create = useCreateSummary();
+  const [draft] = useState(loadSummaryDraft);
+  const [initialValues, setInitialValues] = useState<SummaryFormValues>(
+    draft ?? EMPTY_SUMMARY_FORM
   );
   const [restored, setRestored] = useState(draft !== null);
   const [submitError, setSubmitError] = useState<string | null>(null);
 
-  useDocumentTitle(t('page.create-debate.title'));
+  useDocumentTitle(t('page.create-summary.title'));
 
   if (!isLoggedIn) {
     return (
       <PageState
         icon={<LogIn />}
-        title={t('page.create-debate.state.login-title')}
-        description={t('page.create-debate.state.login-description')}
+        title={t('page.create-summary.state.login-title')}
+        description={t('page.create-summary.state.login-description')}
         actions={
           <Link to='/login' className={buttonStyles({ variant: 'primary' })}>
             {t('component.topnav.login')}
@@ -49,21 +49,21 @@ function DebateCreatePage() {
     );
   }
 
-  const handleSubmit = async (values: DebateFormValues, files: File[]) => {
+  const handleSubmit = async (values: SummaryFormValues, files: File[]) => {
     setSubmitError(null);
     try {
       const id = await create.mutateAsync({
         files,
-        toRequest: (uploaded) => formToRequest(values, uploaded ?? []),
+        toRequest: (uploaded) => summaryFormToRequest(values, uploaded),
       });
-      clearDebateDraft();
-      navigate(`/debate/${id}`, { replace: true });
+      clearSummaryDraft();
+      navigate(`/summary/${id}`, { replace: true });
     } catch (error) {
       setSubmitError(
         t(
-          error instanceof UploadError
-            ? 'page.create-debate.error.upload'
-            : 'page.create-debate.error.submit'
+          error instanceof SummaryUploadError
+            ? 'component.form.upload'
+            : 'component.form.submit'
         )
       );
     }
@@ -72,33 +72,33 @@ function DebateCreatePage() {
   return (
     <div className={s.page}>
       <header className={s.header}>
-        <Link to='/debate' className={s.backLink}>
+        <Link to='/summary' className={s.backLink}>
           <ChevronLeft aria-hidden='true' />
-          {t('component.topnav.debate')}
+          {t('component.topnav.summary')}
         </Link>
-        <h1 className={s.title}>{t('page.create-debate.title')}</h1>
+        <h1 className={s.title}>{t('page.create-summary.title')}</h1>
       </header>
-      <DebateForm
+      <SummaryForm
         mode='create'
         initialValues={initialValues}
         submitting={create.isPending}
         submitError={submitError}
         onSubmit={handleSubmit}
-        onSaveDraft={saveDebateDraft}
+        onSaveDraft={saveSummaryDraft}
         notice={
           restored && (
             <p role='status' className={noticeStyle}>
-              {t('page.create-debate.draft.restored')}
+              {t('component.draft.restored')}
               <Button
                 variant='ghost'
                 size='sm'
                 onClick={() => {
-                  clearDebateDraft();
-                  setInitialValues(EMPTY_DEBATE_FORM);
+                  clearSummaryDraft();
+                  setInitialValues(EMPTY_SUMMARY_FORM);
                   setRestored(false);
                 }}
               >
-                {t('page.create-debate.draft.discard')}
+                {t('component.draft.discard')}
               </Button>
             </p>
           )
@@ -108,4 +108,4 @@ function DebateCreatePage() {
   );
 }
 
-export default DebateCreatePage;
+export default SummaryCreatePage;

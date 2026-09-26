@@ -210,3 +210,30 @@ globalStyle(`${actions} > *`, {
     [mq.md]: { flex: '0 0 auto', minWidth: '120px' },
   },
 });
+
+/** 무료 미리보기와 유료 내용 사이 구분선 (여기부터 결제 후 공개) */
+export const paywallDivider = style({
+  display: 'flex',
+  alignItems: 'center',
+  gap: '10px',
+  fontSize: fontSize.sm,
+  fontWeight: 600,
+  color: vars.color.brand,
+  selectors: {
+    '&::before, &::after': {
+      content: '""',
+      flex: '1 1 0',
+      height: '1px',
+      backgroundColor: vars.color.brandMuted,
+    },
+  },
+});
+
+export const paywallDividerLabel = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: '4px',
+  whiteSpace: 'nowrap',
+});
+
+globalStyle(`${paywallDividerLabel} svg`, { width: '14px', height: '14px' });

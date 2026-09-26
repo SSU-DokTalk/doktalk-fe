@@ -390,6 +390,22 @@
       "too-many": "You can attach up to {{max}} files",
       "too-large": "Files larger than {{size}}MB can't be uploaded",
       "unacceptable": "Only PDF, JPG, PNG, and GIF files are allowed"
+    },
+    "stats": {
+      "likes": "{{count}} likes",
+      "comments": "{{count}} comments",
+      "free": "Free"
+    },
+    "draft": {
+      "saved": "Draft saved",
+      "restored": "Your draft has been restored",
+      "discard": "Start over"
+    },
+    "form": {
+      "summary": "Please check what you entered",
+      "submit": "Couldn't save. Please try again in a moment.",
+      "upload": "Couldn't upload the files. Check them and try again.",
+      "cancel": "Cancel"
     }
   },
   "page": {
@@ -488,18 +504,38 @@
       "search": {
         "book-title": "Book Title",
         "item-title": "Summary Title",
-        "placeholder": "Search for summaries!"
+        "placeholder": "Search for summaries!",
+        "by": "Search by",
+        "label": "Search summaries"
       },
       "sort": {
         "latest": "Latest",
-        "popular": "Popular"
+        "popular": "Popular",
+        "label": "Sort"
       },
       "button": {
         "write": "Write a Summary"
       },
       "item": {
         "no-summary-item": "There is no summary item",
-        "no-debate-item": "There is no discussion item"
+        "no-debate-item": "There is no discussion item",
+        "no-result": "No summaries match your filters",
+        "no-result-description": "Try a different keyword or category",
+        "empty-description": "Be the first to write one",
+        "error": "Couldn't load summaries",
+        "error-description": "Please try again in a moment"
+      },
+      "subtitle": "Read the free preview first, then buy only the summaries you want to finish",
+      "filters": "Search and filters",
+      "list": "Summary list",
+      "category-label": "Category",
+      "category-all": "All",
+      "recommend": {
+        "prev": "Previous recommended summaries",
+        "next": "Next recommended summaries"
+      },
+      "popular-debates": {
+        "more-label": "See more trending discussions"
       }
     },
     "search": {
@@ -595,12 +631,42 @@
         "free-content-placeholder": "Write content you want to share as a preview.",
         "charged-content-placeholder": "Write content you want to share for a fee.",
         "price": "Price",
-        "price-placeholder": "Please enter the price"
+        "price-placeholder": "Please enter the price",
+        "title-label": "Title",
+        "category-hint": "Choose categories for the book · You can pick more than one",
+        "free-label": "Free preview",
+        "free-hint": "Anyone can read this",
+        "charged-label": "Paid content",
+        "charged-hint": "Only buyers can read this",
+        "paywall-divider": "Paid content starts here",
+        "price-unit": "KRW",
+        "free": "Make everything free"
       },
       "button": {
         "file-add": "Add Files",
         "temp-save": "Save Draft",
         "submit": "Publish"
+      },
+      "section": {
+        "basic": "Basics",
+        "content": "Content",
+        "sale": "Price and files"
+      },
+      "error": {
+        "title-required": "Please enter a title",
+        "book-required": "Please choose the book you summarized",
+        "category-required": "Please choose at least one category",
+        "free-required": "Please write the free preview",
+        "charged-required": "Please write the paid content",
+        "price-range": "Enter a price between {{min}} and {{max}} KRW. For a free summary, choose ‘Make everything free’."
+      },
+      "charged-unavailable": "We couldn't load the paid content. Saving replaces it with what you enter below, so please enter the paid content again.",
+      "state": {
+        "login-title": "Log in to write a summary",
+        "login-description": "Only members who are logged in can write summaries.",
+        "forbidden-title": "You can only edit summaries you wrote",
+        "forbidden-description": "Only the author can edit this summary.",
+        "to-summary": "Back to the summary"
       }
     },
     "debate-detail": {
@@ -781,6 +847,52 @@
           "success": "The book has been removed from your library",
           "error": "An error occurred while deleting the book"
         }
+      }
+    },
+    "summary-detail": {
+      "options": "Summary options",
+      "book-label": "Summarized book",
+      "library": {
+        "add": "Add to my library",
+        "error": "Couldn't add it to your library. Please try again in a moment."
+      },
+      "badge": {
+        "preview": "Free preview",
+        "purchased": "Purchased",
+        "free": "Free summary",
+        "own": "Your summary"
+      },
+      "paywall": {
+        "title": "Purchase to keep reading.",
+        "note": "Purchased summaries stay in ‘Summaries I’m reading’ in your library.",
+        "pay": "Buy",
+        "free-title": "This summary is free",
+        "free-note": "Tap the button to read the whole summary right away.",
+        "read-free": "Read it free",
+        "login": "Log in to read the full summary",
+        "error": "Couldn't open it. Please try again in a moment.",
+        "locked": "Content unlocked after purchase"
+      },
+      "owner": {
+        "note": "You wrote this summary. The paid part is visible only to buyers."
+      },
+      "charged-error": "Couldn't load the paid content",
+      "rail": {
+        "label": "Purchase",
+        "full": "Full summary",
+        "toss-note": "Paid with Toss Payments. You can read the full summary right after paying.",
+        "purchased": "Purchased",
+        "purchased-note": "You bought this summary on {{date}} for {{price}}. Find it anytime in ‘Summaries I’m reading’ in your library.",
+        "library-link": "Open my library",
+        "payments-link": "Payment history"
+      },
+      "delete-dialog": {
+        "title": "Delete this summary?",
+        "description": "A deleted summary can't be restored, and buyers will no longer see it."
+      },
+      "state": {
+        "not-found-title": "We couldn't find this summary",
+        "to-list": "Back to summaries"
       }
     }
   },

@@ -11,7 +11,7 @@ import {
 import type { Debate } from '@/shared/api/models';
 import { parseServerDate, useFormat } from '@/shared/format';
 import { categoryText, placeText } from '../display';
-import * as s from './DebateListItem.css';
+import * as s from '@/shared/components/FeedItem.css';
 
 type DebateListItemProps = {
   debate: Debate;

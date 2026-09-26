@@ -14,10 +14,11 @@ import {
   type Purchase,
 } from '@/shared/api/models';
 import type { components } from '@/shared/api/schema';
+import type { SearchBy } from '@/shared/hooks/useListParams';
 import { uploadFiles } from '@/shared/api/upload';
 
 export type DebateSort = 'latest' | 'popular' | 'from';
-export type DebateSearchBy = 'bt' | 'it';
+export type DebateSearchBy = SearchBy;
 
 export type DebateListFilters = {
   /** 카테고리 비트마스크. 0이면 전체 */

@@ -1,3 +1,4 @@
+import type { TFunction } from 'i18next';
 import { CATEGORY } from '@/common/variables';
 
 export type CategoryOption = {
@@ -18,4 +19,11 @@ export function categoryLabelKeys(mask: number): string[] {
   return CATEGORY_OPTIONS.filter((option) => (mask & option.value) !== 0).map(
     (option) => option.labelKey
   );
+}
+
+/** 인문 · 논술 */
+export function categoryText(mask: number, t: TFunction) {
+  return categoryLabelKeys(mask)
+    .map((key) => t(key))
+    .join(' · ');
 }

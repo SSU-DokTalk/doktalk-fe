@@ -4,7 +4,6 @@ import { Route, Routes } from 'react-router-dom';
 import '@/assets/css/main.scss';
 import '@/assets/css/pages/_settings.scss';
 import '@/assets/css/components/_sidebar.scss';
-import 'react-datepicker/dist/react-datepicker.css';
 import '@/assets/css/tailwind.css';
 
 import { AppShell, LandingLayout, PageLayout, SideColumnLayout } from '@/shell';
@@ -17,7 +16,7 @@ import Register from '@/pages/Register';
 import Auth from '@/pages/Auth';
 import MyPage from '@/pages/MyPage';
 import UserProfile from '@/pages/UserProfile';
-import Summary from '@/pages/Summary';
+import SummaryListPage from '@/features/summary/pages/SummaryListPage';
 import { useEffect, useState } from 'react';
 import { useAppDispatch, useAppSelector } from './stores/hooks';
 import { selectUser, setUser } from './stores/user';
@@ -27,12 +26,12 @@ import Search from './pages/Search';
 import CircularProgress from '@mui/material/CircularProgress';
 import i18n from './locales/i18n';
 import DebateCreatePage from './features/debate/pages/DebateCreatePage';
-import CreateSummary from './pages/CreateSummary';
+import SummaryCreatePage from './features/summary/pages/SummaryCreatePage';
 import Settings from './pages/Settings';
 import DebateDetailPage from './features/debate/pages/DebateDetailPage';
-import SummaryDetail from './pages/SummaryDetail';
+import SummaryDetailPage from './features/summary/pages/SummaryDetailPage';
 import PostDetail from './pages/PostDetail';
-import UpdateSummary from './pages/UpdateSummary';
+import SummaryEditPage from './features/summary/pages/SummaryEditPage';
 import DebateEditPage from './features/debate/pages/DebateEditPage';
 import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
 import { CheckoutFail } from './components/Payments/CheckoutFail';
@@ -151,15 +150,18 @@ function App() {
               element={<DebateEditPage />}
             ></Route>
 
-            <Route path='/summary' element={<Summary />}></Route>
-            <Route path='/summary/create' element={<CreateSummary />}></Route>
+            <Route path='/summary' element={<SummaryListPage />}></Route>
+            <Route
+              path='/summary/create'
+              element={<SummaryCreatePage />}
+            ></Route>
             <Route
               path='/summary/:summary_id'
-              element={<SummaryDetail />}
+              element={<SummaryDetailPage />}
             ></Route>
             <Route
               path='/summary/:summary_id/update'
-              element={<UpdateSummary />}
+              element={<SummaryEditPage />}
             ></Route>
 
             <Route path='/post/:post_id' element={<PostDetail />}></Route>
