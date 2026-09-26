@@ -27,8 +27,10 @@ export const content = style({
   },
 });
 
+/** 제목과 만들기 버튼이 한 줄에 안 들어가면(몽골어) 버튼이 제목 아래로 내려가요. */
 export const header = style({
   display: 'flex',
+  flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'space-between',
   gap: '12px',

@@ -87,12 +87,16 @@ export const header = style({
   },
 });
 
+/**
+ * 모바일 한 줄에서는 이름이 먼저 자리를 잡고(최대 9em), 카테고리가 남는 폭에서 줄어요.
+ * 몽골어 카테고리가 길어도 짧은 이름이 잘리지 않아요.
+ */
 export const host = style({
   gridArea: 'host',
   display: 'flex',
   alignItems: 'center',
   gap: '8px',
-  flex: '1 1 auto',
+  flex: '0 0 auto',
   minWidth: 0,
   fontSize: fontSize.sm,
   lineHeight: 1.5,
@@ -109,6 +113,9 @@ export const hostName = style({
   whiteSpace: 'nowrap',
   fontWeight: 600,
   color: vars.color.textMuted,
+  '@media': {
+    [mq.belowMd]: { maxWidth: '9em' },
+  },
 });
 
 export const time = style({
@@ -118,6 +125,7 @@ export const time = style({
 export const category = style({
   gridArea: 'category',
   flex: '0 1 auto',
+  minWidth: 0,
   maxWidth: '55%',
   margin: 0,
   overflow: 'hidden',

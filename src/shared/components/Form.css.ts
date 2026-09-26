@@ -177,12 +177,14 @@ export const alert = style({
 
 /**
  * 저장 버튼 줄. 모바일에서는 화면 아래(하단 탭 위)에 붙어 있어요.
+ * 버튼 글자가 길어 한 줄에 안 들어가면(좁은 화면의 몽골어) 다음 줄로 내려가요.
  */
 export const actions = style({
   position: 'sticky',
   bottom: 'calc(64px + env(safe-area-inset-bottom))',
   zIndex: 1,
   display: 'flex',
+  flexWrap: 'wrap',
   gap: '8px',
   margin: '8px -20px 0',
   padding: '12px 16px',

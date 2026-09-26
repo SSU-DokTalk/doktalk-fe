@@ -37,7 +37,14 @@ export const Playground: Story = {};
 
 export const Variants: Story = {
   render: () => (
-    <div style={{ display: 'flex', alignItems: 'center', gap: 16 }}>
+    <div
+      style={{
+        display: 'flex',
+        flexWrap: 'wrap',
+        alignItems: 'center',
+        gap: 16,
+      }}
+    >
       <IconButton aria-label='통합 검색'>
         <Search />
       </IconButton>

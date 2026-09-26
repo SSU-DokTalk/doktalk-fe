@@ -230,10 +230,12 @@ export const bottomTab = style({
   justifyContent: 'center',
   gap: '2px',
   minHeight: '56px',
-  padding: '4px 2px',
+  padding: '4px 0',
   borderRadius: vars.radius.md,
   color: vars.color.textTertiary,
-  fontSize: fontSize.xs,
+  // 칸 너비가 화면의 1/5이라 글자도 화면 폭에 맞춰 11.2~12px 사이에서 정해져요.
+  // 360px 폰까지 몽골어 탭 이름('Хэлэлцүүлэг')이 단어 중간에서 끊기지 않아요.
+  fontSize: `clamp(0.7rem, 2.9vw, ${fontSize.xs})`,
   fontWeight: 500,
   lineHeight: 1.2,
   textAlign: 'center',

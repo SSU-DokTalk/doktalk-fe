@@ -6,6 +6,7 @@ export const root = recipe({
   base: {
     display: 'inline-flex',
     gap: '2px',
+    maxWidth: '100%',
     boxSizing: 'border-box',
   },
   variants: {
@@ -30,18 +31,23 @@ export const root = recipe({
 
 export type SegmentedControlVariants = NonNullable<RecipeVariants<typeof root>>;
 
+/**
+ * 자리가 모자라면 항목이 줄어들고 글자가 띄어쓰기에서 두 줄로 나뉘어요 (긴 몽골어 정렬 이름).
+ * 가장 긴 단어보다 좁아지지는 않아서 단어 중간이 끊기지 않아요.
+ */
 export const item = recipe({
   base: {
-    flex: '1 0 auto',
-    height: '34px',
+    flex: '1 1 auto',
+    minHeight: '34px',
     margin: 0,
+    paddingBlock: '4px',
     border: 0,
     backgroundColor: 'transparent',
     color: vars.color.textSecondary,
     fontFamily: vars.font.family,
     fontWeight: 500,
-    lineHeight: 1,
-    whiteSpace: 'nowrap',
+    lineHeight: 1.2,
+    textWrap: 'balance',
     cursor: 'pointer',
     transition: 'background-color 120ms ease, color 120ms ease',
     selectors: {
@@ -60,8 +66,8 @@ export const item = recipe({
   },
   variants: {
     size: {
-      sm: { padding: '0 11px', borderRadius: '8px', fontSize: fontSize.sm },
-      md: { padding: '0 14px', borderRadius: '9px', fontSize: fontSize.md },
+      sm: { paddingInline: '11px', borderRadius: '8px', fontSize: fontSize.sm },
+      md: { paddingInline: '14px', borderRadius: '9px', fontSize: fontSize.md },
     },
   },
   defaultVariants: {

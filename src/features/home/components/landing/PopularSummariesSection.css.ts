@@ -102,11 +102,13 @@ export const excerpt = style({
   },
 });
 
+/** 좁은 화면에서 '미리보기'가 안 들어가면 가격 아래 줄로 내려가요. */
 export const topFoot = style({
   display: 'flex',
+  flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '12px',
+  gap: '8px 12px',
   marginTop: 'auto',
   paddingTop: '8px',
 });
