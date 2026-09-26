@@ -1,37 +1,53 @@
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import ScrollToTop from '@/shell/ScrollToTop';
-import AuthCallbackPage from '@/features/auth/pages/AuthCallbackPage';
-import LoginPage from '@/features/auth/pages/LoginPage';
-import RegisterPage from '@/features/auth/pages/RegisterPage';
 import { useRestoreSession } from '@/features/auth/useRestoreSession';
-import DebateCreatePage from '@/features/debate/pages/DebateCreatePage';
-import DebateDetailPage from '@/features/debate/pages/DebateDetailPage';
-import DebateEditPage from '@/features/debate/pages/DebateEditPage';
-import DebateListPage from '@/features/debate/pages/DebateListPage';
-import HomePage from '@/features/home/pages/HomePage';
-import MyLibraryPage from '@/features/library/pages/MyLibraryPage';
-import CheckoutResultPage from '@/features/payment/pages/CheckoutResultPage';
-import PostDetailPage from '@/features/post/pages/PostDetailPage';
-import PostFeedPage from '@/features/post/pages/PostFeedPage';
-import MyPage from '@/features/profile/pages/MyPage';
-import UserProfilePage from '@/features/profile/pages/UserProfilePage';
-import BookSearchPage from '@/features/search/pages/BookSearchPage';
-import IntegratedSearchPage from '@/features/search/pages/IntegratedSearchPage';
-import SettingsPage from '@/features/settings/pages/SettingsPage';
-import SummaryCreatePage from '@/features/summary/pages/SummaryCreatePage';
-import SummaryDetailPage from '@/features/summary/pages/SummaryDetailPage';
-import SummaryEditPage from '@/features/summary/pages/SummaryEditPage';
-import SummaryListPage from '@/features/summary/pages/SummaryListPage';
+import {
+  AuthCallbackPage,
+  BookSearchPage,
+  CheckoutResultPage,
+  DebateCreatePage,
+  DebateDetailPage,
+  DebateEditPage,
+  DebateListPage,
+  HomePage,
+  IntegratedSearchPage,
+  LoginPage,
+  MyLibraryPage,
+  MyPage,
+  PostDetailPage,
+  PostFeedPage,
+  preloadPagesWhenIdle,
+  RegisterPage,
+  SettingsPage,
+  SummaryCreatePage,
+  SummaryDetailPage,
+  SummaryEditPage,
+  SummaryListPage,
+  UserProfilePage,
+} from '@/pages';
 import { FullPageSpinner } from '@/shared/components/FullPageSpinner';
-import { AppShell, LandingLayout, PageLayout, SideColumnLayout } from '@/shell';
+import {
+  AppShell,
+  LandingLayout,
+  PageLayout,
+  SideColumnLayout,
+  StandaloneLayout,
+} from '@/shell';
 import { useAuth } from '@/shell/hooks';
 import NotFoundPage from '@/shell/NotFoundPage';
+import ScrollToTop from '@/shell/ScrollToTop';
 
 function App() {
   const { isLoggedIn } = useAuth();
   // 새로고침하면 로그인 상태를 먼저 되살린 뒤 화면을 그려요.
   const ready = useRestoreSession();
+
+  // 첫 화면을 그린 뒤 나머지 페이지 조각을 미리 받아 둬요.
+  useEffect(() => {
+    if (ready) preloadPagesWhenIdle();
+  }, [ready]);
+
   if (!ready) return <FullPageSpinner />;
 
   return (
@@ -94,9 +110,11 @@ function App() {
           </Route>
         </Route>
 
-        <Route path='/login' element={<LoginPage />} />
-        <Route path='/register' element={<RegisterPage />} />
-        <Route path='/auth/:provider' element={<AuthCallbackPage />} />
+        <Route element={<StandaloneLayout />}>
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='/auth/:provider' element={<AuthCallbackPage />} />
+        </Route>
       </Routes>
     </>
   );

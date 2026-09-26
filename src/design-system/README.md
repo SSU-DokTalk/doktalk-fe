@@ -53,5 +53,6 @@ yarn storybook
 | `/mypage`, `/user/:id`, `/settings`, 결제 결과, 404 | `PageLayout` — 본문 + 한 줄 푸터                    |
 
 - 데스크톱(md 이상)은 `TopNav`, 모바일은 `MobileTopBar`를 보여줘요. 로그인하면 모바일에 `BottomTabs`가 고정돼요.
-- 로그인·회원가입·소셜 로그인 콜백 화면은 셸 밖에 있어요.
+- 로그인·회원가입·소셜 로그인 콜백 화면은 셸 밖에 있어요 (`StandaloneLayout`).
+- 레이아웃마다 `RouteBoundary`가 페이지 조각을 받는 동안의 로딩과 오류 화면을 맡아요. 오류가 나도 셸은 그대로 남아요.
 - AI 챗봇 버튼은 글쓰기 화면을 뺀 모든 셸 화면에 떠 있어요.

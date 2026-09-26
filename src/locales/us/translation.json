@@ -193,6 +193,11 @@
       "login-card": {
         "title": "Log in to join the discussion",
         "description": "We'll recommend discussions and summaries that fit your interests."
+      },
+      "route-error": {
+        "title": "Couldn't load this page",
+        "description": "Your connection may be unstable, or a new version is out. Please reload the page.",
+        "reload": "Reload"
       }
     },
     "user": {

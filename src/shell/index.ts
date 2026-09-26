@@ -4,4 +4,5 @@ export {
   LandingLayout,
   PageLayout,
   SideColumnLayout,
+  StandaloneLayout,
 } from './layouts';
