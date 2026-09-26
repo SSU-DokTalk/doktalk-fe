@@ -1,0 +1,11 @@
+/*
+ * 기존 main.scss와 같은 글꼴 파일, 같은 이름이라 두 번 내려받지 않아요.
+ * 레거시 스타일을 지울 때 이 파일만 남기면 돼요.
+ */
+@font-face {
+  font-family: 'Pretendard-Variable';
+  src: url('../../assets/fonts/PretendardVariable.ttf') format('truetype');
+  font-weight: 45 930;
+  font-style: normal;
+  font-display: swap;
+}
