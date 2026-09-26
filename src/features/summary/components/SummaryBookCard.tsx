@@ -2,7 +2,7 @@ import { BookmarkCheck, BookmarkPlus } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { BookCover, Button } from '@/design-system';
 import type { Summary } from '@/shared/api/models';
-import { useInLibrary, useToggleLibrary } from '../api';
+import { useInLibrary, useToggleLibrary } from '@/features/library/api';
 import * as s from './SummaryDetail.css';
 
 /** 요약한 책 + 내 서재에 담기 */
@@ -15,7 +15,7 @@ export function SummaryBookCard({
 }) {
   const { t } = useTranslation();
   const inLibrary = useInLibrary(book.isbn, viewerId);
-  const toggle = useToggleLibrary(book.isbn, viewerId);
+  const toggle = useToggleLibrary(viewerId);
   const added = inLibrary.data === true;
 
   return (
@@ -45,7 +45,7 @@ export function SummaryBookCard({
           size='sm'
           aria-pressed={added}
           disabled={inLibrary.isPending || toggle.isPending}
-          onClick={() => toggle.mutate(!added)}
+          onClick={() => toggle.mutate({ isbn: book.isbn, add: !added })}
         >
           {added ? (
             <BookmarkCheck aria-hidden='true' />

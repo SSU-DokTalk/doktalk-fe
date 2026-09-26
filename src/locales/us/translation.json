@@ -557,7 +557,9 @@
     "search": {
       "item": {
         "no-book-item": "No search results found",
-        "search-prompt": "Search for your favorite books!"
+        "search-prompt": "Search for your favorite books!",
+        "error": "Couldn't search books",
+        "no-result-description": "Try a different keyword"
       },
       "title": {
         "page": "Book Search"
@@ -568,6 +570,24 @@
       },
       "search": {
         "placeholder": "Search for books!"
+      },
+      "subtitle": "Find books you like and add them to your library",
+      "label": "Search books",
+      "submit": "Search",
+      "clear": "Clear search",
+      "result-count": "{{count}} books for ‘{{query}}’",
+      "results": "Search results",
+      "sort-label": "Sort",
+      "library": {
+        "added": "In my library",
+        "count": "Added {{count}}",
+        "error": "Couldn't update your library. Please try again in a moment."
+      },
+      "rail": {
+        "title": "My library",
+        "count": "Reading {{count}}",
+        "link": "Go to library",
+        "empty": "No books yet"
       }
     },
     "create-debate": {
@@ -841,7 +861,18 @@
         "post": "Posts",
         "book": "Books"
       },
-      "no-results": "No search results found."
+      "no-results": "No search results found.",
+      "heading": "{{count}} results for ‘{{query}}’",
+      "filters": "Result types",
+      "all": "All",
+      "more": "See more",
+      "more-label": "See more {{section}}",
+      "search-label": "Search",
+      "prompt-title": "What are you looking for?",
+      "prompt-description": "Search books, discussions, summaries, and posts at once.",
+      "empty-description": "Try a different keyword",
+      "error": "Couldn't load search results",
+      "book": "Books"
     },
     "not-found": {
       "message": "Page Not Found!"

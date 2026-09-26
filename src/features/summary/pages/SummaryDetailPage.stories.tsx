@@ -9,7 +9,8 @@ import type { Purchase, Summary } from '@/shared/api/models';
 import { AppShell, SideColumnLayout } from '@/shell';
 import globalStateReducer from '@/stores/globalStates';
 import userReducer from '@/stores/user';
-import { libraryKeys, summaryKeys } from '../api';
+import { libraryKeys } from '@/features/library/api';
+import { summaryKeys } from '../api';
 import SummaryDetailPage from './SummaryDetailPage';
 
 const AUTHOR_ID = 5;

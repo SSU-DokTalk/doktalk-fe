@@ -22,7 +22,7 @@ import { useAppDispatch, useAppSelector } from './stores/hooks';
 import { selectUser, setUser } from './stores/user';
 import cookie from 'react-cookies';
 import DebateListPage from './features/debate/pages/DebateListPage';
-import Search from './pages/Search';
+import BookSearchPage from './features/search/pages/BookSearchPage';
 import CircularProgress from '@mui/material/CircularProgress';
 import i18n from './locales/i18n';
 import DebateCreatePage from './features/debate/pages/DebateCreatePage';
@@ -35,7 +35,7 @@ import SummaryEditPage from './features/summary/pages/SummaryEditPage';
 import DebateEditPage from './features/debate/pages/DebateEditPage';
 import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
 import { CheckoutFail } from './components/Payments/CheckoutFail';
-import IntegratedSearch from './pages/IntegratedSearch';
+import IntegratedSearchPage from './features/search/pages/IntegratedSearchPage';
 import MyLibrary from './pages/MyLibrary';
 import ScrollToTop from './components/utils/ScrollToTop';
 
@@ -133,10 +133,10 @@ function App() {
           <Route element={<SideColumnLayout />}>
             <Route path='/post' element={<PostFeedPage />}></Route>
 
-            <Route path='/search' element={<Search />}></Route>
+            <Route path='/search' element={<BookSearchPage />}></Route>
             <Route
               path='/integrated-search'
-              element={<IntegratedSearch />}
+              element={<IntegratedSearchPage />}
             ></Route>
 
             <Route path='/debate' element={<DebateListPage />}></Route>

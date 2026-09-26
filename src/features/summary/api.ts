@@ -56,12 +56,6 @@ export const summaryKeys = {
     [...summaryKeys.all, 'charged', id, viewerId] as const,
 };
 
-export const libraryKeys = {
-  all: ['library'] as const,
-  contains: (isbn: number, viewerId: number) =>
-    [...libraryKeys.all, 'contains', isbn, viewerId] as const,
-};
-
 /* ---------- 목록 ---------- */
 
 export function summaryListQuery(filters: SummaryListFilters) {
@@ -298,42 +292,6 @@ export function useDeleteSummary() {
       void queryClient.invalidateQueries({
         queryKey: [...summaryKeys.all, 'popular'],
       });
-    },
-  });
-}
-
-/* ---------- 내 서재 ---------- */
-
-export function useInLibrary(isbn: number, viewerId: number) {
-  return useQuery({
-    queryKey: libraryKeys.contains(isbn, viewerId),
-    queryFn: async ({ signal }) => {
-      const isbns = (await api.get('/librarys/is_in_library', {
-        query: { ids: [isbn] },
-        signal,
-      })) as number[];
-      return isbns.includes(isbn);
-    },
-    enabled: isbn > 0 && viewerId > 0,
-  });
-}
-
-export function useToggleLibrary(isbn: number, viewerId: number) {
-  const queryClient = useQueryClient();
-  const key = libraryKeys.contains(isbn, viewerId);
-  return useMutation({
-    mutationFn: (add: boolean) =>
-      add
-        ? api.post('/library/{isbn}', { path: { isbn } })
-        : api.delete('/library/{isbn}', { path: { isbn } }),
-    onMutate: async (add) => {
-      await queryClient.cancelQueries({ queryKey: key });
-      const previous = queryClient.getQueryData<boolean>(key);
-      queryClient.setQueryData(key, add);
-      return { previous };
-    },
-    onError: (_error, _add, context) => {
-      queryClient.setQueryData(key, context?.previous);
     },
   });
 }

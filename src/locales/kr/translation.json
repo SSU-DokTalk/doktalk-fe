@@ -557,7 +557,9 @@
     "search": {
       "item": {
         "no-book-item": "검색 결과가 없습니다",
-        "search-prompt": "원하는 도서를 검색해보세요!"
+        "search-prompt": "원하는 도서를 검색해보세요!",
+        "error": "도서를 검색하지 못했어요",
+        "no-result-description": "다른 검색어로 찾아보세요"
       },
       "title": {
         "page": "도서 검색"
@@ -568,6 +570,24 @@
       },
       "search": {
         "placeholder": "관심 도서를 검색해보세요!"
+      },
+      "subtitle": "관심 도서를 찾아 내 서재에 담아 보세요",
+      "label": "도서 검색",
+      "submit": "검색",
+      "clear": "검색어 지우기",
+      "result-count": "‘{{query}}’ 검색 결과 {{count}}권",
+      "results": "검색 결과",
+      "sort-label": "정렬",
+      "library": {
+        "added": "서재에 담김",
+        "count": "담은 수 {{count}}",
+        "error": "서재를 바꾸지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "rail": {
+        "title": "내 서재",
+        "count": "읽고 있는 책 {{count}}",
+        "link": "서재로 가기",
+        "empty": "아직 담은 책이 없어요"
       }
     },
     "create-debate": {
@@ -841,7 +861,18 @@
         "post": "게시글",
         "book": "도서 검색"
       },
-      "no-results": "검색 결과가 없습니다."
+      "no-results": "검색 결과가 없습니다.",
+      "heading": "‘{{query}}’ 검색 결과 {{count}}건",
+      "filters": "결과 종류",
+      "all": "전체",
+      "more": "더보기",
+      "more-label": "{{section}} 더보기",
+      "search-label": "통합 검색",
+      "prompt-title": "무엇을 찾고 있나요?",
+      "prompt-description": "도서, 토론방, 요약, 게시글을 한 번에 찾아볼 수 있어요.",
+      "empty-description": "다른 검색어로 찾아보세요",
+      "error": "검색 결과를 불러오지 못했어요",
+      "book": "도서"
     },
     "not-found": {
       "message": "Page Not Found!"
