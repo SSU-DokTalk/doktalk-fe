@@ -3,7 +3,7 @@ name: React CI/CD pipeline
 on:
   push:
     branches:
-      - "master"
+      - 'master'
 
 jobs:
   build:
@@ -25,7 +25,7 @@ jobs:
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
-          node-version: lts/Hydrogen
+          node-version: lts/*
           cache: yarn
       - run: yarn
 
