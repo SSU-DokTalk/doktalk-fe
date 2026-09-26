@@ -424,6 +424,18 @@
       "unacceptable": "Only JPG, PNG, and GIF photos are allowed",
       "title-required": "Please enter a title",
       "discard-confirm": "Your changes will be lost. Close anyway?"
+    },
+    "chatbot": {
+      "title": "DokTalk AI",
+      "subtitle": "Help with book picks and reading questions",
+      "greeting": "Hello! Ask me anything.",
+      "log": "Conversation",
+      "me": "You",
+      "disclaimer": "AI answers may be inaccurate.",
+      "prompt2": "How do I write good discussion questions?",
+      "prompt3": "I want to read one book a month",
+      "typing": "Writing a reply",
+      "error": "Couldn't get a reply. Please try again in a moment."
     }
   },
   "page": {

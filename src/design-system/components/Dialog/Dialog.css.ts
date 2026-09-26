@@ -67,6 +67,22 @@ export const popup = recipe({
           },
         },
       },
+      /** 오른쪽 아래에 떠 있는 창 (데스크톱 챗봇). 여는 버튼 바로 위에 놓여요. */
+      corner: {
+        right: '32px',
+        bottom: '112px',
+        width: 'min(calc(100vw - 32px), var(--dialog-width, 400px))',
+        height: 'min(656px, calc(100dvh - 144px))',
+        borderRadius: vars.radius['2xl'],
+        overflow: 'hidden',
+        transformOrigin: 'bottom right',
+        selectors: {
+          '&[data-starting-style], &[data-ending-style]': {
+            opacity: 0,
+            transform: 'translateY(12px) scale(0.98)',
+          },
+        },
+      },
       /** 화면 전체 (모바일 프로필 편집·팔로우 목록) */
       full: {
         inset: 0,

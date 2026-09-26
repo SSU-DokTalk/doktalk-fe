@@ -1,7 +1,7 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
 import { Outlet, useLocation } from 'react-router-dom';
-import ChatbotFloatingButton from '@/components/floating/ChatbotFloatingButton';
+import { ChatbotLauncher } from '@/features/chatbot/components/ChatbotLauncher';
 import BottomTabs from './BottomTabs';
 import LandingFooter from './LandingFooter';
 import { useAuth, useHtmlLang } from './hooks';
@@ -39,7 +39,7 @@ export function AppShell() {
         <Outlet />
       </div>
       {isLoggedIn && <BottomTabs />}
-      {!FORM_ROUTE.test(pathname) && <ChatbotFloatingButton />}
+      {!FORM_ROUTE.test(pathname) && <ChatbotLauncher />}
     </div>
   );
 }
