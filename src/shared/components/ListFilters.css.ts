@@ -1,16 +1,16 @@
 import { style } from '@vanilla-extract/css';
-import { mq, vars } from '@/design-system/tokens';
+import { layout, mq, space, vars } from '@/design-system/tokens';
 
 export const filters = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
-  padding: '16px 0 12px',
+  gap: space[12],
+  padding: `${space[16]} 0 ${space[12]}`,
   borderTop: `8px solid ${vars.color.canvas}`,
   '@media': {
     [mq.md]: {
-      gap: '14px',
-      padding: '16px 20px',
+      gap: space[14],
+      padding: `${space[16]} ${space[20]}`,
       border: 0,
       borderRadius: vars.radius['2xl'],
       backgroundColor: vars.color.surface,
@@ -20,8 +20,8 @@ export const filters = style({
 
 /** 모바일에서 좌우 20px 여백. 칩 줄은 여백 안쪽에서 옆으로 넘겨요. */
 const gutter = style({
-  paddingLeft: '20px',
-  paddingRight: '20px',
+  paddingLeft: layout.gutter,
+  paddingRight: layout.gutter,
   '@media': {
     [mq.md]: { paddingLeft: 0, paddingRight: 0 },
   },
@@ -31,7 +31,7 @@ export const searchRow = style([
   gutter,
   {
     display: 'flex',
-    gap: '8px',
+    gap: space[8],
     margin: 0,
   },
 ]);
@@ -54,11 +54,11 @@ export const sortRow = style([
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
-    gap: '8px',
+    gap: space[8],
     '@media': {
       [mq.md]: {
-        gap: '12px',
-        paddingTop: '14px',
+        gap: space[12],
+        paddingTop: space[14],
         borderTop: `1px solid ${vars.color.borderSubtle}`,
       },
     },

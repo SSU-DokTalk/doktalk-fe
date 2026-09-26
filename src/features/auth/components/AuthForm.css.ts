@@ -1,27 +1,27 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, vars } from '@/design-system/tokens';
+import { fontSize, space, vars } from '@/design-system/tokens';
 
 export const form = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '14px',
+  gap: space[14],
   margin: 0,
 });
 
 export const wideForm = style({
-  gap: '20px',
+  gap: space[20],
 });
 
 export const alert = style({
   display: 'flex',
   alignItems: 'flex-start',
-  gap: '8px',
+  gap: space[8],
   margin: 0,
-  padding: '12px 14px',
+  padding: `${space[12]} ${space[14]}`,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.dangerSubtle,
   color: vars.color.danger,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.55,
 });
 
@@ -37,11 +37,11 @@ export const alertIcon = style({
   flexShrink: 0,
   width: '18px',
   height: '18px',
-  marginTop: '2px',
+  marginTop: space[2],
 });
 
 export const actions = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '10px',
+  gap: space[10],
 });

@@ -1,17 +1,24 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  mq,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 /** 모바일은 옆으로 넘기는 줄, 넓어지면 2칸 → 4칸 */
 export const grid = style({
   display: 'grid',
   gridAutoFlow: 'column',
   gridAutoColumns: 'minmax(240px, 72%)',
-  gap: '12px',
-  margin: '0 -16px',
-  padding: '0 16px 4px',
+  gap: space[12],
+  margin: `0 -${space[16]}`,
+  padding: `0 ${space[16]} ${space[4]}`,
   overflowX: 'auto',
   scrollSnapType: 'x mandatory',
-  scrollPaddingLeft: '16px',
+  scrollPaddingLeft: space[16],
   listStyle: 'none',
   scrollbarWidth: 'none',
   selectors: {
@@ -24,9 +31,12 @@ export const grid = style({
       margin: 0,
       padding: 0,
       overflow: 'visible',
-      gap: '20px',
+      gap: space[20],
     },
-    [mq.lg]: { gridTemplateColumns: 'repeat(4, minmax(0, 1fr))', gap: '24px' },
+    [mq.lg]: {
+      gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
+      gap: space[24],
+    },
   },
 });
 
@@ -66,10 +76,10 @@ export const stage = style({
 
 export const mode = style({
   position: 'absolute',
-  top: '14px',
-  left: '14px',
+  top: space[14],
+  left: space[14],
   // 좁은 카드에서 표지와 겹쳐도 배지가 위에 보이게
-  zIndex: 1,
+  zIndex: zIndex.raised,
 });
 
 export const modeIcon = style({ width: '14px', height: '14px' });
@@ -77,14 +87,14 @@ export const modeIcon = style({ width: '14px', height: '14px' });
 export const body = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
   flex: '1 1 auto',
-  padding: '16px 18px 18px',
+  padding: `${space[16]} ${space[18]} ${space[18]}`,
 });
 
 export const category = style({
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.info,
 });
 
@@ -94,8 +104,8 @@ export const title = style({
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
   minHeight: '2.8em',
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
   selectors: {
@@ -106,8 +116,8 @@ export const title = style({
 export const when = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '6px',
-  fontSize: fontSize.md,
+  gap: space[6],
+  fontSize: fontSize[14],
   color: vars.color.textTertiary,
 });
 
@@ -121,17 +131,17 @@ export const foot = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px',
+  gap: space[8],
   marginTop: 'auto',
-  paddingTop: '8px',
+  paddingTop: space[8],
 });
 
 export const price = style({
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
 });
 
 export const limit = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
 });

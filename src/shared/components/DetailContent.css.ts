@@ -1,13 +1,20 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 /* 상세 화면 본문 (요약·게시글): 제목 묶음, 본문 글자 */
 
 export const heading = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
-  padding: '16px 20px 0',
+  gap: space[12],
+  padding: `${space[16]} ${layout.gutter} 0`,
   '@media': {
     [mq.md]: { padding: 0 },
   },
@@ -16,20 +23,20 @@ export const heading = style({
 export const badges = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '6px',
+  gap: space[6],
 });
 
 export const title = style({
   margin: 0,
-  fontSize: '1.375rem',
-  fontWeight: 700,
+  fontSize: fontSize[22],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {
     [mq.md]: {
-      fontSize: '1.875rem',
+      fontSize: fontSize[30],
       lineHeight: 1.35,
       letterSpacing: '-0.9px',
     },
@@ -39,8 +46,8 @@ export const title = style({
 export const body = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '14px',
-  padding: '20px 20px 8px',
+  gap: space[14],
+  padding: `${space[20]} ${layout.gutter} ${space[8]}`,
   '@media': {
     [mq.md]: { padding: 0 },
   },
@@ -48,12 +55,12 @@ export const body = style({
 
 export const text = style({
   margin: 0,
-  fontSize: fontSize.lg,
+  fontSize: fontSize[16],
   lineHeight: 1.8,
   color: vars.color.textBody,
   whiteSpace: 'pre-wrap',
   overflowWrap: 'anywhere',
   '@media': {
-    [mq.md]: { fontSize: fontSize.xl, lineHeight: 1.85 },
+    [mq.md]: { fontSize: fontSize[17], lineHeight: 1.85 },
   },
 });

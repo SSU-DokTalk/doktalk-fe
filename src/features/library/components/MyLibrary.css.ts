@@ -1,9 +1,9 @@
 import { style } from '@vanilla-extract/css';
-import { mq, vars } from '@/design-system/tokens';
+import { layout, mq, space, vars } from '@/design-system/tokens';
 
 /** 모바일에서 책·요약을 나누는 알약 탭 줄 */
 export const tabsBar = style({
-  padding: '12px 20px 4px',
+  padding: `${space[12]} ${layout.gutter} ${space[4]}`,
   backgroundColor: vars.color.surface,
   '@media': {
     [mq.md]: { display: 'none' },
@@ -13,8 +13,8 @@ export const tabsBar = style({
 export const stack = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   '@media': {
-    [mq.md]: { gap: '16px' },
+    [mq.md]: { gap: space[16] },
   },
 });

@@ -1,16 +1,16 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, space, vars } from '@/design-system/tokens';
 
 export const root = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   minWidth: 0,
 });
 
 export const label = style({
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.text,
 });
@@ -18,8 +18,8 @@ export const label = style({
 export const selected = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
-  padding: '12px',
+  gap: space[12],
+  padding: space[12],
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.surfaceSubtle,
 });
@@ -32,15 +32,15 @@ export const bookText = style({
 });
 
 export const bookTitle = style({
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.45,
   color: vars.color.text,
   overflowWrap: 'anywhere',
 });
 
 export const bookMeta = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textSecondary,
   overflowWrap: 'anywhere',
@@ -50,7 +50,7 @@ export const results = style({
   display: 'flex',
   flexDirection: 'column',
   margin: 0,
-  padding: '4px',
+  padding: space[4],
   border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.lg,
   listStyle: 'none',
@@ -61,11 +61,11 @@ export const results = style({
 export const result = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
+  gap: space[12],
   width: '100%',
   minHeight: '64px',
   boxSizing: 'border-box',
-  padding: '8px 10px',
+  padding: `${space[8]} ${space[10]}`,
   border: 0,
   borderRadius: vars.radius.md,
   background: 'transparent',
@@ -83,14 +83,14 @@ export const result = style({
 
 export const status = style({
   margin: 0,
-  padding: '12px',
-  fontSize: fontSize.md,
+  padding: space[12],
+  fontSize: fontSize[14],
   color: vars.color.textTertiary,
 });
 
 export const error = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.danger,
 });

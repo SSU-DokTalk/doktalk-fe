@@ -1,6 +1,6 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '../../tokens/theme.css';
-import { fontSize, mq, zIndex } from '../../tokens/scale';
+import { fontSize, fontWeight, mq, space, zIndex } from '../../tokens/scale';
 
 export const positioner = style({
   zIndex: zIndex.popover,
@@ -10,7 +10,7 @@ export const positioner = style({
 export const popup = style({
   boxSizing: 'border-box',
   minWidth: '200px',
-  padding: '8px',
+  padding: space[8],
   border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.xl,
   backgroundColor: vars.color.surface,
@@ -33,14 +33,14 @@ export const popup = style({
 export const item = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
+  gap: space[10],
   boxSizing: 'border-box',
   minHeight: '44px',
-  padding: '0 10px',
+  padding: `0 ${space[10]}`,
   borderRadius: vars.radius.md,
   color: vars.color.text,
-  fontSize: fontSize.base,
-  fontWeight: 500,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.medium,
   lineHeight: 1.4,
   textDecoration: 'none',
   cursor: 'pointer',
@@ -70,7 +70,7 @@ export const radioItem = style([
       '&[data-checked]': {
         backgroundColor: vars.color.brandSubtle,
         color: vars.color.brand,
-        fontWeight: 700,
+        fontWeight: fontWeight.bold,
       },
     },
   },
@@ -85,15 +85,15 @@ globalStyle(`${indicator} svg`, { width: '18px', height: '18px' });
 
 export const separator = style({
   height: '1px',
-  margin: '6px 4px',
+  margin: `${space[6]} ${space[4]}`,
   border: 0,
   backgroundColor: vars.color.borderSubtle,
 });
 
 export const groupLabel = style({
-  padding: '8px 10px 4px',
-  fontSize: fontSize.xs,
-  fontWeight: 600,
+  padding: `${space[8]} ${space[10]} ${space[4]}`,
+  fontSize: fontSize[12],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });

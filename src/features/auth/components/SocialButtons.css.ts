@@ -1,10 +1,10 @@
 import { style, styleVariants } from '@vanilla-extract/css';
-import { fontSize, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, space, vars } from '@/design-system/tokens';
 
 export const list = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '12px',
+  gap: space[12],
   margin: 0,
   padding: 0,
   listStyle: 'none',
@@ -12,7 +12,7 @@ export const list = style({
 
 export const centered = style({
   justifyContent: 'center',
-  gap: '16px',
+  gap: space[16],
 });
 
 const base = style({
@@ -44,8 +44,8 @@ export const provider = styleVariants({
     {
       backgroundColor: '#03C75A',
       color: '#FFFFFF',
-      fontSize: '1.25rem',
-      fontWeight: 900,
+      fontSize: fontSize[20],
+      fontWeight: fontWeight.black,
     },
   ],
   kakao: [base, { backgroundColor: '#FEE500', color: '#191919' }],
@@ -55,8 +55,8 @@ export const provider = styleVariants({
       backgroundColor: vars.color.surface,
       borderColor: vars.color.borderInput,
       color: '#3C4043',
-      fontSize: '1.3125rem',
-      fontWeight: 700,
+      fontSize: fontSize[21],
+      fontWeight: fontWeight.bold,
     },
   ],
   facebook: [
@@ -64,8 +64,8 @@ export const provider = styleVariants({
     {
       backgroundColor: '#1877F2',
       color: '#FFFFFF',
-      fontSize: fontSize.xl,
-      fontWeight: 800,
+      fontSize: fontSize[17],
+      fontWeight: fontWeight.extrabold,
     },
   ],
 });

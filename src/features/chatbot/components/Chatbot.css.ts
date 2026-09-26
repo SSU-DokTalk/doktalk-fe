@@ -1,12 +1,20 @@
 import { keyframes, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars, zIndex } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 /* ---------- 여는 버튼 ---------- */
 
 export const fab = style({
   position: 'fixed',
-  right: '16px',
-  bottom: 'calc(16px + env(safe-area-inset-bottom))',
+  right: space[16],
+  bottom: `calc(${space[16]} + env(safe-area-inset-bottom))`,
   zIndex: zIndex.fab,
   display: 'flex',
   alignItems: 'center',
@@ -30,15 +38,22 @@ export const fab = style({
     },
   },
   '@media': {
-    [mq.md]: { right: '32px', bottom: '32px', width: '60px', height: '60px' },
+    [mq.md]: {
+      right: space[32],
+      bottom: space[32],
+      width: '60px',
+      height: '60px',
+    },
     [mq.reducedMotion]: { transition: 'none' },
   },
 });
 
-/** 로그인하면 모바일 하단 탭(64px) 위로 올려요. */
+/** 로그인하면 모바일 하단 탭 위로 올려요. */
 export const fabAboveTabs = style({
   '@media': {
-    [mq.belowMd]: { bottom: 'calc(80px + env(safe-area-inset-bottom))' },
+    [mq.belowMd]: {
+      bottom: `calc(${layout.bottomTabsHeight} + ${space[16]} + env(safe-area-inset-bottom))`,
+    },
   },
 });
 
@@ -58,10 +73,10 @@ export const sheet = style({
 export const header = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
+  gap: space[12],
   flexShrink: 0,
   minHeight: '68px',
-  padding: '0 8px 0 16px',
+  padding: `0 ${space[8]} 0 ${space[16]}`,
   backgroundColor: vars.color.brand,
   color: vars.color.textOnBrand,
   '@media': {
@@ -89,13 +104,13 @@ export const headerText = style({
 
 export const title = style({
   margin: 0,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
 });
 
 export const subtitle = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.4,
   // 남색 위 옅은 글자 (대비 7:1 이상)
   color: 'rgba(255, 255, 255, 0.84)',
@@ -121,19 +136,20 @@ export const close = style({
 export const log = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: space[12],
   flex: '1 1 auto',
   minHeight: 0,
   overflowY: 'auto',
   overscrollBehavior: 'contain',
-  padding: '20px 16px',
+  padding: `${space[20]} ${space[16]}`,
   backgroundColor: vars.color.canvas,
 });
 
 const bubbleBase = style({
   maxWidth: 'min(300px, 85%)',
-  padding: '11px 14px',
-  fontSize: fontSize.base,
+  // 위아래는 토큰 사이 값(11px)으로 줄 간격과 맞춰요.
+  padding: `11px ${space[14]}`,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   whiteSpace: 'pre-wrap',
   overflowWrap: 'anywhere',
@@ -144,7 +160,8 @@ export const botBubble = style([
   bubbleBase,
   {
     alignSelf: 'flex-start',
-    borderRadius: '16px 16px 16px 4px',
+    // 말꼬리 쪽 모서리만 작게
+    borderRadius: `${vars.radius.xl} ${vars.radius.xl} ${vars.radius.xl} 4px`,
     backgroundColor: vars.color.surface,
     color: vars.color.text,
   },
@@ -154,7 +171,7 @@ export const myBubble = style([
   bubbleBase,
   {
     alignSelf: 'flex-end',
-    borderRadius: '16px 16px 4px 16px',
+    borderRadius: `${vars.radius.xl} ${vars.radius.xl} 4px ${vars.radius.xl}`,
     backgroundColor: vars.color.brand,
     color: vars.color.textOnBrand,
   },
@@ -166,7 +183,7 @@ export const errorBubble = style([
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'flex-start',
-    gap: '8px',
+    gap: space[8],
     color: vars.color.danger,
   },
 ]);
@@ -181,8 +198,8 @@ export const typing = style([
   {
     display: 'flex',
     alignItems: 'center',
-    gap: '4px',
-    padding: '14px 16px',
+    gap: space[4],
+    padding: `${space[14]} ${space[16]}`,
   },
 ]);
 
@@ -205,7 +222,7 @@ export const dot = style({
 export const exchange = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: space[12],
 });
 
 export const errorText = style({
@@ -216,28 +233,29 @@ export const suggestions = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  gap: '8px',
-  marginTop: '4px',
+  gap: space[8],
+  marginTop: space[4],
 });
 
 export const suggestionsLabel = style({
   margin: 0,
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textSecondary,
 });
 
 export const suggestion = style({
   maxWidth: '100%',
   minHeight: '40px',
-  padding: '8px 16px',
+  padding: `${space[8]} ${space[16]}`,
   border: `1px solid ${vars.color.brandBorder}`,
+  // 한 줄일 때는 알약 모양, 두 줄로 늘어나도 모서리가 너무 둥글지 않은 값
   borderRadius: '22px',
   backgroundColor: vars.color.surface,
   color: vars.color.brand,
   fontFamily: vars.font.family,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.4,
   textAlign: 'left',
   cursor: 'pointer',
@@ -253,21 +271,21 @@ export const suggestion = style({
 export const form = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   flexShrink: 0,
   margin: 0,
-  padding: '12px 12px 16px',
+  padding: `${space[12]} ${space[12]} ${space[16]}`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
   backgroundColor: vars.color.surface,
   '@media': {
-    [mq.md]: { paddingBottom: '10px' },
+    [mq.md]: { paddingBottom: space[10] },
   },
 });
 
 export const inputRow = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const inputField = style({
@@ -278,7 +296,7 @@ export const inputField = style({
 /** 둥근 회색 입력칸 */
 export const input = style({
   borderRadius: vars.radius.pill,
-  paddingLeft: '18px',
+  paddingLeft: space[18],
 });
 
 export const send = style({
@@ -289,7 +307,7 @@ export const send = style({
 
 export const disclaimer = style({
   margin: 0,
-  padding: '0 6px',
-  fontSize: fontSize.xs,
+  padding: `0 ${space[6]}`,
+  fontSize: fontSize[12],
   color: vars.color.textTertiary,
 });

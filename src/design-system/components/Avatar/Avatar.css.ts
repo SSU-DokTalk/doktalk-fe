@@ -1,6 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
+import { fontWeight } from '../../tokens/scale';
 
 export const avatar = recipe({
   base: {
@@ -12,7 +13,7 @@ export const avatar = recipe({
     overflow: 'hidden',
     borderRadius: vars.radius.pill,
     fontFamily: vars.font.family,
-    fontWeight: 700,
+    fontWeight: fontWeight.bold,
     lineHeight: 1,
     userSelect: 'none',
   },

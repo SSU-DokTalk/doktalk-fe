@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { mq, zIndex } from '../../tokens/scale';
+import { fontSize, fontWeight, mq, space, zIndex } from '../../tokens/scale';
 
 export const backdrop = style({
   position: 'fixed',
@@ -121,10 +121,10 @@ export const header = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px',
+  gap: space[8],
   flexShrink: 0,
   minHeight: '64px',
-  padding: '0 12px 0 24px',
+  padding: `0 ${space[12]} 0 ${space[24]}`,
 });
 
 export const headerDivider = style({
@@ -133,22 +133,22 @@ export const headerDivider = style({
 
 export const title = style({
   margin: 0,
-  fontSize: '1.125rem',
-  fontWeight: 700,
+  fontSize: fontSize[18],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
 });
 
 export const body = style({
   flex: '1 1 auto',
-  padding: '24px',
+  padding: space[24],
 });
 
 export const footer = style({
   display: 'flex',
   justifyContent: 'flex-end',
-  gap: '8px',
+  gap: space[8],
   flexShrink: 0,
-  padding: '16px 24px 24px',
+  padding: `${space[16]} ${space[24]} ${space[24]}`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
 });

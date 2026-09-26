@@ -1,11 +1,17 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 export const rail = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
-  padding: '20px',
+  gap: space[4],
+  padding: space[20],
   borderRadius: vars.radius['2xl'],
   backgroundColor: vars.color.surface,
 });
@@ -14,14 +20,14 @@ export const head = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px',
-  marginBottom: '4px',
+  gap: space[8],
+  marginBottom: space[4],
 });
 
 export const heading = style({
   margin: 0,
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
   color: vars.color.brand,
 });
@@ -30,10 +36,10 @@ export const more = style({
   display: 'inline-flex',
   alignItems: 'center',
   minHeight: '32px',
-  padding: '0 4px',
+  padding: `0 ${space[4]}`,
   borderRadius: vars.radius.xs,
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.text,
   textDecoration: 'none',
   selectors: {
@@ -55,8 +61,8 @@ export const item = style({
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
-  padding: '12px 0',
+  gap: space[4],
+  padding: `${space[12]} 0`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
 });
 
@@ -65,8 +71,8 @@ export const title = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.45,
   letterSpacing: '-0.4px',
   color: vars.color.text,
@@ -81,7 +87,7 @@ export const link = style({
       content: '""',
       position: 'absolute',
       inset: 0,
-      zIndex: 1,
+      zIndex: zIndex.raised,
     },
     '&:hover': { color: vars.color.brand },
     '&:focus-visible::after': {
@@ -94,7 +100,7 @@ export const link = style({
 
 export const preview = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
@@ -107,9 +113,9 @@ export const preview = style({
 export const footer = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
-  margin: '4px 0 0',
-  fontSize: fontSize.sm,
+  gap: space[8],
+  margin: `${space[4]} 0 0`,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });
@@ -120,7 +126,7 @@ export const author = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
   color: vars.color.textMuted,
 });
 
@@ -133,7 +139,7 @@ export const likes = style({
 globalStyle(`${likes} svg`, { width: '13px', height: '13px' });
 
 export const price = style({
-  fontWeight: 700,
+  fontWeight: fontWeight.bold,
   color: vars.color.text,
   whiteSpace: 'nowrap',
 });
@@ -141,6 +147,6 @@ export const price = style({
 export const skeletons = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
-  paddingTop: '12px',
+  gap: space[16],
+  paddingTop: space[12],
 });

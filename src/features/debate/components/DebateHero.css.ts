@@ -1,17 +1,24 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 export const hero = style({
   display: 'flex',
   flexDirection: 'column',
   '@media': {
-    [mq.md]: { flexDirection: 'row', alignItems: 'flex-start', gap: '28px' },
+    [mq.md]: { flexDirection: 'row', alignItems: 'flex-start', gap: space[28] },
   },
 });
 
 /** 모바일은 회색 띠 안에, 데스크톱은 왼쪽에 표지 무대를 둬요. */
 export const stageBand = style({
-  padding: '4px 20px 24px',
+  padding: `${space[4]} ${layout.gutter} ${space[24]}`,
   backgroundColor: vars.color.canvas,
   '@media': {
     [mq.md]: { padding: 0, backgroundColor: 'transparent', flexShrink: 0 },
@@ -29,31 +36,31 @@ export const stage = style({
 export const body = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: space[12],
   flex: '1 1 0',
   minWidth: 0,
-  padding: '20px 20px 16px',
+  padding: `${space[20]} ${layout.gutter} ${space[16]}`,
   '@media': {
-    [mq.md]: { gap: '14px', padding: 0 },
+    [mq.md]: { gap: space[14], padding: 0 },
   },
 });
 
 export const badges = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '6px',
+  gap: space[6],
 });
 
 export const title = style({
   margin: 0,
-  fontSize: '1.375rem',
-  fontWeight: 700,
+  fontSize: fontSize[22],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {
-    [mq.md]: { fontSize: '1.75rem', letterSpacing: '-0.8px' },
+    [mq.md]: { fontSize: fontSize[28], letterSpacing: '-0.8px' },
   },
 });
 
@@ -64,17 +71,17 @@ export const title = style({
 export const info = style({
   display: 'grid',
   gridTemplateColumns: '18px max-content minmax(0, 1fr)',
-  columnGap: '12px',
+  columnGap: space[12],
   margin: '0',
-  padding: '4px 16px',
+  padding: `${space[4]} ${space[16]}`,
   border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.xl,
   '@media': {
     [mq.md]: {
-      columnGap: '10px',
-      rowGap: '10px',
-      marginTop: '4px',
-      padding: '14px 16px',
+      columnGap: space[10],
+      rowGap: space[10],
+      marginTop: space[4],
+      padding: `${space[14]} ${space[16]}`,
       border: 0,
       backgroundColor: vars.color.surfaceSubtle,
     },
@@ -110,30 +117,30 @@ globalStyle(`${infoRow} > svg`, {
 
 export const infoLabel = style({
   maxWidth: '9rem',
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.4,
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { fontSize: fontSize.sm, color: vars.color.textSecondary },
+    [mq.md]: { fontSize: fontSize[13], color: vars.color.textSecondary },
   },
 });
 
 export const infoValue = style({
   minWidth: 0,
   margin: 0,
-  padding: '6px 0',
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  padding: `${space[6]} 0`,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {
-    [mq.md]: { padding: 0, fontSize: fontSize.md },
+    [mq.md]: { padding: 0, fontSize: fontSize[14] },
   },
 });
 
 export const infoMuted = style({
-  fontWeight: 500,
+  fontWeight: fontWeight.medium,
   color: vars.color.textTertiary,
 });
 

@@ -1,5 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 /** 모바일은 흰 바탕에 구역을 회색 띠로 나누고, 데스크톱은 회색 바탕 위 흰 카드로 나눠요. */
 export const page = style({
@@ -11,9 +18,9 @@ export const page = style({
     [mq.md]: { backgroundColor: 'transparent' },
     [mq.xl]: {
       display: 'grid',
-      gridTemplateColumns: 'minmax(0, 1fr) 300px',
+      gridTemplateColumns: `minmax(0, 1fr) ${layout.railWidth}`,
       alignItems: 'start',
-      gap: '24px',
+      gap: space[24],
     },
   },
 });
@@ -23,7 +30,7 @@ export const content = style({
   flexDirection: 'column',
   minWidth: 0,
   '@media': {
-    [mq.md]: { gap: '20px' },
+    [mq.md]: { gap: space[20] },
   },
 });
 
@@ -33,36 +40,36 @@ export const header = style({
   flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '12px',
-  padding: '16px 20px 4px',
+  gap: space[12],
+  padding: `${space[16]} ${layout.gutter} ${space[4]}`,
   '@media': {
-    [mq.md]: { alignItems: 'flex-end', gap: '16px', padding: 0 },
+    [mq.md]: { alignItems: 'flex-end', gap: space[16], padding: 0 },
   },
 });
 
 export const titles = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
   minWidth: 0,
 });
 
 export const title = style({
   margin: 0,
-  fontSize: '1.375rem',
-  fontWeight: 700,
+  fontSize: fontSize[22],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
   color: vars.color.text,
   '@media': {
-    [mq.md]: { fontSize: '1.625rem', letterSpacing: '-0.7px' },
+    [mq.md]: { fontSize: fontSize[26], letterSpacing: '-0.7px' },
   },
 });
 
 export const subtitle = style({
   display: 'none',
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   color: vars.color.textTertiary,
   '@media': {
@@ -76,5 +83,5 @@ export const createLink = style({
 
 export const rail = style({
   position: 'sticky',
-  top: '96px',
+  top: layout.stickyTop,
 });

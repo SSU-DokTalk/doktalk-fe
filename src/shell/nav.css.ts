@@ -1,5 +1,13 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars, zIndex } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 const focusVisible = {
   outline: `2px solid ${vars.color.brand}`,
@@ -18,19 +26,19 @@ export const topNav = style({
 });
 
 export const topNavInner = style({
-  height: '72px',
+  height: layout.topNavHeight,
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const logoLink = style({
   display: 'flex',
   flexShrink: 0,
-  marginRight: '12px',
+  marginRight: space[12],
   borderRadius: vars.radius.sm,
   selectors: { '&:focus-visible': focusVisible },
-  '@media': { [mq.lg]: { marginRight: '28px' } },
+  '@media': { [mq.lg]: { marginRight: space[28] } },
 });
 
 export const logo = style({
@@ -43,7 +51,7 @@ export const navList = style({
   display: 'flex',
   alignItems: 'stretch',
   alignSelf: 'stretch',
-  gap: '2px',
+  gap: space[2],
   minWidth: 0,
   flexShrink: 1,
   // 몽골어처럼 긴 메뉴 이름이 좁은 화면에서 넘치면 옆으로 넘겨 봐요.
@@ -55,24 +63,24 @@ export const navList = style({
 export const navLink = style({
   display: 'flex',
   alignItems: 'center',
-  padding: '0 12px',
+  padding: `0 ${space[12]}`,
   color: vars.color.textMuted,
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   whiteSpace: 'nowrap',
   textDecoration: 'none',
   selectors: {
     '&:hover': { color: vars.color.text },
     '&[aria-current="page"]': {
       color: vars.color.brand,
-      fontWeight: 700,
+      fontWeight: fontWeight.bold,
       boxShadow: `inset 0 -3px 0 ${vars.color.brand}`,
     },
     '&:focus-visible': focusVisible,
   },
   '@media': {
-    [mq.belowLg]: { padding: '0 8px', fontSize: fontSize.md },
-    [mq.xl]: { padding: '0 14px', fontSize: fontSize.lg },
+    [mq.belowLg]: { padding: `0 ${space[8]}`, fontSize: fontSize[14] },
+    [mq.xl]: { padding: `0 ${space[14]}`, fontSize: fontSize[16] },
   },
 });
 
@@ -113,34 +121,34 @@ export const createLabel = style({
 export const actions = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
   flexShrink: 0,
 });
 
 /** 언어 버튼에 현재 언어 이름을 같이 보여줄 때 */
 export const languageTriggerLabelled = style({
   width: 'auto',
-  gap: '6px',
-  padding: '0 10px',
+  gap: space[6],
+  padding: `0 ${space[10]}`,
   fontFamily: vars.font.family,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textMuted,
 });
 
 export const profileTrigger = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
   height: '44px',
   margin: 0,
-  padding: '0 6px 0 4px',
+  padding: `0 ${space[6]} 0 ${space[4]}`,
   border: 0,
   borderRadius: vars.radius.pill,
   background: 'transparent',
   color: vars.color.text,
   fontFamily: vars.font.family,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   cursor: 'pointer',
   selectors: {
     '&:hover': { backgroundColor: vars.color.surfaceSubtle },
@@ -174,13 +182,13 @@ export const profileName = style({
 export const menuHeader = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
-  margin: '0 0 6px',
-  padding: '10px 10px 12px',
+  gap: space[10],
+  margin: `0 0 ${space[6]}`,
+  padding: `${space[10]} ${space[10]} ${space[12]}`,
   borderBottom: `1px solid ${vars.color.borderSubtle}`,
   fontFamily: vars.font.family,
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
   color: vars.color.text,
 });
 
@@ -190,12 +198,12 @@ export const mobileBar = style({
   position: 'sticky',
   top: 0,
   zIndex: zIndex.sticky,
-  height: '56px',
+  height: layout.mobileBarHeight,
   boxSizing: 'border-box',
-  padding: '0 6px 0 16px',
+  padding: `0 ${space[6]} 0 ${space[16]}`,
   display: 'flex',
   alignItems: 'center',
-  gap: '2px',
+  gap: space[2],
   backgroundColor: vars.color.surface,
   borderBottom: `1px solid ${vars.color.borderSubtle}`,
 });
@@ -217,7 +225,7 @@ export const bottomTabs = style({
   boxSizing: 'border-box',
   display: 'grid',
   gridTemplateColumns: 'repeat(5, minmax(0, 1fr))',
-  padding: '4px 4px calc(4px + env(safe-area-inset-bottom))',
+  padding: `${space[4]} ${space[4]} calc(${space[4]} + env(safe-area-inset-bottom))`,
   backgroundColor: vars.color.surface,
   borderTop: `1px solid ${vars.color.border}`,
   fontFamily: vars.font.family,
@@ -228,22 +236,26 @@ export const bottomTab = style({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '2px',
-  minHeight: '56px',
-  padding: '4px 0',
+  gap: space[2],
+  // 탭 줄 높이에서 위아래 여백을 뺀 만큼
+  minHeight: `calc(${layout.bottomTabsHeight} - 2 * ${space[4]})`,
+  padding: `${space[4]} 0`,
   borderRadius: vars.radius.md,
   color: vars.color.textTertiary,
   // 칸 너비가 화면의 1/5이라 글자도 화면 폭에 맞춰 11.2~12px 사이에서 정해져요.
   // 360px 폰까지 몽골어 탭 이름('Хэлэлцүүлэг')이 단어 중간에서 끊기지 않아요.
-  fontSize: `clamp(0.7rem, 2.9vw, ${fontSize.xs})`,
-  fontWeight: 500,
+  fontSize: `clamp(0.7rem, 2.9vw, ${fontSize[12]})`,
+  fontWeight: fontWeight.medium,
   lineHeight: 1.2,
   textAlign: 'center',
   textDecoration: 'none',
   overflowWrap: 'anywhere',
   WebkitTapHighlightColor: 'transparent',
   selectors: {
-    '&[aria-current="page"]': { color: vars.color.brand, fontWeight: 700 },
+    '&[aria-current="page"]': {
+      color: vars.color.brand,
+      fontWeight: fontWeight.bold,
+    },
     '&:focus-visible': focusVisible,
   },
 });

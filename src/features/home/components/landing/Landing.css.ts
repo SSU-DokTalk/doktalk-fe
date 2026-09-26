@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 export const page = style({
   backgroundColor: vars.color.surface,
@@ -19,18 +19,18 @@ export const heroInner = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
   gridTemplateAreas: '"text" "card" "actions"',
-  gap: '24px',
-  paddingTop: '32px',
-  paddingBottom: '32px',
+  gap: space[24],
+  paddingTop: space[32],
+  paddingBottom: space[32],
   '@media': {
     [mq.lg]: {
       gridTemplateColumns: 'minmax(0, 1.1fr) minmax(0, 1fr)',
       gridTemplateAreas: '"text card" "actions card"',
       alignItems: 'center',
-      columnGap: '48px',
-      rowGap: '28px',
-      paddingTop: '72px',
-      paddingBottom: '80px',
+      columnGap: space[48],
+      rowGap: space[28],
+      paddingTop: space[72],
+      paddingBottom: space[80],
     },
     [mq.xl]: {
       gridTemplateColumns: 'minmax(0, 620px) minmax(0, 560px)',
@@ -59,37 +59,41 @@ export const heroText = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  gap: '16px',
+  gap: space[16],
   '@media': {
-    [mq.lg]: { gap: '20px', alignSelf: 'end' },
+    [mq.lg]: { gap: space[20], alignSelf: 'end' },
   },
 });
 
 export const badge = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '6px',
+  gap: space[6],
   height: '32px',
-  padding: '0 14px',
+  padding: `0 ${space[14]}`,
   border: `1px solid ${vars.color.brandMuted}`,
   borderRadius: vars.radius.pill,
   backgroundColor: vars.color.surface,
   color: vars.color.brand,
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
 });
 
 export const badgeIcon = style({ width: '16px', height: '16px' });
 
 export const heroTitle = style({
   margin: 0,
-  fontSize: '1.875rem',
-  fontWeight: 700,
+  fontSize: fontSize[30],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.3,
   letterSpacing: '-0.9px',
   '@media': {
-    [mq.md]: { fontSize: '2.5rem', letterSpacing: '-1.2px' },
-    [mq.lg]: { fontSize: '3.25rem', lineHeight: 1.25, letterSpacing: '-1.6px' },
+    [mq.md]: { fontSize: fontSize[40], letterSpacing: '-1.2px' },
+    [mq.lg]: {
+      fontSize: fontSize[52],
+      lineHeight: 1.25,
+      letterSpacing: '-1.6px',
+    },
   },
 });
 
@@ -100,11 +104,11 @@ export const heroAccent = style({
 export const heroDescription = style({
   margin: 0,
   maxWidth: '480px',
-  fontSize: fontSize.lg,
+  fontSize: fontSize[16],
   lineHeight: 1.65,
   color: vars.color.textSecondary,
   '@media': {
-    [mq.md]: { fontSize: '1.125rem' },
+    [mq.md]: { fontSize: fontSize[18] },
   },
 });
 
@@ -112,7 +116,7 @@ export const heroActions = style({
   gridArea: 'actions',
   display: 'flex',
   flexDirection: 'column',
-  gap: '10px',
+  gap: space[10],
   '@media': {
     [mq.sm]: { flexDirection: 'row' },
     [mq.lg]: { alignSelf: 'start' },
@@ -124,7 +128,7 @@ export const heroCardArea = style({
   position: 'relative',
   '@media': {
     [mq.lg]: {
-      paddingTop: '24px',
+      paddingTop: space[24],
       selectors: {
         // 뒤에 겹친 반투명 판 (장식)
         '&::before': {
@@ -133,7 +137,7 @@ export const heroCardArea = style({
           top: 0,
           left: '30px',
           right: 0,
-          bottom: '24px',
+          bottom: space[24],
           borderRadius: vars.radius['3xl'],
           border: '1px solid rgba(255, 255, 255, 0.9)',
           backgroundColor: 'rgba(255, 255, 255, 0.6)',
@@ -162,7 +166,7 @@ export const featured = style({
     [mq.lg]: {
       minHeight: '262px',
       borderRadius: vars.radius['3xl'],
-      marginRight: '20px',
+      marginRight: space[20],
     },
   },
 });
@@ -174,7 +178,7 @@ export const featuredStage = style({
   flexShrink: 0,
   width: '38%',
   maxWidth: '210px',
-  padding: '20px 0',
+  padding: `${space[20]} 0`,
   // 회색 판(bookCoverStage)을 카드 왼쪽에 꽉 채워요.
   borderRadius: 0,
 });
@@ -182,18 +186,19 @@ export const featuredStage = style({
 export const featuredBody = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   flex: '1 1 0',
   minWidth: 0,
-  padding: '18px',
+  padding: space[18],
   '@media': {
-    [mq.md]: { gap: '10px', padding: '24px 26px' },
+    // 표지 판 옆 글 영역은 좌우를 토큰 사이 값(26px)으로 조금 더 넓혀요.
+    [mq.md]: { gap: space[10], padding: `${space[24]} 26px` },
   },
 });
 
 export const featuredLabel = style({
-  fontSize: fontSize.sm,
-  fontWeight: 700,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.bold,
   color: vars.color.info,
 });
 
@@ -202,30 +207,30 @@ export const featuredTitle = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.5px',
   selectors: {
     [`${featured}:hover &`]: { color: vars.color.brand },
   },
   '@media': {
-    [mq.md]: { fontSize: '1.375rem' },
+    [mq.md]: { fontSize: fontSize[22] },
   },
 });
 
 export const featuredMeta = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
-  fontSize: fontSize.md,
+  gap: space[4],
+  fontSize: fontSize[14],
   color: vars.color.textSecondary,
 });
 
 export const metaLine = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const metaIcon = style({
@@ -239,16 +244,16 @@ export const featuredFoot = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '12px',
+  gap: space[12],
   marginTop: 'auto',
-  paddingTop: '8px',
+  paddingTop: space[8],
 });
 
 export const featuredPrice = style({
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   '@media': {
-    [mq.md]: { fontSize: '1.25rem' },
+    [mq.md]: { fontSize: fontSize[20] },
   },
 });
 
@@ -257,14 +262,18 @@ export const fakeButton = style({
   display: 'inline-flex',
   alignItems: 'center',
   height: '40px',
-  padding: '0 16px',
+  padding: `0 ${space[16]}`,
   borderRadius: vars.radius.md,
   backgroundColor: vars.color.brand,
   color: vars.color.textOnBrand,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   '@media': {
-    [mq.md]: { height: '44px', padding: '0 18px', fontSize: fontSize.base },
+    [mq.md]: {
+      height: '44px',
+      padding: `0 ${space[18]}`,
+      fontSize: fontSize[15],
+    },
   },
 });
 
@@ -273,11 +282,15 @@ export const fakeButton = style({
 export const section = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '20px',
-  paddingTop: '40px',
-  paddingBottom: '40px',
+  gap: space[20],
+  paddingTop: space[40],
+  paddingBottom: space[40],
   '@media': {
-    [mq.md]: { gap: '28px', paddingTop: '56px', paddingBottom: '64px' },
+    [mq.md]: {
+      gap: space[28],
+      paddingTop: space[56],
+      paddingBottom: space[64],
+    },
   },
 });
 
@@ -290,33 +303,33 @@ export const sectionHead = style({
   flexWrap: 'wrap',
   alignItems: 'flex-end',
   justifyContent: 'space-between',
-  gap: '12px 24px',
+  gap: `${space[12]} ${space[24]}`,
 });
 
 export const sectionTitles = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
 });
 
 export const sectionTitle = style({
   margin: 0,
-  fontSize: '1.375rem',
-  fontWeight: 700,
+  fontSize: fontSize[22],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
   '@media': {
-    [mq.md]: { fontSize: '1.75rem', letterSpacing: '-0.8px' },
+    [mq.md]: { fontSize: fontSize[28], letterSpacing: '-0.8px' },
   },
 });
 
 export const sectionDescription = style({
   margin: 0,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.6,
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { fontSize: fontSize.base },
+    [mq.md]: { fontSize: fontSize[15] },
   },
 });
 
@@ -324,16 +337,16 @@ export const sectionTools = style({
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'center',
-  gap: '12px 20px',
+  gap: `${space[12]} ${space[20]}`,
 });
 
 export const seeAll = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '2px',
+  gap: space[2],
   minHeight: '44px',
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   color: vars.color.brand,
   textDecoration: 'none',
   selectors: {
@@ -344,9 +357,9 @@ export const seeAll = style({
 export const seeAllIcon = style({ width: '18px', height: '18px' });
 
 export const chips = style({
-  paddingTop: '8px',
+  paddingTop: space[8],
   '@media': {
-    [mq.md]: { paddingTop: '28px' },
+    [mq.md]: { paddingTop: space[28] },
   },
 });
 

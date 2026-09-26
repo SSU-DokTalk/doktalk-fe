@@ -1,13 +1,13 @@
 import { style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { fontSize } from '../../tokens/scale';
+import { fontSize, fontWeight, space } from '../../tokens/scale';
 
 export const list = recipe({
   base: {
     position: 'relative',
     display: 'flex',
-    gap: '4px',
+    gap: space[4],
     boxSizing: 'border-box',
   },
   variants: {
@@ -32,7 +32,7 @@ export const list = recipe({
         display: 'grid',
         gridAutoColumns: 'minmax(0, 1fr)',
         gridAutoFlow: 'column',
-        padding: '4px',
+        padding: space[4],
         borderRadius: vars.radius.lg,
         backgroundColor: vars.color.surfaceSubtle,
       },
@@ -51,7 +51,7 @@ export const tab = recipe({
     background: 'transparent',
     color: vars.color.textSecondary,
     fontFamily: vars.font.family,
-    fontWeight: 500,
+    fontWeight: fontWeight.medium,
     lineHeight: 1.2,
     whiteSpace: 'nowrap',
     cursor: 'pointer',
@@ -60,7 +60,10 @@ export const tab = recipe({
       '&:hover:not([data-active]):not([data-disabled])': {
         color: vars.color.text,
       },
-      '&[data-active]': { color: vars.color.brand, fontWeight: 700 },
+      '&[data-active]': {
+        color: vars.color.brand,
+        fontWeight: fontWeight.bold,
+      },
       '&[data-disabled]': {
         color: vars.color.textDisabled,
         cursor: 'not-allowed',
@@ -75,8 +78,8 @@ export const tab = recipe({
   },
   variants: {
     size: {
-      md: { height: '48px', padding: '0 12px', fontSize: fontSize.base },
-      lg: { height: '56px', padding: '0 14px', fontSize: fontSize.lg },
+      md: { height: '48px', padding: `0 ${space[12]}`, fontSize: fontSize[15] },
+      lg: { height: '56px', padding: `0 ${space[14]}`, fontSize: fontSize[16] },
     },
     fill: {
       true: { flex: '1 1 0' },
@@ -86,10 +89,11 @@ export const tab = recipe({
         // 긴 이름(몽골어)은 두 줄로 내려요.
         height: 'auto',
         minHeight: '44px',
-        padding: '4px 8px',
+        padding: `${space[4]} ${space[8]}`,
         whiteSpace: 'normal',
         textAlign: 'center',
         lineHeight: 1.3,
+        // SegmentedControl 알약과 같은 모서리
         borderRadius: '9px',
         selectors: {
           '&[data-active]': {

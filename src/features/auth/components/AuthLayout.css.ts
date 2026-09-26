@@ -1,5 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 /** 모바일은 흰 화면, 데스크톱은 옅은 남색 배경 위 가운데 카드 */
 export const page = style({
@@ -26,11 +33,14 @@ export const header = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   width: '100%',
-  maxWidth: '1328px',
-  height: '56px',
-  padding: '0 6px 0 4px',
+  maxWidth: layout.maxWidth,
+  height: layout.mobileBarHeight,
+  padding: `0 ${space[6]} 0 ${space[4]}`,
   '@media': {
-    [mq.md]: { height: '72px', padding: '0 24px' },
+    [mq.md]: {
+      height: layout.topNavHeight,
+      padding: `0 ${layout.gutterDesktop}`,
+    },
   },
 });
 
@@ -58,14 +68,14 @@ export const card = style({
   boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
-  gap: '20px',
+  gap: space[20],
   width: '100%',
-  padding: '8px 24px 32px',
+  padding: `${space[8]} ${space[24]} ${space[32]}`,
   '@media': {
     [mq.md]: {
-      gap: '22px',
-      marginTop: '32px',
-      padding: '40px',
+      gap: space[22],
+      marginTop: space[32],
+      padding: space[40],
       borderRadius: vars.radius['3xl'],
       backgroundColor: vars.color.surface,
       boxShadow: '0 12px 40px rgba(17, 24, 39, 0.08)',
@@ -95,26 +105,26 @@ export const cardLogo = style({
 export const titles = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
   '@media': {
-    [mq.md]: { gap: '6px' },
+    [mq.md]: { gap: space[6] },
   },
 });
 
 export const title = style({
   margin: 0,
-  fontSize: '1.5rem',
-  fontWeight: 700,
+  fontSize: fontSize[24],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
   '@media': {
-    [mq.md]: { fontSize: '1.625rem', letterSpacing: '-0.7px' },
+    [mq.md]: { fontSize: fontSize[26], letterSpacing: '-0.7px' },
   },
 });
 
 export const subtitle = style({
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
 });
@@ -128,10 +138,10 @@ export const footer = style({
   flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '4px 16px',
+  gap: `${space[4]} ${space[16]}`,
   minHeight: '64px',
-  padding: '12px 16px',
-  fontSize: fontSize.sm,
+  padding: `${space[12]} ${space[16]}`,
+  fontSize: fontSize[13],
   color: vars.color.textSecondary,
 });
 
@@ -147,15 +157,15 @@ export const footerLink = style({
 });
 
 export const footerEmphasis = style({
-  fontWeight: 700,
+  fontWeight: fontWeight.bold,
 });
 
 /** 가운데 줄 + 글자 (소셜 로그인, 또는 이메일로 가입) */
 export const divider = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
-  fontSize: fontSize.sm,
+  gap: space[12],
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
   selectors: {
@@ -171,13 +181,13 @@ export const divider = style({
 export const switchText = style({
   margin: 0,
   textAlign: 'center',
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
 });
 
 export const switchLink = style({
-  fontWeight: 700,
+  fontWeight: fontWeight.bold,
   color: vars.color.brand,
   textDecoration: 'none',
   selectors: {

@@ -1,40 +1,47 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 export const section = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '14px',
-  padding: '20px',
+  gap: space[14],
+  padding: space[20],
   borderTop: `8px solid ${vars.color.canvas}`,
   backgroundColor: vars.color.surface,
   // 상단 고정 내비에 제목이 가리지 않게 (#comments로 이동할 때)
-  scrollMarginTop: '72px',
+  scrollMarginTop: layout.stickyTopMobile,
   '@media': {
     [mq.md]: {
-      padding: '24px 28px 20px',
+      padding: `${space[24]} ${space[28]} ${space[20]}`,
       border: 0,
       borderRadius: vars.radius['3xl'],
-      scrollMarginTop: '96px',
+      scrollMarginTop: layout.stickyTop,
     },
   },
 });
 
 export const heading = style({
   margin: 0,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
   color: vars.color.text,
   '@media': {
-    [mq.md]: { fontSize: '1.125rem' },
+    [mq.md]: { fontSize: fontSize[18] },
   },
 });
 
 export const composer = style({
   display: 'flex',
   alignItems: 'flex-start',
-  gap: '8px',
+  gap: space[8],
   margin: 0,
 });
 
@@ -44,7 +51,7 @@ export const composerField = style({
 
 export const alert = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.danger,
 });
@@ -54,19 +61,19 @@ export const loginPrompt = style({
   flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px 12px',
+  gap: `${space[8]} ${space[12]}`,
   margin: 0,
-  padding: '12px 14px',
+  padding: `${space[12]} ${space[14]}`,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.surfaceSubtle,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   color: vars.color.textSecondary,
 });
 
 export const status = style({
   margin: 0,
-  padding: '12px 0',
-  fontSize: fontSize.md,
+  padding: `${space[12]} 0`,
+  fontSize: fontSize[14],
   color: vars.color.textTertiary,
 });
 
@@ -78,15 +85,15 @@ export const list = style({
 
 export const item = style({
   display: 'flex',
-  gap: '12px',
-  padding: '14px 0 4px',
+  gap: space[12],
+  padding: `${space[14]} 0 ${space[4]}`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
 });
 
 export const body = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
   flex: '1 1 0',
   minWidth: 0,
 });
@@ -95,24 +102,24 @@ export const meta = style({
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'baseline',
-  gap: '0 8px',
+  gap: `0 ${space[8]}`,
   lineHeight: 1.5,
 });
 
 export const author = style({
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.text,
 });
 
 export const time = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
 });
 
 export const content = style({
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   color: vars.color.textBody,
   whiteSpace: 'pre-wrap',
@@ -124,13 +131,13 @@ export const replyButton = style({
   display: 'inline-flex',
   alignItems: 'center',
   minHeight: '32px',
-  padding: '0 2px',
+  padding: `0 ${space[2]}`,
   border: 0,
   borderRadius: vars.radius.xs,
   background: 'transparent',
   fontFamily: vars.font.family,
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textTertiary,
   cursor: 'pointer',
   selectors: {
@@ -144,19 +151,19 @@ export const replyButton = style({
 
 /** 답글과 답글 입력칸은 아바타(32) + 간격(12)만큼 들여 써요. */
 export const replyForm = style({
-  padding: '4px 0 10px 44px',
+  padding: `${space[4]} 0 ${space[10]} ${space[44]}`,
 });
 
 export const replies = style({
-  margin: '4px 0 0',
-  padding: '0 0 0 44px',
+  margin: `${space[4]} 0 0`,
+  padding: `0 0 0 ${space[44]}`,
   listStyle: 'none',
 });
 
 globalStyle(`${replies} > li > ${item}`, {
-  paddingTop: '10px',
+  paddingTop: space[10],
 });
 
 export const more = style({
-  marginTop: '4px',
+  marginTop: space[4],
 });

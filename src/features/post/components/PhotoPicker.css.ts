@@ -1,18 +1,18 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 export const root = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const thumbs = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '10px',
+  gap: space[10],
   margin: 0,
-  padding: '6px 0 0',
+  padding: `${space[6]} 0 0`,
   listStyle: 'none',
 });
 
@@ -39,8 +39,8 @@ export const image = style({
 
 export const remove = style({
   position: 'absolute',
-  top: '-8px',
-  right: '-8px',
+  top: `-${space[8]}`,
+  right: `-${space[8]}`,
 });
 
 export const add = style({
@@ -48,7 +48,7 @@ export const add = style({
   flexDirection: 'column',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '4px',
+  gap: space[4],
   width: tileSize.mobile,
   height: tileSize.mobile,
   boxSizing: 'border-box',
@@ -56,8 +56,8 @@ export const add = style({
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.surface,
   fontFamily: vars.font.family,
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.brand,
   cursor: 'pointer',
   selectors: {
@@ -75,20 +75,20 @@ export const add = style({
 globalStyle(`${add} svg`, { width: '22px', height: '22px' });
 
 export const count = style({
-  fontWeight: 500,
+  fontWeight: fontWeight.medium,
   color: vars.color.textSecondary,
 });
 
 export const hint = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textSecondary,
 });
 
 export const error = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.danger,
 });

@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 export const list = style({
   margin: 0,
@@ -16,17 +16,17 @@ export const upcoming = style({
   gridTemplateColumns: '60px minmax(0, 1fr)',
   gridTemplateAreas: '"date body" "action action"',
   alignItems: 'start',
-  columnGap: '14px',
-  rowGap: '12px',
-  padding: '14px 0 16px',
+  columnGap: space[14],
+  rowGap: space[12],
+  padding: `${space[14]} 0 ${space[16]}`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
   '@media': {
     [mq.md]: {
       gridTemplateColumns: '72px minmax(0, 1fr) auto',
       gridTemplateAreas: '"date body action"',
       alignItems: 'center',
-      columnGap: '18px',
-      padding: '16px 0',
+      columnGap: space[18],
+      padding: `${space[16]} 0`,
     },
   },
 });
@@ -40,6 +40,7 @@ export const body = style({
   gridArea: 'body',
   display: 'flex',
   flexDirection: 'column',
+  // 제목과 정보 줄을 촘촘하게 붙여요 (토큰 사이 값).
   gap: '3px',
   minWidth: 0,
   color: vars.color.text,
@@ -52,41 +53,41 @@ export const body = style({
     },
   },
   '@media': {
-    [mq.md]: { gap: '4px' },
+    [mq.md]: { gap: space[4] },
   },
 });
 
 export const badges = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const dday = style({
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.info,
 });
 
 export const title = style({
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
   selectors: {
     [`${body}:hover &`]: { color: vars.color.brand },
   },
   '@media': {
-    [mq.md]: { fontSize: fontSize.xl },
+    [mq.md]: { fontSize: fontSize[17] },
   },
 });
 
 export const meta = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { fontSize: fontSize.md },
+    [mq.md]: { fontSize: fontSize[14] },
   },
 });
 
@@ -101,8 +102,8 @@ export const action = style({
 export const past = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '14px',
-  padding: '12px 0',
+  gap: space[14],
+  padding: `${space[12]} 0`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
   color: vars.color.text,
   textDecoration: 'none',
@@ -114,21 +115,21 @@ export const past = style({
     },
   },
   '@media': {
-    [mq.md]: { gap: '16px', padding: '14px 0' },
+    [mq.md]: { gap: space[16], padding: `${space[14]} 0` },
   },
 });
 
 export const pastText = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px',
+  gap: space[2],
   flex: '1 1 0',
   minWidth: 0,
 });
 
 export const pastTitle = style({
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.45,
   letterSpacing: '-0.3px',
   overflow: 'hidden',
@@ -138,7 +139,7 @@ export const pastTitle = style({
     [`${past}:hover &`]: { color: vars.color.brand },
   },
   '@media': {
-    [mq.md]: { fontSize: fontSize.lg, whiteSpace: 'normal' },
+    [mq.md]: { fontSize: fontSize[16], whiteSpace: 'normal' },
   },
 });
 
@@ -153,31 +154,31 @@ export const empty = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  gap: '4px',
-  padding: '14px 0 16px',
+  gap: space[4],
+  padding: `${space[14]} 0 ${space[16]}`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
 });
 
 export const emptyTitle = style({
   margin: 0,
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textSecondary,
 });
 
 export const emptyDescription = style({
   margin: 0,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   color: vars.color.textTertiary,
 });
 
 export const emptyLink = style({
-  marginTop: '8px',
+  marginTop: space[8],
 });
 
 export const notice = style({
   margin: 0,
-  padding: '10px 0 14px',
-  fontSize: fontSize.sm,
+  padding: `${space[10]} 0 ${space[14]}`,
+  fontSize: fontSize[13],
   color: vars.color.danger,
 });

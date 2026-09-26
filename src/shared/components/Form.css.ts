@@ -1,16 +1,28 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  inputFontSize,
+  layout,
+  mq,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
+
+/** 모바일 폼 좌우 안쪽 여백. 구분 띠와 저장 버튼 줄은 이만큼 밖으로 늘려 화면 끝까지 채워요. */
+const inset = layout.gutter;
 
 export const form = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
+  gap: space[16],
   margin: 0,
-  padding: '20px 20px 0',
+  padding: `${space[20]} ${inset} 0`,
   backgroundColor: vars.color.surface,
   '@media': {
     [mq.md]: {
-      padding: '32px',
+      padding: space[32],
       borderRadius: vars.radius['3xl'],
     },
   },
@@ -19,38 +31,38 @@ export const form = style({
 export const fieldset = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '18px',
+  gap: space[18],
   minWidth: 0,
   margin: 0,
   padding: 0,
   border: 0,
   '@media': {
-    [mq.md]: { gap: '20px' },
+    [mq.md]: { gap: space[20] },
   },
 });
 
 export const legend = style({
   padding: 0,
-  marginBottom: '14px',
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  marginBottom: space[14],
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
   color: vars.color.text,
   '@media': {
-    [mq.md]: { marginBottom: '16px', fontSize: fontSize.xl },
+    [mq.md]: { marginBottom: space[16], fontSize: fontSize[17] },
   },
 });
 
 /** 모바일은 회색 띠, 데스크톱은 가는 선으로 구역을 나눠요. */
 export const divider = style({
   height: '8px',
-  margin: '12px -20px',
+  margin: `${space[12]} -${inset}`,
   border: 0,
   backgroundColor: vars.color.canvas,
   '@media': {
     [mq.md]: {
       height: '1px',
-      margin: '16px 0',
+      margin: `${space[16]} 0`,
       backgroundColor: vars.color.borderSubtle,
     },
   },
@@ -59,27 +71,27 @@ export const divider = style({
 export const group = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   minWidth: 0,
 });
 
 export const label = style({
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.text,
 });
 
 export const hint = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });
 
 export const error = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.danger,
 });
@@ -87,9 +99,12 @@ export const error = style({
 export const twoColumns = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
-  gap: '18px',
+  gap: space[18],
   '@media': {
-    [mq.sm]: { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px' },
+    [mq.sm]: {
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+      gap: space[12],
+    },
   },
 });
 
@@ -101,7 +116,7 @@ export const modeControl = style({
 export const modeOption = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '6px',
+  gap: space[6],
 });
 
 globalStyle(`${modeOption} svg`, { width: '16px', height: '16px' });
@@ -109,19 +124,19 @@ globalStyle(`${modeOption} svg`, { width: '16px', height: '16px' });
 export const stepper = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const stepperInput = style({
   width: '72px',
   height: '48px',
   boxSizing: 'border-box',
-  padding: '0 8px',
+  padding: `0 ${space[8]}`,
   border: `1px solid ${vars.color.borderInput}`,
   borderRadius: vars.radius.lg,
   fontFamily: vars.font.family,
-  fontSize: '16px',
-  fontWeight: 600,
+  fontSize: inputFontSize,
+  fontWeight: fontWeight.semibold,
   textAlign: 'center',
   color: vars.color.text,
   outline: 'none',
@@ -137,8 +152,8 @@ export const stepperInput = style({
 });
 
 export const unit = style({
-  paddingRight: '10px',
-  fontSize: fontSize.base,
+  paddingRight: space[10],
+  fontSize: fontSize[15],
   color: vars.color.textSecondary,
   whiteSpace: 'nowrap',
 });
@@ -146,7 +161,7 @@ export const unit = style({
 export const priceGroup = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px',
+  gap: space[2],
   minWidth: 0,
 });
 
@@ -155,21 +170,21 @@ export const notice = style({
   flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px 12px',
+  gap: `${space[8]} ${space[12]}`,
   margin: 0,
-  padding: '10px 14px',
+  padding: `${space[10]} ${space[14]}`,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.infoSubtle,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   color: vars.color.info,
 });
 
 export const alert = style({
   margin: 0,
-  padding: '12px 14px',
+  padding: `${space[12]} ${space[14]}`,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.dangerSubtle,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.5,
   color: vars.color.danger,
   outline: 'none',
@@ -181,13 +196,13 @@ export const alert = style({
  */
 export const actions = style({
   position: 'sticky',
-  bottom: 'calc(64px + env(safe-area-inset-bottom))',
-  zIndex: 1,
+  bottom: `calc(${layout.bottomTabsHeight} + env(safe-area-inset-bottom))`,
+  zIndex: zIndex.raised,
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '8px',
-  margin: '8px -20px 0',
-  padding: '12px 16px',
+  gap: space[8],
+  margin: `${space[8]} -${inset} 0`,
+  padding: `${space[12]} ${space[16]}`,
   borderTop: `1px solid ${vars.color.border}`,
   backgroundColor: vars.color.surface,
   boxShadow: '0 -6px 16px rgba(17, 24, 39, 0.05)',
@@ -195,7 +210,7 @@ export const actions = style({
     [mq.md]: {
       position: 'static',
       justifyContent: 'flex-end',
-      margin: '8px 0 0',
+      margin: `${space[8]} 0 0`,
       padding: 0,
       border: 0,
       boxShadow: 'none',
@@ -217,9 +232,9 @@ globalStyle(`${actions} > *`, {
 export const paywallDivider = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  gap: space[10],
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.brand,
   selectors: {
     '&::before, &::after': {
@@ -234,7 +249,7 @@ export const paywallDivider = style({
 export const paywallDividerLabel = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '4px',
+  gap: space[4],
   whiteSpace: 'nowrap',
 });
 

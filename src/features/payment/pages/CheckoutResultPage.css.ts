@@ -1,22 +1,29 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 export const card = style({
   boxSizing: 'border-box',
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '20px',
+  gap: space[20],
   width: '100%',
   maxWidth: '520px',
   margin: '0 auto',
-  padding: '32px 20px',
+  padding: `${space[32]} ${layout.gutter}`,
   backgroundColor: vars.color.surface,
   textAlign: 'center',
   '@media': {
     [mq.md]: {
-      marginTop: '24px',
-      padding: '40px',
+      marginTop: space[24],
+      padding: space[40],
       borderRadius: vars.radius['3xl'],
     },
   },
@@ -44,20 +51,20 @@ export const iconFail = style({
 export const texts = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '6px',
+  gap: space[6],
 });
 
 export const title = style({
   margin: 0,
-  fontSize: '1.5rem',
-  fontWeight: 700,
+  fontSize: fontSize[24],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
 });
 
 export const lead = style({
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
 });
@@ -67,7 +74,7 @@ export const details = style({
   display: 'flex',
   flexDirection: 'column',
   margin: 0,
-  padding: '4px 20px',
+  padding: `${space[4]} ${space[20]}`,
   borderRadius: vars.radius.xl,
   backgroundColor: vars.color.surfaceSubtle,
   textAlign: 'left',
@@ -76,9 +83,9 @@ export const details = style({
 export const detail = style({
   display: 'grid',
   gridTemplateColumns: '96px minmax(0, 1fr)',
-  gap: '12px',
-  padding: '12px 0',
-  fontSize: fontSize.md,
+  gap: space[12],
+  padding: `${space[12]} 0`,
+  fontSize: fontSize[14],
   selectors: {
     '&:not(:last-child)': { borderBottom: `1px solid ${vars.color.border}` },
   },
@@ -90,7 +97,7 @@ export const term = style({
 
 export const value = style({
   margin: 0,
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
   color: vars.color.text,
   overflowWrap: 'anywhere',
 });
@@ -99,5 +106,5 @@ export const actions = style({
   alignSelf: 'stretch',
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
 });

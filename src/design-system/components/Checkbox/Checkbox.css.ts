@@ -1,15 +1,15 @@
 import { style } from '@vanilla-extract/css';
 import { vars } from '../../tokens/theme.css';
-import { fontSize } from '../../tokens/scale';
+import { fontSize, space } from '../../tokens/scale';
 
 /** 라벨 전체를 눌러도 체크돼요. 누르는 영역은 44px 이상이에요. */
 export const root = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
   minHeight: '44px',
   fontFamily: vars.font.family,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.5,
   color: vars.color.textMuted,
   cursor: 'pointer',

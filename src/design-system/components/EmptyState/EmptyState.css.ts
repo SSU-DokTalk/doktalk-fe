@@ -1,13 +1,13 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '../../tokens/theme.css';
-import { fontSize } from '../../tokens/scale';
+import { fontSize, fontWeight, space } from '../../tokens/scale';
 
 export const root = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '10px',
-  padding: '36px 24px',
+  gap: space[10],
+  padding: `${space[36]} ${space[24]}`,
   textAlign: 'center',
   fontFamily: vars.font.family,
 });
@@ -15,7 +15,7 @@ export const root = style({
 export const icon = style({
   width: '64px',
   height: '64px',
-  marginBottom: '6px',
+  marginBottom: space[6],
   borderRadius: vars.radius.pill,
   display: 'flex',
   alignItems: 'center',
@@ -37,8 +37,8 @@ export const iconTone = {
 
 export const title = style({
   margin: 0,
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.45,
   letterSpacing: '-0.4px',
   color: vars.color.text,
@@ -47,15 +47,15 @@ export const title = style({
 export const description = style({
   margin: 0,
   maxWidth: '320px',
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
 });
 
 export const actions = style({
-  marginTop: '8px',
+  marginTop: space[8],
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'center',
-  gap: '8px',
+  gap: space[8],
 });

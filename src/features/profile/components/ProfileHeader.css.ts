@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 /** 모바일은 흰 띠, 데스크톱은 둥근 흰 카드 (탭까지 한 카드) */
 export const header = style({
@@ -19,17 +19,17 @@ export const top = style({
   gridTemplateColumns: '72px minmax(0, 1fr)',
   gridTemplateAreas: '"avatar info" "intro intro" "actions actions"',
   alignItems: 'center',
-  columnGap: '16px',
-  rowGap: '12px',
-  padding: '20px',
+  columnGap: space[16],
+  rowGap: space[12],
+  padding: space[20],
   '@media': {
     [mq.md]: {
       gridTemplateColumns: '96px minmax(0, 1fr) auto',
       gridTemplateAreas: '"avatar info actions" "avatar intro actions"',
       alignItems: 'start',
-      columnGap: '24px',
-      rowGap: '4px',
-      padding: '32px 32px 24px',
+      columnGap: space[24],
+      rowGap: space[4],
+      padding: `${space[32]} ${space[32]} ${space[24]}`,
     },
   },
 });
@@ -42,28 +42,28 @@ export const info = style({
   flexDirection: 'column',
   minWidth: 0,
   '@media': {
-    [mq.md]: { gap: '6px' },
+    [mq.md]: { gap: space[6] },
   },
 });
 
 export const name = style({
   margin: 0,
-  fontSize: '1.25rem',
-  fontWeight: 700,
+  fontSize: fontSize[20],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.5px',
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {
-    [mq.md]: { fontSize: '1.5rem', letterSpacing: '-0.6px' },
+    [mq.md]: { fontSize: fontSize[24], letterSpacing: '-0.6px' },
   },
 });
 
 export const counts = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '4px',
-  marginLeft: '-8px',
+  gap: space[4],
+  marginLeft: `-${space[8]}`,
 });
 
 /** 팔로워·팔로잉 숫자. 누르면 목록이 떠요 (로그아웃이면 글자만). */
@@ -71,16 +71,16 @@ export const count = style({
   display: 'inline-flex',
   alignItems: 'center',
   minHeight: '44px',
-  padding: '0 8px',
+  padding: `0 ${space[8]}`,
   border: 0,
   borderRadius: vars.radius.sm,
   background: 'transparent',
   color: vars.color.textSecondary,
   fontFamily: vars.font.family,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   whiteSpace: 'nowrap',
   '@media': {
-    [mq.md]: { minHeight: '36px', fontSize: fontSize.base },
+    [mq.md]: { minHeight: '36px', fontSize: fontSize[15] },
   },
 });
 
@@ -96,7 +96,7 @@ export const countButton = style({
 });
 
 export const countNumber = style({
-  fontWeight: 700,
+  fontWeight: fontWeight.bold,
   color: vars.color.text,
 });
 
@@ -104,7 +104,7 @@ export const intro = style({
   gridArea: 'intro',
   margin: 0,
   maxWidth: '520px',
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.65,
   color: vars.color.textBody,
   whiteSpace: 'pre-wrap',
@@ -118,7 +118,7 @@ export const introEmpty = style({
 export const actions = style({
   gridArea: 'actions',
   display: 'flex',
-  gap: '8px',
+  gap: space[8],
   '@media': {
     [mq.md]: { flexShrink: 0 },
   },
@@ -133,10 +133,10 @@ export const mainAction = style({
 });
 
 export const tabs = style({
-  padding: '0 8px',
+  padding: `0 ${space[8]}`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
   '@media': {
     [mq.belowMd]: { borderBottom: `1px solid ${vars.color.border}` },
-    [mq.md]: { padding: '0 20px' },
+    [mq.md]: { padding: `0 ${space[20]}` },
   },
 });

@@ -1,13 +1,13 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 export const row = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
-  marginTop: '2px',
+  gap: space[10],
+  marginTop: space[2],
   '@media': {
-    [mq.md]: { gap: '12px', marginTop: 0 },
+    [mq.md]: { gap: space[12], marginTop: 0 },
   },
 });
 
@@ -35,8 +35,8 @@ export const name = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
 });
 
@@ -45,7 +45,7 @@ globalStyle(`${link}:hover ${name}`, {
 });
 
 export const meta = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });
@@ -60,5 +60,5 @@ export const spacer = style({
 export const actions = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '2px',
+  gap: space[2],
 });

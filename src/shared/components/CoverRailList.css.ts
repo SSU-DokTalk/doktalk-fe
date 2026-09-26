@@ -1,11 +1,17 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 export const section = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
-  padding: '20px',
+  gap: space[4],
+  padding: space[20],
   borderRadius: vars.radius['2xl'],
   backgroundColor: vars.color.surface,
 });
@@ -14,18 +20,18 @@ export const head = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px',
-  marginBottom: '4px',
+  gap: space[8],
+  marginBottom: space[4],
 });
 
 export const more = style({
   display: 'inline-flex',
   alignItems: 'center',
   minHeight: '32px',
-  padding: '0 4px',
+  padding: `0 ${space[4]}`,
   borderRadius: vars.radius.xs,
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.text,
   textDecoration: 'none',
   selectors: {
@@ -39,8 +45,8 @@ export const more = style({
 
 export const heading = style({
   margin: 0,
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
   color: vars.color.brand,
 });
@@ -55,15 +61,15 @@ export const item = style({
   position: 'relative',
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
-  padding: '12px 0',
+  gap: space[12],
+  padding: `${space[12]} 0`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
 });
 
 export const body = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px',
+  gap: space[2],
   flex: '1 1 0',
   minWidth: 0,
 });
@@ -72,8 +78,8 @@ export const link = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontSize: fontSize.md,
-  fontWeight: 700,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.45,
   color: vars.color.text,
   textDecoration: 'none',
@@ -83,7 +89,7 @@ export const link = style({
       content: '""',
       position: 'absolute',
       inset: 0,
-      zIndex: 1,
+      zIndex: zIndex.raised,
     },
     '&:hover': { color: vars.color.brand },
     '&:focus-visible::after': {
@@ -95,7 +101,7 @@ export const link = style({
 });
 
 export const meta = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });

@@ -1,11 +1,11 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, space, vars } from '@/design-system/tokens';
 
 export const files = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
-  margin: '6px 0 0',
+  gap: space[8],
+  margin: `${space[6]} 0 0`,
   padding: 0,
   listStyle: 'none',
 });
@@ -13,18 +13,18 @@ export const files = style({
 export const fileButton = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
+  gap: space[12],
   width: '100%',
   maxWidth: '480px',
   minHeight: '52px',
   boxSizing: 'border-box',
-  padding: '0 14px',
+  padding: `0 ${space[14]}`,
   border: 0,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.surfaceSubtle,
   fontFamily: vars.font.family,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.text,
   textAlign: 'start',
   cursor: 'pointer',

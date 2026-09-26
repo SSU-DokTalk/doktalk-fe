@@ -1,16 +1,16 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 export const root = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   minWidth: 0,
 });
 
 export const label = style({
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.text,
 });
@@ -18,9 +18,9 @@ export const label = style({
 export const addRow = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   '@media': {
-    [mq.md]: { flexDirection: 'row', alignItems: 'center', gap: '12px' },
+    [mq.md]: { flexDirection: 'row', alignItems: 'center', gap: space[12] },
   },
 });
 
@@ -28,15 +28,15 @@ export const addButton = style({
   display: 'inline-flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '6px',
+  gap: space[6],
   minHeight: '48px',
-  padding: '0 18px',
+  padding: `0 ${space[18]}`,
   border: `1px dashed ${vars.color.borderInput}`,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.surface,
   fontFamily: vars.font.family,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.brand,
   cursor: 'pointer',
   selectors: {
@@ -55,19 +55,19 @@ export const addButton = style({
 globalStyle(`${addButton} svg`, { width: '18px', height: '18px' });
 
 export const count = style({
-  fontWeight: 500,
+  fontWeight: fontWeight.medium,
   color: vars.color.textSecondary,
 });
 
 export const hint = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textSecondary,
 });
 
 export const error = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.danger,
 });
@@ -75,7 +75,7 @@ export const error = style({
 export const list = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   margin: 0,
   padding: 0,
   listStyle: 'none',
@@ -84,9 +84,9 @@ export const list = style({
 export const row = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
+  gap: space[10],
   minHeight: '48px',
-  padding: '0 4px 0 14px',
+  padding: `0 ${space[4]} 0 ${space[14]}`,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.surfaceSubtle,
 });
@@ -104,14 +104,14 @@ export const name = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.text,
 });
 
 export const size = style({
   flexShrink: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   color: vars.color.textSecondary,
 });
 

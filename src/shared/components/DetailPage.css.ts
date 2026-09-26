@@ -1,5 +1,12 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 export const page = style({
   backgroundColor: vars.color.surface,
@@ -9,9 +16,9 @@ export const page = style({
     [mq.md]: { backgroundColor: 'transparent' },
     [mq.xl]: {
       display: 'grid',
-      gridTemplateColumns: 'minmax(0, 1fr) 300px',
+      gridTemplateColumns: `minmax(0, 1fr) ${layout.railWidth}`,
       alignItems: 'start',
-      gap: '24px',
+      gap: space[24],
     },
   },
 });
@@ -21,7 +28,7 @@ export const content = style({
   flexDirection: 'column',
   minWidth: 0,
   '@media': {
-    [mq.md]: { gap: '16px' },
+    [mq.md]: { gap: space[16] },
   },
 });
 
@@ -30,8 +37,8 @@ export const article = style({
   flexDirection: 'column',
   '@media': {
     [mq.md]: {
-      gap: '24px',
-      padding: '28px 32px',
+      gap: space[24],
+      padding: `${space[28]} ${space[32]}`,
       borderRadius: vars.radius['3xl'],
       backgroundColor: vars.color.surface,
     },
@@ -42,13 +49,13 @@ export const article = style({
 export const topRow = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '2px',
-  padding: '6px 6px 0',
+  gap: space[2],
+  padding: `${space[6]} ${space[6]} 0`,
   backgroundColor: vars.color.canvas,
   '@media': {
     [mq.md]: {
       padding: 0,
-      marginBottom: '-8px',
+      marginBottom: `-${space[8]}`,
       backgroundColor: 'transparent',
     },
   },
@@ -57,12 +64,12 @@ export const topRow = style({
 export const backLink = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '4px',
+  gap: space[4],
   minHeight: '44px',
-  padding: '0 10px 0 6px',
+  padding: `0 ${space[10]} 0 ${space[6]}`,
   borderRadius: vars.radius.md,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textSecondary,
   textDecoration: 'none',
   selectors: {
@@ -73,7 +80,7 @@ export const backLink = style({
     },
   },
   '@media': {
-    [mq.md]: { minHeight: '32px', padding: '0 6px 0 0' },
+    [mq.md]: { minHeight: '32px', padding: `0 ${space[6]} 0 0` },
   },
 });
 
@@ -89,78 +96,81 @@ export const topActions = style({
 export const intro = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '10px',
-  padding: '8px 20px 24px',
+  gap: space[10],
+  padding: `${space[8]} ${layout.gutter} ${space[24]}`,
   '@media': {
-    [mq.md]: { gap: '12px', padding: 0 },
+    [mq.md]: { gap: space[12], padding: 0 },
   },
 });
 
 export const sectionTitle = style({
   margin: 0,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
   color: vars.color.text,
   '@media': {
-    [mq.md]: { fontSize: '1.125rem' },
+    [mq.md]: { fontSize: fontSize[18] },
   },
 });
 
 export const introText = style({
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.75,
   color: vars.color.textBody,
   whiteSpace: 'pre-wrap',
   overflowWrap: 'anywhere',
   '@media': {
-    [mq.md]: { fontSize: fontSize.lg, lineHeight: 1.8 },
+    [mq.md]: { fontSize: fontSize[16], lineHeight: 1.8 },
   },
 });
 
 export const footer = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '4px',
-  padding: '12px 10px 16px',
+  gap: space[4],
+  padding: `${space[12]} ${space[10]} ${space[16]}`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
   '@media': {
-    [mq.md]: { padding: '16px 0 0', marginLeft: '-10px' },
+    [mq.md]: { padding: `${space[16]} 0 0`, marginLeft: `-${space[10]}` },
   },
 });
 
 export const rail = style({
   position: 'sticky',
-  top: '96px',
+  top: layout.stickyTop,
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
+  gap: space[16],
 });
 
 export const skeleton = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
-  padding: '20px',
+  gap: space[16],
+  padding: space[20],
   backgroundColor: vars.color.surface,
   '@media': {
-    [mq.md]: { padding: '28px 32px', borderRadius: vars.radius['3xl'] },
+    [mq.md]: {
+      padding: `${space[28]} ${space[32]}`,
+      borderRadius: vars.radius['3xl'],
+    },
   },
 });
 
 export const skeletonHero = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
+  gap: space[16],
   '@media': {
-    [mq.md]: { flexDirection: 'row', gap: '28px' },
+    [mq.md]: { flexDirection: 'row', gap: space[28] },
   },
 });
 
 export const skeletonLines = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: space[12],
   flex: '1 1 0',
 });

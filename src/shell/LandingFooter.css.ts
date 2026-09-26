@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 /** 어두운 바탕 위 보조 글자 (대비 7:1 이상) */
 const soft = 'rgba(255, 255, 255, 0.8)';
@@ -17,20 +17,20 @@ export const footer = style({
 export const inner = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '32px',
-  paddingTop: '40px',
-  paddingBottom: '32px',
+  gap: space[32],
+  paddingTop: space[40],
+  paddingBottom: space[32],
   '@media': {
-    [mq.md]: { paddingTop: '48px' },
+    [mq.md]: { paddingTop: space[48] },
   },
 });
 
 export const columns = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-  gap: '28px 24px',
+  gap: `${space[28]} ${space[24]}`,
   '@media': {
-    [mq.lg]: { gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: '32px' },
+    [mq.lg]: { gridTemplateColumns: '2fr 1fr 1fr 1fr', gap: space[32] },
   },
 });
 
@@ -38,7 +38,7 @@ export const brand = style({
   gridColumn: '1 / -1',
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: space[12],
   '@media': {
     [mq.lg]: { gridColumn: 'auto' },
   },
@@ -46,20 +46,20 @@ export const brand = style({
 
 export const brandName = style({
   margin: 0,
-  fontSize: '1.25rem',
-  fontWeight: 700,
+  fontSize: fontSize[20],
+  fontWeight: fontWeight.bold,
 });
 
 export const description = style({
   margin: 0,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.7,
   color: soft,
 });
 
 export const contact = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.6,
   color: faint,
 });
@@ -67,20 +67,20 @@ export const contact = style({
 export const group = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '6px',
+  gap: space[6],
 });
 
 export const groupTitle = style({
-  margin: '0 0 4px',
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  margin: `0 0 ${space[4]}`,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
 });
 
 export const link = style({
   display: 'inline-flex',
   alignItems: 'center',
   minHeight: '28px',
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   color: soft,
   textDecoration: 'none',
   selectors: {
@@ -88,6 +88,7 @@ export const link = style({
     '&:focus-visible': {
       outline: `2px solid ${vars.color.inverseText}`,
       outlineOffset: '2px',
+      // 글자 링크의 포커스 링은 작게 둥글려요.
       borderRadius: '4px',
     },
   },
@@ -104,7 +105,7 @@ export const languageButton = style([
     textAlign: 'left',
     selectors: {
       '&[aria-pressed="true"]': {
-        fontWeight: 700,
+        fontWeight: fontWeight.bold,
         color: vars.color.inverseText,
       },
     },
@@ -115,9 +116,9 @@ export const bottom = style({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'space-between',
-  gap: '8px 16px',
-  paddingTop: '20px',
+  gap: `${space[8]} ${space[16]}`,
+  paddingTop: space[20],
   borderTop: '1px solid rgba(255, 255, 255, 0.14)',
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   color: faint,
 });

@@ -1,7 +1,7 @@
 import { style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { typeScale } from '../../tokens/scale';
+import { fontWeight, typeScale } from '../../tokens/scale';
 
 export const text = recipe({
   base: {
@@ -23,11 +23,11 @@ export const text = recipe({
       inherit: { color: 'inherit' },
     },
     weight: {
-      regular: { fontWeight: 400 },
-      medium: { fontWeight: 500 },
-      semibold: { fontWeight: 600 },
-      bold: { fontWeight: 700 },
-      heavy: { fontWeight: 800 },
+      regular: { fontWeight: fontWeight.regular },
+      medium: { fontWeight: fontWeight.medium },
+      semibold: { fontWeight: fontWeight.semibold },
+      bold: { fontWeight: fontWeight.bold },
+      heavy: { fontWeight: fontWeight.extrabold },
     },
     align: {
       start: { textAlign: 'start' },

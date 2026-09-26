@@ -1,5 +1,6 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
+import { space } from '../../tokens/scale';
 
 export const card = recipe({
   base: {
@@ -10,10 +11,10 @@ export const card = recipe({
   variants: {
     padding: {
       none: { padding: 0 },
-      sm: { padding: '16px' },
-      md: { padding: '20px' },
-      lg: { padding: '24px' },
-      xl: { padding: '32px' },
+      sm: { padding: space[16] },
+      md: { padding: space[20] },
+      lg: { padding: space[24] },
+      xl: { padding: space[32] },
     },
     radius: {
       /** 카드 안의 작은 카드 */

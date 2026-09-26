@@ -1,18 +1,19 @@
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { fontSize } from '../../tokens/scale';
+import { fontSize, fontWeight, space } from '../../tokens/scale';
 
 export const root = recipe({
   base: {
     display: 'inline-flex',
-    gap: '2px',
+    gap: space[2],
     maxWidth: '100%',
     boxSizing: 'border-box',
   },
   variants: {
     size: {
+      // 작은 트랙은 여백 3px, 모서리 11px (안쪽 알약 8px + 여백 3px)
       sm: { padding: '3px', borderRadius: '11px' },
-      md: { padding: '4px', borderRadius: vars.radius.lg },
+      md: { padding: space[4], borderRadius: vars.radius.lg },
     },
     /** 흰 카드 위에서는 surface, 회색 페이지 위에서는 canvas */
     on: {
@@ -40,12 +41,12 @@ export const item = recipe({
     flex: '1 1 auto',
     minHeight: '34px',
     margin: 0,
-    paddingBlock: '4px',
+    paddingBlock: space[4],
     border: 0,
     backgroundColor: 'transparent',
     color: vars.color.textSecondary,
     fontFamily: vars.font.family,
-    fontWeight: 500,
+    fontWeight: fontWeight.medium,
     lineHeight: 1.2,
     textWrap: 'balance',
     cursor: 'pointer',
@@ -55,7 +56,7 @@ export const item = recipe({
       '&[data-pressed]': {
         backgroundColor: vars.color.surface,
         color: vars.color.brand,
-        fontWeight: 600,
+        fontWeight: fontWeight.semibold,
         boxShadow: '0 1px 3px rgba(17, 24, 39, 0.1)',
       },
       '&:focus-visible': {
@@ -66,8 +67,17 @@ export const item = recipe({
   },
   variants: {
     size: {
-      sm: { paddingInline: '11px', borderRadius: '8px', fontSize: fontSize.sm },
-      md: { paddingInline: '14px', borderRadius: '9px', fontSize: fontSize.md },
+      sm: {
+        paddingInline: '11px',
+        borderRadius: vars.radius.sm,
+        fontSize: fontSize[13],
+      },
+      md: {
+        paddingInline: space[14],
+        // 트랙 모서리(12px)보다 조금 작게. Tabs의 segmented 알약과 같은 값이에요.
+        borderRadius: '9px',
+        fontSize: fontSize[14],
+      },
     },
   },
   defaultVariants: {

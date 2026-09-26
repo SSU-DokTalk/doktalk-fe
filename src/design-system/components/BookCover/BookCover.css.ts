@@ -1,5 +1,6 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '../../tokens/theme.css';
+import { fontWeight } from '../../tokens/scale';
 
 export const cover = style({
   position: 'relative',
@@ -45,7 +46,7 @@ export const image = style({
 });
 
 export const fallbackTitle = style({
-  fontWeight: 800,
+  fontWeight: fontWeight.extrabold,
   lineHeight: 1.2,
   letterSpacing: '-0.3px',
   overflowWrap: 'anywhere',
@@ -56,7 +57,7 @@ export const fallbackTitle = style({
 });
 
 export const fallbackAuthor = style({
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
   whiteSpace: 'nowrap',
   overflow: 'hidden',
   textOverflow: 'ellipsis',
@@ -71,11 +72,28 @@ export const stage = style({
   background: 'linear-gradient(180deg, #F5F4F3 0%, #E9E9E9 100%)',
 });
 
+/**
+ * 표지 너비에 비례하는 안쪽 여백과 글자 크기 (너비의 %, 최소 px).
+ * 고정 너비 표지는 BookCover.tsx가 px로, 칸을 채우는 표지는 아래 CSS가 cqw로 같은 비율을 써요.
+ */
+export const proportions = {
+  padding: { percent: 10, min: 6 },
+  title: { percent: 13, min: 9 },
+  author: { percent: 7.5, min: 7 },
+};
+
+const fluid = ({ percent, min }: { percent: number; min: number }) =>
+  `max(${min}px, ${percent}cqw)`;
+
 /** 칸을 채우는 표지. 안쪽 여백·글자 크기를 표지 너비(cqw)에 맞춰요. */
 export const fill = style({
   containerType: 'inline-size',
 });
 
-globalStyle(`${fill} ${art}`, { padding: 'max(6px, 10cqw)' });
-globalStyle(`${fill} ${fallbackTitle}`, { fontSize: 'max(9px, 13cqw)' });
-globalStyle(`${fill} ${fallbackAuthor}`, { fontSize: 'max(7px, 7.5cqw)' });
+globalStyle(`${fill} ${art}`, { padding: fluid(proportions.padding) });
+globalStyle(`${fill} ${fallbackTitle}`, {
+  fontSize: fluid(proportions.title),
+});
+globalStyle(`${fill} ${fallbackAuthor}`, {
+  fontSize: fluid(proportions.author),
+});

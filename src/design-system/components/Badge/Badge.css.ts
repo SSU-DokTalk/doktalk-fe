@@ -1,19 +1,19 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { fontSize } from '../../tokens/scale';
+import { fontSize, fontWeight, space } from '../../tokens/scale';
 
 const badgeBase = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '4px',
+  gap: space[4],
   flexShrink: 0,
   // grid·세로 flex 안에서도 늘어나지 않고 글자 폭만큼만 차지해요.
   width: 'fit-content',
   boxSizing: 'border-box',
   border: '1px solid transparent',
   fontFamily: vars.font.family,
-  fontWeight: 700,
+  fontWeight: fontWeight.bold,
   lineHeight: 1,
   whiteSpace: 'nowrap',
 });
@@ -45,7 +45,7 @@ export const badgeStyles = recipe({
         backgroundColor: vars.color.surface,
         borderColor: vars.color.border,
         color: vars.color.text,
-        fontWeight: 600,
+        fontWeight: fontWeight.semibold,
       },
       /** 지난 모임의 역할처럼 강조가 필요 없는 정보 */
       neutral: {
@@ -62,13 +62,14 @@ export const badgeStyles = recipe({
       overlay: {
         backgroundColor: 'rgba(255, 255, 255, 0.94)',
         color: vars.color.text,
-        fontWeight: 600,
+        fontWeight: fontWeight.semibold,
       },
     },
     size: {
-      sm: { height: '22px', padding: '0 7px', fontSize: fontSize.xs },
-      md: { height: '26px', padding: '0 10px', fontSize: fontSize.xs },
-      lg: { height: '28px', padding: '0 10px', fontSize: fontSize.sm },
+      // 작은 배지는 좌우 여백을 토큰 사이 값(7px)으로 좁혀 글자와 균형을 맞춰요.
+      sm: { height: '22px', padding: '0 7px', fontSize: fontSize[12] },
+      md: { height: '26px', padding: `0 ${space[10]}`, fontSize: fontSize[12] },
+      lg: { height: '28px', padding: `0 ${space[10]}`, fontSize: fontSize[13] },
     },
     shape: {
       rounded: { borderRadius: vars.radius.xs },

@@ -1,11 +1,11 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, space, vars } from '@/design-system/tokens';
 
 export const rail = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '14px',
-  padding: '20px',
+  gap: space[14],
+  padding: space[20],
   borderRadius: vars.radius['2xl'],
   backgroundColor: vars.color.surface,
 });
@@ -14,26 +14,26 @@ export const head = style({
   display: 'flex',
   alignItems: 'baseline',
   justifyContent: 'space-between',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const heading = style({
   margin: 0,
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
   color: vars.color.brand,
 });
 
 export const count = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
 });
 
 export const covers = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(4, minmax(0, 1fr))',
-  gap: '8px',
+  gap: space[8],
   margin: 0,
   padding: 0,
   listStyle: 'none',
@@ -41,6 +41,6 @@ export const covers = style({
 
 export const empty = style({
   margin: 0,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   color: vars.color.textTertiary,
 });

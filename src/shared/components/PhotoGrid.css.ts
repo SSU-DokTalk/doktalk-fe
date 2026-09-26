@@ -1,10 +1,10 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 export const grid = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-  gap: '8px',
+  gap: space[8],
   margin: 0,
   padding: 0,
   listStyle: 'none',
@@ -50,7 +50,7 @@ export const more = style({
   alignItems: 'center',
   justifyContent: 'center',
   backgroundColor: 'rgba(17, 24, 39, 0.55)',
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   color: vars.color.textOnBrand,
 });

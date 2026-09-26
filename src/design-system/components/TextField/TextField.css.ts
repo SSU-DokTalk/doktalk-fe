@@ -1,22 +1,22 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { fontSize } from '../../tokens/scale';
+import { fontSize, fontWeight, inputFontSize, space } from '../../tokens/scale';
 
 export const field = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '6px',
+  gap: space[6],
   minWidth: 0,
 });
 
 export const label = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '6px',
+  gap: space[6],
   fontFamily: vars.font.family,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.text,
 });
@@ -24,7 +24,7 @@ export const label = style({
 const controlBase = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
   boxSizing: 'border-box',
   minWidth: 0,
   border: `1px solid ${vars.color.borderInput}`,
@@ -58,9 +58,21 @@ export const control = recipe({
   base: controlBase,
   variants: {
     size: {
-      sm: { height: '44px', padding: '0 12px', borderRadius: vars.radius.md },
-      md: { height: '48px', padding: '0 14px', borderRadius: vars.radius.lg },
-      lg: { height: '52px', padding: '0 16px', borderRadius: vars.radius.lg },
+      sm: {
+        height: '44px',
+        padding: `0 ${space[12]}`,
+        borderRadius: vars.radius.md,
+      },
+      md: {
+        height: '48px',
+        padding: `0 ${space[14]}`,
+        borderRadius: vars.radius.lg,
+      },
+      lg: {
+        height: '52px',
+        padding: `0 ${space[16]}`,
+        borderRadius: vars.radius.lg,
+      },
     },
     variant: {
       outlined: {},
@@ -75,7 +87,7 @@ export const control = recipe({
     },
     /** 오른쪽에 버튼(비밀번호 보기, 지우기)이 있을 때 여백을 줄여요 */
     hasEnd: {
-      true: { paddingRight: '4px' },
+      true: { paddingRight: space[4] },
     },
   },
   defaultVariants: {
@@ -96,8 +108,7 @@ export const input = style({
   outline: 'none',
   background: 'transparent',
   fontFamily: vars.font.family,
-  // iOS Safari는 16px보다 작은 입력칸에 포커스하면 화면을 확대해서 px로 고정했어요.
-  fontSize: '16px',
+  fontSize: inputFontSize,
   lineHeight: 1.5,
   color: vars.color.text,
   selectors: {
@@ -110,7 +121,7 @@ export const textareaControl = style([
   controlBase,
   {
     alignItems: 'stretch',
-    padding: '12px 14px',
+    padding: `${space[12]} ${space[14]}`,
     borderRadius: vars.radius.lg,
   },
 ]);
@@ -128,7 +139,7 @@ export const textarea = style([
 export const helper = style({
   margin: 0,
   fontFamily: vars.font.family,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });

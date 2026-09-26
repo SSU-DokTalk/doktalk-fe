@@ -1,5 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 /**
  * 모바일은 회색 바탕에 흰 띠(사이 8px), 데스크톱은 흰 카드.
@@ -12,9 +19,9 @@ export const page = style({
     [mq.belowMd]: { backgroundColor: vars.color.canvas },
     [mq.xl]: {
       display: 'grid',
-      gridTemplateColumns: 'minmax(0, 1fr) 300px',
+      gridTemplateColumns: `minmax(0, 1fr) ${layout.railWidth}`,
       alignItems: 'start',
-      gap: '24px',
+      gap: space[24],
     },
   },
 });
@@ -22,19 +29,19 @@ export const page = style({
 export const content = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   minWidth: 0,
   '@media': {
-    [mq.md]: { gap: '24px' },
+    [mq.md]: { gap: space[24] },
   },
 });
 
 export const rail = style({
   position: 'sticky',
-  top: '96px',
+  top: layout.stickyTop,
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
+  gap: space[16],
 });
 
 /* ---------- 인사·다가오는 모임 ---------- */
@@ -42,65 +49,72 @@ export const rail = style({
 export const welcome = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '14px',
-  padding: '20px',
+  gap: space[14],
+  padding: space[20],
   backgroundColor: vars.color.surface,
   '@media': {
-    [mq.md]: { gap: '16px', padding: 0, backgroundColor: 'transparent' },
+    [mq.md]: { gap: space[16], padding: 0, backgroundColor: 'transparent' },
   },
 });
 
 export const greeting = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
 });
 
 export const title = style({
   margin: 0,
-  fontSize: '1.375rem',
-  fontWeight: 700,
+  fontSize: fontSize[22],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
   '@media': {
-    [mq.md]: { fontSize: '1.5rem' },
+    [mq.md]: { fontSize: fontSize[24] },
   },
 });
 
 export const subtitle = style({
   margin: 0,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.6,
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { fontSize: fontSize.base },
+    [mq.md]: { fontSize: fontSize[15] },
   },
 });
 
 export const meetings = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
-  gap: '10px',
+  gap: space[10],
   margin: 0,
   padding: 0,
   listStyle: 'none',
   '@media': {
-    [mq.md]: { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '16px' },
+    [mq.md]: {
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+      gap: space[16],
+    },
   },
 });
 
 export const meeting = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '14px',
+  gap: space[14],
   height: '100%',
   boxSizing: 'border-box',
-  padding: '12px',
+  padding: space[12],
   border: `1px solid ${vars.color.borderSubtle}`,
   borderRadius: vars.radius.xl,
   backgroundColor: vars.color.surface,
   '@media': {
-    [mq.md]: { padding: '16px', border: 0, borderRadius: vars.radius['2xl'] },
+    [mq.md]: {
+      padding: space[16],
+      border: 0,
+      borderRadius: vars.radius['2xl'],
+    },
   },
 });
 
@@ -115,7 +129,7 @@ export const meetingText = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'flex-start',
-  gap: '2px',
+  gap: space[2],
   minWidth: 0,
 });
 
@@ -124,8 +138,8 @@ export const meetingTitle = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   color: vars.color.text,
   textDecoration: 'none',
@@ -133,12 +147,12 @@ export const meetingTitle = style({
     '&:hover': { color: vars.color.brand, textDecoration: 'underline' },
   },
   '@media': {
-    [mq.md]: { fontSize: fontSize.lg },
+    [mq.md]: { fontSize: fontSize[16] },
   },
 });
 
 export const meetingMeta = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
 });
 
@@ -166,14 +180,14 @@ export const feed = style({
 });
 
 export const feedTabs = style({
-  padding: '0 8px',
+  padding: `0 ${space[8]}`,
   '@media': {
-    [mq.md]: { padding: '0 12px' },
+    [mq.md]: { padding: `0 ${space[12]}` },
   },
 });
 
 export const chips = style({
-  padding: '14px 20px 6px',
+  padding: `${space[14]} ${space[20]} ${space[6]}`,
 });
 
 export const items = style({
@@ -186,10 +200,10 @@ export const more = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '2px',
+  gap: space[2],
   minHeight: '52px',
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   color: vars.color.brand,
   textDecoration: 'none',
   selectors: {
@@ -200,15 +214,15 @@ export const more = style({
 export const moreIcon = style({ width: '18px', height: '18px' });
 
 export const state = style({
-  padding: '8px 0',
+  padding: `${space[8]} 0`,
 });
 
 /** xl 아래에서는 오른쪽 칸 내용을 피드 아래에 둬요. */
 export const below = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   '@media': {
-    [mq.md]: { gap: '16px' },
+    [mq.md]: { gap: space[16] },
   },
 });

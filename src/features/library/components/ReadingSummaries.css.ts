@@ -1,16 +1,16 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 export const grid = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
-  gap: '12px',
+  gap: space[12],
   margin: 0,
-  padding: '4px 0 20px',
+  padding: `${space[4]} 0 ${space[20]}`,
   listStyle: 'none',
   '@media': {
     [mq.sm]: { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))' },
-    [mq.md]: { gap: '16px', paddingBottom: '24px' },
+    [mq.md]: { gap: space[16], paddingBottom: space[24] },
     [mq.lg]: { gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' },
   },
 });
@@ -19,22 +19,22 @@ export const card = style({
   display: 'flex',
   flexDirection: 'column',
   justifyContent: 'space-between',
-  gap: '14px',
-  padding: '16px',
+  gap: space[14],
+  padding: space[16],
   border: `1px solid ${vars.color.borderSubtle}`,
   borderRadius: vars.radius.xl,
 });
 
 export const top = style({
   display: 'flex',
-  gap: '14px',
+  gap: space[14],
   minWidth: 0,
 });
 
 export const text = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
   minWidth: 0,
 });
 
@@ -43,32 +43,32 @@ export const bookTitle = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
   color: vars.color.text,
 });
 
 export const by = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textSecondary,
   overflowWrap: 'anywhere',
 });
 
 export const bought = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });
 
 export const notice = style({
-  margin: '0 0 12px',
-  fontSize: fontSize.sm,
+  margin: `0 0 ${space[12]}`,
+  fontSize: fontSize[13],
   color: vars.color.danger,
 });
 
 export const state = style({
-  padding: '8px 0 24px',
+  padding: `${space[8]} 0 ${space[24]}`,
 });

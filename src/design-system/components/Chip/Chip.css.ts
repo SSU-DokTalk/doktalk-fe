@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { fontSize } from '../../tokens/scale';
+import { fontSize, fontWeight, space } from '../../tokens/scale';
 import { focusRing } from '../../styles/utils.css';
 
 const chipBase = style([
@@ -9,6 +9,7 @@ const chipBase = style([
   {
     display: 'inline-flex',
     alignItems: 'center',
+    // 아이콘(14px)과 글자 사이. 4px은 붙어 보여서 토큰 사이 값을 써요.
     gap: '5px',
     flexShrink: 0,
     boxSizing: 'border-box',
@@ -18,8 +19,8 @@ const chipBase = style([
     backgroundColor: vars.color.surface,
     color: vars.color.textMuted,
     fontFamily: vars.font.family,
-    fontSize: fontSize.md,
-    fontWeight: 500,
+    fontSize: fontSize[14],
+    fontWeight: fontWeight.medium,
     lineHeight: 1.2,
     whiteSpace: 'nowrap',
     cursor: 'pointer',
@@ -48,10 +49,10 @@ export const chipStyles = recipe({
   base: chipBase,
   variants: {
     size: {
-      sm: { height: '34px', padding: '0 14px' },
-      md: { height: '40px', padding: '0 14px' },
+      sm: { height: '34px', padding: `0 ${space[14]}` },
+      md: { height: '40px', padding: `0 ${space[14]}` },
       /** 모바일 터치 영역 44px */
-      lg: { height: '44px', padding: '0 16px' },
+      lg: { height: '44px', padding: `0 ${space[16]}` },
     },
     selection: {
       /** 하나만 고르는 필터 (전체 / 카테고리) — 채움으로 표시 */
@@ -61,7 +62,7 @@ export const chipStyles = recipe({
             backgroundColor: vars.color.brand,
             borderColor: vars.color.brand,
             color: vars.color.textOnBrand,
-            fontWeight: 600,
+            fontWeight: fontWeight.semibold,
           },
         },
       },
@@ -72,7 +73,7 @@ export const chipStyles = recipe({
             backgroundColor: vars.color.brandSubtle,
             borderColor: vars.color.brand,
             color: vars.color.brand,
-            fontWeight: 700,
+            fontWeight: fontWeight.bold,
           },
         },
       },
@@ -88,7 +89,7 @@ export type ChipVariants = NonNullable<RecipeVariants<typeof chipStyles>>;
 
 /** 라벨 옆 개수 (독서 토론 3) */
 export const count = style({
-  fontWeight: 500,
+  fontWeight: fontWeight.medium,
   color: vars.color.textTertiary,
   selectors: {
     [`${chipBase}[aria-pressed="true"] &`]: {
@@ -101,7 +102,7 @@ export const count = style({
 export const group = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '8px',
+  gap: space[8],
 });
 
 /** 모바일에서 한 줄로 두고 옆으로 넘겨 보는 칩 목록 */

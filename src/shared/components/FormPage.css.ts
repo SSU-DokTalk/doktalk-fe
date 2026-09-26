@@ -1,8 +1,15 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 export const page = style({
-  maxWidth: '880px',
+  maxWidth: layout.centeredWidth,
   backgroundColor: vars.color.surface,
   wordBreak: 'keep-all',
   overflowWrap: 'break-word',
@@ -10,7 +17,7 @@ export const page = style({
     [mq.md]: {
       display: 'flex',
       flexDirection: 'column',
-      gap: '20px',
+      gap: space[20],
       backgroundColor: 'transparent',
     },
   },
@@ -19,8 +26,8 @@ export const page = style({
 export const header = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px',
-  padding: '12px 20px 0',
+  gap: space[2],
+  padding: `${space[12]} ${layout.gutter} 0`,
   '@media': {
     [mq.md]: { padding: 0 },
   },
@@ -30,12 +37,12 @@ export const backLink = style({
   display: 'inline-flex',
   alignItems: 'center',
   alignSelf: 'flex-start',
-  gap: '4px',
+  gap: space[4],
   minHeight: '36px',
-  paddingRight: '6px',
+  paddingRight: space[6],
   borderRadius: vars.radius.md,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textSecondary,
   textDecoration: 'none',
   selectors: {
@@ -51,12 +58,12 @@ globalStyle(`${backLink} svg`, { width: '18px', height: '18px' });
 
 export const title = style({
   margin: 0,
-  fontSize: '1.375rem',
-  fontWeight: 700,
+  fontSize: fontSize[22],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
   color: vars.color.text,
   '@media': {
-    [mq.md]: { fontSize: '1.625rem', letterSpacing: '-0.7px' },
+    [mq.md]: { fontSize: fontSize[26], letterSpacing: '-0.7px' },
   },
 });

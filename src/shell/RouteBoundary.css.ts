@@ -1,5 +1,5 @@
 import { keyframes, style } from '@vanilla-extract/css';
-import { mq, vars } from '@/design-system/tokens';
+import { layout, mq, space, vars } from '@/design-system/tokens';
 
 const appear = keyframes({
   from: { opacity: 0 },
@@ -11,7 +11,7 @@ export const loading = style({
   alignItems: 'flex-start',
   justifyContent: 'center',
   minHeight: '60vh',
-  paddingTop: '120px',
+  paddingTop: space[120],
   // 0.3초 안에 끝나는 로딩은 보이지 않게 해요.
   animation: `${appear} 150ms ease-out 300ms both`,
   '@media': {
@@ -20,9 +20,9 @@ export const loading = style({
 });
 
 export const error = style({
-  padding: '64px 20px',
+  padding: `${space[64]} ${layout.gutter}`,
   '@media': {
-    [mq.md]: { padding: '96px 0' },
+    [mq.md]: { padding: `${space[96]} 0` },
   },
 });
 
@@ -33,6 +33,6 @@ export const fullPage = style({
   alignItems: 'center',
   justifyContent: 'center',
   minHeight: '100dvh',
-  padding: '24px 20px',
+  padding: `${space[24]} ${layout.gutter}`,
   backgroundColor: vars.color.canvas,
 });

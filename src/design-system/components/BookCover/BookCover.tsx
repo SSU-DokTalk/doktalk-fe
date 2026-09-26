@@ -64,8 +64,8 @@ function BookCover({
   const tone = toneFor(title);
   const fill = width === 'fill';
   /** 고정 너비일 때 너비에 비례한 크기(px). 'fill'은 CSS(cqw)가 맡아요. */
-  const scaled = (factor: number, min: number) =>
-    fill ? undefined : Math.max(min, Math.round(width * factor));
+  const scaled = ({ percent, min }: { percent: number; min: number }) =>
+    fill ? undefined : Math.max(min, Math.round((width * percent) / 100));
 
   return (
     <div
@@ -86,7 +86,7 @@ function BookCover({
         role={alt ? 'img' : undefined}
         aria-label={alt || undefined}
         aria-hidden={alt ? undefined : true}
-        style={{ padding: scaled(0.1, 6) }}
+        style={{ padding: scaled(s.proportions.padding) }}
       >
         {showImage ? (
           <img
@@ -101,14 +101,14 @@ function BookCover({
           <>
             <span
               className={s.fallbackTitle}
-              style={{ fontSize: scaled(0.13, 9) }}
+              style={{ fontSize: scaled(s.proportions.title) }}
             >
               {title}
             </span>
             {author && (
               <span
                 className={s.fallbackAuthor}
-                style={{ fontSize: scaled(0.075, 7) }}
+                style={{ fontSize: scaled(s.proportions.author) }}
               >
                 {author}
               </span>

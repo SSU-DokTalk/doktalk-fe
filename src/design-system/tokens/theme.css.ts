@@ -81,6 +81,8 @@ export const vars = createGlobalThemeContract(
       sm: null,
       md: null,
       lg: null,
+      /** 정사각형 아이콘·날짜 타일 */
+      tile: null,
       xl: null,
       '2xl': null,
       '3xl': null,
@@ -147,6 +149,7 @@ createGlobalTheme(':root', vars, {
     sm: '8px',
     md: '10px',
     lg: '12px',
+    tile: '14px',
     xl: '16px',
     '2xl': '20px',
     '3xl': '24px',

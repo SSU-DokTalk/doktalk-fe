@@ -1,25 +1,32 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 import { card } from '@/shared/components/Section.css';
 
 export const page = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   '@media': {
-    [mq.md]: { gap: '16px' },
+    [mq.md]: { gap: space[16] },
   },
 });
 
 export const title = style({
   margin: 0,
-  padding: '16px 20px 8px',
-  fontSize: '1.375rem',
-  fontWeight: 700,
+  padding: `${space[16]} ${layout.gutter} ${space[8]}`,
+  fontSize: fontSize[22],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
   '@media': {
-    [mq.md]: { padding: 0, fontSize: '1.625rem', letterSpacing: '-0.7px' },
+    [mq.md]: { padding: 0, fontSize: fontSize[26], letterSpacing: '-0.7px' },
   },
 });
 
@@ -28,23 +35,23 @@ export const section = style([
   {
     display: 'flex',
     flexDirection: 'column',
-    padding: '20px 20px 4px',
+    padding: `${space[20]} ${layout.gutter} ${space[4]}`,
     '@media': {
-      [mq.md]: { padding: '24px 28px 8px' },
+      [mq.md]: { padding: `${space[24]} ${space[28]} ${space[8]}` },
     },
   },
 ]);
 
 export const sectionTitle = style({
-  margin: '0 0 8px',
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  margin: `0 0 ${space[8]}`,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
 });
 
 export const description = style({
-  margin: '0 0 14px',
-  fontSize: fontSize.md,
+  margin: `0 0 ${space[14]}`,
+  fontSize: fontSize[14],
   lineHeight: 1.6,
   color: vars.color.textTertiary,
 });
@@ -59,10 +66,10 @@ export const row = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
   alignItems: 'center',
-  columnGap: '16px',
-  rowGap: '4px',
+  columnGap: space[16],
+  rowGap: space[4],
   minHeight: '64px',
-  padding: '12px 0',
+  padding: `${space[12]} 0`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
   '@media': {
     [mq.md]: { gridTemplateColumns: '180px minmax(0, 1fr)' },
@@ -70,21 +77,21 @@ export const row = style({
 });
 
 export const term = style({
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textBody,
   '@media': {
-    [mq.md]: { fontSize: fontSize.base },
+    [mq.md]: { fontSize: fontSize[15] },
   },
 });
 
 export const value = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
+  gap: space[12],
   minWidth: 0,
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   color: vars.color.text,
   overflowWrap: 'anywhere',
 });
@@ -102,11 +109,11 @@ export const profileText = style({
 });
 
 export const profileName = style({
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
 });
 
 export const profileHint = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
 });
 
@@ -114,9 +121,9 @@ export const profileHint = style({
 export const languages = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
-  gap: '10px',
+  gap: space[10],
   margin: 0,
-  padding: '0 0 16px',
+  padding: `0 0 ${space[16]}`,
   border: 0,
   '@media': {
     [mq.sm]: { gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' },
@@ -126,15 +133,15 @@ export const languages = style({
 export const language = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
+  gap: space[10],
   boxSizing: 'border-box',
   minHeight: '56px',
-  padding: '0 16px',
+  padding: `0 ${space[16]}`,
   border: `1px solid ${vars.color.borderInput}`,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.surface,
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   cursor: 'pointer',
   selectors: {
     '&:has(input:checked)': {
@@ -163,7 +170,7 @@ export const linkRow = style({
   justifyContent: 'space-between',
   minHeight: '56px',
   borderTop: `1px solid ${vars.color.borderSubtle}`,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   color: vars.color.text,
   textDecoration: 'none',
   selectors: {
@@ -177,7 +184,7 @@ export const linkRow = style({
 });
 
 export const linkEmphasis = style({
-  fontWeight: 700,
+  fontWeight: fontWeight.bold,
 });
 
 export const chevron = style({
@@ -190,51 +197,51 @@ export const manageRow = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '16px',
+  gap: space[16],
   minHeight: '72px',
-  padding: '12px 0',
+  padding: `${space[12]} 0`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
 });
 
 export const manageText = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px',
+  gap: space[2],
   minWidth: 0,
 });
 
 export const manageTitle = style({
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
 });
 
 export const manageHint = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });
 
 export const footer = style({
   display: 'flex',
-  gap: '12px',
-  padding: '12px 20px 8px',
-  fontSize: fontSize.sm,
+  gap: space[12],
+  padding: `${space[12]} ${layout.gutter} ${space[8]}`,
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { padding: '12px 4px 0' },
+    [mq.md]: { padding: `${space[12]} ${space[4]} 0` },
   },
 });
 
 export const dialogText = style({
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   color: vars.color.textBody,
 });
 
 export const dialogError = style({
-  margin: '12px 0 0',
-  fontSize: fontSize.md,
+  margin: `${space[12]} 0 0`,
+  fontSize: fontSize[14],
   color: vars.color.danger,
 });
 
@@ -245,10 +252,10 @@ export const loginPrompt = style([
     flexWrap: 'wrap',
     alignItems: 'center',
     justifyContent: 'space-between',
-    gap: '12px',
-    padding: '20px',
+    gap: space[12],
+    padding: space[20],
     '@media': {
-      [mq.md]: { padding: '24px 28px' },
+      [mq.md]: { padding: `${space[24]} ${space[28]}` },
     },
   },
 ]);

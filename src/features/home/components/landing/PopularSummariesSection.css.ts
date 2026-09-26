@@ -1,15 +1,15 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 export const layout = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
-  gap: '12px',
+  gap: space[12],
   '@media': {
-    [mq.md]: { gap: '16px' },
+    [mq.md]: { gap: space[16] },
     [mq.lg]: {
       gridTemplateColumns: 'minmax(0, 1.15fr) minmax(0, 1fr)',
-      gap: '24px',
+      gap: space[24],
     },
   },
 });
@@ -17,8 +17,8 @@ export const layout = style({
 /** 1위 요약 큰 카드 */
 export const top = style({
   display: 'flex',
-  gap: '16px',
-  padding: '20px',
+  gap: space[16],
+  padding: space[20],
   borderRadius: vars.radius['2xl'],
   backgroundColor: vars.color.surface,
   color: vars.color.text,
@@ -31,14 +31,18 @@ export const top = style({
     },
   },
   '@media': {
-    [mq.md]: { gap: '28px', padding: '28px', borderRadius: vars.radius['3xl'] },
+    [mq.md]: {
+      gap: space[28],
+      padding: space[28],
+      borderRadius: vars.radius['3xl'],
+    },
   },
 });
 
 export const topBody = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   flex: '1 1 0',
   minWidth: 0,
 });
@@ -46,7 +50,7 @@ export const topBody = style({
 export const rankRow = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const rankBadge = style({
@@ -58,34 +62,34 @@ export const rankBadge = style({
   borderRadius: vars.radius.sm,
   backgroundColor: vars.color.brand,
   color: vars.color.textOnBrand,
-  fontSize: fontSize.md,
-  fontWeight: 700,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.bold,
 });
 
 export const category = style({
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.info,
 });
 
 export const topTitle = style({
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.5px',
   selectors: {
     [`${top}:hover &`]: { color: vars.color.brand },
   },
   '@media': {
-    [mq.md]: { fontSize: '1.375rem' },
+    [mq.md]: { fontSize: fontSize[22] },
   },
 });
 
 export const bookLine = style({
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { fontSize: fontSize.base },
+    [mq.md]: { fontSize: fontSize[15] },
   },
 });
 
@@ -94,7 +98,7 @@ export const excerpt = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 3,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.65,
   color: vars.color.textSecondary,
   '@media': {
@@ -108,19 +112,19 @@ export const topFoot = style({
   flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px 12px',
+  gap: `${space[8]} ${space[12]}`,
   marginTop: 'auto',
-  paddingTop: '8px',
+  paddingTop: space[8],
 });
 
 export const price = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '6px',
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  gap: space[6],
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   '@media': {
-    [mq.md]: { fontSize: fontSize.xl },
+    [mq.md]: { fontSize: fontSize[17] },
   },
 });
 
@@ -135,21 +139,25 @@ export const fakeButton = style({
   display: 'inline-flex',
   alignItems: 'center',
   height: '40px',
-  padding: '0 16px',
+  padding: `0 ${space[16]}`,
   border: `1px solid ${vars.color.brand}`,
   borderRadius: vars.radius.md,
   color: vars.color.brand,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   '@media': {
-    [mq.md]: { height: '44px', padding: '0 18px', fontSize: fontSize.base },
+    [mq.md]: {
+      height: '44px',
+      padding: `0 ${space[18]}`,
+      fontSize: fontSize[15],
+    },
   },
 });
 
 export const list = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: space[12],
   margin: 0,
   padding: 0,
   listStyle: 'none',
@@ -158,8 +166,8 @@ export const list = style({
 export const row = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '14px',
-  padding: '14px 16px',
+  gap: space[14],
+  padding: `${space[14]} ${space[16]}`,
   borderRadius: vars.radius.xl,
   backgroundColor: vars.color.surface,
   color: vars.color.text,
@@ -172,7 +180,7 @@ export const row = style({
     },
   },
   '@media': {
-    [mq.md]: { gap: '16px', padding: '14px 18px' },
+    [mq.md]: { gap: space[16], padding: `${space[14]} ${space[18]}` },
   },
 });
 
@@ -180,15 +188,15 @@ export const rank = style({
   width: '20px',
   flexShrink: 0,
   textAlign: 'center',
-  fontSize: '1.125rem',
-  fontWeight: 700,
+  fontSize: fontSize[18],
+  fontWeight: fontWeight.bold,
   color: vars.color.brand,
 });
 
 export const rowText = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px',
+  gap: space[2],
   flex: '1 1 0',
   minWidth: 0,
 });
@@ -198,14 +206,14 @@ export const rowTitle = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   selectors: {
     [`${row}:hover &`]: { color: vars.color.brand },
   },
   '@media': {
-    [mq.md]: { fontSize: fontSize.lg },
+    [mq.md]: { fontSize: fontSize[16] },
   },
 });
 
@@ -213,15 +221,15 @@ export const rowMeta = style({
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { fontSize: fontSize.md },
+    [mq.md]: { fontSize: fontSize[14] },
   },
 });
 
 export const rowPrice = style({
   flexShrink: 0,
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
 });

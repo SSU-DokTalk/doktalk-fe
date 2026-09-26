@@ -1,46 +1,46 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, space, vars } from '@/design-system/tokens';
 
 export const socialTitle = style({
   margin: 0,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textBody,
 });
 
 export const social = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: space[12],
 });
 
 export const passwordGroup = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const rules = style({
   display: 'flex',
   flexWrap: 'wrap',
-  gap: '4px 14px',
+  gap: `${space[4]} ${space[14]}`,
   margin: 0,
   padding: 0,
   listStyle: 'none',
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
 });
 
 export const rule = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '4px',
+  gap: space[4],
   color: vars.color.textTertiary,
-  fontWeight: 500,
+  fontWeight: fontWeight.medium,
 });
 
 export const ruleMet = style({
   color: vars.color.info,
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
 });
 
 export const ruleIcon = style({
@@ -53,7 +53,7 @@ export const agreements = style({
   display: 'flex',
   flexDirection: 'column',
   margin: 0,
-  padding: '4px 16px',
+  padding: `${space[4]} ${space[16]}`,
   border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.xl,
 });
@@ -61,25 +61,25 @@ export const agreements = style({
 export const agreeAll = style({
   minHeight: '52px',
   borderBottom: `1px solid ${vars.color.borderSubtle}`,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
 });
 
 export const agreement = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
+  gap: space[10],
   minHeight: '44px',
 });
 
 export const agreementLabel = style({
   flex: '1 1 auto',
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   color: vars.color.textBody,
 });
 
 export const requiredTag = style({
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
   color: vars.color.brand,
 });
 
@@ -87,16 +87,16 @@ export const viewLink = style({
   display: 'inline-flex',
   alignItems: 'center',
   minHeight: '44px',
-  padding: '0 4px',
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  padding: `0 ${space[4]}`,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textSecondary,
   textDecoration: 'underline',
   textUnderlineOffset: '2px',
 });
 
 export const agreementError = style({
-  margin: '4px 0 0',
-  fontSize: fontSize.sm,
+  margin: `${space[4]} 0 0`,
+  fontSize: fontSize[13],
   color: vars.color.danger,
 });

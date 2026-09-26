@@ -1,5 +1,12 @@
 import { style, styleVariants } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 import { card } from '@/shared/components/Section.css';
 
 export const monthCard = style([
@@ -7,10 +14,10 @@ export const monthCard = style([
   {
     display: 'flex',
     flexDirection: 'column',
-    gap: '10px',
-    padding: '12px 12px 16px',
+    gap: space[10],
+    padding: `${space[12]} ${space[12]} ${space[16]}`,
     '@media': {
-      [mq.md]: { padding: '16px 20px 20px' },
+      [mq.md]: { padding: `${space[16]} ${space[20]} ${space[20]}` },
     },
   },
 ]);
@@ -23,8 +30,8 @@ export const monthNav = style({
 
 export const month = style({
   margin: 0,
-  fontSize: '1.125rem',
-  fontWeight: 700,
+  fontSize: fontSize[18],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
   color: vars.color.text,
@@ -34,10 +41,10 @@ export const total = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '12px',
-  margin: '0 8px',
-  padding: '14px 16px',
-  borderRadius: '14px',
+  gap: space[12],
+  margin: `0 ${space[8]}`,
+  padding: `${space[14]} ${space[16]}`,
+  borderRadius: vars.radius.tile,
   backgroundColor: vars.color.surfaceSubtle,
   '@media': {
     [mq.md]: { margin: 0 },
@@ -45,14 +52,14 @@ export const total = style({
 });
 
 export const totalLabel = style({
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.5,
   color: vars.color.textSecondary,
 });
 
 export const totalValue = style({
-  fontSize: '1.125rem',
-  fontWeight: 800,
+  fontSize: fontSize[18],
+  fontWeight: fontWeight.extrabold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
   color: vars.color.text,
@@ -78,18 +85,18 @@ export const list = style({
 export const row = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
-  padding: '14px 20px',
+  gap: space[12],
+  padding: `${space[14]} ${layout.gutter}`,
   borderBottom: `1px solid ${vars.color.borderSubtle}`,
   '@media': {
-    [mq.md]: { padding: '16px 24px' },
+    [mq.md]: { padding: `${space[16]} ${space[24]}` },
   },
 });
 
 export const text = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
   flex: '1 1 0',
   minWidth: 0,
 });
@@ -97,15 +104,15 @@ export const text = style({
 export const badges = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '6px',
+  gap: space[6],
 });
 
 const titleBase = style({
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.45,
   letterSpacing: '-0.3px',
   textDecoration: 'none',
@@ -120,15 +127,15 @@ export const title = styleVariants({
 });
 
 export const date = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });
 
 const priceBase = style({
   flexShrink: 0,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
 });
 
 export const price = styleVariants({
@@ -141,15 +148,15 @@ export const price = styleVariants({
 
 export const note = style({
   margin: 0,
-  padding: '14px 20px 18px',
-  fontSize: fontSize.sm,
+  padding: `${space[14]} ${layout.gutter} ${space[18]}`,
+  fontSize: fontSize[13],
   lineHeight: 1.6,
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { padding: '14px 24px 18px' },
+    [mq.md]: { padding: `${space[14]} ${space[24]} ${space[18]}` },
   },
 });
 
 export const state = style({
-  padding: '8px 0',
+  padding: `${space[8]} 0`,
 });

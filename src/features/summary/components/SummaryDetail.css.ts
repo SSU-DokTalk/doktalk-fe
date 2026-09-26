@@ -1,5 +1,12 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 /** 제목 묶음 (카테고리, 제목, 작성자) */
 
@@ -9,9 +16,9 @@ export const book = style({
   display: 'flex',
   flexWrap: 'wrap',
   alignItems: 'center',
-  gap: '12px 16px',
-  margin: '16px 20px 0',
-  padding: '16px',
+  gap: `${space[12]} ${space[16]}`,
+  margin: `${space[16]} ${layout.gutter} 0`,
+  padding: space[16],
   borderRadius: vars.radius.xl,
   backgroundColor: vars.color.surfaceSubtle,
   '@media': {
@@ -22,31 +29,31 @@ export const book = style({
 export const bookText = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px',
+  gap: space[2],
   flex: '1 1 160px',
   minWidth: 0,
 });
 
 export const bookLabel = style({
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textSecondary,
 });
 
 export const bookTitle = style({
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {
-    [mq.md]: { fontSize: '1.125rem' },
+    [mq.md]: { fontSize: fontSize[18] },
   },
 });
 
 export const bookAuthor = style({
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.5,
   color: vars.color.textSecondary,
 });
@@ -58,7 +65,7 @@ export const inLibrary = style({
 export const alert = style({
   flexBasis: '100%',
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.danger,
 });
@@ -84,10 +91,10 @@ export const teaser = style({
 
 export const ownerNote = style({
   margin: 0,
-  padding: '14px 16px',
+  padding: `${space[14]} ${space[16]}`,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.infoSubtle,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.6,
   color: vars.color.info,
 });
@@ -98,15 +105,15 @@ export const paywall = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '8px',
-  margin: '4px 20px 8px',
-  padding: '24px 20px',
+  gap: space[8],
+  margin: `${space[4]} ${layout.gutter} ${space[8]}`,
+  padding: `${space[24]} ${space[20]}`,
   border: `1px solid ${vars.color.brandMuted}`,
   borderRadius: vars.radius['2xl'],
   backgroundColor: `color-mix(in srgb, ${vars.color.brandSubtle} 50%, ${vars.color.surface})`,
   textAlign: 'center',
   '@media': {
-    [mq.md]: { margin: 0, padding: '28px' },
+    [mq.md]: { margin: 0, padding: space[28] },
   },
 });
 
@@ -116,7 +123,7 @@ export const paywallIcon = style({
   justifyContent: 'center',
   width: '48px',
   height: '48px',
-  marginBottom: '4px',
+  marginBottom: space[4],
   borderRadius: vars.radius.pill,
   backgroundColor: vars.color.brand,
   color: vars.color.textOnBrand,
@@ -126,8 +133,8 @@ globalStyle(`${paywallIcon} svg`, { width: '22px', height: '22px' });
 
 export const paywallTitle = style({
   margin: 0,
-  fontSize: '1.1875rem',
-  fontWeight: 700,
+  fontSize: fontSize[19],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.45,
   letterSpacing: '-0.5px',
   color: vars.color.text,
@@ -135,15 +142,15 @@ export const paywallTitle = style({
 
 export const paywallNote = style({
   margin: 0,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
 });
 
 export const paywallPrice = style({
-  margin: '6px 0 0',
-  fontSize: '1.625rem',
-  fontWeight: 800,
+  margin: `${space[6]} 0 0`,
+  fontSize: fontSize[26],
+  fontWeight: fontWeight.extrabold,
   letterSpacing: '-0.6px',
   color: vars.color.text,
 });
@@ -152,8 +159,8 @@ export const paywallActions = style({
   display: 'flex',
   flexWrap: 'wrap',
   justifyContent: 'center',
-  gap: '8px',
-  marginTop: '4px',
+  gap: space[8],
+  marginTop: space[4],
 });
 
 /* ---------- 오른쪽 구매 카드 ---------- */
@@ -161,24 +168,24 @@ export const paywallActions = style({
 export const purchaseCard = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
-  padding: '20px',
+  gap: space[12],
+  padding: space[20],
   borderRadius: vars.radius['2xl'],
   backgroundColor: vars.color.surface,
 });
 
 export const purchaseLabel = style({
   margin: 0,
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });
 
 export const purchasePrice = style({
   margin: 0,
-  fontSize: '1.5rem',
-  fontWeight: 800,
+  fontSize: fontSize[24],
+  fontWeight: fontWeight.extrabold,
   lineHeight: 1.3,
   letterSpacing: '-0.6px',
   color: vars.color.text,
@@ -186,7 +193,7 @@ export const purchasePrice = style({
 
 export const purchaseNote = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
 });

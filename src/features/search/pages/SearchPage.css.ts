@@ -1,11 +1,18 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 export const searchForm = style({
   display: 'flex',
-  gap: '8px',
+  gap: space[8],
   margin: 0,
-  padding: '12px 20px 0',
+  padding: `${space[12]} ${layout.gutter} 0`,
   '@media': {
     [mq.md]: { padding: 0 },
   },
@@ -18,8 +25,8 @@ export const resultBar = style({
   flexWrap: 'wrap',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px 12px',
-  padding: '12px 20px',
+  gap: `${space[8]} ${space[12]}`,
+  padding: `${space[12]} ${layout.gutter}`,
   '@media': {
     [mq.md]: { padding: 0 },
   },
@@ -27,11 +34,11 @@ export const resultBar = style({
 
 export const resultCount = style({
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   color: vars.color.textSecondary,
 });
 
 export const query = style({
-  fontWeight: 700,
+  fontWeight: fontWeight.bold,
   color: vars.color.text,
 });

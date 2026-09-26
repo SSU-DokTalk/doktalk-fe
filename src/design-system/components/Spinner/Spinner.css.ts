@@ -1,7 +1,7 @@
 import { keyframes, style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { fontSize, mq } from '../../tokens/scale';
+import { fontSize, mq, space } from '../../tokens/scale';
 
 const spin = keyframes({
   to: { transform: 'rotate(360deg)' },
@@ -54,12 +54,12 @@ export type SpinnerVariants = NonNullable<RecipeVariants<typeof spinner>>;
 export const status = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '10px',
+  gap: space[10],
 });
 
 export const labelText = style({
   fontFamily: vars.font.family,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });

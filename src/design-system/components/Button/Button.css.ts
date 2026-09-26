@@ -1,7 +1,7 @@
 import { globalStyle, style, type StyleRule } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { fontSize } from '../../tokens/scale';
+import { fontSize, fontWeight, space } from '../../tokens/scale';
 import { focusRing } from '../../styles/utils.css';
 
 const interactive = ':not(:disabled):not([aria-disabled="true"])';
@@ -16,27 +16,27 @@ const states = (hover: string, active: string): StyleRule => ({
 
 const sizeSm = style({
   height: '36px',
-  padding: '0 14px',
-  gap: '4px',
+  padding: `0 ${space[14]}`,
+  gap: space[4],
   borderRadius: vars.radius.md,
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
 });
 const sizeMd = style({
   height: '44px',
-  padding: '0 18px',
-  gap: '6px',
+  padding: `0 ${space[18]}`,
+  gap: space[6],
   borderRadius: vars.radius.md,
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
 });
 const sizeLg = style({
   height: '52px',
-  padding: '0 24px',
-  gap: '8px',
+  padding: `0 ${space[24]}`,
+  gap: space[8],
   borderRadius: vars.radius.lg,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
 });
 
 // 아이콘 크기를 버튼 크기에 맞춰요. 기존 reset이 svg를 block으로 바꿔도 flex 안이라 괜찮아요.

@@ -1,5 +1,12 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  mq,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 /** 표지 너비(px). 컴포넌트에서도 같은 값을 써요. */
 export const COVER_WIDTH = { mobile: 72, desktop: 84 } as const;
@@ -29,8 +36,8 @@ export const item = style({
     "title cover"
     "meta cover"
     "stats cover"`,
-  columnGap: '14px',
-  rowGap: '4px',
+  columnGap: space[14],
+  rowGap: space[4],
   boxSizing: 'border-box',
   minHeight: `${MOBILE_PADDING_Y * 2 + MOBILE_HEADER + coverHeight(COVER_WIDTH.mobile)}px`,
   padding: `${MOBILE_PADDING_Y}px 20px`,
@@ -52,8 +59,8 @@ export const item = style({
         "cover body body"
         "cover meta meta"
         "cover host stats"`,
-      columnGap: '18px',
-      rowGap: '6px',
+      columnGap: space[18],
+      rowGap: space[6],
       minHeight: `${DESKTOP_PADDING * 2 + coverHeight(COVER_WIDTH.desktop)}px`,
       padding: `${DESKTOP_PADDING}px`,
     },
@@ -79,9 +86,9 @@ export const header = style({
   gridArea: 'header',
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
   minWidth: 0,
-  marginBottom: '6px',
+  marginBottom: space[6],
   '@media': {
     [mq.md]: { display: 'contents' },
   },
@@ -95,14 +102,14 @@ export const host = style({
   gridArea: 'host',
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
   flex: '0 0 auto',
   minWidth: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { marginTop: '6px' },
+    [mq.md]: { marginTop: space[6] },
   },
 });
 
@@ -111,7 +118,7 @@ export const hostName = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
   color: vars.color.textMuted,
   '@media': {
     [mq.belowMd]: { maxWidth: '9em' },
@@ -131,8 +138,8 @@ export const category = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.info,
   '@media': {
@@ -143,8 +150,8 @@ export const category = style({
 export const title = style({
   gridArea: 'title',
   margin: 0,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
   color: vars.color.text,
@@ -155,7 +162,7 @@ export const title = style({
   overflow: 'hidden',
   '@media': {
     [mq.md]: {
-      fontSize: '1.125rem',
+      fontSize: fontSize[18],
       letterSpacing: '-0.5px',
       WebkitLineClamp: 1,
     },
@@ -173,7 +180,7 @@ export const link = style({
       content: '""',
       position: 'absolute',
       inset: 0,
-      zIndex: 1,
+      zIndex: zIndex.raised,
     },
     '&:focus-visible::after': {
       outline: `2px solid ${vars.color.brand}`,
@@ -186,7 +193,7 @@ export const body = style({
   gridArea: 'body',
   display: 'none',
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
   overflowWrap: 'anywhere',
@@ -210,13 +217,13 @@ export const meta = style({
   margin: 0,
   padding: 0,
   listStyle: 'none',
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: {
-      gap: '6px',
-      marginTop: '4px',
+      gap: space[6],
+      marginTop: space[4],
     },
   },
 });
@@ -227,6 +234,7 @@ export const metaItem = style({
   selectors: {
     '& + &::before': {
       content: '"·"',
+      // 가운뎃점 양옆은 토큰 사이 값으로 좁게
       margin: '0 5px',
     },
   },
@@ -239,8 +247,8 @@ export const metaItem = style({
       padding: '3px 8px',
       borderRadius: vars.radius.sm,
       backgroundColor: vars.color.surfaceSubtle,
-      fontSize: fontSize.xs,
-      fontWeight: 500,
+      fontSize: fontSize[12],
+      fontWeight: fontWeight.medium,
       lineHeight: 1.4,
       color: vars.color.textMuted,
       selectors: {
@@ -255,16 +263,16 @@ export const stats = style({
   alignSelf: 'end',
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
-  marginTop: '4px',
-  fontSize: fontSize.sm,
+  gap: space[10],
+  marginTop: space[4],
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: {
       alignSelf: 'center',
-      gap: '12px',
-      marginTop: '6px',
+      gap: space[12],
+      marginTop: space[6],
     },
   },
 });
@@ -287,13 +295,13 @@ export const priceSlot = style({
   display: 'inline-flex',
   alignItems: 'center',
   '@media': {
-    [mq.md]: { order: 0, marginLeft: '2px' },
+    [mq.md]: { order: 0, marginLeft: space[2] },
   },
 });
 
 export const priceText = style({
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
   color: vars.color.text,
   whiteSpace: 'nowrap',
 });
@@ -310,7 +318,7 @@ export const cover = style({
 export const skeletonText = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   minWidth: 0,
 });
 
@@ -318,18 +326,19 @@ export const skeletonText = style({
 export const metaText = style({
   gridArea: 'meta',
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
   '@media': {
-    [mq.md]: { fontSize: fontSize.md, color: vars.color.textSecondary },
+    [mq.md]: { fontSize: fontSize[14], color: vars.color.textSecondary },
   },
 });
 
 globalStyle(`${priceText} svg`, {
   width: '14px',
   height: '14px',
+  // 아이콘을 글자 기준선에 맞추는 광학 보정
   marginRight: '3px',
   verticalAlign: '-1px',
 });

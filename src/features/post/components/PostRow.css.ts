@@ -1,12 +1,20 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 /** 짧은 게시글 줄 (메인 화면 피드). 글자는 왼쪽, 사진이 있으면 오른쪽에 작게 */
 export const row = style({
   position: 'relative',
   display: 'flex',
-  gap: '14px',
-  padding: '16px 20px',
+  gap: space[14],
+  padding: `${space[16]} ${layout.gutter}`,
   borderBottom: `1px solid ${vars.color.borderSubtle}`,
   backgroundColor: vars.color.surface,
   selectors: {
@@ -15,22 +23,22 @@ export const row = style({
     },
   },
   '@media': {
-    [mq.md]: { gap: '18px', padding: '18px 20px' },
+    [mq.md]: { gap: space[18], padding: `${space[18]} ${space[20]}` },
   },
 });
 
 export const text = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
   flex: '1 1 0',
   minWidth: 0,
 });
 
 export const title = style({
   margin: 0,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.3px',
 });
@@ -40,7 +48,12 @@ export const link = style({
   color: vars.color.text,
   textDecoration: 'none',
   selectors: {
-    '&::after': { content: '""', position: 'absolute', inset: 0, zIndex: 1 },
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      inset: 0,
+      zIndex: zIndex.raised,
+    },
     '&:hover': { color: vars.color.brand },
     '&:focus-visible': { outline: 'none' },
     '&:focus-visible::after': {
@@ -56,7 +69,7 @@ export const excerpt = style({
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
   margin: 0,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
   whiteSpace: 'pre-line',
@@ -65,9 +78,9 @@ export const excerpt = style({
 export const meta = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
-  margin: '4px 0 0',
-  fontSize: fontSize.sm,
+  gap: space[8],
+  margin: `${space[4]} 0 0`,
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
 });
 
@@ -75,7 +88,7 @@ export const author = style({
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
   color: vars.color.textMuted,
 });
 

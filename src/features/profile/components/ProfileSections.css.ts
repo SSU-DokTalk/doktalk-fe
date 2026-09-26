@@ -1,5 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 import { card } from '@/shared/components/Section.css';
 
 /** 쓰기·만들기 안내 카드 */
@@ -9,10 +16,10 @@ export const prompt = style([
     display: 'flex',
     flexWrap: 'wrap',
     alignItems: 'center',
-    gap: '12px',
-    padding: '16px 20px',
+    gap: space[12],
+    padding: `${space[16]} ${layout.gutter}`,
     '@media': {
-      [mq.md]: { gap: '16px', padding: '20px 24px' },
+      [mq.md]: { gap: space[16], padding: `${space[20]} ${space[24]}` },
     },
   },
 ]);
@@ -24,7 +31,7 @@ export const promptIcon = style({
   flexShrink: 0,
   width: '48px',
   height: '48px',
-  borderRadius: '14px',
+  borderRadius: vars.radius.tile,
   backgroundColor: vars.color.brandSubtle,
   color: vars.color.brand,
   '@media': {
@@ -36,29 +43,29 @@ export const promptIcon = style({
 export const promptText = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px',
+  gap: space[2],
   flex: '1 1 180px',
   minWidth: 0,
 });
 
 export const promptTitle = style({
   margin: 0,
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
   color: vars.color.text,
   '@media': {
-    [mq.md]: { fontSize: fontSize.lg },
+    [mq.md]: { fontSize: fontSize[16] },
   },
 });
 
 export const promptDescription = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
   '@media': {
-    [mq.md]: { fontSize: fontSize.md },
+    [mq.md]: { fontSize: fontSize[14] },
   },
 });
 

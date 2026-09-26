@@ -1,5 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { mq, vars, zIndex } from '@/design-system/tokens';
+import {
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 export const app = style({
   minHeight: '100vh',
@@ -11,17 +18,18 @@ export const app = style({
 /** 키보드 사용자가 내비를 건너뛰고 본문으로 가는 링크. 포커스될 때만 보여요. */
 export const skipLink = style({
   position: 'absolute',
-  left: '16px',
-  top: '-80px',
+  left: space[16],
+  // 포커스되기 전에는 화면 위로 숨겨요.
+  top: `-${space[80]}`,
   zIndex: zIndex.toast,
-  padding: '10px 16px',
+  padding: `${space[10]} ${space[16]}`,
   borderRadius: vars.radius.md,
   backgroundColor: vars.color.brand,
   color: vars.color.textOnBrand,
-  fontWeight: 700,
+  fontWeight: fontWeight.bold,
   textDecoration: 'none',
   selectors: {
-    '&:focus': { top: '12px' },
+    '&:focus': { top: space[12] },
   },
 });
 
@@ -29,11 +37,11 @@ export const skipLink = style({
 export const container = style({
   boxSizing: 'border-box',
   width: '100%',
-  maxWidth: '1328px',
+  maxWidth: layout.maxWidth,
   margin: '0 auto',
-  padding: '0 16px',
+  padding: `0 ${space[16]}`,
   '@media': {
-    [mq.md]: { padding: '0 24px' },
+    [mq.md]: { padding: `0 ${layout.gutterDesktop}` },
   },
 });
 
@@ -45,7 +53,7 @@ export const content = style({
 export const withBottomTabs = style({
   '@media': {
     [mq.belowMd]: {
-      paddingBottom: 'calc(64px + env(safe-area-inset-bottom))',
+      paddingBottom: `calc(${layout.bottomTabsHeight} + env(safe-area-inset-bottom))`,
     },
   },
 });
@@ -71,16 +79,16 @@ export const columns = style({
   width: '100%',
   '@media': {
     [mq.md]: {
-      maxWidth: '1328px',
+      maxWidth: layout.maxWidth,
       margin: '0 auto',
-      padding: '16px 24px 40px',
+      padding: `${space[16]} ${layout.gutterDesktop} ${space[40]}`,
     },
     [mq.lg]: {
       display: 'flex',
       alignItems: 'flex-start',
-      gap: '24px',
-      paddingTop: '24px',
-      paddingBottom: '56px',
+      gap: space[24],
+      paddingTop: space[24],
+      paddingBottom: space[56],
     },
   },
 });
@@ -91,7 +99,7 @@ export const side = style({
     [mq.lg]: {
       display: 'flex',
       position: 'sticky',
-      top: '96px',
+      top: layout.stickyTop,
     },
   },
 });
@@ -108,12 +116,12 @@ export const main = style({
 export const centered = style({
   boxSizing: 'border-box',
   width: '100%',
-  maxWidth: '928px',
+  maxWidth: layout.centeredMaxWidth,
   margin: '0 auto',
-  paddingBottom: '40px',
+  paddingBottom: space[40],
   wordBreak: 'keep-all',
   overflowWrap: 'break-word',
   '@media': {
-    [mq.md]: { padding: '32px 24px 56px' },
+    [mq.md]: { padding: `${space[32]} ${layout.gutterDesktop} ${space[56]}` },
   },
 });

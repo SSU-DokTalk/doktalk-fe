@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { mq, vars } from '@/design-system/tokens';
+import { mq, space, vars } from '@/design-system/tokens';
 
 export const list = style({
   borderTop: `1px solid ${vars.color.borderSubtle}`,
@@ -29,7 +29,7 @@ export const status = style({
   alignItems: 'center',
   justifyContent: 'center',
   minHeight: '64px',
-  padding: '12px 20px',
+  padding: `${space[12]} ${space[20]}`,
 });
 
 /** 글마다 따로 카드 (게시글 피드). 빈 목록·오류는 흰 카드 안에 보여줘요. */
@@ -43,12 +43,12 @@ export const cards = style({
 export const cardItems = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
   margin: 0,
   padding: 0,
   listStyle: 'none',
   '@media': {
-    [mq.md]: { gap: '12px' },
+    [mq.md]: { gap: space[12] },
   },
 });
 

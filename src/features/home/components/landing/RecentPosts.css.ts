@@ -1,16 +1,22 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 export const grid = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
-  gap: '12px',
+  gap: space[12],
   margin: 0,
   padding: 0,
   listStyle: 'none',
   '@media': {
-    [mq.md]: { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '20px' },
-    [mq.lg]: { gridTemplateColumns: 'repeat(3, minmax(0, 1fr))', gap: '24px' },
+    [mq.md]: {
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+      gap: space[20],
+    },
+    [mq.lg]: {
+      gridTemplateColumns: 'repeat(3, minmax(0, 1fr))',
+      gap: space[24],
+    },
   },
 });
 
@@ -47,11 +53,11 @@ export const photo = style({
 export const body = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '6px',
+  gap: space[6],
   flex: '1 1 auto',
-  padding: '16px 18px 18px',
+  padding: `${space[16]} ${space[18]} ${space[18]}`,
   '@media': {
-    [mq.md]: { padding: '18px 20px 20px' },
+    [mq.md]: { padding: `${space[18]} ${space[20]} ${space[20]}` },
   },
 });
 
@@ -60,15 +66,15 @@ export const title = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
   selectors: {
     [`${card}:hover &`]: { color: vars.color.brand },
   },
   '@media': {
-    [mq.md]: { fontSize: '1.125rem' },
+    [mq.md]: { fontSize: fontSize[18] },
   },
 });
 
@@ -77,7 +83,7 @@ export const excerpt = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  fontSize: fontSize.base,
+  fontSize: fontSize[15],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
   whiteSpace: 'pre-line',
@@ -86,10 +92,10 @@ export const excerpt = style({
 export const meta = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '8px',
+  gap: space[8],
   marginTop: 'auto',
-  paddingTop: '8px',
-  fontSize: fontSize.sm,
+  paddingTop: space[8],
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
 });
 
@@ -97,8 +103,8 @@ export const author = style({
   overflow: 'hidden',
   whiteSpace: 'nowrap',
   textOverflow: 'ellipsis',
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   color: vars.color.textMuted,
 });
 
@@ -107,7 +113,7 @@ export const spacer = style({ flex: '1 1 auto' });
 export const stat = style({
   display: 'inline-flex',
   alignItems: 'center',
-  gap: '4px',
+  gap: space[4],
   flexShrink: 0,
 });
 

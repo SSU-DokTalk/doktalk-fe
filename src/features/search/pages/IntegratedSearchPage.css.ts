@@ -1,21 +1,29 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 export const page = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
+  gap: space[12],
   wordBreak: 'keep-all',
   overflowWrap: 'break-word',
   '@media': {
-    [mq.md]: { gap: '16px' },
+    [mq.md]: { gap: space[16] },
   },
 });
 
 /** lg 미만: 상단 내비 검색창이 아이콘으로 줄어서 여기에 검색창을 둬요. */
 export const searchForm = style({
   margin: 0,
-  padding: '12px 20px 0',
+  padding: `${space[12]} ${layout.gutter} 0`,
   '@media': {
     [mq.md]: { padding: 0 },
     [mq.lg]: { display: 'none' },
@@ -25,35 +33,35 @@ export const searchForm = style({
 export const heading = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
-  padding: '4px 20px 0',
+  gap: space[4],
+  padding: `${space[4]} ${layout.gutter} 0`,
   '@media': {
     [mq.md]: { padding: 0 },
   },
 });
 
 export const eyebrow = style({
-  fontSize: fontSize.md,
-  fontWeight: 600,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.info,
 });
 
 export const title = style({
   margin: 0,
-  fontSize: '1.375rem',
-  fontWeight: 700,
+  fontSize: fontSize[22],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.6px',
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {
-    [mq.md]: { fontSize: '1.625rem', letterSpacing: '-0.7px' },
+    [mq.md]: { fontSize: fontSize[26], letterSpacing: '-0.7px' },
   },
 });
 
 export const chips = style({
-  padding: '0 20px',
+  padding: `0 ${layout.gutter}`,
   '@media': {
     [mq.md]: { padding: 0 },
   },
@@ -62,8 +70,8 @@ export const chips = style({
 export const section = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
-  padding: '20px',
+  gap: space[12],
+  padding: space[20],
   backgroundColor: vars.color.surface,
   '@media': {
     [mq.md]: { borderRadius: vars.radius['2xl'] },
@@ -74,34 +82,37 @@ export const sectionHead = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'space-between',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const sectionTitle = style({
   display: 'flex',
   alignItems: 'baseline',
-  gap: '6px',
+  gap: space[6],
   margin: 0,
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
   color: vars.color.text,
 });
 
 export const sectionCount = style({
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
   color: vars.color.textTertiary,
 });
 
 export const grid3 = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
-  gap: '10px',
+  gap: space[10],
   margin: 0,
   padding: 0,
   listStyle: 'none',
   '@media': {
-    [mq.md]: { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px' },
+    [mq.md]: {
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+      gap: space[12],
+    },
     [mq.xl]: { gridTemplateColumns: 'repeat(3, minmax(0, 1fr))' },
   },
 });
@@ -109,22 +120,25 @@ export const grid3 = style({
 export const grid2 = style({
   display: 'grid',
   gridTemplateColumns: 'minmax(0, 1fr)',
-  gap: '10px',
+  gap: space[10],
   margin: 0,
   padding: 0,
   listStyle: 'none',
   '@media': {
-    [mq.md]: { gridTemplateColumns: 'repeat(2, minmax(0, 1fr))', gap: '12px' },
+    [mq.md]: {
+      gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
+      gap: space[12],
+    },
   },
 });
 
 export const card = style({
   position: 'relative',
   display: 'flex',
-  gap: '12px',
+  gap: space[12],
   height: '100%',
   boxSizing: 'border-box',
-  padding: '14px',
+  padding: space[14],
   border: `1px solid ${vars.color.border}`,
   borderRadius: vars.radius.lg,
   transition: 'border-color 120ms ease, background-color 120ms ease',
@@ -136,15 +150,15 @@ export const card = style({
 export const cardBody = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '4px',
+  gap: space[4],
   flex: '1 1 0',
   minWidth: 0,
 });
 
 export const cardTitle = style({
   margin: 0,
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   letterSpacing: '-0.4px',
   color: vars.color.text,
@@ -160,7 +174,12 @@ export const link = style({
   textDecoration: 'none',
   outline: 'none',
   selectors: {
-    '&::after': { content: '""', position: 'absolute', inset: 0, zIndex: 1 },
+    '&::after': {
+      content: '""',
+      position: 'absolute',
+      inset: 0,
+      zIndex: zIndex.raised,
+    },
     '&:focus-visible::after': {
       outline: `2px solid ${vars.color.brand}`,
       outlineOffset: '2px',
@@ -171,7 +190,7 @@ export const link = style({
 
 export const cardMeta = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
@@ -179,7 +198,7 @@ export const cardMeta = style({
 
 export const excerpt = style({
   margin: 0,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   lineHeight: 1.6,
   color: vars.color.textMuted,
   overflowWrap: 'anywhere',
@@ -192,10 +211,10 @@ export const excerpt = style({
 export const cardFoot = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '10px',
+  gap: space[10],
   marginTop: 'auto',
-  paddingTop: '4px',
-  fontSize: fontSize.sm,
+  paddingTop: space[4],
+  fontSize: fontSize[13],
   color: vars.color.textTertiary,
 });
 
@@ -203,7 +222,7 @@ export const author = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
   color: vars.color.textMuted,
 });
 
@@ -225,8 +244,8 @@ export const postRow = style({
   position: 'relative',
   display: 'flex',
   flexDirection: 'column',
-  gap: '6px',
-  padding: '14px 0 16px',
+  gap: space[6],
+  padding: `${space[14]} 0 ${space[16]}`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
 });
 
@@ -234,9 +253,9 @@ export const books = style({
   display: 'grid',
   gridAutoFlow: 'column',
   gridAutoColumns: '140px',
-  gap: '12px',
+  gap: space[12],
   margin: 0,
-  padding: '0 0 4px',
+  padding: `0 0 ${space[4]}`,
   listStyle: 'none',
   overflowX: 'auto',
   '@media': {
@@ -251,7 +270,7 @@ export const books = style({
 export const book = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '10px',
+  gap: space[10],
   minWidth: 0,
 });
 
@@ -263,8 +282,8 @@ export const bookStage = style({
 export const bookTitle = style({
   margin: 0,
   minHeight: '2.8em',
-  fontSize: fontSize.base,
-  fontWeight: 700,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.4,
   color: vars.color.text,
   overflowWrap: 'anywhere',
@@ -276,6 +295,6 @@ export const bookTitle = style({
 
 export const sectionError = style({
   margin: 0,
-  fontSize: fontSize.md,
+  fontSize: fontSize[14],
   color: vars.color.textTertiary,
 });

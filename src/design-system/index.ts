@@ -27,6 +27,10 @@ import { TabsList, TabsPanel, TabsRoot, TabsTab } from './components/Tabs/Tabs';
 export { vars } from './tokens/theme.css';
 export {
   breakpoints,
+  fontSize,
+  fontWeight,
+  inputFontSize,
+  layout,
   mq,
   space,
   typeScale,

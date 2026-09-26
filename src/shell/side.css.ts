@@ -1,5 +1,12 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  space,
+  vars,
+  zIndex,
+} from '@/design-system/tokens';
 
 const focusVisible = {
   outline: `2px solid ${vars.color.brand}`,
@@ -9,10 +16,10 @@ const focusVisible = {
 /* ---------- 왼쪽 칼럼 ---------- */
 
 export const sideColumn = style({
-  width: '240px',
+  width: layout.sideColumnWidth,
   flexShrink: 0,
   flexDirection: 'column',
-  gap: '16px',
+  gap: space[16],
   fontFamily: vars.font.family,
 });
 
@@ -20,18 +27,18 @@ export const profileCard = style({
   display: 'flex',
   flexDirection: 'column',
   alignItems: 'center',
-  gap: '4px',
+  gap: space[4],
   textAlign: 'center',
 });
 
 export const profileAvatar = style({
-  marginBottom: '8px',
+  marginBottom: space[8],
 });
 
 export const profileName = style({
   margin: 0,
-  fontSize: fontSize.xl,
-  fontWeight: 700,
+  fontSize: fontSize[17],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.45,
   letterSpacing: '-0.4px',
   overflowWrap: 'anywhere',
@@ -39,24 +46,24 @@ export const profileName = style({
 
 export const profileMeta = style({
   margin: 0,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });
 
 export const profileActions = style({
   alignSelf: 'stretch',
-  marginTop: '12px',
+  marginTop: space[12],
   display: 'grid',
   gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-  gap: '8px',
+  gap: space[8],
 });
 
 // 몽골어 버튼 이름("Миний номын сан")이 반 칸에 안 들어가서 줄바꿈을 허용해요.
 globalStyle(`${profileActions} > a`, {
   height: 'auto',
   minHeight: '36px',
-  padding: '6px 8px',
+  padding: `${space[6]} ${space[8]}`,
   whiteSpace: 'normal',
   lineHeight: 1.3,
 });
@@ -64,15 +71,15 @@ globalStyle(`${profileActions} > a`, {
 export const activityCard = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '2px',
-  padding: '16px 8px 8px',
+  gap: space[2],
+  padding: `${space[16]} ${space[8]} ${space[8]}`,
 });
 
 export const activityTitle = style({
   margin: 0,
-  padding: '0 12px 6px',
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  padding: `0 ${space[12]} ${space[6]}`,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.textTertiary,
 });
@@ -82,11 +89,11 @@ export const activityLink = style({
   alignItems: 'center',
   minHeight: '40px',
   boxSizing: 'border-box',
-  padding: '8px 12px',
+  padding: `${space[8]} ${space[12]}`,
   borderRadius: vars.radius.md,
   color: vars.color.textMuted,
-  fontSize: fontSize.md,
-  fontWeight: 500,
+  fontSize: fontSize[14],
+  fontWeight: fontWeight.medium,
   lineHeight: 1.45,
   textDecoration: 'none',
   selectors: {
@@ -101,14 +108,14 @@ export const activityLink = style({
 export const loginCard = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const loginIcon = style({
   width: '44px',
   height: '44px',
-  marginBottom: '6px',
-  borderRadius: '14px',
+  marginBottom: space[6],
+  borderRadius: vars.radius.tile,
   backgroundColor: vars.color.brandSubtle,
   color: vars.color.brand,
   display: 'flex',
@@ -120,15 +127,15 @@ globalStyle(`${loginIcon} svg`, { width: '22px', height: '22px' });
 
 export const loginTitle = style({
   margin: 0,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.45,
   letterSpacing: '-0.4px',
 });
 
 export const loginDescription = style({
-  margin: '0 0 8px',
-  fontSize: fontSize.md,
+  margin: `0 0 ${space[8]}`,
+  fontSize: fontSize[14],
   lineHeight: 1.6,
   color: vars.color.textTertiary,
 });
@@ -138,28 +145,28 @@ export const loginDescription = style({
 export const siteLinks = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '10px',
+  gap: space[10],
   fontFamily: vars.font.family,
-  fontSize: fontSize.sm,
+  fontSize: fontSize[13],
   lineHeight: 1.6,
   color: vars.color.textSecondary,
 });
 
 export const siteLinksColumn = style({
-  padding: '4px 12px',
+  padding: `${space[4]} ${space[12]}`,
 });
 
 /** 왼쪽 칼럼이 없는 화면 아래 한 줄 푸터 */
 export const siteLinksBar = style({
   // 기존 설정 화면의 고정 사이드바보다 위에 그려요.
   position: 'relative',
-  zIndex: 1,
+  zIndex: zIndex.raised,
   backgroundColor: vars.color.canvas,
   boxSizing: 'border-box',
   width: '100%',
-  maxWidth: '1328px',
+  maxWidth: layout.maxWidth,
   margin: '0 auto',
-  padding: '20px 24px 32px',
+  padding: `${space[20]} ${layout.gutterDesktop} ${space[32]}`,
   flexDirection: 'row',
   flexWrap: 'wrap',
   alignItems: 'center',
@@ -170,7 +177,7 @@ export const siteLinksBar = style({
 export const siteLinkList = style({
   display: 'flex',
   flexWrap: 'wrap',
-  columnGap: '12px',
+  columnGap: space[12],
   rowGap: 0,
   margin: 0,
   padding: 0,
@@ -191,7 +198,7 @@ export const siteLink = style({
 });
 
 export const siteLinkStrong = style({
-  fontWeight: 700,
+  fontWeight: fontWeight.bold,
 });
 
 export const siteMeta = style({
@@ -204,16 +211,16 @@ export const siteMeta = style({
 export const drawerBody = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '16px',
-  padding: '4px 16px 24px',
+  gap: space[16],
+  padding: `${space[4]} ${space[16]} ${space[24]}`,
   fontFamily: vars.font.family,
 });
 
 export const drawerCta = style({
   display: 'flex',
   flexDirection: 'column',
-  gap: '12px',
-  padding: '18px',
+  gap: space[12],
+  padding: space[18],
   borderRadius: vars.radius.xl,
   backgroundColor: vars.color.surfaceSubtle,
 });
@@ -221,19 +228,19 @@ export const drawerCta = style({
 export const drawerCtaActions = style({
   display: 'grid',
   gridTemplateColumns: 'repeat(2, minmax(0, 1fr))',
-  gap: '8px',
+  gap: space[8],
 });
 
 export const drawerProfile = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
-  padding: '12px',
+  gap: space[12],
+  padding: space[12],
   borderRadius: vars.radius.xl,
   backgroundColor: vars.color.surfaceSubtle,
   color: vars.color.text,
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   textDecoration: 'none',
   selectors: {
     '&:focus-visible': focusVisible,
@@ -251,14 +258,14 @@ export const drawerList = style({
 export const drawerLink = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
+  gap: space[12],
   minHeight: '52px',
   boxSizing: 'border-box',
-  padding: '0 8px',
+  padding: `0 ${space[8]}`,
   borderRadius: vars.radius.lg,
   color: vars.color.text,
-  fontSize: fontSize.lg,
-  fontWeight: 600,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.semibold,
   textDecoration: 'none',
   selectors: {
     '&:hover': { backgroundColor: vars.color.surfaceSubtle },
@@ -283,17 +290,17 @@ globalStyle(`${drawerLinkIcon} svg`, { width: '19px', height: '19px' });
 
 export const drawerSection = style({
   margin: 0,
-  padding: '12px 0 0',
+  padding: `${space[12]} 0 0`,
   border: 0,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
   minWidth: 0,
 });
 
 export const drawerSectionTitle = style({
-  margin: '0 0 2px',
+  margin: `0 0 ${space[2]}`,
   padding: 0,
-  fontSize: fontSize.sm,
-  fontWeight: 600,
+  fontSize: fontSize[13],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   color: vars.color.textSecondary,
 });
@@ -303,8 +310,8 @@ export const drawerRadio = style({
   alignItems: 'center',
   justifyContent: 'space-between',
   minHeight: '44px',
-  padding: '0 4px',
-  fontSize: fontSize.base,
+  padding: `0 ${space[4]}`,
+  fontSize: fontSize[15],
   color: vars.color.text,
   cursor: 'pointer',
 });

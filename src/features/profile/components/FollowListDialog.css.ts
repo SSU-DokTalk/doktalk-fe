@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
 
 /** 탭을 바꿔도 창 높이가 그대로이게 높이를 정해 두고, 목록만 스크롤해요. */
 export const popup = style({
@@ -29,22 +29,22 @@ export const panel = style({
 
 export const list = style({
   margin: 0,
-  padding: '8px 0',
+  padding: `${space[8]} 0`,
   listStyle: 'none',
 });
 
 export const row = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
+  gap: space[12],
   minHeight: '68px',
-  padding: '0 20px 0 24px',
+  padding: `0 ${space[20]} 0 ${space[24]}`,
 });
 
 export const person = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '12px',
+  gap: space[12],
   flex: '1 1 0',
   minWidth: 0,
   minHeight: '44px',
@@ -61,8 +61,8 @@ export const person = style({
 });
 
 export const personName = style({
-  fontSize: fontSize.base,
-  fontWeight: 600,
+  fontSize: fontSize[15],
+  fontWeight: fontWeight.semibold,
   lineHeight: 1.5,
   whiteSpace: 'nowrap',
   overflow: 'hidden',
@@ -74,9 +74,9 @@ export const status = style({
   alignItems: 'center',
   justifyContent: 'center',
   minHeight: '56px',
-  padding: '8px 20px',
+  padding: `${space[8]} ${space[20]}`,
 });
 
 export const state = style({
-  padding: '24px 20px',
+  padding: `${space[24]} ${space[20]}`,
 });

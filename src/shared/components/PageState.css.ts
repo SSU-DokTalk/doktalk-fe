@@ -1,10 +1,13 @@
 import { style } from '@vanilla-extract/css';
-import { mq, vars } from '@/design-system/tokens';
+import { layout, mq, space, vars } from '@/design-system/tokens';
 
 export const root = style({
-  padding: '24px 20px',
+  padding: `${space[24]} ${layout.gutter}`,
   backgroundColor: vars.color.surface,
   '@media': {
-    [mq.md]: { padding: '48px 32px', borderRadius: vars.radius['3xl'] },
+    [mq.md]: {
+      padding: `${space[48]} ${space[32]}`,
+      borderRadius: vars.radius['3xl'],
+    },
   },
 });

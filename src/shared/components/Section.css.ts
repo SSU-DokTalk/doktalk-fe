@@ -1,5 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, mq, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 /** 모바일은 흰 띠(사이 8px 회색), 데스크톱은 둥근 흰 카드 */
 export const card = style({
@@ -9,15 +16,18 @@ export const card = style({
   },
 });
 
+/** 구역 좌우 안쪽 여백. '더보기' 줄은 이만큼 밖으로 늘려서 구분선을 끝까지 그어요. */
+const inset = { mobile: layout.gutter, desktop: space[24] };
+
 /** 제목이 있는 구역 (다가오는 모임, 지난 모임, 읽고 있는 책…) */
 export const section = style([
   card,
   {
     display: 'flex',
     flexDirection: 'column',
-    padding: '16px 20px 4px',
+    padding: `${space[16]} ${inset.mobile} ${space[4]}`,
     '@media': {
-      [mq.md]: { padding: '20px 24px 8px' },
+      [mq.md]: { padding: `${space[20]} ${inset.desktop} ${space[8]}` },
     },
   },
 ]);
@@ -25,19 +35,19 @@ export const section = style([
 export const sectionTitle = style({
   display: 'flex',
   alignItems: 'center',
-  gap: '6px',
-  margin: '0 0 4px',
-  fontSize: fontSize.lg,
-  fontWeight: 700,
+  gap: space[6],
+  margin: `0 0 ${space[4]}`,
+  fontSize: fontSize[16],
+  fontWeight: fontWeight.bold,
   lineHeight: 1.5,
   color: vars.color.text,
   '@media': {
-    [mq.md]: { margin: '0 0 6px', fontSize: fontSize.xl },
+    [mq.md]: { margin: `0 0 ${space[6]}`, fontSize: fontSize[17] },
   },
 });
 
 export const sectionCount = style({
-  fontWeight: 600,
+  fontWeight: fontWeight.semibold,
   color: vars.color.textTertiary,
 });
 
@@ -46,18 +56,18 @@ export const moreRow = style({
   display: 'flex',
   alignItems: 'center',
   justifyContent: 'center',
-  gap: '2px',
+  gap: space[2],
   minHeight: '48px',
-  margin: '0 -20px',
+  margin: `0 -${inset.mobile}`,
   borderTop: `1px solid ${vars.color.borderSubtle}`,
   '@media': {
-    [mq.md]: { margin: '0 -24px' },
+    [mq.md]: { margin: `0 -${inset.desktop}` },
   },
 });
 
 export const state = style([
   card,
   {
-    padding: '8px 0',
+    padding: `${space[8]} 0`,
   },
 ]);
