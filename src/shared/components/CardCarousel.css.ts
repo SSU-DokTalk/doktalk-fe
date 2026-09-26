@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
   zIndex,
 } from '@/design-system/tokens';
@@ -38,9 +39,8 @@ export const head = style({
 
 export const heading = style({
   margin: 0,
-  fontSize: fontSize[16],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.5,
+  ...typeScale.sectionTitleSm,
+
   color: vars.color.text,
   '@media': {
     [mq.md]: { fontSize: fontSize[17] },
@@ -151,8 +151,8 @@ export const link = style({
 
 export const cardMeta = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
 });

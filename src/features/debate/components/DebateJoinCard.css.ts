@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -37,9 +38,8 @@ export const inline = style({
 
 export const label = style({
   margin: 0,
-  fontSize: fontSize[13],
-  fontWeight: fontWeight.semibold,
-  lineHeight: 1.5,
+  ...typeScale.captionStrong,
+
   color: vars.color.textTertiary,
 });
 
@@ -69,7 +69,7 @@ export const description = style({
 
 export const alert = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.danger,
 });

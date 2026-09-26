@@ -104,18 +104,18 @@ export const Cards: Story = {
       }}
     >
       <Card as='article'>
-        <Text as='h3' variant='title'>
+        <Text as='h3' variant='cardTitle'>
           기본 카드
         </Text>
-        <Text variant='bodyXs' tone='secondary'>
+        <Text variant='bodySm' tone='secondary'>
           padding md · radius lg (20px)
         </Text>
       </Card>
       <Card as='article' padding='lg' radius='xl'>
-        <Text as='h3' variant='title'>
+        <Text as='h3' variant='cardTitle'>
           패널 카드
         </Text>
-        <Text variant='bodyXs' tone='secondary'>
+        <Text variant='bodySm' tone='secondary'>
           padding lg · radius xl (24px)
         </Text>
       </Card>
@@ -123,7 +123,7 @@ export const Cards: Story = {
         <div style={{ display: 'flex', gap: 12 }}>
           <BookCover title='넛지' author='리처드 탈러' width={60} />
           <div style={{ display: 'grid', gap: 4, alignContent: 'start' }}>
-            <Text variant='title' lines={2}>
+            <Text variant='cardTitle' lines={2}>
               넛지로 보는 선택의 설계
             </Text>
             <Text variant='caption' tone='tertiary'>

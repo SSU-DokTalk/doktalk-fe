@@ -1,5 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  mq,
+  space,
+  typeScale,
+  vars,
+} from '@/design-system/tokens';
 
 export const grid = style({
   display: 'grid',
@@ -66,10 +73,8 @@ export const title = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  fontSize: fontSize[16],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.4px',
+  ...typeScale.cardTitleSm,
+
   selectors: {
     [`${card}:hover &`]: { color: vars.color.brand },
   },
@@ -83,8 +88,8 @@ export const excerpt = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  fontSize: fontSize[15],
-  lineHeight: 1.6,
+  ...typeScale.body,
+
   color: vars.color.textSecondary,
   whiteSpace: 'pre-line',
 });

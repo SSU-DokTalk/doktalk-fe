@@ -1,10 +1,10 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import {
   fontSize,
-  fontWeight,
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -40,10 +40,8 @@ export const text = style({
 
 export const title = style({
   margin: 0,
-  fontSize: fontSize[17],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.4px',
+  ...typeScale.cardTitle,
+
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {

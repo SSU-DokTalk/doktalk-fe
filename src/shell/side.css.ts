@@ -4,6 +4,7 @@ import {
   fontWeight,
   layout,
   space,
+  typeScale,
   vars,
   zIndex,
 } from '@/design-system/tokens';
@@ -46,8 +47,8 @@ export const profileName = style({
 
 export const profileMeta = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 
@@ -78,9 +79,8 @@ export const activityCard = style({
 export const activityTitle = style({
   margin: 0,
   padding: `0 ${space[12]} ${space[6]}`,
-  fontSize: fontSize[13],
-  fontWeight: fontWeight.semibold,
-  lineHeight: 1.5,
+  ...typeScale.captionStrong,
+
   color: vars.color.textTertiary,
 });
 
@@ -135,8 +135,8 @@ export const loginTitle = style({
 
 export const loginDescription = style({
   margin: `0 0 ${space[8]}`,
-  fontSize: fontSize[14],
-  lineHeight: 1.6,
+  ...typeScale.bodySm,
+
   color: vars.color.textTertiary,
 });
 
@@ -299,9 +299,8 @@ export const drawerSection = style({
 export const drawerSectionTitle = style({
   margin: `0 0 ${space[2]}`,
   padding: 0,
-  fontSize: fontSize[13],
-  fontWeight: fontWeight.semibold,
-  lineHeight: 1.5,
+  ...typeScale.captionStrong,
+
   color: vars.color.textSecondary,
 });
 

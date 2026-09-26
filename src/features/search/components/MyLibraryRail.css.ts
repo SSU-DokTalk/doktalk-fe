@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, fontWeight, space, vars } from '@/design-system/tokens';
+import { fontSize, space, typeScale, vars } from '@/design-system/tokens';
 
 export const rail = style({
   display: 'flex',
@@ -19,9 +19,8 @@ export const head = style({
 
 export const heading = style({
   margin: 0,
-  fontSize: fontSize[17],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.5,
+  ...typeScale.sectionTitle,
+
   color: vars.color.brand,
 });
 

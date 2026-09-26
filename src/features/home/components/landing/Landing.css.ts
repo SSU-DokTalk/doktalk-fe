@@ -1,5 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  mq,
+  space,
+  typeScale,
+  vars,
+} from '@/design-system/tokens';
 
 export const page = style({
   backgroundColor: vars.color.surface,
@@ -314,10 +321,8 @@ export const sectionTitles = style({
 
 export const sectionTitle = style({
   margin: 0,
-  fontSize: fontSize[22],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.6px',
+  ...typeScale.heading,
+
   '@media': {
     [mq.md]: { fontSize: fontSize[28], letterSpacing: '-0.8px' },
   },
@@ -325,8 +330,8 @@ export const sectionTitle = style({
 
 export const sectionDescription = style({
   margin: 0,
-  fontSize: fontSize[14],
-  lineHeight: 1.6,
+  ...typeScale.bodySm,
+
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { fontSize: fontSize[15] },

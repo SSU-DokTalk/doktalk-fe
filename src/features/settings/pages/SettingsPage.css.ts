@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 import { card } from '@/shared/components/Section.css';
@@ -18,17 +19,16 @@ export const page = style({
   },
 });
 
-export const title = style({
-  margin: 0,
-  padding: `${space[16]} ${layout.gutter} ${space[8]}`,
-  fontSize: fontSize[22],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.6px',
-  '@media': {
-    [mq.md]: { padding: 0, fontSize: fontSize[26], letterSpacing: '-0.7px' },
+export const title = style([
+  typeScale.pageTitle,
+  {
+    margin: 0,
+    padding: `${space[16]} ${layout.gutter} ${space[8]}`,
+    '@media': {
+      [mq.md]: { padding: 0 },
+    },
   },
-});
+]);
 
 export const section = style([
   card,
@@ -44,15 +44,13 @@ export const section = style([
 
 export const sectionTitle = style({
   margin: `0 0 ${space[8]}`,
-  fontSize: fontSize[17],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.5,
+  ...typeScale.sectionTitle,
 });
 
 export const description = style({
   margin: `0 0 ${space[14]}`,
-  fontSize: fontSize[14],
-  lineHeight: 1.6,
+  ...typeScale.bodySm,
+
   color: vars.color.textTertiary,
 });
 
@@ -216,8 +214,8 @@ export const manageTitle = style({
 });
 
 export const manageHint = style({
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 
@@ -234,8 +232,8 @@ export const footer = style({
 
 export const dialogText = style({
   margin: 0,
-  fontSize: fontSize[15],
-  lineHeight: 1.6,
+  ...typeScale.body,
+
   color: vars.color.textBody,
 });
 

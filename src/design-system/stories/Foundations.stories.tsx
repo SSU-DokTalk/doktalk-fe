@@ -1,5 +1,14 @@
 import type { Meta, StoryObj } from '@storybook/react-vite';
-import { Text, typeScale, vars, type TypeVariant } from '@/design-system';
+import {
+  fontSize,
+  fontWeight,
+  layout,
+  space,
+  Text,
+  typeScale,
+  vars,
+  type TypeVariant,
+} from '@/design-system';
 
 const meta = {
   title: 'Foundations/Tokens',
@@ -137,7 +146,7 @@ export const Colors: Story = {
             }}
           />
           <div style={{ padding: 12, display: 'grid', gap: 2 }}>
-            <Text variant='bodyXs' weight='bold'>
+            <Text variant='bodySm' weight='bold'>
               {swatch.name}
             </Text>
             <Text variant='caption' tone='tertiary'>
@@ -155,16 +164,20 @@ export const Colors: Story = {
 
 const samples: Record<TypeVariant, string> = {
   display: '함께 읽고, 함께 토론하며,',
-  h1: '모집 중인 토론방',
-  h2: '인기 요약',
-  h3: '채식주의자로 읽는 거부와 존재',
-  title: '넛지로 보는 선택의 설계',
+  pageTitle: '독서 토론방',
+  heading: '채식주의자로 읽는 거부와 존재',
+  sectionTitle: '인기 요약',
+  sectionTitleSm: '댓글 12',
+  cardTitle: '넛지로 보는 선택의 설계',
+  cardTitleSm: '생각에 관한 생각, 2부까지 읽고',
   body: '독서토론과 도서 요약을 통해 지식을 나누고 성장하는 플랫폼입니다.',
-  bodyS: '같은 책을 읽은 사람들과 모임을 열고 이야기를 나눠요',
-  bodyXs: '토론방을 열고 함께 읽을 사람을 모아 보세요',
+  bodySm: '같은 책을 읽은 사람들과 모임을 열고 이야기를 나눠요',
+  label: '토론 인원',
   caption: '10월 6일 (화) 19:30 · 온라인 · 정원 12명',
-  label: '무료 · 온라인 · 인문',
+  captionStrong: '인문 · 사회',
 };
+
+const px = (rem: string) => `${parseFloat(rem) * 16}px`;
 
 export const Typography: Story = {
   render: () => (
@@ -182,8 +195,8 @@ export const Typography: Story = {
             }}
           >
             <Text variant='caption' tone='tertiary'>
-              {variant} · {spec.fontSize} / {spec.fontWeight} /{' '}
-              {spec.lineHeight}
+              {variant} · {px(spec.fontSize)} /{' '}
+              {'fontWeight' in spec ? spec.fontWeight : '–'} / {spec.lineHeight}
             </Text>
             <Text variant={variant}>{samples[variant]}</Text>
           </div>
@@ -200,6 +213,92 @@ export const Typography: Story = {
           Хамтдаа уншиж, хамтдаа хэлэлцэж, хамтдаа өсье.
         </Text>
       </div>
+    </div>
+  ),
+};
+
+function ScaleTable({
+  title,
+  rows,
+}: {
+  title: string;
+  rows: [string, string, React.ReactNode?][];
+}) {
+  return (
+    <section style={{ display: 'grid', gap: 8 }}>
+      <Text as='h2' variant='sectionTitle'>
+        {title}
+      </Text>
+      {rows.map(([name, value, sample]) => (
+        <div
+          key={name}
+          style={{
+            display: 'grid',
+            gridTemplateColumns: '180px 90px 1fr',
+            gap: 16,
+            alignItems: 'center',
+          }}
+        >
+          <Text variant='caption' tone='secondary'>
+            {name}
+          </Text>
+          <Text variant='caption' tone='tertiary'>
+            {value}
+          </Text>
+          {sample}
+        </div>
+      ))}
+    </section>
+  );
+}
+
+/** 간격·글자 크기·굵기·앱 틀 치수. 스타일 파일에서는 이 표에 있는 값만 써요. */
+export const Scales: Story = {
+  render: () => (
+    <div style={{ display: 'grid', gap: 32, padding: 24, maxWidth: 720 }}>
+      <ScaleTable
+        title='space'
+        rows={Object.entries(space).map(([key, value]) => [
+          `space[${key}]`,
+          value,
+          <span
+            key={key}
+            style={{
+              width: value,
+              height: 12,
+              borderRadius: 2,
+              background: vars.color.brandMuted,
+            }}
+          />,
+        ])}
+      />
+      <ScaleTable
+        title='fontSize'
+        rows={Object.entries(fontSize).map(([key, value]) => [
+          `fontSize[${key}]`,
+          value,
+          <span key={key} style={{ fontSize: value, lineHeight: 1.3 }}>
+            함께 읽고 Хамтдаа
+          </span>,
+        ])}
+      />
+      <ScaleTable
+        title='fontWeight'
+        rows={Object.entries(fontWeight).map(([key, value]) => [
+          `fontWeight.${key}`,
+          String(value),
+          <span key={key} style={{ fontWeight: value }}>
+            함께 읽고, 함께 토론하며
+          </span>,
+        ])}
+      />
+      <ScaleTable
+        title='layout'
+        rows={Object.entries(layout).map(([key, value]) => [
+          `layout.${key}`,
+          value,
+        ])}
+      />
     </div>
   ),
 };

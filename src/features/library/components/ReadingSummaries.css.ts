@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
+import { fontSize, mq, space, typeScale, vars } from '@/design-system/tokens';
 
 export const grid = style({
   display: 'grid',
@@ -43,23 +43,21 @@ export const bookTitle = style({
   overflow: 'hidden',
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
-  fontSize: fontSize[16],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.4px',
+  ...typeScale.cardTitleSm,
+
   color: vars.color.text,
 });
 
 export const by = style({
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textSecondary,
   overflowWrap: 'anywhere',
 });
 
 export const bought = style({
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 

@@ -1,6 +1,6 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { vars } from '../../tokens/theme.css';
-import { fontSize, fontWeight, space } from '../../tokens/scale';
+import { fontSize, fontWeight, space, typeScale } from '../../tokens/scale';
 
 export const root = style({
   display: 'flex',
@@ -47,8 +47,8 @@ export const title = style({
 export const description = style({
   margin: 0,
   maxWidth: '320px',
-  fontSize: fontSize[14],
-  lineHeight: 1.6,
+  ...typeScale.bodySm,
+
   color: vars.color.textSecondary,
 });
 

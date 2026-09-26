@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
   zIndex,
 } from '@/design-system/tokens';
@@ -69,8 +70,8 @@ export const excerpt = style({
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
   margin: 0,
-  fontSize: fontSize[15],
-  lineHeight: 1.6,
+  ...typeScale.body,
+
   color: vars.color.textSecondary,
   whiteSpace: 'pre-line',
 });

@@ -6,6 +6,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
   zIndex,
 } from '@/design-system/tokens';
@@ -44,9 +45,8 @@ export const fieldset = style({
 export const legend = style({
   padding: 0,
   marginBottom: space[14],
-  fontSize: fontSize[16],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.5,
+  ...typeScale.sectionTitleSm,
+
   color: vars.color.text,
   '@media': {
     [mq.md]: { marginBottom: space[16], fontSize: fontSize[17] },
@@ -76,23 +76,22 @@ export const group = style({
 });
 
 export const label = style({
-  fontSize: fontSize[14],
-  fontWeight: fontWeight.semibold,
-  lineHeight: 1.5,
+  ...typeScale.label,
+
   color: vars.color.text,
 });
 
 export const hint = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 
 export const error = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.danger,
 });
 

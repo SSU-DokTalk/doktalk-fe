@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
   zIndex,
 } from '@/design-system/tokens';
@@ -148,8 +149,8 @@ const bubbleBase = style({
   maxWidth: 'min(300px, 85%)',
   // 위아래는 토큰 사이 값(11px)으로 줄 간격과 맞춰요.
   padding: `11px ${space[14]}`,
-  fontSize: fontSize[15],
-  lineHeight: 1.6,
+  ...typeScale.body,
+
   whiteSpace: 'pre-wrap',
   overflowWrap: 'anywhere',
   boxShadow: vars.shadow.sm,

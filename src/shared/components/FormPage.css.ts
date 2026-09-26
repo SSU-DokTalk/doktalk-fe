@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -56,14 +57,10 @@ export const backLink = style({
 
 globalStyle(`${backLink} svg`, { width: '18px', height: '18px' });
 
-export const title = style({
-  margin: 0,
-  fontSize: fontSize[22],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.6px',
-  color: vars.color.text,
-  '@media': {
-    [mq.md]: { fontSize: fontSize[26], letterSpacing: '-0.7px' },
+export const title = style([
+  typeScale.pageTitle,
+  {
+    margin: 0,
+    color: vars.color.text,
   },
-});
+]);

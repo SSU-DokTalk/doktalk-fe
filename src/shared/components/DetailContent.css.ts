@@ -1,10 +1,10 @@
 import { style } from '@vanilla-extract/css';
 import {
   fontSize,
-  fontWeight,
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -28,10 +28,8 @@ export const badges = style({
 
 export const title = style({
   margin: 0,
-  fontSize: fontSize[22],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.6px',
+  ...typeScale.heading,
+
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {

@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -65,10 +66,8 @@ export const greeting = style({
 
 export const title = style({
   margin: 0,
-  fontSize: fontSize[22],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.6px',
+  ...typeScale.heading,
+
   '@media': {
     [mq.md]: { fontSize: fontSize[24] },
   },
@@ -76,8 +75,8 @@ export const title = style({
 
 export const subtitle = style({
   margin: 0,
-  fontSize: fontSize[14],
-  lineHeight: 1.6,
+  ...typeScale.bodySm,
+
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { fontSize: fontSize[15] },

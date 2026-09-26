@@ -4,6 +4,7 @@ import {
   fontWeight,
   mq,
   space,
+  typeScale,
   vars,
   zIndex,
 } from '@/design-system/tokens';
@@ -105,8 +106,8 @@ export const host = style({
   gap: space[8],
   flex: '0 0 auto',
   minWidth: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { marginTop: space[6] },
@@ -138,9 +139,8 @@ export const category = style({
   overflow: 'hidden',
   textOverflow: 'ellipsis',
   whiteSpace: 'nowrap',
-  fontSize: fontSize[13],
-  fontWeight: fontWeight.semibold,
-  lineHeight: 1.5,
+  ...typeScale.captionStrong,
+
   color: vars.color.info,
   '@media': {
     [mq.md]: { maxWidth: 'none' },
@@ -150,10 +150,8 @@ export const category = style({
 export const title = style({
   gridArea: 'title',
   margin: 0,
-  fontSize: fontSize[16],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.4px',
+  ...typeScale.cardTitleSm,
+
   color: vars.color.text,
   overflowWrap: 'anywhere',
   display: '-webkit-box',
@@ -193,8 +191,8 @@ export const body = style({
   gridArea: 'body',
   display: 'none',
   margin: 0,
-  fontSize: fontSize[15],
-  lineHeight: 1.6,
+  ...typeScale.body,
+
   color: vars.color.textSecondary,
   overflowWrap: 'anywhere',
   whiteSpace: 'pre-line',
@@ -217,8 +215,8 @@ export const meta = style({
   margin: 0,
   padding: 0,
   listStyle: 'none',
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: {
@@ -265,8 +263,8 @@ export const stats = style({
   alignItems: 'center',
   gap: space[10],
   marginTop: space[4],
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: {
@@ -326,8 +324,8 @@ export const skeletonText = style({
 export const metaText = style({
   gridArea: 'meta',
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
   '@media': {

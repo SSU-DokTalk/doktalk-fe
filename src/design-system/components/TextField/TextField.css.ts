@@ -1,7 +1,7 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
 import { vars } from '../../tokens/theme.css';
-import { fontSize, fontWeight, inputFontSize, space } from '../../tokens/scale';
+import { inputFontSize, space, typeScale } from '../../tokens/scale';
 
 export const field = style({
   display: 'flex',
@@ -15,9 +15,8 @@ export const label = style({
   alignItems: 'center',
   gap: space[6],
   fontFamily: vars.font.family,
-  fontSize: fontSize[14],
-  fontWeight: fontWeight.semibold,
-  lineHeight: 1.5,
+  ...typeScale.label,
+
   color: vars.color.text,
 });
 
@@ -139,8 +138,8 @@ export const textarea = style([
 export const helper = style({
   margin: 0,
   fontFamily: vars.font.family,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 

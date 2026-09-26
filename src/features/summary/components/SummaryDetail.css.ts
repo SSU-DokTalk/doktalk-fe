@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -35,16 +36,14 @@ export const bookText = style({
 });
 
 export const bookLabel = style({
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textSecondary,
 });
 
 export const bookTitle = style({
-  fontSize: fontSize[17],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.4px',
+  ...typeScale.cardTitle,
+
   color: vars.color.text,
   overflowWrap: 'anywhere',
   '@media': {
@@ -65,8 +64,8 @@ export const inLibrary = style({
 export const alert = style({
   flexBasis: '100%',
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.danger,
 });
 
@@ -94,8 +93,8 @@ export const ownerNote = style({
   padding: `${space[14]} ${space[16]}`,
   borderRadius: vars.radius.lg,
   backgroundColor: vars.color.infoSubtle,
-  fontSize: fontSize[14],
-  lineHeight: 1.6,
+  ...typeScale.bodySm,
+
   color: vars.color.info,
 });
 
@@ -142,8 +141,8 @@ export const paywallTitle = style({
 
 export const paywallNote = style({
   margin: 0,
-  fontSize: fontSize[14],
-  lineHeight: 1.6,
+  ...typeScale.bodySm,
+
   color: vars.color.textSecondary,
 });
 
@@ -176,9 +175,8 @@ export const purchaseCard = style({
 
 export const purchaseLabel = style({
   margin: 0,
-  fontSize: fontSize[13],
-  fontWeight: fontWeight.semibold,
-  lineHeight: 1.5,
+  ...typeScale.captionStrong,
+
   color: vars.color.textTertiary,
 });
 

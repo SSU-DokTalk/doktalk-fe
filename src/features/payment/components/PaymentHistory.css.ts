@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 import { card } from '@/shared/components/Section.css';
@@ -127,8 +128,8 @@ export const title = styleVariants({
 });
 
 export const date = style({
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 

@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -124,8 +125,8 @@ export const title = style({
 
 export const subtitle = style({
   margin: 0,
-  fontSize: fontSize[15],
-  lineHeight: 1.6,
+  ...typeScale.body,
+
   color: vars.color.textSecondary,
 });
 
@@ -165,8 +166,8 @@ export const divider = style({
   display: 'flex',
   alignItems: 'center',
   gap: space[12],
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
   selectors: {
     '&::before, &::after': {
@@ -181,8 +182,8 @@ export const divider = style({
 export const switchText = style({
   margin: 0,
   textAlign: 'center',
-  fontSize: fontSize[15],
-  lineHeight: 1.6,
+  ...typeScale.body,
+
   color: vars.color.textSecondary,
 });
 

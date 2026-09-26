@@ -1,5 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, space, vars } from '@/design-system/tokens';
+import { fontSize, space, typeScale, vars } from '@/design-system/tokens';
 
 /** 머리글·버튼 줄은 고정하고 입력 칸만 스크롤해요. */
 export const popup = style({
@@ -38,8 +38,8 @@ export const notice = style({
 
 export const alert = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.danger,
 });
 

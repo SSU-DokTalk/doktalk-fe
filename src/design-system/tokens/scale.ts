@@ -139,67 +139,85 @@ export const fontWeight = {
   black: 900,
 } as const;
 
-/** 글자 크기는 rem이라 브라우저 글자 크기 설정을 따라가요. */
+const heading = {
+  fontSize: fontSize[22],
+  lineHeight: 1.4,
+  fontWeight: fontWeight.bold,
+  letterSpacing: '-0.6px',
+} as const;
+
+/**
+ * 글자 역할. 화면에서 여러 번 쓰는 크기·줄 간격·굵기·자간 묶음이에요.
+ * 스타일 파일에서 `...typeScale.caption`처럼 펼쳐 넣고, 데스크톱에서 커지는 역할(pageTitle)은
+ * `style([typeScale.pageTitle, { ... }])`로 합쳐요. 역할에 없는 조합은 fontSize·fontWeight 토큰으로 적어요.
+ */
 export const typeScale = {
+  /** 랜딩 첫 문장 (lg 이상) */
   display: {
     fontSize: fontSize[52],
     lineHeight: 1.25,
     fontWeight: fontWeight.bold,
     letterSpacing: '-1.6px',
   },
-  h1: {
-    fontSize: fontSize[28],
-    lineHeight: 1.4,
-    fontWeight: fontWeight.bold,
-    letterSpacing: '-0.8px',
+  /** 목록·작성·설정·검색 화면 제목. 데스크톱에서 한 단계 커져요. */
+  pageTitle: {
+    ...heading,
+    '@media': {
+      [mq.md]: { fontSize: fontSize[26], letterSpacing: '-0.7px' },
+    },
   },
-  h2: {
-    fontSize: fontSize[22],
-    lineHeight: 1.4,
-    fontWeight: fontWeight.bold,
-    letterSpacing: '-0.5px',
-  },
-  h3: {
-    fontSize: fontSize[18],
-    lineHeight: 1.4,
-    fontWeight: fontWeight.bold,
-    letterSpacing: '-0.4px',
-  },
-  title: {
+  /** 큰 제목 (글 상세 제목, 홈 인사말, 랜딩 구역 제목의 모바일 크기) */
+  heading,
+  /** 구역 제목 (오른쪽 칼럼, 검색 결과·설정 구역) */
+  sectionTitle: {
     fontSize: fontSize[17],
-    lineHeight: 1.45,
+    lineHeight: 1.5,
+    fontWeight: fontWeight.bold,
+  },
+  /** 작은 구역 제목 (댓글, 폼 묶음, 카드 모음) */
+  sectionTitleSm: {
+    fontSize: fontSize[16],
+    lineHeight: 1.5,
+    fontWeight: fontWeight.bold,
+  },
+  /** 카드 제목 */
+  cardTitle: {
+    fontSize: fontSize[17],
+    lineHeight: 1.4,
     fontWeight: fontWeight.bold,
     letterSpacing: '-0.4px',
   },
-  body: {
+  cardTitleSm: {
     fontSize: fontSize[16],
-    lineHeight: 1.75,
-    fontWeight: fontWeight.regular,
-    letterSpacing: '-0.2px',
+    lineHeight: 1.4,
+    fontWeight: fontWeight.bold,
+    letterSpacing: '-0.4px',
   },
-  bodyS: {
+  /** 본문·설명 */
+  body: {
     fontSize: fontSize[15],
     lineHeight: 1.6,
-    fontWeight: fontWeight.regular,
-    letterSpacing: '-0.2px',
   },
-  bodyXs: {
+  bodySm: {
     fontSize: fontSize[14],
     lineHeight: 1.6,
-    fontWeight: fontWeight.regular,
-    letterSpacing: '-0.2px',
   },
+  /** 입력칸 이름처럼 짧고 굵은 글 */
+  label: {
+    fontSize: fontSize[14],
+    lineHeight: 1.5,
+    fontWeight: fontWeight.semibold,
+  },
+  /** 날짜·저자 같은 부가 정보, 도움말·오류 문구 */
   caption: {
     fontSize: fontSize[13],
     lineHeight: 1.5,
-    fontWeight: fontWeight.medium,
-    letterSpacing: '-0.1px',
   },
-  label: {
-    fontSize: fontSize[12],
+  /** 부가 정보 중 이름표 (카테고리, 묶음 이름) */
+  captionStrong: {
+    fontSize: fontSize[13],
     lineHeight: 1.5,
-    fontWeight: fontWeight.bold,
-    letterSpacing: '0',
+    fontWeight: fontWeight.semibold,
   },
 } as const;
 

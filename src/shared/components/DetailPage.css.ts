@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -105,9 +106,8 @@ export const intro = style({
 
 export const sectionTitle = style({
   margin: 0,
-  fontSize: fontSize[16],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.5,
+  ...typeScale.sectionTitleSm,
+
   color: vars.color.text,
   '@media': {
     [mq.md]: { fontSize: fontSize[18] },

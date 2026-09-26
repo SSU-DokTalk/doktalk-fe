@@ -4,6 +4,7 @@ import {
   fontWeight,
   mq,
   space,
+  typeScale,
   vars,
   zIndex,
 } from '@/design-system/tokens';
@@ -104,10 +105,8 @@ export const title = style({
   WebkitBoxOrient: 'vertical',
   WebkitLineClamp: 2,
   minHeight: '2.8em',
-  fontSize: fontSize[17],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.4px',
+  ...typeScale.cardTitle,
+
   selectors: {
     [`${card}:hover &`]: { color: vars.color.brand },
   },

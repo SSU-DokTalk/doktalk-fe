@@ -1,12 +1,5 @@
 import { style } from '@vanilla-extract/css';
-import {
-  fontSize,
-  fontWeight,
-  layout,
-  mq,
-  space,
-  vars,
-} from '@/design-system/tokens';
+import { layout, mq, space, typeScale, vars } from '@/design-system/tokens';
 
 /** 모바일은 흰 바탕에 구역을 회색 띠로 나누고, 데스크톱은 회색 바탕 위 흰 카드로 나눠요. */
 export const page = style({
@@ -54,23 +47,19 @@ export const titles = style({
   minWidth: 0,
 });
 
-export const title = style({
-  margin: 0,
-  fontSize: fontSize[22],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.6px',
-  color: vars.color.text,
-  '@media': {
-    [mq.md]: { fontSize: fontSize[26], letterSpacing: '-0.7px' },
+export const title = style([
+  typeScale.pageTitle,
+  {
+    margin: 0,
+    color: vars.color.text,
   },
-});
+]);
 
 export const subtitle = style({
   display: 'none',
   margin: 0,
-  fontSize: fontSize[15],
-  lineHeight: 1.6,
+  ...typeScale.body,
+
   color: vars.color.textTertiary,
   '@media': {
     [mq.md]: { display: 'block' },

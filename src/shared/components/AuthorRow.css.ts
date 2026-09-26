@@ -1,5 +1,12 @@
 import { globalStyle, style } from '@vanilla-extract/css';
-import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  mq,
+  space,
+  typeScale,
+  vars,
+} from '@/design-system/tokens';
 
 export const row = style({
   display: 'flex',
@@ -45,8 +52,8 @@ globalStyle(`${link}:hover ${name}`, {
 });
 
 export const meta = style({
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 

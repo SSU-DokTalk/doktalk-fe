@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -57,8 +58,8 @@ export const authorName = style({
 globalStyle(`${author}:hover ${authorName}`, { textDecoration: 'underline' });
 
 export const time = style({
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 

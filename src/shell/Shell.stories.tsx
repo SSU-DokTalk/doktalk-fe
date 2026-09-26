@@ -43,7 +43,7 @@ function makeStore(loggedIn: boolean) {
 function PlaceholderPage({ title }: { title: string }) {
   return (
     <Card radius='xl' style={{ minHeight: 480 }}>
-      <Text as='h1' variant='h2'>
+      <Text as='h1' variant='heading'>
         {title}
       </Text>
       <EmptyState

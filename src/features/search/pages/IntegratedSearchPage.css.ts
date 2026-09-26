@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
   zIndex,
 } from '@/design-system/tokens';
@@ -41,24 +42,19 @@ export const heading = style({
 });
 
 export const eyebrow = style({
-  fontSize: fontSize[14],
-  fontWeight: fontWeight.semibold,
-  lineHeight: 1.5,
+  ...typeScale.label,
+
   color: vars.color.info,
 });
 
-export const title = style({
-  margin: 0,
-  fontSize: fontSize[22],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.4,
-  letterSpacing: '-0.6px',
-  color: vars.color.text,
-  overflowWrap: 'anywhere',
-  '@media': {
-    [mq.md]: { fontSize: fontSize[26], letterSpacing: '-0.7px' },
+export const title = style([
+  typeScale.pageTitle,
+  {
+    margin: 0,
+    color: vars.color.text,
+    overflowWrap: 'anywhere',
   },
-});
+]);
 
 export const chips = style({
   padding: `0 ${layout.gutter}`,
@@ -90,9 +86,8 @@ export const sectionTitle = style({
   alignItems: 'baseline',
   gap: space[6],
   margin: 0,
-  fontSize: fontSize[17],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.5,
+  ...typeScale.sectionTitle,
+
   color: vars.color.text,
 });
 
@@ -190,16 +185,16 @@ export const link = style({
 
 export const cardMeta = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
 });
 
 export const excerpt = style({
   margin: 0,
-  fontSize: fontSize[14],
-  lineHeight: 1.6,
+  ...typeScale.bodySm,
+
   color: vars.color.textMuted,
   overflowWrap: 'anywhere',
   display: '-webkit-box',

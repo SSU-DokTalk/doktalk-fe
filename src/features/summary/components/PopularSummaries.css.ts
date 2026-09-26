@@ -3,6 +3,7 @@ import {
   fontSize,
   fontWeight,
   space,
+  typeScale,
   vars,
   zIndex,
 } from '@/design-system/tokens';
@@ -26,9 +27,8 @@ export const head = style({
 
 export const heading = style({
   margin: 0,
-  fontSize: fontSize[17],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.5,
+  ...typeScale.sectionTitle,
+
   color: vars.color.brand,
 });
 
@@ -100,8 +100,8 @@ export const link = style({
 
 export const preview = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
   overflowWrap: 'anywhere',
   display: '-webkit-box',
@@ -115,8 +115,8 @@ export const footer = style({
   alignItems: 'center',
   gap: space[8],
   margin: `${space[4]} 0 0`,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 

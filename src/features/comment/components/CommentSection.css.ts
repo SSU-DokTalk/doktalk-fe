@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -29,9 +30,8 @@ export const section = style({
 
 export const heading = style({
   margin: 0,
-  fontSize: fontSize[16],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.5,
+  ...typeScale.sectionTitleSm,
+
   color: vars.color.text,
   '@media': {
     [mq.md]: { fontSize: fontSize[18] },
@@ -51,8 +51,8 @@ export const composerField = style({
 
 export const alert = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.danger,
 });
 
@@ -119,8 +119,8 @@ export const time = style({
 
 export const content = style({
   margin: 0,
-  fontSize: fontSize[15],
-  lineHeight: 1.6,
+  ...typeScale.body,
+
   color: vars.color.textBody,
   whiteSpace: 'pre-wrap',
   overflowWrap: 'anywhere',

@@ -5,6 +5,7 @@ import {
   layout,
   mq,
   space,
+  typeScale,
   vars,
 } from '@/design-system/tokens';
 
@@ -37,9 +38,8 @@ export const sectionTitle = style({
   alignItems: 'center',
   gap: space[6],
   margin: `0 0 ${space[4]}`,
-  fontSize: fontSize[16],
-  fontWeight: fontWeight.bold,
-  lineHeight: 1.5,
+  ...typeScale.sectionTitleSm,
+
   color: vars.color.text,
   '@media': {
     [mq.md]: { margin: `0 0 ${space[6]}`, fontSize: fontSize[17] },

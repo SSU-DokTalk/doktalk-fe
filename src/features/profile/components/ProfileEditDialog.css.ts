@@ -1,5 +1,12 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  mq,
+  space,
+  typeScale,
+  vars,
+} from '@/design-system/tokens';
 
 /** 모바일은 화면 전체라 본문만 스크롤하고 저장 버튼 줄은 아래에 붙여 둬요. */
 export const popup = style({
@@ -54,15 +61,15 @@ export const photoButtons = style({
 
 export const hint = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.textTertiary,
 });
 
 export const photoError = style({
   margin: 0,
-  fontSize: fontSize[13],
-  lineHeight: 1.5,
+  ...typeScale.caption,
+
   color: vars.color.danger,
 });
 
