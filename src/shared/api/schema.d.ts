@@ -1261,7 +1261,7 @@ export interface paths {
     };
     /**
      * Oauthlogincontroller
-     * @description 소셜 로그인. 처음 온 사람은 계정 대신 가입 토큰을 받아요 (POST /oauth/register).
+     * @description 소셜 로그인. 처음 온 사람은 계정 대신 가입 토큰을 받아요 (POST /oauth/register). 같은 이메일의 계정이 있으면 연결하지 않고 409 EMAIL_IN_USE, 서비스가 인증하지 않은 이메일이면 400 EMAIL_NOT_VERIFIED예요.
      */
     get: operations['oAuthLoginController_oauth__provider__get'];
     put?: never;
