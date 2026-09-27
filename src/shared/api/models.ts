@@ -8,13 +8,17 @@ export type Summary = Schemas['BasicSummaryRes'];
 export type Post = Schemas['BasicPostRes'];
 export type Book = Schemas['BookSchema'];
 export type UserBrief = Schemas['BasicUserSchema'];
+/** 로그인한 나 (/user/me). 이메일 같은 개인정보가 있어요. */
 export type User = Schemas['UserSchema'];
+/** 다른 사람 프로필 (/user/{id}). 누구나 볼 수 있는 값만 와요. */
+export type PublicUser = Schemas['PublicUserSchema'];
 export type Purchase = Schemas['PurchaseSchema'];
 export type AttachedFile = Schemas['FileDto'];
 
 /**
- * 댓글. 백엔드 댓글 목록 API에 response_model이 없어서 직접 적었어요.
- * 백엔드에 모델이 생기면 schema.d.ts의 타입으로 바꿔요.
+ * 요약·토론·게시글 댓글이 같이 쓰는 모양.
+ * 요약·토론 댓글은 서버 모델(BasicSummaryComment·BasicDebateComment)로 오지만,
+ * 게시글 댓글 목록은 response_model이 없어서 직접 적었어요.
  */
 export type Comment = {
   id: number;

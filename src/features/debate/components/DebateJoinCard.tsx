@@ -49,7 +49,7 @@ export function DebateJoinCard({
     debate.held_at !== undefined &&
     parseServerDate(debate.held_at).getTime() < Date.now();
   const free = debate.price <= 0;
-  const online = Boolean(debate.link) && !debate.location?.trim();
+  const online = debate.is_online && !debate.location?.trim();
 
   const renderBody = () => {
     if (isHost) {

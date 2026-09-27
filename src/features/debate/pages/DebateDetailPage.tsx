@@ -25,7 +25,6 @@ import {
   useDebate,
   useDebateComments,
   useDebateLiked,
-  useDebatePurchase,
   useToggleDebateLike,
 } from '../api';
 import { DebateHero } from '../components/DebateHero';
@@ -55,7 +54,6 @@ function DebateDetail({ debate }: { debate: Debate }) {
   const introId = useId();
   const backTo = useBackToList();
 
-  const purchase = useDebatePurchase(debate.id, isHost ? 0 : viewerId);
   const liked = useDebateLiked(debate.id, viewerId);
   const toggleLike = useToggleDebateLike(debate.id, viewerId);
   const comments = useDebateComments(debate.id, true);
@@ -95,7 +93,6 @@ function DebateDetail({ debate }: { debate: Debate }) {
           <DebateHero
             debate={debate}
             viewerId={viewerId}
-            canSeeLink={isHost || Boolean(purchase.data)}
             actions={isDesktop ? actions : undefined}
           />
 

@@ -9,7 +9,7 @@ import {
 } from '@/features/post/components/PostCard';
 import { PostComposer } from '@/features/post/components/PostComposer';
 import { WritePrompt } from '@/features/post/components/WritePrompt';
-import type { Post, User } from '@/shared/api/models';
+import type { Post, PublicUser } from '@/shared/api/models';
 import { InfiniteFeed } from '@/shared/components/InfiniteFeed';
 
 /** 게시글 탭. 내 프로필이면 맨 위에서 바로 글을 쓰고, 새 글은 목록 맨 위에 보여요. */
@@ -17,7 +17,7 @@ export function ProfilePosts({
   user,
   viewerId,
 }: {
-  user: User;
+  user: PublicUser;
   viewerId: number;
 }) {
   const { t } = useTranslation();

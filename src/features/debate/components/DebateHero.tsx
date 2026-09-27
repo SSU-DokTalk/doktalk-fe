@@ -34,19 +34,12 @@ function InfoRow({
 type DebateHeroProps = {
   debate: Debate;
   viewerId: number;
-  /** 온라인 링크를 보여줄지 (개설자·참여자) */
-  canSeeLink: boolean;
   /** 작성자 줄 오른쪽 버튼 (데스크톱의 공유·옵션) */
   actions?: ReactNode;
 };
 
 /** 표지, 카테고리, 제목, 개설자, 모임 정보 */
-export function DebateHero({
-  debate,
-  viewerId,
-  canSeeLink,
-  actions,
-}: DebateHeroProps) {
+export function DebateHero({ debate, viewerId, actions }: DebateHeroProps) {
   const { t } = useTranslation();
   const format = useFormat();
   const isDesktop = useMediaQuery(mq.md);
@@ -130,12 +123,13 @@ export function DebateHero({
               {location}
             </InfoRow>
           )}
-          {debate.link && (
+          {/* 링크는 서버가 주최자·참여자에게만 담아 줘요. */}
+          {debate.is_online && (
             <InfoRow
               icon={<Link2 aria-hidden='true' />}
               label={t('page.debate-detail.info.link')}
             >
-              {!canSeeLink ? (
+              {!debate.link ? (
                 <span className={s.infoMuted}>
                   {t('page.debate-detail.info.link-locked')}
                 </span>

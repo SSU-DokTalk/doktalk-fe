@@ -10,6 +10,7 @@ import type {
   Debate,
   Page,
   Post,
+  PublicUser,
   Purchase,
   Summary,
   User,
@@ -48,15 +49,17 @@ export const me: User = {
   is_deleted: false,
 };
 
-export const other: User = {
-  ...me,
+/** 다른 사람 프로필: 서버가 공개 정보만 줘요 (이메일·수정일 없음). */
+export const other: PublicUser = {
   id: OTHER_ID,
-  email: 'other@example.com',
   name: '박서연',
   introduction:
     '합정에서 경제·경영 책 모임을 열어요. 요즘은 행동경제학 책을 읽고 있어요.',
   follower_num: 342,
   following_num: 120,
+  role: 'USER',
+  created: at(-400 * DAY),
+  is_deleted: false,
 };
 
 const book = (isbn: number, title: string, author: string): Book => ({
@@ -101,6 +104,7 @@ const debate = (
     hostId === VIEWER_ID ? brief(VIEWER_ID, me.name!) : brief(hostId, '박서연'),
   book: BOOKS[bookIndex],
   ...extra,
+  is_online: Boolean(extra.link),
 });
 
 /** 내가 연 토론방 */

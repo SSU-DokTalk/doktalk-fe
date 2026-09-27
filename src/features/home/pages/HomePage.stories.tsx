@@ -42,6 +42,7 @@ const openDebates: Debate[] = [
     price: 8000,
     limit: 15,
     link: 'https://meet.example.com/justice',
+    is_online: true,
     location: null,
   },
   {

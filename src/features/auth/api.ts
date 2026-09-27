@@ -37,12 +37,16 @@ export async function loginWithProvider(
   return { token: String(res.headers.authorization ?? ''), user: res.data };
 }
 
+/** 이용약관·개인정보 동의는 필수라서 서버도 둘 다 true인지 확인해요. */
 export function registerWithEmail(input: {
   email: string;
   password: string;
   name: string;
+  agreements: { terms: boolean; privacy: boolean };
 }) {
-  return api.post('/user/register', { body: input });
+  return api.post('/user/register', {
+    body: { ...input, agreements: { ...input.agreements, marketing: false } },
+  });
 }
 
 /** 탈퇴한 계정 되살리기. 로그인으로 받은 토큰이 헤더에 있어야 해요. */

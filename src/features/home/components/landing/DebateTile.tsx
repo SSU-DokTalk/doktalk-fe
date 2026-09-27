@@ -22,7 +22,7 @@ export function DebateTile({ debate }: { debate: Debate }) {
   const format = useFormat();
   const isDesktop = useMediaQuery(mq.md);
   const kind = placeKindText(debate, t);
-  const online = !debate.location?.trim() && Boolean(debate.link);
+  const online = !debate.location?.trim() && debate.is_online;
   const ended =
     Boolean(debate.held_at) &&
     parseServerDate(debate.held_at!).getTime() < Date.now();

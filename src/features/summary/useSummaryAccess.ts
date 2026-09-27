@@ -7,8 +7,8 @@ import {
 } from './api';
 
 /**
- * 유료 내용을 볼 수 있는지. 구매 기록이 있어야 서버가 유료 내용을 줘요.
- * 작성자도 지금은 구매 기록이 없으면 받을 수 없어요(백엔드 수정 대기).
+ * 유료 내용을 볼 수 있는지. 서버는 작성자와 구매 기록이 있는 사람에게 유료 내용을 줘요.
+ * 무료 요약은 '무료로 읽기'로 0원 구매 기록을 만들어 내 서재에 담은 뒤 열어요.
  */
 export function useSummaryAccess(summary: Summary) {
   const { user, isLoggedIn } = useAuth();

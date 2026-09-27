@@ -12,14 +12,14 @@ import {
 } from '@/design-system';
 import { useFollowList, type FollowListKind } from '@/features/user/api';
 import { FollowButton } from '@/features/user/components/FollowButton';
-import type { User } from '@/shared/api/models';
+import type { PublicUser } from '@/shared/api/models';
 import { useFormat } from '@/shared/format';
 import { useLoadMoreOnScroll } from '@/shared/hooks/useLoadMoreOnScroll';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import * as s from './FollowListDialog.css';
 
 type FollowListDialogProps = {
-  user: Pick<User, 'id' | 'name' | 'follower_num' | 'following_num'>;
+  user: Pick<PublicUser, 'id' | 'name' | 'follower_num' | 'following_num'>;
   viewerId: number;
   /** 보고 있는 목록. null이면 닫혀 있어요. */
   kind: FollowListKind | null;

@@ -17,6 +17,7 @@ const base: Debate = {
     '영혜는 왜 먹기를 거부했을까요? 1부를 중심으로 거부라는 행동이 어떻게 한 사람의 존재 선언이 되는지 이야기합니다.',
   location: null,
   link: 'https://meet.google.com/xyz-abcd-efg',
+  is_online: true,
   held_at: '2026-10-06T10:30:00',
   price: 10000,
   limit: 12,
@@ -43,6 +44,7 @@ const debates: Record<string, Debate> = {
     content:
       '기본값 하나가 선택을 어떻게 바꾸는지, 각자의 생활 속 넛지 사례를 가져와 이야기해요.',
     link: null,
+    is_online: false,
     location: '서울 마포구 합정동',
     price: 0,
     limit: 8,

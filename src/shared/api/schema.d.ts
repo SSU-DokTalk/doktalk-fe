@@ -132,7 +132,7 @@ export interface paths {
     };
     /**
      * Getdebatecommentlikecontroller
-     * @description 토론의 댓글 좋아요 조회
+     * @description 토론의 댓글 좋아요 조회. 좋아요한 댓글 id만 돌려줘요.
      */
     get: operations['getDebateCommentLikeController_debate_comments_like_get'];
     put?: never;
@@ -152,7 +152,7 @@ export interface paths {
     };
     /**
      * Getdebatecontroller
-     * @description 단일 토론 조회
+     * @description 단일 토론 조회. 온라인 링크는 주최자와 참여자에게만 담아요.
      */
     get: operations['getDebateController_debate__debate_id__get'];
     /**
@@ -180,7 +180,7 @@ export interface paths {
     };
     /**
      * Getdebatecommentscontroller
-     * @description 토론의 댓글 조회
+     * @description 토론의 댓글 조회. 작성자는 공개 정보(BasicUserSchema)만 담아요.
      */
     get: operations['getDebateCommentsController_debate__debate_id__comments_get'];
     put?: never;
@@ -404,10 +404,10 @@ export interface paths {
       cookie?: never;
     };
     /**
-     * Getpostlikecontroller
+     * Getpostcommentlikecontroller
      * @description 게시글의 댓글 좋아요 조회
      */
-    get: operations['getPostLikeController_post_comments_like_get'];
+    get: operations['getPostCommentLikeController_post_comments_like_get'];
     put?: never;
     post?: never;
     delete?: never;
@@ -584,9 +584,37 @@ export interface paths {
     put?: never;
     /**
      * Createpurchasecontroller
-     * @description 구매 내역 생성
+     * @description 무료(0원) 토론방 참여·요약 열람 기록. 가격은 서버가 상품에서 읽어요.
+     *
+     *     - 유료 상품이면 402 (결제 후 /purchase/confirm으로 만들어요)
+     *     - 이미 있으면 409
      */
     post: operations['createPurchaseController_purchase_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/purchase/confirm': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Confirmpurchasecontroller
+     * @description 유료 상품 결제 확인. 토스 결제 창이 넘겨준 paymentKey·orderId·amount를 받아
+     *     서버에서 토스에 승인을 요청하고, 승인된 결제만 구매 기록으로 남겨요.
+     *
+     *     - 금액이 상품 가격과 다르면 400 (승인 요청을 보내지 않아요)
+     *     - 토스가 거절하면 402 (detail에 토스의 code·message)
+     *     - 이미 산 상품이면 409. 같은 결제로 다시 보내면 같은 기록 id를 돌려줘요.
+     */
+    post: operations['confirmPurchaseController_purchase_confirm_post'];
     delete?: never;
     options?: never;
     head?: never;
@@ -683,7 +711,7 @@ export interface paths {
     };
     /**
      * Getsummarycommentlikecontroller
-     * @description 요약의 댓글 좋아요 조회
+     * @description 요약의 댓글 좋아요 조회. 좋아요한 댓글 id만 돌려줘요.
      */
     get: operations['getSummaryCommentLikeController_summary_comments_like_get'];
     put?: never;
@@ -751,7 +779,7 @@ export interface paths {
     };
     /**
      * Getsummarycommentcontroller
-     * @description 요약의 댓글 조회
+     * @description 요약의 댓글 조회. 작성자는 공개 정보(BasicUserSchema)만 담아요.
      */
     get: operations['getSummaryCommentController_summary__summary_id__comments_get'];
     put?: never;
@@ -901,7 +929,7 @@ export interface paths {
     };
     /**
      * Getuserinfocontroller
-     * @description 유저의 정보를 반환하는 API
+     * @description 유저의 공개 프로필. 누구나 볼 수 있어서 이메일·성별·생일은 빼요 (본인 정보는 /user/me).
      */
     get: operations['getUserInfoController_user__user_id__get'];
     put?: never;
@@ -936,7 +964,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Getusersummariescontroller */
+    /**
+     * Getusersummariescontroller
+     * @description 유저가 쓴 요약. 누구나 볼 수 있어서 유료 내용은 다른 목록처럼 가려요.
+     */
     get: operations['getUserSummariesController_user__user_id__summaries_get'];
     put?: never;
     post?: never;
@@ -970,7 +1001,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Getpurchasedsummariescontroller */
+    /**
+     * Getpurchasedsummariescontroller
+     * @description 본인이 산 요약 (최근에 산 순서). 유료 내용은 /summary/{id}/charged_content로 받아요.
+     */
     get: operations['getPurchasedSummariesController_user__user_id__purchased_summaries_get'];
     put?: never;
     post?: never;
@@ -987,7 +1021,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Getuserdebatescontroller */
+    /**
+     * Getuserdebatescontroller
+     * @description 유저가 연 토론방. 온라인 링크는 주최자 본인에게만 보여요 (참여자는 상세에서 봐요).
+     */
     get: operations['getUserDebatesController_user__user_id__debates_get'];
     put?: never;
     post?: never;
@@ -1004,7 +1041,10 @@ export interface paths {
       path?: never;
       cookie?: never;
     };
-    /** Getpurchaseddebatescontroller */
+    /**
+     * Getpurchaseddebatescontroller
+     * @description 본인이 참여한(산) 토론방 (최근에 참여한 순서)
+     */
     get: operations['getPurchasedDebatesController_user__user_id__purchased_debates_get'];
     put?: never;
     post?: never;
@@ -1216,6 +1256,34 @@ export interface paths {
 export type webhooks = Record<string, never>;
 export interface components {
   schemas: {
+    /** BasicDebateComment */
+    BasicDebateComment: {
+      /** Id */
+      id: number;
+      /** User Id */
+      user_id: number;
+      /** Debate Id */
+      debate_id: number;
+      /** Upper Comment Id */
+      upper_comment_id?: number | null;
+      /** Content */
+      content?: string | null;
+      /** Comments Num */
+      comments_num: number;
+      /** Likes Num */
+      likes_num: number;
+      /**
+       * Created
+       * Format: date-time
+       */
+      created: string;
+      /**
+       * Updated
+       * Format: date-time
+       */
+      updated: string;
+      user: components['schemas']['BasicUserSchema'];
+    };
     /** BasicDebateRes */
     BasicDebateRes: {
       /** Id */
@@ -1228,6 +1296,11 @@ export interface components {
       location?: string | null;
       /** Link */
       link?: string | null;
+      /**
+       * Is Online
+       * @default false
+       */
+      is_online: boolean;
       /** Held At */
       held_at?: string | null;
       /** Title */
@@ -1363,8 +1436,35 @@ export interface components {
       name?: string | null;
       /** Gender */
       gender?: boolean | null;
-      /** Age */
-      age?: number | null;
+      agreements: components['schemas']['RegisterAgreementsReq'];
+    };
+    /** BasicSummaryComment */
+    BasicSummaryComment: {
+      /** Id */
+      id: number;
+      /** User Id */
+      user_id: number;
+      /** Summary Id */
+      summary_id: number;
+      /** Upper Comment Id */
+      upper_comment_id?: number | null;
+      /** Content */
+      content: string;
+      /** Comments Num */
+      comments_num: number;
+      /** Likes Num */
+      likes_num: number;
+      /**
+       * Created
+       * Format: date-time
+       */
+      created: string;
+      /**
+       * Updated
+       * Format: date-time
+       */
+      updated: string;
+      user: components['schemas']['BasicUserSchema'];
     };
     /** BasicSummaryRes */
     BasicSummaryRes: {
@@ -1513,6 +1613,25 @@ export interface components {
        */
       success: boolean;
     };
+    /**
+     * ConfirmPurchaseReq
+     * @description 토스 결제 창이 성공 주소로 넘겨준 값
+     */
+    ConfirmPurchaseReq: {
+      /**
+       * Product Type
+       * @enum {string}
+       */
+      product_type: 'D' | 'S';
+      /** Product Id */
+      product_id: number;
+      /** Payment Key */
+      payment_key: string;
+      /** Order Id */
+      order_id: string;
+      /** Amount */
+      amount: number;
+    };
     /** CreateDebateCommentReq */
     CreateDebateCommentReq: {
       /** Upper Comment Id */
@@ -1562,7 +1681,11 @@ export interface components {
       /** Files */
       files?: components['schemas']['FileDto'][] | null;
     };
-    /** CreatePurchaseReq */
+    /**
+     * CreatePurchaseReq
+     * @description 무료(0원) 상품 참여·열람. 가격은 서버가 상품에서 읽어요.
+     *     유료 상품은 결제를 확인하는 /purchase/confirm으로 만들어요.
+     */
     CreatePurchaseReq: {
       /**
        * Product Type
@@ -1571,17 +1694,11 @@ export interface components {
       product_type: 'D' | 'S';
       /** Product Id */
       product_id: number;
-      /** Content */
-      content?: string | null;
-      /** Price */
-      price: number;
-      /** Quantity */
-      quantity: number;
     };
     /** CreateSummaryCommentReq */
     CreateSummaryCommentReq: {
       /** Upper Comment Id */
-      upper_comment_id: number;
+      upper_comment_id?: number | null;
       /** Content */
       content: string;
     };
@@ -1705,6 +1822,49 @@ export interface components {
       /** Pages */
       pages?: number | null;
     };
+    /** Page[PurchaseSchema] */
+    Page_PurchaseSchema_: {
+      /** Items */
+      items: components['schemas']['PurchaseSchema'][];
+      /** Total */
+      total: number | null;
+      /** Page */
+      page: number | null;
+      /** Size */
+      size: number | null;
+      /** Pages */
+      pages?: number | null;
+    };
+    /**
+     * PublicUserSchema
+     * @description 다른 사람이 보는 프로필. 이메일·성별·생일 같은 개인정보는 넣지 않아요.
+     */
+    PublicUserSchema: {
+      /** Id */
+      id: number;
+      /** Profile */
+      profile?: string | null;
+      /** Name */
+      name?: string | null;
+      /** Introduction */
+      introduction?: string | null;
+      /** Follower Num */
+      follower_num: number;
+      /** Following Num */
+      following_num: number;
+      /** @default USER */
+      role: components['schemas']['ROLE'];
+      /**
+       * Created
+       * Format: date-time
+       */
+      created: string;
+      /**
+       * Is Deleted
+       * @default false
+       */
+      is_deleted: boolean;
+    };
     /** PurchaseSchema */
     PurchaseSchema: {
       /** Id */
@@ -1724,6 +1884,8 @@ export interface components {
       price: number;
       /** Quantity */
       quantity: number;
+      /** Order Id */
+      order_id?: string | null;
       /**
        * Created
        * Format: date-time
@@ -1744,6 +1906,21 @@ export interface components {
      * @enum {string}
      */
     ROLE: 'ADMIN' | 'USER';
+    /**
+     * RegisterAgreementsReq
+     * @description 가입할 때 받는 약관 동의. 이용약관과 개인정보 수집·이용 동의는 필수예요.
+     */
+    RegisterAgreementsReq: {
+      /** Terms */
+      terms: boolean;
+      /** Privacy */
+      privacy: boolean;
+      /**
+       * Marketing
+       * @default false
+       */
+      marketing: boolean;
+    };
     /** UpdateUserInfoReq */
     UpdateUserInfoReq: {
       /** Profile */
@@ -1753,7 +1930,10 @@ export interface components {
       /** Introduction */
       introduction?: string | null;
     };
-    /** UserSchema */
+    /**
+     * UserSchema
+     * @description 본인 정보 (/user/me, 로그인). 개인정보가 들어 있어서 본인에게만 줘요.
+     */
     UserSchema: {
       /** Id */
       id: number;
@@ -2053,7 +2233,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': boolean[];
+          'application/json': number[];
         };
       };
       /** @description Validation Error */
@@ -2181,7 +2361,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': components['schemas']['BasicDebateComment'][];
         };
       };
       /** @description Validation Error */
@@ -2468,7 +2648,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': number[];
         };
       };
       /** @description Validation Error */
@@ -2664,7 +2844,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': number[];
         };
       };
       /** @description Validation Error */
@@ -2678,7 +2858,7 @@ export interface operations {
       };
     };
   };
-  getPostLikeController_post_comments_like_get: {
+  getPostCommentLikeController_post_comments_like_get: {
     parameters: {
       query?: {
         ids?: number[] | null;
@@ -2695,7 +2875,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': number[];
         };
       };
       /** @description Validation Error */
@@ -3130,6 +3310,39 @@ export interface operations {
       };
     };
   };
+  confirmPurchaseController_purchase_confirm_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['ConfirmPurchaseReq'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': number;
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
   deletePurchaseController_purchase__purchase_id__delete: {
     parameters: {
       query?: never;
@@ -3281,7 +3494,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': number[];
         };
       };
       /** @description Validation Error */
@@ -3312,7 +3525,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': number[];
         };
       };
       /** @description Validation Error */
@@ -3473,7 +3686,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': components['schemas']['BasicSummaryComment'][];
         };
       };
       /** @description Validation Error */
@@ -3755,7 +3968,9 @@ export interface operations {
       query: {
         _from: string;
         _to: string;
+        /** @description Page size */
         size?: number;
+        /** @description Page number */
         page?: number;
       };
       header?: never;
@@ -3770,7 +3985,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': components['schemas']['Page_PurchaseSchema_'];
         };
       };
       /** @description Validation Error */
@@ -3801,7 +4016,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': components['schemas']['UserSchema'];
+          'application/json': components['schemas']['PublicUserSchema'];
         };
       };
       /** @description Validation Error */
@@ -3854,6 +4069,7 @@ export interface operations {
   getUserSummariesController_user__user_id__summaries_get: {
     parameters: {
       query?: {
+        lang?: components['schemas']['LANGUAGE'];
         /** @description Page number */
         page?: number;
         /** @description Page size */
@@ -3926,6 +4142,7 @@ export interface operations {
   getPurchasedSummariesController_user__user_id__purchased_summaries_get: {
     parameters: {
       query?: {
+        lang?: components['schemas']['LANGUAGE'];
         /** @description Page number */
         page?: number;
         /** @description Page size */
@@ -4354,7 +4571,7 @@ export interface operations {
           [name: string]: unknown;
         };
         content: {
-          'application/json': unknown;
+          'application/json': components['schemas']['UserSchema'];
         };
       };
       /** @description Validation Error */

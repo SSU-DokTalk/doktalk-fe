@@ -12,13 +12,13 @@ import {
 } from '@/design-system';
 import type { FollowListKind } from '@/features/user/api';
 import { FollowButton } from '@/features/user/components/FollowButton';
-import type { User } from '@/shared/api/models';
+import type { PublicUser } from '@/shared/api/models';
 import { useFormat } from '@/shared/format';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import * as s from './ProfileHeader.css';
 
 type ProfileHeaderProps = {
-  user: User;
+  user: PublicUser;
   viewerId: number;
   /** 팔로우 목록은 로그인해야 볼 수 있어요. 없으면 숫자만 보여줘요. */
   onOpenFollows?: (kind: FollowListKind) => void;

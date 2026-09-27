@@ -61,8 +61,8 @@ export function useMonthlyPurchases(
 }
 
 /**
- * 지금까지 산 것 (취소 제외). 참여한 토론과 산 요약을 여기서 찾아요.
- * 백엔드의 purchased-debates·purchased-summaries가 아직 비어 있어서예요.
+ * 지금까지 산 것 (취소 제외). 참여한 토론과 산 요약을 여기서 찾아요 (산 날짜도 여기에만 있어요).
+ * 백엔드의 purchased-debates·purchased-summaries로 옮기면 요청 수를 줄일 수 있어요.
  */
 export function usePurchaseHistory(viewerId: number) {
   return useQuery({

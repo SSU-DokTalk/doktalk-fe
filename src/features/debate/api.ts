@@ -10,12 +10,7 @@ import {
 } from '@tanstack/react-query';
 import { purchaseKeys } from '@/features/payment/api';
 import { api, httpStatus } from '@/shared/api/client';
-import {
-  nextPageParam,
-  type Comment,
-  type Debate,
-  type Purchase,
-} from '@/shared/api/models';
+import { nextPageParam, type Debate, type Purchase } from '@/shared/api/models';
 import type { components } from '@/shared/api/schema';
 import type { SearchBy } from '@/shared/hooks/useListParams';
 import { uploadFiles } from '@/shared/api/upload';
@@ -151,11 +146,11 @@ export function useDebatesByIds(ids: number[]) {
 export function useDebateComments(id: number, enabled: boolean) {
   return useQuery({
     queryKey: debateKeys.comments(id),
-    queryFn: async ({ signal }) =>
-      (await api.get('/debate/{debate_id}/comments', {
+    queryFn: ({ signal }) =>
+      api.get('/debate/{debate_id}/comments', {
         path: { debate_id: id },
         signal,
-      })) as Comment[],
+      }),
     enabled: enabled && id > 0,
   });
 }
@@ -234,7 +229,7 @@ export function useToggleDebateLike(id: number, viewerId: number) {
 
 /**
  * 무료 토론방 참여. 결제 없이 참여 기록만 만들어요.
- * 유료는 결제를 마친 뒤 /checkout/success에서 기록을 만들어요.
+ * 유료는 결제를 마친 뒤 /checkout/success에서 서버가 결제를 확인하고 기록을 만들어요.
  */
 export function useJoinFreeDebate(debate: Debate, viewerId: number) {
   const queryClient = useQueryClient();
@@ -242,13 +237,7 @@ export function useJoinFreeDebate(debate: Debate, viewerId: number) {
     mutationFn: async () => {
       try {
         await api.post('/purchase', {
-          body: {
-            product_type: 'D',
-            product_id: debate.id,
-            content: debate.title,
-            price: 0,
-            quantity: 1,
-          },
+          body: { product_type: 'D', product_id: debate.id },
         });
       } catch (error) {
         // 이미 참여한 경우예요. 참여 상태를 다시 불러오면 돼요.
@@ -257,6 +246,10 @@ export function useJoinFreeDebate(debate: Debate, viewerId: number) {
     },
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: purchaseKeys.all });
+      // 참여하면 상세에 온라인 링크가 담겨 와요.
+      void queryClient.invalidateQueries({
+        queryKey: debateKeys.detail(debate.id),
+      });
       return queryClient.invalidateQueries({
         queryKey: debateKeys.purchase(debate.id, viewerId),
       });

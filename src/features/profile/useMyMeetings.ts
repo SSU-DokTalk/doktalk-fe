@@ -23,7 +23,7 @@ export function daysUntil(date: Date) {
 
 /**
  * 내가 연 토론방과 참여한 토론방을 합쳐서 다가오는 모임·지난 모임으로 나눠요.
- * 참여한 토론방은 백엔드 목록 API가 비어 있어서 구매 기록에서 찾아요.
+ * 참여한 토론방은 구매 기록에서 찾아서 상세 화면과 같은 캐시로 불러와요.
  */
 export function useMyMeetings(viewerId: number) {
   const hosted = useHostedDebates(viewerId);

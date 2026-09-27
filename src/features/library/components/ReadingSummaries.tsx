@@ -43,7 +43,7 @@ function SummariesSkeleton() {
 
 /**
  * 읽고 있는 요약 = 산 요약 (무료로 연 것 포함).
- * 백엔드에 산 요약 목록 API가 아직 없어서 구매 기록에서 찾아요.
+ * 산 날짜를 같이 보여줘야 해서 구매 기록에서 찾아요.
  */
 export function ReadingSummaries({
   viewerId,

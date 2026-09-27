@@ -1,4 +1,5 @@
 import {
+  ANONYMOUS,
   loadTossPayments,
   type TossPaymentsWidgets,
 } from '@tosspayments/tosspayments-sdk';
@@ -12,13 +13,12 @@ import { encodePurchase, type ProductType } from '../checkout';
 import * as s from './CheckoutDialog.css';
 
 /**
- * 토스 공식 문서의 테스트 키라서 실제 결제는 되지 않아요.
- * 운영 키로 바꾸는 일은 서버 결제 확인 작업과 같이 해요.
+ * 결제 위젯 클라이언트 키. 서버(TOSS_SECRET_KEY)와 같은 상점의 키여야 결제 확인이 돼요.
+ * 설정하지 않으면 토스 공식 문서의 테스트 키를 써요. 테스트 키로는 실제 결제가 되지 않아요.
  */
-const TOSS_TEST_KEYS = {
-  clientKey: 'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm',
-  customerKey: 'GSpd_oQzjDH9sGptWJQSg',
-};
+const TOSS_CLIENT_KEY =
+  import.meta.env.VITE_TOSS_CLIENT_KEY ||
+  'test_gck_docs_Ovk5rk1EwkEbP0W43n07xlzm';
 
 const METHOD_ID = 'checkout-payment-method';
 const AGREEMENT_ID = 'checkout-agreement';
@@ -47,8 +47,10 @@ function useTossWidgets(product: CheckoutProduct) {
 
     (async () => {
       try {
-        const toss = await loadTossPayments(TOSS_TEST_KEYS.clientKey);
-        const next = toss.widgets({ customerKey: TOSS_TEST_KEYS.customerKey });
+        const toss = await loadTossPayments(TOSS_CLIENT_KEY);
+        // 회원마다 다른 구매자 키(customerKey)가 서버에 없어서 비회원 결제로 열어요.
+        // 모두 같은 키를 쓰면 저장한 결제 수단이 다른 회원에게 보일 수 있어요.
+        const next = toss.widgets({ customerKey: ANONYMOUS });
         await next.setAmount({ value: product.price, currency: 'KRW' });
         if (cancelled) return;
         const [methods, agreement] = await Promise.all([
@@ -95,7 +97,6 @@ function CheckoutBody({ product }: { product: CheckoutProduct }) {
       product_id: product.id,
       content: product.title,
       price: product.price,
-      quantity: 1,
     });
     const back = (result: 'success' | 'fail') =>
       `${window.location.origin}/checkout/${result}?${new URLSearchParams({

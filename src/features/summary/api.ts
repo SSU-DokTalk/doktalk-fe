@@ -11,7 +11,6 @@ import { purchaseKeys } from '@/features/payment/api';
 import { api, httpStatus } from '@/shared/api/client';
 import {
   nextPageParam,
-  type Comment,
   type Purchase,
   type Summary,
 } from '@/shared/api/models';
@@ -196,10 +195,10 @@ export function useSummaryLiked(id: number, viewerId: number) {
   return useQuery({
     queryKey: summaryKeys.liked(id, viewerId),
     queryFn: async ({ signal }) => {
-      const liked = (await api.get('/summarys/like', {
+      const liked = await api.get('/summarys/like', {
         query: { ids: [id] },
         signal,
-      })) as number[];
+      });
       return liked.includes(id);
     },
     enabled: id > 0 && viewerId > 0,
@@ -250,20 +249,17 @@ export function useToggleSummaryLike(id: number, viewerId: number) {
   });
 }
 
-/** 무료 요약 열기. 결제 없이 구매 기록만 만들고 유료 내용을 다시 불러와요. */
+/**
+ * 무료 요약 열기. 결제 없이 구매 기록만 만들고 유료 내용을 다시 불러와요.
+ * 가격은 서버가 요약에서 직접 읽어서, 유료 요약은 402로 거절해요.
+ */
 export function useUnlockFreeSummary(summary: Summary, viewerId: number) {
   const queryClient = useQueryClient();
   return useMutation({
     mutationFn: async () => {
       try {
         await api.post('/purchase', {
-          body: {
-            product_type: 'S',
-            product_id: summary.id,
-            content: summary.title,
-            price: 0,
-            quantity: 1,
-          },
+          body: { product_type: 'S', product_id: summary.id },
         });
       } catch (error) {
         if (httpStatus(error) !== 409) throw error;
@@ -284,11 +280,11 @@ export function useUnlockFreeSummary(summary: Summary, viewerId: number) {
 export function useSummaryComments(id: number) {
   return useQuery({
     queryKey: summaryKeys.comments(id),
-    queryFn: async ({ signal }) =>
-      (await api.get('/summary/{summary_id}/comments', {
+    queryFn: ({ signal }) =>
+      api.get('/summary/{summary_id}/comments', {
         path: { summary_id: id },
         signal,
-      })) as Comment[],
+      }),
     enabled: id > 0,
   });
 }
@@ -299,14 +295,10 @@ export function useCreateSummaryComment(id: number) {
     mutationFn: (input: { content: string; upperCommentId?: number }) =>
       api.post('/summary/{summary_id}/comment', {
         path: { summary_id: id },
-        // 백엔드가 upper_comment_id를 필수로 받아서 지금은 답글만 등록돼요.
-        // Optional로 고치면(백엔드 작업) 맨 위 댓글도 그대로 동작해요.
         body: {
           content: input.content,
-          ...(input.upperCommentId
-            ? { upper_comment_id: input.upperCommentId }
-            : {}),
-        } as components['schemas']['CreateSummaryCommentReq'],
+          upper_comment_id: input.upperCommentId ?? null,
+        },
       }),
     onSuccess: () => {
       queryClient.setQueriesData<Summary>(

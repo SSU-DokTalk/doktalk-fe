@@ -22,6 +22,7 @@ const debate: Debate = {
   content: '1부만 읽고 오셔도 충분히 참여할 수 있어요.',
   location: null,
   link: 'https://meet.google.com/xyz-abcd-efg',
+  is_online: true,
   held_at: '2026-10-06T10:30:00',
   price: 10000,
   limit: 12,

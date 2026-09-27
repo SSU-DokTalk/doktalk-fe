@@ -1,12 +1,17 @@
-import type { components } from '@/shared/api/schema';
-
 export type ProductType = 'D' | 'S';
 
 /**
- * 결제를 마치면 만드는 구매 기록. 결제 창으로 떠나기 전에 결과 화면 주소에 담아 보내요.
- * 서버가 토스 결제를 직접 확인하게 바뀌기 전까지 쓰는 방식이에요 (별도 작업으로 남겨 둠).
+ * 결제 창으로 떠나기 전에 결과 화면 주소(tmp)에 담아 두는 상품 정보.
+ * 결과 화면은 이 상품으로 결제 확인을 요청하고, 이름과 가격을 보여줘요.
+ * 가격은 보여주기만 해요. 서버가 상품 가격과 토스가 승인한 금액을 직접 확인해요.
  */
-export type PendingPurchase = components['schemas']['CreatePurchaseReq'];
+export type PendingPurchase = {
+  product_type: ProductType;
+  product_id: number;
+  /** 상품 이름 */
+  content: string;
+  price: number;
+};
 
 /** 한글이 들어 있어도 주소에 안전하게 담아요 (UTF-8 → base64). */
 export function encodePurchase(purchase: PendingPurchase) {
@@ -22,6 +27,7 @@ export function decodePurchase(value: string | null): PendingPurchase | null {
     const valid =
       (data.product_type === 'D' || data.product_type === 'S') &&
       Number.isInteger(data.product_id) &&
+      typeof data.content === 'string' &&
       typeof data.price === 'number';
     return valid ? data : null;
   } catch {

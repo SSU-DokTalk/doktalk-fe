@@ -117,6 +117,7 @@ function RegisterPage() {
         email,
         password: values.password,
         name: values.name.trim(),
+        agreements: agreed,
       });
     } catch (error) {
       setPending(false);

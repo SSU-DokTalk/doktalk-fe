@@ -26,6 +26,7 @@ const debate: Debate = {
     '‘채식주의자’의 영혜는 왜 먹기를 거부했을까요? 이번 모임에서는 1부 ‘채식주의자’를 중심으로, 거부라는 행동이 어떻게 한 사람의 존재 선언이 되는지 이야기합니다.\n\n1부만 읽고 오셔도 충분히 참여할 수 있어요. 발제문은 아래 첨부파일로 미리 확인해 주세요.',
   location: null,
   link: 'https://meet.google.com/xyz-abcd-efg',
+  is_online: true,
   held_at: iso(24 * 9),
   price: 10000,
   limit: 12,
@@ -90,6 +91,7 @@ const related: Debate[] = [
     title: '넛지로 보는 선택의 설계',
     price: 0,
     link: null,
+    is_online: false,
     location: '서울 마포구',
     book: { ...debate.book, title: '넛지', author: '리처드 탈러' },
   },
@@ -126,6 +128,8 @@ function setup(scenario: Scenario) {
     ...debate,
     price: scenario === 'free' ? 0 : debate.price,
     held_at: scenario === 'ended' ? iso(-48) : debate.held_at,
+    // 서버는 주최자·참여자에게만 링크를 담아 줘요.
+    link: scenario === 'joined' || scenario === 'host' ? debate.link : null,
   };
 
   const queryClient = new QueryClient({
@@ -138,7 +142,10 @@ function setup(scenario: Scenario) {
     debateKeys.purchase(data.id, viewerId),
     scenario === 'joined' ? purchase : null
   );
-  queryClient.setQueryData(debateKeys.popular(), [data, ...related]);
+  queryClient.setQueryData(
+    debateKeys.popular(),
+    [data, ...related].map((item) => ({ ...item, link: null }))
+  );
   queryClient.setQueryData(userKeys.following(HOST_ID, viewerId), false);
 
   const store = configureStore({

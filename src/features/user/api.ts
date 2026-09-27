@@ -8,6 +8,7 @@ import { api } from '@/shared/api/client';
 import {
   nextPageParam,
   type Page,
+  type PublicUser,
   type User,
   type UserBrief,
 } from '@/shared/api/models';
@@ -101,8 +102,8 @@ export function useIsFollowing(targetId: number, viewerId: number) {
   });
 }
 
-const bumpCount = (
-  user: User | undefined,
+const bumpCount = <T extends PublicUser>(
+  user: T | undefined,
   field: 'follower_num' | 'following_num',
   delta: number
 ) => (user ? { ...user, [field]: Math.max(0, user[field] + delta) } : user);
@@ -134,12 +135,12 @@ export function useToggleFollow(targetId: number, viewerId: number) {
       );
       const previous = {
         following: queryClient.getQueryData<boolean>(followingKey),
-        target: queryClient.getQueryData<User>(targetKey),
+        target: queryClient.getQueryData<PublicUser>(targetKey),
         me: queryClient.getQueryData<User>(meKey),
       };
       const delta = follow ? 1 : -1;
       queryClient.setQueryData(followingKey, follow);
-      queryClient.setQueryData<User>(targetKey, (user) =>
+      queryClient.setQueryData<PublicUser>(targetKey, (user) =>
         bumpCount(user, 'follower_num', delta)
       );
       queryClient.setQueryData<User>(meKey, (user) =>
