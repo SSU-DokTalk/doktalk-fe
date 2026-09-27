@@ -1,8 +1,8 @@
 import { PenLine, SquarePen } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Link, useNavigate, useSearchParams } from 'react-router-dom';
-import { Avatar, buttonStyles, EmptyState, mq } from '@/design-system';
+import { useNavigate, useSearchParams } from 'react-router-dom';
+import { EmptyState, mq } from '@/design-system';
 import { maskLanguageFor, usePopularSummaries } from '@/features/summary/api';
 import type { Post } from '@/shared/api/models';
 import { CoverRailList } from '@/shared/components/CoverRailList';
@@ -15,8 +15,7 @@ import { useAuth } from '@/shell/hooks';
 import { usePostFeed, useTogglePostLike } from '../api';
 import { PostCard, PostCardSkeleton } from '../components/PostCard';
 import { PostComposer } from '../components/PostComposer';
-import * as prompt from '../components/WritePrompt.css';
-import { useAuthHref } from '@/features/auth/redirect';
+import { WritePrompt } from '../components/WritePrompt';
 
 function PopularSummariesRail() {
   const { t, i18n } = useTranslation();
@@ -48,7 +47,6 @@ function PopularSummariesRail() {
 /** 게시글 피드 (/post). ?write=1로 들어오면 쓰기 창을 열어요. */
 function PostFeedPage() {
   const { t } = useTranslation();
-  const loginHref = useAuthHref();
   const navigate = useNavigate();
   const isWide = useMediaQuery(mq.xl);
   const { user, isLoggedIn } = useAuth();
@@ -82,7 +80,6 @@ function PostFeedPage() {
 
   const likedIds = new Set(query.data?.pages.flatMap((page) => page.likedIds));
   const getKey = useCallback((post: Post) => post.id, []);
-  const name = user.name || t('component.user.unknown');
 
   return (
     <div className={s.page}>
@@ -94,30 +91,7 @@ function PostFeedPage() {
           </div>
         </div>
 
-        <div className={prompt.prompt}>
-          {isLoggedIn ? (
-            <>
-              <Avatar name={name} src={user.profile} size={40} />
-              <button
-                type='button'
-                className={prompt.field}
-                onClick={openComposer}
-              >
-                {t('component.card.write-post.placeholder')}
-              </button>
-            </>
-          ) : (
-            <>
-              <p className={prompt.loginText}>{t('page.post.login-prompt')}</p>
-              <Link
-                to={loginHref}
-                className={buttonStyles({ variant: 'primary', size: 'sm' })}
-              >
-                {t('component.topnav.login')}
-              </Link>
-            </>
-          )}
-        </div>
+        <WritePrompt onOpen={openComposer} />
 
         <InfiniteFeed
           variant='cards'

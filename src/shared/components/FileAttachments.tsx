@@ -2,17 +2,16 @@ import { FileText, Image as ImageIcon, Paperclip, X } from 'lucide-react';
 import { useId, useRef, useState, type ChangeEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconButton } from '@/design-system';
-import { ACCEPTABLE } from '@/common/variables';
 import type { AttachedFile } from '@/shared/api/models';
+import {
+  ATTACHMENT_EXTENSIONS,
+  checkPicked,
+  isImageName,
+  MAX_ATTACHMENTS,
+  MAX_FILE_MB,
+} from '@/shared/files';
 import { formatFileSize } from '@/shared/format';
 import * as s from './FileAttachments.css';
-
-const IMAGE = /\.(jpe?g|png|gif|webp)$/i;
-
-const extensionOf = (name: string) => {
-  const dot = name.lastIndexOf('.');
-  return dot < 0 ? '' : name.slice(dot).toLowerCase();
-};
 
 export type FileAttachmentsProps = {
   /** 이미 올라가 있는 파일 (수정할 때) */
@@ -37,7 +36,7 @@ function FileRow({
   onRemove: () => void;
 }) {
   const { t } = useTranslation();
-  const Icon = IMAGE.test(name) ? ImageIcon : FileText;
+  const Icon = isImageName(name) ? ImageIcon : FileText;
   return (
     <li className={s.row}>
       <Icon aria-hidden='true' />
@@ -62,9 +61,9 @@ export function FileAttachments({
   onExistingChange,
   files,
   onFilesChange,
-  max = 5,
-  maxSizeMb = 10,
-  accept = ACCEPTABLE,
+  max = MAX_ATTACHMENTS,
+  maxSizeMb = MAX_FILE_MB,
+  accept = ATTACHMENT_EXTENSIONS,
 }: FileAttachmentsProps) {
   const { t } = useTranslation();
   const labelId = useId();
@@ -79,16 +78,22 @@ export function FileAttachments({
     event.target.value = '';
     if (picked.length === 0) return;
 
-    if (count + picked.length > max) {
-      setError(t('component.attachments.too-many', { max }));
-      return;
-    }
-    if (picked.some((file) => !accept.includes(extensionOf(file.name)))) {
-      setError(t('component.attachments.unacceptable'));
-      return;
-    }
-    if (picked.some((file) => file.size > maxSizeMb * 1024 * 1024)) {
-      setError(t('component.attachments.too-large', { size: maxSizeMb }));
+    const problem = checkPicked(picked, {
+      count,
+      max,
+      extensions: accept,
+      maxSizeMb,
+    });
+    if (problem) {
+      setError(
+        {
+          'too-many': t('component.attachments.too-many', { max }),
+          unacceptable: t('component.attachments.unacceptable'),
+          'too-large': t('component.attachments.too-large', {
+            size: maxSizeMb,
+          }),
+        }[problem]
+      );
       return;
     }
     setError(null);

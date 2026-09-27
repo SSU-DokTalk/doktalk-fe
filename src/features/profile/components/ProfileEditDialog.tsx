@@ -25,11 +25,9 @@ import {
 } from '@/features/user/api';
 import type { User } from '@/shared/api/models';
 import { focusFirstInvalid } from '@/shared/draft';
+import { IMAGE_TYPES, MAX_FILE_MB } from '@/shared/files';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import * as s from './ProfileEditDialog.css';
-
-const PHOTO_TYPES = ['image/jpeg', 'image/png', 'image/gif'];
-const PHOTO_MAX_BYTES = 10 * 1024 * 1024;
 
 type FieldErrors = { name?: string; introduction?: string };
 
@@ -68,11 +66,11 @@ function ProfileEditForm({ user, onDone }: { user: User; onDone: () => void }) {
     const picked = event.target.files?.[0];
     event.target.value = '';
     if (!picked) return;
-    if (!PHOTO_TYPES.includes(picked.type)) {
+    if (!IMAGE_TYPES.includes(picked.type)) {
       setPhotoError(t('page.profile.edit.photo-type-error'));
       return;
     }
-    if (picked.size > PHOTO_MAX_BYTES) {
+    if (picked.size > MAX_FILE_MB * 1024 * 1024) {
       setPhotoError(t('page.profile.edit.photo-size-error'));
       return;
     }
@@ -175,7 +173,7 @@ function ProfileEditForm({ user, onDone }: { user: User; onDone: () => void }) {
             <input
               ref={fileRef}
               type='file'
-              accept={PHOTO_TYPES.join(',')}
+              accept={IMAGE_TYPES.join(',')}
               hidden
               onChange={handlePhoto}
             />

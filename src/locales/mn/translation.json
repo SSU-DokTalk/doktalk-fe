@@ -95,11 +95,6 @@
         "settings": "Тохиргоо",
         "logout": "Гарах"
       },
-      "language": {
-        "korean": "한국어",
-        "english": "English",
-        "mongolian": "Монгол хэл"
-      },
       "register": "Бүртгүүлэх",
       "login": "Нэвтрэх"
     },

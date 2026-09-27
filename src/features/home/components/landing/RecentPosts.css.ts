@@ -113,11 +113,7 @@ export const author = style({
 
 export const spacer = style({ flex: '1 1 auto' });
 
+/** 좁아져도 좋아요·댓글 수는 줄어들지 않아요. */
 export const stat = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: space[4],
   flexShrink: 0,
 });
-
-export const statIcon = style({ width: '15px', height: '15px' });

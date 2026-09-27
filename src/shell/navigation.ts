@@ -118,4 +118,9 @@ export const SITE_LINKS = [
   { key: 'contact', labelKey: 'footer.support.contact', to: '/contact' },
 ] as const;
 
+/** 고객 지원 목록 (설정, 랜딩 푸터). 공지·자주 묻는 질문·문의 다음에 약관을 둬요. */
+export const SUPPORT_LINKS = (
+  ['notice', 'faq', 'contact', 'terms', 'privacy'] as const
+).flatMap((key) => SITE_LINKS.filter((link) => link.key === key));
+
 export const APP_VERSION = '2.0.0';

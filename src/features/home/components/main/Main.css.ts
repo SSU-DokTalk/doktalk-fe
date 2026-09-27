@@ -159,14 +159,6 @@ export const allMeetings = style({
 
 /* ---------- 글쓰기 줄 ---------- */
 
-export const flatPrompt = style({
-  border: 0,
-});
-
-export const photoButton = style({
-  flexShrink: 0,
-});
-
 /* ---------- 피드 ---------- */
 
 export const feed = style({

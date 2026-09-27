@@ -2,12 +2,7 @@ import clsx from 'clsx';
 import { ChevronRight, Heart, MessageCircle, PenLine } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import {
-  Avatar,
-  buttonStyles,
-  Skeleton,
-  visuallyHidden,
-} from '@/design-system';
+import { Avatar, buttonStyles, Skeleton } from '@/design-system';
 import { authPath } from '@/features/auth/redirect';
 import { useRecentPosts } from '@/features/post/api';
 import { postTitle } from '@/features/post/display';
@@ -18,6 +13,7 @@ import { useAuth } from '@/shell/hooks';
 import * as shell from '@/shell/shell.css';
 import * as landing from './Landing.css';
 import * as s from './RecentPosts.css';
+import { Stat } from '@/shared/components/Stat';
 
 const COUNT = 3;
 
@@ -43,20 +39,22 @@ function PostTile({ post }: { post: Post }) {
             {format.relativeTime(post.created)}
           </time>
           <span className={s.spacer} />
-          <span className={s.stat}>
-            <Heart aria-hidden='true' className={s.statIcon} />
-            <span className={visuallyHidden}>
-              {t('component.stats.likes', { count: post.likes_num })}
-            </span>
-            <span aria-hidden='true'>{post.likes_num}</span>
-          </span>
-          <span className={s.stat}>
-            <MessageCircle aria-hidden='true' className={s.statIcon} />
-            <span className={visuallyHidden}>
-              {t('component.stats.comments', { count: post.comments_num })}
-            </span>
-            <span aria-hidden='true'>{post.comments_num}</span>
-          </span>
+          <Stat
+            icon={Heart}
+            size='lg'
+            label={t('component.stats.likes', { count: post.likes_num })}
+            className={s.stat}
+          >
+            {post.likes_num}
+          </Stat>
+          <Stat
+            icon={MessageCircle}
+            size='lg'
+            label={t('component.stats.comments', { count: post.comments_num })}
+            className={s.stat}
+          >
+            {post.comments_num}
+          </Stat>
         </span>
       </span>
     </Link>

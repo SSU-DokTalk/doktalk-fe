@@ -3,25 +3,15 @@ import { ChevronRight, LogIn } from 'lucide-react';
 import { useId, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Avatar, Button, buttonStyles, Dialog } from '@/design-system';
+import { Avatar, Button, buttonStyles, Dialog, Radio } from '@/design-system';
 import { deleteAccount } from '@/features/auth/api';
 import { useAuthHref } from '@/features/auth/redirect';
 import { ProfileEditDialog } from '@/features/profile/components/ProfileEditDialog';
 import { useMe } from '@/features/user/api';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
-import { useAuth, useLanguage, type LanguageValue } from '@/shell/hooks';
-import { APP_VERSION, SITE_LINKS } from '@/shell/navigation';
+import { useAuth, useLanguage } from '@/shell/hooks';
+import { APP_VERSION, SUPPORT_LINKS } from '@/shell/navigation';
 import * as s from './SettingsPage.css';
-
-/** 언어 이름은 그 언어로 적어요. 지금 언어를 못 읽는 사람도 자기 언어를 찾을 수 있게요. */
-const NATIVE_NAMES: Record<LanguageValue, string> = {
-  mn: 'Монгол хэл',
-  kr: '한국어',
-  us: 'English',
-};
-
-/** 순서: 고객 지원 목록 */
-const SUPPORT_ORDER = ['notice', 'faq', 'contact', 'terms', 'privacy'];
 
 function DeleteAccountDialog({
   open,
@@ -90,7 +80,7 @@ function SettingsPage() {
   const { user, isLoggedIn, logout } = useAuth();
   const viewerId = isLoggedIn ? (user.id ?? 0) : 0;
   const me = useMe(viewerId);
-  const { current, change } = useLanguage();
+  const { languages, current, change } = useLanguage();
   const loginHref = useAuthHref();
   const accountId = useId();
   const languageId = useId();
@@ -102,9 +92,6 @@ function SettingsPage() {
   useDocumentTitle(t('page.settings.title'));
 
   const name = me.data?.name || user.name || t('component.user.unknown');
-  const supportLinks = SUPPORT_ORDER.flatMap((key) =>
-    SITE_LINKS.filter((link) => link.key === key)
-  );
 
   return (
     <div className={s.page}>
@@ -167,20 +154,19 @@ function SettingsPage() {
           {t('page.settings.language-description')}
         </p>
         <fieldset aria-labelledby={languageId} className={s.languages}>
-          {(Object.keys(NATIVE_NAMES) as LanguageValue[]).map((value) => (
+          {languages.map((language) => (
             <label
-              key={value}
-              lang={value === 'kr' ? 'ko' : value === 'us' ? 'en' : 'mn'}
+              key={language.value}
+              lang={language.htmlLang}
               className={s.language}
             >
-              <input
-                type='radio'
+              <Radio
                 name='language'
-                value={value}
-                checked={current.value === value}
-                onChange={() => change(value)}
+                value={language.value}
+                checked={current.value === language.value}
+                onChange={() => change(language.value)}
               />
-              {NATIVE_NAMES[value]}
+              {language.nativeName}
             </label>
           ))}
         </fieldset>
@@ -190,7 +176,7 @@ function SettingsPage() {
         <h2 id={supportId} className={s.sectionTitle}>
           {t('page.settings.support')}
         </h2>
-        {supportLinks.map((link) => (
+        {SUPPORT_LINKS.map((link) => (
           <Link
             key={link.key}
             to={link.to}

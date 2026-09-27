@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import {
   fontSize,
   fontWeight,
@@ -152,13 +152,6 @@ export const language = style({
       outlineOffset: '2px',
     },
   },
-});
-
-globalStyle(`${language} input`, {
-  width: '18px',
-  height: '18px',
-  margin: 0,
-  accentColor: vars.color.brand,
 });
 
 export const linkRow = style({

@@ -1,10 +1,9 @@
-import { ImagePlus } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
-import { Avatar, IconButton, mq } from '@/design-system';
+import { mq } from '@/design-system';
 import { PostComposer } from '@/features/post/components/PostComposer';
-import * as prompt from '@/features/post/components/WritePrompt.css';
+import { WritePrompt } from '@/features/post/components/WritePrompt';
 import { MyLibraryRail } from '@/features/search/components/MyLibraryRail';
 import { PopularSummaries } from '@/features/summary/components/PopularSummaries';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
@@ -28,26 +27,7 @@ export function MainHome() {
       <div className={s.content}>
         <UpcomingMeetings viewerId={viewerId} name={name} />
 
-        <div className={`${prompt.prompt} ${s.flatPrompt}`}>
-          <Avatar name={name} src={user.profile} size={40} />
-          <button
-            type='button'
-            aria-haspopup='dialog'
-            className={prompt.field}
-            onClick={() => setComposing(true)}
-          >
-            {t('component.card.write-post.placeholder')}
-          </button>
-          <IconButton
-            variant='ghost'
-            aria-label={t('component.modal.write-post.button.add-photo')}
-            aria-haspopup='dialog'
-            className={s.photoButton}
-            onClick={() => setComposing(true)}
-          >
-            <ImagePlus />
-          </IconButton>
-        </div>
+        <WritePrompt flat withPhoto onOpen={() => setComposing(true)} />
 
         <HomeFeed viewerId={viewerId} />
 

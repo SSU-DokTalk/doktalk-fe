@@ -1,12 +1,13 @@
 import { Heart, MessageCircle } from 'lucide-react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Avatar, Skeleton, visuallyHidden } from '@/design-system';
+import { Avatar, Skeleton } from '@/design-system';
 import type { Post } from '@/shared/api/models';
 import { photosOf } from '@/shared/files';
 import { parseServerDate, useFormat } from '@/shared/format';
 import { postTitle } from '../display';
 import * as s from './PostRow.css';
+import { Stat } from '@/shared/components/Stat';
 
 /** 게시글 한 줄 (메인 화면 피드). 줄 어디를 눌러도 글로 가요. */
 export function PostRow({ post }: { post: Post }) {
@@ -31,20 +32,20 @@ export function PostRow({ post }: { post: Post }) {
           <time dateTime={parseServerDate(post.created).toISOString()}>
             {format.relativeTime(post.created)}
           </time>
-          <span className={s.stat}>
-            <Heart aria-hidden='true' className={s.statIcon} />
-            <span className={visuallyHidden}>
-              {t('component.stats.likes', { count: post.likes_num })}
-            </span>
-            <span aria-hidden='true'>{post.likes_num}</span>
-          </span>
-          <span className={s.stat}>
-            <MessageCircle aria-hidden='true' className={s.statIcon} />
-            <span className={visuallyHidden}>
-              {t('component.stats.comments', { count: post.comments_num })}
-            </span>
-            <span aria-hidden='true'>{post.comments_num}</span>
-          </span>
+          <Stat
+            icon={Heart}
+            label={t('component.stats.likes', { count: post.likes_num })}
+            className={s.stat}
+          >
+            {post.likes_num}
+          </Stat>
+          <Stat
+            icon={MessageCircle}
+            label={t('component.stats.comments', { count: post.comments_num })}
+            className={s.stat}
+          >
+            {post.comments_num}
+          </Stat>
         </p>
       </div>
       {photo && (

@@ -1,17 +1,16 @@
 import { PenLine, SquarePen } from 'lucide-react';
 import { useCallback, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { Avatar, EmptyState } from '@/design-system';
+import { EmptyState } from '@/design-system';
 import { usePostFeed, useTogglePostLike } from '@/features/post/api';
 import {
   PostCard,
   PostCardSkeleton,
 } from '@/features/post/components/PostCard';
 import { PostComposer } from '@/features/post/components/PostComposer';
-import * as prompt from '@/features/post/components/WritePrompt.css';
+import { WritePrompt } from '@/features/post/components/WritePrompt';
 import type { Post, User } from '@/shared/api/models';
 import { InfiniteFeed } from '@/shared/components/InfiniteFeed';
-import * as s from './ProfileSections.css';
 
 /** 게시글 탭. 내 프로필이면 맨 위에서 바로 글을 쓰고, 새 글은 목록 맨 위에 보여요. */
 export function ProfilePosts({
@@ -29,23 +28,10 @@ export function ProfilePosts({
   const [editing, setEditing] = useState<Post | undefined>();
   const likedIds = new Set(query.data?.pages.flatMap((page) => page.likedIds));
   const getKey = useCallback((post: Post) => post.id, []);
-  const name = user.name || t('component.user.unknown');
 
   return (
     <>
-      {isMine && (
-        <div className={`${prompt.prompt} ${s.flatPrompt}`}>
-          <Avatar name={name} src={user.profile} size={40} />
-          <button
-            type='button'
-            aria-haspopup='dialog'
-            className={prompt.field}
-            onClick={() => setComposing(true)}
-          >
-            {t('component.card.write-post.placeholder')}
-          </button>
-        </div>
-      )}
+      {isMine && <WritePrompt flat onOpen={() => setComposing(true)} />}
 
       <InfiniteFeed
         variant='cards'

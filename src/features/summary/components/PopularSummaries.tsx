@@ -2,10 +2,11 @@ import { Heart } from 'lucide-react';
 import { useId } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
-import { Avatar, Skeleton, visuallyHidden } from '@/design-system';
+import { Avatar, Skeleton } from '@/design-system';
 import { useFormat } from '@/shared/format';
 import { usePopularSummaries } from '../api';
 import * as s from './PopularSummaries.css';
+import { Stat } from '@/shared/components/Stat';
 
 /**
  * 오른쪽 칸의 인기 요약. 다른 목록 화면 옆에 붙여 써요.
@@ -66,17 +67,15 @@ export function PopularSummaries() {
                       size={20}
                     />
                     <span className={s.author}>{author}</span>
-                    <span className={s.likes}>
-                      <Heart aria-hidden='true' />
-                      <span className={visuallyHidden}>
-                        {t('page.debate.item.likes', {
-                          count: summary.likes_num,
-                        })}
-                      </span>
-                      <span aria-hidden='true'>
-                        {format.number(summary.likes_num)}
-                      </span>
-                    </span>
+                    <Stat
+                      icon={Heart}
+                      size='sm'
+                      label={t('page.debate.item.likes', {
+                        count: summary.likes_num,
+                      })}
+                    >
+                      {format.number(summary.likes_num)}
+                    </Stat>
                     <span className={s.price}>
                       {summary.price > 0
                         ? format.price(summary.price)

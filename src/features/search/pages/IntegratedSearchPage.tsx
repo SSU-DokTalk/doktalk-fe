@@ -20,7 +20,6 @@ import {
   IconButton,
   Skeleton,
   TextField,
-  visuallyHidden,
 } from '@/design-system';
 import { placeKindText } from '@/features/debate/display';
 import { LibraryActions } from '@/features/library/components';
@@ -33,6 +32,7 @@ import { useAuth } from '@/shell/hooks';
 import { useIntegratedSearch, type SearchSection } from '../api';
 import { authorText } from '../display';
 import * as s from './IntegratedSearchPage.css';
+import { Stat } from '@/shared/components/Stat';
 
 const SECTIONS: SearchSection[] = ['debate', 'summary', 'post', 'book'];
 const isSection = (value: string | null): value is SearchSection =>
@@ -110,20 +110,20 @@ function Stats({ likes, comments }: { likes: number; comments: number }) {
   const { t } = useTranslation();
   return (
     <>
-      <span className={s.stat}>
-        <Heart aria-hidden='true' />
-        <span className={visuallyHidden}>
-          {t('component.stats.likes', { count: likes })}
-        </span>
-        <span aria-hidden='true'>{likes}</span>
-      </span>
-      <span className={s.stat}>
-        <MessageCircle aria-hidden='true' />
-        <span className={visuallyHidden}>
-          {t('component.stats.comments', { count: comments })}
-        </span>
-        <span aria-hidden='true'>{comments}</span>
-      </span>
+      <Stat
+        icon={Heart}
+        size='sm'
+        label={t('component.stats.likes', { count: likes })}
+      >
+        {likes}
+      </Stat>
+      <Stat
+        icon={MessageCircle}
+        size='sm'
+        label={t('component.stats.comments', { count: comments })}
+      >
+        {comments}
+      </Stat>
     </>
   );
 }

@@ -86,6 +86,3 @@ export const shortLabel = style({
 });
 
 /** 게시글 쓰기 줄. 탭 사이 간격이 이미 있어서 모바일 회색 띠를 빼요. */
-export const flatPrompt = style({
-  border: 0,
-});

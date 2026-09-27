@@ -22,13 +22,13 @@ import * as s from './nav.css';
 /** 화면 언어 고르기. showLabel이면 지구본 옆에 현재 언어 이름도 보여줘요. */
 export function LanguageMenu({ showLabel = false }: { showLabel?: boolean }) {
   const { t } = useTranslation();
-  const { languages, current, currentLabel, change } = useLanguage();
+  const { languages, current, change } = useLanguage();
 
   return (
     <Menu.Root modal={false}>
       <Menu.Trigger
         aria-label={t('component.shell.language-current', {
-          lang: currentLabel,
+          lang: current.nativeName,
         })}
         className={iconButtonStyles({
           variant: 'ghost',
@@ -38,7 +38,7 @@ export function LanguageMenu({ showLabel = false }: { showLabel?: boolean }) {
         })}
       >
         <Globe aria-hidden='true' />
-        {showLabel && <span aria-hidden='true'>{currentLabel}</span>}
+        {showLabel && <span aria-hidden='true'>{current.nativeName}</span>}
       </Menu.Trigger>
       <Menu.Content>
         <Menu.RadioGroup
@@ -51,7 +51,7 @@ export function LanguageMenu({ showLabel = false }: { showLabel?: boolean }) {
               value={language.value}
               lang={language.htmlLang}
             >
-              {t(language.labelKey)}
+              {language.nativeName}
             </Menu.RadioItem>
           ))}
         </Menu.RadioGroup>

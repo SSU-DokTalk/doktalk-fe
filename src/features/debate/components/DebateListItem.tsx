@@ -5,13 +5,14 @@ import {
   Avatar,
   Badge,
   BookCover,
+  coverRatio,
   Skeleton,
-  visuallyHidden,
 } from '@/design-system';
 import type { Debate } from '@/shared/api/models';
 import { parseServerDate, useFormat } from '@/shared/format';
 import { categoryText, placeText } from '../display';
 import * as s from '@/shared/components/FeedItem.css';
+import { Stat } from '@/shared/components/Stat';
 
 type DebateListItemProps = {
   debate: Debate;
@@ -79,20 +80,18 @@ export function DebateListItem({ debate, coverWidth }: DebateListItemProps) {
       )}
 
       <p className={s.stats}>
-        <span className={s.stat}>
-          <Heart aria-hidden='true' />
-          <span className={visuallyHidden}>
-            {t('page.debate.item.likes', { count: debate.likes_num })}
-          </span>
-          <span aria-hidden='true'>{format.number(debate.likes_num)}</span>
-        </span>
-        <span className={s.stat}>
-          <MessageCircle aria-hidden='true' />
-          <span className={visuallyHidden}>
-            {t('page.debate.item.comments', { count: debate.comments_num })}
-          </span>
-          <span aria-hidden='true'>{format.number(debate.comments_num)}</span>
-        </span>
+        <Stat
+          icon={Heart}
+          label={t('page.debate.item.likes', { count: debate.likes_num })}
+        >
+          {format.number(debate.likes_num)}
+        </Stat>
+        <Stat
+          icon={MessageCircle}
+          label={t('page.debate.item.comments', { count: debate.comments_num })}
+        >
+          {format.number(debate.comments_num)}
+        </Stat>
         <span className={s.priceSlot}>
           {debate.price > 0 ? (
             <span className={s.priceText}>{format.price(debate.price)}</span>
@@ -137,7 +136,7 @@ export function DebateListItemSkeleton({ coverWidth }: { coverWidth: number }) {
       <Skeleton
         className={s.cover}
         width={coverWidth}
-        height={Math.round(coverWidth * 1.45)}
+        height={Math.round(coverWidth * coverRatio)}
         radius='2px 5px 5px 2px'
       />
     </div>

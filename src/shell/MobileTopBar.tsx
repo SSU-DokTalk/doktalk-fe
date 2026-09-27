@@ -10,8 +10,9 @@ import {
   Dialog,
   IconButton,
   iconButtonStyles,
+  Radio,
 } from '@/design-system';
-import { useAuth, useLanguage, type LanguageValue } from './hooks';
+import { useAuth, useLanguage } from './hooks';
 import { MAIN_NAV } from './navigation';
 import SiteLinks from './SiteLinks';
 import * as s from './nav.css';
@@ -109,13 +110,12 @@ function DrawerContent({ onNavigate }: { onNavigate: () => void }) {
             className={side.drawerRadio}
             lang={language.htmlLang}
           >
-            {t(language.labelKey)}
-            <input
-              type='radio'
+            {language.nativeName}
+            <Radio
               name='drawer-language'
               value={language.value}
               checked={current.value === language.value}
-              onChange={() => change(language.value as LanguageValue)}
+              onChange={() => change(language.value)}
             />
           </label>
         ))}

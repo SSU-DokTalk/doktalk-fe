@@ -1,4 +1,4 @@
-import { globalStyle, style } from '@vanilla-extract/css';
+import { style } from '@vanilla-extract/css';
 import {
   fontSize,
   fontWeight,
@@ -216,14 +216,6 @@ export const author = style({
   fontWeight: fontWeight.semibold,
   color: vars.color.textMuted,
 });
-
-export const stat = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: '3px',
-});
-
-globalStyle(`${stat} svg`, { width: '13px', height: '13px' });
 
 export const posts = style({
   margin: 0,

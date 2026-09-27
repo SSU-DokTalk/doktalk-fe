@@ -92,14 +92,10 @@ export const author = style({
   color: vars.color.textMuted,
 });
 
+/** 좁아져도 좋아요·댓글 수는 줄어들지 않아요. */
 export const stat = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: '3px',
   flexShrink: 0,
 });
-
-export const statIcon = style({ width: '14px', height: '14px' });
 
 export const thumb = style({
   flexShrink: 0,

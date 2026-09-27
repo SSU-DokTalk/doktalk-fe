@@ -28,25 +28,21 @@ export function useAuth() {
   return { user, isLoggedIn, logout };
 }
 
+/**
+ * 화면 언어. 이름은 번역하지 않고 그 언어로 적어요.
+ * 지금 언어를 못 읽는 사람도 자기 언어를 찾을 수 있게요.
+ */
 export const LANGUAGES = [
-  {
-    value: 'mn',
-    htmlLang: 'mn',
-    labelKey: 'component.topnav.language.mongolian',
-  },
-  { value: 'kr', htmlLang: 'ko', labelKey: 'component.topnav.language.korean' },
-  {
-    value: 'us',
-    htmlLang: 'en',
-    labelKey: 'component.topnav.language.english',
-  },
+  { value: 'mn', htmlLang: 'mn', nativeName: 'Монгол хэл' },
+  { value: 'kr', htmlLang: 'ko', nativeName: '한국어' },
+  { value: 'us', htmlLang: 'en', nativeName: 'English' },
 ] as const;
 
 export type LanguageValue = (typeof LANGUAGES)[number]['value'];
 
 /** 화면 언어. 고른 값은 localStorage에 남겨 다음 방문에도 이어져요. */
 export function useLanguage() {
-  const { i18n, t } = useTranslation();
+  const { i18n } = useTranslation();
   const current =
     LANGUAGES.find((language) => language.value === i18n.language) ??
     LANGUAGES[0];
@@ -59,12 +55,7 @@ export function useLanguage() {
     [i18n]
   );
 
-  return {
-    languages: LANGUAGES,
-    current,
-    currentLabel: t(current.labelKey),
-    change,
-  };
+  return { languages: LANGUAGES, current, change };
 }
 
 /** <html lang>을 화면 언어에 맞춰요. 스크린 리더 발음이 달라져요. */

@@ -9,14 +9,14 @@ import {
 } from 'react';
 import { useTranslation } from 'react-i18next';
 import { IconButton, visuallyHidden } from '@/design-system';
-import { ACCEPTABLE_IMAGE } from '@/common/variables';
 import type { AttachedFile } from '@/shared/api/models';
+import {
+  checkPicked,
+  IMAGE_EXTENSIONS,
+  MAX_FILE_MB,
+  MAX_PHOTOS,
+} from '@/shared/files';
 import * as s from './PhotoPicker.css';
-
-const extensionOf = (name: string) => {
-  const dot = name.lastIndexOf('.');
-  return dot < 0 ? '' : name.slice(dot).toLowerCase();
-};
 
 type PhotoPickerProps = {
   existing: AttachedFile[];
@@ -33,8 +33,8 @@ export function PhotoPicker({
   onExistingChange,
   files,
   onFilesChange,
-  max = 10,
-  maxSizeMb = 10,
+  max = MAX_PHOTOS,
+  maxSizeMb = MAX_FILE_MB,
 }: PhotoPickerProps) {
   const { t } = useTranslation();
   const labelId = useId();
@@ -57,18 +57,22 @@ export function PhotoPicker({
     const picked = Array.from(event.target.files ?? []);
     event.target.value = '';
     if (picked.length === 0) return;
-    if (count + picked.length > max) {
-      setError(t('component.post-composer.too-many', { max }));
-      return;
-    }
-    if (
-      picked.some((file) => !ACCEPTABLE_IMAGE.includes(extensionOf(file.name)))
-    ) {
-      setError(t('component.post-composer.unacceptable'));
-      return;
-    }
-    if (picked.some((file) => file.size > maxSizeMb * 1024 * 1024)) {
-      setError(t('component.post-composer.too-large', { size: maxSizeMb }));
+    const problem = checkPicked(picked, {
+      count,
+      max,
+      extensions: IMAGE_EXTENSIONS,
+      maxSizeMb,
+    });
+    if (problem) {
+      setError(
+        {
+          'too-many': t('component.post-composer.too-many', { max }),
+          unacceptable: t('component.post-composer.unacceptable'),
+          'too-large': t('component.post-composer.too-large', {
+            size: maxSizeMb,
+          }),
+        }[problem]
+      );
       return;
     }
     setError(null);
@@ -147,7 +151,7 @@ export function PhotoPicker({
         ref={inputRef}
         type='file'
         multiple
-        accept={ACCEPTABLE_IMAGE.join(',')}
+        accept={IMAGE_EXTENSIONS.join(',')}
         className={s.input}
         tabIndex={-1}
         aria-hidden='true'

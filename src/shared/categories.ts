@@ -1,5 +1,17 @@
 import type { TFunction } from 'i18next';
-import { CATEGORY } from '@/common/variables';
+
+/** 서버의 카테고리 목록. 값은 비트마스크 자리예요. */
+const CATEGORY: Record<string, { name: string; value: number }> = {
+  POLITICS: { name: 'var.category.POLITICS', value: 1 << 0 },
+  HUMANITIES: { name: 'var.category.HUMANITIES', value: 1 << 1 },
+  ECONOMY: { name: 'var.category.ECONOMY', value: 1 << 2 },
+  HISTORY: { name: 'var.category.HISTORY', value: 1 << 3 },
+  SCIENCE: { name: 'var.category.SCIENCE', value: 1 << 4 },
+  ESSAY: { name: 'var.category.ESSAY', value: 1 << 5 },
+  TEENAGER: { name: 'var.category.TEENAGER', value: 1 << 6 },
+  CHILD: { name: 'var.category.CHILD', value: 1 << 7 },
+  WEBTOON: { name: 'var.category.WEBTOON', value: 1 << 8 },
+};
 
 export type CategoryOption = {
   key: string;

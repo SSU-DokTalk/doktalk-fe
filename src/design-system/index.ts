@@ -60,6 +60,7 @@ export {
   default as Checkbox,
   type CheckboxProps,
 } from './components/Checkbox/Checkbox';
+export { default as Radio, type RadioProps } from './components/Radio/Radio';
 export {
   default as Chip,
   ChipGroup,

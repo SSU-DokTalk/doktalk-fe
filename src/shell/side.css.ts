@@ -302,13 +302,6 @@ export const drawerRadio = style({
   cursor: 'pointer',
 });
 
-globalStyle(`${drawerRadio} input`, {
-  width: '20px',
-  height: '20px',
-  margin: 0,
-  accentColor: vars.color.brand,
-});
-
 export const drawerLogout = style({
   alignSelf: 'flex-start',
 });

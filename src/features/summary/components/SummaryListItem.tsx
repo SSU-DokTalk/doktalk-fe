@@ -5,14 +5,15 @@ import {
   Avatar,
   Badge,
   BookCover,
+  coverRatio,
   Skeleton,
-  visuallyHidden,
 } from '@/design-system';
 import type { Summary } from '@/shared/api/models';
 import { categoryText } from '@/shared/categories';
 import * as s from '@/shared/components/FeedItem.css';
 import { parseServerDate, useFormat } from '@/shared/format';
 import { bookLine } from '../display';
+import { Stat } from '@/shared/components/Stat';
 
 type SummaryListItemProps = {
   summary: Summary;
@@ -58,20 +59,18 @@ export function SummaryListItem({ summary, coverWidth }: SummaryListItemProps) {
       <p className={s.metaText}>{bookLine(summary.book)}</p>
 
       <p className={s.stats}>
-        <span className={s.stat}>
-          <Heart aria-hidden='true' />
-          <span className={visuallyHidden}>
-            {t('component.stats.likes', { count: summary.likes_num })}
-          </span>
-          <span aria-hidden='true'>{format.number(summary.likes_num)}</span>
-        </span>
-        <span className={s.stat}>
-          <MessageCircle aria-hidden='true' />
-          <span className={visuallyHidden}>
-            {t('component.stats.comments', { count: summary.comments_num })}
-          </span>
-          <span aria-hidden='true'>{format.number(summary.comments_num)}</span>
-        </span>
+        <Stat
+          icon={Heart}
+          label={t('component.stats.likes', { count: summary.likes_num })}
+        >
+          {format.number(summary.likes_num)}
+        </Stat>
+        <Stat
+          icon={MessageCircle}
+          label={t('component.stats.comments', { count: summary.comments_num })}
+        >
+          {format.number(summary.comments_num)}
+        </Stat>
         <span className={s.priceSlot}>
           {summary.price > 0 ? (
             <span className={s.priceText}>
@@ -122,7 +121,7 @@ export function SummaryListItemSkeleton({
       <Skeleton
         className={s.cover}
         width={coverWidth}
-        height={Math.round(coverWidth * 1.45)}
+        height={Math.round(coverWidth * coverRatio)}
         radius='2px 5px 5px 2px'
       />
     </div>

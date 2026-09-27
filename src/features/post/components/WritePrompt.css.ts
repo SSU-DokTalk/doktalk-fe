@@ -18,6 +18,11 @@ export const prompt = style({
   },
 });
 
+/** 위아래 회색 띠 없이 */
+export const flat = style({
+  border: 0,
+});
+
 export const field = style({
   display: 'flex',
   alignItems: 'center',

@@ -1,7 +1,9 @@
 import { globalStyle, style } from '@vanilla-extract/css';
 import {
+  coverRatio,
   fontSize,
   fontWeight,
+  layout,
   mq,
   space,
   typeScale,
@@ -11,8 +13,9 @@ import {
 
 /** 표지 너비(px). 컴포넌트에서도 같은 값을 써요. */
 export const COVER_WIDTH = { mobile: 72, desktop: 84 } as const;
-const coverHeight = (width: number) => Math.round(width * 1.45);
+const coverHeight = (width: number) => Math.round(width * coverRatio);
 
+/** 안쪽 여백(px). 표지 높이에 맞춘 최소 높이 계산에 같이 써요. */
 const MOBILE_PADDING_Y = 16;
 /** 개설자 줄(24) + 아래 여백(6) + 줄 간격(4) */
 const MOBILE_HEADER = 24 + 6 + 4;
@@ -41,7 +44,7 @@ export const item = style({
   rowGap: space[4],
   boxSizing: 'border-box',
   minHeight: `${MOBILE_PADDING_Y * 2 + MOBILE_HEADER + coverHeight(COVER_WIDTH.mobile)}px`,
-  padding: `${MOBILE_PADDING_Y}px 20px`,
+  padding: `${MOBILE_PADDING_Y}px ${layout.gutter}`,
   borderBottom: `1px solid ${vars.color.borderSubtle}`,
   backgroundColor: vars.color.surface,
   transition: 'background-color 120ms ease',
@@ -267,18 +270,6 @@ export const stats = style({
       marginTop: space[6],
     },
   },
-});
-
-export const stat = style({
-  display: 'inline-flex',
-  alignItems: 'center',
-  gap: '3px',
-});
-
-globalStyle(`${stat} svg`, {
-  width: '14px',
-  height: '14px',
-  flexShrink: 0,
 });
 
 /** 모바일은 가격을 맨 앞, 데스크톱은 맨 뒤에 둬요. */
