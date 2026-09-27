@@ -7,6 +7,7 @@ import {
   useSearchParams,
 } from 'react-router-dom';
 import { buttonStyles } from '@/design-system';
+import { apiErrorCode } from '@/shared/api/client';
 import { FullPageSpinner } from '@/shared/components/FullPageSpinner';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
 import {
@@ -24,7 +25,32 @@ import {
   readPendingSocialLogin,
 } from '../social';
 
-type Status = 'loading' | 'failed';
+/** 로그인하지 못한 이유. 서버가 알려 준 이유가 없으면 generic이에요. */
+type Failure =
+  | 'generic'
+  | 'email-in-use'
+  | 'email-not-verified'
+  | 'email-required';
+
+const FAILURE_BY_CODE: Record<string, Failure> = {
+  // 같은 이메일로 가입한 계정이 있어요. 서버는 이메일만 보고 계정을 잇지 않아요.
+  EMAIL_IN_USE: 'email-in-use',
+  // 소셜 서비스가 이메일을 인증하지 않았다고 알려 줬어요.
+  EMAIL_NOT_VERIFIED: 'email-not-verified',
+  // 이메일 제공에 동의하지 않았어요.
+  EMAIL_REQUIRED: 'email-required',
+};
+
+const failureKeys = (failure: Failure) =>
+  failure === 'generic'
+    ? {
+        title: 'page.auth.callback.failed-title',
+        description: 'page.auth.callback.failed-description',
+      }
+    : {
+        title: `page.auth.callback.${failure}-title`,
+        description: `page.auth.callback.${failure}-description`,
+      };
 
 /**
  * 소셜 로그인에서 돌아오는 곳 (/auth/:provider?code=…&state=…).
@@ -39,16 +65,12 @@ function AuthCallbackPage() {
   const startSession = useStartSession();
   const [pending] = useState(readPendingSocialLogin);
   const next = safeNext(pending?.next);
-  const [status, setStatus] = useState<Status>('loading');
+  const [failure, setFailure] = useState<Failure | null>(null);
   const [deleted, setDeleted] = useState<Session | null>(null);
   const started = useRef(false);
 
   useDocumentTitle(
-    t(
-      status === 'failed'
-        ? 'page.auth.callback.failed-title'
-        : 'page.auth.callback.loading'
-    )
+    t(failure ? failureKeys(failure).title : 'page.auth.callback.loading')
   );
 
   useEffect(() => {
@@ -66,7 +88,7 @@ function AuthCallbackPage() {
     clearPendingSocialLogin();
 
     if (!valid) {
-      setStatus('failed');
+      setFailure('generic');
       return;
     }
 
@@ -88,7 +110,9 @@ function AuthCallbackPage() {
         startSession(session);
         navigate(next, { replace: true });
       })
-      .catch(() => setStatus('failed'));
+      .catch((error: unknown) =>
+        setFailure(FAILURE_BY_CODE[apiErrorCode(error) ?? ''] ?? 'generic')
+      );
   }, [navigate, next, params, pending, provider, startSession]);
 
   if (deleted) {
@@ -101,12 +125,10 @@ function AuthCallbackPage() {
     );
   }
 
-  if (status === 'failed') {
+  if (failure) {
+    const keys = failureKeys(failure);
     return (
-      <AuthLayout
-        title={t('page.auth.callback.failed-title')}
-        subtitle={t('page.auth.callback.failed-description')}
-      >
+      <AuthLayout title={t(keys.title)} subtitle={t(keys.description)}>
         <Link
           to={authPath('login', next)}
           className={buttonStyles({ size: 'lg', fullWidth: true })}

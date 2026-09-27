@@ -931,7 +931,13 @@
         "loading": "Logging you in",
         "failed-title": "Couldn't log you in",
         "failed-description": "The social login was cancelled or has expired. Please try again.",
-        "back": "Back to log in"
+        "back": "Back to log in",
+        "email-in-use-title": "This email is already registered",
+        "email-in-use-description": "An account with this email already exists. Please log in the way you first signed up (email or another social account).",
+        "email-not-verified-title": "Email verification needed",
+        "email-not-verified-description": "Your social account's email isn't verified. Verify it with that service, then try again.",
+        "email-required-title": "Email access needed",
+        "email-required-description": "To sign up, allow access to your social account email. Log in again and agree to share your email."
       },
       "extras": {
         "title": "More about you",

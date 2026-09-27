@@ -10,6 +10,7 @@ import type { User } from '@/shared/api/models';
 import { StandaloneLayout } from '@/shell';
 import userReducer from '@/stores/user';
 import AgreementsPage from './AgreementsPage';
+import AuthCallbackPage from './AuthCallbackPage';
 import RegisterPage from './RegisterPage';
 import SocialSignupPage from './SocialSignupPage';
 
@@ -29,10 +30,18 @@ const member: User = {
   needs_agreements: true,
 };
 
-type Screen = 'register' | 'social' | 'socialMissing' | 'agreements';
-type Outcome = 'ok' | 'expired' | 'emailTaken';
+type Screen =
+  | 'register'
+  | 'social'
+  | 'socialMissing'
+  | 'agreements'
+  | 'callback';
+type Outcome = 'ok' | 'expired' | 'emailTaken' | 'emailInUse' | 'notVerified';
 
-const ENTRIES: Record<Screen, { pathname: string; state?: unknown }> = {
+const ENTRIES: Record<
+  Screen,
+  { pathname: string; search?: string; state?: unknown }
+> = {
   register: { pathname: '/register' },
   social: {
     pathname: '/register/social',
@@ -47,7 +56,11 @@ const ENTRIES: Record<Screen, { pathname: string; state?: unknown }> = {
   },
   socialMissing: { pathname: '/register/social' },
   agreements: { pathname: '/agreements' },
+  // 카카오에서 돌아온 콜백. 떠날 때 남긴 state(sessionStorage)와 같아야 해요.
+  callback: { pathname: '/auth/kakao', search: '?code=c&state=story' },
 };
+
+const PENDING_SOCIAL_LOGIN = { provider: 'kakao', state: 'story', next: '/' };
 
 /** 스토리에는 서버가 없어서 가입·동의 요청에 정한 응답을 돌려줘요. */
 const fakeServer =
@@ -65,6 +78,22 @@ const fakeServer =
     if (config.url === '/api/oauth/register') {
       if (outcome === 'expired') fail(401, 'SIGNUP_TOKEN_INVALID');
       if (outcome === 'emailTaken') fail(409, 'EMAIL_TAKEN');
+    }
+    if (config.url === '/api/oauth/kakao') {
+      if (outcome === 'emailInUse') fail(409, 'EMAIL_IN_USE');
+      if (outcome === 'notVerified') fail(400, 'EMAIL_NOT_VERIFIED');
+      // 처음 온 사람: 계정 대신 가입 토큰
+      return {
+        data: {
+          signup_token: 'signup-token',
+          email: 'reader@example.com',
+          name: '김독서',
+        },
+        status: 200,
+        statusText: 'OK',
+        headers: {},
+        config,
+      };
     }
     const data =
       config.url === '/api/user/register'
@@ -101,11 +130,17 @@ function Preview({ screen, outcome }: { screen: Screen; outcome: Outcome }) {
   useEffect(() => {
     const previous = axios.defaults.adapter;
     axios.defaults.adapter = fakeServer(outcome);
+    if (screen === 'callback') {
+      sessionStorage.setItem(
+        'doktalk:social-login',
+        JSON.stringify(PENDING_SOCIAL_LOGIN)
+      );
+    }
     setReady(true);
     return () => {
       axios.defaults.adapter = previous;
     };
-  }, [outcome]);
+  }, [outcome, screen]);
 
   if (!ready) return null;
   return (
@@ -117,6 +152,7 @@ function Preview({ screen, outcome }: { screen: Screen; outcome: Outcome }) {
               <Route path='/register' element={<RegisterPage />} />
               <Route path='/register/social' element={<SocialSignupPage />} />
               <Route path='/agreements' element={<AgreementsPage />} />
+              <Route path='/auth/:provider' element={<AuthCallbackPage />} />
             </Route>
             <Route
               path='*'
@@ -138,7 +174,7 @@ const meta = {
     screen: { control: 'inline-radio', options: Object.keys(ENTRIES) },
     outcome: {
       control: 'inline-radio',
-      options: ['ok', 'expired', 'emailTaken'],
+      options: ['ok', 'expired', 'emailTaken', 'emailInUse', 'notVerified'],
     },
   },
 } satisfies Meta<typeof Preview>;
@@ -162,6 +198,19 @@ export const SocialSignupMissing: Story = { args: { screen: 'socialMissing' } };
 
 /** 동의 기록 없이 가입한 예전 회원: 로그인하면 이 화면부터 거쳐요. */
 export const Agreements: Story = { args: { screen: 'agreements' } };
+
+/** 소셜 로그인으로 처음 왔을 때: 콜백이 가입 마무리 화면으로 보내요. */
+export const CallbackNewMember: Story = { args: { screen: 'callback' } };
+
+/** 같은 이메일로 가입한 계정이 있을 때: 자동으로 잇지 않고 원래 방법으로 로그인하게 해요. */
+export const CallbackEmailInUse: Story = {
+  args: { screen: 'callback', outcome: 'emailInUse' },
+};
+
+/** 소셜 서비스가 인증하지 않은 이메일일 때 */
+export const CallbackEmailNotVerified: Story = {
+  args: { screen: 'callback', outcome: 'notVerified' },
+};
 
 /** 모바일 */
 export const RegisterMobile: Story = {
