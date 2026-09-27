@@ -1,9 +1,10 @@
 import axios from 'axios';
 import cookie from 'react-cookies';
 import { useEffect } from 'react';
-import { useAppDispatch } from '@/stores/hooks';
 import { queryClient } from '@/shared/api/queryClient';
-import { unsetUser } from './stores/user';
+import { useAppDispatch } from '@/stores/hooks';
+import { unsetUser } from '@/stores/user';
+import { clearTokens, setAccessToken } from './api';
 
 function TokenRefresher({ children }: { children: React.ReactNode }) {
   const dispatch = useAppDispatch();
@@ -44,7 +45,7 @@ function TokenRefresher({ children }: { children: React.ReactNode }) {
               .then(async (res) => {
                 // 새 토큰 저장
                 const token = res.headers.authorization;
-                axios.defaults.headers.common['Authorization'] = token;
+                setAccessToken(token);
 
                 // 새로 응답받은 데이터로 실패한 요청 재시도
                 config.headers['Authorization'] = token;
@@ -55,8 +56,7 @@ function TokenRefresher({ children }: { children: React.ReactNode }) {
           // 로그인하지 않고 보낸 요청이면 정리할 세션이 없어요. 오류만 넘겨서 화면이 로그인 안내를 보여줘요.
           if (!config?.headers?.Authorization) return Promise.reject(error);
           // 잘못됐거나 만료된 refresh_token인 경우 모든 token 초기화
-          axios.defaults.headers.common['Authorization'] = '';
-          cookie.remove('Authorization', { path: '/' });
+          clearTokens();
           await dispatch(unsetUser());
           // 이전 사람의 데이터를 지우고, 보고 있던 화면은 로그아웃 상태로 다시 불러와요.
           // (clear()는 불러오던 요청까지 지워서 화면이 로딩 상태에 멈춰요.)

@@ -1,9 +1,8 @@
 import { useQueryClient } from '@tanstack/react-query';
-import axios from 'axios';
 import { useCallback, useEffect } from 'react';
-import cookie from 'react-cookies';
 import { useTranslation } from 'react-i18next';
 import { useNavigate } from 'react-router-dom';
+import { clearTokens } from '@/features/auth/api';
 import { useMe } from '@/features/user/api';
 import { useAppDispatch, useAppSelector } from '@/stores/hooks';
 import { selectUser, unsetUser } from '@/stores/user';
@@ -20,8 +19,7 @@ export function useAuth() {
     dispatch(unsetUser());
     // 다음에 다른 계정으로 들어와도 이전 사람의 정보가 남지 않게 비워요.
     queryClient.clear();
-    axios.defaults.headers.common['Authorization'] = '';
-    cookie.remove('Authorization', { path: '/' });
+    clearTokens();
     navigate('/login');
   }, [dispatch, navigate, queryClient]);
 

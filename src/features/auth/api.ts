@@ -54,10 +54,12 @@ export function deleteAccount() {
   return api.delete('/user/me');
 }
 
+/** 로그인 토큰은 여기서만 넣고 빼요. 모든 요청이 axios 기본 헤더로 토큰을 보내요. */
 export function setAccessToken(token: string) {
   axios.defaults.headers.common['Authorization'] = token;
 }
 
+/** 로그아웃: 요청 헤더의 access token과 refresh token 쿠키를 지워요. */
 export function clearTokens() {
   axios.defaults.headers.common['Authorization'] = '';
   cookie.remove('Authorization', { path: '/' });

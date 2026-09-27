@@ -13,7 +13,7 @@ import '@/design-system/styles/fonts.css';
 import '@/design-system/styles/reset.css';
 
 import App from '@/App.tsx';
-import TokenRefresher from '@/TokenRefresher';
+import TokenRefresher from '@/features/auth/TokenRefresher';
 
 createRoot(document.getElementById('root')!).render(
   <BrowserRouter
