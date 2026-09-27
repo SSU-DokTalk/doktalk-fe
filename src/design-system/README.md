@@ -18,16 +18,26 @@ yarn storybook
 
 ## 구성
 
-| 폴더                  | 내용                                                                                                                                                                      |
-| --------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens/theme.css.ts` | 색·반경·그림자·글꼴 CSS 변수. 이름이 `--dt-*`로 고정돼 있어요.                                                                                                            |
-| `tokens/scale.ts`     | 간격, 기준점(`mq`), 글자 크기(`typeScale`), z-index                                                                                                                       |
-| `styles/`             | 전역 기본 스타일(`reset.css`), 글꼴, 포커스 링, 스크린 리더 전용 텍스트                                                                                                   |
-| `components/`         | Button, IconButton, Chip, Badge, TextField/Textarea, Select, Checkbox, Tabs, SegmentedControl, Menu, Dialog, Avatar, BookCover, Card, Text, EmptyState, Skeleton, Spinner |
+| 폴더                  | 내용                                                                                                                                                                             |
+| --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `tokens/theme.css.ts` | 색·반경·그림자·글꼴 CSS 변수. 이름이 `--dt-*`로 고정돼 있어요.                                                                                                                   |
+| `tokens/scale.ts`     | 간격(`space`), 글자 크기·굵기(`fontSize`, `fontWeight`), 글자 역할(`typeScale`), 앱 틀 치수(`layout`), 기준점(`mq`), z-index                                                     |
+| `tokens/palette.ts`   | 그림에만 쓰는 고정 색 (표지 대체 색)                                                                                                                                             |
+| `styles/`             | 전역 기본 스타일(`reset.css`), 글꼴, 포커스 링, 스크린 리더 전용 텍스트                                                                                                          |
+| `components/`         | Button, IconButton, Chip, Badge, TextField/Textarea, Select, Checkbox, Radio, Tabs, SegmentedControl, Menu, Dialog, Avatar, BookCover, Card, Text, EmptyState, Skeleton, Spinner |
 
 ## 규칙
 
-- **화면 코드에서 색은 토큰으로만** 써요. `vars.color.brand`처럼 쓰고, 16진수 값을 직접 적지 않아요.
+- **스타일 값은 토큰으로만** 써요. 스타일 파일(`*.css.ts`)에서는 `@/design-system/tokens`를 가져와요.
+  - 색·그림자·모서리: `vars.color.brand`, `vars.shadow.md`, `vars.radius.lg`. 16진수·rgba를 직접 적지 않아요.
+  - 간격: `space[16]`. 키가 px 값이고 2px 단위예요. 여러 값은 `` `${space[12]} ${space[20]}` ``처럼 적어요.
+  - 글자: 자주 쓰는 묶음은 `...typeScale.caption`, 데스크톱에서 커지는 제목은 `style([typeScale.pageTitle, {...}])`. 나머지는 `fontSize[15]`, `fontWeight.bold`. 줄 간격·자간은 크기와 짝을 이루는 숫자로 적어요.
+  - 앱 틀 치수: `layout.topNavHeight`, `layout.bottomTabsHeight`, `layout.stickyTop`, `layout.gutter` 등. 내비·하단 탭 높이에 기대는 위치는 이 값으로 계산해요.
+  - 토큰 사이 값(1·3·5·7·11px)은 배지·칩·아이콘처럼 작은 부품의 광학 보정에만 쓰고, 그 자리에 이유를 적어요.
+  - 아이콘·썸네일·아바타처럼 그 부품만의 크기는 부품 스타일 파일에 숫자로 둬요.
+- **컴포넌트 모양은 옵션으로** 바꿔요. `className`은 위치·배치(margin, flex, grid)에만 쓰고, 색·크기·hover를 덮어쓰지 않아요. 필요한 모양이 없으면 컴포넌트에 옵션을 더해요.
+  - 예: IconButton `variant='onBrand'`(남색 바탕), `size='fab'`(떠 있는 버튼), `labelled`, TextField `shape='pill'`, Button `wrap`(좁은 칸 두 줄), Menu.Item `tone='danger'`.
+- **`!important`는 쓰지 않아요.** 화면 폭에 따라 숨길 때는 그 요소의 스타일에 `@media`를 두거나 `useMediaQuery`로 아예 그리지 않아요. 인라인 `style`은 실행 중에 정해지는 값(표지 너비에 맞춘 크기 등)에만 써요.
 - **Steel(`infoIcon`)은 아이콘 전용**이에요. 텍스트에는 대비가 충분한 `info`를 써요.
 - **아이콘은 lucide-react**를 써요. 버튼 크기에 맞춰 아이콘 크기가 자동으로 정해져요.
 - **아이콘만 있는 버튼**은 `IconButton`을 쓰고 `aria-label`을 꼭 넣어요(타입에서 필수).
@@ -54,5 +64,6 @@ yarn storybook
 
 - 데스크톱(md 이상)은 `TopNav`, 모바일은 `MobileTopBar`를 보여줘요. 로그인하면 모바일에 `BottomTabs`가 고정돼요.
 - 로그인·회원가입·소셜 로그인 콜백 화면은 셸 밖에 있어요 (`StandaloneLayout`).
+- 화면 언어 목록은 `LANGUAGES`(`src/shell/hooks.ts`) 하나예요. 언어 이름은 번역하지 않고 그 언어로 적어요.
 - 레이아웃마다 `RouteBoundary`가 페이지 조각을 받는 동안의 로딩과 오류 화면을 맡아요. 오류가 나도 셸은 그대로 남아요.
 - AI 챗봇 버튼은 글쓰기 화면을 뺀 모든 셸 화면에 떠 있어요.
