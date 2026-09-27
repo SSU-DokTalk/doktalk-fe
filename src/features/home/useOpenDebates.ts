@@ -7,7 +7,7 @@ import { parseServerDate } from '@/shared/format';
 export type OpenDebateSort = 'latest' | 'popular' | 'soonest';
 
 /**
- * 모집 중인 토론방 = 모임 날짜가 아직 오지 않은 토론방.
+ * 모집 중인 토론방 = 모임 날짜가 아직 오지 않았고 자리가 남은 토론방.
  * 서버에 '앞으로 열릴 모임' 조건이 없어서 첫 페이지(10개)를 받아 걸러요.
  * 목록 화면(/debate)과 같은 캐시를 써서 '전체 보기'로 가도 다시 부르지 않아요.
  */
@@ -28,7 +28,9 @@ export function useOpenDebates(category: number, sort: OpenDebateSort) {
     const now = Date.now();
     const open = recent.filter(
       (debate) =>
-        debate.held_at && parseServerDate(debate.held_at).getTime() > now
+        !debate.is_full &&
+        debate.held_at &&
+        parseServerDate(debate.held_at).getTime() > now
     );
     if (sort === 'soonest') {
       open.sort(

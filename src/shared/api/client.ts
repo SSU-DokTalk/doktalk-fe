@@ -100,3 +100,13 @@ export const api = {
 export function httpStatus(error: unknown): number | undefined {
   return isAxiosError(error) ? error.response?.status : undefined;
 }
+
+/** 서버가 알려 준 오류 코드. FastAPI detail이 문자열이면 그대로, 객체면 detail.code예요. */
+export function apiErrorCode(error: unknown): string | undefined {
+  if (!isAxiosError(error)) return undefined;
+  const data: unknown = error.response?.data;
+  const detail = (data as { detail?: unknown } | undefined)?.detail;
+  if (typeof detail === 'string') return detail;
+  const code = (detail as { code?: unknown } | null | undefined)?.code;
+  return typeof code === 'string' ? code : undefined;
+}

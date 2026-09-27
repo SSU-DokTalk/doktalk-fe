@@ -10,7 +10,7 @@ import {
 } from '@/design-system';
 import type { Debate } from '@/shared/api/models';
 import { parseServerDate, useFormat } from '@/shared/format';
-import { categoryText, placeText } from '../display';
+import { categoryText, placeText, seatsText } from '../display';
 import * as s from '@/shared/components/FeedItem.css';
 import { Stat } from '@/shared/components/Stat';
 
@@ -38,7 +38,8 @@ export function DebateListItem({ debate, coverWidth }: DebateListItemProps) {
       </time>
     ),
     place,
-    debate.limit > 0 && t('page.debate.item.limit', { count: debate.limit }),
+    seatsText(debate, t),
+    debate.is_full && t('page.debate.item.full'),
   ].filter(Boolean);
 
   return (

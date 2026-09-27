@@ -7,7 +7,7 @@ import { AuthorRow } from '@/shared/components/AuthorRow';
 import { useFormat } from '@/shared/format';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { categoryLabelKeys } from '@/shared/categories';
-import { placeKindText } from '../display';
+import { memberCount, placeKindText } from '../display';
 import * as s from './DebateHero.css';
 
 /** http(s) 주소만 링크로 걸어요. */
@@ -108,10 +108,11 @@ export function DebateHero({ debate, viewerId, actions }: DebateHeroProps) {
           {debate.limit > 0 && (
             <InfoRow
               icon={<Users aria-hidden='true' />}
-              label={t('page.debate-detail.info.limit')}
+              label={t('page.debate-detail.info.seats')}
             >
-              {t('page.debate-detail.info.limit-value', {
-                count: debate.limit,
+              {t('page.debate-detail.info.seats-value', {
+                count: memberCount(debate),
+                limit: debate.limit,
               })}
             </InfoRow>
           )}

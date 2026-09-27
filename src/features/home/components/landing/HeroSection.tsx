@@ -4,7 +4,7 @@ import { useTranslation } from 'react-i18next';
 import { Link } from 'react-router-dom';
 import { BookCover, bookCoverStage, buttonStyles, mq } from '@/design-system';
 import { usePopularDebates } from '@/features/debate/api';
-import { placeText } from '@/features/debate/display';
+import { placeText, seatsText } from '@/features/debate/display';
 import type { Debate } from '@/shared/api/models';
 import { parseServerDate, useFormat } from '@/shared/format';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
@@ -13,7 +13,7 @@ import { useOpenDebates } from '../../useOpenDebates';
 import * as s from './Landing.css';
 
 /**
- * 추천 카드에 보일 토론방: 인기 토론방 가운데 모임 전인 첫 번째,
+ * 추천 카드에 보일 토론방: 인기 토론방 가운데 모임 전이고 자리가 남은 첫 번째,
  * 없으면 최근에 열린 모집 중 토론방. 둘 다 없으면 카드를 빼요.
  */
 function useFeaturedDebate(): Debate | undefined {
@@ -23,7 +23,9 @@ function useFeaturedDebate(): Debate | undefined {
   return (
     data?.find(
       (debate) =>
-        debate.held_at && parseServerDate(debate.held_at).getTime() > now
+        !debate.is_full &&
+        debate.held_at &&
+        parseServerDate(debate.held_at).getTime() > now
     ) ?? open[0]
   );
 }
@@ -32,7 +34,9 @@ function FeaturedDebate({ debate }: { debate: Debate }) {
   const { t } = useTranslation();
   const format = useFormat();
   const isDesktop = useMediaQuery(mq.md);
-  const place = placeText(debate, t);
+  const where = [placeText(debate, t), seatsText(debate, t)]
+    .filter(Boolean)
+    .join(' · ');
 
   return (
     <Link to={`/debate/${debate.id}`} className={s.featured}>
@@ -54,12 +58,12 @@ function FeaturedDebate({ debate }: { debate: Debate }) {
               {format.meetingDateTime(debate.held_at)}
             </span>
           )}
-          <span className={s.metaLine}>
-            <MapPin aria-hidden='true' className={s.metaIcon} />
-            {[place, t('page.debate.item.limit', { count: debate.limit })]
-              .filter(Boolean)
-              .join(' · ')}
-          </span>
+          {where && (
+            <span className={s.metaLine}>
+              <MapPin aria-hidden='true' className={s.metaIcon} />
+              {where}
+            </span>
+          )}
         </span>
         <span className={s.featuredFoot}>
           <span className={s.featuredPrice}>

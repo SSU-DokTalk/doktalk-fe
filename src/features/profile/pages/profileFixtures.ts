@@ -95,6 +95,8 @@ const debate = (
   held_at: heldAt,
   price: 0,
   limit: 8,
+  participants_num: 3,
+  is_full: false,
   category: 1,
   likes_num: 4,
   comments_num: 2,

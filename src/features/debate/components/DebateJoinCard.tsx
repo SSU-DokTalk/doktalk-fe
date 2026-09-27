@@ -27,7 +27,7 @@ type DebateJoinCardProps = {
 };
 
 /**
- * 참여 카드. 개설자 → 참여 중 → 끝난 모임 → 참여 전(무료·유료) 순서로 상태를 골라요.
+ * 참여 카드. 개설자 → 참여 중 → 끝난 모임 → 정원 마감 → 참여 전(무료·유료) 순서로 상태를 골라요.
  * 무료(0원)는 결제 없이 바로 참여해요.
  */
 export function DebateJoinCard({
@@ -104,6 +104,17 @@ export function DebateJoinCard({
           <p className={s.title}>{t('page.debate-detail.join.ended')}</p>
           <p className={s.description}>
             {t('page.debate-detail.join.ended-description')}
+          </p>
+        </>
+      );
+    }
+
+    if (debate.is_full) {
+      return (
+        <>
+          <p className={s.title}>{t('page.debate-detail.join.full')}</p>
+          <p className={s.description}>
+            {t('page.debate-detail.join.full-description')}
           </p>
         </>
       );

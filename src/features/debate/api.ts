@@ -9,7 +9,7 @@ import {
   type UseQueryResult,
 } from '@tanstack/react-query';
 import { purchaseKeys } from '@/features/payment/api';
-import { api, httpStatus } from '@/shared/api/client';
+import { api, apiErrorCode, httpStatus } from '@/shared/api/client';
 import { nextPageParam, type Debate, type Purchase } from '@/shared/api/models';
 import type { components } from '@/shared/api/schema';
 import type { SearchBy } from '@/shared/hooks/useListParams';
@@ -240,19 +240,34 @@ export function useJoinFreeDebate(debate: Debate, viewerId: number) {
           body: { product_type: 'D', product_id: debate.id },
         });
       } catch (error) {
-        // 이미 참여한 경우예요. 참여 상태를 다시 불러오면 돼요.
-        if (httpStatus(error) !== 409) throw error;
+        // 409는 이미 참여한 경우예요. 참여 상태를 다시 불러오면 돼요.
+        // 다만 DEBATE_FULL은 그 사이 정원이 찬 거라 실패로 알려요.
+        if (
+          httpStatus(error) !== 409 ||
+          apiErrorCode(error) === 'DEBATE_FULL'
+        ) {
+          throw error;
+        }
       }
     },
     onSuccess: () => {
       void queryClient.invalidateQueries({ queryKey: purchaseKeys.all });
-      // 참여하면 상세에 온라인 링크가 담겨 와요.
+      void queryClient.invalidateQueries({ queryKey: debateKeys.lists() });
+      // 참여하면 인원이 늘고, 상세에 온라인 링크가 담겨 와요.
       void queryClient.invalidateQueries({
         queryKey: debateKeys.detail(debate.id),
       });
       return queryClient.invalidateQueries({
         queryKey: debateKeys.purchase(debate.id, viewerId),
       });
+    },
+    onError: (error) => {
+      // 정원이 찼으면 상세를 다시 불러와 참여 카드를 '정원 마감'으로 바꿔요.
+      if (apiErrorCode(error) === 'DEBATE_FULL') {
+        void queryClient.invalidateQueries({
+          queryKey: debateKeys.detail(debate.id),
+        });
+      }
     },
   });
 }

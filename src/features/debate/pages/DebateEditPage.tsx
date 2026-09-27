@@ -3,12 +3,13 @@ import { useRef, useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useNavigate, useParams } from 'react-router-dom';
 import { Button, buttonStyles, Spinner } from '@/design-system';
-import { httpStatus } from '@/shared/api/client';
+import { apiErrorCode, httpStatus } from '@/shared/api/client';
 import { PageState } from '@/shared/components/PageState';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
 import { useAuth } from '@/shell/hooks';
 import { UploadError, useDebate, useUpdateDebate } from '../api';
 import { DebateForm } from '../components/DebateForm';
+import { memberCount } from '../display';
 import { debateToForm, formToRequest, type DebateFormValues } from '../form';
 import * as s from '@/shared/components/FormPage.css';
 import { useAuthHref } from '@/features/auth/redirect';
@@ -114,6 +115,18 @@ function DebateEditPage() {
       });
       navigate(`/debate/${id}`, { replace: true });
     } catch (error) {
+      if (apiErrorCode(error) === 'LIMIT_BELOW_MEMBERS') {
+        // 고치는 사이 참여한 사람이 있어요. 지금 인원을 다시 불러와 알려줘요.
+        const fresh = await query.refetch();
+        if (fresh.data) {
+          setSubmitError(
+            t('page.create-debate.error.limit-below-members', {
+              count: memberCount(fresh.data),
+            })
+          );
+          return;
+        }
+      }
       setSubmitError(
         t(
           error instanceof UploadError
@@ -136,6 +149,7 @@ function DebateEditPage() {
       <DebateForm
         mode='edit'
         initialValues={initialRef.current}
+        members={memberCount(query.data)}
         submitting={update.isPending}
         submitError={submitError}
         onSubmit={handleSubmit}

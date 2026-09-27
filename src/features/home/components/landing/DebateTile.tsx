@@ -9,7 +9,7 @@ import {
   mq,
   Skeleton,
 } from '@/design-system';
-import { placeKindText } from '@/features/debate/display';
+import { placeKindText, seatsText } from '@/features/debate/display';
 import type { Debate } from '@/shared/api/models';
 import { categoryText } from '@/shared/categories';
 import { parseServerDate, useFormat } from '@/shared/format';
@@ -22,6 +22,7 @@ export function DebateTile({ debate }: { debate: Debate }) {
   const format = useFormat();
   const isDesktop = useMediaQuery(mq.md);
   const kind = placeKindText(debate, t);
+  const seats = seatsText(debate, t);
   const online = !debate.location?.trim() && debate.is_online;
   const ended =
     Boolean(debate.held_at) &&
@@ -30,9 +31,9 @@ export function DebateTile({ debate }: { debate: Debate }) {
   return (
     <Link to={`/debate/${debate.id}`} className={s.card}>
       <span className={clsx(bookCoverStage, s.stage)}>
-        {ended ? (
+        {ended || debate.is_full ? (
           <Badge tone='neutral' size='md' className={s.mode}>
-            {t('page.home.debates.ended')}
+            {t(ended ? 'page.home.debates.ended' : 'page.debate.item.full')}
           </Badge>
         ) : (
           kind && (
@@ -70,9 +71,7 @@ export function DebateTile({ debate }: { debate: Debate }) {
               {t('component.stats.free')}
             </Badge>
           )}
-          <span className={s.limit}>
-            {t('page.debate.item.limit', { count: debate.limit })}
-          </span>
+          {seats && <span className={s.limit}>{seats}</span>}
         </span>
       </span>
     </Link>

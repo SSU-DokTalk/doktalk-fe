@@ -1313,6 +1313,16 @@ export interface components {
       price: number;
       /** Limit */
       limit: number;
+      /**
+       * Participants Num
+       * @default 0
+       */
+      participants_num: number;
+      /**
+       * Is Full
+       * @default false
+       */
+      is_full: boolean;
       /** Category */
       category: number;
       /** Likes Num */

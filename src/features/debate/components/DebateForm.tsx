@@ -146,6 +146,8 @@ export type DebateFormProps = {
   notice?: ReactNode;
   /** 수정 화면: 취소 링크 */
   cancelAction?: ReactNode;
+  /** 수정 화면: 이미 모인 인원(주최자 포함). 정원을 이보다 줄일 수 없어요. */
+  members?: number;
 };
 
 /** 토론방 만들기·수정 폼 */
@@ -158,6 +160,7 @@ export function DebateForm({
   onSaveDraft,
   notice,
   cancelAction,
+  members = 0,
 }: DebateFormProps) {
   const { t } = useTranslation();
   const formRef = useRef<HTMLFormElement>(null);
@@ -219,6 +222,7 @@ export function DebateForm({
     event.preventDefault();
     const nextErrors = validateDebateForm(values, {
       requireFuture: mode === 'create' || heldAtChanged,
+      members,
     });
     setErrors(nextErrors);
     if (Object.keys(nextErrors).length > 0) {
@@ -348,7 +352,7 @@ export function DebateForm({
           <NumberStepper
             label={t('page.create-debate.input.limit')}
             value={values.limit}
-            min={LIMIT_RANGE.min}
+            min={Math.max(LIMIT_RANGE.min, members)}
             max={LIMIT_RANGE.max}
             unit={t('page.create-debate.input.limit-unit')}
             decreaseLabel={t('page.create-debate.input.limit-decrease')}

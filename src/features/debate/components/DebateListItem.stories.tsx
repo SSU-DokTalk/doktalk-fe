@@ -21,6 +21,8 @@ const base: Debate = {
   held_at: '2026-10-06T10:30:00',
   price: 10000,
   limit: 12,
+  participants_num: 3,
+  is_full: false,
   category: (1 << 1) | (1 << 5),
   likes_num: 42,
   comments_num: 12,
@@ -63,6 +65,13 @@ const debates: Record<string, Debate> = {
     category: (1 << 3) | (1 << 4) | (1 << 2),
     user: { ...base.user, name: 'Батбаяр Энхтуяа' },
     book: { ...base.book, title: 'Sapiens', author: 'Yuval Noah Harari' },
+  },
+  full: {
+    ...base,
+    id: 4,
+    limit: 6,
+    participants_num: 5,
+    is_full: true,
   },
 };
 
@@ -110,6 +119,9 @@ export const LongMongolian: Story = {
   args: { variant: 'longMongolian' },
   globals: { locale: 'mn' },
 };
+
+/** 정원이 다 찼을 때: 인원 옆에 모집 마감 */
+export const Full: Story = { args: { variant: 'full' } };
 
 /** 모바일 배치 (표지가 오른쪽) */
 export const Mobile: Story = {

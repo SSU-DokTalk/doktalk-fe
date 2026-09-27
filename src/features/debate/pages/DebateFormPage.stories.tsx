@@ -26,6 +26,8 @@ const debate: Debate = {
   held_at: '2026-10-06T10:30:00',
   price: 10000,
   limit: 12,
+  participants_num: 3,
+  is_full: false,
   category: (1 << 1) | (1 << 5),
   likes_num: 42,
   comments_num: 3,

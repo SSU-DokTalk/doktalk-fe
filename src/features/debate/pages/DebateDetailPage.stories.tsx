@@ -30,6 +30,8 @@ const debate: Debate = {
   held_at: iso(24 * 9),
   price: 10000,
   limit: 12,
+  participants_num: 3,
+  is_full: false,
   category: (1 << 1) | (1 << 5),
   likes_num: 42,
   comments_num: 3,
@@ -120,7 +122,7 @@ const purchase: Purchase = {
   quantity: 1,
 } as Purchase;
 
-type Scenario = 'paid' | 'free' | 'joined' | 'host' | 'ended';
+type Scenario = 'paid' | 'free' | 'joined' | 'host' | 'ended' | 'full';
 
 function setup(scenario: Scenario) {
   const viewerId = scenario === 'host' ? HOST_ID : VIEWER_ID;
@@ -130,6 +132,10 @@ function setup(scenario: Scenario) {
     held_at: scenario === 'ended' ? iso(-48) : debate.held_at,
     // 서버는 주최자·참여자에게만 링크를 담아 줘요.
     link: scenario === 'joined' || scenario === 'host' ? debate.link : null,
+    // 정원 12명 = 주최자 + 참여자 11명
+    participants_num:
+      scenario === 'full' ? debate.limit - 1 : debate.participants_num,
+    is_full: scenario === 'full',
   };
 
   const queryClient = new QueryClient({
@@ -193,7 +199,7 @@ const meta = {
   argTypes: {
     scenario: {
       control: 'inline-radio',
-      options: ['paid', 'free', 'joined', 'host', 'ended'],
+      options: ['paid', 'free', 'joined', 'host', 'ended', 'full'],
     },
   },
 } satisfies Meta<typeof Preview>;
@@ -215,6 +221,9 @@ export const Host: Story = { args: { scenario: 'host' } };
 
 /** 모임 시간이 지났어요. */
 export const Ended: Story = { args: { scenario: 'ended' } };
+
+/** 정원이 다 찼어요 (주최자 포함 12/12명). 참여 버튼 대신 안내가 보여요. */
+export const Full: Story = { args: { scenario: 'full' } };
 
 /** 모바일 */
 export const Mobile: Story = {

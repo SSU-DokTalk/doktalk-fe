@@ -109,10 +109,11 @@ const isWebUrl = (value: string) => {
 /**
  * 폼 검사. 서버 규칙(제목 255자, 링크는 http(s) 주소)에 화면 규칙을 더했어요.
  * requireFuture: 새로 만들 때, 또는 수정하면서 일시를 바꿨을 때만 지난 시간을 막아요.
+ * members: 수정할 때 이미 모인 인원(주최자 포함). 정원을 이보다 줄일 수 없어요.
  */
 export function validateDebateForm(
   values: DebateFormValues,
-  { requireFuture }: { requireFuture: boolean }
+  { requireFuture, members = 0 }: { requireFuture: boolean; members?: number }
 ): DebateFormErrors {
   const errors: DebateFormErrors = {};
   const prefix = 'page.create-debate.error';
@@ -147,6 +148,11 @@ export function validateDebateForm(
     values.limit > LIMIT_RANGE.max
   ) {
     errors.limit = { key: `${prefix}.limit-range`, values: { ...LIMIT_RANGE } };
+  } else if (values.limit < members) {
+    errors.limit = {
+      key: `${prefix}.limit-below-members`,
+      values: { count: members },
+    };
   }
 
   if (

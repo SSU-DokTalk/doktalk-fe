@@ -12,7 +12,7 @@ import {
   Skeleton,
   visuallyHidden,
 } from '@/design-system';
-import { placeText } from '@/features/debate/display';
+import { placeText, seatsText } from '@/features/debate/display';
 import { useFormat } from '@/shared/format';
 import { daysUntil, useMyMeetings, type Meeting } from '../useMyMeetings';
 import { CreatePrompt } from './CreatePrompt';
@@ -46,7 +46,7 @@ function UpcomingMeeting({ meeting }: { meeting: Meeting }) {
   const meta = [
     at ? format.time(at) : null,
     placeText(debate, t),
-    t('page.debate.item.limit', { count: debate.limit }),
+    seatsText(debate, t),
     debate.price > 0 ? format.price(debate.price) : t('component.stats.free'),
   ].filter(Boolean);
 

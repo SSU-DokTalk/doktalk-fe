@@ -39,6 +39,7 @@ const CONFIRM_RESPONSES = {
     },
   },
   error: { status: 502, data: { detail: 'PAYMENT_GATEWAY_ERROR' } },
+  full: { status: 409, data: { detail: 'DEBATE_FULL' } },
 };
 type ConfirmOutcome = keyof typeof CONFIRM_RESPONSES;
 
@@ -145,6 +146,9 @@ export const Declined: Story = { args: { confirm: 'declined' } };
 
 /** 결제 확인 요청이 실패했을 때: 결제가 됐는지 모르니 다시 확인하게 해요. */
 export const ConfirmError: Story = { args: { confirm: 'error' } };
+
+/** 결제하는 사이 토론방 정원이 찼을 때: 서버가 결제를 취소하고, 다시 결제하기는 빠져요. */
+export const DebateFull: Story = { args: { confirm: 'full' } };
 
 /** 결과 주소에 결제 정보가 없을 때 */
 export const Missing: Story = { args: { path: 'missing' } };

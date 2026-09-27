@@ -327,7 +327,8 @@
         "no-debate-item": "아직 토론방이 없습니다",
         "online": "온라인",
         "offline": "오프라인",
-        "limit": "정원 {{count}}명",
+        "seats": "참여 {{count}}/{{limit}}명",
+        "full": "모집 마감",
         "free": "무료",
         "likes": "좋아요 {{count}}",
         "comments": "댓글 {{count}}",
@@ -438,7 +439,7 @@
         "link-error": "https://url 형식으로 적어주세요",
         "book-select": "도서 선택",
         "category": "카테고리",
-        "limit": "인원 제한",
+        "limit": "정원 (나 포함)",
         "limit-unit": "명",
         "content-placeholder": "나누고 싶은 이야기를 적어주세요",
         "price": "가격",
@@ -475,6 +476,7 @@
         "date-required": "모임 날짜와 시간을 입력해주세요",
         "date-past": "지금보다 뒤의 시간을 골라주세요",
         "limit-range": "인원은 {{min}}~{{max}}명 사이로 정해주세요",
+        "limit-below-members": "이미 {{count}}명이 모였어요 (나 포함). 정원을 {{count}}명보다 줄일 수 없어요.",
         "price-range": "가격은 {{min}}~{{max}}원 사이로 입력해주세요. 무료라면 ‘무료로 열기’를 선택해요.",
         "submit": "저장하지 못했어요. 잠시 후 다시 시도해 주세요.",
         "upload": "파일을 올리지 못했어요. 파일을 확인하고 다시 시도해 주세요."
@@ -547,8 +549,8 @@
         "link": "온라인 링크",
         "time": "시간",
         "book": "지정 도서",
-        "limit": "인원 제한",
-        "limit-value": "{{count}}명",
+        "seats": "참여 인원",
+        "seats-value": "{{count}}/{{limit}}명 (주최자 포함)",
         "link-locked": "참여하면 링크를 볼 수 있어요"
       },
       "payment": {
@@ -575,6 +577,8 @@
         "host-description": "토론방 내용은 오른쪽 위 메뉴에서 고칠 수 있어요.",
         "ended": "끝난 토론방이에요",
         "ended-description": "모임 시간이 지나서 참여할 수 없어요.",
+        "full": "정원이 다 찼어요",
+        "full-description": "참여한 사람이 취소하면 자리가 생겨요.",
         "error": "참여하지 못했어요. 잠시 후 다시 시도해 주세요."
       },
       "delete-dialog": {
@@ -962,6 +966,7 @@
         },
         "fail-title": "결제하지 못했어요",
         "fail-lead": "결제가 완료되지 않았어요. 아래 사유를 확인하고 다시 시도해 주세요.",
+        "debate-full": "결제하는 사이 정원이 다 찼어요. 결제는 취소돼요.",
         "confirm-error-title": "결제를 확인하지 못했어요",
         "confirm-error-lead": "잠시 후 다시 시도해 주세요. 계속 안 되면 주문번호와 함께 문의해 주세요.",
         "missing-title": "결제 정보를 찾을 수 없어요",

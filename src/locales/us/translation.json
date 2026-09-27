@@ -327,7 +327,8 @@
         "no-debate-item": "There is no discussion item",
         "online": "Online",
         "offline": "In person",
-        "limit": "Up to {{count}}",
+        "seats": "{{count}}/{{limit}} joined",
+        "full": "Full",
         "free": "Free",
         "likes": "{{count}} likes",
         "comments": "{{count}} comments",
@@ -438,7 +439,7 @@
         "link-error": "Please write in https://url format",
         "book-select": "Select Book",
         "category": "Category",
-        "limit": "Participant Limit",
+        "limit": "Capacity (including you)",
         "limit-unit": "people",
         "content-placeholder": "Write about what you want to discuss",
         "price": "Price",
@@ -475,6 +476,7 @@
         "date-required": "Please enter the date and time",
         "date-past": "Please choose a time in the future",
         "limit-range": "Set between {{min}} and {{max}} people",
+        "limit-below-members": "{{count}} people, including you, have already joined. The capacity can’t go below {{count}}.",
         "price-range": "Enter a price between {{min}} and {{max}} KRW. For a free discussion, choose ‘Make it free’.",
         "submit": "Couldn't save. Please try again in a moment.",
         "upload": "Couldn't upload the files. Check them and try again."
@@ -547,8 +549,8 @@
         "link": "Online Link",
         "time": "Time",
         "book": "Selected Book",
-        "limit": "Capacity",
-        "limit-value": "{{count}} people",
+        "seats": "Participants",
+        "seats-value": "{{count}}/{{limit}} people (host included)",
         "link-locked": "Join to see the link"
       },
       "payment": {
@@ -575,6 +577,8 @@
         "host-description": "Edit it from the menu at the top right.",
         "ended": "This discussion has ended",
         "ended-description": "The meetup time has passed, so you can no longer join.",
+        "full": "This discussion is full",
+        "full-description": "A spot opens up if someone cancels.",
         "error": "Couldn't join. Please try again in a moment."
       },
       "delete-dialog": {
@@ -962,6 +966,7 @@
         },
         "fail-title": "Payment failed",
         "fail-lead": "The payment didn't go through. Check the reason below and try again.",
+        "debate-full": "The discussion filled up while you were paying. Your payment will be cancelled.",
         "confirm-error-title": "We couldn't confirm your payment",
         "confirm-error-lead": "Please try again in a moment. If it keeps failing, contact us with your order number.",
         "missing-title": "Payment details not found",

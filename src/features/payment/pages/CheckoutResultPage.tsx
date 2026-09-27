@@ -6,7 +6,7 @@ import { useEffect, useRef, useState, type ReactNode } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, useSearchParams } from 'react-router-dom';
 import { Button, buttonStyles, Spinner } from '@/design-system';
-import { api, httpStatus } from '@/shared/api/client';
+import { api, apiErrorCode, httpStatus } from '@/shared/api/client';
 import { useFormat } from '@/shared/format';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
 import { purchaseKeys } from '../api';
@@ -89,22 +89,30 @@ function readTossRedirect(params: URLSearchParams): TossRedirect | null {
 
 type Declined = { code: string | null; message: string | null };
 
+/** 결제 중에 토론방 정원이 찼어요 (서버가 결제를 취소해요). */
+const isDebateFull = (error: unknown) =>
+  httpStatus(error) === 409 && apiErrorCode(error) === 'DEBATE_FULL';
+
 /**
- * 서버가 결제를 승인하지 않았으면(400·402·404) 이유를 꺼내요. 토스가 거절했으면 토스의 코드와 문구가 와요.
+ * 서버가 결제를 승인하지 않았으면(400·402·404, 정원 마감 409) 이유를 꺼내요.
+ * 토스가 거절했으면 토스의 코드와 문구가 와요.
  * 그 밖의 실패(네트워크·5xx)는 결제가 됐는지 모르는 상태라 다시 확인하게 해요.
  */
 function declinedReason(error: unknown): Declined | null {
   const status = httpStatus(error);
-  if (status !== 400 && status !== 402 && status !== 404) return null;
+  if (
+    status !== 400 &&
+    status !== 402 &&
+    status !== 404 &&
+    !isDebateFull(error)
+  ) {
+    return null;
+  }
   const data: unknown = isAxiosError(error) ? error.response?.data : undefined;
   const detail = (data as { detail?: unknown } | undefined)?.detail;
-  if (typeof detail === 'string') return { code: detail, message: null };
-  const { code, message } = (detail ?? {}) as {
-    code?: unknown;
-    message?: unknown;
-  };
+  const message = (detail as { message?: unknown } | null | undefined)?.message;
   return {
-    code: typeof code === 'string' ? code : null,
+    code: apiErrorCode(error) ?? null,
     message: typeof message === 'string' ? message : null,
   };
 }
@@ -139,8 +147,8 @@ function SuccessResult({
           },
         });
       } catch (error) {
-        // 이미 산 상품이에요 (같은 결제를 두 번 확인한 경우 포함).
-        if (httpStatus(error) !== 409) throw error;
+        // 409는 이미 산 상품이에요 (같은 결제를 두 번 확인한 경우 포함). 정원 마감은 실패예요.
+        if (httpStatus(error) !== 409 || isDebateFull(error)) throw error;
       }
     },
     onSuccess: () => {
@@ -166,11 +174,15 @@ function SuccessResult({
   if (confirmPayment.isError) {
     const declined = declinedReason(confirmPayment.error);
     if (declined) {
+      const full = declined.code === 'DEBATE_FULL';
       return (
         <FailResult
           purchase={purchase}
           code={declined.code}
-          reason={declined.message}
+          reason={
+            full ? t('page.checkout.result.debate-full') : declined.message
+          }
+          canRetry={!full}
         />
       );
     }
@@ -257,10 +269,13 @@ function FailResult({
   purchase,
   code,
   reason,
+  canRetry = true,
 }: {
   purchase: PendingPurchase | null;
   code: string | null;
   reason: string | null;
+  /** 다시 결제할 수 있는지 (토론방 정원이 찼으면 못 해요) */
+  canRetry?: boolean;
 }) {
   const { t } = useTranslation();
   const format = useFormat();
@@ -293,19 +308,21 @@ function FailResult({
       actions={
         <>
           {/* 상세 화면으로 돌아가면서 결제 창을 바로 다시 열어요. */}
-          <Link
-            to={target}
-            replace
-            state={{ openCheckout: true }}
-            className={buttonStyles({ size: 'lg', fullWidth: true })}
-          >
-            {t('page.checkout.result.retry')}
-          </Link>
+          {canRetry && (
+            <Link
+              to={target}
+              replace
+              state={{ openCheckout: true }}
+              className={buttonStyles({ size: 'lg', fullWidth: true })}
+            >
+              {t('page.checkout.result.retry')}
+            </Link>
+          )}
           <Link
             to={target}
             replace
             className={buttonStyles({
-              variant: 'neutral',
+              variant: canRetry ? 'neutral' : 'primary',
               size: 'lg',
               fullWidth: true,
             })}
