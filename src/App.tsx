@@ -3,6 +3,7 @@ import { Route, Routes } from 'react-router-dom';
 
 import { useRestoreSession } from '@/features/auth/useRestoreSession';
 import {
+  AgreementsPage,
   AuthCallbackPage,
   BookSearchPage,
   CheckoutResultPage,
@@ -12,6 +13,7 @@ import {
   DebateListPage,
   HomePage,
   IntegratedSearchPage,
+  LegalPage,
   LoginPage,
   MyLibraryPage,
   MyPage,
@@ -20,6 +22,7 @@ import {
   preloadPagesWhenIdle,
   RegisterPage,
   SettingsPage,
+  SocialSignupPage,
   SummaryCreatePage,
   SummaryDetailPage,
   SummaryEditPage,
@@ -98,6 +101,8 @@ function App() {
             <Route path='/mypage' element={<MyPage />} />
             <Route path='/user/:user_id' element={<UserProfilePage />} />
             <Route path='/settings' element={<SettingsPage />} />
+            <Route path='/terms' element={<LegalPage kind='terms' />} />
+            <Route path='/privacy' element={<LegalPage kind='privacy' />} />
             <Route
               path='/checkout/success'
               element={<CheckoutResultPage result='success' />}
@@ -113,6 +118,8 @@ function App() {
         <Route element={<StandaloneLayout />}>
           <Route path='/login' element={<LoginPage />} />
           <Route path='/register' element={<RegisterPage />} />
+          <Route path='/register/social' element={<SocialSignupPage />} />
+          <Route path='/agreements' element={<AgreementsPage />} />
           <Route path='/auth/:provider' element={<AuthCallbackPage />} />
         </Route>
       </Routes>

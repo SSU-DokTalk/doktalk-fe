@@ -2,19 +2,30 @@ import { Check, CircleAlert, Dot } from 'lucide-react';
 import { useId, useRef, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom';
-import { Button, Checkbox, TextField, visuallyHidden } from '@/design-system';
+import { Button, TextField, visuallyHidden } from '@/design-system';
 import { NAME_MAX } from '@/features/user/api';
 import { httpStatus } from '@/shared/api/client';
 import { focusFirstInvalid } from '@/shared/draft';
 import { useDocumentTitle } from '@/shared/hooks/useDocumentTitle';
 import { useAuth } from '@/shell/hooks';
 import { loginWithEmail, registerWithEmail, useStartSession } from '../api';
+import { AgreementsFields } from '../components/AgreementsFields';
 import { AuthLayout } from '../components/AuthLayout';
 import * as layout from '../components/AuthLayout.css';
 import * as form from '../components/AuthForm.css';
 import { PasswordField } from '../components/PasswordField';
+import { ProfileExtrasFields } from '../components/ProfileExtrasFields';
 import { SocialButtons, hasSocialLogin } from '../components/SocialButtons';
 import { authPath, safeNext } from '../redirect';
+import {
+  checkBirthdate,
+  EMPTY_EXTRAS,
+  hasRequiredAgreements,
+  NO_AGREEMENTS,
+  type Agreements,
+  type BirthdateError,
+  type ProfileExtras,
+} from '../signup';
 import * as s from './RegisterPage.css';
 
 const EMAIL_PATTERN = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
@@ -41,8 +52,7 @@ type Errors = Partial<Record<keyof Values | 'agreements', string>>;
 
 /**
  * 회원가입 (/register?next=…).
- * 서버가 저장하는 이메일·닉네임·비밀번호만 받아요. 기존 화면의 생년월일·성별·관심분야·본인인증은
- * 서버에 저장되지 않거나(성별은 형식이 달라 가입이 실패했어요) 실제 인증이 없어서 뺐어요.
+ * 이메일·닉네임·비밀번호와 약관 동의(필수 셋, 마케팅 선택)를 받고, 생년월일·성별·관심 분야는 골라서 입력해요.
  */
 function RegisterPage() {
   const { t } = useTranslation();
@@ -52,7 +62,6 @@ function RegisterPage() {
   const { isLoggedIn } = useAuth();
   const startSession = useStartSession();
   const rulesId = useId();
-  const agreementErrorId = useId();
   const formRef = useRef<HTMLFormElement>(null);
   const [values, setValues] = useState<Values>({
     email: '',
@@ -60,7 +69,11 @@ function RegisterPage() {
     password: '',
     confirm: '',
   });
-  const [agreed, setAgreed] = useState({ terms: false, privacy: false });
+  const [agreed, setAgreed] = useState<Agreements>(NO_AGREEMENTS);
+  const [extras, setExtras] = useState<ProfileExtras>(EMPTY_EXTRAS);
+  const [birthdateError, setBirthdateError] = useState<BirthdateError | null>(
+    null
+  );
   const [errors, setErrors] = useState<Errors>({});
   const [formError, setFormError] = useState<string | null>(null);
   const [pending, setPending] = useState(false);
@@ -94,7 +107,7 @@ function RegisterPage() {
     } else if (values.confirm !== values.password) {
       next.confirm = t('page.auth.register.password-mismatch');
     }
-    if (!agreed.terms || !agreed.privacy) {
+    if (!hasRequiredAgreements(agreed)) {
       next.agreements = t('page.auth.register.agreements-required');
     }
     return next;
@@ -103,9 +116,11 @@ function RegisterPage() {
   const handleSubmit = async (event: FormEvent) => {
     event.preventDefault();
     const nextErrors = validate();
+    const nextBirthdateError = checkBirthdate(extras.birthdate);
     setErrors(nextErrors);
+    setBirthdateError(nextBirthdateError);
     setFormError(null);
-    if (Object.keys(nextErrors).length > 0) {
+    if (Object.keys(nextErrors).length > 0 || nextBirthdateError) {
       focusFirstInvalid(formRef.current);
       return;
     }
@@ -118,6 +133,7 @@ function RegisterPage() {
         password: values.password,
         name: values.name.trim(),
         agreements: agreed,
+        extras,
       });
     } catch (error) {
       setPending(false);
@@ -141,8 +157,6 @@ function RegisterPage() {
       });
     }
   };
-
-  const allAgreed = agreed.terms && agreed.privacy;
 
   return (
     <AuthLayout
@@ -246,71 +260,17 @@ function RegisterPage() {
           onChange={set('confirm')}
         />
 
-        <fieldset className={s.agreements}>
-          <legend className={visuallyHidden}>
-            {t('page.auth.register.agreements')}
-          </legend>
-          <div className={s.agreeAll}>
-            <Checkbox
-              label={
-                <span className={s.agreeAllLabel}>
-                  {t('page.register.form.all-agreements')}
-                </span>
-              }
-              checked={allAgreed}
-              onChange={(event) =>
-                setAgreed({
-                  terms: event.target.checked,
-                  privacy: event.target.checked,
-                })
-              }
-            />
-          </div>
-          {(['terms', 'privacy'] as const).map((key) => (
-            <div key={key} className={s.agreement}>
-              <Checkbox
-                label={
-                  <span className={s.agreementLabel}>
-                    <span className={s.requiredTag}>
-                      {t('page.auth.register.required-tag')}
-                    </span>{' '}
-                    {t(`page.auth.register.${key}`)}
-                  </span>
-                }
-                checked={agreed[key]}
-                aria-invalid={
-                  errors.agreements && !agreed[key] ? true : undefined
-                }
-                aria-describedby={
-                  errors.agreements && !agreed[key]
-                    ? agreementErrorId
-                    : undefined
-                }
-                onChange={(event) =>
-                  setAgreed((current) => ({
-                    ...current,
-                    [key]: event.target.checked,
-                  }))
-                }
-              />
-              <Link
-                to={key === 'terms' ? '/terms' : '/privacy'}
-                target='_blank'
-                className={s.viewLink}
-              >
-                <span aria-hidden='true'>{t('page.register.form.view')}</span>
-                <span className={visuallyHidden}>
-                  {t(`page.auth.register.view-${key}`)}
-                </span>
-              </Link>
-            </div>
-          ))}
-          {errors.agreements && (
-            <p id={agreementErrorId} className={s.agreementError}>
-              {errors.agreements}
-            </p>
-          )}
-        </fieldset>
+        <ProfileExtrasFields
+          value={extras}
+          onChange={setExtras}
+          birthdateError={birthdateError}
+        />
+
+        <AgreementsFields
+          value={agreed}
+          onChange={setAgreed}
+          error={errors.agreements}
+        />
 
         {formError && (
           <p role='alert' className={form.alert}>

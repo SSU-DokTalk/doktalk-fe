@@ -29,6 +29,7 @@ type Status = 'loading' | 'failed';
 /**
  * 소셜 로그인에서 돌아오는 곳 (/auth/:provider?code=…&state=…).
  * 떠날 때 남겨 둔 state와 같은지 확인한 뒤 서버에 code를 넘겨 로그인해요.
+ * 처음 온 사람은 약관 동의 화면(/register/social)에서 가입을 마쳐요.
  */
 function AuthCallbackPage() {
   const { t } = useTranslation();
@@ -70,7 +71,15 @@ function AuthCallbackPage() {
     }
 
     loginWithProvider(provider, code, state)
-      .then((session) => {
+      .then((result) => {
+        if (result.kind === 'signup') {
+          navigate('/register/social', {
+            replace: true,
+            state: { signup: result.signup, next },
+          });
+          return;
+        }
+        const { session } = result;
         if (session.user.is_deleted) {
           setAccessToken(session.token);
           setDeleted(session);

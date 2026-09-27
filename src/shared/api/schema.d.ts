@@ -1131,6 +1131,26 @@ export interface paths {
     patch?: never;
     trace?: never;
   };
+  '/user/me/agreements': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Agreecontroller
+     * @description 약관 동의 기록 남기기. 동의 없이 가입한 예전 회원(needs_agreements)이 로그인한 뒤에 써요.
+     */
+    post: operations['agreeController_user_me_agreements_post'];
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
   '/user/register': {
     parameters: {
       query?: never;
@@ -1240,12 +1260,32 @@ export interface paths {
       cookie?: never;
     };
     /**
-     * Oauthregistercontroller
-     * @description 소셜 로그인 및 회원가입
+     * Oauthlogincontroller
+     * @description 소셜 로그인. 처음 온 사람은 계정 대신 가입 토큰을 받아요 (POST /oauth/register).
      */
-    get: operations['oAuthRegisterController_oauth__provider__get'];
+    get: operations['oAuthLoginController_oauth__provider__get'];
     put?: never;
     post?: never;
+    delete?: never;
+    options?: never;
+    head?: never;
+    patch?: never;
+    trace?: never;
+  };
+  '/oauth/register': {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    get?: never;
+    put?: never;
+    /**
+     * Oauthregistercontroller
+     * @description 소셜 로그인으로 처음 온 사람의 가입. 약관에 동의해야 계정을 만들어요.
+     */
+    post: operations['oAuthRegisterController_oauth_register_post'];
     delete?: never;
     options?: never;
     head?: never;
@@ -1430,6 +1470,14 @@ export interface components {
     };
     /** BasicRegisterReq */
     BasicRegisterReq: {
+      /** Birthdate */
+      birthdate?: string | null;
+      gender?: components['schemas']['GENDER'] | null;
+      /**
+       * Interests
+       * @default 0
+       */
+      interests: number;
       /**
        * Email
        * Format: email
@@ -1444,8 +1492,6 @@ export interface components {
       profile?: string | null;
       /** Name */
       name?: string | null;
-      /** Gender */
-      gender?: boolean | null;
       agreements: components['schemas']['RegisterAgreementsReq'];
     };
     /** BasicSummaryComment */
@@ -1739,6 +1785,12 @@ export interface components {
        */
       url: string;
     };
+    /**
+     * GENDER
+     * @description 성별 (선택 입력). 고르지 않으면 None이에요.
+     * @enum {string}
+     */
+    GENDER: 'MALE' | 'FEMALE';
     /** HTTPValidationError */
     HTTPValidationError: {
       /** Detail */
@@ -1749,6 +1801,36 @@ export interface components {
      * @enum {string}
      */
     LANGUAGE: 'kr' | 'us';
+    /**
+     * OAuthRegisterReq
+     * @description 소셜 로그인으로 처음 온 사람의 가입. 첫 로그인에서 받은 가입 토큰과 약관 동의를 보내요.
+     */
+    OAuthRegisterReq: {
+      /** Birthdate */
+      birthdate?: string | null;
+      gender?: components['schemas']['GENDER'] | null;
+      /**
+       * Interests
+       * @default 0
+       */
+      interests: number;
+      /** Signup Token */
+      signup_token: string;
+      agreements: components['schemas']['RegisterAgreementsReq'];
+    };
+    /**
+     * OAuthSignupSchema
+     * @description 소셜 로그인으로 처음 온 사람. 약관에 동의하기 전에는 계정을 만들지 않고,
+     *     가입에 쓸 정보를 서명한 토큰(30분)에만 담아 돌려줘요. POST /oauth/register로 가입을 마쳐요.
+     */
+    OAuthSignupSchema: {
+      /** Signup Token */
+      signup_token: string;
+      /** Email */
+      email?: string | null;
+      /** Name */
+      name?: string | null;
+    };
     /**
      * PROVIDER
      * @enum {string}
@@ -1918,13 +2000,15 @@ export interface components {
     ROLE: 'ADMIN' | 'USER';
     /**
      * RegisterAgreementsReq
-     * @description 가입할 때 받는 약관 동의. 이용약관과 개인정보 수집·이용 동의는 필수예요.
+     * @description 가입할 때 받는 약관 동의. 이용약관, 개인정보 수집·이용 동의, 만 14세 이상 확인은 필수예요.
      */
     RegisterAgreementsReq: {
       /** Terms */
       terms: boolean;
       /** Privacy */
       privacy: boolean;
+      /** Age14 */
+      age14: boolean;
       /**
        * Marketing
        * @default false
@@ -1956,10 +2040,14 @@ export interface components {
       profile?: string | null;
       /** Name */
       name?: string | null;
-      /** Gender */
-      gender?: boolean | null;
+      gender?: components['schemas']['GENDER'] | null;
       /** Birthday */
       birthday?: string | null;
+      /**
+       * Interests
+       * @default 0
+       */
+      interests: number;
       /** Introduction */
       introduction?: string | null;
       /** Follower Num */
@@ -1985,6 +2073,11 @@ export interface components {
        * @default false
        */
       is_deleted: boolean;
+      /**
+       * Needs Agreements
+       * @default false
+       */
+      needs_agreements: boolean;
     };
     /** ValidationError */
     ValidationError: {
@@ -4381,6 +4474,39 @@ export interface operations {
       };
     };
   };
+  agreeController_user_me_agreements_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['RegisterAgreementsReq'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      201: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['UserSchema'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
   basicRegisterController_user_register_post: {
     parameters: {
       query?: never;
@@ -4560,7 +4686,7 @@ export interface operations {
       };
     };
   };
-  oAuthRegisterController_oauth__provider__get: {
+  oAuthLoginController_oauth__provider__get: {
     parameters: {
       query: {
         code: string;
@@ -4577,6 +4703,41 @@ export interface operations {
     responses: {
       /** @description Successful Response */
       200: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json':
+            | components['schemas']['UserSchema']
+            | components['schemas']['OAuthSignupSchema'];
+        };
+      };
+      /** @description Validation Error */
+      422: {
+        headers: {
+          [name: string]: unknown;
+        };
+        content: {
+          'application/json': components['schemas']['HTTPValidationError'];
+        };
+      };
+    };
+  };
+  oAuthRegisterController_oauth_register_post: {
+    parameters: {
+      query?: never;
+      header?: never;
+      path?: never;
+      cookie?: never;
+    };
+    requestBody: {
+      content: {
+        'application/json': components['schemas']['OAuthRegisterReq'];
+      };
+    };
+    responses: {
+      /** @description Successful Response */
+      201: {
         headers: {
           [name: string]: unknown;
         };

@@ -47,6 +47,8 @@ export const me: User = {
   created: at(-400 * DAY),
   updated: at(-2 * DAY),
   is_deleted: false,
+  interests: 0,
+  needs_agreements: false,
 };
 
 /** 다른 사람 프로필: 서버가 공개 정보만 줘요 (이메일·수정일 없음). */

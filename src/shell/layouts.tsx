@@ -1,7 +1,9 @@
 import clsx from 'clsx';
 import { useTranslation } from 'react-i18next';
-import { Outlet, useLocation } from 'react-router-dom';
+import { Navigate, Outlet, useLocation } from 'react-router-dom';
+import { authPath } from '@/features/auth/redirect';
 import { ChatbotLauncher } from '@/features/chatbot/components/ChatbotLauncher';
+import { useMe } from '@/features/user/api';
 import BottomTabs from './BottomTabs';
 import LandingFooter from './LandingFooter';
 import { useAuth, useHtmlLang } from './hooks';
@@ -15,15 +17,26 @@ import * as s from './shell.css';
 /** 글쓰기 화면은 아래에 저장 버튼 줄이 붙어서 챗봇 버튼을 숨겨요. */
 const FORM_ROUTE = /\/(create|update)\/?$/;
 
+/** 약관은 동의하기 전에도 읽을 수 있어야 해요. */
+const LEGAL_ROUTE = /^\/(terms|privacy)\/?$/;
+
 /**
  * 앱 전체 틀: 상단 내비(데스크톱) / 모바일 상단 바, 본문, 모바일 하단 탭, 챗봇 버튼.
  * 로그인·회원가입 화면은 이 틀 밖에 있어요 (StandaloneLayout).
  */
 export function AppShell() {
   const { t } = useTranslation();
-  const { isLoggedIn } = useAuth();
-  const { pathname } = useLocation();
+  const { user, isLoggedIn } = useAuth();
+  const { pathname, search, hash } = useLocation();
+  const me = useMe(isLoggedIn ? (user.id ?? 0) : 0);
   useHtmlLang();
+
+  // 필수 약관에 동의한 기록이 없는 회원(예전 소셜 가입)은 동의 화면부터 거쳐요.
+  if (me.data?.needs_agreements && !LEGAL_ROUTE.test(pathname)) {
+    return (
+      <Navigate to={authPath('agreements', pathname + search + hash)} replace />
+    );
+  }
 
   return (
     <div className={s.app}>

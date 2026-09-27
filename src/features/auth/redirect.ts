@@ -7,12 +7,15 @@ import { useLocation } from 'react-router-dom';
 export function safeNext(value: string | null | undefined): string {
   if (!value || !value.startsWith('/')) return '/';
   if (value.startsWith('//') || value.startsWith('/\\')) return '/';
-  if (/^\/(login|register|auth)(\/|\?|#|$)/.test(value)) return '/';
+  if (/^\/(login|register|auth|agreements)(\/|\?|#|$)/.test(value)) return '/';
   return value;
 }
 
 /** /login?next=… · next가 메인이면 붙이지 않아요. */
-export function authPath(page: 'login' | 'register', next: string) {
+export function authPath(
+  page: 'login' | 'register' | 'agreements',
+  next: string
+) {
   const target = safeNext(next);
   return target === '/'
     ? `/${page}`

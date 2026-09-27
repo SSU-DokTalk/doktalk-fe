@@ -76,6 +76,14 @@ export const RegisterPage = page(
 export const AuthCallbackPage = page(
   () => import('@/features/auth/pages/AuthCallbackPage')
 );
+export const SocialSignupPage = page(
+  () => import('@/features/auth/pages/SocialSignupPage')
+);
+export const AgreementsPage = page(
+  () => import('@/features/auth/pages/AgreementsPage')
+);
+
+export const LegalPage = page(() => import('@/features/legal/pages/LegalPage'));
 
 type NetworkInformation = { saveData?: boolean; effectiveType?: string };
 

@@ -619,18 +619,8 @@
       "form": {
         "nickname": "Nickname",
         "password-confirm": "Confirm Password",
-        "interests": "Select Interests",
         "all-agreements": "Agree to All Terms",
         "view": "View Terms"
-      },
-      "interests": {
-        "politics": "Politics",
-        "business": "Business / Economics",
-        "religion": "Religion",
-        "webtoon": "Webtoon / Comics",
-        "philosophy": "Philosophy",
-        "exhibition": "Performances / Exhibitions",
-        "self-development": "Personal Development"
       }
     },
     "settings": {
@@ -924,7 +914,11 @@
         "agreements-required": "Please accept the required agreements.",
         "submit": "Sign up",
         "email-taken": "This email is already registered. Try logging in.",
-        "failed": "Couldn't sign you up. Please check your details and try again."
+        "failed": "Couldn't sign you up. Please check your details and try again.",
+        "optional-tag": "(Optional)",
+        "age14": "I am 14 or older",
+        "marketing": "Receive marketing messages",
+        "view-marketing": "View marketing message details"
       },
       "restore": {
         "title": "This account was deleted",
@@ -938,6 +932,38 @@
         "failed-title": "Couldn't log you in",
         "failed-description": "The social login was cancelled or has expired. Please try again.",
         "back": "Back to log in"
+      },
+      "extras": {
+        "title": "More about you",
+        "hint": "All optional. You can sign up without them.",
+        "birthdate": "Date of birth",
+        "birthdate-invalid": "Please check your date of birth.",
+        "birthdate-under-14": "You must be 14 or older to sign up.",
+        "gender": "Gender",
+        "gender-male": "Male",
+        "gender-female": "Female",
+        "gender-none": "Prefer not to say",
+        "interests": "Interests",
+        "interests-hint": "Pick as many as you like."
+      },
+      "social-signup": {
+        "title": "Finish signing up",
+        "subtitle": "Welcome, {{email}}. Agree to the terms to finish signing up.",
+        "subtitle-no-email": "Welcome! Agree to the terms to finish signing up.",
+        "submit": "Agree and sign up",
+        "missing-title": "Sign-up details not found",
+        "missing-description": "Please start again with social login.",
+        "expired": "This sign-up has expired. Please log in with your social account again.",
+        "email-taken": "An account with this email already exists. Please log in with your email.",
+        "already-registered": "You've already signed up. Please log in again.",
+        "failed": "We couldn't sign you up. Please try again in a moment."
+      },
+      "consent": {
+        "title": "Please agree to the terms",
+        "subtitle": "You need to agree to the terms to keep using DokTalk.",
+        "submit": "Agree and continue",
+        "decline": "Decline and log out",
+        "failed": "We couldn't save your agreement. Please try again in a moment."
       }
     },
     "checkout": {
@@ -1044,6 +1070,12 @@
         "all-meetings": "All my meetings",
         "rail": "Popular summaries and my library"
       }
+    },
+    "legal": {
+      "effective": "Effective {{date}}",
+      "toc": "Contents",
+      "loading": "Loading the document",
+      "error": "Couldn't load the document"
     }
   },
   "footer": {
