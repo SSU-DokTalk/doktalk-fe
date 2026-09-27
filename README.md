@@ -3,7 +3,9 @@
 https://www.tosspayments.com/about/fee
 https://docs.tosspayments.com/guides/v2/payment-widget/integration?frontend=react&backend=node
 
-현재 공식문서에서 제공하는 테스트용 key로 되어있으며, 추후 테스트가 끝나면 백엔드에 인증로직을 추가하면서 수정을 해야함.
+- 결제 위젯 클라이언트 키는 `VITE_TOSS_CLIENT_KEY`로 넣어요. CI는 같은 이름의 GitHub secret을 읽어요. 비워 두면 토스 문서의 테스트 키를 써서 실제 결제는 되지 않아요.
+- 백엔드 `TOSS_SECRET_KEY`와 같은 상점의 키 한 쌍이어야 해요. 결제를 마치면 `/checkout/success`가 `POST /purchase/confirm`으로 서버에 확인을 요청하고, 서버가 금액을 확인하고 토스에 승인을 요청한 뒤 구매 기록을 남겨요.
+- 가상계좌는 입금 알림(웹훅)을 받지 않아서 서버가 발급을 바로 취소해요. 토스 상점 관리자에서 결제 위젯의 가상계좌를 꺼 두세요.
 
 # React + TypeScript + Vite
 

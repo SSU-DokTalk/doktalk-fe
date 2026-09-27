@@ -1,0 +1,86 @@
+import { globalStyle, style } from '@vanilla-extract/css';
+import { recipe, type RecipeVariants } from '@vanilla-extract/recipes';
+import { vars } from '../../tokens/theme.css';
+import { fontSize, fontWeight, space } from '../../tokens/scale';
+
+const badgeBase = style({
+  display: 'inline-flex',
+  alignItems: 'center',
+  gap: space[4],
+  flexShrink: 0,
+  // grid·세로 flex 안에서도 늘어나지 않고 글자 폭만큼만 차지해요.
+  width: 'fit-content',
+  boxSizing: 'border-box',
+  border: '1px solid transparent',
+  fontFamily: vars.font.family,
+  fontWeight: fontWeight.bold,
+  lineHeight: 1,
+  whiteSpace: 'nowrap',
+});
+
+globalStyle(`${badgeBase} svg`, {
+  width: '13px',
+  height: '13px',
+  flexShrink: 0,
+});
+
+export const badgeStyles = recipe({
+  base: badgeBase,
+  variants: {
+    tone: {
+      /** 무료·카테고리·온라인 */
+      info: { backgroundColor: vars.color.infoSubtle, color: vars.color.info },
+      /** 구매한 요약·참여 중 */
+      brand: {
+        backgroundColor: vars.color.brandSubtle,
+        color: vars.color.brand,
+      },
+      /** 주최 */
+      solid: {
+        backgroundColor: vars.color.brand,
+        color: vars.color.textOnBrand,
+      },
+      /** 흰 바탕 위 테두리 (온라인·오프라인 같은 형식 정보) */
+      outline: {
+        backgroundColor: vars.color.surface,
+        borderColor: vars.color.border,
+        color: vars.color.text,
+        fontWeight: fontWeight.semibold,
+      },
+      /** 지난 모임의 역할처럼 강조가 필요 없는 정보 */
+      neutral: {
+        backgroundColor: vars.color.surfaceSubtle,
+        color: vars.color.textSecondary,
+      },
+      /** 결제 취소 */
+      danger: {
+        backgroundColor: vars.color.surface,
+        borderColor: vars.color.dangerBorder,
+        color: vars.color.danger,
+      },
+      /** 표지·사진 위 */
+      overlay: {
+        backgroundColor: vars.color.surfaceTranslucent,
+        color: vars.color.text,
+        fontWeight: fontWeight.semibold,
+      },
+    },
+    size: {
+      // 작은 배지는 좌우 여백을 토큰 사이 값(7px)으로 좁혀 글자와 균형을 맞춰요.
+      sm: { height: '22px', padding: '0 7px', fontSize: fontSize[12] },
+      md: { height: '26px', padding: `0 ${space[10]}`, fontSize: fontSize[12] },
+      lg: { height: '28px', padding: `0 ${space[10]}`, fontSize: fontSize[13] },
+    },
+    shape: {
+      rounded: { borderRadius: vars.radius.xs },
+      pill: { borderRadius: vars.radius.pill },
+    },
+  },
+  defaultVariants: {
+    tone: 'info',
+    size: 'sm',
+    shape: 'rounded',
+  },
+});
+
+export type BadgeVariants = NonNullable<RecipeVariants<typeof badgeStyles>>;

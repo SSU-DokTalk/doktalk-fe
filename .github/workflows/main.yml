@@ -3,7 +3,7 @@ name: React CI/CD pipeline
 on:
   push:
     branches:
-      - "master"
+      - 'master'
 
 jobs:
   build:
@@ -21,11 +21,12 @@ jobs:
           echo -e VITE_NAVER_CLIENT_ID=${{ secrets.VITE_NAVER_CLIENT_ID }} >> ".env"
           echo -e VITE_FACEBOOK_CLIENT_ID=${{ secrets.VITE_FACEBOOK_CLIENT_ID }} >> ".env"
           echo -e VITE_REDIRECT_URI=${{ secrets.VITE_REDIRECT_URI }} >> ".env"
+          echo -e VITE_TOSS_CLIENT_KEY=${{ secrets.VITE_TOSS_CLIENT_KEY }} >> ".env"
 
       - name: Setup Node.js environment
         uses: actions/setup-node@v4
         with:
-          node-version: lts/Hydrogen
+          node-version: lts/*
           cache: yarn
       - run: yarn
 

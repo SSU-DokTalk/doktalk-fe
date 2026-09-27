@@ -14,15 +14,7 @@
   },
   "function": {
     "time": {
-      "ago": " 전",
       "now": "방금 전",
-      "second": "초",
-      "minute": "분",
-      "hour": "시간",
-      "day": "일",
-      "week": "주",
-      "month": "개월",
-      "year": "년",
       "months": {
         "1": "1월",
         "2": "2월",
@@ -36,46 +28,45 @@
         "10": "10월",
         "11": "11월",
         "12": "12월"
+      },
+      "weekdays": {
+        "0": "일",
+        "1": "월",
+        "2": "화",
+        "3": "수",
+        "4": "목",
+        "5": "금",
+        "6": "토"
+      },
+      "relative": {
+        "second": "{{count}}초 전",
+        "minute": "{{count}}분 전",
+        "hour": "{{count}}시간 전",
+        "day": "{{count}}일 전",
+        "week": "{{count}}주 전",
+        "month": "{{count}}개월 전",
+        "year": "{{count}}년 전"
       }
     }
   },
   "component": {
     "base": {
-      "upload-file": {
-        "attach": "파일 첨부",
-        "error": {
-          "too-large": "파일은 최대 {{size}}MB까지만 업로드 가능합니다",
-          "unacceptable": "파일은 {{types}} 형식만 업로드 가능합니다"
-        }
-      },
-      "upload-files": {
-        "error": {
-          "too-many": "파일은 최대 {{limit}}개까지 업로드 가능합니다.",
-          "too-large": "각 파일은 최대 {{size}}MB까지 업로드 가능합니다.",
-          "unacceptable": "{{types}} 파일만 업로드 가능합니다."
-        }
-      },
       "infinite-scroll": {
-        "loading": "로딩 중...",
-        "no-item": "아직 항목이 없습니다"
+        "loading": "로딩 중..."
       }
     },
     "floating": {
       "text": {
-        "login": "로그인",
         "follower": "팔로워",
         "following": "팔로잉",
         "my-activity": "내 활동",
-        "likes": "좋아요",
         "post": "내 게시글",
         "summary": "내 요약",
-        "shopping-cart": "찜 내역",
         "debate": "참여중인 토론방",
         "library": "내 서재"
       },
       "chatbot": {
         "test-message": "안녕하세요! 무엇이든 물어보세요 👋",
-        "not-supported": "죄송합니다. 아직 챗봇 기능을 개발 중입니다. 조금만 기다려주세요! 🙏",
         "ask-like-this": "이렇게 물어보세요!",
         "placeholder": "메시지를 입력하세요...",
         "prompt1": "가볍게 읽기 좋은 책을 추천해줄래?",
@@ -101,14 +92,8 @@
       },
       "dropdown": {
         "mypage": "마이페이지",
-        "my-activity": "내 활동",
         "settings": "설정",
         "logout": "로그아웃"
-      },
-      "language": {
-        "korean": "한국어",
-        "english": "English",
-        "mongolian": "Монгол хэл"
       },
       "register": "회원가입",
       "login": "로그인"
@@ -117,41 +102,14 @@
       "write-post": {
         "placeholder": "게시글을 작성해보세요!"
       },
-      "write-summary": {
-        "placeholder": "요약을 작성해보세요!"
-      },
-      "write-debate": {
-        "placeholder": "새로운 토론방을 생성해보세요!"
-      },
-      "post": {
-        "more-comments": "댓글 더보기"
-      },
-      "simple-post": {
-        "no-content": "내용이 없습니다."
-      },
-      "comment": {
-        "reply": "답글"
-      },
-      "payment": {
-        "cancelled": "취소",
-        "currency": "원"
-      },
-      "category": {
-        "select": "카테고리 선택",
-        "no-selected": "선택한 카테고리가 없습니다."
-      },
       "book": {
         "button": {
           "add-to-library": "내 서재에 담기",
-          "remove-from-library": "서재에서 삭제",
-          "in-library-num": "담은 수"
+          "remove-from-library": "서재에서 삭제"
         }
       }
     },
     "dropdown": {
-      "category-chip": {
-        "placeholder": "토론 주제의 카테고리를 선택해주세요"
-      },
       "book-search": {
         "placeholder": "토론할 도서를 검색해주세요"
       }
@@ -159,15 +117,9 @@
     "section": {
       "profile": {
         "button": {
-          "edit-profile": "프로필 편집",
-          "follow": "팔로우",
-          "unfollow": "팔로우 취소"
+          "edit-profile": "프로필 편집"
         },
         "text": {
-          "follower-prefix": "팔로워 ",
-          "follower-postfix": "명",
-          "following-prefix": "팔로잉 ",
-          "following-postfix": "명",
           "no-introduction": "자기소개가 없습니다."
         },
         "tab": {
@@ -183,81 +135,21 @@
             "library": "서재"
           }
         }
-      },
-      "profile-tab-details": {
-        "item": {
-          "no-post-item": "작성된 게시글이 없습니다",
-          "no-summary-item": "요약이 존재하지 않습니다",
-          "no-library-item": "서재에 담긴 도서가 없습니다",
-          "no-debate-item": "참여중인 토론방이 없습니다",
-          "no-payment-item": "결제 내역이 없습니다",
-          "no-payment-date": "해당 날짜의 결제 내역이 없습니다",
-          "no-book-item": "읽고 있는 책이 없습니다",
-          "currently-reading-book-prefix": "내가 읽고 있는 책",
-          "currently-reading-book-postfix": "개",
-          "currently-reading-summary-prefix": "내가 읽고 있는 요약",
-          "currently-reading-summary-postfix": "개",
-          "show-more": "더보기",
-          "currency": "₩"
-        },
-        "go-to": {
-          "search": "내 서재에 담을 도서 검색하러 가기",
-          "summary": "읽을 요약 보러 가기"
-        },
-        "time": {
-          "year": "년",
-          "month": {
-            "1": "1월",
-            "2": "2월",
-            "3": "3월",
-            "4": "4월",
-            "5": "5월",
-            "6": "6월",
-            "7": "7월",
-            "8": "8월",
-            "9": "9월",
-            "10": "10월",
-            "11": "11월",
-            "12": "12월"
-          }
-        }
-      },
-      "settings": {
-        "privacy-scope": "공개 범위",
-        "my-activity": "내 활동"
-      },
-      "comment": {
-        "title": "댓글",
-        "placeholder": "댓글을 입력해주세요",
-        "button": {
-          "submit": "등록"
-        }
       }
     },
     "modal": {
       "edit-profile": {
         "title": "프로필 편집",
-        "button": {
-          "image-upload": "이미지 업로드",
-          "image-remove": "이미지 제거",
-          "submit": "편집 완료"
-        },
         "label": {
           "nickname": "닉네임",
           "introduction": "자기소개"
         },
         "placeholder": {
-          "nickname": "(필수) 닉네임을 입력해주세요.",
           "introduction": "회원님에 대해 소개해주세요."
         }
       },
       "update-post": {
-        "title": "게시글 수정",
-        "placeholder": {
-          "content": "나누고 싶은 이야기를 적어주세요."
-        },
         "button": {
-          "add-photo": "사진 추가",
           "submit": "수정 완료"
         }
       },
@@ -272,76 +164,141 @@
           "temp-save": "임시 저장",
           "submit": "작성 완료"
         }
-      },
-      "friend-list": {
-        "button": {
-          "delete": "삭제"
-        }
       }
     },
     "navigation": {
       "topnav": {
         "explore": "탐색",
-        "nickname-fallback": "닉네임",
-        "language": {
-          "korean": "한국어"
-        }
+        "nickname-fallback": "닉네임"
       }
     },
-    "payments": {
-      "checkout-success": {
-        "title": "결제 성공",
-        "order-id": "주문번호"
+    "shell": {
+      "home": "讀:TALK 홈",
+      "main-nav": "주요 메뉴",
+      "bottom-nav": "하단 메뉴",
+      "my-menu": "내 메뉴",
+      "footer-nav": "약관과 고객지원",
+      "skip-to-content": "본문으로 건너뛰기",
+      "search": "통합 검색",
+      "open-menu": "메뉴 열기",
+      "close-menu": "메뉴 닫기",
+      "language": "언어",
+      "language-current": "언어 선택, 현재 {{lang}}",
+      "create": "만들기",
+      "login-card": {
+        "title": "로그인하고 토론에 참여해 보세요",
+        "description": "관심 분야에 맞는 토론방과 요약을 추천해 드려요."
       },
-      "checkout-fail": {
-        "title": "결제 실패",
-        "error-code": "에러 코드",
-        "fail-reason": "실패 사유"
-      },
-      "checkout-button": "결제하기 →",
-      "checkout-modal": {
-        "button": "결제하기"
-      },
-      "checkout-container": {
-        "message": "이어서 읽으시려면 결제가 필요합니다.",
-        "wishlist": "찜"
+      "route-error": {
+        "title": "화면을 불러오지 못했어요",
+        "description": "연결이 불안정하거나 새 버전이 올라왔을 수 있어요. 새로고침해 주세요.",
+        "reload": "새로고침"
       }
+    },
+    "user": {
+      "unknown": "알 수 없는 사용자"
+    },
+    "comments": {
+      "heading": "댓글 {{count}}",
+      "label": "댓글 입력",
+      "placeholder": "댓글을 입력해주세요",
+      "submit": "등록",
+      "reply": "답글",
+      "reply-label": "{{name}}님에게 답글 입력",
+      "reply-placeholder": "답글을 입력해주세요",
+      "cancel": "취소",
+      "more": "댓글 더보기",
+      "empty": "첫 댓글을 남겨 보세요",
+      "login": "로그인하고 댓글을 남겨 보세요",
+      "error": "댓글을 불러오지 못했어요",
+      "submit-error": "댓글을 등록하지 못했어요. 다시 시도해 주세요.",
+      "replies": "{{name}}님 댓글의 답글"
+    },
+    "share": {
+      "share": "공유하기",
+      "copied": "링크를 복사했어요",
+      "failed": "링크를 복사하지 못했어요"
+    },
+    "follow": {
+      "follow": "팔로우",
+      "following": "팔로잉"
+    },
+    "dialog": {
+      "close": "닫기"
+    },
+    "book-picker": {
+      "change": "변경",
+      "results": "도서 검색 결과",
+      "empty": "검색 결과가 없어요",
+      "error": "도서를 검색하지 못했어요",
+      "more": "더 보기"
+    },
+    "attachments": {
+      "label": "첨부 파일",
+      "add": "파일 추가",
+      "hint": "PDF, JPG, PNG, GIF · 최대 {{max}}개 · 파일당 {{size}}MB 이하",
+      "remove": "{{name}} 삭제",
+      "too-many": "파일은 최대 {{max}}개까지 올릴 수 있어요",
+      "too-large": "{{size}}MB보다 큰 파일은 올릴 수 없어요",
+      "unacceptable": "PDF, JPG, PNG, GIF 파일만 올릴 수 있어요"
+    },
+    "stats": {
+      "likes": "좋아요 {{count}}",
+      "comments": "댓글 {{count}}",
+      "free": "무료"
+    },
+    "draft": {
+      "saved": "임시 저장했어요",
+      "restored": "임시 저장한 내용을 불러왔어요",
+      "discard": "새로 쓰기"
+    },
+    "form": {
+      "summary": "입력한 내용을 확인해주세요",
+      "submit": "저장하지 못했어요. 잠시 후 다시 시도해 주세요.",
+      "upload": "파일을 올리지 못했어요. 파일을 확인하고 다시 시도해 주세요.",
+      "cancel": "취소",
+      "required": "필수",
+      "counter": "{{count}}/{{max}}"
+    },
+    "post-composer": {
+      "title-create": "게시글 작성",
+      "title-edit": "게시글 수정",
+      "title-label": "제목",
+      "content-label": "내용",
+      "photos-label": "사진",
+      "add": "사진 추가",
+      "hint": "JPG, PNG, GIF · 최대 {{max}}장 · 장당 {{size}}MB 이하",
+      "remove": "사진 {{index}} 삭제",
+      "photo-alt": "첨부한 사진 {{index}}",
+      "too-many": "사진은 최대 {{max}}장까지 올릴 수 있어요",
+      "too-large": "{{size}}MB보다 큰 사진은 올릴 수 없어요",
+      "unacceptable": "JPG, PNG, GIF 사진만 올릴 수 있어요",
+      "title-required": "제목을 입력해주세요",
+      "discard-confirm": "작성 중인 내용이 사라져요. 닫을까요?"
+    },
+    "chatbot": {
+      "title": "독TALK AI",
+      "subtitle": "책 추천과 독서 질문을 도와드려요",
+      "greeting": "안녕하세요! 무엇이든 물어보세요.",
+      "log": "대화",
+      "me": "나",
+      "disclaimer": "AI 답변은 정확하지 않을 수 있어요.",
+      "prompt2": "독서 토론 질문을 만드는 법을 알려줘",
+      "prompt3": "한 달에 한 권 읽는 습관을 만들고 싶어",
+      "typing": "답변을 쓰고 있어요",
+      "error": "답변을 받지 못했어요. 잠시 후 다시 시도해 주세요."
     }
   },
   "page": {
     "landing": {
-      "title": {
-        "post": "게시글",
-        "popular-summary": "인기 요약",
-        "recommend": "추천 토론방",
-        "recommend-prefix": "",
-        "recommend-postfix": "추천 토론방",
-        "for-you-prefix": "",
-        "for-you-postfix": "님을 위한 "
-      },
-      "button": {
-        "more": "더보기 +",
-        "write-post": "글 작성하기",
-        "previous": "이전",
-        "next": "다음"
-      },
       "item": {
-        "no-post-item": "표시할 게시글이 없습니다",
-        "no-summary-item": "아직 작성된 요약이 없습니다",
-        "no-debate-item": "추천할 토론방이 없습니다"
-      },
-      "loading": "로딩 중...",
-      "error": "데이터를 불러오는 데 실패했습니다"
+        "no-post-item": "표시할 게시글이 없습니다"
+      }
     },
     "login": {
       "email": "이메일",
       "password": "비밀번호",
       "login": "로그인",
-      "keep-login": "로그인 유지",
-      "save-id": "아이디 저장",
-      "find-id": "아이디 찾기",
-      "find-password": "비밀번호 찾기",
-      "social-login-text": "소셜 계정으로 간편 로그인",
       "register": "회원가입"
     },
     "debate": {
@@ -352,20 +309,49 @@
       "search": {
         "book-title": "도서 제목",
         "item-title": "토론방 제목",
-        "placeholder": "토론방을 검색해보세요!"
+        "placeholder": "토론방을 검색해보세요!",
+        "by": "검색 기준",
+        "label": "토론방 검색"
       },
       "sort": {
         "latest": "최신순",
         "popular": "인기순",
-        "from": "날짜순"
+        "from": "날짜순",
+        "label": "정렬",
+        "from-date": "시작 날짜"
       },
       "button": {
         "create": "토론방 생성"
       },
       "item": {
         "no-debate-item": "아직 토론방이 없습니다",
-        "no-summary-item": "아직 작성된 요약이 없습니다"
-      }
+        "online": "온라인",
+        "offline": "오프라인",
+        "seats": "참여 {{count}}/{{limit}}명",
+        "full": "모집 마감",
+        "free": "무료",
+        "likes": "좋아요 {{count}}",
+        "comments": "댓글 {{count}}",
+        "empty-description": "첫 토론방을 열어 보세요",
+        "no-result": "조건에 맞는 토론방이 없어요",
+        "no-result-description": "검색어나 카테고리를 바꿔 보세요",
+        "error": "토론방을 불러오지 못했어요",
+        "error-description": "잠시 후 다시 시도해 주세요",
+        "retry": "다시 시도"
+      },
+      "subtitle": "같은 책을 읽은 사람들과 모임을 열고 이야기를 나눠요",
+      "filters": "검색과 필터",
+      "list": "토론방 목록",
+      "category-all": "전체",
+      "recommend": {
+        "prev": "이전 추천 토론방",
+        "next": "다음 추천 토론방"
+      },
+      "popular": {
+        "more": "더보기",
+        "more-label": "인기 요약 더보기"
+      },
+      "category-label": "카테고리"
     },
     "summary": {
       "title": {
@@ -375,24 +361,45 @@
       "search": {
         "book-title": "도서 제목",
         "item-title": "요약 제목",
-        "placeholder": "관심 도서의 요약을 검색해보세요!"
+        "placeholder": "관심 도서의 요약을 검색해보세요!",
+        "by": "검색 기준",
+        "label": "요약 검색"
       },
       "sort": {
         "latest": "최신순",
-        "popular": "인기순"
+        "popular": "인기순",
+        "label": "정렬"
       },
       "button": {
         "write": "요약 작성"
       },
       "item": {
         "no-summary-item": "아직 작성된 요약이 없습니다",
-        "no-debate-item": "아직 토론방이 없습니다"
+        "no-result": "조건에 맞는 요약이 없어요",
+        "no-result-description": "검색어나 카테고리를 바꿔 보세요",
+        "empty-description": "첫 요약을 써 보세요",
+        "error": "요약을 불러오지 못했어요",
+        "error-description": "잠시 후 다시 시도해 주세요"
+      },
+      "subtitle": "무료 미리보기로 먼저 읽고, 더 읽고 싶은 요약만 구매해요",
+      "filters": "검색과 필터",
+      "list": "요약 목록",
+      "category-label": "카테고리",
+      "category-all": "전체",
+      "recommend": {
+        "prev": "이전 추천 요약",
+        "next": "다음 추천 요약"
+      },
+      "popular-debates": {
+        "more-label": "인기 토론방 더보기"
       }
     },
     "search": {
       "item": {
         "no-book-item": "검색 결과가 없습니다",
-        "search-prompt": "원하는 도서를 검색해보세요!"
+        "search-prompt": "원하는 도서를 검색해보세요!",
+        "error": "도서를 검색하지 못했어요",
+        "no-result-description": "다른 검색어로 찾아보세요"
       },
       "title": {
         "page": "도서 검색"
@@ -403,6 +410,23 @@
       },
       "search": {
         "placeholder": "관심 도서를 검색해보세요!"
+      },
+      "subtitle": "관심 도서를 찾아 내 서재에 담아 보세요",
+      "label": "도서 검색",
+      "submit": "검색",
+      "clear": "검색어 지우기",
+      "result-count": "‘{{query}}’ 검색 결과 {{count}}권",
+      "results": "검색 결과",
+      "sort-label": "정렬",
+      "library": {
+        "added": "서재에 담김",
+        "count": "담은 수 {{count}}"
+      },
+      "rail": {
+        "title": "내 서재",
+        "count": "읽고 있는 책 {{count}}",
+        "link": "서재로 가기",
+        "empty": "아직 담은 책이 없어요"
       }
     },
     "create-debate": {
@@ -412,21 +436,62 @@
         "location-label": "모임 장소",
         "location-placeholder": "모일 장소를 입력해주세요",
         "link-label": "온라인 링크",
-        "link-placeholder": "온라인 모임일 경우 참여 링크를 입력해주세요",
         "link-error": "https://url 형식으로 적어주세요",
-        "meeting-time": "모임 시간",
         "book-select": "도서 선택",
         "category": "카테고리",
-        "limit": "인원 제한",
+        "limit": "정원 (나 포함)",
         "limit-unit": "명",
         "content-placeholder": "나누고 싶은 이야기를 적어주세요",
         "price": "가격",
-        "price-placeholder": "가격을 입력해주세요"
+        "title-label": "제목",
+        "category-hint": "토론 주제의 카테고리를 선택해주세요 · 여러 개 선택할 수 있어요",
+        "mode": "모임 방식",
+        "mode-online": "온라인",
+        "mode-offline": "오프라인",
+        "date": "모임 날짜",
+        "time": "모임 시간",
+        "limit-decrease": "인원 줄이기",
+        "limit-increase": "인원 늘리기",
+        "price-unit": "원",
+        "free": "무료로 열기",
+        "content-label": "내용"
       },
       "button": {
-        "file-add": "파일 추가",
         "temp-save": "임시 저장",
-        "submit": "작성 완료"
+        "submit": "작성 완료",
+        "cancel": "취소"
+      },
+      "section": {
+        "basic": "기본 정보",
+        "meeting": "모임 정보",
+        "intro": "소개"
+      },
+      "error": {
+        "summary": "입력한 내용을 확인해주세요",
+        "title-required": "제목을 입력해주세요",
+        "book-required": "토론할 도서를 골라주세요",
+        "category-required": "카테고리를 하나 이상 골라주세요",
+        "link-required": "온라인 링크를 입력해주세요",
+        "location-required": "모임 장소를 입력해주세요",
+        "date-required": "모임 날짜와 시간을 입력해주세요",
+        "date-past": "지금보다 뒤의 시간을 골라주세요",
+        "limit-range": "인원은 {{min}}~{{max}}명 사이로 정해주세요",
+        "limit-below-members": "이미 {{count}}명이 모였어요 (나 포함). 정원을 {{count}}명보다 줄일 수 없어요.",
+        "price-range": "가격은 {{min}}~{{max}}원 사이로 입력해주세요. 무료라면 ‘무료로 열기’를 선택해요.",
+        "submit": "저장하지 못했어요. 잠시 후 다시 시도해 주세요.",
+        "upload": "파일을 올리지 못했어요. 파일을 확인하고 다시 시도해 주세요."
+      },
+      "draft": {
+        "saved": "임시 저장했어요",
+        "restored": "임시 저장한 내용을 불러왔어요",
+        "discard": "새로 쓰기"
+      },
+      "state": {
+        "login-title": "로그인하고 토론방을 만들어 보세요",
+        "login-description": "토론방은 로그인한 회원만 열 수 있어요.",
+        "forbidden-title": "직접 연 토론방만 수정할 수 있어요",
+        "forbidden-description": "토론방을 연 사람만 내용을 고칠 수 있어요.",
+        "to-debate": "토론방으로 돌아가기"
       }
     },
     "create-summary": {
@@ -438,12 +503,40 @@
         "free-content-placeholder": "미리보기로 공유하고 싶은 내용을 작성해주세요.",
         "charged-content-placeholder": "유료로 공유하고 싶은 내용을 작성해주세요.",
         "price": "가격",
-        "price-placeholder": "가격을 입력해주세요"
+        "title-label": "제목",
+        "category-hint": "요약한 책의 카테고리를 선택해주세요 · 여러 개 선택할 수 있어요",
+        "free-label": "무료 미리보기",
+        "free-hint": "누구나 읽을 수 있어요",
+        "charged-label": "유료 내용",
+        "charged-hint": "결제한 사람만 읽을 수 있어요",
+        "paywall-divider": "여기부터 결제 후 공개",
+        "price-unit": "원",
+        "free": "전체 무료로 공개"
       },
       "button": {
-        "file-add": "파일 추가",
         "temp-save": "임시 저장",
         "submit": "작성 완료"
+      },
+      "section": {
+        "basic": "기본 정보",
+        "content": "내용",
+        "sale": "판매와 첨부"
+      },
+      "error": {
+        "title-required": "제목을 입력해주세요",
+        "book-required": "요약할 도서를 골라주세요",
+        "category-required": "카테고리를 하나 이상 골라주세요",
+        "free-required": "무료 미리보기를 입력해주세요",
+        "charged-required": "유료 내용을 입력해주세요",
+        "price-range": "가격은 {{min}}~{{max}}원 사이로 입력해주세요. 무료라면 ‘전체 무료로 공개’를 선택해요."
+      },
+      "charged-unavailable": "유료 내용을 불러오지 못했어요. 저장하면 아래에 입력한 내용으로 바뀌니, 유료 내용을 다시 입력해 주세요.",
+      "state": {
+        "login-title": "로그인하고 요약을 써 보세요",
+        "login-description": "요약은 로그인한 회원만 쓸 수 있어요.",
+        "forbidden-title": "직접 쓴 요약만 수정할 수 있어요",
+        "forbidden-description": "요약을 쓴 사람만 내용을 고칠 수 있어요.",
+        "to-summary": "요약으로 돌아가기"
       }
     },
     "debate-detail": {
@@ -455,17 +548,52 @@
         "location": "모임 장소",
         "link": "온라인 링크",
         "time": "시간",
-        "category": "카테고리",
-        "book": "지정 도서"
-      },
-      "modal": {
-        "title": "게시글 옵션"
+        "book": "지정 도서",
+        "seats": "참여 인원",
+        "seats-value": "{{count}}/{{limit}}명 (주최자 포함)",
+        "link-locked": "참여하면 링크를 볼 수 있어요"
       },
       "payment": {
-        "title": "토론방에 참여하시려면 결제가 필요합니다.",
-        "bookmark": "찜",
-        "currency": "원",
-        "already-joined": "토론방에 이미 참가하셨습니다"
+        "title": "토론방에 참여하시려면 결제가 필요합니다."
+      },
+      "host-label": "토론방 개설",
+      "options": "토론방 옵션",
+      "intro": "소개",
+      "files": "첨부파일",
+      "download": "{{name}} 내려받기",
+      "like": "좋아요 {{count}}",
+      "comments": "댓글 {{count}}",
+      "join": {
+        "label": "참여",
+        "fee": "참가비",
+        "free": "무료",
+        "free-description": "무료 토론방이에요. 바로 참여할 수 있어요.",
+        "pay": "결제하고 참여하기",
+        "join": "참여하기",
+        "joined": "참여 중이에요",
+        "joined-online": "모임 시간에 맞춰 온라인 링크로 들어와 주세요.",
+        "joined-offline": "모임 시간에 맞춰 모임 장소에서 만나요.",
+        "host": "내가 연 토론방이에요",
+        "host-description": "토론방 내용은 오른쪽 위 메뉴에서 고칠 수 있어요.",
+        "ended": "끝난 토론방이에요",
+        "ended-description": "모임 시간이 지나서 참여할 수 없어요.",
+        "full": "정원이 다 찼어요",
+        "full-description": "참여한 사람이 취소하면 자리가 생겨요.",
+        "error": "참여하지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "delete-dialog": {
+        "title": "토론방을 삭제할까요?",
+        "description": "삭제한 토론방은 되돌릴 수 없어요.",
+        "cancel": "취소",
+        "confirm": "삭제",
+        "error": "삭제하지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "state": {
+        "login-title": "로그인하고 토론방을 확인해 보세요",
+        "login-description": "토론방 내용은 로그인한 회원에게 보여요.",
+        "not-found-title": "토론방을 찾을 수 없어요",
+        "not-found-description": "삭제되었거나 주소가 잘못되었어요.",
+        "to-list": "토론방 목록으로"
       }
     },
     "update-debate": {
@@ -484,105 +612,476 @@
       "button": {
         "edit": "수정",
         "delete": "삭제"
-      },
-      "modal": {
-        "title": "게시글 옵션"
       }
     },
     "register": {
       "welcome": "독서토론 커뮤니티 독TALK에 오신 것을 환영합니다!",
       "form": {
-        "email": "이메일",
-        "email-required": "이메일을 입력해주세요",
         "nickname": "닉네임",
-        "nickname-required": "닉네임을 입력해주세요",
-        "password": "비밀번호",
-        "password-required": "비밀번호를 입력해주세요",
-        "password-min": "비밀번호는 8자 이상이어야 합니다",
         "password-confirm": "비밀번호 확인",
-        "password-confirm-required": "비밀번호 확인을 입력해주세요",
-        "password-match": "비밀번호가 일치하지 않습니다",
-        "birthdate": "생년월일",
-        "birthdate-required": "생년월일을 입력해주세요",
-        "birthdate-format": "올바른 형식(YYYY-MM-DD)으로 입력해주세요",
-        "gender": "성별",
-        "gender-required": "성별을 선택해주세요",
-        "male": "남자",
-        "female": "여자",
-        "validation": "본인인증",
-        "validation-complete": "본인인증이 완료되었습니다.",
-        "interests": "관심분야 선택",
-        "interests-description": "선택한 관심분야는 개인 맞춤 도서 추천 / 토론방 매칭에 사용됩니다.",
         "all-agreements": "약관 전체동의",
-        "agreement1": "(필수) 약관 1 동의",
-        "agreement2": "(필수) 약관 2 동의",
-        "agreement3": "(선택) 약관 3 동의",
-        "view": "보기",
-        "submit": "회원가입"
-      },
-      "alerts": {
-        "validation-required": "본인인증을 해주세요",
-        "interests-required": "관심분야를 선택해주세요",
-        "agreements-required": "필수 약관에 동의해주세요",
-        "agreement1-error": "약관 1에 동의해주세요",
-        "agreement2-error": "약관 2에 동의해주세요",
-        "password-length": "비밀번호는 8자 이상이어야 합니다",
-        "password-mismatch": "비밀번호가 일치하지 않습니다",
-        "register-error": "회원가입 중 오류가 발생했습니다."
-      },
-      "interests": {
-        "politics": "정치",
-        "business": "경영 / 경제",
-        "religion": "종교",
-        "webtoon": "웹툰",
-        "philosophy": "철학",
-        "exhibition": "연주회 / 전시회",
-        "self-development": "자기계발"
+        "view": "보기"
       }
     },
     "settings": {
-      "privacy": {
-        "title": "공개 범위 수정"
-      },
-      "notifications": {
-        "likes": "좋아요",
-        "comments": "댓글",
-        "notifications": "알림",
-        "page": " 페이지"
-      }
+      "title": "설정",
+      "account": "계정",
+      "email": "이메일",
+      "profile": "프로필",
+      "profile-description": "닉네임, 자기소개, 프로필 사진",
+      "language": "언어",
+      "language-description": "화면에 보이는 메뉴와 안내 문구의 언어예요. 다른 사람이 쓴 글은 바뀌지 않아요.",
+      "support": "고객 지원",
+      "manage": "계정 관리",
+      "logout-description": "이 기기에서 로그아웃해요",
+      "delete": "회원 탈퇴",
+      "delete-description": "탈퇴하면 이 계정으로 서비스를 이용할 수 없어요. 같은 계정으로 다시 로그인하면 복구할 수 있어요.",
+      "delete-button": "탈퇴하기",
+      "delete-confirm-title": "정말 탈퇴할까요?",
+      "delete-confirm-description": "탈퇴하면 바로 로그아웃돼요. 나중에 같은 계정으로 로그인하면 복구할 수 있어요.",
+      "delete-error": "탈퇴하지 못했어요. 잠시 후 다시 시도해 주세요.",
+      "version": "버전 {{version}}",
+      "login-prompt": "로그인하면 계정과 프로필을 관리할 수 있어요."
     },
     "integrated-search": {
       "title": "통합 검색 결과",
-      "search-result": "검색 결과",
-      "sections": {
-        "debate": "독서토론",
-        "summary": "도서 요약",
-        "post": "게시글",
-        "book": "도서 검색"
-      },
-      "no-results": "검색 결과가 없습니다."
+      "no-results": "검색 결과가 없습니다.",
+      "heading": "‘{{query}}’ 검색 결과 {{count}}건",
+      "filters": "결과 종류",
+      "all": "전체",
+      "more": "더보기",
+      "more-label": "{{section}} 더보기",
+      "search-label": "통합 검색",
+      "prompt-title": "무엇을 찾고 있나요?",
+      "prompt-description": "도서, 토론방, 요약, 게시글을 한 번에 찾아볼 수 있어요.",
+      "empty-description": "다른 검색어로 찾아보세요",
+      "error": "검색 결과를 불러오지 못했어요",
+      "book": "도서"
     },
     "not-found": {
-      "message": "Page Not Found!"
+      "title": "페이지를 찾을 수 없어요",
+      "description": "주소가 바뀌었거나 삭제된 페이지예요. 입력한 주소를 다시 확인해 주세요.",
+      "home": "메인으로 가기",
+      "search": "검색하기"
     },
     "mypage": {
       "library": {
         "title": "내 서재",
         "description": "읽고 있는 책과 요약을 관리하세요",
-        "sections": {
-          "my-books": "읽고 있는 책",
-          "purchased-summaries": "읽고 있는 요약들"
-        },
-        "no-books": "읽고 있는 책이 없습니다",
-        "no-summaries": "읽고 있는 요약이 없습니다",
-        "go-to-search": "도서 검색하기",
-        "delete": {
-          "button": "도서 삭제",
-          "confirm": "이 책을 서재에서 삭제하시겠습니까?",
-          "success": "책이 서재에서 삭제되었습니다",
-          "error": "삭제 중 오류가 발생했습니다"
-        }
+        "go-to-search": "도서 검색하기"
       }
+    },
+    "summary-detail": {
+      "options": "요약 옵션",
+      "book-label": "요약한 책",
+      "library": {
+        "add": "내 서재에 담기",
+        "error": "서재에 담지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "badge": {
+        "preview": "무료 미리보기",
+        "purchased": "구매한 요약",
+        "free": "무료 요약",
+        "own": "내가 쓴 요약"
+      },
+      "paywall": {
+        "title": "이어서 읽으시려면 결제가 필요합니다.",
+        "note": "구매한 요약은 내 서재의 ‘읽고 있는 요약’에서 언제든 다시 볼 수 있어요.",
+        "pay": "결제하기",
+        "free-title": "무료로 공개된 요약이에요",
+        "free-note": "버튼을 누르면 바로 전체 내용을 읽을 수 있어요.",
+        "read-free": "무료로 전체 읽기",
+        "login": "로그인하고 전체 요약을 읽어 보세요",
+        "error": "열지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "owner": {
+        "note": "내가 쓴 요약이에요. 유료 내용은 구매한 사람에게만 보여요."
+      },
+      "charged-error": "유료 내용을 불러오지 못했어요",
+      "rail": {
+        "label": "구매 정보",
+        "full": "전체 요약",
+        "toss-note": "토스페이먼츠로 결제돼요. 결제 후 바로 전체 요약을 읽을 수 있어요.",
+        "purchased": "구매 완료",
+        "purchased-note": "{{date}}에 {{price}}으로 구매한 요약이에요. 내 서재의 ‘읽고 있는 요약’에서 언제든 다시 볼 수 있어요.",
+        "library-link": "내 서재에서 보기",
+        "payments-link": "결제 내역"
+      },
+      "delete-dialog": {
+        "title": "요약을 삭제할까요?",
+        "description": "삭제한 요약은 되돌릴 수 없어요. 구매한 사람도 더 이상 볼 수 없어요."
+      },
+      "state": {
+        "not-found-title": "요약을 찾을 수 없어요",
+        "to-list": "요약 목록으로"
+      }
+    },
+    "post": {
+      "subtitle": "독후감, 토론 후기, 추천 도서를 자유롭게 나눠요",
+      "list": "게시글 목록",
+      "options": "게시글 옵션",
+      "photo-alt": "첨부 사진 {{index}}",
+      "more-photos": "사진 {{count}}장 더 있음",
+      "empty-description": "첫 게시글을 남겨 보세요",
+      "error": "게시글을 불러오지 못했어요",
+      "error-description": "잠시 후 다시 시도해 주세요",
+      "login-prompt": "로그인하고 게시글을 남겨 보세요",
+      "delete-dialog": {
+        "title": "게시글을 삭제할까요?",
+        "description": "삭제한 게시글은 되돌릴 수 없어요."
+      },
+      "state": {
+        "not-found-title": "게시글을 찾을 수 없어요",
+        "to-list": "게시글 목록으로"
+      },
+      "untitled": "제목 없는 글"
+    },
+    "profile": {
+      "region": "프로필",
+      "my-tabs": "마이페이지 메뉴",
+      "user-tabs": "프로필 메뉴",
+      "followers": "팔로워 <b>{{number}}</b>명",
+      "followings": "팔로잉 <b>{{number}}</b>명",
+      "state": {
+        "login-title": "로그인이 필요해요",
+        "login-description": "로그인하면 내 글과 서재, 결제 내역을 볼 수 있어요.",
+        "not-found-title": "사용자를 찾을 수 없어요",
+        "not-found-description": "탈퇴했거나 주소가 잘못되었어요.",
+        "error-title": "프로필을 불러오지 못했어요",
+        "error-description": "잠시 후 다시 시도해 주세요."
+      },
+      "posts": {
+        "heading": "게시글 목록",
+        "empty": "아직 쓴 게시글이 없어요",
+        "empty-description": "읽은 책 이야기를 가볍게 남겨 보세요.",
+        "error": "게시글을 불러오지 못했어요"
+      },
+      "summaries": {
+        "heading": "내 요약 목록",
+        "prompt-title": "읽은 책을 요약해 볼까요?",
+        "prompt-description": "핵심을 정리해 두면 다른 사람에게도 도움이 돼요",
+        "empty": "아직 쓴 요약이 없어요",
+        "error": "요약을 불러오지 못했어요"
+      },
+      "meetings": {
+        "prompt-title": "같이 읽고 싶은 책이 있나요?",
+        "prompt-description": "토론방을 열고 함께 읽을 사람을 모아 보세요",
+        "upcoming": "다가오는 모임",
+        "past": "지난 모임",
+        "host": "주최",
+        "guest": "참여",
+        "d-day": "D-{{count}}",
+        "today": "오늘",
+        "date-tbd": "일정 미정",
+        "open-link": "모임 링크 열기",
+        "open-map": "장소 보기",
+        "new-window": "새 창에서 열려요",
+        "more-past": "지난 모임 더보기",
+        "empty-upcoming": "다가오는 모임이 없어요",
+        "empty-upcoming-description": "관심 있는 토론방에 참여해 보세요.",
+        "browse": "토론방 둘러보기",
+        "empty-past": "지난 모임이 없어요",
+        "error": "모임을 불러오지 못했어요",
+        "partial-error": "참여한 토론방 일부를 불러오지 못했어요.",
+        "create-short": "생성"
+      },
+      "payments": {
+        "month-label": "{{year}}년 {{month}}",
+        "previous-month": "이전 달, {{label}}",
+        "next-month": "다음 달, {{label}}",
+        "total": "결제 합계",
+        "cancelled-note": "취소된 결제는 합계에서 제외돼요.",
+        "cancelled": "결제 취소",
+        "type": {
+          "D": "토론",
+          "S": "요약"
+        },
+        "list": "{{label}} 결제 목록",
+        "empty": "이 달에는 결제 내역이 없어요",
+        "error": "결제 내역을 불러오지 못했어요",
+        "untitled": "이름 없는 상품"
+      },
+      "library": {
+        "books": "읽고 있는 책",
+        "summaries": "읽고 있는 요약",
+        "sections": "서재 구분",
+        "recent": "최근 담은 순",
+        "edit": "편집",
+        "done": "완료",
+        "remove": "서재에서 빼기: {{title}}",
+        "removed": "서재에서 뺐어요: {{title}}",
+        "remove-error": "서재에서 빼지 못했어요. 다시 시도해 주세요.",
+        "add": "책 담기",
+        "add-hint": "도서 검색에서 담아요",
+        "more": "{{count}}권 더보기",
+        "empty": "아직 서재에 담은 책이 없어요",
+        "empty-description": "도서 검색에서 읽고 있는 책을 담아 보세요.",
+        "empty-user": "서재에 담긴 책이 없어요",
+        "error": "서재를 불러오지 못했어요",
+        "summary-by": "요약 · {{name}}",
+        "bought": "{{date}} 구매",
+        "read": "이어 읽기",
+        "read-label": "이어 읽기: {{title}}",
+        "summaries-empty": "아직 산 요약이 없어요",
+        "summaries-empty-description": "마음에 드는 요약을 찾아 읽어 보세요.",
+        "browse-summaries": "요약 둘러보기",
+        "summaries-error": "요약을 불러오지 못했어요",
+        "summaries-partial-error": "요약 일부를 불러오지 못했어요.",
+        "books-tab": "읽고 있는 책",
+        "summaries-tab": "읽고 있는 요약"
+      },
+      "follow-list": {
+        "tabs": "팔로우 목록",
+        "followers": "팔로워 {{number}}",
+        "followings": "팔로잉 {{number}}",
+        "empty-followers": "아직 팔로워가 없어요",
+        "empty-followings": "아직 팔로우한 사람이 없어요",
+        "error": "목록을 불러오지 못했어요"
+      },
+      "edit": {
+        "change-photo": "사진 변경",
+        "remove-photo": "사진 삭제",
+        "photo-hint": "JPG, PNG, GIF · 10MB 이하",
+        "photo-type-error": "JPG, PNG, GIF 사진만 올릴 수 있어요.",
+        "photo-size-error": "10MB 이하 사진만 올릴 수 있어요.",
+        "name-placeholder": "닉네임을 입력해주세요",
+        "name-required": "닉네임을 입력해 주세요.",
+        "name-too-long": "닉네임은 {{max}}자까지 쓸 수 있어요.",
+        "introduction-too-long": "자기소개는 {{max}}자까지 쓸 수 있어요.",
+        "save": "저장",
+        "upload-error": "사진을 올리지 못했어요. 다른 사진으로 다시 시도해 주세요.",
+        "saved": "프로필을 저장했어요"
+      }
+    },
+    "auth": {
+      "login": {
+        "title": "로그인",
+        "subtitle": "같은 책을 읽은 사람들과 이야기를 나눠 보세요",
+        "invalid": "이메일 또는 비밀번호가 맞지 않아요. 다시 확인해 주세요.",
+        "failed": "로그인하지 못했어요. 잠시 후 다시 시도해 주세요.",
+        "no-account": "아직 회원이 아니신가요?",
+        "signed-up": "가입했어요. 로그인해 주세요."
+      },
+      "field": {
+        "email-placeholder": "이메일 주소를 입력해주세요",
+        "email-required": "이메일을 입력해 주세요.",
+        "email-invalid": "이메일 형식이 맞지 않아요.",
+        "password-placeholder": "비밀번호를 입력해주세요",
+        "password-required": "비밀번호를 입력해 주세요.",
+        "show-password": "비밀번호 보기"
+      },
+      "social": {
+        "login-title": "소셜 계정으로 간편 로그인",
+        "start-title": "소셜 계정으로 빠르게 시작하기",
+        "login": {
+          "kakao": "카카오로 로그인",
+          "google": "구글로 로그인",
+          "naver": "네이버로 로그인",
+          "facebook": "페이스북으로 로그인"
+        },
+        "start": {
+          "kakao": "카카오로 시작하기",
+          "google": "구글로 시작하기",
+          "naver": "네이버로 시작하기",
+          "facebook": "페이스북으로 시작하기"
+        }
+      },
+      "register": {
+        "title": "회원가입",
+        "email-divider": "또는 이메일로 가입",
+        "has-account": "이미 계정이 있으신가요?",
+        "nickname-placeholder": "다른 사람에게 보일 이름이에요",
+        "nickname-required": "닉네임을 입력해 주세요.",
+        "password-rules": "비밀번호 조건",
+        "rule": {
+          "length": "8~30자",
+          "letter": "영문",
+          "digit": "숫자",
+          "special": "특수문자 {{chars}}",
+          "met": "충족",
+          "unmet": "미충족"
+        },
+        "password-invalid": "비밀번호 조건을 모두 채워 주세요.",
+        "password-confirm-placeholder": "비밀번호를 한 번 더 입력해주세요",
+        "password-confirm-required": "비밀번호를 한 번 더 입력해 주세요.",
+        "password-mismatch": "비밀번호가 일치하지 않아요.",
+        "agreements": "약관 동의",
+        "required-tag": "(필수)",
+        "terms": "서비스 이용약관 동의",
+        "privacy": "개인정보 수집·이용 동의",
+        "view-terms": "이용약관 보기",
+        "view-privacy": "개인정보처리방침 보기",
+        "agreements-required": "필수 약관에 동의해 주세요.",
+        "submit": "가입하기",
+        "email-taken": "이미 가입된 이메일이에요. 로그인해 보세요.",
+        "failed": "가입하지 못했어요. 입력한 내용을 확인하고 다시 시도해 주세요.",
+        "optional-tag": "(선택)",
+        "age14": "만 14세 이상이에요",
+        "marketing": "마케팅 정보 수신 동의",
+        "view-marketing": "마케팅 정보 수신 내용 보기"
+      },
+      "restore": {
+        "title": "탈퇴한 계정이에요",
+        "description": "다시 사용하려면 계정을 복구해 주세요.",
+        "submit": "계정 복구하기",
+        "cancel": "다른 계정으로 로그인",
+        "failed": "계정을 복구하지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "callback": {
+        "loading": "로그인하고 있어요",
+        "failed-title": "로그인하지 못했어요",
+        "failed-description": "소셜 로그인이 취소되었거나 시간이 지났어요. 다시 시도해 주세요.",
+        "back": "로그인 화면으로",
+        "email-in-use-title": "이미 가입한 이메일이에요",
+        "email-in-use-description": "이 이메일로 가입한 계정이 있어요. 처음 가입한 방법(이메일 또는 다른 소셜 계정)으로 로그인해 주세요.",
+        "email-not-verified-title": "이메일 인증이 필요해요",
+        "email-not-verified-description": "소셜 계정의 이메일이 인증되지 않았어요. 해당 서비스에서 이메일을 인증한 뒤 다시 시도해 주세요.",
+        "email-required-title": "이메일 정보가 필요해요",
+        "email-required-description": "가입하려면 소셜 계정의 이메일 제공에 동의해야 해요. 다시 로그인하면서 이메일 제공에 동의해 주세요."
+      },
+      "extras": {
+        "title": "추가 정보",
+        "hint": "모두 선택이에요. 입력하지 않아도 가입할 수 있어요.",
+        "birthdate": "생년월일",
+        "birthdate-invalid": "생년월일을 다시 확인해 주세요.",
+        "birthdate-under-14": "만 14세 이상만 가입할 수 있어요.",
+        "gender": "성별",
+        "gender-male": "남성",
+        "gender-female": "여성",
+        "gender-none": "선택 안 함",
+        "interests": "관심 분야",
+        "interests-hint": "여러 개 고를 수 있어요."
+      },
+      "social-signup": {
+        "title": "가입을 마무리해 주세요",
+        "subtitle": "{{email}} 계정으로 처음 오셨어요. 약관에 동의하면 가입이 끝나요.",
+        "subtitle-no-email": "처음 오셨어요. 약관에 동의하면 가입이 끝나요.",
+        "submit": "동의하고 가입하기",
+        "missing-title": "가입 정보를 찾을 수 없어요",
+        "missing-description": "소셜 로그인부터 다시 해 주세요.",
+        "expired": "가입 시간이 지났어요. 소셜 로그인을 다시 해 주세요.",
+        "email-taken": "이 이메일로 이미 가입한 계정이 있어요. 이메일로 로그인해 주세요.",
+        "already-registered": "이미 가입을 마쳤어요. 다시 로그인해 주세요.",
+        "failed": "가입하지 못했어요. 잠시 후 다시 시도해 주세요."
+      },
+      "consent": {
+        "title": "약관에 동의해 주세요",
+        "subtitle": "서비스를 계속 이용하려면 약관 동의가 필요해요.",
+        "submit": "동의하고 계속하기",
+        "decline": "동의하지 않고 로그아웃",
+        "failed": "저장하지 못했어요. 잠시 후 다시 시도해 주세요."
+      }
+    },
+    "checkout": {
+      "title": "결제하기",
+      "item": "주문 상품",
+      "type": {
+        "D": "독서 토론",
+        "S": "도서 요약"
+      },
+      "method": "결제 수단",
+      "widget-loading": "결제 수단을 불러오고 있어요",
+      "widget-error": "결제 창을 불러오지 못했어요. 잠시 후 다시 시도해 주세요.",
+      "total": "최종 결제 금액",
+      "pay": "{{price}} 결제하기",
+      "note": {
+        "S": "결제가 끝나면 바로 전체 요약을 읽을 수 있어요.",
+        "D": "결제가 끝나면 바로 토론방에 참여해요."
+      },
+      "request-error": "결제를 시작하지 못했어요. 다시 시도해 주세요.",
+      "result": {
+        "checking": "결제를 확인하고 있어요",
+        "success-title": "결제가 완료됐어요",
+        "success-lead": {
+          "S": "이제 전체 요약을 읽을 수 있어요. 내 서재의 ‘읽고 있는 요약’에도 담아 두었어요.",
+          "D": "토론방에 참여했어요. 마이페이지 ‘토론방’에서 모임 일정을 확인할 수 있어요."
+        },
+        "fail-title": "결제하지 못했어요",
+        "fail-lead": "결제가 완료되지 않았어요. 아래 사유를 확인하고 다시 시도해 주세요.",
+        "debate-full": "결제하는 사이 정원이 다 찼어요. 결제는 취소돼요.",
+        "confirm-error-title": "결제를 확인하지 못했어요",
+        "confirm-error-lead": "잠시 후 다시 시도해 주세요. 계속 안 되면 주문번호와 함께 문의해 주세요.",
+        "missing-title": "결제 정보를 찾을 수 없어요",
+        "missing-lead": "주소가 잘못되었거나 오래되었어요. 결제 내역에서 결제를 확인해 주세요.",
+        "item": "상품",
+        "amount": "결제 금액",
+        "date": "결제 일시",
+        "order": "주문번호",
+        "reason": "실패 사유",
+        "code": "오류 코드",
+        "read-summary": "요약 읽으러 가기",
+        "go-debate": "토론방으로 가기",
+        "payments": "결제 내역 보기",
+        "retry": "다시 결제하기",
+        "back": "돌아가기"
+      }
+    },
+    "home": {
+      "hero": {
+        "badge": "독서 토론 · 도서 요약 커뮤니티",
+        "title-1": "함께 읽고, 함께 토론하며,",
+        "title-2": "함께 성장해요.",
+        "browse-debates": "토론방 둘러보기",
+        "browse-summaries": "도서 요약 보기",
+        "featured": "추천 토론방",
+        "join": "참여하기"
+      },
+      "debates": {
+        "title": "모집 중인 토론방",
+        "description": "같은 책을 읽은 사람들과 이야기를 나눠보세요",
+        "sort-label": "모집 중인 토론방 정렬",
+        "soonest": "모임 가까운 순",
+        "see-all": "토론방 전체 보기",
+        "empty": "지금 모집 중인 토론방이 없어요",
+        "empty-description": "다른 카테고리를 보거나 직접 토론방을 열어 보세요.",
+        "recent-title": "최근 토론방",
+        "recent-description": "지금 모집 중인 토론방이 없어서 최근에 열린 토론방을 보여드려요",
+        "ended": "모임 종료"
+      },
+      "summaries": {
+        "title": "많이 읽는 요약",
+        "description": "무료 미리보기로 먼저 읽어보세요",
+        "see-all": "도서 요약 전체 보기",
+        "preview": "미리보기",
+        "rank": "{{rank}}위",
+        "empty": "아직 요약이 없어요"
+      },
+      "posts": {
+        "description": "독후감, 토론 후기, 추천 도서를 자유롭게 나눠요",
+        "write": "글 작성하기",
+        "see-all": "게시글 전체 보기",
+        "empty": "아직 게시글이 없어요"
+      },
+      "see-all": "전체 보기",
+      "footer": {
+        "language": "언어",
+        "rights": "© DokTalk. All rights reserved."
+      },
+      "main": {
+        "greeting": "{{name}}님, 반가워요",
+        "upcoming": "다가오는 모임이 {{count}}개 있어요.",
+        "no-upcoming": "다가오는 모임이 없어요. 관심 있는 토론방에 참여해 보세요.",
+        "upcoming-label": "다가오는 모임",
+        "feed": "추천 피드",
+        "tab": {
+          "debates": "추천 토론방",
+          "posts": "게시글",
+          "summaries": "도서 요약"
+        },
+        "more": {
+          "debates": "토론방 더보기",
+          "posts": "게시글 더보기",
+          "summaries": "요약 더보기"
+        },
+        "all-meetings": "내 모임 전체 보기",
+        "rail": "인기 요약과 내 서재"
+      }
+    },
+    "legal": {
+      "effective": "시행일 {{date}}",
+      "toc": "목차",
+      "loading": "문서를 불러오고 있어요",
+      "error": "문서를 불러오지 못했어요"
     }
   },
   "footer": {
@@ -591,8 +1090,7 @@
       "motto": "함께 읽고, 함께 토론하며, 함께 성장해요.",
       "address": "주소",
       "address_value": "서울특별시 동작구 상도동 사당로 46 숭실대학교 창의관",
-      "email": "이메일",
-      "phone": "전화"
+      "email": "이메일"
     },
     "services": {
       "title": "서비스",
@@ -609,12 +1107,8 @@
       "terms": "이용약관",
       "privacy": "개인정보처리방침"
     },
-    "copyright": {
-      "text": "© 2024 DokTalk. All rights reserved."
-    },
     "version": {
-      "label": "버전",
-      "last_update": "마지막 업데이트"
+      "label": "버전"
     }
   }
 }

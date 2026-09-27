@@ -14,15 +14,7 @@
   },
   "function": {
     "time": {
-      "ago": " ago",
       "now": "now",
-      "second": "s",
-      "minute": "m",
-      "hour": "h",
-      "day": "d",
-      "week": "w",
-      "month": "m",
-      "year": "y",
       "months": {
         "1": "Jan",
         "2": "Feb",
@@ -36,46 +28,45 @@
         "10": "Oct",
         "11": "Nov",
         "12": "Dec"
+      },
+      "weekdays": {
+        "0": "Sun",
+        "1": "Mon",
+        "2": "Tue",
+        "3": "Wed",
+        "4": "Thu",
+        "5": "Fri",
+        "6": "Sat"
+      },
+      "relative": {
+        "second": "{{count}}s ago",
+        "minute": "{{count}}m ago",
+        "hour": "{{count}}h ago",
+        "day": "{{count}}d ago",
+        "week": "{{count}}w ago",
+        "month": "{{count}}mo ago",
+        "year": "{{count}}y ago"
       }
     }
   },
   "component": {
     "base": {
-      "upload-file": {
-        "attach": "Attach File",
-        "error": {
-          "too-large": "File must be under {{size}}MB",
-          "unacceptable": "Only {{types}} file formats are allowed"
-        }
-      },
-      "upload-files": {
-        "error": {
-          "too-many": "Maximum {{limit}} files can be uploaded.",
-          "too-large": "Each file must be under {{size}}MB.",
-          "unacceptable": "Only {{types}} files can be uploaded."
-        }
-      },
       "infinite-scroll": {
-        "loading": "Loading...",
-        "no-item": "No items yet"
+        "loading": "Loading..."
       }
     },
     "floating": {
       "text": {
-        "login": "Login",
         "follower": "Follower",
         "following": "Following",
         "my-activity": "My Activity",
-        "likes": "Likes",
         "post": "My Posts",
         "summary": "My Summaries",
-        "shopping-cart": "Saved Books",
         "debate": "Joined Discussions",
         "library": "My Library"
       },
       "chatbot": {
         "test-message": "Hello! Ask me anything 👋",
-        "not-supported": "Sorry, the chatbot feature is still in development. Please wait a little longer! 🙏",
         "ask-like-this": "Try asking like this!",
         "placeholder": "Type a message...",
         "prompt1": "Can you recommend a good book for light reading?",
@@ -101,14 +92,8 @@
       },
       "dropdown": {
         "mypage": "Mypage",
-        "my-activity": "My Activity",
         "settings": "Settings",
         "logout": "Logout"
-      },
-      "language": {
-        "korean": "한국어",
-        "english": "English",
-        "mongolian": "Монгол хэл"
       },
       "register": "Sign up",
       "login": "Log in"
@@ -117,41 +102,14 @@
       "write-post": {
         "placeholder": "Write your post!"
       },
-      "write-summary": {
-        "placeholder": "Write a summary!"
-      },
-      "write-debate": {
-        "placeholder": "Create a new discussion room!"
-      },
-      "post": {
-        "more-comments": "More comments"
-      },
-      "simple-post": {
-        "no-content": "No content available."
-      },
-      "comment": {
-        "reply": "Reply"
-      },
-      "payment": {
-        "cancelled": "Cancelled",
-        "currency": "$"
-      },
-      "category": {
-        "select": "Category",
-        "no-selected": "No category selected."
-      },
       "book": {
         "button": {
           "add-to-library": "Add to My Library",
-          "remove-from-library": "Remove from My Library",
-          "in-library-num": "In Library"
+          "remove-from-library": "Remove from My Library"
         }
       }
     },
     "dropdown": {
-      "category-chip": {
-        "placeholder": "Please select a discussion topic category"
-      },
       "book-search": {
         "placeholder": "Search for books to discuss"
       }
@@ -159,15 +117,9 @@
     "section": {
       "profile": {
         "button": {
-          "edit-profile": "Edit Profile",
-          "follow": "Follow",
-          "unfollow": "Unfollow"
+          "edit-profile": "Edit Profile"
         },
         "text": {
-          "follower-prefix": "",
-          "follower-postfix": " follower",
-          "following-prefix": "",
-          "following-postfix": " following",
           "no-introduction": "No introduction."
         },
         "tab": {
@@ -183,81 +135,21 @@
             "library": "My Library"
           }
         }
-      },
-      "profile-tab-details": {
-        "item": {
-          "no-post-item": "There is no post item",
-          "no-summary-item": "There is no summary item",
-          "no-library-item": "There is no book in the library",
-          "no-debate-item": "There is no participating discussion room",
-          "no-payment-item": "There is no payment item",
-          "no-payment-date": "No payment history for this date",
-          "no-book-item": "There is no book",
-          "currently-reading-book-prefix": "Currently reading",
-          "currently-reading-book-postfix": " books",
-          "currently-reading-summary-prefix": "Currently reading",
-          "currently-reading-summary-postfix": " summaries",
-          "show-more": "Show more",
-          "currency": "$"
-        },
-        "go-to": {
-          "search": "Go to search books to add to your library",
-          "summary": "Go to explore summary"
-        },
-        "time": {
-          "year": "",
-          "month": {
-            "1": "Jan",
-            "2": "Feb",
-            "3": "Mar",
-            "4": "Apr",
-            "5": "May",
-            "6": "Jun",
-            "7": "Jul",
-            "8": "Aug",
-            "9": "Sep",
-            "10": "Oct",
-            "11": "Nov",
-            "12": "Dec"
-          }
-        }
-      },
-      "settings": {
-        "privacy-scope": "Privacy Scope",
-        "my-activity": "My Activity"
-      },
-      "comment": {
-        "title": "Comments",
-        "placeholder": "Add a comment",
-        "button": {
-          "submit": "Submit"
-        }
       }
     },
     "modal": {
       "edit-profile": {
         "title": "Edit Profile",
-        "button": {
-          "image-upload": "Upload Image",
-          "image-remove": "Remove Image",
-          "submit": "Save Changes"
-        },
         "label": {
           "nickname": "Nickname",
           "introduction": "Introduction"
         },
         "placeholder": {
-          "nickname": "(Required) Please enter your nickname.",
           "introduction": "Tell us about yourself."
         }
       },
       "update-post": {
-        "title": "Edit Post",
-        "placeholder": {
-          "content": "Share your thoughts here."
-        },
         "button": {
-          "add-photo": "Add Photo",
           "submit": "Save Changes"
         }
       },
@@ -272,76 +164,141 @@
           "temp-save": "Save Draft",
           "submit": "Publish"
         }
-      },
-      "friend-list": {
-        "button": {
-          "delete": "Delete"
-        }
       }
     },
     "navigation": {
       "topnav": {
         "explore": "Explore",
-        "nickname-fallback": "Username",
-        "language": {
-          "korean": "Korean"
-        }
+        "nickname-fallback": "Username"
       }
     },
-    "payments": {
-      "checkout-success": {
-        "title": "Payment Successful",
-        "order-id": "Order ID"
+    "shell": {
+      "home": "讀:TALK home",
+      "main-nav": "Main menu",
+      "bottom-nav": "Bottom menu",
+      "my-menu": "My menu",
+      "footer-nav": "Terms and support",
+      "skip-to-content": "Skip to content",
+      "search": "Search",
+      "open-menu": "Open menu",
+      "close-menu": "Close menu",
+      "language": "Language",
+      "language-current": "Language, current: {{lang}}",
+      "create": "Create",
+      "login-card": {
+        "title": "Log in to join the discussion",
+        "description": "We'll recommend discussions and summaries that fit your interests."
       },
-      "checkout-fail": {
-        "title": "Payment Failed",
-        "error-code": "Error Code",
-        "fail-reason": "Failure Reason"
-      },
-      "checkout-button": "Pay →",
-      "checkout-modal": {
-        "button": "Pay"
-      },
-      "checkout-container": {
-        "message": "Payment required to continue reading.",
-        "wishlist": "Wishlist"
+      "route-error": {
+        "title": "Couldn't load this page",
+        "description": "Your connection may be unstable, or a new version is out. Please reload the page.",
+        "reload": "Reload"
       }
+    },
+    "user": {
+      "unknown": "Unknown user"
+    },
+    "comments": {
+      "heading": "Comments {{count}}",
+      "label": "Write a comment",
+      "placeholder": "Write a comment",
+      "submit": "Post",
+      "reply": "Reply",
+      "reply-label": "Reply to {{name}}",
+      "reply-placeholder": "Write a reply",
+      "cancel": "Cancel",
+      "more": "More comments",
+      "empty": "Be the first to comment",
+      "login": "Log in to leave a comment",
+      "error": "Couldn't load comments",
+      "submit-error": "Couldn't post your comment. Please try again.",
+      "replies": "Replies to {{name}}"
+    },
+    "share": {
+      "share": "Share",
+      "copied": "Link copied",
+      "failed": "Couldn't copy the link"
+    },
+    "follow": {
+      "follow": "Follow",
+      "following": "Following"
+    },
+    "dialog": {
+      "close": "Close"
+    },
+    "book-picker": {
+      "change": "Change",
+      "results": "Book search results",
+      "empty": "No results",
+      "error": "Couldn't search books",
+      "more": "Show more"
+    },
+    "attachments": {
+      "label": "Attachments",
+      "add": "Add files",
+      "hint": "PDF, JPG, PNG, GIF · up to {{max}} · {{size}}MB each",
+      "remove": "Remove {{name}}",
+      "too-many": "You can attach up to {{max}} files",
+      "too-large": "Files larger than {{size}}MB can't be uploaded",
+      "unacceptable": "Only PDF, JPG, PNG, and GIF files are allowed"
+    },
+    "stats": {
+      "likes": "{{count}} likes",
+      "comments": "{{count}} comments",
+      "free": "Free"
+    },
+    "draft": {
+      "saved": "Draft saved",
+      "restored": "Your draft has been restored",
+      "discard": "Start over"
+    },
+    "form": {
+      "summary": "Please check what you entered",
+      "submit": "Couldn't save. Please try again in a moment.",
+      "upload": "Couldn't upload the files. Check them and try again.",
+      "cancel": "Cancel",
+      "required": "Required",
+      "counter": "{{count}}/{{max}}"
+    },
+    "post-composer": {
+      "title-create": "New post",
+      "title-edit": "Edit post",
+      "title-label": "Title",
+      "content-label": "Content",
+      "photos-label": "Photos",
+      "add": "Add photos",
+      "hint": "JPG, PNG, GIF · up to {{max}} · {{size}}MB each",
+      "remove": "Remove photo {{index}}",
+      "photo-alt": "Attached photo {{index}}",
+      "too-many": "You can attach up to {{max}} photos",
+      "too-large": "Photos larger than {{size}}MB can't be uploaded",
+      "unacceptable": "Only JPG, PNG, and GIF photos are allowed",
+      "title-required": "Please enter a title",
+      "discard-confirm": "Your changes will be lost. Close anyway?"
+    },
+    "chatbot": {
+      "title": "DokTalk AI",
+      "subtitle": "Help with book picks and reading questions",
+      "greeting": "Hello! Ask me anything.",
+      "log": "Conversation",
+      "me": "You",
+      "disclaimer": "AI answers may be inaccurate.",
+      "prompt2": "How do I write good discussion questions?",
+      "prompt3": "I want to read one book a month",
+      "typing": "Writing a reply",
+      "error": "Couldn't get a reply. Please try again in a moment."
     }
   },
   "page": {
     "landing": {
-      "title": {
-        "post": "Post",
-        "popular-summary": "Trending Summaries",
-        "recommend": "Recommended Discussions",
-        "recommend-prefix": "Recommended Discussions ",
-        "recommend-postfix": "",
-        "for-you-prefix": "For ",
-        "for-you-postfix": ""
-      },
-      "button": {
-        "more": "More +",
-        "write-post": "Write Post",
-        "previous": "Previous",
-        "next": "Next"
-      },
       "item": {
-        "no-post-item": "No posts to display",
-        "no-summary-item": "There is no summary item",
-        "no-debate-item": "No recommended discussions"
-      },
-      "loading": "Loading...",
-      "error": "Failed to load data"
+        "no-post-item": "No posts to display"
+      }
     },
     "login": {
       "email": "E-mail",
       "password": "Password",
       "login": "Log in",
-      "keep-login": "Keep me logged in",
-      "save-id": "Remember Me",
-      "find-id": "Find ID",
-      "find-password": "Forgot Password",
-      "social-login-text": "Log in with Social accounts",
       "register": "Sign up"
     },
     "debate": {
@@ -352,20 +309,49 @@
       "search": {
         "book-title": "Book Title",
         "item-title": "Room Title",
-        "placeholder": "Search for discussions!"
+        "placeholder": "Search for discussions!",
+        "by": "Search by",
+        "label": "Search discussions"
       },
       "sort": {
         "latest": "Latest",
         "popular": "Popular",
-        "from": "From"
+        "from": "From",
+        "label": "Sort",
+        "from-date": "Start date"
       },
       "button": {
         "create": "Start a Discussion"
       },
       "item": {
         "no-debate-item": "There is no discussion item",
-        "no-summary-item": "There is no summary item"
-      }
+        "online": "Online",
+        "offline": "In person",
+        "seats": "{{count}}/{{limit}} joined",
+        "full": "Full",
+        "free": "Free",
+        "likes": "{{count}} likes",
+        "comments": "{{count}} comments",
+        "empty-description": "Be the first to start one",
+        "no-result": "No discussions match your filters",
+        "no-result-description": "Try a different keyword or category",
+        "error": "Couldn't load discussions",
+        "error-description": "Please try again in a moment",
+        "retry": "Try again"
+      },
+      "subtitle": "Host meetups and talk with people who read the same book",
+      "filters": "Search and filters",
+      "list": "Discussion list",
+      "category-all": "All",
+      "recommend": {
+        "prev": "Previous recommended discussions",
+        "next": "Next recommended discussions"
+      },
+      "popular": {
+        "more": "See more",
+        "more-label": "See more trending summaries"
+      },
+      "category-label": "Category"
     },
     "summary": {
       "title": {
@@ -375,24 +361,45 @@
       "search": {
         "book-title": "Book Title",
         "item-title": "Summary Title",
-        "placeholder": "Search for summaries!"
+        "placeholder": "Search for summaries!",
+        "by": "Search by",
+        "label": "Search summaries"
       },
       "sort": {
         "latest": "Latest",
-        "popular": "Popular"
+        "popular": "Popular",
+        "label": "Sort"
       },
       "button": {
         "write": "Write a Summary"
       },
       "item": {
         "no-summary-item": "There is no summary item",
-        "no-debate-item": "There is no discussion item"
+        "no-result": "No summaries match your filters",
+        "no-result-description": "Try a different keyword or category",
+        "empty-description": "Be the first to write one",
+        "error": "Couldn't load summaries",
+        "error-description": "Please try again in a moment"
+      },
+      "subtitle": "Read the free preview first, then buy only the summaries you want to finish",
+      "filters": "Search and filters",
+      "list": "Summary list",
+      "category-label": "Category",
+      "category-all": "All",
+      "recommend": {
+        "prev": "Previous recommended summaries",
+        "next": "Next recommended summaries"
+      },
+      "popular-debates": {
+        "more-label": "See more trending discussions"
       }
     },
     "search": {
       "item": {
         "no-book-item": "No search results found",
-        "search-prompt": "Search for your favorite books!"
+        "search-prompt": "Search for your favorite books!",
+        "error": "Couldn't search books",
+        "no-result-description": "Try a different keyword"
       },
       "title": {
         "page": "Book Search"
@@ -403,6 +410,23 @@
       },
       "search": {
         "placeholder": "Search for books!"
+      },
+      "subtitle": "Find books you like and add them to your library",
+      "label": "Search books",
+      "submit": "Search",
+      "clear": "Clear search",
+      "result-count": "{{count}} books for ‘{{query}}’",
+      "results": "Search results",
+      "sort-label": "Sort",
+      "library": {
+        "added": "In my library",
+        "count": "Added {{count}}"
+      },
+      "rail": {
+        "title": "My library",
+        "count": "Reading {{count}}",
+        "link": "Go to library",
+        "empty": "No books yet"
       }
     },
     "create-debate": {
@@ -412,21 +436,62 @@
         "location-label": "Meeting Location",
         "location-placeholder": "Please enter the meeting location",
         "link-label": "Online Link",
-        "link-placeholder": "Please enter the participation link for online meetings",
         "link-error": "Please write in https://url format",
-        "meeting-time": "Meeting Time",
         "book-select": "Select Book",
         "category": "Category",
-        "limit": "Participant Limit",
+        "limit": "Capacity (including you)",
         "limit-unit": "people",
         "content-placeholder": "Write about what you want to discuss",
         "price": "Price",
-        "price-placeholder": "Please enter the price"
+        "title-label": "Title",
+        "category-hint": "Choose categories for the topic · You can pick more than one",
+        "mode": "Format",
+        "mode-online": "Online",
+        "mode-offline": "In person",
+        "date": "Date",
+        "time": "Time",
+        "limit-decrease": "Fewer people",
+        "limit-increase": "More people",
+        "price-unit": "KRW",
+        "free": "Make it free",
+        "content-label": "Description"
       },
       "button": {
-        "file-add": "Add Files",
         "temp-save": "Save Draft",
-        "submit": "Create"
+        "submit": "Create",
+        "cancel": "Cancel"
+      },
+      "section": {
+        "basic": "Basics",
+        "meeting": "Meetup",
+        "intro": "About"
+      },
+      "error": {
+        "summary": "Please check what you entered",
+        "title-required": "Please enter a title",
+        "book-required": "Please choose a book to discuss",
+        "category-required": "Please choose at least one category",
+        "link-required": "Please enter the online link",
+        "location-required": "Please enter the meetup place",
+        "date-required": "Please enter the date and time",
+        "date-past": "Please choose a time in the future",
+        "limit-range": "Set between {{min}} and {{max}} people",
+        "limit-below-members": "{{count}} people, including you, have already joined. The capacity can’t go below {{count}}.",
+        "price-range": "Enter a price between {{min}} and {{max}} KRW. For a free discussion, choose ‘Make it free’.",
+        "submit": "Couldn't save. Please try again in a moment.",
+        "upload": "Couldn't upload the files. Check them and try again."
+      },
+      "draft": {
+        "saved": "Draft saved",
+        "restored": "Your draft has been restored",
+        "discard": "Start over"
+      },
+      "state": {
+        "login-title": "Log in to create a discussion",
+        "login-description": "Only members who are logged in can create discussions.",
+        "forbidden-title": "You can only edit discussions you created",
+        "forbidden-description": "Only the host can edit this discussion.",
+        "to-debate": "Back to the discussion"
       }
     },
     "create-summary": {
@@ -438,12 +503,40 @@
         "free-content-placeholder": "Write content you want to share as a preview.",
         "charged-content-placeholder": "Write content you want to share for a fee.",
         "price": "Price",
-        "price-placeholder": "Please enter the price"
+        "title-label": "Title",
+        "category-hint": "Choose categories for the book · You can pick more than one",
+        "free-label": "Free preview",
+        "free-hint": "Anyone can read this",
+        "charged-label": "Paid content",
+        "charged-hint": "Only buyers can read this",
+        "paywall-divider": "Paid content starts here",
+        "price-unit": "KRW",
+        "free": "Make everything free"
       },
       "button": {
-        "file-add": "Add Files",
         "temp-save": "Save Draft",
         "submit": "Publish"
+      },
+      "section": {
+        "basic": "Basics",
+        "content": "Content",
+        "sale": "Price and files"
+      },
+      "error": {
+        "title-required": "Please enter a title",
+        "book-required": "Please choose the book you summarized",
+        "category-required": "Please choose at least one category",
+        "free-required": "Please write the free preview",
+        "charged-required": "Please write the paid content",
+        "price-range": "Enter a price between {{min}} and {{max}} KRW. For a free summary, choose ‘Make everything free’."
+      },
+      "charged-unavailable": "We couldn't load the paid content. Saving replaces it with what you enter below, so please enter the paid content again.",
+      "state": {
+        "login-title": "Log in to write a summary",
+        "login-description": "Only members who are logged in can write summaries.",
+        "forbidden-title": "You can only edit summaries you wrote",
+        "forbidden-description": "Only the author can edit this summary.",
+        "to-summary": "Back to the summary"
       }
     },
     "debate-detail": {
@@ -455,17 +548,52 @@
         "location": "Meeting Location",
         "link": "Online Link",
         "time": "Time",
-        "category": "Category",
-        "book": "Selected Book"
-      },
-      "modal": {
-        "title": "Post Options"
+        "book": "Selected Book",
+        "seats": "Participants",
+        "seats-value": "{{count}}/{{limit}} people (host included)",
+        "link-locked": "Join to see the link"
       },
       "payment": {
-        "title": "Payment is required to join this discussion room.",
-        "bookmark": "Bookmark",
-        "currency": "$",
-        "already-joined": "You have already joined this discussion room"
+        "title": "Payment is required to join this discussion room."
+      },
+      "host-label": "Host",
+      "options": "Discussion options",
+      "intro": "About",
+      "files": "Attachments",
+      "download": "Download {{name}}",
+      "like": "Like {{count}}",
+      "comments": "Comments {{count}}",
+      "join": {
+        "label": "Join",
+        "fee": "Fee",
+        "free": "Free",
+        "free-description": "This discussion is free. You can join right away.",
+        "pay": "Pay and join",
+        "join": "Join",
+        "joined": "You're in",
+        "joined-online": "Join with the online link at the meetup time.",
+        "joined-offline": "See you at the meetup place at the meetup time.",
+        "host": "You host this discussion",
+        "host-description": "Edit it from the menu at the top right.",
+        "ended": "This discussion has ended",
+        "ended-description": "The meetup time has passed, so you can no longer join.",
+        "full": "This discussion is full",
+        "full-description": "A spot opens up if someone cancels.",
+        "error": "Couldn't join. Please try again in a moment."
+      },
+      "delete-dialog": {
+        "title": "Delete this discussion?",
+        "description": "A deleted discussion can't be restored.",
+        "cancel": "Cancel",
+        "confirm": "Delete",
+        "error": "Couldn't delete. Please try again in a moment."
+      },
+      "state": {
+        "login-title": "Log in to see this discussion",
+        "login-description": "Discussions are visible to members who are logged in.",
+        "not-found-title": "We couldn't find this discussion",
+        "not-found-description": "It was deleted or the address is wrong.",
+        "to-list": "Back to discussions"
       }
     },
     "update-debate": {
@@ -484,105 +612,476 @@
       "button": {
         "edit": "Edit",
         "delete": "Delete"
-      },
-      "modal": {
-        "title": "Post Options"
       }
     },
     "register": {
       "welcome": "Welcome to DokTalk, the book discussion community!",
       "form": {
-        "email": "E-mail",
-        "email-required": "Please enter your email",
         "nickname": "Nickname",
-        "nickname-required": "Please enter your nickname",
-        "password": "Password",
-        "password-required": "Please enter your password",
-        "password-min": "Password must be at least 8 characters",
         "password-confirm": "Confirm Password",
-        "password-confirm-required": "Please confirm your password",
-        "password-match": "Passwords do not match",
-        "birthdate": "Date of Birth",
-        "birthdate-required": "Please enter your date of birth",
-        "birthdate-format": "Please enter in the correct format (YYYY-MM-DD)",
-        "gender": "Gender",
-        "gender-required": "Please select your gender",
-        "male": "Male",
-        "female": "Female",
-        "validation": "Identity Verification",
-        "validation-complete": "Identity verification completed.",
-        "interests": "Select Interests",
-        "interests-description": "Selected interests will be used for personalized book recommendations and discussion room matching.",
         "all-agreements": "Agree to All Terms",
-        "agreement1": "Agree to Terms 1 (Required)",
-        "agreement2": "Agree to Terms 2 (Required)",
-        "agreement3": "Agree to Terms 3 (Optional)",
-        "view": "View Terms",
-        "submit": "Sign Up"
-      },
-      "alerts": {
-        "validation-required": "Please complete identity verification",
-        "interests-required": "Please select your interests",
-        "agreements-required": "Please agree to the required terms",
-        "agreement1-error": "Please agree to Terms 1",
-        "agreement2-error": "Please agree to Terms 2",
-        "password-length": "Password must be at least 8 characters",
-        "password-mismatch": "Passwords do not match",
-        "register-error": "An error occurred during registration."
-      },
-      "interests": {
-        "politics": "Politics",
-        "business": "Business / Economics",
-        "religion": "Religion",
-        "webtoon": "Webtoon / Comics",
-        "philosophy": "Philosophy",
-        "exhibition": "Performances / Exhibitions",
-        "self-development": "Personal Development"
+        "view": "View Terms"
       }
     },
     "settings": {
-      "privacy": {
-        "title": "Edit Privacy Settings"
-      },
-      "notifications": {
-        "likes": "Likes",
-        "comments": "Comments",
-        "notifications": "Notifications",
-        "page": " Page"
-      }
+      "title": "Settings",
+      "account": "Account",
+      "email": "Email",
+      "profile": "Profile",
+      "profile-description": "Nickname, introduction and photo",
+      "language": "Language",
+      "language-description": "The language of menus and messages. Posts written by others don't change.",
+      "support": "Support",
+      "manage": "Account management",
+      "logout-description": "Log out on this device",
+      "delete": "Delete account",
+      "delete-description": "You won't be able to use the service with this account. You can restore it by logging in again.",
+      "delete-button": "Delete",
+      "delete-confirm-title": "Delete your account?",
+      "delete-confirm-description": "You'll be logged out right away. You can restore the account later by logging in with it.",
+      "delete-error": "Couldn't delete the account. Please try again in a moment.",
+      "version": "Version {{version}}",
+      "login-prompt": "Log in to manage your account and profile."
     },
     "integrated-search": {
       "title": "Integrated Search Results",
-      "search-result": "Search Results",
-      "sections": {
-        "debate": "Discussions",
-        "summary": "Summaries",
-        "post": "Posts",
-        "book": "Books"
-      },
-      "no-results": "No search results found."
+      "no-results": "No search results found.",
+      "heading": "{{count}} results for ‘{{query}}’",
+      "filters": "Result types",
+      "all": "All",
+      "more": "See more",
+      "more-label": "See more {{section}}",
+      "search-label": "Search",
+      "prompt-title": "What are you looking for?",
+      "prompt-description": "Search books, discussions, summaries, and posts at once.",
+      "empty-description": "Try a different keyword",
+      "error": "Couldn't load search results",
+      "book": "Books"
     },
     "not-found": {
-      "message": "Page Not Found!"
+      "title": "Page not found",
+      "description": "The page was moved or deleted. Please check the address.",
+      "home": "Go to home",
+      "search": "Search"
     },
     "mypage": {
       "library": {
         "title": "My Library",
         "description": "Manage your reading books and summaries",
-        "sections": {
-          "my-books": "Currently Reading",
-          "purchased-summaries": "Reading Summaries"
-        },
-        "no-books": "No books in your library",
-        "no-summaries": "No reading summaries",
-        "go-to-search": "Search for Books",
-        "delete": {
-          "button": "Delete Book",
-          "confirm": "Are you sure you want to remove this book from your library?",
-          "success": "The book has been removed from your library",
-          "error": "An error occurred while deleting the book"
-        }
+        "go-to-search": "Search for Books"
       }
+    },
+    "summary-detail": {
+      "options": "Summary options",
+      "book-label": "Summarized book",
+      "library": {
+        "add": "Add to my library",
+        "error": "Couldn't add it to your library. Please try again in a moment."
+      },
+      "badge": {
+        "preview": "Free preview",
+        "purchased": "Purchased",
+        "free": "Free summary",
+        "own": "Your summary"
+      },
+      "paywall": {
+        "title": "Purchase to keep reading.",
+        "note": "Purchased summaries stay in ‘Summaries I’m reading’ in your library.",
+        "pay": "Buy",
+        "free-title": "This summary is free",
+        "free-note": "Tap the button to read the whole summary right away.",
+        "read-free": "Read it free",
+        "login": "Log in to read the full summary",
+        "error": "Couldn't open it. Please try again in a moment."
+      },
+      "owner": {
+        "note": "You wrote this summary. The paid part is visible only to buyers."
+      },
+      "charged-error": "Couldn't load the paid content",
+      "rail": {
+        "label": "Purchase",
+        "full": "Full summary",
+        "toss-note": "Paid with Toss Payments. You can read the full summary right after paying.",
+        "purchased": "Purchased",
+        "purchased-note": "You bought this summary on {{date}} for {{price}}. Find it anytime in ‘Summaries I’m reading’ in your library.",
+        "library-link": "Open my library",
+        "payments-link": "Payment history"
+      },
+      "delete-dialog": {
+        "title": "Delete this summary?",
+        "description": "A deleted summary can't be restored, and buyers will no longer see it."
+      },
+      "state": {
+        "not-found-title": "We couldn't find this summary",
+        "to-list": "Back to summaries"
+      }
+    },
+    "post": {
+      "subtitle": "Share book reviews, discussion notes, and recommendations",
+      "list": "Posts",
+      "options": "Post options",
+      "photo-alt": "Attached photo {{index}}",
+      "more-photos": "{{count}} more photos",
+      "empty-description": "Be the first to post",
+      "error": "Couldn't load posts",
+      "error-description": "Please try again in a moment",
+      "login-prompt": "Log in to write a post",
+      "delete-dialog": {
+        "title": "Delete this post?",
+        "description": "A deleted post can't be restored."
+      },
+      "state": {
+        "not-found-title": "We couldn't find this post",
+        "to-list": "Back to posts"
+      },
+      "untitled": "Untitled post"
+    },
+    "profile": {
+      "region": "Profile",
+      "my-tabs": "My page menu",
+      "user-tabs": "Profile menu",
+      "followers": "Followers <b>{{number}}</b>",
+      "followings": "Following <b>{{number}}</b>",
+      "state": {
+        "login-title": "Please log in",
+        "login-description": "Log in to see your posts, library and payments.",
+        "not-found-title": "User not found",
+        "not-found-description": "The account was deleted or the address is wrong.",
+        "error-title": "Couldn't load the profile",
+        "error-description": "Please try again in a moment."
+      },
+      "posts": {
+        "heading": "Posts",
+        "empty": "No posts yet",
+        "empty-description": "Share a few thoughts about what you are reading.",
+        "error": "Couldn't load posts"
+      },
+      "summaries": {
+        "heading": "My summaries",
+        "prompt-title": "Summarize a book you have read",
+        "prompt-description": "Your key points can help other readers too",
+        "empty": "No summaries yet",
+        "error": "Couldn't load summaries"
+      },
+      "meetings": {
+        "prompt-title": "Want to read a book together?",
+        "prompt-description": "Open a discussion room and gather fellow readers",
+        "upcoming": "Upcoming meetings",
+        "past": "Past meetings",
+        "host": "Host",
+        "guest": "Joined",
+        "d-day": "D-{{count}}",
+        "today": "Today",
+        "date-tbd": "Date to be set",
+        "open-link": "Open meeting link",
+        "open-map": "View place",
+        "new-window": "Opens in a new window",
+        "more-past": "More past meetings",
+        "empty-upcoming": "No upcoming meetings",
+        "empty-upcoming-description": "Join a discussion room that interests you.",
+        "browse": "Browse discussion rooms",
+        "empty-past": "No past meetings",
+        "error": "Couldn't load meetings",
+        "partial-error": "Some joined rooms couldn't be loaded.",
+        "create-short": "Create"
+      },
+      "payments": {
+        "month-label": "{{month}} {{year}}",
+        "previous-month": "Previous month, {{label}}",
+        "next-month": "Next month, {{label}}",
+        "total": "Total paid",
+        "cancelled-note": "Cancelled payments are not included in the total.",
+        "cancelled": "Cancelled",
+        "type": {
+          "D": "Discussion",
+          "S": "Summary"
+        },
+        "list": "Payments in {{label}}",
+        "empty": "No payments this month",
+        "error": "Couldn't load payments",
+        "untitled": "Untitled item"
+      },
+      "library": {
+        "books": "Books I am reading",
+        "summaries": "Summaries I am reading",
+        "sections": "Library sections",
+        "recent": "Recently added",
+        "edit": "Edit",
+        "done": "Done",
+        "remove": "Remove from library: {{title}}",
+        "removed": "Removed from library: {{title}}",
+        "remove-error": "Couldn't remove the book. Please try again.",
+        "add": "Add books",
+        "add-hint": "From book search",
+        "more": "Show {{count}} more",
+        "empty": "No books in the library yet",
+        "empty-description": "Add the books you are reading from book search.",
+        "empty-user": "No books in this library",
+        "error": "Couldn't load the library",
+        "summary-by": "Summary · {{name}}",
+        "bought": "Bought {{date}}",
+        "read": "Continue reading",
+        "read-label": "Continue reading: {{title}}",
+        "summaries-empty": "No summaries yet",
+        "summaries-empty-description": "Find a summary you like and start reading.",
+        "browse-summaries": "Browse summaries",
+        "summaries-error": "Couldn't load summaries",
+        "summaries-partial-error": "Some summaries couldn't be loaded.",
+        "books-tab": "Books",
+        "summaries-tab": "Summaries"
+      },
+      "follow-list": {
+        "tabs": "Follow lists",
+        "followers": "Followers {{number}}",
+        "followings": "Following {{number}}",
+        "empty-followers": "No followers yet",
+        "empty-followings": "Not following anyone yet",
+        "error": "Couldn't load the list"
+      },
+      "edit": {
+        "change-photo": "Change photo",
+        "remove-photo": "Remove photo",
+        "photo-hint": "JPG, PNG, GIF · up to 10MB",
+        "photo-type-error": "Only JPG, PNG or GIF photos can be used.",
+        "photo-size-error": "Photos must be 10MB or smaller.",
+        "name-placeholder": "Enter a nickname",
+        "name-required": "Please enter a nickname.",
+        "name-too-long": "Nicknames can be up to {{max}} characters.",
+        "introduction-too-long": "The introduction can be up to {{max}} characters.",
+        "save": "Save",
+        "upload-error": "Couldn't upload the photo. Please try another one.",
+        "saved": "Profile saved"
+      }
+    },
+    "auth": {
+      "login": {
+        "title": "Log in",
+        "subtitle": "Talk with people who read the same books",
+        "invalid": "The email or password is incorrect. Please check and try again.",
+        "failed": "Couldn't log in. Please try again in a moment.",
+        "no-account": "New to DokTalk?",
+        "signed-up": "You're signed up. Please log in."
+      },
+      "field": {
+        "email-placeholder": "Enter your email address",
+        "email-required": "Please enter your email.",
+        "email-invalid": "Please enter a valid email address.",
+        "password-placeholder": "Enter your password",
+        "password-required": "Please enter your password.",
+        "show-password": "Show password"
+      },
+      "social": {
+        "login-title": "Or log in with",
+        "start-title": "Get started with a social account",
+        "login": {
+          "kakao": "Log in with Kakao",
+          "google": "Log in with Google",
+          "naver": "Log in with Naver",
+          "facebook": "Log in with Facebook"
+        },
+        "start": {
+          "kakao": "Continue with Kakao",
+          "google": "Continue with Google",
+          "naver": "Continue with Naver",
+          "facebook": "Continue with Facebook"
+        }
+      },
+      "register": {
+        "title": "Sign up",
+        "email-divider": "Or sign up with email",
+        "has-account": "Already have an account?",
+        "nickname-placeholder": "The name others will see",
+        "nickname-required": "Please enter a nickname.",
+        "password-rules": "Password requirements",
+        "rule": {
+          "length": "8–30 characters",
+          "letter": "A letter",
+          "digit": "A number",
+          "special": "A symbol {{chars}}",
+          "met": "met",
+          "unmet": "not met"
+        },
+        "password-invalid": "Please meet all the password requirements.",
+        "password-confirm-placeholder": "Enter the password again",
+        "password-confirm-required": "Please enter the password again.",
+        "password-mismatch": "The passwords don't match.",
+        "agreements": "Agreements",
+        "required-tag": "(Required)",
+        "terms": "I agree to the Terms of Service",
+        "privacy": "I agree to the collection and use of personal information",
+        "view-terms": "View the Terms of Service",
+        "view-privacy": "View the Privacy Policy",
+        "agreements-required": "Please accept the required agreements.",
+        "submit": "Sign up",
+        "email-taken": "This email is already registered. Try logging in.",
+        "failed": "Couldn't sign you up. Please check your details and try again.",
+        "optional-tag": "(Optional)",
+        "age14": "I am 14 or older",
+        "marketing": "Receive marketing messages",
+        "view-marketing": "View marketing message details"
+      },
+      "restore": {
+        "title": "This account was deleted",
+        "description": "Restore the account to use it again.",
+        "submit": "Restore account",
+        "cancel": "Use another account",
+        "failed": "Couldn't restore the account. Please try again in a moment."
+      },
+      "callback": {
+        "loading": "Logging you in",
+        "failed-title": "Couldn't log you in",
+        "failed-description": "The social login was cancelled or has expired. Please try again.",
+        "back": "Back to log in",
+        "email-in-use-title": "This email is already registered",
+        "email-in-use-description": "An account with this email already exists. Please log in the way you first signed up (email or another social account).",
+        "email-not-verified-title": "Email verification needed",
+        "email-not-verified-description": "Your social account's email isn't verified. Verify it with that service, then try again.",
+        "email-required-title": "Email access needed",
+        "email-required-description": "To sign up, allow access to your social account email. Log in again and agree to share your email."
+      },
+      "extras": {
+        "title": "More about you",
+        "hint": "All optional. You can sign up without them.",
+        "birthdate": "Date of birth",
+        "birthdate-invalid": "Please check your date of birth.",
+        "birthdate-under-14": "You must be 14 or older to sign up.",
+        "gender": "Gender",
+        "gender-male": "Male",
+        "gender-female": "Female",
+        "gender-none": "Prefer not to say",
+        "interests": "Interests",
+        "interests-hint": "Pick as many as you like."
+      },
+      "social-signup": {
+        "title": "Finish signing up",
+        "subtitle": "Welcome, {{email}}. Agree to the terms to finish signing up.",
+        "subtitle-no-email": "Welcome! Agree to the terms to finish signing up.",
+        "submit": "Agree and sign up",
+        "missing-title": "Sign-up details not found",
+        "missing-description": "Please start again with social login.",
+        "expired": "This sign-up has expired. Please log in with your social account again.",
+        "email-taken": "An account with this email already exists. Please log in with your email.",
+        "already-registered": "You've already signed up. Please log in again.",
+        "failed": "We couldn't sign you up. Please try again in a moment."
+      },
+      "consent": {
+        "title": "Please agree to the terms",
+        "subtitle": "You need to agree to the terms to keep using DokTalk.",
+        "submit": "Agree and continue",
+        "decline": "Decline and log out",
+        "failed": "We couldn't save your agreement. Please try again in a moment."
+      }
+    },
+    "checkout": {
+      "title": "Checkout",
+      "item": "Item",
+      "type": {
+        "D": "Discussion",
+        "S": "Book summary"
+      },
+      "method": "Payment method",
+      "widget-loading": "Loading payment methods",
+      "widget-error": "Couldn't load the payment form. Please try again in a moment.",
+      "total": "Total",
+      "pay": "Pay {{price}}",
+      "note": {
+        "S": "You can read the full summary right after paying.",
+        "D": "You'll join the discussion right after paying."
+      },
+      "request-error": "Couldn't start the payment. Please try again.",
+      "result": {
+        "checking": "Confirming your payment",
+        "success-title": "Payment complete",
+        "success-lead": {
+          "S": "You can now read the full summary. It's also in “Summaries I am reading” in your library.",
+          "D": "You joined the discussion. See the schedule under “Discussion” on your page."
+        },
+        "fail-title": "Payment failed",
+        "fail-lead": "The payment didn't go through. Check the reason below and try again.",
+        "debate-full": "The discussion filled up while you were paying. Your payment will be cancelled.",
+        "confirm-error-title": "We couldn't confirm your payment",
+        "confirm-error-lead": "Please try again in a moment. If it keeps failing, contact us with your order number.",
+        "missing-title": "Payment details not found",
+        "missing-lead": "The address is wrong or outdated. Please check your payments.",
+        "item": "Item",
+        "amount": "Amount",
+        "date": "Paid at",
+        "order": "Order number",
+        "reason": "Reason",
+        "code": "Error code",
+        "read-summary": "Read the summary",
+        "go-debate": "Go to the discussion",
+        "payments": "View payments",
+        "retry": "Try again",
+        "back": "Go back"
+      }
+    },
+    "home": {
+      "hero": {
+        "badge": "Book discussions & summaries",
+        "title-1": "Read together, discuss together,",
+        "title-2": "and grow together.",
+        "browse-debates": "Browse discussions",
+        "browse-summaries": "See book summaries",
+        "featured": "Featured discussion",
+        "join": "Join"
+      },
+      "debates": {
+        "title": "Open discussions",
+        "description": "Talk with people who read the same book",
+        "sort-label": "Sort open discussions",
+        "soonest": "Soonest",
+        "see-all": "See all discussions",
+        "empty": "No discussions are open right now",
+        "empty-description": "Try another category or open one yourself.",
+        "recent-title": "Recent discussions",
+        "recent-description": "No discussions are open right now, so here are the latest ones",
+        "ended": "Ended"
+      },
+      "summaries": {
+        "title": "Popular summaries",
+        "description": "Start with the free preview",
+        "see-all": "See all summaries",
+        "preview": "Preview",
+        "rank": "No. {{rank}}",
+        "empty": "No summaries yet"
+      },
+      "posts": {
+        "description": "Share reviews, discussion notes and book picks",
+        "write": "Write a post",
+        "see-all": "See all posts",
+        "empty": "No posts yet"
+      },
+      "see-all": "See all",
+      "footer": {
+        "language": "Language",
+        "rights": "© DokTalk. All rights reserved."
+      },
+      "main": {
+        "greeting": "Welcome back, {{name}}",
+        "upcoming": "Upcoming meetings: {{count}}",
+        "no-upcoming": "No upcoming meetings. Join a discussion that interests you.",
+        "upcoming-label": "Upcoming meetings",
+        "feed": "Recommended feed",
+        "tab": {
+          "debates": "Discussions",
+          "posts": "Posts",
+          "summaries": "Summaries"
+        },
+        "more": {
+          "debates": "More discussions",
+          "posts": "More posts",
+          "summaries": "More summaries"
+        },
+        "all-meetings": "All my meetings",
+        "rail": "Popular summaries and my library"
+      }
+    },
+    "legal": {
+      "effective": "Effective {{date}}",
+      "toc": "Contents",
+      "loading": "Loading the document",
+      "error": "Couldn't load the document"
     }
   },
   "footer": {
@@ -591,8 +1090,7 @@
       "motto": "Read together, discuss together, grow together.",
       "address": "Address",
       "address_value": "46 Sangdo-dong, Dongjak-gu, Seoul, Soongsil University Changui Hall",
-      "email": "Email",
-      "phone": "Phone"
+      "email": "Email"
     },
     "services": {
       "title": "Services",
@@ -609,12 +1107,8 @@
       "terms": "Terms of Service",
       "privacy": "Privacy Policy"
     },
-    "copyright": {
-      "text": "© 2024 DokTalk. All rights reserved."
-    },
     "version": {
-      "label": "Version",
-      "last_update": "Last Updated"
+      "label": "Version"
     }
   }
 }

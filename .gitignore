@@ -26,3 +26,7 @@ dist-ssr
 # Environmental Files
 .env*
 .*env
+
+# Storybook
+storybook-static
+*storybook.log

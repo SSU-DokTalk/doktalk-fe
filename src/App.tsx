@@ -1,176 +1,127 @@
-import axios from 'axios';
+import { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 
-import '@/assets/css/main.scss';
-import '@/assets/css/pages/_settings.scss';
-import '@/assets/css/components/_sidebar.scss';
-import 'react-datepicker/dist/react-datepicker.css';
-import '@/assets/css/tailwind.css';
-
-import BasicLayout from '@/layouts/BasicLayout';
-
-import Landing from '@/pages/Landing';
-import Post from '@/pages/Post';
-import Login from '@/pages/Login';
-import NotFound from '@/pages/NotFound';
-import Register from '@/pages/Register';
-import Auth from '@/pages/Auth';
-import MyPage from '@/pages/MyPage';
-import UserProfile from '@/pages/UserProfile';
-import Summary from '@/pages/Summary';
-import { useEffect, useState } from 'react';
-import { useAppDispatch, useAppSelector } from './stores/hooks';
-import { selectUser, setUser } from './stores/user';
-import cookie from 'react-cookies';
-import ContentMainLayout from './layouts/ContentMainLayout';
-import Debate from './pages/Debate';
-import Search from './pages/Search';
-import CircularProgress from '@mui/material/CircularProgress';
-import i18n from './locales/i18n';
-import CreateDebate from './pages/CreateDebate';
-import CreateSummary from './pages/CreateSummary';
-import Settings from './pages/Settings';
-import DebateDetail from './pages/DebateDetail';
-import SummaryDetail from './pages/SummaryDetail';
-import PostDetail from './pages/PostDetail';
-import UpdateSummary from './pages/UpdateSummary';
-import UpdateDebate from './pages/UpdateDebate';
-import { CheckoutSuccess } from './components/Payments/CheckoutSuccess';
-import { CheckoutFail } from './components/Payments/CheckoutFail';
-import IntegratedSearch from './pages/IntegratedSearch';
-import MyLibrary from './pages/MyLibrary';
-import ScrollToTop from './components/utils/ScrollToTop';
+import { useRestoreSession } from '@/features/auth/useRestoreSession';
+import {
+  AgreementsPage,
+  AuthCallbackPage,
+  BookSearchPage,
+  CheckoutResultPage,
+  DebateCreatePage,
+  DebateDetailPage,
+  DebateEditPage,
+  DebateListPage,
+  HomePage,
+  IntegratedSearchPage,
+  LegalPage,
+  LoginPage,
+  MyLibraryPage,
+  MyPage,
+  PostDetailPage,
+  PostFeedPage,
+  preloadPagesWhenIdle,
+  RegisterPage,
+  SettingsPage,
+  SocialSignupPage,
+  SummaryCreatePage,
+  SummaryDetailPage,
+  SummaryEditPage,
+  SummaryListPage,
+  UserProfilePage,
+} from '@/pages';
+import { FullPageSpinner } from '@/shared/components/FullPageSpinner';
+import {
+  AppShell,
+  LandingLayout,
+  PageLayout,
+  SideColumnLayout,
+  StandaloneLayout,
+} from '@/shell';
+import { useAuth } from '@/shell/hooks';
+import NotFoundPage from '@/shell/NotFoundPage';
+import ScrollToTop from '@/shell/ScrollToTop';
 
 function App() {
-  const dispatch = useAppDispatch();
-  const user = useAppSelector(selectUser);
-  const [isAuthChecked, setIsAuthChecked] = useState(false);
+  const { isLoggedIn } = useAuth();
+  // 새로고침하면 로그인 상태를 먼저 되살린 뒤 화면을 그려요.
+  const ready = useRestoreSession();
 
+  // 첫 화면을 그린 뒤 나머지 페이지 조각을 미리 받아 둬요.
   useEffect(() => {
-    if (localStorage.getItem('lang') == null) {
-      localStorage.setItem('lang', 'mn');
-    }
-    i18n.changeLanguage(localStorage.getItem('lang') as string);
+    if (ready) preloadPagesWhenIdle();
+  }, [ready]);
 
-    if (cookie.load('Authorization') != undefined) {
-      axios
-        .post(
-          `/api/user/access-token`,
-          {},
-          {
-            params: {
-              refresh_token: cookie.load('Authorization'),
-            },
-          }
-        )
-        .then(async (res) => {
-          // 새 토큰 저장
-          let token = res.headers.authorization;
-          axios.defaults.headers.common['Authorization'] = token;
-
-          // 유저 정보가 없는 경우 다시 요청
-          if (user.id == 0) {
-            axios.get('/api/user/me').then(async (res) => {
-              let {
-                id,
-                name,
-                role,
-                profile,
-              }: {
-                id: number;
-                name: string;
-                role: 'USER' | 'ADMIN';
-                profile: string;
-              } = res.data;
-              if (id != 0) {
-                await dispatch(
-                  setUser({
-                    id: id,
-                    name: name,
-                    profile: profile,
-                    role: role,
-                  })
-                );
-              }
-            });
-          }
-        })
-        .finally(() => {
-          setIsAuthChecked(true);
-        });
-    } else {
-      setIsAuthChecked(true);
-    }
-  }, []);
-
-  if (!isAuthChecked) {
-    return (
-      <div
-        style={{
-          width: '100vw',
-          height: '100vh',
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-        }}
-      >
-        <CircularProgress className='loading-spinner' />
-      </div>
-    );
-  }
+  if (!ready) return <FullPageSpinner />;
 
   return (
     <>
       <ScrollToTop />
       <Routes>
-        <Route path='/checkout'>
-          <Route path='/checkout/success' element={<CheckoutSuccess />}></Route>
-          <Route path='/checkout/fail' element={<CheckoutFail />}></Route>
-        </Route>
-        <Route element={<BasicLayout />}>
-          <Route path='/' element={<Landing />}></Route>
+        <Route element={<AppShell />}>
+          {/* 첫 화면: 로그아웃이면 넓은 랜딩, 로그인하면 왼쪽 칼럼이 있는 앱 틀 */}
+          <Route
+            element={isLoggedIn ? <SideColumnLayout /> : <LandingLayout />}
+          >
+            <Route path='/' element={<HomePage />} />
+          </Route>
 
-          <Route element={<ContentMainLayout />}>
-            <Route path='/post' element={<Post />}></Route>
+          <Route element={<SideColumnLayout />}>
+            <Route path='/post' element={<PostFeedPage />} />
+            <Route path='/post/:post_id' element={<PostDetailPage />} />
 
-            <Route path='/search' element={<Search />}></Route>
+            <Route path='/search' element={<BookSearchPage />} />
             <Route
               path='/integrated-search'
-              element={<IntegratedSearch />}
-            ></Route>
+              element={<IntegratedSearchPage />}
+            />
 
-            <Route path='/debate' element={<Debate />}></Route>
-            <Route path='/debate/create' element={<CreateDebate />}></Route>
-            <Route path='/debate/:debate_id' element={<DebateDetail />}></Route>
+            <Route path='/debate' element={<DebateListPage />} />
+            <Route path='/debate/create' element={<DebateCreatePage />} />
+            <Route path='/debate/:debate_id' element={<DebateDetailPage />} />
             <Route
               path='/debate/:debate_id/update'
-              element={<UpdateDebate />}
-            ></Route>
+              element={<DebateEditPage />}
+            />
 
-            <Route path='/summary' element={<Summary />}></Route>
-            <Route path='/summary/create' element={<CreateSummary />}></Route>
+            <Route path='/summary' element={<SummaryListPage />} />
+            <Route path='/summary/create' element={<SummaryCreatePage />} />
             <Route
               path='/summary/:summary_id'
-              element={<SummaryDetail />}
-            ></Route>
+              element={<SummaryDetailPage />}
+            />
             <Route
               path='/summary/:summary_id/update'
-              element={<UpdateSummary />}
-            ></Route>
+              element={<SummaryEditPage />}
+            />
 
-            <Route path='/post/:post_id' element={<PostDetail />}></Route>
+            <Route path='/mypage/library' element={<MyLibraryPage />} />
           </Route>
-          <Route path='/mypage' element={<MyPage />}></Route>
-          <Route path='/mypage/library' element={<MyLibrary />}></Route>
 
-          <Route path='/user/:user_id' element={<UserProfile />}></Route>
-          <Route path='settings' element={<Settings />}></Route>
+          <Route element={<PageLayout />}>
+            <Route path='/mypage' element={<MyPage />} />
+            <Route path='/user/:user_id' element={<UserProfilePage />} />
+            <Route path='/settings' element={<SettingsPage />} />
+            <Route path='/terms' element={<LegalPage kind='terms' />} />
+            <Route path='/privacy' element={<LegalPage kind='privacy' />} />
+            <Route
+              path='/checkout/success'
+              element={<CheckoutResultPage result='success' />}
+            />
+            <Route
+              path='/checkout/fail'
+              element={<CheckoutResultPage result='fail' />}
+            />
+            <Route path='*' element={<NotFoundPage />} />
+          </Route>
         </Route>
-        <Route path='/login' element={<Login />}></Route>
-        <Route path='/register' element={<Register />}></Route>
-        <Route path='/auth/:provider' element={<Auth />}></Route>
 
-        <Route path='*' element={<NotFound />}></Route>
+        <Route element={<StandaloneLayout />}>
+          <Route path='/login' element={<LoginPage />} />
+          <Route path='/register' element={<RegisterPage />} />
+          <Route path='/register/social' element={<SocialSignupPage />} />
+          <Route path='/agreements' element={<AgreementsPage />} />
+          <Route path='/auth/:provider' element={<AuthCallbackPage />} />
+        </Route>
       </Routes>
     </>
   );

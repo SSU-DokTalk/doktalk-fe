@@ -1,0 +1,19 @@
+# 이미지 안에서 yarn.lock대로 새로 설치하고 빌드해요. 로컬·CI 러너의 설치물과 빌드 결과는 넣지 않아요.
+node_modules
+dist
+dist-ssr
+storybook-static
+*storybook.log
+
+# 빌드에 필요 없는 것
+.git
+.github
+.vscode
+.idea
+.DS_Store
+logs
+*.log
+
+# .env는 넣어요. CI가 빌드 직전에 VITE_* 값을 .env로 만들고 vite build가 읽어요.
+# 개인 설정 파일(.env.local 같은 *.local)만 빼요.
+*.local
