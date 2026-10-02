@@ -2,7 +2,7 @@ import { LogOut, Menu as MenuIcon, Search } from 'lucide-react';
 import { useState } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink } from 'react-router-dom';
-import logo from '@/assets/images/logo.svg';
+import logo from '@/assets/images/logo-inverse.svg';
 import {
   Avatar,
   Button,

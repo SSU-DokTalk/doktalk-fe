@@ -2,6 +2,7 @@ import { style } from '@vanilla-extract/css';
 import {
   fontSize,
   fontWeight,
+  inverseTheme,
   mq,
   space,
   typeScale,
@@ -17,9 +18,13 @@ export const page = style({
 
 /* ---------- 첫 화면 (히어로) ---------- */
 
-export const hero = style({
-  background: `linear-gradient(134deg, ${vars.color.brandSubtle} 0%, ${vars.color.canvas} 55%, ${vars.color.brandSubtle} 100%)`,
-});
+/** 남색 바탕에 오른쪽 위로 옅은 금빛이 번져요. 안의 버튼·카드는 금색으로 강조돼요. */
+export const hero = style([
+  inverseTheme,
+  {
+    background: `radial-gradient(circle at 88% 0%, ${vars.color.brandFaint} 0%, transparent 45%), ${vars.color.surface}`,
+  },
+]);
 
 /** 모바일: 글 → 추천 카드 → 버튼 / 데스크톱: [글·버튼 | 카드] */
 export const heroInner = style({
@@ -78,9 +83,9 @@ export const badge = style({
   gap: space[6],
   height: '32px',
   padding: `0 ${space[14]}`,
-  border: `1px solid ${vars.color.brandMuted}`,
+  border: `1px solid ${vars.color.brandBorder}`,
   borderRadius: vars.radius.pill,
-  backgroundColor: vars.color.surface,
+  backgroundColor: vars.color.brandSubtle,
   color: vars.color.brand,
   fontSize: fontSize[13],
   fontWeight: fontWeight.semibold,
@@ -159,7 +164,9 @@ export const featured = style({
   display: 'flex',
   overflow: 'hidden',
   borderRadius: vars.radius['2xl'],
-  backgroundColor: vars.color.surface,
+  // 바탕보다 살짝 밝은 판. 뒤에 겹친 장식 판이 비치지 않게 불투명하게 깔아요.
+  background: `linear-gradient(${vars.color.surfaceGlass}, ${vars.color.surfaceGlass}), ${vars.color.surface}`,
+  border: `1px solid ${vars.color.surfaceGlassBorder}`,
   boxShadow: vars.shadow.lg,
   color: vars.color.text,
   textDecoration: 'none',

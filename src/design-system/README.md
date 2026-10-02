@@ -20,7 +20,7 @@ yarn storybook
 
 | 폴더                  | 내용                                                                                                                                                                             |
 | --------------------- | -------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `tokens/theme.css.ts` | 색·반경·그림자·글꼴 CSS 변수. 이름이 `--dt-*`로 고정돼 있어요.                                                                                                                   |
+| `tokens/theme.css.ts` | 색·반경·그림자·글꼴 CSS 변수. 이름이 `--dt-*`로 고정돼 있어요. 남색 바탕 영역용 `inverseTheme`도 여기 있어요.                                                                    |
 | `tokens/scale.ts`     | 간격(`space`), 글자 크기·굵기(`fontSize`, `fontWeight`), 글자 역할(`typeScale`), 앱 틀 치수(`layout`), 기준점(`mq`), z-index                                                     |
 | `tokens/palette.ts`   | 그림에만 쓰는 고정 색 (표지 대체 색)                                                                                                                                             |
 | `styles/`             | 전역 기본 스타일(`reset.css`), 글꼴, 포커스 링, 스크린 리더 전용 텍스트                                                                                                          |
@@ -38,7 +38,8 @@ yarn storybook
 - **컴포넌트 모양은 옵션으로** 바꿔요. `className`은 위치·배치(margin, flex, grid)에만 쓰고, 색·크기·hover를 덮어쓰지 않아요. 필요한 모양이 없으면 컴포넌트에 옵션을 더해요.
   - 예: IconButton `variant='onBrand'`(남색 바탕), `size='fab'`(떠 있는 버튼), `labelled`, TextField `shape='pill'`, Button `wrap`(좁은 칸 두 줄), Menu.Item `tone='danger'`.
 - **`!important`는 쓰지 않아요.** 화면 폭에 따라 숨길 때는 그 요소의 스타일에 `@media`를 두거나 `useMediaQuery`로 아예 그리지 않아요. 인라인 `style`은 실행 중에 정해지는 값(표지 너비에 맞춘 크기 등)에만 써요.
-- **Steel(`infoIcon`)은 아이콘 전용**이에요. 텍스트에는 대비가 충분한 `info`를 써요.
+- **금색(`infoIcon`)은 아이콘 전용**이에요. 텍스트에는 대비가 충분한 `info`를 써요.
+- **남색 바탕 영역**은 `style([inverseTheme, {...}])`처럼 `inverseTheme`을 붙여요. 그 안에서는 토큰이 남색 바탕용 값으로 바뀌어서(글자 흰색, `brand` 금색, 금색 버튼 위 글자 남색) Button·IconButton·TextField를 그대로 써요. 상단 내비, 모바일 상단 바, 첫 화면 히어로, 푸터가 이렇게 돼 있어요. 메뉴·대화상자는 body에 그려져서 밝은 색 그대로예요.
 - **아이콘은 lucide-react**를 써요. 버튼 크기에 맞춰 아이콘 크기가 자동으로 정해져요.
 - **아이콘만 있는 버튼**은 `IconButton`을 쓰고 `aria-label`을 꼭 넣어요(타입에서 필수).
 - **링크를 버튼처럼** 보이게 할 때는 `<Link className={buttonStyles({ variant: 'secondary' })}>`처럼 써요.
@@ -47,7 +48,7 @@ yarn storybook
 ## 전역 스타일
 
 - `styles/reset.css`는 Tailwind preflight를 바탕으로 한 기본값이에요. `dt-reset` 레이어 안에 있어서, 레이어 밖에 있는 컴포넌트 스타일이 선택자 명시도와 상관없이 이겨요. 컴포넌트는 layer 없이 클래스 하나로 써요.
-- 키보드 포커스는 reset이 모든 요소에 기본 링(Navy 2px)을 그려요. 모양이 다른 곳만 컴포넌트에서 `:focus-visible`로 덮어써요.
+- 키보드 포커스는 reset이 모든 요소에 기본 링(`brand` 2px, 남색 바탕에서는 금색)을 그려요. 모양이 다른 곳만 컴포넌트에서 `:focus-visible`로 덮어써요.
 - 글자 크기는 rem이라 브라우저 글자 크기 설정을 따라가요. 입력칸은 iOS 확대를 막으려고 16px로 고정했어요.
 - 본문 글은 선택·복사할 수 있어요. 버튼 글자만 선택되지 않아요.
 - 글꼴은 Pretendard Variable woff2 한 파일(약 2MB)이에요. 한글·영문·키릴 문자가 모두 들어 있어요.

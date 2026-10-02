@@ -24,7 +24,7 @@ import {
 } from './components/Menu/Menu';
 import { TabsList, TabsPanel, TabsRoot, TabsTab } from './components/Tabs/Tabs';
 
-export { vars } from './tokens/theme.css';
+export { inverseTheme, vars } from './tokens/theme.css';
 export {
   breakpoints,
   coverRatio,
