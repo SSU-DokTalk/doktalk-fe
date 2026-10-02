@@ -3,7 +3,7 @@ import { Search } from 'lucide-react';
 import { useEffect, useState, type FormEvent } from 'react';
 import { useTranslation } from 'react-i18next';
 import { Link, NavLink, useLocation, useNavigate } from 'react-router-dom';
-import logo from '@/assets/images/logo.svg';
+import logo from '@/assets/images/logo-inverse.svg';
 import { buttonStyles, iconButtonStyles, mq, TextField } from '@/design-system';
 import { useMediaQuery } from '@/shared/hooks/useMediaQuery';
 import { useAuth } from './hooks';
@@ -108,7 +108,7 @@ function TopNav() {
             <>
               <Link
                 to={loginHref}
-                className={buttonStyles({ variant: 'ghost', size: 'md' })}
+                className={buttonStyles({ variant: 'plain', size: 'md' })}
               >
                 {t('component.topnav.login')}
               </Link>

@@ -1,18 +1,29 @@
 import { style } from '@vanilla-extract/css';
-import { fontSize, fontWeight, mq, space, vars } from '@/design-system/tokens';
+import {
+  fontSize,
+  fontWeight,
+  inverseTheme,
+  mq,
+  space,
+  vars,
+} from '@/design-system/tokens';
 
 /** 어두운 바탕 위 보조 글자 (대비 7:1 이상) */
 const soft = vars.color.inverseTextMuted;
 /** 어두운 바탕 위 옅은 글자 (대비 4.5:1 이상) */
 const faint = vars.color.inverseTextSubtle;
 
-export const footer = style({
-  backgroundColor: vars.color.inverse,
-  color: vars.color.inverseText,
-  fontFamily: vars.font.family,
-  wordBreak: 'keep-all',
-  overflowWrap: 'break-word',
-});
+/** 남색 바탕 토큰(inverseTheme)을 써서 묶음 제목을 금색(brand)으로 강조해요. */
+export const footer = style([
+  inverseTheme,
+  {
+    backgroundColor: vars.color.inverse,
+    color: vars.color.inverseText,
+    fontFamily: vars.font.family,
+    wordBreak: 'keep-all',
+    overflowWrap: 'break-word',
+  },
+]);
 
 export const inner = style({
   display: 'flex',
@@ -74,6 +85,7 @@ export const groupTitle = style({
   margin: `0 0 ${space[4]}`,
   fontSize: fontSize[15],
   fontWeight: fontWeight.bold,
+  color: vars.color.brand,
 });
 
 export const link = style({

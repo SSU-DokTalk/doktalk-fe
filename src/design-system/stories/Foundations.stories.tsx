@@ -51,7 +51,7 @@ const swatches: { name: string; token: string; value: string; use: string }[] =
       use: '카테고리·보조 강조 텍스트',
     },
     {
-      name: 'Info icon (Steel)',
+      name: 'Info icon (Gold)',
       token: 'color-info-icon',
       value: vars.color.infoIcon,
       use: '아이콘 전용, 텍스트 금지',

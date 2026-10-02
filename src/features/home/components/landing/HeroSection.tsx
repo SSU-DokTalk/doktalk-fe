@@ -118,7 +118,7 @@ export function HeroSection() {
           </Link>
           <Link
             to='/summary'
-            className={buttonStyles({ variant: 'secondary', size: 'lg' })}
+            className={buttonStyles({ variant: 'neutral', size: 'lg' })}
           >
             {t('page.home.hero.browse-summaries')}
           </Link>

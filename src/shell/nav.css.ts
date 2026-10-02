@@ -2,6 +2,7 @@ import { globalStyle, style } from '@vanilla-extract/css';
 import {
   fontSize,
   fontWeight,
+  inverseTheme,
   layout,
   mq,
   space,
@@ -17,17 +18,20 @@ const focusVisible = {
 
 /* ---------- 데스크톱 상단 내비 ---------- */
 
-/** 데스크톱(md 이상)에만 보여요. */
-export const topNav = style({
-  position: 'sticky',
-  top: 0,
-  zIndex: zIndex.sticky,
-  backgroundColor: vars.color.surface,
-  borderBottom: `1px solid ${vars.color.borderSubtle}`,
-  '@media': {
-    [mq.belowMd]: { display: 'none' },
+/** 데스크톱(md 이상)에만 보여요. 남색 바탕이라 안의 링크·버튼은 금색으로 강조해요. */
+export const topNav = style([
+  inverseTheme,
+  {
+    position: 'sticky',
+    top: 0,
+    zIndex: zIndex.sticky,
+    backgroundColor: vars.color.surface,
+    borderBottom: `1px solid ${vars.color.borderSubtle}`,
+    '@media': {
+      [mq.belowMd]: { display: 'none' },
+    },
   },
-});
+]);
 
 export const topNavInner = style({
   height: layout.topNavHeight,
@@ -179,23 +183,26 @@ export const menuHeader = style({
 
 /* ---------- 모바일 상단 바 ---------- */
 
-/** 모바일(md 미만)에만 보여요. */
-export const mobileBar = style({
-  position: 'sticky',
-  top: 0,
-  zIndex: zIndex.sticky,
-  height: layout.mobileBarHeight,
-  boxSizing: 'border-box',
-  padding: `0 ${space[6]} 0 ${space[16]}`,
-  display: 'flex',
-  alignItems: 'center',
-  gap: space[2],
-  backgroundColor: vars.color.surface,
-  borderBottom: `1px solid ${vars.color.borderSubtle}`,
-  '@media': {
-    [mq.md]: { display: 'none' },
+/** 모바일(md 미만)에만 보여요. 데스크톱 내비처럼 남색 바탕이에요. */
+export const mobileBar = style([
+  inverseTheme,
+  {
+    position: 'sticky',
+    top: 0,
+    zIndex: zIndex.sticky,
+    height: layout.mobileBarHeight,
+    boxSizing: 'border-box',
+    padding: `0 ${space[6]} 0 ${space[16]}`,
+    display: 'flex',
+    alignItems: 'center',
+    gap: space[2],
+    backgroundColor: vars.color.surface,
+    borderBottom: `1px solid ${vars.color.borderSubtle}`,
+    '@media': {
+      [mq.md]: { display: 'none' },
+    },
   },
-});
+]);
 
 export const mobileLogo = style({
   display: 'block',

@@ -1,6 +1,8 @@
 import {
+  assignVars,
   createGlobalTheme,
   createGlobalThemeContract,
+  style,
 } from '@vanilla-extract/css';
 
 const toKebab = (key: string) =>
@@ -19,9 +21,9 @@ export const vars = createGlobalThemeContract(
       canvas: null,
       /** 카드·시트·내비 배경 */
       surface: null,
-      /** 카드 안의 회색 영역 */
+      /** 카드 안의 옅은 영역 */
       surfaceSubtle: null,
-      /** 회색 페이지 위에 파인 영역 (SegmentedControl 트랙) */
+      /** 페이지 배경 위에 파인 영역 (SegmentedControl 트랙) */
       canvasInset: null,
       /** 사진·표지 위에 올리는 흰 바탕 (배지·버튼) */
       surfaceTranslucent: null,
@@ -33,20 +35,20 @@ export const vars = createGlobalThemeContract(
       brand: null,
       brandHover: null,
       brandActive: null,
-      /** 활성 메뉴·날짜 블록 배경 (Navy 50) */
+      /** 활성 메뉴·날짜 블록 배경 (Cream) */
       brandSubtle: null,
-      /** 아바타·선택 칩 배경 (Navy 100) */
+      /** 아바타·선택 칩 배경 (짙은 Cream) */
       brandMuted: null,
       /** 연한 강조 테두리 */
       brandBorder: null,
-      /** 가장 옅은 남색 배경 (서재의 책 담기 칸) */
+      /** 가장 옅은 배경 (서재의 책 담기 칸) */
       brandFaint: null,
 
-      /** 카테고리·보조 강조 텍스트 (Steel Text) */
+      /** 카테고리·보조 강조 텍스트 (짙은 Gold) */
       info: null,
-      /** 아이콘·장식 전용, 텍스트에 쓰지 않아요 (Steel) */
+      /** 아이콘·장식 전용, 텍스트에 쓰지 않아요 (Gold) */
       infoIcon: null,
-      /** 무료·카테고리 배지 배경 (Steel 50) */
+      /** 무료·카테고리 배지 배경 (Gold 50) */
       infoSubtle: null,
 
       danger: null,
@@ -103,7 +105,7 @@ export const vars = createGlobalThemeContract(
 
       /** 표지 가장자리 선 */
       coverEdge: null,
-      /** 표지 뒤 회색 판 (위 → 아래 그라디언트) */
+      /** 표지 뒤 판 (위 → 아래 그라디언트) */
       coverStageTop: null,
       coverStageBottom: null,
     },
@@ -149,63 +151,66 @@ export const vars = createGlobalThemeContract(
 );
 
 createGlobalTheme(':root', vars, {
+  // 색은 리디자인 목업(남색 #0D1B3E · 금색 #C8A84B · 크림 #F8F5EE)을 따라요.
+  // 밝은 바탕에서 대비가 모자란 목업 색만 진하게 바꿨어요. 옅은 글자 #9090AA → #66667F(4.5:1 이상),
+  // 금색 글자 → #7A5C0F(4.5:1 이상), 금색 아이콘 → #A3842A(3:1 이상). 밝은 금색은 남색 바탕(inverseTheme)에서 써요.
   color: {
-    canvas: '#F3F4F7',
+    canvas: '#F8F5EE',
     surface: '#FFFFFF',
-    surfaceSubtle: '#F3F4F7',
-    canvasInset: '#E9EAF0',
+    surfaceSubtle: '#F8F5EE',
+    canvasInset: '#EFEADF',
     surfaceTranslucent: 'rgba(255, 255, 255, 0.94)',
     surfaceGlass: 'rgba(255, 255, 255, 0.6)',
     surfaceGlassBorder: 'rgba(255, 255, 255, 0.9)',
 
-    brand: '#000080',
-    brandHover: '#1C1CA8',
-    brandActive: '#00006B',
-    brandSubtle: '#EEF0FB',
-    brandMuted: '#E0E3F7',
-    brandBorder: '#B9BFE8',
-    brandFaint: '#F8F9FE',
+    brand: '#0D1B3E',
+    brandHover: '#1A2F5E',
+    brandActive: '#081330',
+    brandSubtle: '#F2EDE3',
+    brandMuted: '#E8E1D1',
+    brandBorder: '#E2D3A6',
+    brandFaint: '#FBF9F4',
 
-    info: '#2B6C8C',
-    infoIcon: '#539AB9',
-    infoSubtle: '#E8F2F7',
+    info: '#7A5C0F',
+    infoIcon: '#A3842A',
+    infoSubtle: '#F6EED6',
 
     danger: '#C92A2A',
     dangerSubtle: '#FFF1F1',
     dangerBorder: '#F1C4C4',
 
-    text: '#111827',
-    textBody: '#1F2937',
-    textMuted: '#374151',
-    textSecondary: '#4B5563',
-    textTertiary: '#666565',
+    text: '#1A1A2E',
+    textBody: '#26263C',
+    textMuted: '#36364F',
+    textSecondary: '#4A4A6A',
+    textTertiary: '#66667F',
     textOnBrand: '#FFFFFF',
     textOnBrandMuted: 'rgba(255, 255, 255, 0.84)',
-    textDisabled: '#666565',
+    textDisabled: '#66667F',
 
-    border: '#E5E7EB',
-    borderSubtle: '#F0F1F4',
-    borderInput: '#D9D9D9',
+    border: 'rgba(13, 27, 62, 0.1)',
+    borderSubtle: 'rgba(13, 27, 62, 0.06)',
+    borderInput: 'rgba(13, 27, 62, 0.2)',
 
-    disabled: '#E5E7EB',
-    inverse: '#1F2937',
+    disabled: '#ECE8DF',
+    inverse: '#080F24',
     inverseText: '#FFFFFF',
     inverseTextMuted: 'rgba(255, 255, 255, 0.8)',
     inverseTextSubtle: 'rgba(255, 255, 255, 0.64)',
-    inverseBorder: 'rgba(255, 255, 255, 0.14)',
+    inverseBorder: 'rgba(255, 255, 255, 0.1)',
 
     onBrandSubtle: 'rgba(255, 255, 255, 0.16)',
     onBrandHover: 'rgba(255, 255, 255, 0.12)',
     onBrandActive: 'rgba(255, 255, 255, 0.2)',
     onBrandTrack: 'rgba(255, 255, 255, 0.35)',
 
-    overlay: 'rgba(17, 24, 39, 0.48)',
-    scrim: 'rgba(17, 24, 39, 0.55)',
-    skeleton: '#EEF0F3',
+    overlay: 'rgba(8, 15, 36, 0.5)',
+    scrim: 'rgba(8, 15, 36, 0.55)',
+    skeleton: '#EFEBE2',
 
     coverEdge: 'rgba(0, 0, 0, 0.06)',
-    coverStageTop: '#F5F4F3',
-    coverStageBottom: '#E9E9E9',
+    coverStageTop: '#F6F2E9',
+    coverStageBottom: '#EAE3D3',
   },
   font: {
     family:
@@ -223,20 +228,95 @@ createGlobalTheme(':root', vars, {
     pill: '9999px',
   },
   shadow: {
-    xs: '0 1px 3px rgba(17, 24, 39, 0.1)',
-    sm: '0 1px 2px rgba(17, 24, 39, 0.06)',
-    md: '0 1px 2px rgba(17, 24, 39, 0.06), 0 6px 16px rgba(17, 24, 39, 0.08)',
-    lg: '0 2px 6px rgba(17, 24, 39, 0.06), 0 24px 48px rgba(0, 0, 128, 0.12)',
-    popover: '0 16px 40px rgba(17, 24, 39, 0.16)',
+    xs: '0 1px 3px rgba(13, 27, 62, 0.1)',
+    sm: '0 1px 2px rgba(13, 27, 62, 0.06)',
+    md: '0 1px 2px rgba(13, 27, 62, 0.06), 0 6px 16px rgba(13, 27, 62, 0.08)',
+    lg: '0 2px 6px rgba(13, 27, 62, 0.06), 0 24px 48px rgba(13, 27, 62, 0.12)',
+    popover: '0 16px 40px rgba(13, 27, 62, 0.16)',
     dialog: '0 24px 64px rgba(0, 0, 0, 0.24)',
-    fab: '0 10px 24px rgba(0, 0, 128, 0.3)',
-    focus: '0 0 0 4px rgba(0, 0, 128, 0.1)',
-    overlay: '0 2px 8px rgba(17, 24, 39, 0.18)',
-    bottomBar: '0 -6px 16px rgba(17, 24, 39, 0.05)',
-    panel: '0 12px 40px rgba(17, 24, 39, 0.08)',
+    fab: '0 10px 24px rgba(13, 27, 62, 0.3)',
+    focus: '0 0 0 4px rgba(13, 27, 62, 0.1)',
+    overlay: '0 2px 8px rgba(13, 27, 62, 0.18)',
+    bottomBar: '0 -6px 16px rgba(13, 27, 62, 0.05)',
+    panel: '0 12px 40px rgba(13, 27, 62, 0.08)',
     book: '0 6px 14px rgba(0, 0, 0, 0.16)',
     bookSpine: 'inset 3px 0 0 rgba(0, 0, 0, 0.12)',
     bookLarge:
       'inset 4px 0 0 rgba(0, 0, 0, 0.12), 0 10px 24px rgba(0, 0, 0, 0.16)',
   },
+});
+
+/**
+ * 남색 바탕 영역 (상단 내비, 첫 화면 히어로, 푸터)
+ *
+ * 이 클래스를 붙인 요소 안에서는 같은 토큰이 남색 바탕에 맞는 값으로 바뀌어요.
+ * 바탕(surface)은 남색, 글자는 흰색 계열, 강조(brand)는 금색, 금색 버튼 위 글자는 남색이에요.
+ * 그래서 안에 둔 Button·IconButton·TextField는 따로 고치지 않아도 남색 바탕에 맞게 보여요.
+ * 메뉴·대화상자처럼 body에 띄우는 판은 이 요소 밖에 그려져서 밝은 색 그대로예요.
+ * 색 토큰을 새로 만들면 여기에도 값을 넣어야 해요 (빠뜨리면 타입 오류가 나요).
+ */
+export const inverseTheme = style({
+  vars: {
+    ...assignVars(vars.color, {
+      canvas: '#0D1B3E',
+      surface: '#0D1B3E',
+      surfaceSubtle: 'rgba(255, 255, 255, 0.08)',
+      canvasInset: 'rgba(0, 0, 0, 0.24)',
+      surfaceTranslucent: 'rgba(13, 27, 62, 0.9)',
+      surfaceGlass: 'rgba(255, 255, 255, 0.05)',
+      surfaceGlassBorder: 'rgba(200, 168, 75, 0.18)',
+
+      brand: '#C8A84B',
+      brandHover: '#E8C96A',
+      brandActive: '#B39543',
+      brandSubtle: 'rgba(200, 168, 75, 0.12)',
+      brandMuted: 'rgba(200, 168, 75, 0.2)',
+      brandBorder: 'rgba(200, 168, 75, 0.35)',
+      brandFaint: 'rgba(200, 168, 75, 0.07)',
+
+      info: '#E8C96A',
+      infoIcon: '#C8A84B',
+      infoSubtle: 'rgba(200, 168, 75, 0.12)',
+
+      danger: '#FF8F8F',
+      dangerSubtle: 'rgba(255, 143, 143, 0.12)',
+      dangerBorder: 'rgba(255, 143, 143, 0.4)',
+
+      text: '#FFFFFF',
+      textBody: 'rgba(255, 255, 255, 0.9)',
+      textMuted: 'rgba(255, 255, 255, 0.72)',
+      textSecondary: 'rgba(255, 255, 255, 0.64)',
+      textTertiary: 'rgba(255, 255, 255, 0.56)',
+      textOnBrand: '#0D1B3E',
+      textOnBrandMuted: 'rgba(13, 27, 62, 0.8)',
+      textDisabled: 'rgba(255, 255, 255, 0.4)',
+
+      border: 'rgba(255, 255, 255, 0.14)',
+      borderSubtle: 'rgba(200, 168, 75, 0.25)',
+      borderInput: 'rgba(255, 255, 255, 0.24)',
+
+      disabled: 'rgba(255, 255, 255, 0.1)',
+      inverse: '#080F24',
+      inverseText: '#FFFFFF',
+      inverseTextMuted: 'rgba(255, 255, 255, 0.8)',
+      inverseTextSubtle: 'rgba(255, 255, 255, 0.64)',
+      inverseBorder: 'rgba(255, 255, 255, 0.1)',
+
+      // 금색 버튼 위
+      onBrandSubtle: 'rgba(13, 27, 62, 0.12)',
+      onBrandHover: 'rgba(13, 27, 62, 0.1)',
+      onBrandActive: 'rgba(13, 27, 62, 0.16)',
+      onBrandTrack: 'rgba(13, 27, 62, 0.3)',
+
+      overlay: 'rgba(8, 15, 36, 0.5)',
+      scrim: 'rgba(8, 15, 36, 0.55)',
+      skeleton: 'rgba(255, 255, 255, 0.1)',
+
+      coverEdge: 'rgba(255, 255, 255, 0.12)',
+      coverStageTop: 'rgba(255, 255, 255, 0.08)',
+      coverStageBottom: 'rgba(255, 255, 255, 0.03)',
+    }),
+    [vars.shadow.focus]: '0 0 0 4px rgba(200, 168, 75, 0.24)',
+  },
+  color: vars.color.text,
 });
